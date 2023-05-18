@@ -683,7 +683,6 @@ object KotlinUtils {
                 pkgInfo.packageName != "com.google.android.googlequicksearchbox"
                 // Play Store asks for POST_NOTIFICATIONS on first launch
                 && perm.name != POST_NOTIFICATIONS
-                && perm.name != Manifest.permission.OTHER_SENSORS
             ) {
                 shouldKill = true
             }
