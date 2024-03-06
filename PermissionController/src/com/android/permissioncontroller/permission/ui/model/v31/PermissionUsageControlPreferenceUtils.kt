@@ -65,19 +65,28 @@ object PermissionUsageControlPreferenceUtils {
         return preference.apply {
             title = permGroupLabel
             icon = KotlinUtils.getPermGroupIcon(context, groupName)
-            summary = StringUtils.getIcuPluralsString(context,
-                R.string.permission_usage_preference_label, count)
+            summary =
+                StringUtils.getIcuPluralsString(
+                    context,
+                    R.string.permission_usage_preference_label,
+                    count
+                )
             if (count == 0) {
                 isEnabled = false
-                val permissionUsageSummaryNotUsed = if (show7Days) {
-                    StringUtils.getIcuPluralsString(context,
+                val permissionUsageSummaryNotUsed =
+                    if (show7Days) {
+                        StringUtils.getIcuPluralsString(
+                            context,
                             R.string.permission_usage_preference_summary_not_used_in_past_n_days,
-                            7)
-                } else {
-                    StringUtils.getIcuPluralsString(context,
+                            7
+                        )
+                    } else {
+                        StringUtils.getIcuPluralsString(
+                            context,
                             R.string.permission_usage_preference_summary_not_used_in_past_n_hours,
-                            24)
-                }
+                            24
+                        )
+                    }
                 setSummary(permissionUsageSummaryNotUsed)
             } else if (SENSOR_DATA_PERMISSIONS.contains(groupName)) {
                 onPreferenceClickListener = OnPreferenceClickListener {
@@ -101,18 +110,19 @@ object PermissionUsageControlPreferenceUtils {
     }
 
     private fun logSensorDataTimelineViewed(groupName: String, sessionId: Long) {
-        val act = when (groupName) {
-            Manifest.permission_group.LOCATION -> {
-                PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__LOCATION_ACCESS_TIMELINE_VIEWED
+        val act =
+            when (groupName) {
+                Manifest.permission_group.LOCATION -> {
+                    PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__LOCATION_ACCESS_TIMELINE_VIEWED
+                }
+                Manifest.permission_group.CAMERA -> {
+                    PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__CAMERA_ACCESS_TIMELINE_VIEWED
+                }
+                Manifest.permission_group.MICROPHONE -> {
+                    PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__MICROPHONE_ACCESS_TIMELINE_VIEWED
+                }
+                else -> 0
             }
-            Manifest.permission_group.CAMERA -> {
-                PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__CAMERA_ACCESS_TIMELINE_VIEWED
-            }
-            Manifest.permission_group.MICROPHONE -> {
-                PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__MICROPHONE_ACCESS_TIMELINE_VIEWED
-            }
-            else -> return
-        }
         PermissionControllerStatsLog.write(PERMISSION_USAGE_FRAGMENT_INTERACTION, sessionId, act)
     }
 }
