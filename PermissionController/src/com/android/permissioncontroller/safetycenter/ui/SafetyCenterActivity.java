@@ -26,6 +26,7 @@ import static com.android.permissioncontroller.PermissionControllerStatsLog.PRIV
 import static com.android.permissioncontroller.safetycenter.SafetyCenterConstants.EXTRA_SETTINGS_FRAGMENT_ARGS_KEY;
 import static com.android.permissioncontroller.safetycenter.SafetyCenterConstants.PERSONAL_PROFILE_SUFFIX;
 import static com.android.permissioncontroller.safetycenter.SafetyCenterConstants.PRIVACY_SOURCES_GROUP_ID;
+import static com.android.permissioncontroller.safetycenter.SafetyCenterConstants.PRIVATE_PROFILE_SUFFIX;
 import static com.android.permissioncontroller.safetycenter.SafetyCenterConstants.WORK_PROFILE_SUFFIX;
 
 import android.app.ActionBar;
@@ -39,10 +40,18 @@ import android.safetycenter.config.SafetySource;
 import android.safetycenter.config.SafetySourcesGroup;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.permissioncontroller.Constants;
 import com.android.permissioncontroller.PermissionControllerStatsLog;
@@ -110,6 +119,36 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity {
         }
 
         configureHomeButton();
+
+        frag.getLifecycle()
+                .addObserver(
+                        new LifecycleEventObserver() {
+                            @Override
+                            public void onStateChanged(
+                                    LifecycleOwner unused, Lifecycle.Event event) {
+                                if (event != Lifecycle.Event.ON_START) {
+                                    return;
+                                }
+                                View listView = getListView(frag);
+                                if (listView == null) {
+                                    return;
+                                }
+                                int paddingBottom = listView.getPaddingBottom();
+                                ViewCompat.setOnApplyWindowInsetsListener(
+                                        listView,
+                                        (v, windowInsets) -> {
+                                            Insets insets =
+                                                    windowInsets.getInsets(
+                                                            WindowInsetsCompat.Type.systemBars());
+                                            v.setPadding(
+                                                    v.getPaddingLeft(),
+                                                    v.getPaddingTop(),
+                                                    v.getPaddingRight(),
+                                                    paddingBottom + insets.bottom);
+                                            return WindowInsetsCompat.CONSUMED;
+                                        });
+                            }
+                        });
     }
 
     @Override
@@ -128,8 +167,10 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity {
     /** Decide whether a home/back button should be shown or not. */
     private void configureHomeButton() {
         ActionBar actionBar = getActionBar();
-        Fragment frag = getSupportFragmentManager().findFragmentById(
-                com.android.settingslib.collapsingtoolbar.R.id.content_frame);
+        Fragment frag =
+                getSupportFragmentManager()
+                        .findFragmentById(
+                                com.android.settingslib.collapsingtoolbar.R.id.content_frame);
         if (actionBar == null || frag == null) {
             return;
         }
@@ -271,6 +312,8 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity {
             splitKey = preferenceKey.split("_" + PERSONAL_PROFILE_SUFFIX);
         } else if (preferenceKey.endsWith(WORK_PROFILE_SUFFIX)) {
             splitKey = preferenceKey.split("_" + WORK_PROFILE_SUFFIX);
+        } else if (preferenceKey.endsWith(PRIVATE_PROFILE_SUFFIX)) {
+            splitKey = preferenceKey.split("_" + PRIVATE_PROFILE_SUFFIX);
         } else {
             return "";
         }
@@ -292,5 +335,20 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity {
             }
         }
         return "";
+    }
+
+    @Nullable
+    private View getListView(Fragment fragment) {
+        if (fragment instanceof PreferenceFragmentCompat) {
+            return ((PreferenceFragmentCompat) fragment).getListView();
+        }
+        if (fragment instanceof SafetyCenterScrollWrapperFragment) {
+            Fragment dashboardFragment =
+                    fragment.getChildFragmentManager().findFragmentById(R.id.fragment_container);
+            if (dashboardFragment instanceof PreferenceFragmentCompat) {
+                return ((PreferenceFragmentCompat) dashboardFragment).getListView();
+            }
+        }
+        return null;
     }
 }

@@ -72,7 +72,7 @@
     <string name="denied_permission_decision" msgid="5308961501779563781">"Anda menolak akses <xliff:g id="APP_NAME">%1$s</xliff:g> ke <xliff:g id="PERMISSION_NAME">%2$s</xliff:g>"</string>
     <string name="days_ago" msgid="6650359081551335629">"{count,plural, =0{Hari ini}=1{1 hari lalu}other{# hari lalu}}"</string>
     <string name="app_disable_dlg_positive" msgid="7418444149981904940">"Nonaktifkan aplikasi"</string>
-    <string name="app_disable_dlg_text" msgid="3126943217146120240">"Jika Anda menonaktifkan aplikasi ini, Android dan aplikasi lain mungkin tidak berfungsi lagi sesuai harapan. Perlu diingat, Anda tidak dapat menghapus aplikasi yang disertakan oleh pabrikan di perangkat Anda. Namun, Anda dapat menonaktifkannya, yang berarti mematikan dan menyembunyikan aplikasi tersebut di perangkat Anda."</string>
+    <string name="app_disable_dlg_text" msgid="3126943217146120240">"Jika aplikasi ini dinonaktifkan, Android dan aplikasi lain mungkin tidak berfungsi normal. Perlu diingat, Anda tidak dapat menghapus aplikasi ini karena merupakan bawaan perangkat. Namun, Anda dapat menonaktifkannya, yang berarti mematikan dan menyembunyikannya di perangkat."</string>
     <string name="app_permission_manager" msgid="3903811137630909550">"Pengelola izin"</string>
     <string name="never_ask_again" msgid="4728762438198560329">"Jangan tanya lagi"</string>
     <string name="no_permissions" msgid="3881676756371148563">"Tidak ada izin"</string>
@@ -191,12 +191,14 @@
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Selalu izinkan semua"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Selalu tanya"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Jangan izinkan"</string>
+    <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Izinkan akses terbatas"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Lokasi presisi"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"Perkiraan lokasi"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Gunakan lokasi presisi"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Saat lokasi presisi dinonaktifkan, aplikasi dapat mengakses perkiraan lokasi"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"Izin <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"Akses <xliff:g id="PERM">%1$s</xliff:g> untuk aplikasi ini"</string>
+    <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Akses <xliff:g id="PERM">%1$s</xliff:g> untuk aplikasi ini di <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Lihat semua izin <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Lihat semua aplikasi yang memiliki izin ini"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Tampilkan penggunaan mikrofon Asisten"</string>
@@ -254,6 +256,7 @@
     <string name="allowed_storage_full" msgid="5356699280625693530">"Diizinkan untuk mengelola semua file"</string>
     <string name="ask_header" msgid="2633816846459944376">"Selalu tanya"</string>
     <string name="denied_header" msgid="903209608358177654">"Tidak diizinkan"</string>
+    <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> di <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Lihat aplikasi lain yang dapat mengakses semua file"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 hari}other{# hari}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# jam}other{# jam}}"</string>
@@ -364,7 +367,7 @@
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Aplikasi ini akan diberi akses ke Kamera, Kontak, Mikrofon, Telepon, dan SMS Anda"</string>
     <string name="role_dialer_search_keywords" msgid="3324448983559188087">"telepon"</string>
     <string name="role_sms_label" msgid="8456999857547686640">"Aplikasi SMS default"</string>
-    <string name="role_sms_short_label" msgid="4371444488034692243">"Aplikasi SMS"</string>
+    <string name="role_sms_short_label" msgid="4371444488034692243">"aplikasi SMS"</string>
     <string name="role_sms_description" msgid="3424020199148153513">"Aplikasi yang memungkinkan Anda menggunakan nomor telepon untuk mengirim dan menerima SMS, foto, video, dan sebagainya"</string>
     <string name="role_sms_request_title" msgid="7953552109601185602">"Tetapkan <xliff:g id="APP_NAME">%1$s</xliff:g> sebagai aplikasi SMS default Anda?"</string>
     <string name="role_sms_request_description" msgid="2691004766132144886">"Aplikasi ini akan diberi akses ke Kamera, Kontak, File dan media, Mikrofon, Telepon, dan SMS Anda"</string>
@@ -405,7 +408,7 @@
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"catatan"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"Aplikasi dompet default"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"Aplikasi dompet"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"Aplikasi dompet dapat menyimpan kartu kredit dan kartu loyalitas, kunci mobil, serta hal lainnya untuk membantu berbagai bentuk transaksi."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"Aplikasi dompet dapat menyimpan kartu kredit dan kartu loyalitas, kunci mobil, serta hal lain untuk membantu berbagai bentuk transaksi."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"Setel <xliff:g id="APP_NAME">%1$s</xliff:g> sebagai aplikasi dompet default?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"Tidak ada izin yang diperlukan"</string>
     <string name="request_role_current_default" msgid="738722892438247184">"Default saat ini"</string>
@@ -433,6 +436,7 @@
     <string name="default_apps_more" msgid="4078194675848858093">"Default lainnya"</string>
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Membuka link"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Default untuk kerja"</string>
+    <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Default untuk ruang privasi"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Tidak ada"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Default sistem)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Tidak ada aplikasi"</string>
@@ -462,75 +466,75 @@
     <string name="assistant_record_audio_user_sensitive_title" msgid="5532123360322362378">"Tampilkan deteksi pemicu asisten"</string>
     <string name="assistant_record_audio_user_sensitive_summary" msgid="6482937591816401619">"Tampilkan ikon di status bar saat mikrofon digunakan untuk mengaktifkan asisten suara"</string>
     <string name="permgrouprequest_storage_isolated" msgid="4892154224026852295">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan media di perangkat?"</string>
-    <string name="permgrouprequest_device_aware_storage_isolated" msgid="5934218468708513375">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan media di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan media di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_contacts" msgid="8391550064551053695">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses kontak?"</string>
-    <string name="permgrouprequest_device_aware_contacts" msgid="2270563860206654757">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses kontak di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses kontak Anda di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_location" msgid="6990232580121067883">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lokasi perangkat ini?"</string>
-    <string name="permgrouprequest_device_aware_location" msgid="6641436550953715107">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lokasi &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lokasi &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"Aplikasi ini hanya akan memiliki akses ke lokasi selagi Anda menggunakan aplikasi"</string>
     <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lokasi perangkat ini?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_location" msgid="7660465507029650527">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lokasi &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_location" msgid="1264484517831380016">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lokasi &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_location" msgid="8021219324989662957">"Aplikasi ini mungkin ingin selalu mengakses lokasi, meski tidak sedang digunakan. "<annotation id="link">"Izinkan di setelan."</annotation></string>
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"Ubah akses lokasi untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgroupupgraderequest_device_aware_location" msgid="4528266408056426513">"Ubah akses lokasi untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupupgraderequest_device_aware_location" msgid="1812338666887726191">"Ubah akses lokasi untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_location" msgid="1550899076845189165">"Aplikasi ini mungkin ingin selalu mengakses lokasi, meski tidak sedang digunakan. "<annotation id="link">"Izinkan di setelan."</annotation></string>
     <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; menemukan, terhubung ke, dan menentukan posisi relatif perangkat di sekitar?"</string>
-    <string name="permgrouprequest_device_aware_nearby_devices" msgid="7919687165848885665">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; menemukan, menghubungkan, dan menentukan posisi relatif perangkat di sekitar di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_nearby_devices" msgid="5293478278408567442">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; menemukan, menghubungkan, dan menentukan posisi relatif perangkat di sekitar di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_nearby_devices" msgid="6877531270654738614">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; menemukan, terhubung ke, dan menentukan posisi relatif perangkat di sekitar? "<annotation id="link">"Izinkan di setelan."</annotation></string>
     <string name="permgrouprequest_fineupgrade" msgid="2334242928821697672">"Ubah akses lokasi <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> dari perkiraan ke lokasi presisi?"</string>
-    <string name="permgrouprequest_device_aware_fineupgrade" msgid="3947134846432067176">"Ubah akses lokasi <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; dari perkiraan menjadi presisi?"</string>
+    <string name="permgrouprequest_device_aware_fineupgrade" msgid="4453775952305587571">"Ubah akses lokasi <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; dari perkiraan menjadi presisi?"</string>
     <string name="permgrouprequest_coarselocation" msgid="7244605063736425232">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses perkiraan lokasi perangkat ini?"</string>
-    <string name="permgrouprequest_device_aware_coarselocation" msgid="9001956706241104626">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses perkiraan lokasi &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_coarselocation" msgid="8367540370912066757">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses perkiraan lokasi &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"Presisi"</string>
     <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"Perkiraan"</string>
     <string name="permgrouprequest_calendar" msgid="1493150855673603806">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses kalender?"</string>
-    <string name="permgrouprequest_device_aware_calendar" msgid="3103987548035171850">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses kalender di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_calendar" msgid="7161929851377463612">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses kalender Anda di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_sms" msgid="5672063688745420991">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengirim dan melihat SMS?"</string>
-    <string name="permgrouprequest_device_aware_sms" msgid="7212083972999874267">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengirim dan melihat pesan SMS di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_sms" msgid="6639977653040502291">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengirim dan melihat pesan SMS di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_storage" msgid="8717773092518621602">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto, media, dan file di perangkat?"</string>
-    <string name="permgrouprequest_device_aware_storage" msgid="872629037299467086">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto, media, dan file di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_storage" msgid="6933251810928606636">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto, media, dan file di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_storage_q_to_s" msgid="8213701872983685505">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses &lt;b&gt;foto, video, musik, dan audio&lt;/b&gt; di perangkat ini?"</string>
     <string name="permgrouprequest_storage_pre_q" msgid="168130651144569428">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses &lt;b&gt;foto, video, musik, audio, dan file lainnya&lt;/b&gt; di perangkat ini?"</string>
     <string name="permgrouprequest_read_media_aural" msgid="2593365397347577812">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses musik dan audio di perangkat ini?"</string>
-    <string name="permgrouprequest_device_aware_read_media_aural" msgid="3331524384339036668">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses musik dan audio di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_read_media_aural" msgid="7927884506238101064">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses musik dan audio di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_read_media_visual" msgid="5548780620779729975">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan video di perangkat ini?"</string>
-    <string name="permgrouprequest_device_aware_read_media_visual" msgid="5492319750632751551">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan video di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_read_media_visual" msgid="3122576538319059333">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan video di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_more_photos" msgid="128933814654231321">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan video lainnya di perangkat ini?"</string>
-    <string name="permgrouprequest_device_aware_more_photos" msgid="8946782319103584021">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses foto dan video lainnya di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_more_photos" msgid="1703469013613723053">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses lebih banyak foto dan video di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_microphone" msgid="2825208549114811299">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; merekam audio?"</string>
-    <string name="permgrouprequest_device_aware_microphone" msgid="1266843551173029370">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; merekam audio di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_microphone" msgid="8821701550505437951">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; merekam audio di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_microphone" msgid="8510456971528228861">"Aplikasi hanya dapat merekam audio saat aplikasi sedang digunakan"</string>
     <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; merekam audio?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_microphone" msgid="4990337225146130185">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; merekam audio di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_microphone" msgid="3321823187623762958">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; merekam audio di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_microphone" msgid="553702902263681838">"Aplikasi ini mungkin ingin selalu merekam audio, meski aplikasi tidak sedang digunakan. "<annotation id="link">"Izinkan di setelan"</annotation>"."</string>
     <string name="permgroupupgraderequest_microphone" msgid="1362781696161233341">"Ubah akses mikrofon untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgroupupgraderequest_device_aware_microphone" msgid="222471025997100107">"Ubah akses mikrofon untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupupgraderequest_device_aware_microphone" msgid="8722411173971679806">"Ubah akses mikrofon untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_microphone" msgid="2870497719571464239">"Aplikasi ini ingin selalu merekam audio, meski aplikasi tidak sedang digunakan. "<annotation id="link">"Izinkan di setelan"</annotation>"."</string>
     <string name="permgrouprequest_activityRecognition" msgid="5415121592794230330">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses aktivitas fisik Anda?"</string>
-    <string name="permgrouprequest_device_aware_activityRecognition" msgid="3408326850847755759">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses aktivitas fisik di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_activityRecognition" msgid="1243869530588745374">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses aktivitas fisik Anda di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_camera" msgid="5123097035410002594">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengambil gambar dan merekam video?"</string>
-    <string name="permgrouprequest_device_aware_camera" msgid="3525106924487608868">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengambil gambar dan merekam video di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_camera" msgid="5340173564041615494">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengambil foto dan merekam video di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_camera" msgid="9085323239764667883">"Aplikasi hanya dapat mengambil gambar dan merekam video saat aplikasi sedang digunakan"</string>
     <string name="permgroupbackgroundrequest_camera" msgid="1274286575704213875">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengambil gambar dan merekam video?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_camera" msgid="6718286540040964849">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengambil gambar dan merekam video di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_camera" msgid="8533353179594971475">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengambil foto dan merekam video di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_camera" msgid="4458783509089859078">"Aplikasi ini mungkin ingin selalu mengambil gambar dan merekam video, meski aplikasi tidak sedang digunakan. "<annotation id="link">"Izinkan di setelan"</annotation>"."</string>
     <string name="permgroupupgraderequest_camera" msgid="640758449200241582">"Ubah akses kamera untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgroupupgraderequest_device_aware_camera" msgid="4198765626608612156">"Ubah akses kamera untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupupgraderequest_device_aware_camera" msgid="3290160912843715236">"Ubah akses kamera untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_camera" msgid="6642747548010962597">"Aplikasi ini ingin selalu mengambil gambar dan merekam video, meski aplikasi tidak sedang digunakan. "<annotation id="link">"Izinkan di setelan"</annotation>"."</string>
     <string name="permgrouprequest_calllog" msgid="2065327180175371397">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses log panggilan telepon?"</string>
-    <string name="permgrouprequest_device_aware_calllog" msgid="735079772627778095">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses log panggilan telepon di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses log panggilan telepon Anda di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_phone" msgid="1829234136997316752">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; melakukan dan mengelola panggilan telepon?"</string>
-    <string name="permgrouprequest_device_aware_phone" msgid="4389610977195521813">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; melakukan dan mengelola panggilan telepon di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_phone" msgid="590399263670349955">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; untuk melakukan dan mengelola panggilan telepon di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_sensors" msgid="4397358316850652235">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor tentang tanda-tanda vital Anda?"</string>
-    <string name="permgrouprequest_device_aware_sensors" msgid="1900598688488188225">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor terkait tanda-tanda vital Anda di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_sensors" msgid="3874451050573615157">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor terkait tanda-tanda vital Anda di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_sensors" msgid="6651914048792092835">"Aplikasi ini ingin selalu mengakses data sensor tentang tanda-tanda vital Anda, meski aplikasi tidak sedang digunakan. Untuk melakukan perubahan ini, "<annotation id="link">"buka setelan"</annotation>"."</string>
     <string name="permgroupbackgroundrequest_sensors" msgid="5661924322018503886">"Izinkan &lt;/b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor tentang tanda-tanda vital Anda?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_sensors" msgid="7691308331448239716">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor terkait tanda-tanda vital Anda di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_sensors" msgid="3687673359121603824">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor terkait tanda-tanda vital Anda di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_sensors" msgid="7726767635834043501">"Untuk selalu mengizinkan aplikasi ini mengakses data sensor tubuh, meski saat aplikasi tidak sedang digunakan, "<annotation id="link">"buka setelan."</annotation></string>
     <string name="permgroupupgraderequest_sensors" msgid="7576527638411370468">"Terus izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor tubuh saat aplikasi sedang digunakan?"</string>
-    <string name="permgroupupgraderequest_device_aware_sensors" msgid="3310667992344623159">"Terus izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor tubuh di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; saat apl sedang digunakan?"</string>
+    <string name="permgroupupgraderequest_device_aware_sensors" msgid="5542771499929819675">"Tetap izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengakses data sensor tubuh di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; saat aplikasi sedang digunakan?"</string>
     <string name="permgrouprequest_notifications" msgid="6396739062335106181">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengirim notifikasi kepada Anda?"</string>
-    <string name="permgrouprequest_device_aware_notifications" msgid="7307588961166360244">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengirimi Anda notifikasi di &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_notifications" msgid="857671638951040514">"Izinkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; mengirimi Anda notifikasi di &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="auto_granted_permissions" msgid="6009452264824455892">"Izin terkontrol"</string>
     <string name="auto_granted_location_permission_notification_title" msgid="7570818224669050377">"<xliff:g id="APP_NAME">%1$s</xliff:g> memiliki akses lokasi"</string>
     <string name="auto_granted_permission_notification_body" msgid="5040234389205471318">"Organisasi Anda mengizinkan <xliff:g id="APP_NAME">%1$s</xliff:g> mengakses lokasi Anda"</string>
@@ -546,6 +550,7 @@
     <string name="privdash_label_none" msgid="5991866260360484858">"Tidak ada"</string>
     <string name="privdash_label_24h" msgid="1512532123865375319">"24 jam\nterakhir"</string>
     <string name="privdash_label_7d" msgid="5645301995348656931">"7 hari\nterakhir"</string>
+    <string name="privdash_usage_percent" msgid="6893824766124414127">"<xliff:g id="PERMISSION_NAME">%1$s</xliff:g><xliff:g id="PERCENT">%2$d</xliff:g> persen"</string>
     <string name="exempt_mic_camera_info_label" msgid="6273581737010902815">"<xliff:g id="APP_NAME">%1$s</xliff:g> dilindungi dengan Android. Karena data Anda diproses di perangkat ini, penggunaan izin aplikasi ini tidak ditampilkan di status bar atau dasbor privasi Anda."</string>
     <string name="exempt_info_label" msgid="6286190981253476699">"<xliff:g id="APP_NAME">%1$s</xliff:g> dilindungi dengan Android. Karena data Anda diproses di perangkat ini, penggunaan izin aplikasi ini tidak ditampilkan di dasbor privasi Anda."</string>
     <string name="blocked_camera_title" msgid="1128510551791284384">"Kamera perangkat diblokir"</string>
@@ -554,6 +559,13 @@
     <string name="blocked_sensor_summary" msgid="4443707628305027375">"Untuk aplikasi dan layanan"</string>
     <string name="blocked_mic_summary" msgid="8960466941528458347">"Data mikrofon mungkin tetap dibagikan saat Anda menelepon nomor darurat."</string>
     <string name="blocked_sensor_button_label" msgid="6742092634984289658">"Ubah"</string>
+    <string name="automotive_blocked_camera_title" msgid="6142362431548829416">"Akses kamera nonaktif"</string>
+    <string name="automotive_blocked_microphone_title" msgid="3956311098238620220">"Akses mikrofon nonaktif"</string>
+    <string name="automotive_blocked_location_title" msgid="6047574747593264689">"Akses lokasi nonaktif"</string>
+    <string name="automotive_blocked_infotainment_app_summary" msgid="8217099645064950860">"Untuk aplikasi infotainmen"</string>
+    <string name="automotive_blocked_required_app_summary" msgid="8591513745681168088">"Untuk aplikasi yang diperlukan"</string>
+    <string name="automotive_required_app_title" msgid="2992168288249988735">"Aplikasi ini diperlukan"</string>
+    <string name="automotive_required_app_summary" msgid="6514902316658090465">"Aplikasi ini diperlukan produsen mobil Anda"</string>
     <string name="safety_center_dashboard_page_title" msgid="2810774008694315854">"Keamanan &amp; privasi"</string>
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"Pindai perangkat"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"Tutup"</string>
@@ -641,7 +653,7 @@
     <string name="app_permission_rationale_message" msgid="8511466916077100713">"Keamanan data"</string>
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"Data lokasi mungkin dibagikan"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Aplikasi ini menyatakan bahwa aplikasi mungkin membagikan data lokasi Anda kepada pihak ketiga"</string>
-    <string name="data_sharing_updates_title" msgid="7996933386875213859">"Pembaruan berbagi data untuk lokasi"</string>
+    <string name="data_sharing_updates_title" msgid="7996933386875213859">"Pembaruan berbagi data lokasi"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Tinjau aplikasi yang mengubah caranya berbagi data lokasi Anda"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Aplikasi ini telah mengubah caranya berbagi data lokasi Anda. Aplikasi mungkin sebelumnya tidak membagikan data, atau mungkin kini membagikan data untuk tujuan iklan atau pemasaran."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Developer aplikasi ini memberikan info tentang praktik berbagi data mereka kepada app store. Developer dapat memperbaruinya dari waktu ke waktu.\n\nPraktik berbagi data mungkin berbeda-beda berdasarkan versi aplikasi, penggunaan, wilayah, dan usia Anda."</string>
@@ -659,8 +671,14 @@
     <string name="test_otp_msg" msgid="7559110574222727550">"Sandi sekali pakai Anda adalah 132435"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Setelan terbatas"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Demi keamanan Anda, setelan ini tidak tersedia untuk saat ini."</string>
-    <string name="enhanced_confirmation_dialog_title_permission" msgid="8411239333012890492">"Izin untuk menggunakan <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> telah ditolak"</string>
-    <string name="enhanced_confirmation_dialog_desc_permission" msgid="9207115054288224451">"Aplikasi ini meminta izin <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>, yang merupakan setelan terbatas karena dapat membahayakan keamanan &amp; privasi Anda. Pembatasan izin ini dapat mencegah aplikasi ini berfungsi."</string>
+    <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikasi ditolak aksesnya ke <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Aplikasi meminta akses ke izin sensitif yang dapat membahayakan info pribadi dan keuangan Anda.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Aplikasi mungkin tidak dapat berfungsi dengan baik tanpa izin terbatas ini. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&amp;gtPelajari cara mengizinkan akses&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Aplikasi ditolak aksesnya untuk menjadi <xliff:g id="ROLE_NAME">%1$s</xliff:g> default"</string>
+    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"Aplikasi meminta akses ke izin sensitif yang dapat membahayakan info pribadi dan keuangan Anda.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Aplikasi mungkin tidak dapat berfungsi dengan baik tanpa izin terbatas ini. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&amp;gtPelajari cara mengizinkan akses&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Aplikasi ditolak aksesnya"</string>
+    <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"Akses ke izin ini dapat membahayakan info pribadi dan keuangan Anda.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Aplikasi mungkin tidak dapat berfungsi dengan baik tanpa izin terbatas ini. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&amp;gtPelajari cara mengizinkan akses&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"Pelajari lebih lanjut"</string>
-    <string name="enhanced_confirmation_dialog_ok" msgid="1767075979746135617">"Oke"</string>
+    <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"Oke"</string>
+    <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"Permintaan izin diblokir"</string>
+    <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"Aplikasi ini meminta izin tambahan, tetapi izin tidak dapat diberikan dalam sesi streaming. Berikan izin di ponsel terlebih dahulu."</string>
 </resources>

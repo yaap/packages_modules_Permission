@@ -191,12 +191,14 @@
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Vždy povolit vše"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Pokaždé se zeptat"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Nepovolovat"</string>
+    <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Povolit omezený přístup"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Přesná poloha"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"Přibližná poloha"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Používat přesnou polohu"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Když je přesná poloha vypnutá, aplikace mají přístup k vaší přibližné poloze"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"Oprávnění: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"Přístup této aplikace k oprávnění: <xliff:g id="PERM">%1$s</xliff:g>"</string>
+    <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Přístup k <xliff:g id="PERM">%1$s</xliff:g> pro tuto aplikaci v zařízení <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Zobrazit všechna oprávnění aplikace <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Zobrazit všechny aplikace s tímto oprávněním"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Zobrazit používání mikrofonu asistentem"</string>
@@ -204,7 +206,7 @@
     <string name="auto_revoke_label" msgid="5068393642936571656">"Odebrat oprávnění, pokud se aplikace nepoužívá"</string>
     <string name="unused_apps_label" msgid="2595428768404901064">"Odebrat oprávnění a uvolnit místo"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"Pozastavit aktivitu při nepoužívání"</string>
-    <string name="unused_apps_label_v3" msgid="693340578642156657">"Spravovat aplikaci, pokud se nepoužívá"</string>
+    <string name="unused_apps_label_v3" msgid="693340578642156657">"Správa nepoužívané aplikace"</string>
     <string name="unused_apps_summary" msgid="8839466950318403115">"Odebrat oprávnění, smazat dočasné soubory a zastavit oznámení"</string>
     <string name="unused_apps_summary_v2" msgid="5011313200815115802">"Odebrat oprávnění, smazat dočasné soubory, zastavit oznámení a archivovat aplikaci"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"Pokud tuto aplikaci několik měsíců nepoužijete, kvůli ochraně vašich dat jí budou oprávnění odebrána."</string>
@@ -254,6 +256,7 @@
     <string name="allowed_storage_full" msgid="5356699280625693530">"Povolena správa všech souborů"</string>
     <string name="ask_header" msgid="2633816846459944376">"Pokaždé se zeptat"</string>
     <string name="denied_header" msgid="903209608358177654">"Nepovoleno"</string>
+    <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> na <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Zobrazit další aplikace s přístupem ke všem souborům"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 den}few{# dny}many{# dne}other{# dní}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# hodinu}few{# hodiny}many{# hodiny}other{# hodin}}"</string>
@@ -433,7 +436,8 @@
     <string name="default_apps_more" msgid="4078194675848858093">"Další výchozí nastavení"</string>
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otevírání odkazů"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Výchozí pracovní"</string>
-    <string name="default_app_none" msgid="9084592086808194457">"Žádná"</string>
+    <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Výchozí pro soukromý prostor"</string>
+    <string name="default_app_none" msgid="9084592086808194457">"Žádná aplikace"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Výchozí nastavení systému)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Žádné aplikace"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Vybráno"</string>
@@ -462,75 +466,75 @@
     <string name="assistant_record_audio_user_sensitive_title" msgid="5532123360322362378">"Zobrazit detekci spuštění asistenta"</string>
     <string name="assistant_record_audio_user_sensitive_summary" msgid="6482937591816401619">"Zobrazovat na stavovém řádku ikonu, když bude pomocí mikrofonu aktivován hlasový asistent"</string>
     <string name="permgrouprequest_storage_isolated" msgid="4892154224026852295">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám a mediálnímu obsahu v zařízení?"</string>
-    <string name="permgrouprequest_device_aware_storage_isolated" msgid="5934218468708513375">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám a médiím v zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám a médiím v zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_contacts" msgid="8391550064551053695">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup ke kontaktům?"</string>
-    <string name="permgrouprequest_device_aware_contacts" msgid="2270563860206654757">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup k vašim kontaktům?"</string>
+    <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k vašim kontaktům na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_location" msgid="6990232580121067883">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k poloze tohoto zařízení?"</string>
-    <string name="permgrouprequest_device_aware_location" msgid="6641436550953715107">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k poloze zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k poloze zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"Aplikace bude mít přístup k poloze, pouze když ji budete používat"</string>
     <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k poloze tohoto zařízení?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_location" msgid="7660465507029650527">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k poloze zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_location" msgid="1264484517831380016">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k poloze zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_location" msgid="8021219324989662957">"Aplikace může požadovat přístup k poloze vždy, i když ji nebudete používat. "<annotation id="link">"Povolit ho můžete v nastavení"</annotation>"."</string>
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"Změnit přístup k poloze pro aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgroupupgraderequest_device_aware_location" msgid="4528266408056426513">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; k poloze?"</string>
+    <string name="permgroupupgraderequest_device_aware_location" msgid="1812338666887726191">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; k poloze?"</string>
     <string name="permgroupupgraderequestdetail_location" msgid="1550899076845189165">"Aplikace požaduje přístup k poloze vždy, i když ji nebudete používat. "<annotation id="link">"Povolit ho můžete v nastavení"</annotation>"."</string>
     <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; najít zařízení v okolí, připojit se k nim a zjistit jejich relativní polohu?"</string>
-    <string name="permgrouprequest_device_aware_nearby_devices" msgid="7919687165848885665">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; najít zařízení v okolí, připojit se k nim a zjistit jejich relativní polohu?"</string>
+    <string name="permgrouprequest_device_aware_nearby_devices" msgid="5293478278408567442">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; najít zařízení v okolí, připojit se k nim a zjistit jejich relativní polohu?"</string>
     <string name="permgroupupgraderequestdetail_nearby_devices" msgid="6877531270654738614">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; najít zařízení v okolí, připojit se k nim a zjistit jejich relativní polohu? "<annotation id="link">"Povolit to můžete v nastavení."</annotation></string>
     <string name="permgrouprequest_fineupgrade" msgid="2334242928821697672">"Změnit přístup aplikace <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> k poloze z přibližné na přesnou?"</string>
-    <string name="permgrouprequest_device_aware_fineupgrade" msgid="3947134846432067176">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup aplikace <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> k poloze z přibližné na přesnou?"</string>
+    <string name="permgrouprequest_device_aware_fineupgrade" msgid="4453775952305587571">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup aplikace <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> k poloze z přibližné na přesnou?"</string>
     <string name="permgrouprequest_coarselocation" msgid="7244605063736425232">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k přibližné poloze tohoto zařízení?"</string>
-    <string name="permgrouprequest_device_aware_coarselocation" msgid="9001956706241104626">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k přibližné poloze zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_coarselocation" msgid="8367540370912066757">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k přibližné poloze zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"Přesná"</string>
     <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"Přibližná"</string>
     <string name="permgrouprequest_calendar" msgid="1493150855673603806">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup ke kalendáři?"</string>
-    <string name="permgrouprequest_device_aware_calendar" msgid="3103987548035171850">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup ke kalendáři na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_calendar" msgid="7161929851377463612">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k vašemu kalendáři na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_sms" msgid="5672063688745420991">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; odesílat a zobrazovat SMS?"</string>
-    <string name="permgrouprequest_device_aware_sms" msgid="7212083972999874267">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; odesílat a zobrazovat SMS?"</string>
+    <string name="permgrouprequest_device_aware_sms" msgid="6639977653040502291">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; odesílat a zobrazovat SMS?"</string>
     <string name="permgrouprequest_storage" msgid="8717773092518621602">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám, mediálnímu obsahu a souborům v zařízení?"</string>
-    <string name="permgrouprequest_device_aware_storage" msgid="872629037299467086">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám, médiím a videím v zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_storage" msgid="6933251810928606636">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám, médiím a videím v zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_storage_q_to_s" msgid="8213701872983685505">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k &lt;b&gt;fotkám, videím, hudbě a zvuku&lt;/b&gt; v zařízení?"</string>
     <string name="permgrouprequest_storage_pre_q" msgid="168130651144569428">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k &lt;b&gt;fotkám, videím, hudbě, zvuku a dalším souborům&lt;/b&gt; v zařízení?"</string>
     <string name="permgrouprequest_read_media_aural" msgid="2593365397347577812">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k hudbě a zvuku v zařízení?"</string>
-    <string name="permgrouprequest_device_aware_read_media_aural" msgid="3331524384339036668">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k hudbě a zvukovému obsahu v zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_read_media_aural" msgid="7927884506238101064">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k hudbě a zvukovému obsahu v zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_read_media_visual" msgid="5548780620779729975">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám a videím v zařízení?"</string>
-    <string name="permgrouprequest_device_aware_read_media_visual" msgid="5492319750632751551">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám a videím v zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_read_media_visual" msgid="3122576538319059333">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k fotkám a videím v zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_more_photos" msgid="128933814654231321">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k dalším fotkám a videím v zařízení?"</string>
-    <string name="permgrouprequest_device_aware_more_photos" msgid="8946782319103584021">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k dalším fotkám a videím v zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?​"</string>
+    <string name="permgrouprequest_device_aware_more_photos" msgid="1703469013613723053">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k dalším fotkám a videím v zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?​"</string>
     <string name="permgrouprequest_microphone" msgid="2825208549114811299">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; nahrávat zvuk?"</string>
-    <string name="permgrouprequest_device_aware_microphone" msgid="1266843551173029370">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; nahrávat na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; zvuk?"</string>
+    <string name="permgrouprequest_device_aware_microphone" msgid="8821701550505437951">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; nahrávat na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; zvuk?"</string>
     <string name="permgrouprequestdetail_microphone" msgid="8510456971528228861">"Aplikace bude moci zaznamenávat zvuk, pouze když ji budete používat"</string>
     <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; nahrávat zvuk?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_microphone" msgid="4990337225146130185">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; nahrávat na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; zvuk?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_microphone" msgid="3321823187623762958">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; nahrávat na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; zvuk?"</string>
     <string name="permgroupbackgroundrequestdetail_microphone" msgid="553702902263681838">"Tato aplikace může chtít zaznamenávat zvuk kdykoli, dokonce i když ji nepoužíváte. "<annotation id="link">"Povolit v nastavení"</annotation></string>
     <string name="permgroupupgraderequest_microphone" msgid="1362781696161233341">"Změnit přístup k mikrofonu pro aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgroupupgraderequest_device_aware_microphone" msgid="222471025997100107">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; k mikrofonu?"</string>
+    <string name="permgroupupgraderequest_device_aware_microphone" msgid="8722411173971679806">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; k mikrofonu?"</string>
     <string name="permgroupupgraderequestdetail_microphone" msgid="2870497719571464239">"Tato aplikace chce zaznamenávat zvuk kdykoli, dokonce i když ji nepoužíváte. "<annotation id="link">"Povolit v nastavení"</annotation></string>
     <string name="permgrouprequest_activityRecognition" msgid="5415121592794230330">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k vaší fyzické aktivitě?"</string>
-    <string name="permgrouprequest_device_aware_activityRecognition" msgid="3408326850847755759">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup k vaší fyzické aktivitě?"</string>
+    <string name="permgrouprequest_device_aware_activityRecognition" msgid="1243869530588745374">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup k vaší fyzické aktivitě?"</string>
     <string name="permgrouprequest_camera" msgid="5123097035410002594">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; fotit a nahrávat videa?"</string>
-    <string name="permgrouprequest_device_aware_camera" msgid="3525106924487608868">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; fotit na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; a nahrávat na něm video?"</string>
+    <string name="permgrouprequest_device_aware_camera" msgid="5340173564041615494">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; fotit na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; a nahrávat na něm video?"</string>
     <string name="permgrouprequestdetail_camera" msgid="9085323239764667883">"Aplikace bude moci pořizovat snímky a nahrávat videa, pouze když ji budete používat"</string>
     <string name="permgroupbackgroundrequest_camera" msgid="1274286575704213875">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; fotit a nahrávat videa?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_camera" msgid="6718286540040964849">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; fotit na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; a nahrávat na něm video?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_camera" msgid="8533353179594971475">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; fotit na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; a nahrávat na něm video?"</string>
     <string name="permgroupbackgroundrequestdetail_camera" msgid="4458783509089859078">"Tato aplikace může chtít pořizovat snímky a nahrávat videa kdykoli, dokonce i když ji nepoužíváte. "<annotation id="link">"Povolit v nastavení"</annotation></string>
     <string name="permgroupupgraderequest_camera" msgid="640758449200241582">"Změnit přístup k fotoaparátu pro aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgroupupgraderequest_device_aware_camera" msgid="4198765626608612156">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; k mikrofonu?"</string>
+    <string name="permgroupupgraderequest_device_aware_camera" msgid="3290160912843715236">"Změnit na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; k mikrofonu?"</string>
     <string name="permgroupupgraderequestdetail_camera" msgid="6642747548010962597">"Tato aplikace chce pořizovat snímky a nahrávat videa kdykoli, dokonce i když ji nepoužíváte. "<annotation id="link">"Povolit v nastavení"</annotation></string>
     <string name="permgrouprequest_calllog" msgid="2065327180175371397">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k seznamu telefonních hovorů?"</string>
-    <string name="permgrouprequest_device_aware_calllog" msgid="735079772627778095">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k vašim seznamům hovorů na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k vašim seznamům hovorů na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_phone" msgid="1829234136997316752">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; uskutečňovat a spravovat telefonní hovory?"</string>
-    <string name="permgrouprequest_device_aware_phone" msgid="4389610977195521813">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; uskutečňovat a spravovat na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; telefonní hovory?"</string>
+    <string name="permgrouprequest_device_aware_phone" msgid="590399263670349955">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; uskutečňovat a spravovat na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; telefonní hovory?"</string>
     <string name="permgrouprequest_sensors" msgid="4397358316850652235">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k údajům ze senzorů vašich životních funkcí?"</string>
-    <string name="permgrouprequest_device_aware_sensors" msgid="1900598688488188225">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup k datům ze senzorů životních funkcí?"</string>
+    <string name="permgrouprequest_device_aware_sensors" msgid="3874451050573615157">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup k datům ze senzorů životních funkcí?"</string>
     <string name="permgroupupgraderequestdetail_sensors" msgid="6651914048792092835">"Aplikace požaduje přístup k datům ze senzorů vašich životních funkcí vždy, i když ji nebudete používat. Pokud tuto změnu chcete provést, "<annotation id="link">"přejděte do nastavení."</annotation></string>
     <string name="permgroupbackgroundrequest_sensors" msgid="5661924322018503886">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; přístup k datům ze senzorů vašich životních funkcí?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_sensors" msgid="7691308331448239716">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; přístup k datům ze senzorů životních funkcí?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_sensors" msgid="3687673359121603824">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; přístup k datům ze senzorů životních funkcí?"</string>
     <string name="permgroupbackgroundrequestdetail_sensors" msgid="7726767635834043501">"Pokud chcete této aplikaci povolit trvalý přístup k datům z tělesných senzorů, i když aplikaci nepoužíváte, "<annotation id="link">"přejděte do nastavení"</annotation>"."</string>
     <string name="permgroupupgraderequest_sensors" msgid="7576527638411370468">"Chcete, aby aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; dál měla přístup k datům z tělesných senzorů během používání aplikace?"</string>
-    <string name="permgroupupgraderequest_device_aware_sensors" msgid="3310667992344623159">"Chcete, aby aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; měla během používání i nadále přístup k datům z tělesných senzorů?"</string>
+    <string name="permgroupupgraderequest_device_aware_sensors" msgid="5542771499929819675">"Chcete, aby aplikace &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; měla během používání i nadále přístup k datům z tělesných senzorů?"</string>
     <string name="permgrouprequest_notifications" msgid="6396739062335106181">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; odesílat oznámení?"</string>
-    <string name="permgrouprequest_device_aware_notifications" msgid="7307588961166360244">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; odesílat na zařízení &lt;b&gt;<xliff:g id="DEVICE">%2$s</xliff:g>&lt;/b&gt; oznámení?"</string>
+    <string name="permgrouprequest_device_aware_notifications" msgid="857671638951040514">"Povolit aplikaci &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; odesílat vám na zařízení &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; oznámení?"</string>
     <string name="auto_granted_permissions" msgid="6009452264824455892">"Spravovaná oprávnění"</string>
     <string name="auto_granted_location_permission_notification_title" msgid="7570818224669050377">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> má přístup k poloze"</string>
     <string name="auto_granted_permission_notification_body" msgid="5040234389205471318">"Vaše organizace umožňuje aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> přístup k vaší poloze"</string>
@@ -546,6 +550,7 @@
     <string name="privdash_label_none" msgid="5991866260360484858">"Žádné"</string>
     <string name="privdash_label_24h" msgid="1512532123865375319">"Posledních\n24 hodin"</string>
     <string name="privdash_label_7d" msgid="5645301995348656931">"Posledních\n7 dní"</string>
+    <string name="privdash_usage_percent" msgid="6893824766124414127">"<xliff:g id="PERMISSION_NAME">%1$s</xliff:g> <xliff:g id="PERCENT">%2$d</xliff:g> %%"</string>
     <string name="exempt_mic_camera_info_label" msgid="6273581737010902815">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> je chráněna Androidem. Protože se vaše data zpracovávají na tomto zařízení, oprávnění používaná touto aplikací se nezobrazují na stavovém řádku ani na panelu ochrany soukromí."</string>
     <string name="exempt_info_label" msgid="6286190981253476699">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> je chráněna Androidem. Protože se vaše data zpracovávají na tomto zařízení, oprávnění používaná touto aplikací se nezobrazují na panelu ochrany soukromí."</string>
     <string name="blocked_camera_title" msgid="1128510551791284384">"Fotoaparát zařízení je blokován"</string>
@@ -554,6 +559,13 @@
     <string name="blocked_sensor_summary" msgid="4443707628305027375">"Pro aplikace a služby"</string>
     <string name="blocked_mic_summary" msgid="8960466941528458347">"Když zavoláte na číslo tísňového volání, mohou být nadále sdílena data z mikrofonu."</string>
     <string name="blocked_sensor_button_label" msgid="6742092634984289658">"Změnit"</string>
+    <string name="automotive_blocked_camera_title" msgid="6142362431548829416">"Přístup k fotoaparátu je vypnutý"</string>
+    <string name="automotive_blocked_microphone_title" msgid="3956311098238620220">"Přístup k mikrofonu je vypnutý"</string>
+    <string name="automotive_blocked_location_title" msgid="6047574747593264689">"Přístup k poloze je vypnutý."</string>
+    <string name="automotive_blocked_infotainment_app_summary" msgid="8217099645064950860">"Pro aplikace informační a zábavní aplikace"</string>
+    <string name="automotive_blocked_required_app_summary" msgid="8591513745681168088">"Pro povinné aplikace"</string>
+    <string name="automotive_required_app_title" msgid="2992168288249988735">"Tato aplikace je povinná"</string>
+    <string name="automotive_required_app_summary" msgid="6514902316658090465">"Tuto aplikaci výrobce auta vyžaduje"</string>
     <string name="safety_center_dashboard_page_title" msgid="2810774008694315854">"Zabezpečení a ochrana soukromí"</string>
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"Zkontrolovat zařízení"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"Zavřít"</string>
@@ -659,8 +671,14 @@
     <string name="test_otp_msg" msgid="7559110574222727550">"Vaše jednorázové heslo je 132435"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Blokované nastavení"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Z důvodu vaší bezpečnosti toto nastavení momentálně není dostupné."</string>
-    <string name="enhanced_confirmation_dialog_title_permission" msgid="8411239333012890492">"Oprávnění <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> nebylo uděleno"</string>
-    <string name="enhanced_confirmation_dialog_desc_permission" msgid="9207115054288224451">"Tato aplikace požádala o oprávnění <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>, což je omezené nastavení, protože může ohrozit vaše soukromí a zabezpečení. Omezení tohoto oprávnění může zabránit fungování aplikace."</string>
+    <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikaci byl odepřen přístup k oprávnění <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Aplikace požádala o přístup k citlivému oprávnění, které může ohrozit vaše osobní a finanční údaje.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Je možné, že aplikace bez tohoto oprávnění nebude fungovat správně. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Jak povolit přístup&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Aplikaci byla odepřena role výchozí <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"Aplikace požádala o přístup k citlivým oprávněním, která mohou ohrozit vaše osobní a finanční údaje.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Je možné, že aplikace nebude bez těchto omezených oprávnění fungovat správně. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Jak povolit přístup&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Aplikaci byl odepřen přístup"</string>
+    <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"Přístup k tomuto oprávnění může ohrozit vaše osobní a finanční údaje.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Je možné, že aplikace bez tohoto oprávnění nebude fungovat správně. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Jak povolit přístup&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"Další informace"</string>
-    <string name="enhanced_confirmation_dialog_ok" msgid="1767075979746135617">"Rozumím"</string>
+    <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"OK"</string>
+    <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"Žádost o oprávnění byla potlačena"</string>
+    <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"Tato aplikace požaduje další oprávnění, která ale nelze udělit během relace streamování. Oprávnění udělte nejprve na telefonu."</string>
 </resources>

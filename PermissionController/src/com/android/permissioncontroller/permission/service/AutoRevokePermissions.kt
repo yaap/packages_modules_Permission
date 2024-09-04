@@ -31,6 +31,7 @@ import com.android.permissioncontroller.DumpableLog
 import com.android.permissioncontroller.PermissionControllerStatsLog
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_UNUSED_APP_PERMISSION_REVOKED
+import com.android.permissioncontroller.ecm.EnhancedConfirmationStatsLogUtils
 import com.android.permissioncontroller.hibernation.getUnusedThresholdMs
 import com.android.permissioncontroller.permission.data.AutoRevokedPackagesLiveData
 import com.android.permissioncontroller.permission.data.LightAppPermGroupLiveData
@@ -70,7 +71,7 @@ suspend fun revokeAppPermissions(
     val userManager = context.getSystemService(UserManager::class.java)
 
     val permissionManager = context.getSystemService(PermissionManager::class.java)!!
-    val splitPermissionIndex = SplitPermissionIndex(permissionManager.splitPermissions)
+    val splitPermissions = SplitPermissionIndex(permissionManager.splitPermissions)
 
     for ((user, userApps) in apps) {
         if (userManager == null || !userManager.isUserUnlocked(user)) {
@@ -101,11 +102,11 @@ suspend fun revokeAppPermissions(
                 }
                 return@forEachInParallelOuter
             }
-            val targetSdk = pkg.targetSdkVersion
+            val appTargetSdk = pkg.targetSdkVersion
             val pkgPermGroups: Map<String, List<String>>? =
                 PackagePermissionsLiveData[packageName, user].getInitializedValue()
 
-            if (pkgPermGroups == null || pkgPermGroups.isEmpty()) {
+            if (pkgPermGroups.isNullOrEmpty()) {
                 if (DEBUG_AUTO_REVOKE) {
                     DumpableLog.i(LOG_TAG, "$packageName: no permission groups found.")
                 }
@@ -150,24 +151,34 @@ suspend fun revokeAppPermissions(
             }
 
             // Mark any groups that split from an install-time permission as unrevocable
-            for (fromPerm in
-                pkgPermGroups[PackagePermissionsLiveData.NON_RUNTIME_NORMAL_PERMS] ?: emptyList()) {
-                for (toGroup in
-                    splitPermissionIndex.getPermToGroupSplitsFrom(fromPerm, targetSdk)) {
-                    revocableGroups.remove(toGroup)
+            val requestedInstallPermissions =
+                pkgPermGroups[PackagePermissionsLiveData.NON_RUNTIME_NORMAL_PERMS] ?: emptyList()
+            for (permissionName in requestedInstallPermissions) {
+                val permissionGroups =
+                    splitPermissions.getPermissionGroupsFromSplitPermission(
+                        permissionName,
+                        appTargetSdk
+                    )
+                for (permissionGroup in permissionGroups) {
+                    revocableGroups.remove(permissionGroup)
                 }
             }
 
             // For each unrevocable group, mark all groups that it splits from and to as unrevocable
             for (groupName in pkgPermGroups.keys) {
                 if (!revocableGroups.contains(groupName)) {
-                    for (fromGroup in
-                        splitPermissionIndex.getGroupToGroupSplitsTo(groupName, targetSdk)) {
-                        revocableGroups.remove(fromGroup)
+                    val sourcePermissionGroups =
+                        splitPermissions.getSplitPermissionGroups(groupName, appTargetSdk)
+                    for (sourcePermissionGroup in sourcePermissionGroups) {
+                        revocableGroups.remove(sourcePermissionGroup)
                     }
-                    for (toGroup in
-                        splitPermissionIndex.getGroupToGroupSplitsFrom(groupName, targetSdk)) {
-                        revocableGroups.remove(toGroup)
+                    val newPermissionGroups =
+                        splitPermissions.getPermissionGroupsFromSplitPermissionGroup(
+                            groupName,
+                            appTargetSdk
+                        )
+                    for (permissionGroup in newPermissionGroups) {
+                        revocableGroups.remove(permissionGroup)
                     }
                 }
             }
@@ -199,6 +210,12 @@ suspend fun revokeAppPermissions(
 
                     val uid = group.packageInfo.uid
                     for (permName in revocablePermissions) {
+                        val isPackageRestrictedByEnhancedConfirmation =
+                            EnhancedConfirmationStatsLogUtils.isPackageEcmRestricted(
+                                context,
+                                packageName,
+                                uid
+                            )
                         PermissionControllerStatsLog.write(
                             PERMISSION_GRANT_REQUEST_RESULT_REPORTED,
                             sessionId,
@@ -207,7 +224,8 @@ suspend fun revokeAppPermissions(
                             permName,
                             false,
                             SERVER_LOG_ID,
-                            /* permission_rationale_shown = */ false
+                            /* permission_rationale_shown = */ false,
+                            isPackageRestrictedByEnhancedConfirmation
                         )
                     }
 

@@ -70,6 +70,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.anyString
+import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.timeout
@@ -86,9 +87,6 @@ class RuntimePermissionsUpgradeControllerTest {
         val application = mock(PermissionControllerApplication::class.java)
 
         init {
-            whenever(application.applicationContext).thenReturn(application)
-            whenever(application.createContextAsUser(any(), anyInt())).thenReturn(application)
-
             whenever(application.registerComponentCallbacks(any())).thenAnswer {
                 val dataRepository = it.arguments[0] as ComponentCallbacks2
 
@@ -211,18 +209,17 @@ class RuntimePermissionsUpgradeControllerTest {
                 .startMocking()
 
         whenever(PermissionControllerApplication.get()).thenReturn(application)
-
-        whenever(application.getSystemService(PermissionManager::class.java))
-            .thenReturn(permissionManager)
-        whenever(application.getSystemService(ActivityManager::class.java))
-            .thenReturn(activityManager)
-        whenever(application.getSystemService(AppOpsManager::class.java)).thenReturn(appOpsManager)
-        whenever(application.getSystemService(LocationManager::class.java))
-            .thenReturn(locationManager)
-        whenever(application.getSystemService(UserManager::class.java)).thenReturn(userManager)
-        whenever(application.getSystemService(JobScheduler::class.java)).thenReturn(jobScheduler)
-
-        whenever(application.packageManager).thenReturn(packageManager)
+        whenever(application.applicationContext).thenReturn(application)
+        whenever(application.createContextAsUser(any(), anyInt())).thenReturn(application)
+        doReturn(packageManager).`when`(application).packageManager
+        doReturn(permissionManager)
+            .`when`(application)
+            .getSystemService(PermissionManager::class.java)
+        doReturn(activityManager).`when`(application).getSystemService(ActivityManager::class.java)
+        doReturn(appOpsManager).`when`(application).getSystemService(AppOpsManager::class.java)
+        doReturn(locationManager).`when`(application).getSystemService(LocationManager::class.java)
+        doReturn(userManager).`when`(application).getSystemService(UserManager::class.java)
+        doReturn(jobScheduler).`when`(application).getSystemService(JobScheduler::class.java)
 
         whenever(packageManager.getPermissionInfo(any(), anyInt())).thenAnswer {
             val permissionName = it.arguments[0] as String

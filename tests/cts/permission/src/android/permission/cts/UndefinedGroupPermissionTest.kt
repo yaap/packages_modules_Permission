@@ -30,6 +30,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.UiObjectNotFoundException
+import com.android.compatibility.common.util.FeatureUtil
 import com.android.compatibility.common.util.SystemUtil
 import com.android.compatibility.common.util.SystemUtil.eventually
 import com.android.compatibility.common.util.UiAutomatorUtils2.waitFindObject
@@ -166,10 +167,8 @@ class UndefinedGroupPermissionTest {
     }
 
     fun findAllowButton(): UiObject2 {
-        return if (
-            mContext?.packageManager?.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) == true
-        ) {
-            waitFindObject(By.text(mAllowButtonText!!), 2000)
+         return if (FeatureUtil.isAutomotive() || FeatureUtil.isWatch()) {
+            waitFindObject(By.text(mAllowButtonText!!))
         } else {
             waitFindObject(
                 By.res("com.android.permissioncontroller:id/permission_allow_button"),
@@ -198,11 +197,8 @@ class UndefinedGroupPermissionTest {
             startRequestActivity(arrayOf(targetPermission))
             mUiDevice!!.waitForIdle()
             try {
-                if (
-                    mContext?.packageManager?.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) ==
-                        true
-                ) {
-                    waitFindObject(By.text(mDenyButtonText!!), 2000)
+                if (FeatureUtil.isAutomotive() || FeatureUtil.isWatch()) {
+                    waitFindObject(By.text(mDenyButtonText!!))
                 } else if (
                     mContext?.packageManager?.hasSystemFeature(PackageManager.FEATURE_WATCH) == true
                 ) {

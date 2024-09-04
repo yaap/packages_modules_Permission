@@ -30,6 +30,7 @@ import android.os.SystemClock
 import android.os.SystemProperties
 import android.permission.PermissionManager
 import android.platform.test.annotations.AsbSecurityTest
+import android.platform.test.rule.ScreenRecordRule
 import android.provider.DeviceConfig
 import android.provider.Settings
 import android.safetycenter.SafetyCenterManager
@@ -52,6 +53,7 @@ import com.android.compatibility.common.util.SystemUtil.runShellCommand
 import com.android.compatibility.common.util.SystemUtil.runShellCommandOrThrow
 import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity
 import com.android.compatibility.common.util.UiAutomatorUtils2
+import com.android.compatibility.common.util.UiAutomatorUtils2.assertWithUiDump
 import com.android.modules.utils.build.SdkLevel
 import com.android.sts.common.util.StsExtraBusinessLogicTestCase
 import java.util.regex.Pattern
@@ -81,6 +83,7 @@ private const val USE_INTENT_ACTION = "test.action.USE_CAMERA_OR_MIC"
 private const val PRIVACY_CHIP_ID = "com.android.systemui:id/privacy_chip"
 private const val PRIVACY_ITEM_ID = "com.android.systemui:id/privacy_item"
 private const val INDICATORS_FLAG = "camera_mic_icons_enabled"
+private const val WEAR_MIC_LABEL = "Microphone"
 private const val PERMISSION_INDICATORS_NOT_PRESENT = 162547999L
 private const val IDLE_TIMEOUT_MILLIS: Long = 1000
 private const val UNEXPECTED_TIMEOUT_MILLIS = 1000L
@@ -92,6 +95,7 @@ private val HOTWORD_DETECTION_SERVICE_REQUIRED =
     SystemProperties.getBoolean("ro.hotword.detection_service_required", false)
 
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.S, codeName = "S")
+@ScreenRecordRule.ScreenRecord
 @FlakyTest
 class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
     private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
@@ -104,8 +108,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
 
     private val isTv = packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
     private val isCar = packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)
-    private val safetyCenterMicLabel = getPermissionControllerString(MIC_LABEL_NAME)
-    private val safetyCenterCameraLabel = getPermissionControllerString(CAMERA_LABEL_NAME)
+    private val isWatch = packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)
     private val originalCameraLabel =
         packageManager
             .getPermissionGroupInfo(Manifest.permission_group.CAMERA, 0)
@@ -125,6 +128,8 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
     private lateinit var carCameraPrivacyChipId: String
 
     @get:Rule val disableAnimationRule = DisableAnimationRule()
+
+    @get:Rule val screenRecordRule = ScreenRecordRule(false, false)
 
     constructor() : super()
 
@@ -265,7 +270,6 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         testCameraAndMicIndicator(useMic = true, useCamera = false)
     }
 
-    // TODO b/269687722: remove once mainline presubmit uses a more recent S build
     @Test
     @AsbSecurityTest(cveBugId = [258672042])
     fun testMicIndicatorWithManualFinishOpStillShows() {
@@ -363,8 +367,17 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         openApp(useMic, useCamera, useHotword, finishEarly)
         try {
             eventually {
-                val appView = uiDevice.findObject(UiSelector().textContains(APP_LABEL))
-                assertTrue("View with text $APP_LABEL not found", appView.exists())
+                val appView =
+                    if (isWatch) {
+                        // Title is disabled by default on watch apps
+                        uiDevice.findObject(UiSelector().packageName(APP_PKG))
+                    } else {
+                        uiDevice.findObject(UiSelector().textContains(APP_LABEL))
+                    }
+
+                assertWithUiDump {
+                    assertTrue("View with text $APP_LABEL not found", appView.exists())
+                }
             }
             if (chainUsage) {
                 chainAttribution = createChainAttribution()
@@ -383,14 +396,19 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
 
             if (finishEarly) {
                 // Assert that the indicator doesn't go away
-                val indicatorGoneException: Exception? =
-                    try {
-                        eventually { assertIndicatorsShown(false, false, false) }
-                        null
-                    } catch (e: Exception) {
-                        e
-                    }
-                assertNotNull("Expected the indicator to be present", indicatorGoneException)
+                var failed = false
+                try {
+                    // Check if the indicator has gone away. This will throw an exception if the
+                    // indicator is still present
+                    assertIndicatorsShown(false, false, false)
+                    // If we successfully asserted that the indicator went away, fail the test
+                    failed = true
+                } catch (t: Throwable) {
+                    // expected
+                }
+                if (failed) {
+                    assertWithUiDump { Assert.fail("Expected the indicator to remain present") }
+                }
             }
         } finally {
             if (chainAttribution != null) {
@@ -415,6 +433,8 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
             assertTvIndicatorsShown(useMic, useCamera, useHotword)
         } else if (isCar) {
             assertCarIndicatorsShown(useMic, useCamera, useHotword, chainUsage)
+        } else if (isWatch) {
+            assertWatchIndicatorsShown(useMic, useCamera, useHotword)
         } else {
             uiDevice.openQuickSettings()
             val micInUse =
@@ -430,6 +450,23 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                 safetyCenterEnabled
             )
             uiDevice.pressBack()
+        }
+    }
+
+    private fun assertWatchIndicatorsShown(
+        useMic: Boolean,
+        useCamera: Boolean,
+        useHotword: Boolean
+    ) {
+        if (useMic || useHotword || (!useMic && !useCamera && !useHotword)) {
+            val iconView = UiAutomatorUtils2.waitFindObjectOrNull(By.descContains(WEAR_MIC_LABEL))
+            if (useMic) {
+                assertNotNull("Did not find mic chip", iconView)
+            } else {
+                assertNull("Found mic chip, but did not expect to", iconView)
+                // waitFindObject leaves the watch on the notification screen
+                pressBack()
+            }
         }
     }
 
@@ -530,11 +567,13 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         if (useCamera || useMic) {
             eventually {
                 val privacyChip = UiAutomatorUtils2.waitFindObjectOrNull(By.res(PRIVACY_CHIP_ID))
-                assertNotNull("view with id $PRIVACY_CHIP_ID not found", privacyChip)
+                assertWithUiDump {
+                    assertNotNull("view with id $PRIVACY_CHIP_ID not found", privacyChip)
+                }
                 privacyChip.click()
             }
         } else {
-            UiAutomatorUtils2.waitUntilObjectGone(By.res(PRIVACY_CHIP_ID))
+            assertWithUiDump { UiAutomatorUtils2.waitUntilObjectGone(By.res(PRIVACY_CHIP_ID)) }
             return
         }
 
@@ -548,7 +587,9 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                     assertSafetyCenterMicViewNotNull()
                 } else {
                     val iconView = waitFindObject(By.descContains(micLabel))
-                    assertNotNull("View with description '$micLabel' not found", iconView)
+                    assertWithUiDump {
+                        assertNotNull("View with description '$micLabel' not found", iconView)
+                    }
                 }
             }
             if (useCamera) {
@@ -556,11 +597,13 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                     assertSafetyCenterCameraViewNotNull()
                 } else {
                     val iconView = waitFindObject(By.descContains(cameraLabel))
-                    assertNotNull("View with description '$cameraLabel' not found", iconView)
+                    assertWithUiDump {
+                        assertNotNull("View with description '$cameraLabel' not found", iconView)
+                    }
                 }
             }
             var appView = waitFindObject(By.textContains(APP_LABEL))
-            assertNotNull("View with text $APP_LABEL not found", appView)
+            assertWithUiDump { assertNotNull("View with text $APP_LABEL not found", appView) }
         }
         uiDevice.pressBack()
     }
@@ -678,6 +721,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
     }
 
     private fun assertSafetyCenterMicViewNotNull() {
+        val safetyCenterMicLabel = getPermissionControllerString(MIC_LABEL_NAME)
         val micView = waitFindObject(byOneOfText(originalMicLabel, safetyCenterMicLabel))
         assertNotNull(
             "View with text '$originalMicLabel' or '$safetyCenterMicLabel' not found",
@@ -686,6 +730,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
     }
 
     private fun assertSafetyCenterCameraViewNotNull() {
+        val safetyCenterCameraLabel = getPermissionControllerString(CAMERA_LABEL_NAME)
         val cameraView = waitFindObject(byOneOfText(originalCameraLabel, safetyCenterCameraLabel))
         assertNotNull(
             "View with text '$originalCameraLabel' or '$safetyCenterCameraLabel' not found",

@@ -17,14 +17,14 @@
 package com.android.permissioncontroller.role.utils;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.android.modules.utils.build.SdkLevel;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,46 +35,6 @@ import java.util.Objects;
 public class UserUtils {
 
     private UserUtils() {}
-
-    /**
-     * Check whether a user is a profile.
-     *
-     * @param user    the user to check
-     * @param context the {@code Context} to retrieve system services
-     * @return whether the user is a profile
-     */
-    public static boolean isProfile(@NonNull UserHandle user, @NonNull Context context) {
-        return isManagedProfile(user, context) || isCloneProfile(user, context);
-    }
-
-    /**
-     * Check whether a user is a managed profile.
-     *
-     * @param user    the user to check
-     * @param context the {@code Context} to retrieve system services
-     * @return whether the user is a managed profile
-     */
-    public static boolean isManagedProfile(@NonNull UserHandle user, @NonNull Context context) {
-        Context userContext = getUserContext(context, user);
-        UserManager userUserManager = userContext.getSystemService(UserManager.class);
-        return userUserManager.isManagedProfile(user.getIdentifier());
-    }
-
-    /**
-     * Check whether a user is a clone profile.
-     *
-     * @param user    the user to check
-     * @param context the {@code Context} to retrieve system services
-     * @return whether the user is a clone profile
-     */
-    public static boolean isCloneProfile(@NonNull UserHandle user, @NonNull Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
-            return false;
-        }
-        Context userContext = getUserContext(context, user);
-        UserManager userUserManager = userContext.getSystemService(UserManager.class);
-        return userUserManager.isCloneProfile();
-    }
 
     /**
      * Get the work profile of current user, if any.
@@ -102,6 +62,45 @@ public class UserUtils {
             return profile;
         }
         return null;
+    }
+
+    /**
+     * Get the private profile of current user, if any.
+     *
+     * @param context the {@code Context} to retrieve system services
+     *
+     * @return the private profile of current user, or {@code null} if none
+     */
+    @Nullable
+    public static UserHandle getPrivateProfile(@NonNull Context context) {
+        if (!SdkLevel.isAtLeastV()) {
+            return null;
+        }
+
+        List<UserHandle> profiles = context.getSystemService(UserManager.class).getUserProfiles();
+        UserHandle user = Process.myUserHandle();
+
+        int profilesSize = profiles.size();
+        for (int i = 0; i < profilesSize; i++) {
+            UserHandle profile = profiles.get(i);
+
+            if (Objects.equals(profile, user)) {
+                continue;
+            }
+            if (isPrivateProfile(profile, context)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    private static boolean isPrivateProfile(@NonNull UserHandle userHandle,
+            @NonNull Context context) {
+        if (!SdkLevel.isAtLeastV() || !android.os.Flags.allowPrivateProfile()) {
+            return false;
+        }
+        Context userContext = context.createContextAsUser(userHandle, /* flags= */ 0);
+        return userContext.getSystemService(UserManager.class).isPrivateProfile();
     }
 
     /**

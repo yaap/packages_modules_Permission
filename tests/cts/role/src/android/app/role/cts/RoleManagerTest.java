@@ -58,13 +58,16 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.filters.FlakyTest;
 import androidx.test.filters.SdkSuppress;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.BySelector;
 import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.Until;
 
+import com.android.bedstead.harrier.BedsteadJUnit4;
+import com.android.bedstead.harrier.DeviceState;
+import com.android.bedstead.harrier.annotations.EnsureHasPrivateProfile;
+import com.android.bedstead.nene.types.OptionalBoolean;
 import com.android.compatibility.common.util.DisableAnimationRule;
 import com.android.compatibility.common.util.FreezeRotationRule;
 import com.android.compatibility.common.util.TestUtils;
@@ -73,6 +76,7 @@ import com.android.compatibility.common.util.UiAutomatorUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,7 +93,7 @@ import java.util.function.Consumer;
 /**
  * Tests {@link RoleManager}.
  */
-@RunWith(AndroidJUnit4.class)
+@RunWith(BedsteadJUnit4.class)
 public class RoleManagerTest {
 
     private static final long TIMEOUT_MILLIS = 15 * 1000;
@@ -97,11 +101,17 @@ public class RoleManagerTest {
     private static final long UNEXPECTED_TIMEOUT_MILLIS = 1000;
 
     private static final String ROLE_NAME = RoleManager.ROLE_BROWSER;
+    private static final String ROLE_PHONE_NAME = RoleManager.ROLE_DIALER;
+    private static final String ROLE_SMS_NAME = RoleManager.ROLE_SMS;
     private static final String ROLE_SHORT_LABEL = "Browser app";
 
     private static final String APP_APK_PATH = "/data/local/tmp/cts-role/CtsRoleTestApp.apk";
     private static final String APP_PACKAGE_NAME = "android.app.role.cts.app";
     private static final String APP_LABEL = "CtsRoleTestApp";
+    private static final String APP_FOR_PROFILE_APK_PATH =
+            "/data/local/tmp/cts-role/CtsRoleTestAppForProfile.apk";
+    private static final String APP_FOR_PROFILE_PACKAGE_NAME = "android.app.role.cts.appForProfile";
+    private static final String APP_FOR_PROFILE = "CtsRoleTestAppForProfile";
     private static final String APP_IS_ROLE_HELD_ACTIVITY_NAME = APP_PACKAGE_NAME
             + ".IsRoleHeldActivity";
     private static final String APP_IS_ROLE_HELD_EXTRA_IS_ROLE_HELD = APP_PACKAGE_NAME
@@ -141,6 +151,8 @@ public class RoleManagerTest {
     private static final boolean sIsWatch = sPackageManager.hasSystemFeature(
             PackageManager.FEATURE_WATCH);
 
+    private static final BySelector ENHANCED_CONFIRMATION_DIALOG_SELECTOR =
+            By.res("com.android.permissioncontroller:id/enhanced_confirmation_dialog_title");
     // TODO(b/327528959): consider using resource selectors for Wear too, once the underlying
     // issue is handled.
     private static final BySelector NEGATIVE_BUTTON_SELECTOR =
@@ -163,6 +175,10 @@ public class RoleManagerTest {
     @Rule
     public ActivityTestRule<WaitForResultActivity> mActivityRule =
             new ActivityTestRule<>(WaitForResultActivity.class);
+
+    @ClassRule
+    @Rule
+    public static final DeviceState sDeviceState = new DeviceState();
 
     private String mRoleHolder;
 
@@ -250,18 +266,17 @@ public class RoleManagerTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED)
     @FlakyTest(bugId = 288468003, detail = "CtsRoleTestCases is breaching 20min SLO")
-    public void requestRoleAndSelectRestrictedAppThenRestrictedSettingDialog() throws Exception {
+    public void requestRoleThenBlockRequestRoleDialogByRestrictedSettingDialog() throws Exception {
+        assumeTrue(sRoleManager.isRoleAvailable(RoleManager.ROLE_SMS));
         assumeFalse(sIsWatch || sIsAutomotive || sIsTelevision);
         runWithShellPermissionIdentity(
                 () -> setEnhancedConfirmationRestrictedAppOpMode(sContext, APP_PACKAGE_NAME,
                         AppOpsManager.MODE_ERRORED));
 
-        requestRole(ROLE_NAME);
-        waitFindObject(By.text(APP_LABEL).enabled(false))
-                .clickAndWait(Until.newWindow(), TIMEOUT_MILLIS);
-        waitFindObject(By.textContains("Restricted setting"), TIMEOUT_MILLIS);
+        requestRole(ROLE_SMS_NAME);
+        waitFindObject(ENHANCED_CONFIRMATION_DIALOG_SELECTOR, TIMEOUT_MILLIS);
+
         pressBack();
-        respondToRoleRequest(false);
     }
 
     @Test
@@ -473,13 +488,19 @@ public class RoleManagerTest {
     }
 
     private void installPackage(@NonNull String apkPath) {
-        runShellCommandOrThrow(
-                "pm install -r --user " + Process.myUserHandle().getIdentifier() + " " + apkPath);
+        installPackage(apkPath, Process.myUserHandle());
+    }
+
+    private void installPackage(@NonNull String apkPath, UserHandle user) {
+        runShellCommandOrThrow("pm install -r --user " + user.getIdentifier() + " " + apkPath);
     }
 
     private void uninstallPackage(@NonNull String packageName) {
-        runShellCommand("pm uninstall --user " + Process.myUserHandle().getIdentifier() + " "
-                + packageName);
+        uninstallPackage(packageName, Process.myUserHandle());
+    }
+
+    private void uninstallPackage(@NonNull String packageName, UserHandle user) {
+        runShellCommand("pm uninstall --user " + user.getIdentifier() + " " + packageName);
     }
 
     @Test
@@ -673,6 +694,7 @@ public class RoleManagerTest {
     @FlakyTest(bugId = 288468003, detail = "CtsRoleTestCases is breaching 20min SLO")
     public void openDefaultAppDetailsOnHandHeldThenRestrictedAppIsNotSelectableAsDefaultApp()
             throws Exception {
+        assumeTrue(sRoleManager.isRoleAvailable(RoleManager.ROLE_DIALER));
         assumeFalse(sIsWatch || sIsAutomotive || sIsTelevision);
         runWithShellPermissionIdentity(
                 () -> setEnhancedConfirmationRestrictedAppOpMode(sContext, APP_PACKAGE_NAME,
@@ -681,14 +703,14 @@ public class RoleManagerTest {
         runWithShellPermissionIdentity(() -> sContext.startActivity(new Intent(
                 Intent.ACTION_MANAGE_DEFAULT_APP)
                 .addCategory(Intent.CATEGORY_DEFAULT)
-                .putExtra(Intent.EXTRA_ROLE_NAME, ROLE_NAME)
+                .putExtra(Intent.EXTRA_ROLE_NAME, ROLE_PHONE_NAME)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_CLEAR_TASK)));
 
         waitFindObject(By.text(APP_LABEL).enabled(false)).clickAndWait(Until.newWindow(),
                 TIMEOUT_MILLIS);
 
-        waitFindObject(By.textContains("Restricted setting"), TIMEOUT_MILLIS);
+        waitFindObject(ENHANCED_CONFIRMATION_DIALOG_SELECTOR, TIMEOUT_MILLIS);
         pressBack();
 
         pressBack();
@@ -775,6 +797,7 @@ public class RoleManagerTest {
         pressBack();
     }
 
+    @FlakyTest
     @Test
     public void openDefaultAppListThenIsNotDefaultAppInList() throws Exception {
         sContext.startActivity(new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
@@ -814,6 +837,47 @@ public class RoleManagerTest {
 
         pressBack();
         pressBack();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE)
+    @EnsureHasPrivateProfile(installInstrumentedApp = OptionalBoolean.TRUE)
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+            codeName = "VanillaIceCream")
+    @FlakyTest(bugId = 288468003, detail = "CtsRoleTestCases is breaching 20min SLO")
+    public void openDefaultAppListAndSetDefaultAppThenIsDefaultAppForPrivateSpace()
+            throws Exception {
+        // Private space is not supported on Watch right now and there are no existing plans yet.
+        if (sIsWatch) {
+            return;
+        }
+
+        UserHandle privateProfile = sDeviceState.privateProfile().userHandle();
+        assertThat(privateProfile).isNotNull();
+        installPackage(APP_APK_PATH, privateProfile);
+        installPackage(APP_FOR_PROFILE_APK_PATH, privateProfile);
+        addRoleHolderAsUser(ROLE_NAME, APP_FOR_PROFILE_PACKAGE_NAME, privateProfile);
+
+        sContext.startActivity(new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+                .addCategory(Intent.CATEGORY_DEFAULT)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        waitForIdle();
+
+        waitFindObject(By.hasDescendant(By.text(APP_FOR_PROFILE))).click();
+
+        waitForIdle();
+        waitFindObject(By.clickable(true).hasDescendant(By.checkable(true).checked(false))
+                    .hasDescendant(By.text(APP_LABEL))).click();
+        waitFindObject(By.clickable(true).hasDescendant(By.checkable(true).checked(true))
+                    .hasDescendant(By.text(APP_LABEL)));
+
+        assertIsRoleHolderAsUser(ROLE_NAME, APP_PACKAGE_NAME, true, privateProfile);
+
+        pressBack();
+        pressBack();
+
+        uninstallPackage(APP_PACKAGE_NAME, privateProfile);
+        uninstallPackage(APP_FOR_PROFILE_APK_PATH, privateProfile);
     }
 
     @Test
@@ -1149,8 +1213,12 @@ public class RoleManagerTest {
                 telephonyManager.isEmergencyAssistanceEnabled())) {
             String emergencyAssistancePackageName = callWithShellPermissionIdentity(() ->
                     telephonyManager.getEmergencyAssistancePackageName());
-            assertThat(emergencyRoleHolders).hasSize(1);
-            assertThat(emergencyAssistancePackageName).isEqualTo(emergencyRoleHolders.get(0));
+            if (emergencyRoleHolders.isEmpty()) {
+                assertThat(emergencyAssistancePackageName).isNull();
+            } else {
+                assertThat(emergencyRoleHolders).hasSize(1);
+                assertThat(emergencyAssistancePackageName).isEqualTo(emergencyRoleHolders.get(0));
+            }
         } else {
             assertThrows(IllegalStateException.class, () ->
                     callWithShellPermissionIdentity(() ->
@@ -1272,6 +1340,13 @@ public class RoleManagerTest {
         return callWithShellPermissionIdentity(() -> sRoleManager.getRoleHolders(roleName));
     }
 
+    @NonNull
+    private List<String> getRoleHoldersAsUser(@NonNull String roleName, UserHandle userHandle)
+            throws Exception {
+        return callWithShellPermissionIdentity(
+                () -> sRoleManager.getRoleHoldersAsUser(roleName, userHandle));
+    }
+
     private void assertIsRoleHolder(@NonNull String roleName, @NonNull String packageName,
             boolean shouldBeRoleHolder) throws Exception {
         List<String> packageNames = getRoleHolders(roleName);
@@ -1283,17 +1358,38 @@ public class RoleManagerTest {
         }
      }
 
+    private void assertIsRoleHolderAsUser(@NonNull String roleName, @NonNull String packageName,
+            boolean shouldBeRoleHolder, UserHandle userHandle) throws Exception {
+        List<String> packageNames = getRoleHoldersAsUser(roleName, userHandle);
+
+        if (shouldBeRoleHolder) {
+            assertThat(packageNames).contains(packageName);
+        } else {
+            assertThat(packageNames).doesNotContain(packageName);
+        }
+    }
+
     private void addRoleHolder(@NonNull String roleName, @NonNull String packageName,
             boolean expectSuccess) throws Exception {
-        CallbackFuture future = new CallbackFuture();
-        runWithShellPermissionIdentity(() -> sRoleManager.addRoleHolderAsUser(roleName,
-                packageName, 0, Process.myUserHandle(), sContext.getMainExecutor(), future));
-        assertThat(future.get(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)).isEqualTo(expectSuccess);
+        addRoleHolderAsUser(roleName, packageName, Process.myUserHandle(), expectSuccess);
     }
 
     private void addRoleHolder(@NonNull String roleName, @NonNull String packageName)
             throws Exception {
         addRoleHolder(roleName, packageName, true);
+    }
+
+    private void addRoleHolderAsUser(@NonNull String roleName, @NonNull String packageName,
+            UserHandle userHandle, boolean expectSuccess) throws Exception {
+        CallbackFuture future = new CallbackFuture();
+        runWithShellPermissionIdentity(() -> sRoleManager.addRoleHolderAsUser(roleName,
+                packageName, 0, userHandle, sContext.getMainExecutor(), future));
+        assertThat(future.get(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)).isEqualTo(expectSuccess);
+    }
+
+    private void addRoleHolderAsUser(@NonNull String roleName, @NonNull String packageName,
+            UserHandle userHandle) throws Exception {
+        addRoleHolderAsUser(roleName, packageName, userHandle, true);
     }
 
     private void removeRoleHolder(@NonNull String roleName, @NonNull String packageName,

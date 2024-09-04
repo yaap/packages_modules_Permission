@@ -54,6 +54,7 @@ import android.Manifest;
 import android.app.AppOpsManager;
 import android.app.Application;
 import android.app.admin.DevicePolicyManager;
+import android.app.ecm.EnhancedConfirmationManager;
 import android.app.role.RoleManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -81,6 +82,7 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.permission.flags.Flags;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.Html;
@@ -230,6 +232,8 @@ public final class Utils {
     private static final ArrayMap<String, Integer> PERM_BLOCKED_ICON;
     /** Permission -> Title res id */
     private static final ArrayMap<String, Integer> PERM_BLOCKED_TITLE;
+    /** Permission -> Title res id */
+    private static final ArrayMap<String, Integer> PERM_BLOCKED_TITLE_AUTOMOTIVE;
 
     public static final int FLAGS_ALWAYS_USER_SENSITIVE =
             FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED
@@ -387,6 +391,10 @@ public final class Utils {
         PERM_BLOCKED_TITLE.put(MICROPHONE, R.string.blocked_microphone_title);
         PERM_BLOCKED_TITLE.put(LOCATION, R.string.blocked_location_title);
 
+        PERM_BLOCKED_TITLE_AUTOMOTIVE = new ArrayMap<>();
+        PERM_BLOCKED_TITLE_AUTOMOTIVE.put(CAMERA, R.string.automotive_blocked_camera_title);
+        PERM_BLOCKED_TITLE_AUTOMOTIVE.put(MICROPHONE, R.string.automotive_blocked_microphone_title);
+        PERM_BLOCKED_TITLE_AUTOMOTIVE.put(LOCATION, R.string.automotive_blocked_location_title);
     }
 
     private Utils() {
@@ -1531,6 +1539,13 @@ public final class Utils {
     }
 
     /**
+     * Returns the blocked title code on automotive for a permission
+     **/
+    public static int getBlockedTitleAutomotive(@NonNull String permissionGroupName) {
+        return PERM_BLOCKED_TITLE_AUTOMOTIVE.getOrDefault(permissionGroupName, -1);
+    }
+
+    /**
      * Returns if the permission group has a background mode, even if the background mode is
      * introduced in a platform version after the one currently running
      **/
@@ -1617,5 +1632,42 @@ public final class Utils {
         var userProperties = userManager.getUserProperties(userHandle);
         return !userManager.isQuietModeEnabled(userHandle)
                 || userProperties.getShowInQuietMode() != UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;
+    }
+
+    /**
+     * Check whether an application is restricted for this setting identifier and return the
+     * {@code Intent} for the restriction if it is.
+     *
+     * @param user the user to check for
+     * @param context the {@code Context} to retrieve system services
+     *
+     * @return the {@code Intent} for the restriction if the application is restricted for this
+     *         setting identifier, or {@code null} otherwise.
+     */
+    @Nullable
+    public static Intent getApplicationEnhancedConfirmationRestrictedIntentAsUser(
+            @NonNull UserHandle user,
+            @NonNull Context context,
+            @Nullable String packageName,
+            @Nullable String settingIdentifier) {
+        if (SdkLevel.isAtLeastV() && Flags.enhancedConfirmationModeApisEnabled()) {
+            Context userContext = Utils.getUserContext(context, user);
+            EnhancedConfirmationManager userEnhancedConfirmationManager =
+                    userContext.getSystemService(EnhancedConfirmationManager.class);
+            if (packageName == null || settingIdentifier == null) return null;
+            try {
+                boolean isRestricted = userEnhancedConfirmationManager.isRestricted(packageName,
+                        settingIdentifier);
+                if (isRestricted) {
+                    return userEnhancedConfirmationManager.createRestrictedSettingDialogIntent(
+                            packageName, settingIdentifier);
+                }
+
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.w(LOG_TAG, "Cannot check enhanced confirmation restriction for package: "
+                        + packageName, e);
+            }
+        }
+        return null;
     }
 }

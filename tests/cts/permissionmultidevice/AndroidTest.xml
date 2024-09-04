@@ -37,13 +37,6 @@
         <option name="disable-device-config-sync" value="true" />
     </target_preparer>
 
-    <target_preparer class="com.android.tradefed.targetprep.FeatureFlagTargetPreparer">
-        <option name="flag-value"
-            value="permissions/com.android.permission.flags.device_aware_permission_grant=true"/>
-        <option name="flag-value"
-            value="virtual_devices/android.companion.virtual.flags.stream_permissions=true"/>
-    </target_preparer>
-
     <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
         <option name="cleanup-apks" value="true" />
         <option name="test-file-name" value="CtsPermissionMultiDeviceTestCases.apk" />
@@ -66,6 +59,9 @@
         <option name="run-command" value="am wait-for-broadcast-barrier"  />
         <!-- Dismiss any system dialogs (e.g. crashes, ANR). -->
         <option name="run-command" value="am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS --receiver-foreground"  />
+        <!-- Ensure consistent Intent launch by overriding device provision and user setup status -->
+        <option name="run-command" value="settings put global device_provisioned 1" />
+        <option name="run-command" value="settings put secure user_setup_complete 1" />
     </target_preparer>
 
     <!-- Create place to store apks -->
@@ -77,6 +73,16 @@
     <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
         <option name="package" value="android.permissionmultidevice.cts" />
         <option name="runtime-hint" value="5m" />
+        <option name="device-listeners" value="android.device.collectors.ScreenshotOnFailureCollector"/>
     </test>
+
+    <!-- Collect the dumped files for debugging -->
+    <metrics_collector class="com.android.tradefed.device.metric.FilePullerLogCollector">
+        <option name="pull-pattern-keys" value="view_.*" />
+        <!-- Collect the files generated on error -->
+        <option name="pull-pattern-keys" value="android.device.collectors.ScreenshotOnFailureCollector.*\.png"/>
+        <option name="directory-keys" value="/data/user/0/android.permissionmultidevice.cts/files" />
+        <option name="collect-on-run-ended-only" value="false" />
+    </metrics_collector>
 
 </configuration>

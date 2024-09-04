@@ -37,7 +37,8 @@ android_test {
         "android.companion.virtual.flags-aconfig-java",
         "permission-test-util-lib",
         "permission-multidevice-test-util-lib",
-        "android.permission.flags-aconfig-java",
+        "android.permission.flags-aconfig-java-export",
+        "collector-device-lib",
     ],
     data: [
         ":CtsAccessRemoteDeviceCamera",
@@ -46,5 +47,6 @@ android_test {
         "cts",
         "general-tests",
         "mts-permission",
+        "mcts-permission",
     ],
 }

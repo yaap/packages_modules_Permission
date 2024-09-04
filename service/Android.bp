@@ -109,9 +109,9 @@ java_sdk_library {
         "safety-center-resources-lib",
         "service-permission-shared",
         "service-permission-statsd",
+        "permissioncontroller-statsd",
         "service-permission-proto-stream",
-        "android.permission.flags-aconfig-java",
-        "permissions-aconfig-flags-lib",
+        "com.android.permission.flags-aconfig-java",
     ],
     errorprone: {
         javacflags: ["-Xep:GuardedBy:ERROR"],
@@ -146,6 +146,10 @@ java_sdk_library {
         proguard_compatibility: false, // TODO(b/215530220): remove when this is default behavior
         proguard_flags_files: ["proguard.flags"],
     },
+    aconfig_declarations: [
+        "android.permission.flags-aconfig",
+        "com.android.permission.flags-aconfig",
+    ],
 }
 
 genrule {

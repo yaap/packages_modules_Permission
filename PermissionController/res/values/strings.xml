@@ -75,7 +75,6 @@
 
     <!-- Title for the dialog button to allow limited access. [CHAR LIMIT=60] -->
     <string name="grant_dialog_button_allow_limited_access">Allow limited access</string>
-    <!-- TODO: b/310657469 add app_permission version of this string -->
 
     <!-- Title for the dialog button to allow access to select photos to be shared. [CHAR LIMIT=60] -->
     <string name="grant_dialog_button_allow_selected_photos">Select photos and videos</string>
@@ -582,29 +581,32 @@
     <!-- Summary for an app's use of a permission without duration [CHAR LIMIT=none] -->
     <string name="app_permission_usage_summary_no_duration">Access: <xliff:g id="num" example="2">%1$s</xliff:g> times. Last used <xliff:g id="time" example="2 hours">%2$s</xliff:g> ago.</string>
 
-    <!-- Title for the dialog button to allow a permission grant when you cannot only allow in the foreground. [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to allow a permission grant when you cannot only allow in the foreground. [CHAR LIMIT=60] -->
     <string name="app_permission_button_allow">Allow</string>
 
-    <!-- Title for the dialog button to allow a storage permission grant for all files [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to allow a storage permission grant for all files [CHAR LIMIT=60] -->
     <string name="app_permission_button_allow_all_files">Allow management of all files</string>
 
-    <!-- Title for the dialog button to allow a storage permission grant for media files only [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to allow a storage permission grant for media files only [CHAR LIMIT=60] -->
     <string name="app_permission_button_allow_media_only">Allow access to media only</string>
 
-    <!-- Title for the dialog button to allow a permission grant when you can also only allow in the foreground. [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to allow a permission grant when you can also only allow in the foreground. [CHAR LIMIT=60] -->
     <string name="app_permission_button_allow_always">Allow all the time</string>
 
-    <!-- Title for the dialog button to allow a permission grant only when the app is in the foreground. [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to allow a permission grant only when the app is in the foreground. [CHAR LIMIT=60] -->
     <string name="app_permission_button_allow_foreground">Allow only while using the app</string>
 
-    <!-- Title for the dialog button to allow the user to always allow access to all resources guarded by a permission. [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to allow the user to always allow access to all resources guarded by a permission. [CHAR LIMIT=60] -->
     <string name="app_permission_button_always_allow_all">Always allow all</string>
 
-    <!-- Title for the dialog button to require an app to ask for a permission next time they need it. [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to require an app to ask for a permission next time they need it. [CHAR LIMIT=60] -->
     <string name="app_permission_button_ask">Ask every time</string>
 
-    <!-- Title for the dialog button to deny with prejudice a permission grant. [CHAR LIMIT=60] -->
+    <!-- Title for the settings radio button to deny with prejudice a permission grant. [CHAR LIMIT=60] -->
     <string name="app_permission_button_deny">Don\u2019t allow</string>
+
+    <!-- Title for the settings radio button to allow limited access. [CHAR LIMIT=60] -->
+    <string name="app_permission_button_allow_limited_access">Allow limited access</string>
 
     <!-- Content description for precise location image. [CHAR LIMIT=50] -->
     <string name="precise_image_description">Precise location</string>
@@ -623,6 +625,9 @@
 
     <!-- Description for showing an app's permission [CHAR LIMIT=60] -->
     <string name="app_permission_header"><xliff:g id="perm" example="location">%1$s</xliff:g> access for this app</string>
+
+    <!-- Description for showing an app's permission along with device name [CHAR LIMIT=NONE] -->
+    <string name="app_permission_header_with_device_name"><xliff:g id="perm" example="camera">%1$s</xliff:g> access for this app on <xliff:g id="device_name" example="My Laptop">%2$s</xliff:g></string>
 
     <!-- Text for linking to the page that shows an app's permissions [CHAR LIMIT=none] -->
     <string name="app_permission_footer_app_permissions_link">See all <xliff:g id="app" example="Maps">%1$s</xliff:g> permissions</string>
@@ -798,6 +803,9 @@
 
     <!-- Header for denied permissions/apps [CHAR LIMIT=40] -->
     <string name="denied_header">Not allowed</string>
+
+    <!-- Header to display the Permission group name along with corresponding device name [CHAR LIMIT=None] -->
+    <string name="permission_group_name_with_device_name"><xliff:g id="perm_group_name" example="camera">%1$s</xliff:g> on <xliff:g id="device_name" example="My Laptop">%2$s</xliff:g></string>
 
     <!-- Text of hyperlink shown in storage_footer [CHAR LIMIT=60] -->
     <string name="storage_footer_hyperlink_text">See more apps that can access all files</string>
@@ -1306,6 +1314,9 @@
     <!-- Title for category of default apps for work [CHAR LIMIT=30] -->
     <string name="default_apps_for_work">Default for work</string>
 
+    <!-- Title for category of default apps for private profile [CHAR LIMIT=50] -->
+    <string name="default_apps_for_private_profile">Default for private space</string>
+
     <!-- Summary of a default app when there is no app set [CHAR LIMIT=60] -->
     <string name="default_app_none">None</string>
 
@@ -1409,7 +1420,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos and media on your device?</string>
     <!-- Message shown to the user when the apps requests permission from this group. Shows in the isolated storage case. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_storage_isolated">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos and media on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos and media on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_contacts">Allow
@@ -1417,7 +1428,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_contacts">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your contacts on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your contacts on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
@@ -1425,7 +1436,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access this device\u2019s location?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_location">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your &lt;b><xliff:g id="device_name" example="tablet">%2$s</xliff:g>\u2019s&lt;/b> location?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>\u2019s&lt;/b> location?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the location only while app is in foreground [CHAR LIMIT=150]-->
     <string name="permgrouprequestdetail_location">The app will only have access to the location while you\u2019re using the app</string>
     <!-- Message shown to the user when the apps requests permission to use the location while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
@@ -1433,13 +1444,13 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access this device\u2019s location?</string>
     <!-- Message shown to the user when the apps requests permission to use the location while app is in foreground and background. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgroupbackgroundrequest_device_aware_location">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your &lt;b><xliff:g id="device_name" example="tablet">%2$s</xliff:g>\u2019s location?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>\u2019s&lt;/b> location?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the location while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupbackgroundrequestdetail_location">This app may want to access your location all the time, even when you\u2019re not using the app. <annotation id="link">Allow in settings.</annotation></string>
     <!-- Message shown to the user when the apps requests permission to use the location while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgroupupgraderequest_location">Change location access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b>?</string>
     <!-- Message shown to the user when the apps requests permission to use the location while app is in foreground and background on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
-    <string name="permgroupupgraderequest_device_aware_location">Change location access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+    <string name="permgroupupgraderequest_device_aware_location">Change location access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the location while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupupgraderequestdetail_location">This app wants to access your location all the time, even when you\u2019re not using the app. <annotation id="link">Allow in settings.</annotation></string>
 
@@ -1448,18 +1459,18 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to find, connect to, and determine the relative position of nearby devices?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_nearby_devices">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to find, connect to, and determine the relative position of nearby devices on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to find, connect to, and determine the relative position of nearby devices on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to discovery and connect to nearby devices while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupupgraderequestdetail_nearby_devices">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to find, connect to, and determine the relative position of nearby devices? <annotation id="link">Allow in settings.</annotation></string>
 
     <!-- Message shown to the user when the app requests permission to upgrade to fine location [CHAR LIMIT=120] -->
     <string name="permgrouprequest_fineupgrade">Change <xliff:g id="app_name" example="Gmail">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g>\u2019s location access from approximate to precise?</string>
     <!-- Message shown to the user when the app requests permission to upgrade to fine location on a specific device [CHAR LIMIT=180] -->
-    <string name="permgrouprequest_device_aware_fineupgrade">Change <xliff:g id="app_name" example="Gmail">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g>\u2019s location access on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b> from approximate to precise?</string>
+    <string name="permgrouprequest_device_aware_fineupgrade">Change <xliff:g id="app_name" example="Gmail">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g>\u2019s location access on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b> from approximate to precise?</string>
     <!-- Message shown to the user when the app requests permission to use coarse location [CHAR LIMIT=120] -->
     <string name="permgrouprequest_coarselocation">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access this device\u2019s approximate location?</string>
     <!-- Message shown to the user when the app requests permission to use coarse location for a specific device [CHAR LIMIT=180] -->
-    <string name="permgrouprequest_device_aware_coarselocation">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>\u2019s approximate location?</string>
+    <string name="permgrouprequest_device_aware_coarselocation">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>\u2019s approximate location?</string>
     <!-- Text for the FINE location image [CHAR LIMIT=20] -->
     <string name="permgrouprequest_finelocation_imagetext">Precise</string>
     <!-- Text for the COARSE location image [CHAR LIMIT=20] -->
@@ -1471,7 +1482,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_calendar">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your calendar on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your calendar on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_sms">Allow
@@ -1479,7 +1490,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_sms">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to send and view SMS messages on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to send and view SMS messages on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_storage">Allow
@@ -1487,7 +1498,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_storage">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos, media, and files on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos, media, and files on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_storage_q_to_s">Allow
@@ -1501,27 +1512,27 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
     <string name="permgrouprequest_read_media_aural">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access music and audio on this device?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
-    <string name="permgrouprequest_device_aware_read_media_aural">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access music and audio on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+    <string name="permgrouprequest_device_aware_read_media_aural">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access music and audio on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_read_media_visual">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos and videos on this device?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
-    <string name="permgrouprequest_device_aware_read_media_visual">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos and videos on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+    <string name="permgrouprequest_device_aware_read_media_visual">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access photos and videos on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_more_photos">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access more photos and videos on this device?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_more_photos">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access more photos and videos on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access more photos and videos on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_microphone">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to record audio?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_microphone">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to record audio on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to record audio on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the microphone only while app is in foreground [CHAR LIMIT=150]-->
     <string name="permgrouprequestdetail_microphone">The app will only be able to record audio while you\u2019re using the app</string>
     <!-- Message shown to the user when the apps requests permission to use the microphone while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
@@ -1529,13 +1540,13 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to record audio?</string>
     <!-- Message shown to the user when the apps requests permission to use the microphone while app is in foreground and background. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgroupbackgroundrequest_device_aware_microphone">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to record audio on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to record audio on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the microphone while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupbackgroundrequestdetail_microphone">This app may want to record audio all the time, even when you\u2019re not using the app. <annotation id="link">Allow in settings.</annotation></string>
     <!-- Message shown to the user when the apps requests permission to use the microphone while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgroupupgraderequest_microphone">Change microphone access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b>?</string>
     <!-- Message shown to the user when the apps requests permission to use the microphone while app is in foreground and background. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
-    <string name="permgroupupgraderequest_device_aware_microphone">Change microphone access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+    <string name="permgroupupgraderequest_device_aware_microphone">Change microphone access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the microphone while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupupgraderequestdetail_microphone">This app wants to record audio all the time, even when you\u2019re not using the app. <annotation id="link">Allow in settings.</annotation></string>
 
@@ -1545,7 +1556,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_activityRecognition">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your physical activity on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your physical activity on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_camera">Allow
@@ -1553,7 +1564,7 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_camera">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to take pictures and record video on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to take pictures and record video on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the camera only while app is in foreground [CHAR LIMIT=150]-->
     <string name="permgrouprequestdetail_camera">The app will only be able to take pictures and record video while you\u2019re using the app</string>
     <!-- Message shown to the user when the apps requests permission to use the camera while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
@@ -1561,13 +1572,13 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to take pictures and record video?</string>
     <!-- Message shown to the user when the apps requests permission to use the camera while app is in foreground and background  on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgroupbackgroundrequest_device_aware_camera">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to take pictures and record video on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to take pictures and record video on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the camera while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupbackgroundrequestdetail_camera">This app may want to take pictures and record video all the time, even when you\u2019re not using the app. <annotation id="link">Allow in settings.</annotation></string>
     <!-- Message shown to the user when the apps requests permission to use the camera while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgroupupgraderequest_camera">Change camera access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b>?</string>
     <!-- Message shown to the user when the apps requests permission to use the camera while app is in foreground and background on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
-    <string name="permgroupupgraderequest_device_aware_camera">Change camera access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+    <string name="permgroupupgraderequest_device_aware_camera">Change camera access for &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the camera while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=150] -->
     <string name="permgroupupgraderequestdetail_camera">This app wants to take pictures and record video all the time, even when you\u2019re not using the app. <annotation id="link">Allow in settings.</annotation></string>
 
@@ -1576,21 +1587,21 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your phone call logs?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_calllog">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your phone call logs on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access your phone call logs on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_phone">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to make and manage phone calls?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_phone">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to make and manage phone calls on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to make and manage phone calls on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_sensors">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access sensor data about your vital signs?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_sensors">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access sensor data about your vital signs on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access sensor data about your vital signs on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the body sensors while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=NONE] -->
     <string name="permgroupupgraderequestdetail_sensors">This app wants to access sensor data about your vital signs all the time, even when you\u2019re not using the app. To make this change, <annotation id="link">go to settings.</annotation></string>
@@ -1599,20 +1610,20 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access the sensor data about your vital signs?</string>
     <!-- Message shown to the user when the apps requests permission to use the bosy sensors while app is in foreground and background on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgroupbackgroundrequest_device_aware_sensors">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access the sensor data about your vital signs on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access the sensor data about your vital signs on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
     <!-- Subtitle of the message shown to the user when the apps requests permission to use the body sensors while app is in foreground and background. Try to keep the link annotation at the end of the string [CHAR LIMIT=NONE] -->
     <string name="permgroupbackgroundrequestdetail_sensors">To let this app access body sensor data all the time, even when you\u2019re not using the app, <annotation id="link">go to settings.</annotation></string>
     <!-- Message shown to the user when the apps requests permission to use the body sensors while app is in foreground and background. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgroupupgraderequest_sensors">Keep allowing &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access body sensor data while app is in use?</string>
     <!-- Message shown to the user when the apps requests permission to use the body sensors while app is in foreground and background on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
-    <string name="permgroupupgraderequest_device_aware_sensors">Keep allowing &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access body sensor data on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b> while app is in use?</string>
+    <string name="permgroupupgraderequest_device_aware_sensors">Keep allowing &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access body sensor data on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b> while app is in use?</string>
 
     <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
     <string name="permgrouprequest_notifications">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to send you notifications?</string>
     <!-- Message shown to the user when the apps requests permission from this group on a specific device. If ever possible this should stay below 120 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 180 characters though. [CHAR LIMIT=180] -->
     <string name="permgrouprequest_device_aware_notifications">Allow
-        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to send you notifications on your &lt;b><xliff:g id="device" example="tablet">%2$s</xliff:g>&lt;/b>?</string>
+        &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to send you notifications on &lt;b><xliff:g id="device_name" example="My Laptop">%2$s</xliff:g>&lt;/b>?</string>
 
     <!-- Notification shown to the user when location permissions are auto-granted by admin policy. These are for when the admin is forcing the permission and the user cannot control it. [CHAR LIMIT=120]-->
     <string name="auto_granted_permissions">Controlled permissions</string>
@@ -1648,6 +1659,8 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
     <string name="privdash_label_24h">Past\n24 hours</string>
     <!-- Label that describes a "past 7 days" time window, prefer two lines. [CHAR LIMIT=20] -->
     <string name="privdash_label_7d">Past\n7 days</string>
+    <!-- This information will aid accessibility applications in describing permission usage percentages to users. While the chart visually represents permission usage, accessibility tools will convey the specific percentages for those who need auditory assistance. Examples would be "Microphone 40 percent" or "Location 75 percent" [CHAR LIMIT=none] -->
+    <string name="privdash_usage_percent"><xliff:g id="permission_name" example="camera">%1$s</xliff:g> <xliff:g id="percent" example="25">%2$d</xliff:g> percent</string>
 
     <!-- Info label for status bar indicator permissions (Mic and Camera) for apps holding special exempted roles. [CHAR LIMIT=none] -->
     <string name="exempt_mic_camera_info_label"><xliff:g id="app_name" example="Gmail">%1$s</xliff:g> is protected by Android. Because your data is processed on this device, this app’s permission usage isn’t shown on the status bar or your privacy dashboard. </string>
@@ -1666,6 +1679,20 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
     <string name="blocked_mic_summary">Microphone data may still be shared when you call an emergency number.</string>
     <!-- Label for the button to change the sensor status  [CHAR LIMIT=none] -->
     <string name="blocked_sensor_button_label">Change</string>
+    <!-- Info label for the warning banner title if automotive camera access is off[CHAR LIMIT=none] -->
+    <string name="automotive_blocked_camera_title">Camera access is off</string>
+    <!-- Info label for the warning banner title if automotive microphone access is off[CHAR LIMIT=none] -->
+    <string name="automotive_blocked_microphone_title">Microphone access is off</string>
+    <!-- Info label for the warning banner title if automotive location access is off[CHAR LIMIT=none] -->
+    <string name="automotive_blocked_location_title">Location access is off</string>
+    <!-- Info label to display that the sensor is blocked for automotive infotainment apps and services [CHAR LIMIT=none] -->
+    <string name="automotive_blocked_infotainment_app_summary">For infotainment apps</string>
+     <!-- Info label to display that the sensor is blocked for automotive required apps and services [CHAR LIMIT=none] -->
+    <string name="automotive_blocked_required_app_summary">For required apps</string>
+    <!-- Info label for the required app title which needs to access sensors such as camera, location and microphone [CHAR LIMIT=NONE]-->
+    <string name="automotive_required_app_title">This app is required</string>
+    <!-- Info label to display when the automotive app is a required app for accessing sensors such as camera, location and microphone [CHAR LIMIT=NONE]-->
+    <string name="automotive_required_app_summary">This app is required by your car\u2019s manufacturer</string>
 
     <!-- Title for page containing overall view of device safety status [CHAR LIMIT=30] -->
     <string name="safety_center_dashboard_page_title">Security &amp; privacy</string>
@@ -1970,16 +1997,30 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
     <string name="enhanced_confirmation_dialog_desc">For your security, this setting is currently unavailable.</string>
 
     <!--Title for dialog displayed to tell user that permissions are blocked by setting restrictions [CHAR LIMIT=50] -->
-    <string name="enhanced_confirmation_dialog_title_permission">Permission to use <xliff:g id="permission_name" example="contacts">%1$s</xliff:g> has been denied</string>
+    <string name="enhanced_confirmation_dialog_title_permission">App was denied access to <xliff:g id="permission_name" example="contacts">%1$s</xliff:g></string>
     <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=NONE] -->
-    <string name="enhanced_confirmation_dialog_desc_permission">This app has requested the <xliff:g id="permission_name" example="contacts">%1$s</xliff:g> permission, which is a restricted setting because it can put your security &amp; privacy at risk. Restriction to this permission may prevent this app from working.</string>
+    <string name="enhanced_confirmation_dialog_desc_permission">The app requested access to a sensitive permission which can put your personal and financial info at risk.<xliff:g>&lt;br&gt;&lt;br&gt;</xliff:g>It\'s possible the app won\'t work properly without this restricted permission. &lt;a href=&quot;<xliff:g id="learn_more_link">%1$s</xliff:g>&quot;&gt;Learn how to allow access&lt;/a&gt;</string>
+
+    <string name="enhanced_confirmation_dialog_title_role">App was denied access to be default <xliff:g id="role_name" example="phone app">%1$s</xliff:g></string>
+    <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=NONE] -->
+    <string name="enhanced_confirmation_dialog_desc_role">The app requested access to sensitive permissions which can put your personal and financial info at risk.<xliff:g>&lt;br&gt;&lt;br&gt;</xliff:g>It\'s possible the app won\'t work properly without these restricted permissions. &lt;a href=&quot;<xliff:g id="learn_more_link">%1$s</xliff:g>&quot;&gt;Learn how to allow access&lt;/a&gt;</string>
+
+    <string name="enhanced_confirmation_dialog_title_settings_default">App was denied access</string>
+    <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=NONE] -->
+    <string name="enhanced_confirmation_dialog_desc_settings_default">Access to this permission can put your personal and financial info at risk.<xliff:g>&lt;br&gt;&lt;br&gt;</xliff:g>It\'s possible the app won\'t work properly without this restricted permission. &lt;a href=&quot;<xliff:g id="learn_more_link">%1$s</xliff:g>&quot;&gt;Learn how to allow access&lt;/a&gt;</string>
 
     <!-- Button label to allow the user to view additional information [CHAR LIMIT=NONE] -->
     <string name="enhanced_confirmation_dialog_learn_more">Learn more</string>
     <!-- Button label of the ok button [CHAR LIMIT=NONE] -->
-    <string name="enhanced_confirmation_dialog_ok">Got it</string>
+    <string name="enhanced_confirmation_dialog_ok">OK</string>
     <!-- Help URI, action disabled by restricted settings [DO NOT TRANSLATE] -->
     <string name="help_url_action_disabled_by_restricted_settings" translatable="false"></string>
 
     <!-- END ENHANCED CONFIRMATION DIALOG -->
+
+    <!-- Title for the warning dialog that shows when permission grant dialog is blocked from streaming to a remote device [CHAR LIMIT=70]-->
+    <string name="permission_grant_dialog_streaming_blocked_title">Permission request suppressed</string>
+
+    <!-- Descriptions for the warning dialog that shows when permission grant dialog is blocked from streaming to a remote device [CHAR LIMIT=200] -->
+    <string name="permission_grant_dialog_streaming_blocked_description">This app is requesting additional permissions, but permissions can’t be granted in a streaming session. Grant the permission on your phone first.</string>
 </resources>

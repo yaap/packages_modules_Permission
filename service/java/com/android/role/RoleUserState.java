@@ -242,11 +242,13 @@ class RoleUserState {
     public void upgradeVersion(@NonNull List<String> legacyFallbackDisabledRoles) {
         synchronized (mLock) {
             if (mVersion < VERSION_FALLBACK_STATE_MIGRATED) {
+                mFallbackEnabledRoles.addAll(mRoles.keySet());
                 int legacyFallbackDisabledRolesSize = legacyFallbackDisabledRoles.size();
                 for (int i = 0; i < legacyFallbackDisabledRolesSize; i++) {
                     String roleName = legacyFallbackDisabledRoles.get(i);
                     mFallbackEnabledRoles.remove(roleName);
                 }
+                Log.v(LOG_TAG, "Migrated fallback enabled roles: " + mFallbackEnabledRoles);
                 mVersion = VERSION_FALLBACK_STATE_MIGRATED;
                 scheduleWriteFileLocked();
             }
@@ -515,8 +517,7 @@ class RoleUserState {
 
             long rolesToken = dumpOutputStream.start("roles", RoleUserStateProto.ROLES);
             dumpOutputStream.write("name", RoleProto.NAME, roleName);
-            dumpOutputStream.write("fallback_enabled", RoleProto.FALLBACK_ENABLED,
-                    Boolean.toString(fallbackEnabled));
+            dumpOutputStream.write("fallback_enabled", RoleProto.FALLBACK_ENABLED, fallbackEnabled);
             int roleHoldersSize = roleHolders.size();
             for (int roleHoldersIndex = 0; roleHoldersIndex < roleHoldersSize; roleHoldersIndex++) {
                 String roleHolder = roleHolders.valueAt(roleHoldersIndex);

@@ -23,6 +23,7 @@ import static com.android.permissioncontroller.PermissionControllerStatsLog.REVI
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -45,6 +46,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -150,6 +154,12 @@ public final class ReviewPermissionsFragment extends PreferenceFragmentCompat
         ViewGroup preferenceRootView = mView.requireViewById(R.id.preferences_frame);
         View prefsContainer = super.onCreateView(inflater, preferenceRootView, savedInstanceState);
         preferenceRootView.addView(prefsContainer);
+        ViewCompat.setOnApplyWindowInsetsListener(mView, (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            mView.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+            return WindowInsetsCompat.CONSUMED;
+        });
+
         return mView;
     }
 
@@ -396,7 +406,7 @@ public final class ReviewPermissionsFragment extends PreferenceFragmentCompat
                     }
                     activity.startIntentSenderForResult(intent, -1, null,
                             flagMask, flagValues, 0);
-                } catch (IntentSender.SendIntentException e) {
+                } catch (IntentSender.SendIntentException | ActivityNotFoundException e) {
                         /* ignore */
                 }
                 return;

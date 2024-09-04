@@ -2,15 +2,8 @@ package: "com.android.permission.flags"
 container: "com.android.permission"
 
 flag {
-    name: "device_aware_permission_grant_enabled"
-    is_fixed_read_only: true
-    namespace: "permissions"
-    description: "Enables device aware grant permission flow"
-    bug: "292252664"
-}
-
-flag {
     name: "private_profile_supported"
+    is_exported: true
     namespace: "permissions"
     description: "This flag is used to support private profile in safety center"
     bug: "286539356"
@@ -19,6 +12,7 @@ flag {
 
 flag {
     name: "private_profile_title_api"
+    is_exported: true
     namespace: "permissions"
     description: "This flag is used to guard the private profile title api in safety center"
     bug: "286539356"
@@ -27,6 +21,7 @@ flag {
 
 flag {
     name: "wear_privacy_dashboard_enabled_read_only"
+    is_exported: true
     namespace: "wear_security"
     description: "This flag is used to support Privacy dashboard for Wear"
     bug: "309721061"
@@ -35,8 +30,18 @@ flag {
 
 flag {
     name: "archiving_read_only"
+    is_exported: true
     namespace: "permissions"
     description: "Feature flag to enable the archiving feature."
     bug: "278553670"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "add_banners_to_privacy_sensitive_apps_for_aaos"
+    is_exported: true
+    namespace: "permissions"
+    description: "Flag to display warning banners to privacy sensitive apps in AAOS."
+    bug: "327489942"
     is_fixed_read_only: true
 }

@@ -67,10 +67,12 @@ import com.android.permissioncontroller.permission.model.livedatatypes.AppPermGr
 import com.android.permissioncontroller.permission.model.v34.AppDataSharingUpdate
 import com.android.permissioncontroller.permission.utils.KotlinUtils
 import com.android.permissioncontroller.permission.utils.Utils.getSystemServiceSafe
+import com.android.permissioncontroller.permission.utils.v34.SafetyLabelUtils
 import com.android.permissioncontroller.safetylabel.AppsSafetyLabelHistory
 import com.android.permissioncontroller.safetylabel.AppsSafetyLabelHistory.AppInfo
 import com.android.permissioncontroller.safetylabel.AppsSafetyLabelHistory.SafetyLabel as SafetyLabelForPersistence
 import com.android.permissioncontroller.safetylabel.AppsSafetyLabelHistoryPersistence
+import com.android.permissioncontroller.safetylabel.SafetyLabelChangedBroadcastReceiver
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
@@ -348,8 +350,15 @@ class SafetyLabelChangesJobService : JobService() {
             } else {
                 context.createContextAsUser(user, 0)
             }
+
+        // Asl in Apk (V+) is not supported by permissions
+        if (!SafetyLabelUtils.isAppMetadataSourceSupported(userContext, packageName)) {
+            return null
+        }
+
         val appMetadataBundle: PersistableBundle =
             try {
+                @Suppress("MissingPermission")
                 userContext.packageManager.getAppMetadata(packageName)
             } catch (e: PackageManager.NameNotFoundException) {
                 Log.w(LOG_TAG, "Package $packageName not found while retrieving app metadata")
@@ -424,12 +433,12 @@ class SafetyLabelChangesJobService : JobService() {
 
     private suspend fun getAllPackagesRequestingLocation(): Set<Pair<String, UserHandle>> =
         SinglePermGroupPackagesUiInfoLiveData[Manifest.permission_group.LOCATION]
-            .getInitializedValue(staleOk = false, forceUpdate = true)
+            .getInitializedValue(staleOk = false, forceUpdate = true)!!
             .keys
 
     private suspend fun getAllPackagesGrantedLocation(): Set<Pair<String, UserHandle>> =
         SinglePermGroupPackagesUiInfoLiveData[Manifest.permission_group.LOCATION]
-            .getInitializedValue(staleOk = false, forceUpdate = true)
+            .getInitializedValue(staleOk = false, forceUpdate = true)!!
             .filter { (_, appPermGroupUiInfo) -> appPermGroupUiInfo.isPermissionGranted() }
             .keys
 
@@ -438,7 +447,7 @@ class SafetyLabelChangesJobService : JobService() {
 
     private suspend fun isSafetyLabelSupported(packageUser: Pair<String, UserHandle>): Boolean {
         val lightInstallSourceInfo =
-            LightInstallSourceInfoLiveData[packageUser].getInitializedValue()
+            LightInstallSourceInfoLiveData[packageUser].getInitializedValue() ?: return false
         return lightInstallSourceInfo.supportsSafetyLabel
     }
 
@@ -482,6 +491,7 @@ class SafetyLabelChangesJobService : JobService() {
         val appDataSharingUpdates =
             AppDataSharingUpdatesLiveData(PermissionControllerApplication.get())
                 .getInitializedValue()
+                ?: return 0
 
         return appDataSharingUpdates
             .map { appDataSharingUpdate ->
@@ -678,6 +688,7 @@ class SafetyLabelChangesJobService : JobService() {
                 }
 
                 val job =
+                    @Suppress("MissingPermission")
                     JobInfo.Builder(
                             SAFETY_LABEL_CHANGES_PERIODIC_NOTIFICATION_JOB_ID,
                             ComponentName(context, SafetyLabelChangesJobService::class.java)

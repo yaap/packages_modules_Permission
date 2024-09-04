@@ -29,6 +29,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.UserHandle
@@ -266,9 +267,8 @@ class PermissionUsageDetailsViewModel(
     private fun List<AppPermissionDiscreteAccessesWithLabel>.filterOutExemptAppPermissions(
         showSystem: Boolean
     ): List<AppPermissionDiscreteAccessesWithLabel> {
-        return this.filter {
-                !Utils.getExemptedPackages(roleManager).contains(it.appPermissionId.packageName)
-            }
+        val exemptedPackages = Utils.getExemptedPackages(roleManager)
+        return filter { !exemptedPackages.contains(it.appPermissionId.packageName) }
             .filter { it.appPermissionId.permissionGroup == permissionGroup }
             .filter { isPermissionRequestedByApp(it.appPermissionId) }
             .filter { showSystem || !isAppPermissionSystem(it.appPermissionId) }
@@ -743,8 +743,14 @@ class PermissionUsageDetailsViewModel(
             showingAttribution: Boolean,
             attributionTags: List<String>
         ): Intent? {
-            // TODO(b/255992934) only location provider apps should be able to provide this intent
-            if (!showingAttribution || !SdkLevel.isAtLeastT()) {
+            if (
+                !showingAttribution ||
+                    !SdkLevel.isAtLeastT() ||
+                    !context
+                        .getSystemService(LocationManager::class.java)!!
+                        .isProviderPackage(packageName)
+            ) {
+                // We should only limit this intent to location provider
                 return null
             }
             val intent =
