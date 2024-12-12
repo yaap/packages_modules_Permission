@@ -33,8 +33,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.MaterialTheme
 import com.android.permissioncontroller.R
+import com.android.permissioncontroller.permission.ui.model.v31.BasePermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.AppPermissionAccessUiInfo
+import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiState
 import com.android.permissioncontroller.permission.ui.wear.elements.Chip
 import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
 import com.android.permissioncontroller.permission.utils.KotlinUtils
@@ -43,10 +45,10 @@ import com.android.permissioncontroller.permission.utils.KotlinUtils
 @Composable
 fun WearPermissionUsageDetailsScreen(
     permissionGroup: String,
-    viewModel: PermissionUsageDetailsViewModel
+    viewModel: BasePermissionUsageDetailsViewModel
 ) {
     val context = LocalContext.current
-    val uiData = viewModel.permissionUsagesDetailsInfoUiLiveData.observeAsState(null)
+    val uiData = viewModel.getPermissionUsagesDetailsInfoUiLiveData().observeAsState(null)
     val showSystem = viewModel.showSystemLiveData.observeAsState(false)
     var isLoading by remember { mutableStateOf(true) }
 
@@ -56,7 +58,14 @@ fun WearPermissionUsageDetailsScreen(
             R.string.permission_group_usage_title,
             KotlinUtils.getPermGroupLabel(context, permissionGroup)
         )
-    val hasSystemApps: Boolean = uiData.value?.containsSystemAppAccesses ?: false
+
+    val hasSystemApps: Boolean =
+        if (uiData.value is PermissionUsageDetailsUiState.Success) {
+            (uiData.value as PermissionUsageDetailsUiState.Success).containsSystemAppUsage
+        } else {
+            false
+        }
+
     val onShowSystemClick: (Boolean) -> Unit = { show ->
         run { viewModel.updateShowSystemAppsToggle(show) }
     }
@@ -84,7 +93,11 @@ fun WearPermissionUsageDetailsScreen(
     }
 
     val appPermissionAccessUiInfoList: List<AppPermissionAccessUiInfo> =
-        uiData.value?.appPermissionAccessUiInfoList ?: emptyList()
+        if (uiData.value is PermissionUsageDetailsUiState.Success) {
+            (uiData.value as PermissionUsageDetailsUiState.Success).appPermissionAccessUiInfoList
+        } else {
+            emptyList()
+        }
 
     WearPermissionUsageDetailsContent(
         title,

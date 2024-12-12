@@ -21,6 +21,7 @@
     <string name="permission_search_keyword" msgid="1214451577494730543">"heimildir"</string>
     <string name="cancel" msgid="8943320028373963831">"Hætta við"</string>
     <string name="back" msgid="6249950659061523680">"Til baka"</string>
+    <string name="dialog_close" msgid="6840699812532384661">"Loka"</string>
     <string name="available" msgid="6007778121920339498">"Tiltækt"</string>
     <string name="blocked" msgid="9195547604866033708">"Lokað á"</string>
     <string name="on" msgid="280241003226755921">"Kveikt"</string>
@@ -440,6 +441,7 @@
     <string name="default_app_none" msgid="9084592086808194457">"Ekkert"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sjálfgildi kerfis)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Engin forrit"</string>
+    <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Aðrar NFC-þjónustur"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Valið"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Valið – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"sérstakur forritaaðgangur"</string>
@@ -669,6 +671,7 @@
     <string name="wear_app_perms_24h_access_yest" msgid="7069312481704735679">"Opnað í gær kl. <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="wear_app_perms_7d_access" msgid="4608069019194676432">"Opnað <xliff:g id="TIME_DATE_0">%1$s</xliff:g> kl. <xliff:g id="TIME_DATE_1">%2$s</xliff:g>"</string>
     <string name="test_otp_msg" msgid="7559110574222727550">"Einnota aðgangsorðið þitt er 132435"</string>
+    <string name="allow_restricted_settings" msgid="8073000189478396881">"Leyfa takmarkaðar stillingar"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Takmörkuð stilling"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Til að tryggja öryggi þitt er þessi stilling ekki tiltæk eins og er."</string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Forritið fékk ekki aðgang að <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
@@ -681,4 +684,10 @@
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"Í lagi"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"Heimildarbeiðni hafnað"</string>
     <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"Þetta forrit biður um viðbótarheimildir en ekki er hægt að veita heimildir í streymislotu. Veittu heimildina í símanum fyrst."</string>
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label" msgid="5702912511473457693">"Fyrir neyðarsímtal eða -skilaboð"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_title" msgid="849723944428031911">"Staðsetning send til neyðarþjónustu"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_description" msgid="5815970230573483329">"Þetta forrit fékk aðgang að staðsetningu tækisins vegna símtals eða skilaboða í neyðarnúmer. Þetta getur gerst jafnvel þótt forritið sé ekki með staðsetningarheimild eða slökkt sé á staðsetningu tækisins. "<a href="https://support.google.com/android/answer/9319337">"Nánar"</a></string>
+    <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Athugaðu símann"</string>
+    <string name="wear_phone_connection_error" msgid="8934350845737930783">"Ekki náðist samband við símann þinn"</string>
+    <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Reyna aftur?"</string>
 </resources>

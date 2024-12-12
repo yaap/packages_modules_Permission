@@ -21,6 +21,7 @@
     <string name="permission_search_keyword" msgid="1214451577494730543">"ສິດອະນຸຍາດ"</string>
     <string name="cancel" msgid="8943320028373963831">"ຍົກເລີກ"</string>
     <string name="back" msgid="6249950659061523680">"ກັບຄືນ"</string>
+    <string name="dialog_close" msgid="6840699812532384661">"ປິດ"</string>
     <string name="available" msgid="6007778121920339498">"ສາມາດໃຊ້ໄດ້"</string>
     <string name="blocked" msgid="9195547604866033708">"ບລັອກແລ້ວ"</string>
     <string name="on" msgid="280241003226755921">"ເປີດຢູ່"</string>
@@ -440,6 +441,7 @@
     <string name="default_app_none" msgid="9084592086808194457">"ບໍ່ມີ"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ຄ່າເລີ່ມຕົ້ນຂອງລະບົບ)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ບໍ່ມີແອັບ"</string>
+    <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"ບໍລິການ NFC ອື່ນໆ"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"ເລືອກແລ້ວ"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"ເລືອກແລ້ວ - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"ສິດການເຂົ້າເຖິງແອັບພິເສດ"</string>
@@ -669,6 +671,7 @@
     <string name="wear_app_perms_24h_access_yest" msgid="7069312481704735679">"ເຂົ້າເຖິງມື້ວານນີ້ເມື່ອ <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="wear_app_perms_7d_access" msgid="4608069019194676432">"ເຂົ້າເຖິງເມື່ອ <xliff:g id="TIME_DATE_0">%1$s</xliff:g> <xliff:g id="TIME_DATE_1">%2$s</xliff:g>"</string>
     <string name="test_otp_msg" msgid="7559110574222727550">"ລະຫັດຜ່ານແບບໃຊ້ໄດ້ເທື່ອດຽວຂອງທ່ານແມ່ນ 132435"</string>
+    <string name="allow_restricted_settings" msgid="8073000189478396881">"ອະນຸຍາດການຕັ້ງຄ່າທີ່ຈຳກັດ"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"ການຕັ້ງຄ່າທີ່ຈຳກັດ"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ຕອນນີ້ຈຶ່ງບໍ່ສາມາດໃຊ້ການຕັ້ງຄ່ານີ້ໄດ້."</string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"ແອັບຖືກປະຕິເສດສິດເຂົ້າເຖິງຫາ <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
@@ -681,4 +684,10 @@
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"ຕົກລົງ"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"ຄຳຮ້ອງຂໍການອະນຸຍາດຖືກລະງັບ"</string>
     <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"ແອັບນີ້ກຳລັງຮ້ອງຂໍການອະນຸຍາດເພີ່ມເຕີມ, ແຕ່ບໍ່ສາມາດໃຫ້ການອະນຸຍາດໃນເຊດຊັນການສະຕຣີມໄດ້. ກະລຸນາໃຫ້ການອະນຸຍາດໃນໂທລະສັບຂອງທ່ານກ່ອນ."</string>
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label" msgid="5702912511473457693">"ສຳລັບການໂທ ຫຼື ສົ່ງຂໍ້ຄວາມສຸກເສີນ"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_title" msgid="849723944428031911">"ສົ່ງສະຖານທີ່ໄປຫາບໍລິການສຸກເສີນແລ້ວ"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_description" msgid="5815970230573483329">"ແອັບນີ້ໄດ້ເຂົ້າເຖິງສະຖານທີ່ຂອງອຸປະກອນຂອງທ່ານໃນລະຫວ່າງທີ່ໂທ ຫຼື ສົ່ງຂໍ້ຄວາມຫາເບີໂທສຸກເສີນ. ເຊິ່ງນີ້ສາມາດເກີດຂຶ້ນໄດ້ເຖິງແມ່ນວ່າແອັບຈະບໍ່ມີການອະນຸຍາດສະຖານທີ່ ຫຼື ເຖິງແມ່ນວ່າສະຖານທີ່ຂອງອຸປະກອນຈະປິດຢູ່ກໍຕາມ. "<a href="https://support.google.com/android/answer/9319337">"ສຶກສາເພີ່ມເຕີມ"</a></string>
+    <string name="wear_check_your_phone_title" msgid="7957291983474981420">"ກວດເບິ່ງໂທລະສັບຂອງທ່ານ"</string>
+    <string name="wear_phone_connection_error" msgid="8934350845737930783">"ບໍ່ສາມາດເຂົ້າເຖິງໂທລະສັບຂອງທ່ານໄດ້"</string>
+    <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ລອງໃໝ່ບໍ?"</string>
 </resources>

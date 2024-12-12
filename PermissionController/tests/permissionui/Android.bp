@@ -38,17 +38,20 @@ android_test {
         "src/**/*.kt",
     ],
     libs: [
-        "android.test.base",
-        "android.test.runner",
+        "android.test.base.stubs.test",
+        "android.test.runner.stubs.test",
     ],
 
     static_libs: [
-        "androidx.test.rules",
-        "androidx.test.ext.truth",
         "androidx.test.ext.junit",
+        "androidx.test.ext.truth",
+        "androidx.test.rules",
         "androidx.test.uiautomator_uiautomator",
+        "com.android.permission.flags-aconfig-java",
         "compatibility-device-util-axt",
+        "flag-junit",
         "permission-test-util-lib",
+        "platform-test-annotations",
     ],
 
     test_suites: [
@@ -58,6 +61,7 @@ android_test {
     ],
 
     data: [
+        ":CtsAppThatRequestsLocationAndBackgroundPermission31",
         ":CtsAppThatRequestsLocationPermission29",
         ":PermissionUiUseStoragePermissionApp",
         ":PermissionUiUseCameraPermissionApp",

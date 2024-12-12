@@ -31,4 +31,5 @@
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
+    <style name="ThemeOverlay.PermissionSettings" parent="" />
 </resources>

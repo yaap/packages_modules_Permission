@@ -33,6 +33,7 @@ import android.os.Process;
 import android.os.SystemProperties;
 import android.platform.test.annotations.AppModeFull;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.util.FlagReadException;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -324,8 +325,10 @@ public class PermissionPolicyTest {
                         if (invert) {
                             featureFlag = featureFlag.substring(1).trim();
                         }
-                        boolean flagEnabled =
-                                invert != flagsValueProvider.getBoolean(featureFlag);
+                        boolean flagEnabled = invert;
+                        try {
+                            flagEnabled = invert != flagsValueProvider.getBoolean(featureFlag);
+                        } catch (FlagReadException ignored) { }
                         if (!flagEnabled) {
                             continue;
                         }

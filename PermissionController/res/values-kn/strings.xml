@@ -21,6 +21,7 @@
     <string name="permission_search_keyword" msgid="1214451577494730543">"ಅನುಮತಿಗಳು"</string>
     <string name="cancel" msgid="8943320028373963831">"ರದ್ದುಮಾಡಿ"</string>
     <string name="back" msgid="6249950659061523680">"ಹಿಂದಕ್ಕೆ"</string>
+    <string name="dialog_close" msgid="6840699812532384661">"ಮುಚ್ಚಿರಿ"</string>
     <string name="available" msgid="6007778121920339498">"ಲಭ್ಯವಿದೆ"</string>
     <string name="blocked" msgid="9195547604866033708">"ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
     <string name="on" msgid="280241003226755921">"ಆನ್"</string>
@@ -277,7 +278,7 @@
     <string name="post_drive_permission_decision_reminder_summary_1_app_1_permission" msgid="670521503734140711">"ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP">%1$s</xliff:g> ಗೆ <xliff:g id="PERMISSION">%2$s</xliff:g> ಪ್ರವೇಶವನ್ನು ನೀಡಿದ್ದೀರಿ"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_2_permissions" msgid="671791184670801301">"ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP">%1$s</xliff:g> ಗೆ <xliff:g id="PERMISSION_1">%2$s</xliff:g> ಮತ್ತು <xliff:g id="PERMISSION_2">%3$s</xliff:g> ಪ್ರವೇಶವನ್ನು ನೀಡಿದ್ದೀರಿ"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_multi_permission" msgid="4080701771111456927">"ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP">%2$s</xliff:g> ಗೆ <xliff:g id="COUNT">%1$d</xliff:g> ಅನುಮತಿಗಳನ್ನು ನೀಡಿದ್ದೀರಿ"</string>
-    <string name="post_drive_permission_decision_reminder_summary_multi_apps" msgid="5253882771252863902">"{count,plural, =1{ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP_0">%1$s</xliff:g> ಮತ್ತು # ಇತರ ಆ್ಯಪ್‌ಗೆ ಪ್ರವೇಶವನ್ನು ನೀಡಿದ್ದೀರಿ}one{ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP_1">%1$s</xliff:g> ಮತ್ತು # ಇತರ ಆ್ಯಪ್‌ಗಳಿಗೆ ಪ್ರವೇಶವನ್ನು ನೀಡಿದ್ದೀರಿ}other{ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP_1">%1$s</xliff:g> ಮತ್ತು # ಇತರ ಆ್ಯಪ್‌ಗಳಿಗೆ ಪ್ರವೇಶವನ್ನು ನೀಡಿದ್ದೀರಿ}}"</string>
+    <string name="post_drive_permission_decision_reminder_summary_multi_apps" msgid="5253882771252863902">"{count,plural, =1{ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP_0">%1$s</xliff:g> ಮತ್ತು # ಇತರ ಆ್ಯಪ್‌ಗೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ನೀಡಿದ್ದೀರಿ}one{ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP_1">%1$s</xliff:g> ಮತ್ತು # ಇತರ ಆ್ಯಪ್‌ಗಳಿಗೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ನೀಡಿದ್ದೀರಿ}other{ನೀವು ವಾಹನ ಚಲಾಯಿಸುವಾಗ, <xliff:g id="APP_1">%1$s</xliff:g> ಮತ್ತು # ಇತರ ಆ್ಯಪ್‌ಗಳಿಗೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ನೀಡಿದ್ದೀರಿ}}"</string>
     <string name="go_to_settings" msgid="1053735612211228335">"ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ"</string>
     <string name="auto_revoke_setting_subtitle" msgid="8631720570723050460">"ಹಲವಾರು ತಿಂಗಳುಗಳಿಂದ ಕೆಲವು ಆ್ಯಪ್‌ಗಳನ್ನು ಬಳಸಲಾಗಿಲ್ಲ"</string>
     <string name="permissions_removed_category_title" msgid="1064754271178447643">"ತೆಗೆದುಹಾಕಲಾದ ಅನುಮತಿಗಳು"</string>
@@ -440,6 +441,7 @@
     <string name="default_app_none" msgid="9084592086808194457">"ಯಾವುದೂ ಬೇಡ"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ಸಿಸ್ಟಂ ಡಿಫಾಲ್ಟ್)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ಯಾವುದೇ ಆ್ಯಪ್‌ಗಳು ಇಲ್ಲ"</string>
+    <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"ಇತರ NFC ಸೇವೆಗಳು"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"<xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g> - ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"ವಿಶೇಷ ಆ್ಯಪ್ ಆ್ಯಕ್ಸೆಸ್"</string>
@@ -581,7 +583,7 @@
     <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"ಸ್ಥಿತಿ ಪರಿಶೀಲಿಸಿ"</string>
     <string name="privacy_controls_qs" msgid="5780144882040591169">"ನಿಮ್ಮ ಗೌಪ್ಯತೆ ನಿಯಂತ್ರಣಗಳು"</string>
     <string name="security_settings_button_label_qs" msgid="8280343822465962330">"ಇನ್ನಷ್ಟು ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
-    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"ಕ್ಯಾಮರಾ ಪ್ರವೇಶ"</string>
+    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"ಕ್ಯಾಮರಾ ಆ್ಯಕ್ಸೆಸ್"</string>
     <string name="microphone_toggle_label_qs" msgid="8132912469813396552">"ಮೈಕ್ ಆ್ಯಕ್ಸೆಸ್"</string>
     <string name="permissions_removed_qs" msgid="8957319130625294572">"ಅನುಮತಿಯನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ"</string>
     <string name="camera_usage_qs" msgid="4394233566086665994">"ಇತ್ತೀಚಿನ ಕ್ಯಾಮರಾ ಬಳಕೆಯನ್ನು ನೋಡಿ"</string>
@@ -669,6 +671,7 @@
     <string name="wear_app_perms_24h_access_yest" msgid="7069312481704735679">"ನಿನ್ನೆ <xliff:g id="TIME_DATE">%1$s</xliff:g> ಸಮಯಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="wear_app_perms_7d_access" msgid="4608069019194676432">"<xliff:g id="TIME_DATE_0">%1$s</xliff:g> <xliff:g id="TIME_DATE_1">%2$s</xliff:g> ಸಮಯಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="test_otp_msg" msgid="7559110574222727550">"ನಿಮ್ಮ ಒನ್‌-ಟೈಮ್ ಪಾಸ್‌ವರ್ಡ್ 132435"</string>
+    <string name="allow_restricted_settings" msgid="8073000189478396881">"ನಿರ್ಬಂಧಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"ನಿರ್ಬಂಧಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"ನಿಮ್ಮ ಸುರಕ್ಷತೆಗಾಗಿ, ಈ ಸೆಟ್ಟಿಂಗ್ ಪ್ರಸ್ತುತ ಲಭ್ಯವಿಲ್ಲ."</string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"<xliff:g id="PERMISSION_NAME">%1$s</xliff:g> ಅನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಲು ಆ್ಯಪ್‌ಗೆ ನಿರಾಕರಿಸಲಾಗಿದೆ"</string>
@@ -681,4 +684,10 @@
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"ಸರಿ"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"ಅನುಮತಿ ವಿನಂತಿಯನ್ನು ನಿಗ್ರಹಿಸಲಾಗಿದೆ"</string>
     <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"ಈ ಆ್ಯಪ್ ಹೆಚ್ಚುವರಿ ಅನುಮತಿಗಳನ್ನು ವಿನಂತಿಸುತ್ತಿದೆ, ಆದರೆ ಸ್ಟ್ರೀಮಿಂಗ್ ಸೆಶನ್‌ನಲ್ಲಿ ಅನುಮತಿಗಳನ್ನು ನೀಡಲು ಸಾಧ್ಯವಿಲ್ಲ. ಮೊದಲು ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಅನುಮತಿ ನೀಡಿ."</string>
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label" msgid="5702912511473457693">"ತುರ್ತು ಕರೆ ಅಥವಾ ಪಠ್ಯಕ್ಕಾಗಿ"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_title" msgid="849723944428031911">"ಸ್ಥಳವನ್ನು ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಕಳುಹಿಸಲಾಗಿದೆ"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_description" msgid="5815970230573483329">"ತುರ್ತು ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿದ ಅಥವಾ ಪಠ್ಯವನ್ನು ಕಳುಹಿಸುವ ಸಮಯದಲ್ಲಿ ಈ ಆ್ಯಪ್ ನಿಮ್ಮ ಸಾಧನದ ಸ್ಥಳವನ್ನು ಆ್ಯಕ್ಸೆಸ್ ಮಾಡಿದೆ. ಆ್ಯಪ್ ಸ್ಥಳದ ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲದಿರುವಾಗ ಅಥವಾ ಸಾಧನದ ಸ್ಥಳವು ಆಫ್ ಆಗಿರುವಾಗಲೂ ಇದು ಸಂಭವಿಸಬಹುದು. "<a href="https://support.google.com/android/answer/9319337">"ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ"</a></string>
+    <string name="wear_check_your_phone_title" msgid="7957291983474981420">"ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ"</string>
+    <string name="wear_phone_connection_error" msgid="8934350845737930783">"ನಿಮ್ಮ ಫೋನ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
+    <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ಪುನಃ ಪ್ರಯತ್ನಿಸಬೇಕೆ?"</string>
 </resources>

@@ -79,7 +79,6 @@ import com.android.permissioncontroller.permission.utils.StringUtils;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.permission.utils.v35.MultiDeviceUtils;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.widget.FooterPreference;
 
 import java.text.Collator;
 import java.time.Instant;
@@ -185,9 +184,8 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
             Context context = getPreferenceManager().getContext();
             mPermissionUsages = new PermissionUsages(context);
 
-            long aggregateDataFilterBeginDays = KotlinUtils.INSTANCE.is7DayToggleEnabled()
-                    ? AppPermissionGroupsViewModel.AGGREGATE_DATA_FILTER_BEGIN_DAYS_7 :
-                    AppPermissionGroupsViewModel.AGGREGATE_DATA_FILTER_BEGIN_DAYS_1;
+            long aggregateDataFilterBeginDays =
+                    AppPermissionGroupsViewModel.AGGREGATE_DATA_FILTER_BEGIN_DAYS_7;
 
             long filterTimeBeginMillis = Math.max(System.currentTimeMillis()
                             - DAYS.toMillis(aggregateDataFilterBeginDays),
@@ -252,6 +250,12 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
                         mPackageName, mUser));
                 return true;
             }
+
+            case MENU_ALLOW_RESTRICTED_SETTINGS: {
+                mViewModel.clearRestriction();
+                getActivity().invalidateOptionsMenu();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -265,6 +269,20 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
                 HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_app_permissions,
                         getClass().getName());
             }
+        }
+
+        if (SdkLevel.isAtLeastT() && !SdkLevel.isAtLeastV()
+                && Flags.enhancedConfirmationBackportEnabled()) {
+            menu.add(Menu.NONE, MENU_ALLOW_RESTRICTED_SETTINGS, Menu.NONE,
+                    R.string.allow_restricted_settings);
+        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        final MenuItem allowRestrictedSettingsMenu = menu.findItem(MENU_ALLOW_RESTRICTED_SETTINGS);
+        if (allowRestrictedSettingsMenu != null) {
+            allowRestrictedSettingsMenu.setVisible(mViewModel.isClearRestrictedAllowed());
         }
     }
 
@@ -432,11 +450,11 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
     private void addAutoRevokePreferences(PreferenceScreen screen) {
         Context context = screen.getPreferenceManager().getContext();
 
-        PreferenceCategory autoRevokeCategory = new PreferenceCategory(context);
+        PreferenceCategory autoRevokeCategory = new PermissionPreferenceCategory(context);
         autoRevokeCategory.setKey(AUTO_REVOKE_CATEGORY_KEY);
         screen.addPreference(autoRevokeCategory);
 
-        SwitchPreference autoRevokeSwitch = new SwitchPreference(context);
+        SwitchPreference autoRevokeSwitch = new PermissionSwitchPreference(context);
         autoRevokeSwitch.setOnPreferenceClickListener((preference) -> {
             mViewModel.setAutoRevoke(autoRevokeSwitch.isChecked());
             return true;
@@ -459,8 +477,9 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
         autoRevokeSwitch.setKey(AUTO_REVOKE_SWITCH_KEY);
         autoRevokeCategory.addPreference(autoRevokeSwitch);
 
-        Preference autoRevokeSummary = SdkLevel.isAtLeastS() ? new FooterPreference(context)
-                : new Preference(context);
+        Preference autoRevokeSummary =
+                SdkLevel.isAtLeastS() ? new PermissionFooterPreference(context)
+                : new PermissionPreference(context);
         autoRevokeSummary.setIcon(Utils.applyTint(getActivity(), R.drawable.ic_info_outline,
                 android.R.attr.colorControlNormal));
         autoRevokeSummary.setKey(AUTO_REVOKE_SUMMARY_KEY);
@@ -503,7 +522,10 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
         }
 
         groupLabels.sort(mCollator);
-        if (groupLabels.isEmpty()) {
+        autoRevokeSummary.setVisible(true);
+        if (state.isExemptBySystem()) {
+            autoRevokeSummary.setVisible(false);
+        } else if (groupLabels.isEmpty()) {
             autoRevokeSummary.setSummary(R.string.auto_revoke_summary);
         } else {
             autoRevokeSummary.setSummary(getString(R.string.auto_revoke_summary_with_permissions,
@@ -523,7 +545,7 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
     }
 
     private Preference setUpCustomPermissionsScreen(Context context, int count, String category) {
-        final Preference extraPerms = new Preference(context);
+        final Preference extraPerms = new PermissionPreference(context);
         extraPerms.setIcon(Utils.applyTint(getActivity(), R.drawable.ic_toc,
                 android.R.attr.colorControlNormal));
         extraPerms.setTitle(R.string.additional_permissions);
@@ -540,7 +562,7 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
 
     private void setNoPermissionPreference(PreferenceCategory category, @StringRes int stringId,
             Context context) {
-        Preference empty = new Preference(context);
+        Preference empty = new PermissionPreference(context);
         empty.setKey(getString(stringId));
         empty.setTitle(empty.getKey());
         empty.setSelectable(false);

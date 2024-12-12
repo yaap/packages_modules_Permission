@@ -19,6 +19,8 @@ package com.android.permissioncontroller.permission.ui.handheld;
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.android.permissioncontroller.permission.compat.AppPermissionFragmentCompat;
+
 /**
  * Wrapper over AppPermissionFragment
  */
@@ -27,6 +29,11 @@ public class AppPermissionWrapperFragment extends PermissionsCollapsingToolbarBa
     @NonNull
     @Override
     public PreferenceFragmentCompat createPreferenceFragment() {
-        return new AppPermissionFragment();
+        return AppPermissionFragmentCompat.createFragment();
+    }
+
+    @Override
+    protected boolean isPermissionSettings() {
+        return true;
     }
 }

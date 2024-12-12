@@ -45,3 +45,66 @@ flag {
     bug: "327489942"
     is_fixed_read_only: true
 }
+
+flag {
+    name: "enhanced_confirmation_backport_enabled"
+    is_exported: true
+    namespace: "permissions"
+    description: "Flag to backport enhanced confirmation in permission mainline to T and U."
+    bug: "347876543"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "enable_coarse_fine_location_prompt_for_aaos"
+    is_exported: true
+    namespace: "permissions"
+    description: "Feature flag to enable downgrading to coarse location on Automotive"
+    bug: "346369736"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "livedata_refactor_permission_timeline_enabled"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag is used to enable modern app architecture implementation for timeline page"
+    bug: "354234946"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "odad_notifications_supported"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag is used to enable Safety Center notifications support for ODAD"
+    bug: "356910008"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "safety_center_issue_only_affects_group_status"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag is used by Safety Center to affect the status light of an entry group when an issue only source pushes a warning"
+    bug: "356910111"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "safety_center_enabled_no_device_config"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag disables the usage of DeviceConfig to enable/disable Safety Center on UDC+ (enabled by default instead)"
+    bug: "354670125"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "app_permission_fragment_uses_preferences"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag enables AppPermissionFragment rather than LegacyAppPermissionFragment (to support BC25)"
+    bug: "349675008"
+    is_fixed_read_only: true
+}

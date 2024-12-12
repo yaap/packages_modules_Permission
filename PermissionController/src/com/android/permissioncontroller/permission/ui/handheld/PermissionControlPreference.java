@@ -20,8 +20,6 @@ import static android.health.connect.HealthPermissions.HEALTH_PERMISSION_GROUP;
 
 import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.permission.ui.ManagePermissionsActivity.EXTRA_CALLER_NAME;
-import static com.android.permissioncontroller.permission.ui.handheld.AppPermissionFragment.GRANT_CATEGORY;
-import static com.android.permissioncontroller.permission.ui.handheld.AppPermissionFragment.PERSISTENT_DEVICE_ID;
 import static com.android.permissioncontroller.permission.utils.KotlinUtilsKt.navigateSafe;
 
 import android.Manifest;
@@ -40,10 +38,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.permission.compat.AppPermissionFragmentCompat;
 import com.android.permissioncontroller.permission.model.AppPermissionGroup;
 import com.android.permissioncontroller.permission.ui.LocationProviderInterceptDialog;
 import com.android.permissioncontroller.permission.utils.LocationUtils;
@@ -54,7 +53,7 @@ import java.util.List;
 /**
  * A preference that links to the screen where a permission can be toggled.
  */
-public class PermissionControlPreference extends Preference {
+public class PermissionControlPreference extends PermissionPreference {
     private final @NonNull Context mContext;
     private @Nullable Drawable mWidgetIcon;
     private @Nullable String mWidgetIconContentDescription;
@@ -176,14 +175,21 @@ public class PermissionControlPreference extends Preference {
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
+        ImageView icon = ((ImageView) holder.findViewById(android.R.id.icon));
         if (mUseSmallerIcon) {
-            ImageView icon = ((ImageView) holder.findViewById(android.R.id.icon));
-            icon.setMaxWidth(
-                    mContext.getResources().getDimensionPixelSize(
-                            com.android.settingslib.widget.theme.R.dimen.secondary_app_icon_size));
-            icon.setMaxHeight(
-                    mContext.getResources().getDimensionPixelSize(
-                            com.android.settingslib.widget.theme.R.dimen.secondary_app_icon_size));
+            int iconSize = mContext.getResources().getDimensionPixelSize(
+                            com.android.settingslib.widget.theme.R.dimen.secondary_app_icon_size);
+            icon.setMaxWidth(iconSize);
+            icon.setMaxHeight(iconSize);
+        } else if (SdkLevel.isAtLeastV()) {
+            icon.setAdjustViewBounds(true);
+            int size = getContext().getResources().getDimensionPixelSize(
+                    R.dimen.permission_preference_permission_group_icon_size);
+            icon.setMaxWidth(size);
+            icon.setMaxHeight(size);
+            icon.getLayoutParams().width = size;
+            icon.getLayoutParams().height = size;
+            icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
 
         super.onBindViewHolder(holder);
@@ -232,14 +238,8 @@ public class PermissionControlPreference extends Preference {
                     Utils.navigateToAppHealthConnectSettings(mContext, mPackageName, mUser);
                     return true;
                 }
-                Bundle args = new Bundle();
-                args.putString(Intent.EXTRA_PACKAGE_NAME, mPackageName);
-                args.putString(Intent.EXTRA_PERMISSION_GROUP_NAME, mPermGroupName);
-                args.putParcelable(Intent.EXTRA_USER, mUser);
-                args.putString(EXTRA_CALLER_NAME, mCaller);
-                args.putLong(EXTRA_SESSION_ID, mSessionId);
-                args.putString(GRANT_CATEGORY, mGranted);
-                args.putString(PERSISTENT_DEVICE_ID, mPersistentDeviceId);
+                Bundle args = AppPermissionFragmentCompat.createArgs(mPackageName, null,
+                        mPermGroupName, mUser, mCaller, mSessionId, mGranted, mPersistentDeviceId);
                 navigateSafe(Navigation.findNavController(holder.itemView), R.id.perm_groups_to_app,
                         args);
             } else {

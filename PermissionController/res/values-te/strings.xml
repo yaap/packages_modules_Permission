@@ -21,6 +21,7 @@
     <string name="permission_search_keyword" msgid="1214451577494730543">"అనుమతులు"</string>
     <string name="cancel" msgid="8943320028373963831">"రద్దు చేయండి"</string>
     <string name="back" msgid="6249950659061523680">"వెనుకకు"</string>
+    <string name="dialog_close" msgid="6840699812532384661">"మూసివేయండి"</string>
     <string name="available" msgid="6007778121920339498">"అందుబాటులో ఉంది"</string>
     <string name="blocked" msgid="9195547604866033708">"బ్లాక్ చేయబడినది"</string>
     <string name="on" msgid="280241003226755921">"ఆన్‌లో ఉంది"</string>
@@ -440,6 +441,7 @@
     <string name="default_app_none" msgid="9084592086808194457">"ఏదీ కాదు"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(సిస్టమ్ ఆటోమేటిక్)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ఏ యాప్ లేదు"</string>
+    <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"ఇతర NFC సర్వీస్‌లు"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"ఎంచుకోబడింది"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"<xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g> - ఎంచుకోబడింది"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"ప్రత్యేక యాప్ యాక్సెస్"</string>
@@ -669,6 +671,7 @@
     <string name="wear_app_perms_24h_access_yest" msgid="7069312481704735679">"నిన్న <xliff:g id="TIME_DATE">%1$s</xliff:g>‌కు యాక్సెస్‌ చేశారు"</string>
     <string name="wear_app_perms_7d_access" msgid="4608069019194676432">"<xliff:g id="TIME_DATE_0">%1$s</xliff:g>‌న<xliff:g id="TIME_DATE_1">%2$s</xliff:g>‌కు యాక్సెస్‌ చేశారు"</string>
     <string name="test_otp_msg" msgid="7559110574222727550">"మీ ఒకసారి ఉపయోగించగల పాస్‌వర్డ్ 132435"</string>
+    <string name="allow_restricted_settings" msgid="8073000189478396881">"పరిమితం చేసిన సెట్టింగ్‌లను అనుమతించండి"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"పరిమితం చేయబడిన సెట్టింగ్"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"మీ సెక్యూరిటీ కోసం, ఈ సెట్టింగ్ ప్రస్తుతం అందుబాటులో లేదు."</string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"యాప్ <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>‌కు యాక్సెస్ తిరస్కరించబడింది"</string>
@@ -681,4 +684,10 @@
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"సరే"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"అనుమతి రిక్వెస్ట్ బ్లాక్ చేయబడింది"</string>
     <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"ఈ యాప్ అదనపు అనుమతి కోసం రిక్వెస్ట్ చేస్తోంది, కానీ స్ట్రీమింగ్ సెషన్‌లో అనుమతులను మంజూరు చేయడం సాధ్యం కాదు. ముందుగా మీ ఫోన్‌లో అనుమతిని మంజూరు చేయండి."</string>
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label" msgid="5702912511473457693">"ఎమర్జెన్సీ కాల్ లేదా టెక్స్ట్ మెసేజ్ పంపే విషయంలో"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_title" msgid="849723944428031911">"ఎమర్జెన్సీ సర్వీసులకు లొకేషన్ పంపడం జరిగింది"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_description" msgid="5815970230573483329">"ఎమర్జెన్సీ నంబర్‌కు కాల్ చేసినప్పుడు, లేదా టెక్స్ట్ మెసేజ్ పంపినప్పుడు ఈ యాప్ మీ పరికర లొకేషన్‌ను యాక్సెస్ చేసింది. యాప్‌నకు లొకేషన్ అనుమతి లేకున్నా లేదా పరికర లొకేషన్ ఆఫ్‌లో ఉన్నప్పటికీ కూడా ఇలా జరిగవచ్చు. "<a href="https://support.google.com/android/answer/9319337">"మరింత తెలుసుకోండి"</a></string>
+    <string name="wear_check_your_phone_title" msgid="7957291983474981420">"మీ ఫోన్‌ను చెక్ చేయండి"</string>
+    <string name="wear_phone_connection_error" msgid="8934350845737930783">"మీ ఫోన్‌ను రీచ్ అవడం సాధ్యపడలేదు"</string>
+    <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"మళ్లీ ట్రై చేయాలా?"</string>
 </resources>

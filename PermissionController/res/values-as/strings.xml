@@ -21,6 +21,7 @@
     <string name="permission_search_keyword" msgid="1214451577494730543">"অনুমতি"</string>
     <string name="cancel" msgid="8943320028373963831">"বাতিল কৰক"</string>
     <string name="back" msgid="6249950659061523680">"উভতি যাওক"</string>
+    <string name="dialog_close" msgid="6840699812532384661">"বন্ধ কৰক"</string>
     <string name="available" msgid="6007778121920339498">"উপলব্ধ"</string>
     <string name="blocked" msgid="9195547604866033708">"অৱৰোধ কৰা আছে"</string>
     <string name="on" msgid="280241003226755921">"অন আছে"</string>
@@ -440,6 +441,7 @@
     <string name="default_app_none" msgid="9084592086808194457">"নাই"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ছিষ্টেম ডিফ\'ল্ট)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"কোনো এপ্‌ নাই"</string>
+    <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"অন্য NFC সেৱা"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"বাছনিকৃত"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"বাছনিকৃত - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"বিশেষ এপ্ এক্সেছ"</string>
@@ -669,6 +671,7 @@
     <string name="wear_app_perms_24h_access_yest" msgid="7069312481704735679">"কালি <xliff:g id="TIME_DATE">%1$s</xliff:g>ত এক্সেছ কৰিছিল"</string>
     <string name="wear_app_perms_7d_access" msgid="4608069019194676432">"<xliff:g id="TIME_DATE_0">%1$s</xliff:g> <xliff:g id="TIME_DATE_1">%2$s</xliff:g>ত এক্সেছ কৰিছিল"</string>
     <string name="test_otp_msg" msgid="7559110574222727550">"আপোনাৰ এবাৰ ব্যৱহাৰযোগ্য পাছৱর্ড হৈছে ১৩২৪৩৫"</string>
+    <string name="allow_restricted_settings" msgid="8073000189478396881">"প্ৰতিবন্ধিত ছেটিঙৰ অনুমতি দিয়ক"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"প্ৰতিবন্ধিত ছেটিং"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"আপোনাৰ সুৰক্ষাৰ বাবে, এই ছেটিংটো বৰ্তমান উপলব্ধ নহয়।"</string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"এপ্‌টোক <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>ৰ এক্সেছ প্ৰত্যাখ্যান কৰা হৈছে"</string>
@@ -681,4 +684,10 @@
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"ঠিক আছে"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"অনুমতিৰ অনুৰোধ অৱদমন কৰা হৈছে"</string>
     <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"এই এপ্‌টোৱে অতিৰিক্ত অনুমতিৰ বাবে অনুৰোধ কৰিছে, কিন্তু ষ্ট্ৰীমিং ছেশ্বনত অনুমতি দিব নোৱাৰি। আপোনাৰ ফ’নটোত প্ৰথমে অনুমতি দিয়ক।"</string>
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label" msgid="5702912511473457693">"জৰুৰীকালীন কল বা পাঠ বাৰ্তাৰ বাবে"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_title" msgid="849723944428031911">"অৱস্থান জৰুৰীকালীন সেৱালৈ পঠিওৱা হৈছে"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_description" msgid="5815970230573483329">"এটা জৰুৰীকালীন নম্বৰলৈ কল কৰোঁতে বা বাৰ্তা পঠিয়াওঁতে এই এপ্‌টোৱে আপোনাৰ ডিভাইচৰ অৱস্থান এক্সেছ কৰিছে। এপ্‌টোৰ অৱস্থানৰ অনুমতি নাথাকিলে বা ডিভাইচৰ অৱস্থান অফ হৈ থাকিলেও এনে হ’ব পাৰে। "<a href="https://support.google.com/android/answer/9319337">"অধিক জানক"</a></string>
+    <string name="wear_check_your_phone_title" msgid="7957291983474981420">"আপোনাৰ ফ’নটো চাওক"</string>
+    <string name="wear_phone_connection_error" msgid="8934350845737930783">"আপোনাৰ ফ’নটোৰ সৈতে সংযোগ কৰিব পৰা নগ’ল"</string>
+    <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"পুনৰ চেষ্টা কৰিবনে?"</string>
 </resources>

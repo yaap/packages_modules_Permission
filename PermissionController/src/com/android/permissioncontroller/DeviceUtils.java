@@ -31,4 +31,13 @@ public class DeviceUtils {
     public static boolean isAuto(Context context) {
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE);
     }
+
+    public static boolean isHandheld() {
+        Context context = PermissionControllerApplication.get();
+        return !isTelevision(context) && !isAuto(context) && !isWear(context);
+    }
+
+    public static boolean isHandheld(Context context) {
+        return !isTelevision(context) && !isAuto(context) && !isWear(context);
+    }
 }

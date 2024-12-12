@@ -19,7 +19,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:minWidth="56dp"
+    android:minWidth="@dimen/toggle_preference_container_min_width"
     android:layout_height="match_parent">
 
     <RadioButton

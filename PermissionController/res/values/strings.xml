@@ -30,6 +30,9 @@
     <!-- Button label for back action [CHAR LIMIT=20] -->
     <string name="back">Back</string>
 
+    <!-- Button label for closing a dialog action -->
+    <string name="dialog_close">Close</string>
+
     <!-- Label indicating access is allowed. If you update this string, please
     update the string "quick_settings_camera_mic_available" in System Ui [CHAR LIMIT=NONE] -->
     <string name="available">Available</string>
@@ -1326,6 +1329,9 @@
     <!-- Label when there are no apps available for a default app [CHAR LIMIT=30] -->
     <string name="default_app_no_apps">No apps</string>
 
+    <!-- Title for preference item that will open a screen to manage other NFC services [CHAR LIMIT=50] -->
+    <string name="default_payment_app_other_nfc_services">Other NFC services</string>
+
     <!-- Label for the selected default app for default app [CHAR LIMIT=30] -->
     <string name="car_default_app_selected">Selected</string>
 
@@ -1989,6 +1995,9 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
     <!-- A string representing a message (sms, email, etc.) telling the user about a one time password. Used for testing [CHAR LIMIT=NONE] -->
     <string name="test_otp_msg">Your one time password is 132435</string>
 
+    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted setting from app permissions options menu -->
+    <string name="allow_restricted_settings">Allow restricted settings</string>
+
     <!-- START ENHANCED CONFIRMATION DIALOG -->
 
     <!--Title for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=50] -->
@@ -2023,4 +2032,21 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
 
     <!-- Descriptions for the warning dialog that shows when permission grant dialog is blocked from streaming to a remote device [CHAR LIMIT=200] -->
     <string name="permission_grant_dialog_streaming_blocked_description">This app is requesting additional permissions, but permissions can’t be granted in a streaming session. Grant the permission on your phone first.</string>
+
+    <!-- Attribution label that is enforced to show for emergency location accesses in the privacy dashboard -->
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label">For emergency call or text</string>
+    <!-- Title of the dialog when clicking the app op access entry for EMERGENCY_LOCATION in the privacy dashboard -->
+    <string name="privacy_dashboard_emergency_location_dialog_title">Location sent to emergency services</string>
+    <!-- Description of the dialog when clicking the app op access entry for EMERGENCY_LOCATION in the privacy dashboard -->
+    <string name="privacy_dashboard_emergency_location_dialog_description">This app accessed your device\'s location during a call or text to an emergency number. This can happen even when the app doesn\'t have location permission or the device location is off. <a href="https://support.google.com/android/answer/9319337">Learn more</a></string>
+    <!-- Close button in the pop up dialog when clicking the app op access entry in the privacy dashboard -->
+
+    <!-- Text instructing user to check their paired phone-->
+    <string name="wear_check_your_phone_title">Check your phone</string>
+
+    <!-- Text letting the user to know that companion phone couldn't be reached -->
+    <string name="wear_phone_connection_error">Couldn\'t reach your phone</string>
+
+    <!-- Text asking the user if they want to retry connecting to the paired phone -->
+    <string name="wear_phone_connection_should_retry">Retry?</string>
 </resources>

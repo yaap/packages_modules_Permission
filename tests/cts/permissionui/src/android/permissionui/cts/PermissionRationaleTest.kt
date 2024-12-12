@@ -170,7 +170,9 @@ class PermissionRationaleTest : BaseUsePermissionTest() {
 
         clicksSettings_doesNothing_leaves()
 
-        eventually { assertPermissionRationaleDialogIsVisible(true) }
+        // Eventually requires a longer timeout than that of all internal ui checks in
+        // assertPermissionRationaleDialogIsVisible
+        eventually({ assertPermissionRationaleDialogIsVisible(true) }, 75000L)
     }
 
     @Test
@@ -223,7 +225,7 @@ class PermissionRationaleTest : BaseUsePermissionTest() {
     }
 
     private fun clickInstallSourceLink() {
-        findView(By.res(DATA_SHARING_SOURCE_MESSAGE_ID), true)
+        findView(By.res(DATA_SHARING_SOURCE_MESSAGE_ID), 20000L, true)
 
         eventually {
             // UiObject2 doesn't expose CharSequence.

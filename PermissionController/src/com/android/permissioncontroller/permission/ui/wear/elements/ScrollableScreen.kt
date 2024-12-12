@@ -88,15 +88,19 @@ fun ScrollableScreen(
     val state = rememberSwipeToDismissBoxState()
 
     LaunchedEffect(state.currentValue) {
+        // If the swipe is complete
         if (state.currentValue == SwipeToDismissValue.Dismissed) {
+            // pop the top fragment immediately or dismiss activity.
             dismiss(activity)
+            // Set  dismissed state as true
             dismissed = true
+            // Set swipe box back to starting position(that is cancelled swipe effect) to
+            // show loading indicator while fragment dismisses.
+            // For some reason fragment `popBackImmediate` takes few secs at times.
             state.snapTo(SwipeToDismissValue.Default)
         }
     }
 
-    // To support Swipe-dismiss effect,
-    // add the view to SwipeToDismissBox if the screen is not on the top fragment.
     if (getBackStackEntryCount(activity) > 0) {
         SwipeToDismissBox(state = state) { isBackground ->
             Scaffold(
@@ -135,12 +139,13 @@ internal fun Scaffold(
     titleTestTag: String? = null,
     subtitleTestTag: String? = null,
 ) {
+    val itemsSpacedBy = 4.dp
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val scrollContentHorizontalPadding = (screenWidth * 0.052).dp
     val titleHorizontalPadding = (screenWidth * 0.0884).dp
     val subtitleHorizontalPadding = (screenWidth * 0.0416).dp
-    val scrollContentTopPadding = (screenHeight * 0.1456).dp
+    val scrollContentTopPadding = (screenHeight * 0.1456).dp - itemsSpacedBy
     val scrollContentBottomPadding = (screenHeight * 0.3636).dp
     val titleBottomPadding =
         if (subtitle == null) {
@@ -198,7 +203,12 @@ internal fun Scaffold(
                 }
             },
             vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
-            positionIndicator = { PositionIndicator(scalingLazyListState = listState) }
+            positionIndicator =
+                if (!isLoading) {
+                    { PositionIndicator(scalingLazyListState = listState) }
+                } else {
+                    null
+                }
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 if (isLoading) {
@@ -218,6 +228,7 @@ internal fun Scaffold(
                                 bottom = scrollContentBottomPadding
                             )
                     ) {
+                        staticItem()
                         image?.let {
                             val imageModifier = Modifier.size(24.dp)
                             when (image) {
@@ -284,6 +295,26 @@ internal fun Scaffold(
     }
 }
 
+private fun ScalingLazyListScope.staticItem() {
+    /*
+    This empty item helps to ensure accurate scroll offset calculation. If auto centering is enabled
+    initial item's(first item for us) center matches the center of the screen. Scroll offset is 0 at
+    that point.
+
+    if auto centering is not enabled, initial item will start at the top of the screen with the
+    scroll offset equal to ScreenHeight/2 - scrollContentTopPadding - firstItemHeight/2.
+
+    We need to this offset value to properly move time text.That is the scroll-away offset of the
+    Time Text is equal to the scroll offset of the list at initial position.
+
+    It is easier to calculate if we know the values of ScreenHeight, ScrollContentTopPadding and
+    FirstItem's height. ScreenHeight and ScrollContentPadding are constants but height of the
+    FirstItem depends on the content. Instead of measuring the height, we can simplify the
+    calculation with an empty item with 0dp height.
+    */
+    item {}
+}
+
 @Composable
 private fun RequestFocusOnResume(focusRequester: FocusRequester) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -308,8 +339,7 @@ internal fun getBackStackEntryCount(activity: Activity): Int {
     return if (activity is FragmentActivity) {
         activity.supportFragmentManager.primaryNavigationFragment
             ?.childFragmentManager
-            ?.backStackEntryCount
-            ?: 0
+            ?.backStackEntryCount ?: 0
     } else {
         0
     }

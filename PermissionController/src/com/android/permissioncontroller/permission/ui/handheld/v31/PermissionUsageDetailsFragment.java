@@ -18,6 +18,11 @@ package com.android.permissioncontroller.permission.ui.handheld.v31;
 
 import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_DETAILS_INTERACTION;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_DETAILS_INTERACTION__ACTION__MANAGE_PERMISSIONS_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_DETAILS_INTERACTION__ACTION__SHOW_7DAYS_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_DETAILS_INTERACTION__ACTION__SHOW_SYSTEM_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.write;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -37,7 +42,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProvider;
@@ -50,9 +54,9 @@ import com.android.permissioncontroller.PermissionControllerApplication;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.ui.ManagePermissionsActivity;
 import com.android.permissioncontroller.permission.ui.handheld.SettingsWithLargeHeader;
-import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel;
+import com.android.permissioncontroller.permission.ui.model.v31.BasePermissionUsageDetailsViewModel;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.AppPermissionAccessUiInfo;
-import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiInfo;
+import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiState;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsViewModelFactory;
 import com.android.permissioncontroller.permission.utils.KotlinUtils;
 
@@ -76,16 +80,16 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
 
     private static final int MENU_SHOW_7_DAYS_DATA = Menu.FIRST + 4;
     private static final int MENU_SHOW_24_HOURS_DATA = Menu.FIRST + 5;
-    private @Nullable String mPermissionGroup;
-    private int mUsageSubtitle;
+    private String mPermissionGroup;
     private boolean mHasSystemApps;
+    private boolean mMenuItemsCreated = false;
 
     private MenuItem mShowSystemMenu;
     private MenuItem mHideSystemMenu;
     private MenuItem mShow7DaysDataMenu;
     private MenuItem mShow24HoursDataMenu;
 
-    private PermissionUsageDetailsViewModel mViewModel;
+    private BasePermissionUsageDetailsViewModel mViewModel;
 
     private long mSessionId;
 
@@ -93,17 +97,15 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPermissionGroup = getArguments().getString(Intent.EXTRA_PERMISSION_GROUP_NAME);
-
         if (mPermissionGroup == null) {
             Log.e(TAG, "No permission group was provided for PermissionDetailsFragment");
             return;
         }
-
         PermissionUsageDetailsViewModelFactory factory =
                 new PermissionUsageDetailsViewModelFactory(
                         PermissionControllerApplication.get(), this, mPermissionGroup);
         mViewModel =
-                new ViewModelProvider(this, factory).get(PermissionUsageDetailsViewModel.class);
+                new ViewModelProvider(this, factory).get(BasePermissionUsageDetailsViewModel.class);
 
         if (savedInstanceState != null) {
             mSessionId = savedInstanceState.getLong(SESSION_ID_KEY);
@@ -114,9 +116,7 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
         mViewModel.updateShowSystemAppsToggle(
                 getArguments().getBoolean(ManagePermissionsActivity.EXTRA_SHOW_SYSTEM, false));
         mViewModel.updateShow7DaysToggle(
-                KotlinUtils.INSTANCE.is7DayToggleEnabled()
-                        && getArguments()
-                                .getBoolean(ManagePermissionsActivity.EXTRA_SHOW_7_DAYS, false));
+                getArguments().getBoolean(ManagePermissionsActivity.EXTRA_SHOW_7_DAYS, false));
 
         setHasOptionsMenu(true);
         ActionBar ab = getActivity().getActionBar();
@@ -163,6 +163,11 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
         extendedFab.setVisibility(View.VISIBLE);
         extendedFab.setOnClickListener(
                 view -> {
+                    write(PERMISSION_DETAILS_INTERACTION,
+                            mSessionId,
+                            mPermissionGroup,
+                            null,
+                            PERMISSION_DETAILS_INTERACTION__ACTION__MANAGE_PERMISSIONS_CLICKED);
                     Intent intent =
                             new Intent(Intent.ACTION_MANAGE_PERMISSION_APPS)
                                     .putExtra(Intent.EXTRA_PERMISSION_NAME, mPermissionGroup);
@@ -190,9 +195,9 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
                             .getString(
                                     R.string.permission_group_usage_title,
                                     KotlinUtils.INSTANCE.getPermGroupLabel(
-                                            getActivity(), mPermissionGroup));
+                                            requireActivity(), mPermissionGroup));
         }
-        getActivity().setTitle(title);
+        requireActivity().setTitle(title);
     }
 
     @Override
@@ -207,31 +212,21 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
                 menu.add(Menu.NONE, MENU_SHOW_SYSTEM, Menu.NONE, R.string.menu_show_system);
         mHideSystemMenu =
                 menu.add(Menu.NONE, MENU_HIDE_SYSTEM, Menu.NONE, R.string.menu_hide_system);
-        boolean showSystem = false;
-        if (mViewModel.getShowSystemLiveData().getValue() != null) {
-            showSystem = mViewModel.getShowSystemLiveData().getValue();
-        }
-        updateShowSystemToggle(showSystem);
-
-        if (KotlinUtils.INSTANCE.is7DayToggleEnabled()) {
-            mShow7DaysDataMenu =
-                    menu.add(
-                            Menu.NONE,
-                            MENU_SHOW_7_DAYS_DATA,
-                            Menu.NONE,
-                            R.string.menu_show_7_days_data);
-            mShow24HoursDataMenu =
-                    menu.add(
-                            Menu.NONE,
-                            MENU_SHOW_24_HOURS_DATA,
-                            Menu.NONE,
-                            R.string.menu_show_24_hours_data);
-            boolean show7Days = false;
-            if (mViewModel.getShow7DaysLiveData().getValue() != null) {
-                show7Days = mViewModel.getShow7DaysLiveData().getValue();
-            }
-            updateShow7DaysToggle(show7Days);
-        }
+        mShow7DaysDataMenu =
+                menu.add(
+                        Menu.NONE,
+                        MENU_SHOW_7_DAYS_DATA,
+                        Menu.NONE,
+                        R.string.menu_show_7_days_data);
+        mShow24HoursDataMenu =
+                menu.add(
+                        Menu.NONE,
+                        MENU_SHOW_24_HOURS_DATA,
+                        Menu.NONE,
+                        R.string.menu_show_24_hours_data);
+        mMenuItemsCreated = true;
+        updateShow7DaysToggle(mViewModel.getShow7Days());
+        updateShowSystemToggle(mViewModel.getShowSystem());
     }
 
     @Override
@@ -239,16 +234,26 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
         int itemId = item.getItemId();
         switch (itemId) {
             case android.R.id.home:
-                getActivity().finishAfterTransition();
+                requireActivity().finishAfterTransition();
                 return true;
             case MENU_SHOW_SYSTEM:
+                write(PERMISSION_DETAILS_INTERACTION,
+                        mSessionId,
+                        mPermissionGroup,
+                        null,
+                        PERMISSION_DETAILS_INTERACTION__ACTION__SHOW_SYSTEM_CLICKED);
                 mViewModel.updateShowSystemAppsToggle(true);
                 break;
             case MENU_HIDE_SYSTEM:
                 mViewModel.updateShowSystemAppsToggle(false);
                 break;
             case MENU_SHOW_7_DAYS_DATA:
-                mViewModel.updateShow7DaysToggle(KotlinUtils.INSTANCE.is7DayToggleEnabled());
+                write(PERMISSION_DETAILS_INTERACTION,
+                        mSessionId,
+                        mPermissionGroup,
+                        null,
+                        PERMISSION_DETAILS_INTERACTION__ACTION__SHOW_7DAYS_CLICKED);
+                mViewModel.updateShow7DaysToggle(true);
                 break;
             case MENU_SHOW_24_HOURS_DATA:
                 mViewModel.updateShow7DaysToggle(false);
@@ -259,10 +264,12 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
     }
 
     /** Updates page content and menu items. */
-    private void updateAllUI(PermissionUsageDetailsUiInfo uiData) {
-        if (getActivity() == null) {
+    private void updateAllUI(PermissionUsageDetailsUiState uiInfo) {
+        if (getActivity() == null || uiInfo instanceof PermissionUsageDetailsUiState.Loading) {
             return;
         }
+        PermissionUsageDetailsUiState.Success uiData =
+                (PermissionUsageDetailsUiState.Success) uiInfo;
         Context context = getActivity();
         PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
@@ -270,50 +277,34 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
             setPreferenceScreen(screen);
         }
         screen.removeAll();
-        boolean show7Days =
-                mViewModel.getShow7DaysLiveData().getValue() != null
-                        ? mViewModel.getShow7DaysLiveData().getValue()
-                        : false;
-
         Preference subtitlePreference = new Preference(context);
-        updateShow7DaysToggle(show7Days);
-        mUsageSubtitle =
-                show7Days
-                        ? R.string.permission_group_usage_subtitle_7d
-                        : R.string.permission_group_usage_subtitle_24h;
+        updateShow7DaysToggle(uiData.getShow7Days());
+        int usageSubtitle = uiData.getShow7Days()
+                ? R.string.permission_group_usage_subtitle_7d
+                : R.string.permission_group_usage_subtitle_24h;
 
         subtitlePreference.setSummary(
                 getResources()
                         .getString(
-                                mUsageSubtitle,
+                                usageSubtitle,
                                 KotlinUtils.INSTANCE.getPermGroupLabel(
-                                        getActivity(), mPermissionGroup)));
+                                        context, mPermissionGroup)));
         subtitlePreference.setSelectable(false);
         screen.addPreference(subtitlePreference);
 
-        boolean containsSystemAppAccesses = uiData.getContainsSystemAppAccesses();
+        boolean containsSystemAppAccesses = uiData.getContainsSystemAppUsage();
         if (mHasSystemApps != containsSystemAppAccesses) {
             mHasSystemApps = containsSystemAppAccesses;
         }
-        boolean showSystem =
-                mViewModel.getShowSystemLiveData().getValue() != null
-                        ? mViewModel.getShowSystemLiveData().getValue()
-                        : false;
-        updateShowSystemToggle(showSystem);
+        updateShowSystemToggle(uiData.getShowSystem());
 
         // Make these variables effectively final so that
         // we can use these captured variables in the below lambda expression
         AtomicReference<PreferenceCategory> category =
                 new AtomicReference<>(createDayCategoryPreference());
         screen.addPreference(category.get());
-        PreferenceScreen finalScreen = screen;
 
-        if (getActivity() == null) {
-            // Fragment has no Activity, return.
-            return;
-        }
-        renderHistoryPreferences(uiData.getAppPermissionAccessUiInfoList(), category, finalScreen);
-
+        renderHistoryPreferences(uiData.getAppPermissionAccessUiInfoList(), category, screen);
         setLoading(false, true);
         setProgressBarVisible(false);
     }
@@ -323,8 +314,7 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
             List<AppPermissionAccessUiInfo> appPermissionAccessUiInfoList,
             AtomicReference<PreferenceCategory> category,
             PreferenceScreen preferenceScreen) {
-        Context context = getContext();
-        long previousDateMs = 0L;
+        Context context = requireContext();
         long midnightToday =
                 ZonedDateTime.now(ZoneId.systemDefault())
                                 .truncatedTo(ChronoUnit.DAYS)
@@ -337,19 +327,20 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
                                 .toEpochSecond()
                         * 1000L;
 
+        long previousAccessDateMs = 0L;
+        ZoneId zoneId = Clock.system(ZoneId.systemDefault()).getZone();
+
         for (int i = 0; i < appPermissionAccessUiInfoList.size(); i++) {
             AppPermissionAccessUiInfo appPermissionAccessUiInfo =
                     appPermissionAccessUiInfoList.get(i);
             long accessEndTime = appPermissionAccessUiInfo.getAccessEndTime();
-            long currentDateMs =
-                    ZonedDateTime.ofInstant(
-                                            Instant.ofEpochMilli(accessEndTime),
-                                            Clock.system(ZoneId.systemDefault()).getZone())
-                                    .truncatedTo(ChronoUnit.DAYS)
-                                    .toEpochSecond()
+            long accessDateMS =
+                    ZonedDateTime.ofInstant(Instant.ofEpochMilli(accessEndTime), zoneId)
+                            .truncatedTo(ChronoUnit.DAYS)
+                            .toEpochSecond()
                             * 1000L;
-            if (currentDateMs != previousDateMs) {
-                if (previousDateMs != 0L) {
+            if (accessDateMS != previousAccessDateMs) {
+                if (previousAccessDateMs != 0L) {
                     category.set(createDayCategoryPreference());
                     preferenceScreen.addPreference(category.get());
                 }
@@ -359,14 +350,14 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
                     category.get().setTitle(R.string.permission_history_category_yesterday);
                 } else {
                     category.get()
-                            .setTitle(DateFormat.getLongDateFormat(context).format(currentDateMs));
+                            .setTitle(DateFormat.getLongDateFormat(context).format(accessDateMS));
                 }
-                previousDateMs = currentDateMs;
+                previousAccessDateMs = accessDateMS;
             }
 
             Preference permissionUsagePreference =
                     new PermissionHistoryPreference(
-                            getContext(),
+                            context,
                             appPermissionAccessUiInfo.getUserHandle(),
                             appPermissionAccessUiInfo.getPackageName(),
                             appPermissionAccessUiInfo.getBadgedPackageIcon(),
@@ -378,44 +369,36 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
                             appPermissionAccessUiInfo.getShowingAttribution(),
                             appPermissionAccessUiInfo.getAttributionTags(),
                             i == appPermissionAccessUiInfoList.size() - 1,
-                            mSessionId);
+                            mSessionId,
+                            appPermissionAccessUiInfo.isEmergencyLocationAccess());
 
             category.get().addPreference(permissionUsagePreference);
         }
     }
 
     private void updateShowSystemToggle(boolean showSystem) {
+        if (!mMenuItemsCreated) return;
+
         if (mHasSystemApps) {
-            if (mShowSystemMenu != null) {
-                mShowSystemMenu.setVisible(!showSystem);
-                mShowSystemMenu.setEnabled(true);
-            }
+            mShowSystemMenu.setVisible(!showSystem);
+            mShowSystemMenu.setEnabled(true);
 
-            if (mHideSystemMenu != null) {
-                mHideSystemMenu.setVisible(showSystem);
-                mHideSystemMenu.setEnabled(true);
-            }
+            mHideSystemMenu.setVisible(showSystem);
+            mHideSystemMenu.setEnabled(true);
         } else {
-            if (mShowSystemMenu != null) {
-                mShowSystemMenu.setVisible(true);
-                mShowSystemMenu.setEnabled(false);
-            }
+            mShowSystemMenu.setVisible(true);
+            mShowSystemMenu.setEnabled(false);
 
-            if (mHideSystemMenu != null) {
-                mHideSystemMenu.setVisible(false);
-                mHideSystemMenu.setEnabled(false);
-            }
+            mHideSystemMenu.setVisible(false);
+            mHideSystemMenu.setEnabled(false);
         }
     }
 
     private void updateShow7DaysToggle(boolean show7Days) {
-        if (mShow7DaysDataMenu != null) {
-            mShow7DaysDataMenu.setVisible(!show7Days);
-        }
+        if (!mMenuItemsCreated) return;
 
-        if (mShow24HoursDataMenu != null) {
-            mShow24HoursDataMenu.setVisible(show7Days);
-        }
+        mShow7DaysDataMenu.setVisible(!show7Days);
+        mShow24HoursDataMenu.setVisible(show7Days);
     }
 
     private PreferenceCategory createDayCategoryPreference() {

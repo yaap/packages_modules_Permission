@@ -92,6 +92,15 @@
         <permission name="android.permission.POST_NOTIFICATIONS" minSdkVersion="33" />
     </permission-set>
 
+    <permission-set name="virtual_device">
+        <permission name="android.permission.CREATE_VIRTUAL_DEVICE" minSdkVersion="33" />
+        <permission name="android.permission.ADD_TRUSTED_DISPLAY" minSdkVersion="33" />
+        <permission name="android.permission.ADD_ALWAYS_UNLOCKED_DISPLAY" minSdkVersion="33" />
+        <permission
+            name="android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE"
+            featureFlag="android.companion.virtualdevice.flags.Flags.activityControlApi" />
+    </permission-set>
+
     <role
         name="android.app.role.ASSISTANT"
         behavior="AssistantRoleBehavior"
@@ -697,6 +706,10 @@
                 minSdkVersion="35" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_AUDIT_LOGGING"
                 minSdkVersion="35" />
+            <permission name="android.permission.EXECUTE_APP_FUNCTIONS"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
+            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
         </permissions>
     </role>
 
@@ -860,6 +873,8 @@
             <permission name="android.permission.READ_SMS" minSdkVersion="33" />
             <permission name="android.permission.READ_PEOPLE_DATA" />
             <permission name="android.permission.READ_GLOBAL_APP_SEARCH_DATA" />
+            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
         </permissions>
     </role>
 
@@ -1189,11 +1204,9 @@
         visible="false">
         <permissions>
             <permission-set name="notifications" />
+            <permission-set name="virtual_device" />
             <!-- For capturing audio from the app on the device. -->
             <permission name="android.permission.RECORD_AUDIO" />
-            <permission name="android.permission.CREATE_VIRTUAL_DEVICE" minSdkVersion="33" />
-            <permission name="android.permission.ADD_TRUSTED_DISPLAY" minSdkVersion="33" />
-            <permission name="android.permission.ADD_ALWAYS_UNLOCKED_DISPLAY" minSdkVersion="33" />
 
             <!--TODO(b/201605314) For calling Telecom framework API for audio streaming-->
             <!--<permission name="android.permission.PROVIDE_CALL_ENDPOINTS" />-->
@@ -1260,9 +1273,7 @@
         visible="false">
         <permissions>
             <permission-set name="nearby_devices" />
-            <permission name="android.permission.CREATE_VIRTUAL_DEVICE" />
-            <permission name="android.permission.ADD_TRUSTED_DISPLAY" />
-            <permission name="android.permission.ADD_ALWAYS_UNLOCKED_DISPLAY" />
+            <permission-set name="virtual_device" />
         </permissions>
     </role>
 

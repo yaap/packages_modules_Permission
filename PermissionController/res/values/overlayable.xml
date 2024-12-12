@@ -27,6 +27,43 @@
             <item type="string" name="help_url_action_disabled_by_restricted_settings" />
             <!-- END HELP LINKS -->
 
+            <!-- START PREFERENCE STYLES. Used in V35 only -->
+            <item type="style" name="PermissionPreferenceCategoryRootLayoutStyle" />
+            <item type="style" name="PermissionPreferenceCategoryTextRelativeLayoutStyle" />
+            <item type="style" name="PermissionPreferenceCategoryTitleTextStyle" />
+            <item type="style" name="PermissionPreferenceCategorySummaryTextStyle" />
+
+            <item type="style" name="PermissionPreferenceRootLayoutStyle" />
+            <item type="style" name="PermissionPreferenceIconFrameStyle" />
+            <item type="style" name="PermissionPreferenceIconStyle" />
+            <item type="style" name="PermissionPreferenceTextRelativeLayoutStyle" />
+            <item type="style" name="PermissionPreferenceTitleTextStyle" />
+            <item type="style" name="PermissionPreferenceSummaryTextStyle" />
+            <item type="style" name="PermissionPreferenceWidgetFrameLayoutStyle" />
+
+            <item type="style" name="PermissionFooterPreferenceRootLayoutStyle" />
+            <item type="style" name="PermissionFooterPreferenceIconFrameStyle" />
+            <item type="style" name="PermissionFooterPreferenceIconStyle" />
+            <item type="style" name="PermissionFooterPreferenceLearnMoreTextLayoutStyle" />
+            <item type="style" name="PermissionFooterPreferenceTitleTextStyle" />
+            <item type="style" name="PermissionFooterPreferenceLearnMoreTextStyle" />
+
+            <item type="bool" name="config_permissionFooterPreferenceIconVisible" />
+            <item type="dimen" name="permission_preference_app_icon_size" />
+            <item type="dimen" name="permission_preference_permission_group_icon_size" />
+
+            <!-- END PREFERENCE STYLES -->
+
+            <!-- START AUTO PERMISSION GRANT DIALOG -->
+
+            <item type="style" name="AutoPermissionLocationAccuracyRadioFine" />
+            <item type="style" name="AutoPermissionLocationAccuracyRadioCoarse" />
+            <item type="style" name="AutoPermissionGrantDialogMaterial3" />
+            <item type="style" name="AutoPermissionGrantTitleMessage" />
+            <item type="style" name="AutoPermissionGrantButton" />
+
+            <!-- END AUTO PERMISSION GRANT DIALOG -->
+
             <!-- START PERMISSION GRANT DIALOG -->
             <item type="style" name="PermissionGrantScrollView" />
             <item type="style" name="PermissionGrantSingleton" />
@@ -287,6 +324,10 @@
             <item type="dimen" name="secondary_app_icon_size" />
             <!-- END SETTINGSLIB APPPREFERENCE -->
 
+            <!-- START ATTRS -->
+            <item type="attr" name="state_has_icon_space" />
+            <!-- END ATTRS -->
+
             <!-- START THEMES -->
             <item type="style" name="Settings" />
             <item type="style" name="TextAppearance.CategoryTitle" />
@@ -296,6 +337,8 @@
             <item type="style" name="RequestRole" />
             <item type="style" name="Theme.PermissionGrantDialog" />
             <item type="style" name="PermissionDialog" />
+            <!-- Theme overlay applied to permission settings UI on v35+ -->
+            <item type="style" name="ThemeOverlay.PermissionSettings" />
             <!-- END THEMES -->
 
             <!-- START VISIBILITY CONFIGS -->
@@ -328,6 +371,7 @@
             <!-- END CAR THEMES -->
 
             <!-- START LAYOUTPREFERENCE -->
+            <!-- {@deprecated Use SettingsLibEntityHeaderTitle.} -->
             <item type="style" name="TextAppearance.EntityHeaderTitle" />
             <!-- END LAYOUTPREFERENCE -->
 
@@ -415,6 +459,15 @@
             <item type="style" name="EnhancedConfirmationDialogButtonBar" />
             <item type="style" name="EnhancedConfirmationDialogButton" />
             <!-- END ENHANCED CONFIRMATION DIALOG -->
+
+            <!-- START STETINGS LIB HEADER -->
+            <item type="style" name="SettingsLibEntityHeader" />
+            <item type="style" name="SettingsLibEntityHeaderContent" />
+            <item type="style" name="SettingsLibEntityHeaderIcon" />
+            <item type="style" name="SettingsLibEntityHeaderTitle" />
+
+            <item type="bool" name="config_useCollapsingToolbarInPermissionSettings"/>
+            <!-- END SETTINGS LIB HEADER -->
 
         </policy>
 

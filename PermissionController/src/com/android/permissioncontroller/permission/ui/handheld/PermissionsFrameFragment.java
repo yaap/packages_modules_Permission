@@ -28,11 +28,15 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.modules.utils.build.SdkLevel;
+import com.android.permissioncontroller.DeviceUtils;
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.permission.ui.handheld.v35.SectionPreferenceGroupAdapter;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.settingslib.widget.ActionBarShadowController;
 
@@ -42,6 +46,7 @@ public abstract class PermissionsFrameFragment extends PreferenceFragmentCompat 
     static final int MENU_ALL_PERMS = Menu.FIRST + 1;
     public static final int MENU_SHOW_SYSTEM = Menu.FIRST + 2;
     public static final int MENU_HIDE_SYSTEM = Menu.FIRST + 3;
+    static final int MENU_ALLOW_RESTRICTED_SETTINGS = Menu.FIRST + 4;
 
     private ViewGroup mPreferencesContainer;
 
@@ -115,6 +120,15 @@ public abstract class PermissionsFrameFragment extends PreferenceFragmentCompat 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         // empty
+    }
+
+    @Override
+    public RecyclerView.Adapter onCreateAdapter(@NonNull PreferenceScreen preferenceScreen) {
+        if (SdkLevel.isAtLeastV() && DeviceUtils.isHandheld(requireContext())) {
+            return new SectionPreferenceGroupAdapter(preferenceScreen);
+        } else {
+            return super.onCreateAdapter(preferenceScreen);
+        }
     }
 
     protected void setLoading(boolean loading, boolean animate) {

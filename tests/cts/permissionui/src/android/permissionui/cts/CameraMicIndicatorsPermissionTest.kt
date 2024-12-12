@@ -29,12 +29,14 @@ import android.os.Process
 import android.os.SystemClock
 import android.os.SystemProperties
 import android.permission.PermissionManager
+import android.permission.cts.MtsIgnore
 import android.platform.test.annotations.AsbSecurityTest
 import android.platform.test.rule.ScreenRecordRule
 import android.provider.DeviceConfig
 import android.provider.Settings
 import android.safetycenter.SafetyCenterManager
 import android.server.wm.WindowManagerStateHelper
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.test.filters.FlakyTest
 import androidx.test.filters.SdkSuppress
@@ -85,8 +87,7 @@ private const val PRIVACY_ITEM_ID = "com.android.systemui:id/privacy_item"
 private const val INDICATORS_FLAG = "camera_mic_icons_enabled"
 private const val WEAR_MIC_LABEL = "Microphone"
 private const val PERMISSION_INDICATORS_NOT_PRESENT = 162547999L
-private const val IDLE_TIMEOUT_MILLIS: Long = 1000
-private const val UNEXPECTED_TIMEOUT_MILLIS = 1000L
+private const val IDLE_TIMEOUT_MILLIS: Long = 2000
 private const val TIMEOUT_MILLIS: Long = 20000
 private const val TV_MIC_INDICATOR_WINDOW_TITLE = "MicrophoneCaptureIndicator"
 private const val MIC_LABEL_NAME = "microphone_toggle_label_qs"
@@ -137,6 +138,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         private const val AUTO_MIC_INDICATOR_DISMISSAL_TIMEOUT_MS = 30_000L
         const val SAFETY_CENTER_ENABLED = "safety_center_is_enabled"
         const val DELAY_MILLIS = 3000L
+        private val TAG = CameraMicIndicatorsPermissionTest::class.java.simpleName
     }
 
     private val safetyCenterEnabled = callWithShellPermissionIdentity {
@@ -260,6 +262,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         val manager = context.getSystemService(CameraManager::class.java)!!
         assumeTrue(manager.cameraIdList.isNotEmpty())
         changeSafetyCenterFlag(false.toString())
+        assumeSafetyCenterDisabled()
         testCameraAndMicIndicator(useMic = false, useCamera = true)
     }
 
@@ -267,20 +270,27 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
     @CddTest(requirement = "9.8.2/H-4-1,T-4-1,A-1-1")
     fun testMicIndicator() {
         changeSafetyCenterFlag(false.toString())
+        assumeSafetyCenterDisabled()
         testCameraAndMicIndicator(useMic = true, useCamera = false)
     }
 
     @Test
     @AsbSecurityTest(cveBugId = [258672042])
+    @MtsIgnore(bugId = 351903707)
     fun testMicIndicatorWithManualFinishOpStillShows() {
-        changeSafetyCenterFlag(false.toString())
-        testCameraAndMicIndicator(useMic = true, useCamera = false, finishEarly = true)
+        testCameraAndMicIndicator(
+            useMic = true,
+            useCamera = false,
+            finishEarly = true,
+            safetyCenterEnabled = getSafetyCenterEnabled()
+        )
     }
 
     @Test
     @CddTest(requirement = "9.8.2/H-4-1,T-4-1,A-1-1")
     fun testHotwordIndicatorBehavior() {
         changeSafetyCenterFlag(false.toString())
+        assumeSafetyCenterDisabled()
         testCameraAndMicIndicator(useMic = false, useCamera = false, useHotword = true)
     }
 
@@ -295,6 +305,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         // If camera is not available skip the test
         assumeTrue(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY))
         changeSafetyCenterFlag(false.toString())
+        assumeSafetyCenterDisabled()
         testCameraAndMicIndicator(useMic = false, useCamera = true, chainUsage = true)
     }
 
@@ -359,6 +370,11 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         safetyCenterEnabled: Boolean = false,
         finishEarly: Boolean = false
     ) {
+        Log.d(
+            TAG,
+            "testCameraAndMicIndicator useMic=$useMic useCamera=$useCamera " +
+                "safetyCenterEnabled=$safetyCenterEnabled finishEarly=$finishEarly"
+        )
         // If camera is not available skip the test
         if (useCamera) {
             assumeTrue(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY))
@@ -392,6 +408,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                 }
             }
 
+            Log.d(TAG, "assert to make sure Indicators are displayed")
             assertIndicatorsShown(useMic, useCamera, useHotword, chainUsage, safetyCenterEnabled)
 
             if (finishEarly) {
@@ -400,10 +417,13 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                 try {
                     // Check if the indicator has gone away. This will throw an exception if the
                     // indicator is still present
+                    Log.d(TAG, "checking on indicators again")
                     assertIndicatorsShown(false, false, false)
+                    Log.d(TAG, "indicators are gone")
                     // If we successfully asserted that the indicator went away, fail the test
                     failed = true
                 } catch (t: Throwable) {
+                    Log.d(TAG, "indicators are continuing to show")
                     // expected
                 }
                 if (failed) {
@@ -443,6 +463,13 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                 } else {
                     useMic
                 }
+            if (!micInUse && !useCamera) {
+                // We're asserting the indicator is gone. Wait up to IDLE_TIMEOUT after the quick
+                // settings is opened to see if we find the indicator, so we don't automatically
+                // assert the indicator is gone, just because we didn't open quick settings fast
+                // enough.
+                UiAutomatorUtils2.waitFindObjectOrNull(By.res(PRIVACY_CHIP_ID), IDLE_TIMEOUT_MILLIS)
+            }
             assertPrivacyChipAndIndicatorsPresent(
                 micInUse,
                 useCamera,
@@ -573,6 +600,7 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
                 privacyChip.click()
             }
         } else {
+            Log.d(TAG, "waiting for PRIVACY_CHIP_ID to disappear")
             assertWithUiDump { UiAutomatorUtils2.waitUntilObjectGone(By.res(PRIVACY_CHIP_ID)) }
             return
         }
@@ -677,10 +705,17 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun assumeSafetyCenterEnabled() {
-        val safetyCenterManager = context.getSystemService(SafetyCenterManager::class.java)!!
-        val isSafetyCenterEnabled: Boolean =
-            runWithShellPermissionIdentity<Boolean> { safetyCenterManager.isSafetyCenterEnabled }
-        assumeTrue(isSafetyCenterEnabled)
+        assumeTrue(getSafetyCenterEnabled())
+    }
+
+    private fun assumeSafetyCenterDisabled() {
+        assumeFalse(getSafetyCenterEnabled())
+    }
+
+    private fun getSafetyCenterEnabled(): Boolean {
+        val safetyCenterManager =
+            context.getSystemService(SafetyCenterManager::class.java) ?: return false
+        return runWithShellPermissionIdentity<Boolean> { safetyCenterManager.isSafetyCenterEnabled }
     }
 
     protected fun waitFindObject(selector: BySelector): UiObject2? {

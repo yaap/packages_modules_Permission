@@ -20,6 +20,7 @@ import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SEE_OTHER_PERMISSIONS_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SHOW_7DAYS_CLICKED;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SHOW_SYSTEM_CLICKED;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.write;
 
@@ -46,8 +47,6 @@ import com.android.permissioncontroller.permission.ui.handheld.SettingsWithLarge
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsageViewModel;
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsageViewModelFactory;
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsagesUiState;
-import com.android.permissioncontroller.permission.utils.KotlinUtils;
-import com.android.settingslib.HelpUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -89,6 +88,7 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
     private MenuItem mShow7DaysDataMenu;
     private MenuItem mShow24HoursDataMenu;
     private boolean mOtherExpanded;
+    private boolean mMenuItemsCreated = false;
 
     private PermissionUsageGraphicPreference mGraphic;
 
@@ -198,26 +198,21 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
                 menu.add(Menu.NONE, MENU_SHOW_SYSTEM, Menu.NONE, R.string.menu_show_system);
         mHideSystemMenu =
                 menu.add(Menu.NONE, MENU_HIDE_SYSTEM, Menu.NONE, R.string.menu_hide_system);
+        mShow7DaysDataMenu =
+                menu.add(
+                        Menu.NONE,
+                        MENU_SHOW_7_DAYS_DATA,
+                        Menu.NONE,
+                        R.string.menu_show_7_days_data);
+        mShow24HoursDataMenu =
+                menu.add(
+                        Menu.NONE,
+                        MENU_SHOW_24_HOURS_DATA,
+                        Menu.NONE,
+                        R.string.menu_show_24_hours_data);
+        mMenuItemsCreated = true;
+        updateShow7DaysToggle(mViewModel.getShow7DaysData());
         updateShowSystemToggle(mViewModel.getShowSystemApps());
-
-        if (KotlinUtils.INSTANCE.is7DayToggleEnabled()) {
-            mShow7DaysDataMenu =
-                    menu.add(
-                            Menu.NONE,
-                            MENU_SHOW_7_DAYS_DATA,
-                            Menu.NONE,
-                            R.string.menu_show_7_days_data);
-            mShow24HoursDataMenu =
-                    menu.add(
-                            Menu.NONE,
-                            MENU_SHOW_24_HOURS_DATA,
-                            Menu.NONE,
-                            R.string.menu_show_24_hours_data);
-            updateShow7DaysToggle(mViewModel.getShow7DaysData());
-        }
-
-        HelpUtils.prepareHelpMenuItem(
-                getActivity(), menu, R.string.help_permission_usage, getClass().getName());
     }
 
     @Override
@@ -232,16 +227,20 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
                         PERMISSION_USAGE_FRAGMENT_INTERACTION,
                         mSessionId,
                         PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SHOW_SYSTEM_CLICKED);
-                updateAllUI(mViewModel.updateShowSystem(true));
+                mViewModel.updateShowSystem(true);
                 break;
             case MENU_HIDE_SYSTEM:
-                updateAllUI(mViewModel.updateShowSystem(false));
+                mViewModel.updateShowSystem(false);
                 break;
             case MENU_SHOW_7_DAYS_DATA:
-                updateAllUI(mViewModel.updateShow7Days(KotlinUtils.INSTANCE.is7DayToggleEnabled()));
+                write(
+                        PERMISSION_USAGE_FRAGMENT_INTERACTION,
+                        mSessionId,
+                        PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SHOW_7DAYS_CLICKED);
+                mViewModel.updateShow7Days(true);
                 break;
             case MENU_SHOW_24_HOURS_DATA:
-                updateAllUI(mViewModel.updateShow7Days(false));
+                mViewModel.updateShow7Days(false);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -261,31 +260,28 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
     }
 
     private void updateShowSystemToggle(boolean showSystem) {
+        if (!mMenuItemsCreated) return;
+
         if (mHasSystemApps) {
-            if (mShowSystemMenu != null) {
-                mShowSystemMenu.setVisible(!showSystem);
-            }
-            if (mHideSystemMenu != null) {
-                mHideSystemMenu.setVisible(showSystem);
-            }
+            mShowSystemMenu.setVisible(!showSystem);
+            mShowSystemMenu.setEnabled(true);
+
+            mHideSystemMenu.setVisible(showSystem);
+            mHideSystemMenu.setEnabled(true);
         } else {
-            if (mShowSystemMenu != null) {
-                mShowSystemMenu.setVisible(false);
-            }
-            if (mHideSystemMenu != null) {
-                mHideSystemMenu.setVisible(false);
-            }
+            mShowSystemMenu.setVisible(true);
+            mShowSystemMenu.setEnabled(false);
+
+            mHideSystemMenu.setVisible(false);
+            mHideSystemMenu.setEnabled(false);
         }
     }
 
     private void updateShow7DaysToggle(boolean show7Days) {
-        if (mShow7DaysDataMenu != null) {
-            mShow7DaysDataMenu.setVisible(!show7Days);
-        }
+        if (!mMenuItemsCreated) return;
 
-        if (mShow24HoursDataMenu != null) {
-            mShow24HoursDataMenu.setVisible(show7Days);
-        }
+        mShow7DaysDataMenu.setVisible(!show7Days);
+        mShow24HoursDataMenu.setVisible(show7Days);
     }
 
     /** Updates page content and menu items. */
@@ -318,7 +314,6 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
                     mSessionId,
                     PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SEE_OTHER_PERMISSIONS_CLICKED);
         });
-        boolean containsSystemAppUsages = permissionUsagesUiData.getShouldShowSystemToggle();
         Map<String, Integer> permissionGroupWithUsageCounts =
                 permissionUsagesUiData.getPermissionGroupUsageCount();
         List<Map.Entry<String, Integer>> permissionGroupWithUsageCountsEntries =
@@ -332,13 +327,14 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
                         mViewModel.getPermissionGroupLabel(
                                 context, permissionGroupWithUsageCount.getKey())));
 
+        boolean containsSystemAppUsages = permissionUsagesUiData.getContainsSystemAppUsage();
         if (mHasSystemApps != containsSystemAppUsages) {
             mHasSystemApps = containsSystemAppUsages;
         }
-
-        boolean show7Days = mViewModel.getShow7DaysData();
+        boolean show7Days = permissionUsagesUiData.getShow7Days();
+        boolean showSystem = permissionUsagesUiData.getShowSystem();
         updateShow7DaysToggle(show7Days);
-        updateShowSystemToggle(mViewModel.getShowSystemApps());
+        updateShowSystemToggle(showSystem);
 
         mGraphic = new PermissionUsageGraphicPreference(context, show7Days);
         screen.addPreference(mGraphic);
@@ -351,7 +347,8 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
                 getAdvancedInfoSummaryString(context, permissionGroupWithUsageCountsEntries);
         screen.setSummary(advancedInfoSummary);
 
-        addUIContent(context, permissionGroupWithUsageCountsEntries, category);
+        addUIContent(context, permissionGroupWithUsageCountsEntries, category,
+                showSystem, show7Days);
     }
 
     private CharSequence getAdvancedInfoSummaryString(
@@ -404,10 +401,10 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
     private void addUIContent(
             Context context,
             List<Map.Entry<String, Integer>> permissionGroupWithUsageCounts,
-            PreferenceCategory category) {
-        boolean showSystem = mViewModel.getShowSystemApps();
-        boolean show7Days = mViewModel.getShow7DaysData();
-
+            PreferenceCategory category,
+            boolean showSystem,
+            boolean show7Days
+    ) {
         for (int i = 0; i < permissionGroupWithUsageCounts.size(); i++) {
             Map.Entry<String, Integer> permissionGroupWithUsageCount =
                     permissionGroupWithUsageCounts.get(i);

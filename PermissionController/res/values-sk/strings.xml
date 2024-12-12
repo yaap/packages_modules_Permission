@@ -21,6 +21,7 @@
     <string name="permission_search_keyword" msgid="1214451577494730543">"povolenia"</string>
     <string name="cancel" msgid="8943320028373963831">"Zrušiť"</string>
     <string name="back" msgid="6249950659061523680">"Späť"</string>
+    <string name="dialog_close" msgid="6840699812532384661">"Zavrieť"</string>
     <string name="available" msgid="6007778121920339498">"Dostupné"</string>
     <string name="blocked" msgid="9195547604866033708">"Blokované"</string>
     <string name="on" msgid="280241003226755921">"Zapnuté"</string>
@@ -272,7 +273,7 @@
     <string name="unused_apps_notification_content" msgid="9195026773244581246">"Povolenia a dočasné súbory boli odstránené a upozornenia boli zastavené. Skontrolujte to klepnutím."</string>
     <string name="unused_apps_safety_center_card_title" msgid="5638409355530099149">"Skontrolujte aplikácie s odstránenými povoleniami"</string>
     <string name="unused_apps_safety_center_card_content" msgid="1088557243627427820">"V prípade aplikácií, ktoré ste dlhšie nepoužívali, boli povolenia a dočasné súbory odstránené a upozornenia deaktivované."</string>
-    <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"Skontrolovať aplikácie"</string>
+    <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"Kontrola aplikácií"</string>
     <string name="post_drive_permission_decision_reminder_title" msgid="1290697371418139976">"Skontrolujte nedávne povolenia"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_1_permission" msgid="670521503734140711">"Počas jazdy ste udelili aplikácii <xliff:g id="APP">%1$s</xliff:g> povolenie <xliff:g id="PERMISSION">%2$s</xliff:g>"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_2_permissions" msgid="671791184670801301">"Počas jazdy ste udelili aplikácii <xliff:g id="APP">%1$s</xliff:g> prístup k povoleniam <xliff:g id="PERMISSION_1">%2$s</xliff:g> &amp; <xliff:g id="PERMISSION_2">%3$s</xliff:g>"</string>
@@ -440,6 +441,7 @@
     <string name="default_app_none" msgid="9084592086808194457">"Žiadna"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predvolené systémom)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Žiadne aplikácie"</string>
+    <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Ďalšie služby NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Vybraná"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Vybrané – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"špeciálny prístup aplikácií"</string>
@@ -669,6 +671,7 @@
     <string name="wear_app_perms_24h_access_yest" msgid="7069312481704735679">"Otvorené včera <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="wear_app_perms_7d_access" msgid="4608069019194676432">"Otvorené <xliff:g id="TIME_DATE_0">%1$s</xliff:g> <xliff:g id="TIME_DATE_1">%2$s</xliff:g>"</string>
     <string name="test_otp_msg" msgid="7559110574222727550">"Jednorazové heslo je 132435"</string>
+    <string name="allow_restricted_settings" msgid="8073000189478396881">"Povoliť obmedzené nastavenia"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Obmedzené nastavenie"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Z bezpečnostných dôvodov nie je toto nastavenie momentálne k dispozícii."</string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikácii bol prístup k povoleniu <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> zamietnutý"</string>
@@ -681,4 +684,10 @@
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"OK"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"Žiadosť o povolenie bola zablokovaná"</string>
     <string name="permission_grant_dialog_streaming_blocked_description" msgid="838165608934085319">"Táto aplikácia požaduje ďalšie povolenia, ale povolenia nie je možné udeliť v relácii streamovania. Najprv udeľte povolenie v telefóne."</string>
+    <string name="privacy_dashboard_emergency_location_enforced_attribution_label" msgid="5702912511473457693">"Na účely tiesňového volania alebo textovej správy"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_title" msgid="849723944428031911">"Poloha bola odoslaná tiesňovej linke"</string>
+    <string name="privacy_dashboard_emergency_location_dialog_description" msgid="5815970230573483329">"Táto aplikácia získala počas hovoru s tiesňovou linkou alebo odosielania správy na ňu prístup k polohe vášho zariadenia. Môže sa to stať, aj keď daná aplikácia nemá povolený prístup k polohe alebo keď je poloha zariadenia vypnutá. "<a href="https://support.google.com/android/answer/9319337">"Ďalšie informácie"</a></string>
+    <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Skontrolovať telefón"</string>
+    <string name="wear_phone_connection_error" msgid="8934350845737930783">"S telefónom sa nepodarilo spojiť"</string>
+    <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Chcete to skúsiť znova?"</string>
 </resources>

@@ -1,3 +1,15 @@
+# You may bypass this Gerrit IfThisThenThat Lint if your change doesn't affect
+# RoleParser.applyJarjarTransform(), by adding NO_IFTTT=reason to your commit
+# message.
+# LINT.IfChange
+rule android.app.appfunctions.flags.*FeatureFlags* com.android.permission.jarjar.@0
+rule android.app.appfunctions.flags.FeatureFlags* com.android.permission.jarjar.@0
+rule android.app.appfunctions.flags.FeatureFlags com.android.permission.jarjar.@0
+rule android.app.appfunctions.flags.Flags com.android.permission.jarjar.@0
+rule android.companion.virtualdevice.flags.*FeatureFlags* com.android.permission.jarjar.@0
+rule android.companion.virtualdevice.flags.FeatureFlags* com.android.permission.jarjar.@0
+rule android.companion.virtualdevice.flags.FeatureFlags com.android.permission.jarjar.@0
+rule android.companion.virtualdevice.flags.Flags com.android.permission.jarjar.@0
 rule android.os.*FeatureFlags* com.android.permission.jarjar.@0
 rule android.os.FeatureFlags* com.android.permission.jarjar.@0
 rule android.os.FeatureFlags com.android.permission.jarjar.@0
@@ -25,3 +37,4 @@ rule com.android.safetycenter.resources.** com.android.permission.jarjar.@0
 rule com.google.protobuf.** com.android.permission.jarjar.@0
 rule kotlin.** com.android.permission.jarjar.@0
 rule com.android.permissioncontroller.PermissionControllerStatsLog com.android.permission.jarjar.@0
+# LINT.ThenChange(PermissionController/role-controller/java/com/android/role/controller/model/RoleParser.java:applyJarjarTransform)

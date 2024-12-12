@@ -17,11 +17,9 @@
 package com.android.permissioncontroller.role.ui;
 
 import android.app.admin.DevicePolicyResources.Strings.DefaultAppSettings;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -30,7 +28,7 @@ import android.util.ArrayMap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
@@ -40,12 +38,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.permissioncontroller.role.utils.PackageUtils;
 import com.android.permissioncontroller.role.utils.RoleUiBehaviorUtils;
 import com.android.role.controller.model.Role;
 import com.android.role.controller.model.Roles;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Child fragment for the list of default apps.
@@ -84,8 +82,7 @@ public class DefaultAppListChildFragment<PF extends PreferenceFragmentCompat
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mViewModel = ViewModelProviders.of(this).get(DefaultAppListViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DefaultAppListViewModel.class);
         mViewModel.getLiveData().observe(this, roleItems -> onRoleListChanged());
         if (mViewModel.hasWorkProfile()) {
             mViewModel.getWorkLiveData().observe(this, roleItems -> onRoleListChanged());
@@ -263,7 +260,7 @@ public class DefaultAppListChildFragment<PF extends PreferenceFragmentCompat
     private static void addMoreDefaultAppsPreference(@NonNull PreferenceGroup preferenceGroup,
             @NonNull ArrayMap<String, Preference> oldPreferences, @NonNull Context context) {
         Intent intent = new Intent(Settings.ACTION_MANAGE_MORE_DEFAULT_APPS_SETTINGS);
-        if (!isIntentResolvedToSettings(intent, context)) {
+        if (!PackageUtils.isIntentResolvedToSettings(intent, context)) {
             return;
         }
 
@@ -286,7 +283,7 @@ public class DefaultAppListChildFragment<PF extends PreferenceFragmentCompat
     private static void addManageDomainUrlsPreference(@NonNull PreferenceGroup preferenceGroup,
             @NonNull ArrayMap<String, Preference> oldPreferences, @NonNull Context context) {
         Intent intent = new Intent(Settings.ACTION_MANAGE_DOMAIN_URLS);
-        if (!isIntentResolvedToSettings(intent, context)) {
+        if (!PackageUtils.isIntentResolvedToSettings(intent, context)) {
             return;
         }
 
@@ -304,19 +301,6 @@ public class DefaultAppListChildFragment<PF extends PreferenceFragmentCompat
         }
 
         preferenceGroup.addPreference(preference);
-    }
-
-    private static boolean isIntentResolvedToSettings(@NonNull Intent intent,
-            @NonNull Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        ComponentName componentName = intent.resolveActivity(packageManager);
-        if (componentName == null) {
-            return false;
-        }
-        Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS);
-        String settingsPackageName = settingsIntent.resolveActivity(packageManager)
-                .getPackageName();
-        return Objects.equals(componentName.getPackageName(), settingsPackageName);
     }
 
     @NonNull

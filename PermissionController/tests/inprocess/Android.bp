@@ -37,11 +37,12 @@ android_test {
     srcs: ["src/**/*.kt"],
 
     libs: [
-        "android.test.base",
-        "android.test.runner",
+        "android.test.base.stubs.system",
+        "android.test.runner.stubs.system",
     ],
 
     static_libs: [
+        "androidx.arch.core_core-testing",
         "androidx.test.rules",
         "androidx.test.ext.truth",
         "androidx.test.ext.junit",
