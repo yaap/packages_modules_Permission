@@ -17,10 +17,8 @@
 package com.android.permissioncontroller.role.ui;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.icu.text.Collator;
 import android.os.UserHandle;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -28,34 +26,26 @@ import com.android.permissioncontroller.permission.utils.Utils;
 
 import kotlin.jvm.functions.Function1;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 /**
- * A function for {@link androidx.lifecycle#map(androidx.lifecycle.LiveData, Function1)}
+ * A function for
+ * {@link androidx.lifecycle.Transformations#map(androidx.lifecycle.LiveData, Function1)}
  * that sorts a live data for role.
  */
-public class RoleSortFunction implements Function1<List<Pair<ApplicationInfo, Boolean>>,
-        List<Pair<ApplicationInfo, Boolean>>> {
-
-    @NonNull
-    private final Comparator<Pair<ApplicationInfo, Boolean>> mComparator;
+public class RoleSortFunction extends ListLiveDataSortFunction<RoleApplicationItem> {
 
     public RoleSortFunction(@NonNull Context context) {
-        Collator collator = Collator.getInstance(context.getResources().getConfiguration()
-                .getLocales().get(0));
-        Comparator<Pair<ApplicationInfo, Boolean>> labelComparator = Comparator.comparing(role ->
-                Utils.getAppLabel(role.first, context), collator);
-        Comparator<Pair<ApplicationInfo, Boolean>> userIdComparator = Comparator.comparingInt(role
-                -> UserHandle.getUserHandleForUid(role.first.uid).getIdentifier());
-        mComparator = labelComparator.thenComparing(userIdComparator);
+        super(createComparator(context));
     }
 
-    @Override
-    public List<Pair<ApplicationInfo, Boolean>> invoke(List<Pair<ApplicationInfo, Boolean>> p1) {
-        List<Pair<ApplicationInfo, Boolean>> sorted = new ArrayList<>(p1);
-        sorted.sort(mComparator);
-        return sorted;
+    private static Comparator<RoleApplicationItem> createComparator(@NonNull Context context) {
+        Collator collator = Collator.getInstance(context.getResources().getConfiguration()
+                .getLocales().get(0));
+        Comparator<RoleApplicationItem> labelComparator = Comparator.comparing(item ->
+                Utils.getAppLabel(item.getApplicationInfo(), context), collator);
+        Comparator<RoleApplicationItem> userIdComparator = Comparator.comparingInt(item
+                -> UserHandle.getUserHandleForUid(item.getApplicationInfo().uid).getIdentifier());
+        return labelComparator.thenComparing(userIdComparator);
     }
 }

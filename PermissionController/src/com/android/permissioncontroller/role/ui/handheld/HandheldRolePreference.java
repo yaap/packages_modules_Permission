@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
@@ -33,6 +34,8 @@ import com.android.permissioncontroller.role.ui.RestrictionAwarePreferenceMixin;
 import com.android.permissioncontroller.role.ui.RolePreference;
 import com.android.settingslib.widget.TwoTargetPreference;
 
+import java.util.Objects;
+
 /**
  * {@link Preference} with a settings button.
  *
@@ -43,6 +46,9 @@ public class HandheldRolePreference extends TwoTargetPreference implements RoleP
 
     private final RestrictionAwarePreferenceMixin mRestrictionAwarePreferenceMixin =
             new RestrictionAwarePreferenceMixin(this);
+
+    @Nullable
+    private String mSummaryContentDescription;
 
     @Nullable
     private OnSecondTargetClickListener mOnSecondTargetClickListener;
@@ -94,6 +100,14 @@ public class HandheldRolePreference extends TwoTargetPreference implements RoleP
     }
 
     @Override
+    public void setSummaryContentDescription(@Nullable String summaryContentDescription) {
+        if (!Objects.equals(mSummaryContentDescription, summaryContentDescription)) {
+            mSummaryContentDescription = summaryContentDescription;
+            notifyChanged();
+        }
+    }
+
+    @Override
     public void setRestrictionIntent(@Nullable Intent restrictionIntent) {
         mRestrictionAwarePreferenceMixin.setRestrictionIntent(restrictionIntent);
     }
@@ -113,6 +127,9 @@ public class HandheldRolePreference extends TwoTargetPreference implements RoleP
         }
         // Make the settings button enabled even if the preference itself is disabled.
         settingsButton.setEnabled(true);
+
+        TextView summaryText = (TextView) holder.findViewById(android.R.id.summary);
+        summaryText.setContentDescription(mSummaryContentDescription);
 
         mRestrictionAwarePreferenceMixin.onAfterBindViewHolder(holder);
     }

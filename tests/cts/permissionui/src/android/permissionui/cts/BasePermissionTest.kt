@@ -37,6 +37,7 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.PersistableBundle
 import android.os.SystemClock
+import android.permission.cts.TestUtils
 import android.platform.test.rule.ScreenRecordRule
 import android.provider.DeviceConfig
 import android.provider.Settings
@@ -72,6 +73,7 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
+import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Rule
 
@@ -121,7 +123,7 @@ abstract class BasePermissionTest {
                     /* PackageManager.FEATURE_CAR_SPLITSCREEN_MULTITASKING */
                     "android.software.car.splitscreen_multitasking")
         @JvmStatic
-        private val isAutomotiveVisibleBackgroundUser = isAutomotive &&
+        protected val isAutomotiveVisibleBackgroundUser = isAutomotive &&
             UserHelper(context).isVisibleBackgroundUser()
 
         // TODO(b/382327037):find a way to avoid specifying the display ID for each UiSelector.
@@ -157,6 +159,7 @@ abstract class BasePermissionTest {
 
     @Before
     fun setUp() {
+        assumeTrue(TestUtils.isCddCompliantScreenSize())
         runWithShellPermissionIdentity {
             screenTimeoutBeforeTest =
                 Settings.System.getLong(context.contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
@@ -191,6 +194,9 @@ abstract class BasePermissionTest {
 
     @After
     fun tearDown() {
+        if (!TestUtils.isCddCompliantScreenSize()) {
+            return;
+        }
         runWithShellPermissionIdentity {
             Settings.System.putLong(
                 context.contentResolver,

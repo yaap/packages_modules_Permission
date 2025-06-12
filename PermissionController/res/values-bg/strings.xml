@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Достъп до <xliff:g id="PERM">%1$s</xliff:g> на <xliff:g id="DEVICE_NAME">%2$s</xliff:g> за това приложение"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Преглед на всички разрешения, предоставени за: <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Преглед на всички приложения с това разрешение"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Информация"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Настройки"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Показване на употребата на микрофона за Асистент"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Настройки за неизползваните приложения"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Премахване на разрешенията, ако приложението не се използва"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Отваряне на връзки"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"По подразбиране за работа"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Стандартни за частното пространство"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Оптимизирано за устройството"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Други"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Няма"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Стандартно за системата)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Няма приложения"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> иска да качи информация за отстраняване на грешки."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Споделяне на данните за отстраняване на грешки?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Системата откри проблем."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> иска да качи сигнал за програмна грешка от това устройство, създаден на <xliff:g id="DATE">%2$s</xliff:g> в <xliff:g id="TIME">%3$s</xliff:g>. Сигналите за програмни грешки включват лична информация за устройството ви или регистрирана от приложенията, като например потребителски имена, данни за местоположението, идентификатори на устройството и информация за мрежата. Споделяйте сигналите за програмни грешки само с хора и приложения, на които бихте доверили тази информация. Да се разреши ли на <xliff:g id="APP_NAME_1">%4$s</xliff:g> да качи сигнал за програмна грешка?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> иска да качи отчет за програмни грешки от това устройство, създаден на <xliff:g id="DATE">%2$s</xliff:g> в <xliff:g id="TIME">%3$s</xliff:g> Отчетите за програмни грешки включват лична информация за устройството ви или информация, регистрирана от приложенията, като например потребителски имена, данни за местоположението, идентификатори на устройството и информация за мрежата. Споделяйте отчетите за програмни грешки само с хора и приложения, на които бихте доверили тази информация. \n\nДа се разреши ли на <xliff:g id="APP_NAME_1">%4$s</xliff:g> да качи отчет за програмни грешки?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"При обработката на сигнала за програмна грешка за <xliff:g id="APP_NAME">%1$s</xliff:g> възникна проблем. Затова споделянето на подробните данни за отстраняването на грешки бе отказано. Извиняваме се за прекъсването."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Разрешаване"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Отказ"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Разрешаване на ограничените настройки"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Ограничена настройка"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"От съображения за сигурност понастоящем тази настройка не е налице."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Действието не е налице по време на тел. обаждане"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"По време на телефонно обаждане не можете да разрешавате на приложенията да инсталират други приложения.\n\nТова действие е блокирано от съображения за сигурност, защото често се използва от измамници по време на телефонни разговори. Ако човек, когото не познавате, ви напътства, за да предприемете това действие, възможно е да става дума за измама."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Действието не е възможно по време на обаждане"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Тази настройка е блокирана с цел защита на устройството и данните ви.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Измамници може да се опитат да инсталират опасни приложения, като ви помолят да инсталирате неизвестни приложения от нов източник."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Измамници може да се опитат да поемат контрола над устройството ви, като ви помолят да разрешите на дадено приложение да осъществява достъп до услугите за достъпност."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"На приложението бе отказан достъп до <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Приложението поиска разрешение за достъп до поверителни данни, което може да изложи на риск личната или финансовата ви информация.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Възможно е приложението да не работи правилно без това ограничено разрешение. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Научете как да разрешите достъпа&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Приложението не получи разрешение да бъде по подразбиране: <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

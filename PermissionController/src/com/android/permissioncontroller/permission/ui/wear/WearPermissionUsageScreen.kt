@@ -17,6 +17,7 @@
 package com.android.permissioncontroller.permission.ui.wear
 
 import android.os.Build
+import android.permission.flags.Flags
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -32,17 +33,15 @@ import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.handheld.v31.PermissionUsageControlPreference
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsageViewModel
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsagesUiState
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
 import com.android.permissioncontroller.permission.utils.Utils
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 import java.text.Collator
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
-fun WearPermissionUsageScreen(
-    sessionId: Long,
-    viewModel: PermissionUsageViewModel,
-) {
+fun WearPermissionUsageScreen(sessionId: Long, viewModel: PermissionUsageViewModel) {
     val context = LocalContext.current
     val permissionUsagesUiData = viewModel.permissionUsagesUiLiveData.observeAsState(null)
     val showSystem = viewModel.showSystemAppsLiveData.observeAsState(false)
@@ -72,7 +71,13 @@ fun WearPermissionUsageScreen(
     val permissionGroupPreferences =
         permissionGroupWithUsageCountsEntries
             // Removing Health Connect from the list of permissions to fix b/331260850
-            .filterNot { Utils.isHealthPermissionGroup(it.key) }
+            .let {
+                if (Flags.replaceBodySensorPermissionEnabled()) {
+                    it
+                } else {
+                    it.filterNot { Utils.isHealthPermissionGroup(it.key) }
+                }
+            }
             .map {
                 PermissionUsageControlPreference(
                     context,
@@ -97,7 +102,7 @@ fun WearPermissionUsageScreen(
         hasSystemApps,
         showSystem.value,
         onShowSystemClick,
-        permissionGroupPreferences
+        permissionGroupPreferences,
     )
 
     if (isLoading && isDataLoaded) {
@@ -111,31 +116,34 @@ internal fun WearPermissionUsageContent(
     hasSystemApps: Boolean,
     showSystem: Boolean,
     onShowSystemClick: (Boolean) -> Unit,
-    permissionGroupPreferences: List<PermissionUsageControlPreference>
+    permissionGroupPreferences: List<PermissionUsageControlPreference>,
 ) {
     ScrollableScreen(
         title = stringResource(R.string.permission_usage_title),
-        isLoading = isLoading
+        isLoading = isLoading,
     ) {
         if (permissionGroupPreferences.isEmpty()) {
-            item { Chip(label = stringResource(R.string.no_permissions), onClick = {}) }
+            item {
+                WearPermissionButton(label = stringResource(R.string.no_permissions), onClick = {})
+            }
         } else {
             for (preference in permissionGroupPreferences) {
                 item {
-                    Chip(
+                    WearPermissionButton(
                         label = preference.title.toString(),
                         labelMaxLines = Int.MAX_VALUE,
                         secondaryLabel = preference.summary.toString(),
                         secondaryLabelMaxLines = Int.MAX_VALUE,
-                        icon = preference.icon,
+                        iconBuilder =
+                            preference.icon?.let { WearPermissionIconBuilder.builder(it) },
                         enabled = preference.isEnabled,
-                        onClick = { preference.performClick() }
+                        onClick = { preference.performClick() },
                     )
                 }
             }
             if (hasSystemApps) {
                 item {
-                    Chip(
+                    WearPermissionButton(
                         label =
                             if (showSystem) {
                                 stringResource(R.string.menu_hide_system)

@@ -18,7 +18,6 @@ package com.android.role.controller.util;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Flags;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -27,6 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.modules.utils.build.SdkLevel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Utility class to deal with Android users. */
 public final class UserUtils {
@@ -88,7 +90,7 @@ public final class UserUtils {
      * allowed from Android V+ only, so this method will return false on Sdk levels below that.
      */
     public static boolean isPrivateProfile(@NonNull UserHandle user, @NonNull Context context) {
-        if (!SdkLevel.isAtLeastV() || !Flags.allowPrivateProfile()) {
+        if (!SdkLevel.isAtLeastV()) {
             return false;
         }
         Context userContext = getUserContext(context, user);
@@ -127,9 +129,36 @@ public final class UserUtils {
 
     /** Returns the parent of a given user. */
     @Nullable
-    private static UserHandle getProfileParent(UserHandle user, @NonNull Context context) {
+    public static UserHandle getProfileParent(UserHandle user, @NonNull Context context) {
         Context userContext = getUserContext(context, user);
         UserManager userManager = userContext.getSystemService(UserManager.class);
         return userManager.getProfileParent(user);
+    }
+
+    /**
+     * Returns all the enabled user profiles on the device
+     *
+     * @param user the {@link UserHandle} to get profiles for
+     * @param context the {@link Context}
+     * @param excludePrivate {@code true} to exclude private profiles from returned list of users
+     */
+    @NonNull
+    public static List<UserHandle> getUserProfiles(@NonNull UserHandle user,
+            @NonNull Context context, boolean excludePrivate) {
+        Context userContext = getUserContext(context, user);
+        UserManager userUserManager = userContext.getSystemService(UserManager.class);
+        List<UserHandle> profiles = userUserManager.getUserProfiles();
+        if (!excludePrivate) {
+            return profiles;
+        }
+        List<UserHandle> filteredProfiles = new ArrayList<>();
+        final int profilesSize = profiles.size();
+        for (int i = 0; i < profilesSize; i++) {
+            UserHandle profile = profiles.get(i);
+            if (!isPrivateProfile(profile, userContext)) {
+                filteredProfiles.add(profile);
+            }
+        }
+        return filteredProfiles;
     }
 }

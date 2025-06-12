@@ -27,6 +27,7 @@ import static android.permission.cts.PermissionUtils.getAppOp;
 import static android.permission.cts.PermissionUtils.getPermissionFlags;
 import static android.permission.cts.PermissionUtils.getPermissions;
 import static android.permission.cts.PermissionUtils.grantPermission;
+import static android.permission.cts.PermissionUtils.install;
 import static android.permission.cts.PermissionUtils.isGranted;
 import static android.permission.cts.PermissionUtils.revokePermission;
 import static android.permission.cts.PermissionUtils.setPermissionFlags;
@@ -139,15 +140,6 @@ public class SplitPermissionTest {
         assertWithMessage(permName + " is granted").that(isGranted(APP_PKG, permName)).isFalse();
     }
 
-    /**
-     * Install an APK.
-     *
-     * @param apkFile The apk to install
-     */
-    public void install(@NonNull String apkFile) {
-        PermissionUtils.install(apkFile);
-    }
-
     @After
     public void uninstallTestApp() {
         uninstallApp(APP_PKG);
@@ -173,7 +165,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void permissionsDoNotSplitWithHighTargetSDKPreM() throws Exception {
-        install(APK_CONTACTS_16);
+        install(APK_CONTACTS_16, true);
 
         assertRequestsPermission(READ_CONTACTS);
         assertNotRequestsPermission(READ_CALL_LOG);
@@ -197,7 +189,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void permissionsSplitWithLowTargetSDKPreM() throws Exception {
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
 
         assertRequestsPermission(READ_CONTACTS);
         assertRequestsPermission(READ_CALL_LOG);
@@ -218,7 +210,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void nonInheritedStateHighLowTargetSDKPreM() throws Exception {
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
 
         assertPermissionGranted(READ_CONTACTS);
     }
@@ -245,7 +237,7 @@ public class SplitPermissionTest {
         Assume.assumeTrue("Secondary users have the DISALLOW_OUTGOING_CALLS user restriction",
                 UserHandle.SYSTEM.equals(Process.myUserHandle()));
 
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
 
         assertPermissionGranted(READ_CONTACTS);
         assertPermissionGranted(READ_CALL_LOG);
@@ -256,7 +248,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void backgroundLocationPermissionDefaultGrantPreM() throws Exception {
-        install(APK_LOCATION_22);
+        install(APK_LOCATION_22, true);
 
         assertPermissionGranted(ACCESS_COARSE_LOCATION);
         assertPermissionGranted(ACCESS_BACKGROUND_LOCATION);
@@ -304,7 +296,7 @@ public class SplitPermissionTest {
     @MtsIgnore(bugId = 152580253)
     @Test
     public void inheritFlagsPreM() {
-        install(APK_CONTACTS_16);
+        install(APK_CONTACTS_16, true);
         setPermissionFlags(APP_PKG, READ_CONTACTS, FLAG_PERMISSION_USER_SET,
                 FLAG_PERMISSION_USER_SET);
 
@@ -344,7 +336,7 @@ public class SplitPermissionTest {
         Assume.assumeTrue("Secondary users have the DISALLOW_OUTGOING_CALLS user restriction",
                 UserHandle.SYSTEM.equals(Process.myUserHandle()));
 
-        install(APK_CONTACTS_16);
+        install(APK_CONTACTS_16, true);
 
         install(APK_CONTACTS_15);
 
@@ -374,7 +366,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void inheritRevokedPermissionStatePreM() throws Exception {
-        install(APK_CONTACTS_16);
+        install(APK_CONTACTS_16, true);
         revokePermission(APP_PKG, READ_CONTACTS);
 
         install(APK_CONTACTS_15);
@@ -415,7 +407,7 @@ public class SplitPermissionTest {
         Assume.assumeTrue("Secondary users have the DISALLOW_OUTGOING_CALLS user restriction",
                 UserHandle.SYSTEM.equals(Process.myUserHandle()));
 
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
         revokePermission(APP_PKG, READ_CONTACTS);
 
         grantPermission(APP_PKG, READ_CALL_LOG);
@@ -446,7 +438,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void revokeNewSplitPermissionStatePreM() throws Exception {
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
 
         revokePermission(APP_PKG, READ_CALL_LOG);
 
@@ -521,7 +513,7 @@ public class SplitPermissionTest {
         Assume.assumeTrue("Secondary users have the DISALLOW_OUTGOING_CALLS user restriction",
                 UserHandle.SYSTEM.equals(Process.myUserHandle()));
 
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
 
         install(APK_CONTACTS_CALLLOG_16);
 
@@ -548,7 +540,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void oldPermissionStaysGrantedOnUpgradePreM() throws Exception {
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
 
         install(APK_CONTACTS_CALLLOG_16);
 
@@ -574,7 +566,7 @@ public class SplitPermissionTest {
      */
     @Test
     public void oldPermissionStaysRevokedOnUpgradePreM() throws Exception {
-        install(APK_CONTACTS_15);
+        install(APK_CONTACTS_15, true);
         revokePermission(APP_PKG, READ_CONTACTS);
 
         install(APK_CONTACTS_CALLLOG_16);

@@ -98,8 +98,7 @@ public class StaticSafetyEntryPreference extends Preference implements Comparabl
 
     private Boolean isPrivateProfileSupported() {
         return SdkLevel.isAtLeastV()
-                && com.android.permission.flags.Flags.privateProfileSupported()
-                && android.os.Flags.allowPrivateProfile();
+                && com.android.permission.flags.Flags.privateProfileSupported();
     }
 
     @Override

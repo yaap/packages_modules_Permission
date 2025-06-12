@@ -24,21 +24,26 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.ToggleChipDefaults
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel.ButtonState
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel.ButtonType
 import com.android.permissioncontroller.permission.ui.v33.AdvancedConfirmDialogArgs
-import com.android.permissioncontroller.permission.ui.wear.elements.AlertDialog
-import com.android.permissioncontroller.permission.ui.wear.elements.ListFooter
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
-import com.android.permissioncontroller.permission.ui.wear.elements.ToggleChip
-import com.android.permissioncontroller.permission.ui.wear.elements.ToggleChipToggleControl
-import com.android.permissioncontroller.permission.ui.wear.elements.toggleChipDisabledColors
 import com.android.permissioncontroller.permission.ui.wear.model.AppPermissionConfirmDialogViewModel
 import com.android.permissioncontroller.permission.ui.wear.model.ConfirmDialogArgs
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material2.ListFooter
+import com.android.permissioncontroller.wear.permission.components.material2.ToggleChip
+import com.android.permissioncontroller.wear.permission.components.material2.toggleChipDisabledColors
+import com.android.permissioncontroller.wear.permission.components.material3.DialogButtonContent
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionConfirmationDialog
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlType
+import com.android.permissioncontroller.wear.permission.components.material3.defaultAlertConfirmIcon
+import com.android.permissioncontroller.wear.permission.components.material3.defaultAlertDismissIcon
+import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 import com.android.settingslib.RestrictedLockUtils
 
 @Composable
@@ -53,8 +58,9 @@ fun WearAppPermissionScreen(
     onConfirmDialogCancelButtonClick: () -> Unit,
     onAdvancedConfirmDialogOkButtonClick: (AdvancedConfirmDialogArgs) -> Unit,
     onAdvancedConfirmDialogCancelButtonClick: () -> Unit,
-    onDisabledAllowButtonClick: () -> Unit
+    onDisabledAllowButtonClick: () -> Unit,
 ) {
+    val materialUIVersion = ResourceHelper.materialUIVersionInSettings
     val buttonState = viewModel.buttonStateLiveData.observeAsState(null)
     val detailResIds = viewModel.detailResIdLiveData.observeAsState(null)
     val admin = viewModel.showAdminSupportLiveData.observeAsState(null)
@@ -73,19 +79,21 @@ fun WearAppPermissionScreen(
             onLocationSwitchChanged,
             onGrantedStateChanged,
             onFooterClicked,
-            onDisabledAllowButtonClick
+            onDisabledAllowButtonClick,
         )
         ConfirmDialog(
+            materialUIVersion = materialUIVersion,
             showDialog = showConfirmDialog.value,
             args = confirmDialogViewModel.confirmDialogArgs,
             onOkButtonClick = onConfirmDialogOkButtonClick,
-            onCancelButtonClick = onConfirmDialogCancelButtonClick
+            onCancelButtonClick = onConfirmDialogCancelButtonClick,
         )
         AdvancedConfirmDialog(
+            materialUIVersion = materialUIVersion,
             showDialog = showAdvancedConfirmDialog.value,
             args = confirmDialogViewModel.advancedConfirmDialogArgs,
             onOkButtonClick = onAdvancedConfirmDialogOkButtonClick,
-            onCancelButtonClick = onAdvancedConfirmDialogCancelButtonClick
+            onCancelButtonClick = onAdvancedConfirmDialogCancelButtonClick,
         )
     }
     if (isLoading && !buttonState.value.isNullOrEmpty()) {
@@ -103,7 +111,7 @@ internal fun WearAppPermissionContent(
     onLocationSwitchChanged: (Boolean) -> Unit,
     onGrantedStateChanged: (ButtonType, Boolean) -> Unit,
     onFooterClicked: (RestrictedLockUtils.EnforcedAdmin) -> Unit,
-    onDisabledAllowButtonClick: () -> Unit
+    onDisabledAllowButtonClick: () -> Unit,
 ) {
     ScrollableScreen(title = title, isLoading = isLoading) {
         buttonState?.get(ButtonType.LOCATION_ACCURACY)?.let {
@@ -113,9 +121,9 @@ internal fun WearAppPermissionContent(
                         checked = it.isChecked,
                         enabled = it.isEnabled,
                         label = stringResource(R.string.app_permission_location_accuracy),
-                        toggleControl = ToggleChipToggleControl.Switch,
+                        toggleControl = WearPermissionToggleControlType.Switch,
                         onCheckedChanged = onLocationSwitchChanged,
-                        labelMaxLine = Integer.MAX_VALUE
+                        labelMaxLine = Integer.MAX_VALUE,
                     )
                 }
             }
@@ -133,7 +141,7 @@ internal fun WearAppPermissionContent(
                                     toggleChipDisabledColors()
                                 },
                             label = labelsByButton(buttonType),
-                            toggleControl = ToggleChipToggleControl.Radio,
+                            toggleControl = WearPermissionToggleControlType.Radio,
                             onCheckedChanged = { checked ->
                                 if (it.isEnabled) {
                                     onGrantedStateChanged(buttonType, checked)
@@ -141,7 +149,7 @@ internal fun WearAppPermissionContent(
                                     onDisabledAllowButtonClick()
                                 }
                             },
-                            labelMaxLine = Integer.MAX_VALUE
+                            labelMaxLine = Integer.MAX_VALUE,
                         )
                     }
                 }
@@ -157,7 +165,7 @@ internal fun WearAppPermissionContent(
                             { onFooterClicked(admin) }
                         } else {
                             null
-                        }
+                        },
                 )
             }
         }
@@ -172,7 +180,7 @@ internal val buttonTypeOrder =
         ButtonType.ASK_ONCE,
         ButtonType.ASK,
         ButtonType.DENY,
-        ButtonType.DENY_FOREGROUND
+        ButtonType.DENY_FOREGROUND,
     )
 
 @Composable
@@ -191,45 +199,60 @@ internal fun labelsByButton(buttonType: ButtonType) =
 
 @Composable
 internal fun ConfirmDialog(
+    materialUIVersion: WearPermissionMaterialUIVersion,
     showDialog: Boolean,
     args: ConfirmDialogArgs?,
     onOkButtonClick: (ConfirmDialogArgs) -> Unit,
-    onCancelButtonClick: () -> Unit
+    onCancelButtonClick: () -> Unit,
 ) {
-    args?.let {
-        AlertDialog(
-            showDialog = showDialog,
-            message = stringResource(it.messageId),
-            onOKButtonClick = { onOkButtonClick(it) },
-            onCancelButtonClick = onCancelButtonClick,
-            scalingLazyListState = rememberScalingLazyListState()
+    args?.run {
+        WearPermissionConfirmationDialog(
+            materialUIVersion = materialUIVersion,
+            show = showDialog,
+            message = stringResource(messageId),
+            positiveButtonContent = DialogButtonContent(onClick = { onOkButtonClick(this) }),
+            negativeButtonContent = DialogButtonContent(onClick = { onCancelButtonClick() }),
         )
     }
 }
 
 @Composable
 internal fun AdvancedConfirmDialog(
+    materialUIVersion: WearPermissionMaterialUIVersion,
     showDialog: Boolean,
     args: AdvancedConfirmDialogArgs?,
     onOkButtonClick: (AdvancedConfirmDialogArgs) -> Unit,
-    onCancelButtonClick: () -> Unit
+    onCancelButtonClick: () -> Unit,
 ) {
-    args?.let {
-        AlertDialog(
-            showDialog = showDialog,
-            title =
-                if (it.titleId != 0) {
-                    stringResource(it.titleId)
-                } else {
-                    ""
-                },
-            iconRes = it.iconId,
-            message = stringResource(it.messageId),
-            okButtonContentDescription = stringResource(it.positiveButtonTextId),
-            cancelButtonContentDescription = stringResource(it.negativeButtonTextId),
-            onOKButtonClick = { onOkButtonClick(it) },
-            onCancelButtonClick = onCancelButtonClick,
-            scalingLazyListState = rememberScalingLazyListState()
+    args?.run {
+        val title =
+            if (titleId != 0) {
+                stringResource(titleId)
+            } else {
+                ""
+            }
+        val okButtonIconBuilder =
+            WearPermissionIconBuilder.defaultAlertConfirmIcon()
+                .contentDescription(stringResource(positiveButtonTextId))
+        val cancelButtonIconBuilder =
+            WearPermissionIconBuilder.defaultAlertDismissIcon()
+                .contentDescription(stringResource(negativeButtonTextId))
+        WearPermissionConfirmationDialog(
+            materialUIVersion = materialUIVersion,
+            show = showDialog,
+            title = title,
+            iconRes = WearPermissionIconBuilder.builder(iconId),
+            message = stringResource(messageId),
+            positiveButtonContent =
+                DialogButtonContent(
+                    icon = okButtonIconBuilder,
+                    onClick = { onOkButtonClick(this) },
+                ),
+            negativeButtonContent =
+                DialogButtonContent(
+                    icon = cancelButtonIconBuilder,
+                    onClick = { onCancelButtonClick() },
+                ),
         )
     }
 }

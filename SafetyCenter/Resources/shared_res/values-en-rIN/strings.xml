@@ -19,7 +19,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="scanning_title" msgid="5424849039854311398">"Scanning"</string>
     <string name="loading_summary" msgid="3740846439782713910">"Checking device settings…"</string>
-    <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"Looks fine"</string>
+    <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"Looks good"</string>
     <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"No issues found"</string>
     <string name="overall_severity_level_tip_summary" msgid="1935765582243024999">"{count,plural, =1{See recommendation}other{See recommendations}}"</string>
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{Action taken}other{Actions taken}}"</string>

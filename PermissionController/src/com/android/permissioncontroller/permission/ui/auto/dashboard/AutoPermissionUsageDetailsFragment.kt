@@ -35,7 +35,6 @@ import com.android.permissioncontroller.R
 import com.android.permissioncontroller.auto.AutoSettingsFrameFragment
 import com.android.permissioncontroller.permission.ui.ManagePermissionsActivity
 import com.android.permissioncontroller.permission.ui.auto.AutoDividerPreference
-import com.android.permissioncontroller.permission.ui.model.v31.BasePermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.AppPermissionAccessUiInfo
 import com.android.permissioncontroller.permission.utils.KotlinUtils.getPermGroupLabel
@@ -80,7 +79,7 @@ class AutoPermissionUsageDetailsFragment : AutoSettingsFrameFragment() {
 
     private val SESSION_ID_KEY = (AutoPermissionUsageFragment::class.java.name + KEY_SESSION_ID)
 
-    private lateinit var usageViewModel: BasePermissionUsageDetailsViewModel
+    private lateinit var usageViewModel: PermissionUsageDetailsViewModel
     private lateinit var filterGroup: String
 
     private var showSystem = false
@@ -119,11 +118,10 @@ class AutoPermissionUsageDetailsFragment : AutoSettingsFrameFragment() {
         val factory =
             PermissionUsageDetailsViewModel.PermissionUsageDetailsViewModelFactory(
                 PermissionControllerApplication.get(),
-                this,
                 filterGroup,
             )
         usageViewModel =
-            ViewModelProvider(this, factory)[BasePermissionUsageDetailsViewModel::class.java]
+            ViewModelProvider(this, factory)[PermissionUsageDetailsViewModel::class.java]
         usageViewModel.getPermissionUsagesDetailsInfoUiLiveData().observe(this, this::updateUI)
     }
 

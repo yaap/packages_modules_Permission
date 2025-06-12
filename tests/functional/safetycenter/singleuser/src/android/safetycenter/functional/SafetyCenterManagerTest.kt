@@ -75,6 +75,7 @@ import com.android.safetycenter.internaldata.SafetyCenterIds
 import com.android.safetycenter.resources.SafetyCenterResourcesApk
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_LONG
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_SHORT
+import com.android.safetycenter.testing.Coroutines.assertWithTimeout
 import com.android.safetycenter.testing.Coroutines.waitForWithTimeout
 import com.android.safetycenter.testing.SafetyCenterApisWithShellPermissions.dismissSafetyCenterIssueWithPermission
 import com.android.safetycenter.testing.SafetyCenterApisWithShellPermissions.getSafetyCenterConfigWithPermission
@@ -104,6 +105,7 @@ import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.MIXED_
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.MIXED_STATELESS_GROUP_ID
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.MULTIPLE_SOURCES_GROUP_ID_1
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.MULTIPLE_SOURCES_GROUP_ID_2
+import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SINGLE_SOURCE_GROUP_ID
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SINGLE_SOURCE_ID
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SOURCE_ID_1
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SOURCE_ID_2
@@ -309,14 +311,16 @@ class SafetyCenterManagerTest {
 
     private val safetyCenterEntryOrGroupRecommendation: SafetyCenterEntryOrGroup
         get() =
-            SafetyCenterEntryOrGroup(
-                safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID)
+            safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                SINGLE_SOURCE_GROUP_ID,
+                safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID),
             )
 
     private val safetyCenterEntryOrGroupCritical: SafetyCenterEntryOrGroup
         get() =
-            SafetyCenterEntryOrGroup(
-                safetyCenterTestData.safetyCenterEntryCritical(SINGLE_SOURCE_ID)
+            safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                SINGLE_SOURCE_GROUP_ID,
+                safetyCenterTestData.safetyCenterEntryCritical(SINGLE_SOURCE_ID),
             )
 
     private val safetyCenterEntryGroupMixedFromComplexConfig: SafetyCenterEntryOrGroup
@@ -425,8 +429,10 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusUnknownScanning,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ID),
+                        "No info yet",
                     )
                 ),
                 emptyList(),
@@ -438,8 +444,10 @@ class SafetyCenterManagerTest {
                 safetyCenterTestData.safetyCenterStatusUnknown,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ID),
+                        "No info yet",
                     )
                 ),
                 emptyList(),
@@ -451,8 +459,9 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusOk,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryUnspecified(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryUnspecified(SINGLE_SOURCE_ID),
                     )
                 ),
                 emptyList(),
@@ -464,8 +473,9 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusOk,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryOk(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryOk(SINGLE_SOURCE_ID),
                     )
                 ),
                 emptyList(),
@@ -477,14 +487,15 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusOk,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
                         safetyCenterTestData
                             .safetyCenterEntryOkBuilder(SINGLE_SOURCE_ID)
                             .setIconAction(
                                 ICON_ACTION_TYPE_INFO,
                                 safetySourceTestData.createTestActivityRedirectPendingIntent(),
                             )
-                            .build()
+                            .build(),
                     )
                 ),
                 emptyList(),
@@ -496,8 +507,10 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusUnknownScanning,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryError(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryError(SINGLE_SOURCE_ID),
+                        "Couldn’t check setting",
                     )
                 ),
                 emptyList(),
@@ -509,8 +522,10 @@ class SafetyCenterManagerTest {
                 safetyCenterTestData.safetyCenterStatusUnknown,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryError(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryError(SINGLE_SOURCE_ID),
+                        "Couldn’t check setting",
                     )
                 ),
                 emptyList(),
@@ -522,12 +537,32 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusOkOneAlert,
                 listOf(safetyCenterTestData.safetyCenterIssueInformation(SINGLE_SOURCE_ID)),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryOk(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryOk(SINGLE_SOURCE_ID),
+                        "Ok summary", // When an issue is present, entry summary is used
                     )
                 ),
                 emptyList(),
             )
+
+    private val safetyCenterDataOkOneDismissedAlert: SafetyCenterData
+        get() =
+            SafetyCenterData(
+                    safetyCenterStatusOk,
+                    emptyList(),
+                    listOf(
+                        safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                            SINGLE_SOURCE_GROUP_ID,
+                            safetyCenterTestData.safetyCenterEntryOk(SINGLE_SOURCE_ID),
+                            "Ok summary", // When an issue is present, entry summary is used
+                        )
+                    ),
+                    emptyList(),
+                )
+                .withDismissedIssuesIfAtLeastU(
+                    listOf(safetyCenterTestData.safetyCenterIssueInformation(SINGLE_SOURCE_ID))
+                )
 
     private val safetyCenterDataOkReviewCriticalEntry: SafetyCenterData
         get() =
@@ -562,8 +597,9 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusGeneralRecommendationOneAlert,
                 listOf(safetyCenterTestData.safetyCenterIssueRecommendation(SINGLE_SOURCE_ID)),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID),
                     )
                 ),
                 emptyList(),
@@ -580,8 +616,9 @@ class SafetyCenterManagerTest {
                     )
                 ),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID),
                     )
                 ),
                 emptyList(),
@@ -593,8 +630,9 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusAccountRecommendationOneAlert,
                 listOf(safetyCenterTestData.safetyCenterIssueRecommendation(SINGLE_SOURCE_ID)),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID),
                     )
                 ),
                 emptyList(),
@@ -606,8 +644,9 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusDeviceRecommendationOneAlert,
                 listOf(safetyCenterTestData.safetyCenterIssueRecommendation(SINGLE_SOURCE_ID)),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryRecommendation(SINGLE_SOURCE_ID),
                     )
                 ),
                 emptyList(),
@@ -1024,6 +1063,12 @@ class SafetyCenterManagerTest {
             )
         val defaultEntryPendingIntent =
             apiSafetyCenterData.entriesOrGroups.firstOrNull()?.entry?.pendingIntent
+                ?: apiSafetyCenterData.entriesOrGroups
+                    .firstOrNull()
+                    ?.entryGroup
+                    ?.entries
+                    ?.firstOrNull()
+                    ?.pendingIntent
         val defaultEntryIntentFilterEqualsToExplicitIntent =
             callWithShellPermissionIdentity("android.permission.GET_INTENT_SENDER_INTENT") {
                 expectedExplicitPendingIntent.intentFilterEquals(defaultEntryPendingIntent)
@@ -1044,6 +1089,12 @@ class SafetyCenterManagerTest {
             )
         val defaultEntryPendingIntent =
             apiSafetyCenterData.entriesOrGroups.firstOrNull()?.entry?.pendingIntent
+                ?: apiSafetyCenterData.entriesOrGroups
+                    .firstOrNull()
+                    ?.entryGroup
+                    ?.entries
+                    ?.firstOrNull()
+                    ?.pendingIntent
         val defaultEntryIntentFilterEqualsToImplicitIntent =
             callWithShellPermissionIdentity("android.permission.GET_INTENT_SENDER_INTENT") {
                 expectedImplicitPendingIntent.intentFilterEquals(defaultEntryPendingIntent)
@@ -2306,18 +2357,14 @@ class SafetyCenterManagerTest {
                     groupId = MULTIPLE_SOURCES_GROUP_ID_2,
                 )
             )
-        waitForWithTimeout(timeout = RESURFACE_TIMEOUT, checkPeriod = RESURFACE_CHECK) {
-            val hasResurfaced =
-                safetyCenterManager
-                    .getSafetyCenterDataWithPermission()
-                    .issues
-                    .contains(
-                        safetyCenterTestData.safetyCenterIssueCritical(
-                            SOURCE_ID_5,
-                            groupId = MULTIPLE_SOURCES_GROUP_ID_2,
-                        )
+        assertWithTimeout(timeout = RESURFACE_TIMEOUT, checkPeriod = RESURFACE_CHECK) {
+            assertThat(safetyCenterManager.getSafetyCenterDataWithPermission().issues)
+                .contains(
+                    safetyCenterTestData.safetyCenterIssueCritical(
+                        SOURCE_ID_5,
+                        groupId = MULTIPLE_SOURCES_GROUP_ID_2,
                     )
-            hasResurfaced
+                )
         }
     }
 
@@ -3115,12 +3162,14 @@ class SafetyCenterManagerTest {
                 safetyCenterTestData.safetyCenterStatusUnknown,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
                         safetyCenterTestData
                             .safetyCenterEntryDefaultBuilder(SINGLE_SOURCE_ID)
                             .setPendingIntent(null)
                             .setEnabled(false)
-                            .build()
+                            .build(),
+                        "No info yet",
                     )
                 ),
                 emptyList(),
@@ -3143,13 +3192,14 @@ class SafetyCenterManagerTest {
                 safetyCenterStatusOk,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
                         safetyCenterTestData
                             .safetyCenterEntryOkBuilder(SINGLE_SOURCE_ID)
                             .setSeverityLevel(ENTRY_SEVERITY_LEVEL_UNSPECIFIED)
                             .setPendingIntent(null)
                             .setEnabled(false)
-                            .build()
+                            .build(),
                     )
                 ),
                 emptyList(),
@@ -3446,15 +3496,11 @@ class SafetyCenterManagerTest {
             SafetyCenterTestData.issueId(SINGLE_SOURCE_ID, INFORMATION_ISSUE_ID)
         )
 
-        val expectedSafetyCenterData =
-            safetyCenterDataOk.withDismissedIssuesIfAtLeastU(
-                listOf(safetyCenterTestData.safetyCenterIssueInformation(SINGLE_SOURCE_ID))
-            )
         assertFailsWith(TimeoutCancellationException::class) {
             waitForWithTimeout(timeout = TIMEOUT_SHORT) {
                 val hasResurfaced =
                     safetyCenterManager.getSafetyCenterDataWithPermission() !=
-                        expectedSafetyCenterData
+                        safetyCenterDataOkOneDismissedAlert
                 hasResurfaced
             }
         }
@@ -3483,15 +3529,11 @@ class SafetyCenterManagerTest {
             SafetyCenterTestData.issueId(SINGLE_SOURCE_ID, INFORMATION_ISSUE_ID)
         )
 
-        val expectedSafetyCenterData =
-            safetyCenterDataOk.withDismissedIssuesIfAtLeastU(
-                listOf(safetyCenterTestData.safetyCenterIssueInformation(SINGLE_SOURCE_ID))
-            )
         assertFailsWith(TimeoutCancellationException::class) {
             waitForWithTimeout(timeout = TIMEOUT_SHORT) {
                 val hasResurfaced =
                     safetyCenterManager.getSafetyCenterDataWithPermission() !=
-                        expectedSafetyCenterData
+                        safetyCenterDataOkOneDismissedAlert
                 hasResurfaced
             }
         }
@@ -3941,9 +3983,9 @@ class SafetyCenterManagerTest {
     companion object {
         private val RESURFACE_DELAY = Duration.ofMillis(500)
 
-        // Wait 3 times the RESURFACE_DELAY before asserting whether an issue has or has not
+        // Wait 5 times the RESURFACE_DELAY before asserting whether an issue has or has not
         // resurfaced. Use a constant additive error buffer if we increase the delay considerably.
-        private val RESURFACE_TIMEOUT = RESURFACE_DELAY.multipliedBy(3)
+        private val RESURFACE_TIMEOUT = RESURFACE_DELAY.multipliedBy(5)
 
         // Check more than once during a RESURFACE_DELAY before asserting whether an issue has or
         // has not resurfaced. Use a different check logic (focused at the expected resurface time)

@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Πρόσβαση στην άδεια <xliff:g id="PERM">%1$s</xliff:g> για αυτή την εφαρμογή στη συσκευή <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Εμφάνιση όλων των αδειών της εφαρμογής <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Εμφάνιση όλων των εφαρμογών με αυτή την άδεια"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Πληροφορίες"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Ρυθμίσεις"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Εμφάνιση χρήσης μικροφώνου βοηθού"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Ρυθμίσεις μη χρησιμοποιούμενων εφαρμογών"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Καταργήστε τις άδειες, εάν η εφαρμογή δεν χρησιμοποιείται."</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Άνοιγμα συνδέσμων"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Προεπιλογή για εργασία"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Προεπιλογή για ιδιωτικό χώρο"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Βελτιστοποιημένες για τη συσκευή"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Άλλες"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Καμία"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Προεπιλογή συστήματος)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Δεν υπάρχουν εφαρμογές"</string>
@@ -451,13 +455,13 @@
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Δεν υποστηρίζει προφίλ εργασίας"</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Σημείωση: Εάν έχετε ορίσει ένα κλείδωμα οθόνης και επανεκκινήσετε τη συσκευή, η εκκίνηση αυτής της εφαρμογής δεν θα είναι δυνατή έως ότου ξεκλειδώσετε τη συσκευή σας."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Ο βοηθός θα μπορεί να διαβάσει πληροφορίες σχετικά με τις εφαρμογές που χρησιμοποιούνται στο σύστημά σας, συμπεριλαμβανομένων πληροφοριών που είναι ορατές στην οθόνη σας ή προσβάσιμες εντός των εφαρμογών."</string>
-    <string name="incident_report_channel_name" msgid="3144954065936288440">"Κοινοποίηση δεδομένων εντοπισμού σφαλμάτων"</string>
-    <string name="incident_report_notification_title" msgid="4635984625656519773">"Κοινοποίηση λεπτομερ. δεδομ. εντοπισμού σφαλμάτων;"</string>
-    <string name="incident_report_notification_text" msgid="3376480583513587923">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> θέλει να ανεβάσει πληροφορίες εντοπισμού σφαλμάτων."</string>
-    <string name="incident_report_dialog_title" msgid="669104389325204095">"Κοινοπ. δεδομ. εντοπισμού και διόρθωσης σφαλμάτων;"</string>
+    <string name="incident_report_channel_name" msgid="3144954065936288440">"Κοινοποίηση δεδομένων αποσφαλμάτωσης"</string>
+    <string name="incident_report_notification_title" msgid="4635984625656519773">"Κοινοποίηση λεπτομερ. δεδομ. αποσφαλμάτωσης;"</string>
+    <string name="incident_report_notification_text" msgid="3376480583513587923">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> θέλει να ανεβάσει πληροφορίες αποσφαλμάτωσης."</string>
+    <string name="incident_report_dialog_title" msgid="669104389325204095">"Κοινοπ. δεδομ. αποσφαλμάτωσης;"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Το σύστημα εντόπισε ένα πρόβλημα."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"Η εφαρμογή <xliff:g id="APP_NAME_0">%1$s</xliff:g> ζητάει να ανεβάσει μια αναφορά σφαλμάτων από αυτήν τη συσκευή η οποία λήφθηκε στις <xliff:g id="DATE">%2$s</xliff:g>, <xliff:g id="TIME">%3$s</xliff:g>. Οι αναφορές σφαλμάτων περιλαμβάνουν προσωπικά στοιχεία σχετικά με τη συσκευή σας ή στοιχεία που έχουν καταγράψει οι εφαρμογές σας, για παράδειγμα, ονόματα χρηστών, δεδομένα τοποθεσίας, αναγνωριστικά συσκευών και πληροφορίες δικτύου. Να κοινοποιείτε αναφορές σφαλμάτων μόνο σε άτομα και εφαρμογές που θεωρείτε ότι μπορείτε να εμπιστευτείτε με αυτές τις πληροφορίες. Επιτρέπετε στο <xliff:g id="APP_NAME_1">%4$s</xliff:g> να ανεβάσει μια αναφορά σφαλμάτων;"</string>
-    <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Παρουσιάστηκε ένα σφάλμα κατά την επεξεργασία της αναφοράς σφάλματος για την εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g>. Γι\' αυτόν τον λόγο, η κοινοποίηση λεπτομερών δεδομένων εντοπισμού και διόρθωσης σφαλμάτων απορρίφθηκε. Λυπούμαστε για τη διακοπή."</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"Η εφαρμογή <xliff:g id="APP_NAME_0">%1$s</xliff:g> ζητάει να ανεβάσει μια αναφορά σφάλματος από αυτή τη συσκευή η οποία λήφθηκε στις <xliff:g id="DATE">%2$s</xliff:g>, <xliff:g id="TIME">%3$s</xliff:g>. Οι αναφορές σφάλματος περιλαμβάνουν προσωπικά στοιχεία σχετικά με τη συσκευή σας ή στοιχεία που έχουν καταγράψει οι εφαρμογές, για παράδειγμα, ονόματα χρηστών, δεδομένα τοποθεσίας, αναγνωριστικά συσκευών και πληροφορίες δικτύου. Να κοινοποιείτε τις αναφορές σφάλματος μόνο σε άτομα και εφαρμογές στα οποία θεωρείτε ότι μπορείτε να εμπιστεύεστε αυτές τις πληροφορίες.\n\nΝα επιτραπεί στην εφαρμογή <xliff:g id="APP_NAME_1">%4$s</xliff:g> να ανεβάσει μια αναφορά σφάλματος;"</string>
+    <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Παρουσιάστηκε ένα σφάλμα κατά την επεξεργασία της αναφοράς σφάλματος για την εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g>. Γι\' αυτόν τον λόγο, η κοινοποίηση λεπτομερών δεδομένων αποσφαλμάτωσης απορρίφθηκε. Λυπούμαστε για τη διακοπή."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Να επιτρέπεται"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Να μην επιτρέπεται"</string>
     <string name="adjust_user_sensitive_title" msgid="4196724451314280527">"Σύνθετες ρυθμίσεις"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Επιτρέπονται περιορισμένες ρυθμίσεις"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Περιορισμένη ρύθμιση"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Για την ασφάλειά σας, αυτή η ρύθμιση δεν είναι διαθέσιμη αυτή τη στιγμή."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Δεν διατίθεται κατά τη διάρκεια τηλεφωνικής κλήσης"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Κατά τη διάρκεια μιας τηλεφωνικής κλήσης, δεν επιτρέπεται η παραχώρηση άδειας σε μια εφαρμογή για εγκατάσταση άλλων εφαρμογών.\n\n Οι απατεώνες συχνά ζητούν να κάνετε τέτοιες ενέργειες κατά τη διάρκεια τηλεφωνικών κλήσεων, επομένως η ενέργεια έχει αποκλειστεί για την προστασία σας. Αν κάποιος που δεν γνωρίζετε σας ζητάει να πραγματοποιήσετε αυτή την ενέργεια, ενδέχεται να πρόκειται για απάτη."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Αδύνατη ολοκλήρωση της ενέργειας κατά την κλήση"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Αυτή η ρύθμιση έχει αποκλειστεί για την προστασία της συσκευής και των δεδομένων σας.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Οι απατεώνες μπορεί να προσπαθήσουν να εγκαταστήσουν επιβλαβείς εφαρμογές, ζητώντας σας να εγκαταστήσετε άγνωστες εφαρμογές από μια νέα πηγή."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Οι απατεώνες μπορεί να προσπαθήσουν να αποκτήσουν τον έλεγχο της συσκευής σας, ζητώντας σας να επιτρέψετε την πρόσβαση σε λειτουργίες προσβασιμότητας για μια εφαρμογή."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Απορρίφθηκε η πρόσβαση της εφαρμογής στην άδεια <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Η εφαρμογή ζήτησε πρόσβαση σε μια άδεια πρόσβασης σε ευαίσθητες πληροφορίες, γεγονός που μπορεί να θέσει σε κίνδυνο τα προσωπικά και οικονομικά στοιχεία σας.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Είναι πιθανό η εφαρμογή να μην λειτουργεί σωστά χωρίς αυτή την περιορισμένη άδεια. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Μάθετε πώς μπορείτε να επιτρέψετε την πρόσβαση&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Δεν επιτράπηκε στην εφαρμογή να οριστεί ως η προεπιλεγμένη <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

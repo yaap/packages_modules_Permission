@@ -58,8 +58,8 @@ import com.android.permissioncontroller.permission.ui.v33.AdvancedConfirmDialogA
 import com.android.permissioncontroller.permission.ui.wear.model.AppPermissionConfirmDialogViewModel
 import com.android.permissioncontroller.permission.ui.wear.model.AppPermissionConfirmDialogViewModelFactory
 import com.android.permissioncontroller.permission.ui.wear.model.ConfirmDialogArgs
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
 import com.android.permissioncontroller.permission.utils.KotlinUtils.getPermGroupLabel
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 import com.android.settingslib.RestrictedLockUtils
 
 /**
@@ -98,7 +98,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
             userHandle: UserHandle?,
             caller: String?,
             sessionId: Long,
-            grantCategory: String?
+            grantCategory: String?,
         ): Bundle {
             val arguments = Bundle()
             arguments.putString(Intent.EXTRA_PACKAGE_NAME, packageName)
@@ -118,7 +118,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val activity = requireActivity()
         val packageName =
@@ -145,7 +145,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                 packageName,
                 permGroupName,
                 user,
-                sessionId
+                sessionId,
             )
         val viewModel = ViewModelProvider(this, factory).get(AppPermissionViewModel::class.java)
         confirmDialogViewModel =
@@ -182,14 +182,14 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                         this,
                         this,
                         param.request,
-                        param.buttonClickAction
+                        param.buttonClickAction,
                     )
                 } else {
                     showConfirmDialog(
                         ChangeRequest.GRANT_ALL_FILE_ACCESS,
                         R.string.special_file_access_dialog,
                         -1,
-                        false
+                        false,
                     )
                 }
                 setResult(param.result, permGroupName)
@@ -207,7 +207,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                         this,
                         this,
                         ChangeRequest.GRANT_BOTH,
-                        APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__ALLOW
+                        APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__ALLOW,
                     )
                 } else {
                     viewModel.onDenyAnyWay(args.changeRequest, args.buttonPressed, args.oneTime)
@@ -225,7 +225,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     this,
                     this,
                     args.changeRequest!!,
-                    args.buttonClicked!!
+                    args.buttonClicked!!,
                 )
                 confirmDialogViewModel.showAdvancedConfirmDialogLiveData.value = false
             }
@@ -250,7 +250,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                         onConfirmDialogCancelButtonClick,
                         onAdvancedConfirmDialogOkButtonClick,
                         onAdvancedConfirmDialogCancelButtonClick,
-                        onDisabledAllowButtonTap
+                        onDisabledAllowButtonTap,
                     )
                 }
             }
@@ -261,14 +261,14 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
         changeRequest: ChangeRequest,
         @StringRes messageId: Int,
         buttonPressed: Int,
-        oneTime: Boolean
+        oneTime: Boolean,
     ) {
         confirmDialogViewModel.confirmDialogArgs =
             ConfirmDialogArgs(
                 messageId = messageId,
                 changeRequest = changeRequest,
                 buttonPressed = buttonPressed,
-                oneTime = oneTime
+                oneTime = oneTime,
             )
         confirmDialogViewModel.showConfirmDialogLiveData.value = true
     }
@@ -284,7 +284,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
             Intent()
                 .putExtra(
                     ManagePermissionsActivity.EXTRA_RESULT_PERMISSION_INTERACTED,
-                    permGroupName
+                    permGroupName,
                 )
                 .putExtra(ManagePermissionsActivity.EXTRA_RESULT_PERMISSION_RESULT, result)
         requireActivity().setResult(Activity.RESULT_OK, intent)
@@ -298,7 +298,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     ChangeRequest.GRANT_FOREGROUND,
                     APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__ALLOW,
                     GRANTED_ALWAYS,
-                    false
+                    false,
                 )
             ButtonType.ALLOW_ALWAYS ->
                 GrantedStateChangeParam(
@@ -306,7 +306,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     ChangeRequest.GRANT_BOTH,
                     APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__ALLOW_ALWAYS,
                     GRANTED_ALWAYS,
-                    true
+                    true,
                 )
             ButtonType.ALLOW_FOREGROUND ->
                 GrantedStateChangeParam(
@@ -314,7 +314,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     ChangeRequest.GRANT_FOREGROUND_ONLY,
                     APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__ALLOW_FOREGROUND,
                     GRANTED_FOREGROUND_ONLY,
-                    true
+                    true,
                 )
             ButtonType.ASK ->
                 GrantedStateChangeParam(
@@ -322,7 +322,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     ChangeRequest.REVOKE_BOTH,
                     APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__ASK_EVERY_TIME,
                     DENIED,
-                    false
+                    false,
                 )
             ButtonType.DENY ->
                 GrantedStateChangeParam(
@@ -330,7 +330,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     ChangeRequest.REVOKE_BOTH,
                     APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__DENY,
                     DENIED_DO_NOT_ASK_AGAIN,
-                    false
+                    false,
                 )
             ButtonType.DENY_FOREGROUND ->
                 GrantedStateChangeParam(
@@ -338,7 +338,7 @@ class WearAppPermissionFragment : Fragment(), ConfirmDialogShowingFragment {
                     ChangeRequest.REVOKE_FOREGROUND,
                     APP_PERMISSION_FRAGMENT_ACTION_REPORTED__BUTTON_PRESSED__DENY_FOREGROUND,
                     DENIED_DO_NOT_ASK_AGAIN,
-                    false
+                    false,
                 )
             else -> throw RuntimeException("Wrong button type: $buttonType")
         }
@@ -349,5 +349,5 @@ data class GrantedStateChangeParam(
     val request: ChangeRequest,
     val buttonClickAction: Int,
     val result: Int,
-    val requiresCustomStorageBehavior: Boolean
+    val requiresCustomStorageBehavior: Boolean,
 )

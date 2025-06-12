@@ -295,7 +295,8 @@ public class IssueCardPreference extends Preference
     public static class ConfirmDismissalDialogFragment extends DialogFragment {
         private static final String ISSUE_KEY = "confirm_dialog_sc_issue";
 
-        private static ConfirmDismissalDialogFragment newInstance(SafetyCenterIssue issue) {
+        /** Create new fragment with the data it will need. */
+        public static ConfirmDismissalDialogFragment newInstance(SafetyCenterIssue issue) {
             ConfirmDismissalDialogFragment fragment = new ConfirmDismissalDialogFragment();
 
             Bundle args = new Bundle();

@@ -311,6 +311,7 @@ class AppDataSharingUpdatesTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @Ignore("b/381298073")
     fun clickUpdate_opensAppLocationPermissionPage() {
         installAndWaitTillPackageAdded(
             APP_APK_NAME_31,

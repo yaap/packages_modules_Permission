@@ -55,7 +55,7 @@ import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -102,14 +102,14 @@ class AppDataSharingUpdatesPrivacySourceTest {
     fun safetyCenterEnabledChanged_enabled_doesNothing() {
         appDataSharingUpdatesPrivacySource.safetyCenterEnabledChanged(context, true)
 
-        verifyZeroInteractions(mockSafetyCenterManager)
+        verifyNoMoreInteractions(mockSafetyCenterManager)
     }
 
     @Test
     fun safetyCenterEnabledChanged_disabled_doesNothing() {
         appDataSharingUpdatesPrivacySource.safetyCenterEnabledChanged(context, false)
 
-        verifyZeroInteractions(mockSafetyCenterManager)
+        verifyNoMoreInteractions(mockSafetyCenterManager)
     }
 
     @Test

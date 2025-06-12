@@ -19,6 +19,7 @@ package com.android.permissioncontroller.role.ui.handheld;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,11 +29,16 @@ import com.android.permissioncontroller.role.ui.RestrictionAwarePreferenceMixin;
 import com.android.permissioncontroller.role.ui.RoleApplicationPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
+import java.util.Objects;
+
 /**
  * Preference used to represent apps that can be picked as a default app.
  */
 public class HandheldRadioPreference extends SelectorWithWidgetPreference implements
         RoleApplicationPreference {
+
+    @Nullable
+    private String mContentDescription;
 
     private final RestrictionAwarePreferenceMixin mRestrictionAwarePreferenceMixin =
             new RestrictionAwarePreferenceMixin(this);
@@ -56,6 +62,14 @@ public class HandheldRadioPreference extends SelectorWithWidgetPreference implem
     }
 
     @Override
+    public void setContentDescription(@Nullable String contentDescription) {
+        if (!Objects.equals(mContentDescription, contentDescription)) {
+            mContentDescription = contentDescription;
+            notifyChanged();
+        }
+    }
+
+    @Override
     public void setRestrictionIntent(@Nullable Intent restrictionIntent) {
         mRestrictionAwarePreferenceMixin.setRestrictionIntent(restrictionIntent);
     }
@@ -63,6 +77,9 @@ public class HandheldRadioPreference extends SelectorWithWidgetPreference implem
     @Override
     public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        TextView titleText = (TextView) holder.findViewById(android.R.id.title);
+        titleText.setContentDescription(mContentDescription);
 
         mRestrictionAwarePreferenceMixin.onAfterBindViewHolder(holder);
     }

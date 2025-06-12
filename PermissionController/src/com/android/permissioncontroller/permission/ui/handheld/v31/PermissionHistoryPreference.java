@@ -195,6 +195,7 @@ public class PermissionHistoryPreference extends Preference {
         Intent intent = getViewPermissionUsageForPeriodIntent();
         if (intent != null) {
             dividerVerticalBar.setVisibility(View.VISIBLE);
+            widgetView.setVisibility(View.VISIBLE);
             widgetView.setImageDrawable(mContext.getDrawable(R.drawable.ic_info_outline));
             widgetView.setOnClickListener(v -> {
                 write(PERMISSION_DETAILS_INTERACTION,
@@ -214,6 +215,7 @@ public class PermissionHistoryPreference extends Preference {
         } else {
             dividerVerticalBar.setVisibility(View.GONE);
             widgetView.setImageDrawable(null);
+            widgetView.setVisibility(View.GONE);
         }
     }
 

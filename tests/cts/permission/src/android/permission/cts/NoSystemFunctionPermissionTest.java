@@ -166,7 +166,8 @@ public class NoSystemFunctionPermissionTest extends AndroidTestCase {
      */
     @SmallTest
     public void testSendSms() {
-        if (!getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+        if (!getContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_MESSAGING)) {
             return;
         }
 

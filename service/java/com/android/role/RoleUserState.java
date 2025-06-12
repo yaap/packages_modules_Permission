@@ -102,6 +102,14 @@ class RoleUserState {
     private ArrayMap<String, Integer> mActiveUserIds = new ArrayMap<>();
 
     @GuardedBy("mLock")
+    @NonNull
+    private final Map<String, List<String>> mDefaultHoldersForTest = new ArrayMap<>();
+
+    @GuardedBy("mLock")
+    @NonNull
+    private final Set<String> mRolesVisibleForTest = new ArraySet<>();
+
+    @GuardedBy("mLock")
     private boolean mWriteScheduled;
 
     @GuardedBy("mLock")
@@ -439,6 +447,22 @@ class RoleUserState {
         }
     }
 
+    @NonNull
+    public List<String> getActiveRolesForUser(@UserIdInt int userId) {
+        synchronized (mLock) {
+            List<String> activeRoleNames = new ArrayList<>();
+            int activeUserIdsSize = mActiveUserIds.size();
+            for (int i = 0; i < activeUserIdsSize; i++) {
+                int activeUserId = mActiveUserIds.valueAt(i);
+                if (activeUserId == userId) {
+                    String roleName = mActiveUserIds.keyAt(i);
+                    activeRoleNames.add(roleName);
+                }
+            }
+            return activeRoleNames;
+        }
+    }
+
     /**
      * Set the active user for the role
      *
@@ -461,6 +485,36 @@ class RoleUserState {
             mActiveUserIds.put(roleName, userId);
             scheduleWriteFileLocked();
             return true;
+        }
+    }
+
+    @NonNull
+    public List<String> getDefaultHoldersForTest(@NonNull String roleName) {
+        synchronized (mLock) {
+            return mDefaultHoldersForTest.getOrDefault(roleName, Collections.emptyList());
+        }
+    }
+
+    public void setDefaultHoldersForTest(@NonNull String roleName,
+            @NonNull List<String> packageNames) {
+        synchronized (mLock) {
+            mDefaultHoldersForTest.put(roleName, packageNames);
+        }
+    }
+
+    public boolean isRoleVisibleForTest(@NonNull String roleName) {
+        synchronized (mLock) {
+            return mRolesVisibleForTest.contains(roleName);
+        }
+    }
+
+    public void setRoleVisibleForTest(@NonNull String roleName, boolean visible) {
+        synchronized (mLock) {
+            if (visible) {
+                mRolesVisibleForTest.add(roleName);
+            } else {
+                mRolesVisibleForTest.remove(roleName);
+            }
         }
     }
 

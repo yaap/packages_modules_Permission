@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.SharedLibraryInfo;
-import android.content.pm.Signature;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.UserHandle;
@@ -47,9 +46,11 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.role.controller.util.CollectionUtils;
+import com.android.role.controller.util.IntentCompat;
 import com.android.role.controller.util.PackageUtils;
 import com.android.role.controller.util.RoleFlags;
 import com.android.role.controller.util.RoleManagerCompat;
+import com.android.role.controller.util.SignedPackageUtils;
 import com.android.role.controller.util.UserUtils;
 
 import java.lang.annotation.Retention;
@@ -83,10 +84,6 @@ public class Role {
     private static final boolean DEBUG = false;
 
     private static final String PACKAGE_NAME_ANDROID_SYSTEM = "android";
-
-    private static final String DEFAULT_HOLDER_SEPARATOR = ";";
-
-    private static final String CERTIFICATE_SEPARATOR = ":";
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
@@ -343,15 +340,19 @@ public class Role {
             Integer exclusivity = mBehavior.getExclusivity();
             if (exclusivity != null) {
                 if (!sExclusivityValues.get(exclusivity)) {
-                    throw new IllegalArgumentException("Invalid exclusivity: " + exclusivity);
+                    throw new IllegalArgumentException(
+                        "Role " + mName + " has invalid exclusivity: "
+                            + exclusivity);
                 }
                 if (mShowNone && exclusivity == EXCLUSIVITY_NONE) {
                     throw new IllegalArgumentException(
-                        "Role cannot be non-exclusive when showNone is true: " + exclusivity);
+                        "Role " + mName + " cannot be non-exclusive when showNone is true: "
+                            + exclusivity);
                 }
                 if (!mPreferredActivities.isEmpty() && exclusivity == EXCLUSIVITY_PROFILE_GROUP) {
                     throw new IllegalArgumentException(
-                        "Role cannot have preferred activities when exclusivity is profileGroup");
+                        "Role " + mName + " cannot have preferred activities when exclusivity is "
+                            + "profileGroup");
                 }
                 return exclusivity;
             }
@@ -472,25 +473,21 @@ public class Role {
         if (!isAvailableByFeatureFlagAndSdkVersion()) {
             return false;
         }
-
-        if (getExclusivity() == EXCLUSIVITY_PROFILE_GROUP
-                && UserUtils.isPrivateProfile(user, context)) {
-            return false;
-        }
-
-        if (mBehavior != null) {
-            boolean isAvailableAsUser = mBehavior.isAvailableAsUser(this, user, context);
-            // Ensure that cross-user role is only available if also available for
-            //  the profile-group's full user
-            if (isAvailableAsUser && getExclusivity() == EXCLUSIVITY_PROFILE_GROUP) {
-                UserHandle profileParent = UserUtils.getProfileParentOrSelf(user, context);
-                if (!Objects.equals(profileParent, user)
-                        && !mBehavior.isAvailableAsUser(this, profileParent, context)) {
-                    throw new IllegalArgumentException("Role is not available for profile parent: "
-                            + profileParent.getIdentifier());
-                }
+        if (getExclusivity() == EXCLUSIVITY_PROFILE_GROUP) {
+            if (UserUtils.isPrivateProfile(user, context)) {
+                return false;
             }
-            return isAvailableAsUser;
+
+            // A profile group exclusive role may only be available in a profile when it's
+            // available in the profile parent.
+            UserHandle profileParent = UserUtils.getProfileParentOrSelf(user, context);
+            if (!Objects.equals(user, profileParent)
+                    && !isAvailableAsUser(profileParent, context)) {
+                return false;
+            }
+        }
+        if (mBehavior != null) {
+            return mBehavior.isAvailableAsUser(this, user, context);
         }
         return true;
     }
@@ -506,13 +503,19 @@ public class Role {
             return false;
         }
         return (Build.VERSION.SDK_INT >= mMinSdkVersion
-                // Workaround to match the value 35 for V in roles.xml before SDK finalization.
-                || (mMinSdkVersion == 35 && SdkLevel.isAtLeastV()))
+                // Workaround to match the value 36 for B in roles.xml before SDK finalization.
+                || (mMinSdkVersion == 36 && SdkLevel.isAtLeastB()))
                 && Build.VERSION.SDK_INT <= mMaxSdkVersion;
     }
 
-    public boolean isStatic() {
-        return mStatic;
+    /**
+     * Check whether this role is static, which may change due to bypassing qualification.
+     *
+     * @param context the {@code Context} to retrieve system services
+     * @return whether this role is static
+     */
+    public boolean isStatic(@NonNull Context context) {
+        return mStatic && !isBypassingQualification(context);
     }
 
     /**
@@ -564,69 +567,11 @@ public class Role {
         }
 
         if (isExclusive()) {
-            String packageName = getQualifiedDefaultHolderPackageNameAsUser(defaultHolders, user,
-                    context);
-            if (packageName == null) {
-                return Collections.emptyList();
-            }
-            return Collections.singletonList(packageName);
+            return CollectionUtils.singletonOrEmpty(
+                    SignedPackageUtils.getPackageNameAsUser(defaultHolders, user, context));
         } else {
-            List<String> packageNames = new ArrayList<>();
-            for (String defaultHolder : defaultHolders.split(DEFAULT_HOLDER_SEPARATOR)) {
-                String packageName = getQualifiedDefaultHolderPackageNameAsUser(defaultHolder,
-                        user, context);
-                if (packageName != null) {
-                    packageNames.add(packageName);
-                }
-            }
-            return packageNames;
+            return SignedPackageUtils.getPackageNamesAsUser(defaultHolders, user, context);
         }
-    }
-
-    @Nullable
-    private String getQualifiedDefaultHolderPackageNameAsUser(@NonNull String defaultHolder,
-            @NonNull UserHandle user, @NonNull Context context) {
-        String packageName;
-        byte[] certificate;
-        int certificateSeparatorIndex = defaultHolder.indexOf(CERTIFICATE_SEPARATOR);
-        if (certificateSeparatorIndex != -1) {
-            packageName = defaultHolder.substring(0, certificateSeparatorIndex);
-            String certificateString = defaultHolder.substring(certificateSeparatorIndex + 1);
-            try {
-                certificate = new Signature(certificateString).toByteArray();
-            } catch (IllegalArgumentException e) {
-                Log.w(LOG_TAG, "Cannot parse signing certificate: " + defaultHolder, e);
-                return null;
-            }
-        } else {
-            packageName = defaultHolder;
-            certificate = null;
-        }
-
-        if (certificate != null) {
-            Context userContext = UserUtils.getUserContext(context, user);
-            PackageManager userPackageManager = userContext.getPackageManager();
-            if (!userPackageManager.hasSigningCertificate(packageName, certificate,
-                    PackageManager.CERT_INPUT_SHA256)) {
-                Log.w(LOG_TAG, "Default holder doesn't have required signing certificate: "
-                        + defaultHolder);
-                return null;
-            }
-        } else {
-            ApplicationInfo applicationInfo = PackageUtils.getApplicationInfoAsUser(packageName,
-                    user, context);
-            if (applicationInfo == null) {
-                Log.w(LOG_TAG, "Cannot get ApplicationInfo for default holder: " + packageName);
-                return null;
-            }
-            if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                Log.w(LOG_TAG, "Default holder didn't specify a signing certificate and isn't a"
-                        + " system app: " + packageName);
-                return null;
-            }
-        }
-
-        return packageName;
     }
 
     /**
@@ -685,6 +630,12 @@ public class Role {
         return mAllowBypassingQualification;
     }
 
+    private boolean isBypassingQualification(@NonNull Context context) {
+        RoleManager roleManager = context.getSystemService(RoleManager.class);
+        return shouldAllowBypassingQualification(context)
+                && RoleManagerCompat.isBypassingRoleQualification(roleManager);
+    }
+
     /**
      * Check whether a package is qualified for this role, i.e. whether it contains all the required
      * components (plus meeting some other general restrictions).
@@ -697,9 +648,7 @@ public class Role {
      */
     public boolean isPackageQualifiedAsUser(@NonNull String packageName, @NonNull UserHandle user,
             @NonNull Context context) {
-        RoleManager roleManager = context.getSystemService(RoleManager.class);
-        if (shouldAllowBypassingQualification(context)
-                && RoleManagerCompat.isBypassingRoleQualification(roleManager)) {
+        if (isBypassingQualification(context)) {
             return true;
         }
 
@@ -1047,7 +996,14 @@ public class Role {
      */
     public void onHolderAddedAsUser(@NonNull String packageName, @NonNull UserHandle user,
             @NonNull Context context) {
-        RoleManagerCompat.setRoleFallbackEnabledAsUser(this, true, user, context);
+        if (RoleFlags.isProfileGroupExclusivityAvailable()
+                && com.android.permission.flags.Flags.crossUserRoleUxBugfixEnabled()
+                && getExclusivity() == Role.EXCLUSIVITY_PROFILE_GROUP) {
+            UserHandle profileParent = UserUtils.getProfileParentOrSelf(user, context);
+            RoleManagerCompat.setRoleFallbackEnabledAsUser(this, true, profileParent, context);
+        } else {
+            RoleManagerCompat.setRoleFallbackEnabledAsUser(this, true, user, context);
+        }
     }
 
     /**
@@ -1086,6 +1042,11 @@ public class Role {
      */
     public void onNoneHolderSelectedAsUser(@NonNull UserHandle user, @NonNull Context context) {
         RoleManagerCompat.setRoleFallbackEnabledAsUser(this, false, user, context);
+        if (RoleFlags.isProfileGroupExclusivityAvailable()
+                && getExclusivity() == Role.EXCLUSIVITY_PROFILE_GROUP) {
+            RoleManager roleManager = context.getSystemService(RoleManager.class);
+            roleManager.setActiveUserForRole(mName, user, 0);
+        }
     }
 
     /**
@@ -1097,11 +1058,23 @@ public class Role {
      * @return whether this role should be visible to user
      */
     public boolean isVisibleAsUser(@NonNull UserHandle user, @NonNull Context context) {
-        RoleBehavior behavior = getBehavior();
-        if (behavior == null) {
-            return isVisible();
+        if (mBehavior != null) {
+            Boolean isVisibleAsUser = mBehavior.isVisibleAsUser(this, user, context);
+            if (isVisibleAsUser != null) {
+                if (isVisibleAsUser && mStatic) {
+                    throw new IllegalArgumentException("static=\"true\" is invalid for a visible "
+                            + "role: " + mName);
+                }
+                if (isVisibleAsUser && (mDescriptionResource == 0
+                        || mLabelResource == 0
+                        || mShortLabelResource == 0)) {
+                    throw new IllegalArgumentException("description, label, and shortLabel are "
+                            + "required for a visible role: " + mName);
+                }
+                return isVisibleAsUser;
+            }
         }
-        return isVisible() && behavior.isVisibleAsUser(this, user, context);
+        return isVisible();
     }
 
     /**
@@ -1138,12 +1111,37 @@ public class Role {
     @Nullable
     public Intent getRestrictionIntentAsUser(@NonNull UserHandle user, @NonNull Context context) {
         if (SdkLevel.isAtLeastU() && isExclusive()) {
-            UserManager userManager = context.getSystemService(UserManager.class);
-            if (userManager.hasUserRestrictionForUser(UserManager.DISALLOW_CONFIG_DEFAULT_APPS,
-                    user)) {
-                return new Intent(Settings.ACTION_SHOW_ADMIN_SUPPORT_DETAILS)
-                    .putExtra(DevicePolicyManager.EXTRA_RESTRICTION,
-                        UserManager.DISALLOW_CONFIG_DEFAULT_APPS);
+            boolean crossUserRoleUxBugfixEnabled =
+                    com.android.permission.flags.Flags.crossUserRoleUxBugfixEnabled();
+            if (crossUserRoleUxBugfixEnabled && getExclusivity() == EXCLUSIVITY_PROFILE_GROUP) {
+                DevicePolicyManager devicePolicyManager =
+                        context.getSystemService(DevicePolicyManager.class);
+                if (!devicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()) {
+                    // For profileGroup exclusive roles users on BYOD are free to choose personal or
+                    // work profile app regardless of DISALLOW_CONFIG_DEFAULT_APPS
+                    return null;
+                }
+            }
+
+            // Otherwise if role is profileGroup exclusive check DISALLOW_CONFIG_DEFAULT_APPS for
+            // all users
+            List<UserHandle> profiles =
+                    (crossUserRoleUxBugfixEnabled && getExclusivity() == EXCLUSIVITY_PROFILE_GROUP)
+                            ? UserUtils.getUserProfiles(user, context, true)
+                            : List.of(user);
+            final int profilesSize = profiles.size();
+            for (int i = 0; i < profilesSize; i++) {
+                UserHandle profile = profiles.get(i);
+                UserManager userManager = context.getSystemService(UserManager.class);
+                if (userManager.hasUserRestrictionForUser(
+                        UserManager.DISALLOW_CONFIG_DEFAULT_APPS, profile)) {
+                    return new Intent(Settings.ACTION_SHOW_ADMIN_SUPPORT_DETAILS)
+                            .putExtra(
+                                    DevicePolicyManager.EXTRA_RESTRICTION,
+                                    UserManager.DISALLOW_CONFIG_DEFAULT_APPS)
+                            .putExtra(Intent.EXTRA_USER, profile)
+                            .putExtra(IntentCompat.EXTRA_USER_ID, profile.getIdentifier());
+                }
             }
         }
         return null;

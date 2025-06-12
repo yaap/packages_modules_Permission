@@ -43,11 +43,16 @@ import com.android.safetycenter.internaldata.SafetyCenterIds
 
 /* A SafetyCenterViewModel that talks to the real backing service for Safety Center. */
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
+class LiveSafetyCenterViewModel(
+    app: Application,
+    private val taskId: Int,
+    private val sameTaskSourceIds: List<String>,
+) : SafetyCenterViewModel(app) {
 
     private val TAG: String = LiveSafetyCenterViewModel::class.java.simpleName
     override val statusUiLiveData: LiveData<StatusUiData>
         get() = safetyCenterUiLiveData.map { StatusUiData(it.safetyCenterData) }
+
     override val safetyCenterUiLiveData: LiveData<SafetyCenterUiData> by this::_safetyCenterLiveData
     override val errorLiveData: LiveData<SafetyCenterErrorDetails> by this::_errorLiveData
 
@@ -65,7 +70,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
 
     override fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData =
-        SafetyCenterUiData(safetyCenterManager.safetyCenterData)
+        uiData(safetyCenterManager.safetyCenterData)
 
     override fun dismissIssue(issue: SafetyCenterIssue) {
         safetyCenterManager.dismissSafetyCenterIssue(issue.id)
@@ -74,7 +79,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     override fun executeIssueAction(
         issue: SafetyCenterIssue,
         action: SafetyCenterIssue.Action,
-        launchTaskId: Int?
+        launchTaskId: Int?,
     ) {
         val issueId =
             if (launchTaskId != null) {
@@ -107,9 +112,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     override fun navigateToSafetyCenter(context: Context, navigationSource: NavigationSource?) {
         val intent = Intent(ACTION_SAFETY_CENTER)
 
-        if (navigationSource != null) {
-            navigationSource.addToIntent(intent)
-        }
+        navigationSource?.addToIntent(intent)
 
         context.startActivity(intent)
     }
@@ -132,7 +135,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
             } else {
                 safetyCenterManager.refreshSafetySources(
                     SafetyCenterManager.REFRESH_REASON_PAGE_OPEN,
-                    safetySourceIds
+                    safetySourceIds,
                 )
             }
         }
@@ -174,7 +177,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
         override fun onActive() {
             safetyCenterManager.addOnSafetyCenterDataChangedListener(
                 getMainExecutor(app.applicationContext),
-                this
+                this,
             )
             super.onActive()
         }
@@ -209,7 +212,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
                 Log.d(
                     TAG,
                     "Received SafetyCenterData while issue resolution animations" +
-                        " occurring. Will update UI with new data soon."
+                        " occurring. Will update UI with new data soon.",
                 )
                 return
             }
@@ -254,7 +257,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
         private fun isCurrentlyScanning(): Boolean = value?.safetyCenterData?.isScanning() ?: false
 
         private fun sendNextData() {
-            value = SafetyCenterUiData(safetyCenterDataQueue.removeFirst())
+            value = uiData(safetyCenterDataQueue.removeFirst())
         }
 
         private fun skipNextData() = safetyCenterDataQueue.removeFirst()
@@ -270,7 +273,7 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
             // The current SafetyCenterData still contains the resolved SafetyCenterIssue objects.
             // Send it with the resolved IDs so the UI can generate the correct preferences and
             // trigger the right animations for issue resolution.
-            value = SafetyCenterUiData(currentData, currentResolvedIssues)
+            value = uiData(currentData, currentResolvedIssues)
         }
 
         @MainThread
@@ -279,6 +282,11 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
             maybeProcessDataToNextResolvedIssues()
         }
     }
+
+    private fun uiData(
+        safetyCenterData: SafetyCenterData,
+        resolvedIssues: Map<IssueId, ActionId> = emptyMap(),
+    ) = SafetyCenterUiData(safetyCenterData, taskId, sameTaskSourceIds, resolvedIssues)
 }
 
 /** Returns inflight issues pending resolution */
@@ -309,8 +317,15 @@ private val SafetyCenterData.allResolvableIssues: Sequence<SafetyCenterIssue>
         }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-class LiveSafetyCenterViewModelFactory(private val app: Application) : ViewModelProvider.Factory {
+class LiveSafetyCenterViewModelFactory
+@JvmOverloads
+constructor(
+    private val app: Application,
+    private val taskId: Int = 0,
+    private val sameTaskSourceIds: List<String> = emptyList(),
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return LiveSafetyCenterViewModel(app) as T
+        @Suppress("UNCHECKED_CAST")
+        return LiveSafetyCenterViewModel(app, taskId, sameTaskSourceIds) as T
     }
 }

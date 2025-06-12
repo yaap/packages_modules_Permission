@@ -18,10 +18,10 @@ package android.permission.cts;
 
 import static com.android.compatibility.common.util.ShellUtils.runShellCommand;
 import static com.android.compatibility.common.util.SystemUtil.runShellCommandOrThrow;
-import static com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.Manifest;
 import android.companion.virtual.VirtualDeviceManager;
 import android.companion.virtual.VirtualDeviceManager.VirtualDevice;
 import android.content.Context;
@@ -30,8 +30,6 @@ import android.content.pm.PackageManager.OnPermissionsChangedListener;
 import android.permission.flags.Flags;
 import android.platform.test.annotations.AppModeFull;
 import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.virtualdevice.cts.common.VirtualDeviceRule;
 
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
@@ -69,10 +67,10 @@ public class PermissionUpdateListenerTest {
     private int mTestAppUid;
 
     @Rule
-    public VirtualDeviceRule mVirtualDeviceRule = VirtualDeviceRule.createDefault();
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    public VirtualDeviceRule mVirtualDeviceRule = VirtualDeviceRule.withAdditionalPermissions(
+            "android.permission.OBSERVE_GRANT_REVOKE_PERMISSIONS",
+            Manifest.permission.GRANT_RUNTIME_PERMISSIONS,
+            Manifest.permission.REVOKE_RUNTIME_PERMISSIONS);
 
     @Before
     public void setup() throws PackageManager.NameNotFoundException, InterruptedException {
@@ -99,15 +97,11 @@ public class PermissionUpdateListenerTest {
                     }
                 };
 
-        runWithShellPermissionIdentity(() -> {
-            mPackageManager.addOnPermissionsChangeListener(permissionsChangedListener);
-            mPackageManager.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
-                    mDefaultContext.getUser());
-        });
+        mPackageManager.addOnPermissionsChangeListener(permissionsChangedListener);
+        mPackageManager.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
+                mDefaultContext.getUser());
         countDownLatch.await(TIMEOUT, TimeUnit.MILLISECONDS);
-        runWithShellPermissionIdentity(() -> {
-            mPackageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
-        });
+        mPackageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
 
         assertThat(countDownLatch.getCount()).isEqualTo(0);
     }
@@ -132,16 +126,12 @@ public class PermissionUpdateListenerTest {
         final PackageManager packageManager = context.getPackageManager();
         TestOnPermissionsChangedListener permissionsChangedListener =
                 new TestOnPermissionsChangedListener(1);
-        runWithShellPermissionIdentity(() -> {
-            packageManager.addOnPermissionsChangeListener(permissionsChangedListener);
-            packageManager.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
-                    mDefaultContext.getUser());
-        });
+        packageManager.addOnPermissionsChangeListener(permissionsChangedListener);
+        packageManager.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
+                mDefaultContext.getUser());
 
         permissionsChangedListener.waitForPermissionChangedCallbacks();
-        runWithShellPermissionIdentity(() -> {
-            packageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
-        });
+        packageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
 
         String deviceId = permissionsChangedListener.getNotifiedDeviceId(mTestAppUid);
         assertThat(deviceId).isEqualTo(expectedDeviceId);
@@ -168,17 +158,14 @@ public class PermissionUpdateListenerTest {
         final PackageManager packageManager = context.getPackageManager();
         TestOnPermissionsChangedListener permissionsChangedListener =
                 new TestOnPermissionsChangedListener(1);
-        runWithShellPermissionIdentity(() -> {
-            packageManager.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
-                    mDefaultContext.getUser());
-            packageManager.addOnPermissionsChangeListener(permissionsChangedListener);
-            packageManager.revokeRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
-                    mDefaultContext.getUser());
-        });
+        packageManager.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
+                mDefaultContext.getUser());
+        packageManager.addOnPermissionsChangeListener(permissionsChangedListener);
+        packageManager.revokeRuntimePermission(PACKAGE_NAME, PERMISSION_NAME,
+                mDefaultContext.getUser());
+
         permissionsChangedListener.waitForPermissionChangedCallbacks();
-        runWithShellPermissionIdentity(() -> {
-            packageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
-        });
+        packageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
 
         String deviceId = permissionsChangedListener.getNotifiedDeviceId(mTestAppUid);
         assertThat(deviceId).isEqualTo(expectedDeviceId);
@@ -205,16 +192,12 @@ public class PermissionUpdateListenerTest {
         TestOnPermissionsChangedListener permissionsChangedListener =
                 new TestOnPermissionsChangedListener(1);
         final PackageManager packageManager = context.getPackageManager();
-        runWithShellPermissionIdentity(() -> {
-            packageManager.addOnPermissionsChangeListener(permissionsChangedListener);
-            int flag = PackageManager.FLAG_PERMISSION_USER_SET;
-            packageManager.updatePermissionFlags(PERMISSION_NAME, PACKAGE_NAME, flag, flag,
-                    mDefaultContext.getUser());
-        });
+        packageManager.addOnPermissionsChangeListener(permissionsChangedListener);
+        int flag = PackageManager.FLAG_PERMISSION_USER_SET;
+        packageManager.updatePermissionFlags(PERMISSION_NAME, PACKAGE_NAME, flag, flag,
+                mDefaultContext.getUser());
         permissionsChangedListener.waitForPermissionChangedCallbacks();
-        runWithShellPermissionIdentity(() -> {
-            packageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
-        });
+        packageManager.removeOnPermissionsChangeListener(permissionsChangedListener);
 
         String deviceId = permissionsChangedListener.getNotifiedDeviceId(mTestAppUid);
         assertThat(deviceId).isEqualTo(expectedDeviceId);

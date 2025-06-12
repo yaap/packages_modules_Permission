@@ -20,6 +20,7 @@
     <option name="test-suite-tag" value="apct" />
     <option name="test-suite-tag" value="apct-instrumentation" />
     <option name="test-tag" value="PermissionApexTests" />
+    <option name="hidden-api-checks" value="false" />
     <object type="module_controller" class="com.android.tradefed.testtype.suite.module.Sdk30ModuleController" />
 
     <!-- Install test -->

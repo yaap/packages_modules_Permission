@@ -26,13 +26,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.permissioncontroller.Constants
 import com.android.permissioncontroller.permission.ui.handheld.PermissionAppsFragment
 import com.android.permissioncontroller.permission.ui.model.ManageCustomPermissionsViewModel
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 
 class WearManageCustomPermissionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val activity = requireActivity()
         val application = activity.getApplication()
@@ -41,14 +41,14 @@ class WearManageCustomPermissionsFragment : Fragment() {
         val viewModel =
             ViewModelProvider(
                     this,
-                    ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+                    ViewModelProvider.AndroidViewModelFactory.getInstance(application),
                 )
                 .get(ManageCustomPermissionsViewModel::class.java)
 
         val onPermGroupClick: (String) -> Unit = { permGroupName ->
             viewModel.showPermissionApps(
                 this,
-                PermissionAppsFragment.createArgs(permGroupName, sessionId)
+                PermissionAppsFragment.createArgs(permGroupName, sessionId),
             )
         }
 

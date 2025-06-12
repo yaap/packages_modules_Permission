@@ -25,13 +25,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.model.ManageCustomPermissionsViewModel
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 
 @Composable
 fun WearManageCustomPermissionScreen(
     viewModel: ManageCustomPermissionsViewModel,
-    onPermGroupClick: (String) -> Unit
+    onPermGroupClick: (String) -> Unit,
 ) {
     val permissionGroups = viewModel.uiDataLiveData.observeAsState(emptyMap())
     var isLoading by remember { mutableStateOf(true) }
@@ -39,7 +40,7 @@ fun WearManageCustomPermissionScreen(
     WearManageCustomPermissionContent(
         isLoading,
         getPermGroupChipParams(permissionGroups.value),
-        onPermGroupClick
+        onPermGroupClick,
     )
 
     if (isLoading && permissionGroups.value.isNotEmpty()) {
@@ -51,21 +52,21 @@ fun WearManageCustomPermissionScreen(
 internal fun WearManageCustomPermissionContent(
     isLoading: Boolean,
     permGroupChipParams: List<PermGroupChipParam>,
-    onPermGroupClick: (String) -> Unit
+    onPermGroupClick: (String) -> Unit,
 ) {
     ScrollableScreen(
         title = stringResource(R.string.additional_permissions),
-        isLoading = isLoading
+        isLoading = isLoading,
     ) {
         for (params in permGroupChipParams) {
             item {
-                Chip(
+                WearPermissionButton(
                     label = params.label,
                     labelMaxLines = 3,
-                    icon = params.icon,
+                    iconBuilder = params.icon?.let { WearPermissionIconBuilder.builder(it) },
                     secondaryLabel = params.secondaryLabel,
                     secondaryLabelMaxLines = 3,
-                    onClick = { onPermGroupClick(params.permGroupName) }
+                    onClick = { onPermGroupClick(params.permGroupName) },
                 )
             }
         }

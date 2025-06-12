@@ -17,6 +17,7 @@
 package com.android.permissioncontroller.role.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 /**
@@ -28,4 +29,9 @@ public interface RolePreference extends TwoTargetPreference, RestrictionAwarePre
      */
     @NonNull
     Preference asPreference();
+
+    /**
+     * Sets the preference's summary content description.
+     */
+    void setSummaryContentDescription(@Nullable String summaryContentDescription);
 }

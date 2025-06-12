@@ -70,7 +70,6 @@ class SafetyCenterQsTileService : TileService() {
         qsTile.label = getString(R.string.safety_privacy_qs_tile_title)
         qsTile.subtitle = getString(R.string.safety_privacy_qs_tile_subtitle)
         qsTile.contentDescription = TextUtils.concat(qsTile.label, ", ", qsTile.subtitle)
-        qsTile.state = Tile.STATE_ACTIVE
         qsTile.updateTile()
     }
 

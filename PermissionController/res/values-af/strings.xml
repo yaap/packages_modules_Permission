@@ -63,7 +63,7 @@
     <string name="app_permissions" msgid="3369917736607944781">"Programtoestemmings"</string>
     <string name="unused_apps" msgid="2058057455175955094">"Ongebruikte apps"</string>
     <string name="edit_photos_description" msgid="5540108003480078892">"Redigeer geselekteerde foto’s vir hierdie app"</string>
-    <string name="no_unused_apps" msgid="12809387670415295">"Geen ongebruikte programme nie"</string>
+    <string name="no_unused_apps" msgid="12809387670415295">"Geen ongebruikte apps nie"</string>
     <string name="zero_unused_apps" msgid="9024448554157499748">"0 ongebruikte programme"</string>
     <string name="review_permission_decisions" msgid="309559429150613632">"Onlangse toestemmingbesluite"</string>
     <string name="review_permission_decisions_view_all" msgid="90391040431566130">"Bekyk alle onlangse toestemmingbesluite"</string>
@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="PERM">%1$s</xliff:g>toegang vir hierdie app op <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Sien al <xliff:g id="APP">%1$s</xliff:g> se toestemmings"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Sien alle apps met hierdie toestemming"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Inligting"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Instellings"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Wys Assistent-mikrofoongebruik"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Instellings vir ongebruikte apps"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Verwyder toestemmings as app nie gebruik word nie"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Oopmaak van skakels"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Verstek vir werk"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Verstek vir privaat ruimte"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Geoptimeer vir toestel"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Ander"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Geen"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Stelselverstek)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Geen apps nie"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil graag ontfoutingsinligting oplaai."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Deel ontfoutingsdata?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Die stelsel het \'n probleem bespeur."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> versoek tans om \'n foutverslag wat op <xliff:g id="DATE">%2$s</xliff:g> om <xliff:g id="TIME">%3$s</xliff:g> op hierdie toestel gegenereer is, op te laai. Foutverslae sluit persoonlike inligting oor jou toestel of wat deur programme aangemeld is in, byvoorbeeld gebruikername, liggingdata, toestelidentifiseerders en netwerkinligting. Deel foutverslae net met mense en programme wat jy met hierdie inligting vertrou. Laat <xliff:g id="APP_NAME_1">%4$s</xliff:g> toe om \'n foutverslag op te laai?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> versoek tans om \'n foutverslag wat op <xliff:g id="DATE">%2$s</xliff:g> om <xliff:g id="TIME">%3$s</xliff:g> op hierdie toestel gegenereer is, op te laai. Foutverslae sluit in: Persoonlike inligting oor jou toestel of inligting wat deur apps aangeteken is, byvoorbeeld gebruikername, liggingdata, toestelidentifiseerders en netwerkinligting. Deel foutverslae net met mense en apps wat jy met hierdie inligting vertrou.\n\nLaat <xliff:g id="APP_NAME_1">%4$s</xliff:g> toe om ’n foutverslag op te laai?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Kon nie die foutverslag vir <xliff:g id="APP_NAME">%1$s</xliff:g> verwerk nie. Die deel van die gedetailleerde ontfoutingdata is geweier. Jammer oor die onderbreking."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Laat toe"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Weier"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Laat beperkte instellings toe"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Beperkte instelling"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Hierdie instelling is vir jou veiligheid tans onbeskikbaar."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Handeling nie beskikbaar tydens ’n foonoproep nie"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Dit word nie toegelaat om tydens ’n foonoproep apps toe te laat om ander apps te installeer nie.\n\n Swendelaars versoek dikwels hierdie soort handeling tydens foonoproepgesprekke en dis dus geblokkeer om jou te beskerm. As jy aangesê word om hierdie handeling te doen deur iemand wat jy nie ken nie, kan dit ’n swendelary wees."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Kan nie handeling tydens oproep voltooi nie"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Hierdie instelling is geblokkeer om jou toestel en data te beskerm.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Swendelaars kan probeer om skadelike apps te installeer deur jou te vra om onbekende apps van ’n nuwe bron af te installeer."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Swendelaars kan probeer om beheer oor jou toestel te neem deur jou te vra om toeganklikheidtoegang vir ’n app toe te laat."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Toegang tot <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> is geweier vir die app"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Die app het toegang tot toestemming vir sensitiewe inligting versoek wat jou persoonlike en finansiële inligting in gevaar kan stel.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Dit is moontlik dat die app nie reg sal werk sonder hierdie beperkte toestemming nie. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Kry meer inligting oor hoe om toegang toe te laat&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Toegang is geweier vir app om die verstek <xliff:g id="ROLE_NAME">%1$s</xliff:g> te wees"</string>

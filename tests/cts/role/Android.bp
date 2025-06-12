@@ -37,7 +37,9 @@ android_test {
         "bedstead-multiuser",
         "flag-junit",
         "platform-test-annotations",
+        "platform-test-rules",
         "truth",
+        "uiautomator-helpers",
     ],
 
     test_suites: [
@@ -48,9 +50,17 @@ android_test {
     ],
 
     data: [
+        ":CtsDefaultNotesApp",
         ":CtsRoleTestApp",
         ":CtsRoleTestApp28",
         ":CtsRoleTestApp33WithoutInCallService",
         ":CtsRoleTestAppClone",
+    ],
+}
+
+filegroup {
+    name: "CtsRoleTestUtils",
+    srcs: [
+        "src/android/app/role/cts/RoleManagerUtil.kt",
     ],
 }

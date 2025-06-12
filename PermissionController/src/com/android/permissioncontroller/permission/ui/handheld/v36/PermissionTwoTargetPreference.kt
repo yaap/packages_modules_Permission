@@ -68,6 +68,7 @@ class PermissionTwoTargetPreference : TwoTargetPreference {
     }
 
     @DrawableRes private var extraWidgetIconRes = 0
+    private var extraWidgetContentDescription: String? = null
     private var secondTargetClickListener: OnSecondTargetClickListener? = null
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
@@ -75,6 +76,9 @@ class PermissionTwoTargetPreference : TwoTargetPreference {
         val settingsButton = holder.findViewById(R.id.settings_button) as ImageView
         if (extraWidgetIconRes != 0) {
             settingsButton.setImageResource(extraWidgetIconRes)
+        }
+        if (extraWidgetContentDescription != null) {
+            settingsButton.contentDescription = extraWidgetContentDescription
         }
         if (secondTargetClickListener != null) {
             settingsButton.setOnClickListener {
@@ -94,8 +98,9 @@ class PermissionTwoTargetPreference : TwoTargetPreference {
         notifyChanged()
     }
 
-    fun setExtraWidgetIconRes(@DrawableRes extraWidgetIconRes: Int) {
-        this.extraWidgetIconRes = extraWidgetIconRes
+    fun setExtraWidgetIcon(@DrawableRes iconRes: Int, contentDescription: String) {
+        this.extraWidgetIconRes = iconRes
+        this.extraWidgetContentDescription = contentDescription
         notifyChanged()
     }
 

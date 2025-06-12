@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Přístup k <xliff:g id="PERM">%1$s</xliff:g> pro tuto aplikaci v zařízení <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Zobrazit všechna oprávnění aplikace <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Zobrazit všechny aplikace s tímto oprávněním"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Informace"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Nastavení"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Zobrazit používání mikrofonu asistentem"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Nastavení nepoužívaných aplikací"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Odebrat oprávnění, pokud se aplikace nepoužívá"</string>
@@ -381,7 +383,7 @@
     <string name="role_emergency_search_keywords" msgid="1920007722599213358">"v případě nouze"</string>
     <string name="role_home_label" msgid="3871847846649769412">"Výchozí aplikace pro domácnost"</string>
     <string name="role_home_short_label" msgid="8544733747952272337">"Vstupní aplikace"</string>
-    <string name="role_home_description" msgid="7997371519626556675">"Aplikace (tzv. spouštěče), které nahrazují plochu na zařízení Android a dávají vám přístup k obsahu a funkcím zařízení."</string>
+    <string name="role_home_description" msgid="7997371519626556675">"Aplikace (tzv. spouštěče), které nahrazují plochu na zařízení Android a dávají vám přístup k obsahu a funkcím zařízení."</string>
     <string name="role_home_request_title" msgid="738136983453341081">"Nastavit <xliff:g id="APP_NAME">%1$s</xliff:g> jako výchozí aplikaci pro domácnost?"</string>
     <string name="role_home_request_description" msgid="2658833966716057673">"Není potřeba žádné oprávnění"</string>
     <string name="role_home_search_keywords" msgid="3830755001192666285">"spouštěč"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otevírání odkazů"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Výchozí pracovní"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Výchozí pro soukromý prostor"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimalizováno pro zařízení"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Jiné"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Žádná aplikace"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Výchozí nastavení systému)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Žádné aplikace"</string>
@@ -450,13 +454,13 @@
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Žádné aplikace"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Nepodporuje pracovní profil"</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Poznámka: Pokud restartujete zařízení a máte nastavený zámek obrazovky, tato aplikace se nespustí, dokud zařízení neodemknete."</string>
-    <string name="assistant_confirmation_message" msgid="7476540402884416212">"Asistent bude moci číst informace o aplikacích používaných v systému, včetně údajů viditelných na obrazovce a přístupných v rámci aplikací."</string>
+    <string name="assistant_confirmation_message" msgid="7476540402884416212">"Asistent bude moct číst informace o aplikacích používaných v systému, včetně údajů viditelných na obrazovce a přístupných v rámci aplikací."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Sdílet data ladění"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Sdílet podrobná data pro ladění?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> chce nahrát informace pro ladění."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Sdílet data ladění?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Systém zjistil problém."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"Aplikace <xliff:g id="APP_NAME_0">%1$s</xliff:g> chce nahrát zprávu o chybě tohoto zařízení, která byla pořízena <xliff:g id="DATE">%2$s</xliff:g> v <xliff:g id="TIME">%3$s</xliff:g>. Zprávy o chybě zahrnují osobní údaje o zařízení a údaje z aplikací, např. uživatelská jména, údaje o poloze, identifikátory zařízení a informace o sítích. Zprávy o chybách sdílejte jen s lidmi a aplikacemi, kterým důvěřujete. Chcete aplikaci <xliff:g id="APP_NAME_1">%4$s</xliff:g> povolit nahrát zprávu o chybě?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"Aplikace <xliff:g id="APP_NAME_0">%1$s</xliff:g> chce nahrát zprávu o chybě tohoto zařízení, která byla pořízena <xliff:g id="DATE">%2$s</xliff:g> v <xliff:g id="TIME">%3$s</xliff:g>. Zprávy o chybách zahrnují osobní údaje o zařízení a údaje z aplikací, například uživatelská jména, údaje o poloze, identifikátory zařízení a informace o sítích. Zprávy o chybách sdílejte jen s lidmi a aplikacemi, kterým důvěřujete.\n\nChcete aplikaci <xliff:g id="APP_NAME_1">%4$s</xliff:g> povolit nahrát zprávu o chybě?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Při zpracování zprávy o chybě aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> došlo k chybě. Sdílení podrobných údajů o ladění proto bylo zamítnuto. Omlouváme se za přerušení."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Povolit"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Zamítnout"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Povolit omezená nastavení"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Blokované nastavení"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Z důvodu vaší bezpečnosti toto nastavení momentálně není dostupné."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Akce není během telefonního hovoru k dispozici"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Během telefonního hovoru nelze aplikacím povolit instalovat další aplikace.\n\n O tento typ akce během hovorů často žádají podvodníci. Kvůli vaší ochraně je proto blokována. Pokud vás k této akci navádí někdo, koho neznáte, může se jednat o podvod."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Akci nelze dokončit během hovoru"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Toto nastavení je z důvodu ochrany zařízení a dat zablokováno.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Podvodníci se můžou pokusit nainstalovat škodlivé aplikace tím, že vás požádají o instalaci neznámých aplikací z nového zdroje."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Podvodníci se můžou pokusit převzít nad vaším zařízením kontrolu tím, že vás požádají, abyste aplikaci povolili přístup ke službám pro usnadnění."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikaci byl odepřen přístup k oprávnění <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Aplikace požádala o přístup k citlivému oprávnění, které může ohrozit vaše osobní a finanční údaje.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Je možné, že aplikace bez tohoto oprávnění nebude fungovat správně. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Jak povolit přístup&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Aplikaci byla odepřena role výchozí <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Accés de <xliff:g id="PERM">%1$s</xliff:g> a aquesta aplicació (<xliff:g id="DEVICE_NAME">%2$s</xliff:g>)"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Mostra tots els permisos per a <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Mostra totes les aplicacions que tenen aquest permís"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Informació"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Configuració"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Mostra l\'ús del micròfon de l\'Assistent"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Configuració d\'aplicació no utilitzada"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Suprimeix els permisos si no s\'utilitza l\'aplicació"</string>
@@ -390,8 +392,8 @@
     <string name="role_call_redirection_description" msgid="6091669882014664420">"Aplicacions que et permeten desviar trucades sortints a un altre número de telèfon"</string>
     <string name="role_call_redirection_request_title" msgid="2816244455003562925">"Vols establir <xliff:g id="APP_NAME">%1$s</xliff:g> com a aplicació de desviació de trucades predeterminada?"</string>
     <string name="role_call_redirection_request_description" msgid="3118895714178527164">"No calen permisos"</string>
-    <string name="role_call_screening_label" msgid="883935222060878724">"App predeterminada ID trucades i filtre trucades brossa"</string>
-    <string name="role_call_screening_short_label" msgid="2048465565063130834">"Aplicació ID trucades i filtre trucades brossa"</string>
+    <string name="role_call_screening_label" msgid="883935222060878724">"App predeterminada per identificar trucades i filtrar brossa"</string>
+    <string name="role_call_screening_short_label" msgid="2048465565063130834">"App per identificar trucades i filtrar brossa"</string>
     <string name="role_call_screening_description" msgid="2349431420497468981">"Aplicacions que et permeten identificar trucades i bloquejar les trucades brossa i automàtiques i els números que no vulguis que et truquin"</string>
     <string name="role_call_screening_request_title" msgid="7358309224566977290">"Vols establir <xliff:g id="APP_NAME">%1$s</xliff:g> com a aplicació predeterminada per identificar trucades i filtrar trucades brossa?"</string>
     <string name="role_call_screening_request_description" msgid="7338511921032446006">"No calen permisos"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Obertura d\'enllaços"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predeterminada per a la feina"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predeterminades per a l\'espai privat"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimitzades per al dispositiu"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Altres"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Cap"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Opció predeterminada del sistema)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Cap aplicació"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol penjar informació de depuració."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Vols compartir les dades de depuració?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"El sistema ha detectat un problema."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> sol·licita penjar un informe d\'errors des d\'aquest dispositiu generat el dia <xliff:g id="DATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g>). Els informes d\'errors inclouen informació personal sobre el dispositiu o informació registrada per les aplicacions, com ara noms d\'usuaris, dades de la ubicació, identificadors del dispositiu i informació de la xarxa. Comparteix informes d\'errors només amb persones i aplicacions de confiança. Vols permetre que <xliff:g id="APP_NAME_1">%4$s</xliff:g> pengi un informe d\'errors?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> sol·licita penjar un informe d\'errors des d\'aquest dispositiu generat el dia <xliff:g id="DATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g>). Els informes d\'errors inclouen informació personal sobre el dispositiu o informació registrada per les aplicacions, com ara noms d\'usuaris, dades de la ubicació, identificadors del dispositiu i informació de la xarxa. Comparteix informes d\'errors només amb persones i aplicacions de confiança. \n\nVols permetre que <xliff:g id="APP_NAME_1">%4$s</xliff:g> pengi un informe d\'errors?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Hi ha hagut un error en processar l\'informe d\'errors de l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g> i, per tant, s\'han denegat les dades de depuració detallades. Sentim la interrupció."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Permet"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Denega"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Permet la configuració restringida"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Opció de configuració restringida"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Per a la teva seguretat, aquesta opció de configuració no està disponible en aquests moments."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Acció no disponible durant les trucades"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"No es permet que les aplicacions instal·lin altres aplicacions durant una trucada.\n\n Els estafadors solen demanar aquest tipus d\'acció durant les trucades, de manera que s\'ha bloquejat per protegir-te. Si algú que no coneixes t\'indica que facis aquesta acció, pot ser que es tracti d\'una estafa."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"No es pot completar l\'acció durant la trucada"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Aquesta opció de configuració està bloquejada per protegir el dispositiu i les dades.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Els estafadors poden intentar instal·lar aplicacions perjudicials demanant-te que instal·lis aplicacions desconegudes d\'una font nova."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>És possible que els estafadors intentin prendre el control del teu dispositiu demanant-te que donis a una aplicació accés a funcions d\'accessibilitat."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"A l\'aplicació se li ha denegat l\'accés a <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"L\'aplicació ha demanat accés a un permís sensible, el qual pot posar en risc la teva informació personal o financera.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>És possible que l\'aplicació no funcioni correctament sense aquest permís restringit. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Més informació sobre com pots permetre l\'accés&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"A l\'aplicació se li ha denegat l\'accés per ser <xliff:g id="ROLE_NAME">%1$s</xliff:g> de manera predeterminada"</string>

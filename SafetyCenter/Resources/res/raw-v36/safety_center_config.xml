@@ -30,6 +30,36 @@
                 initialDisplayState="disabled"
                 notificationsAllowed="true"/>
             <dynamic-safety-source
+                id="AndroidFingerprintUnlock"
+                packageName="com.android.settings"
+                profile="all_profiles"
+                title="@com.android.safetycenter.resources:string/fingerprint_unlock_title"
+                titleForWork="@com.android.safetycenter.resources:string/fingerprint_unlock_title_for_work"
+                titleForPrivateProfile="@com.android.safetycenter.resources:string/fingerprint_unlock_title_for_private_profile"
+                searchTerms="@com.android.safetycenter.resources:string/fingerprint_unlock_search_terms"
+                refreshOnPageOpenAllowed="true"
+                initialDisplayState="hidden"/>
+            <dynamic-safety-source
+                id="AndroidFaceUnlock"
+                packageName="com.android.settings"
+                profile="all_profiles"
+                title="@com.android.safetycenter.resources:string/face_unlock_title"
+                titleForWork="@com.android.safetycenter.resources:string/face_unlock_title_for_work"
+                titleForPrivateProfile="@com.android.safetycenter.resources:string/face_unlock_title_for_private_profile"
+                searchTerms="@com.android.safetycenter.resources:string/face_unlock_search_terms"
+                refreshOnPageOpenAllowed="true"
+                initialDisplayState="hidden"/>
+            <dynamic-safety-source
+                id="AndroidWearUnlock"
+                packageName="com.android.settings"
+                profile="all_profiles"
+                title="@com.android.safetycenter.resources:string/wear_unlock_title"
+                titleForWork="@com.android.safetycenter.resources:string/wear_unlock_title_for_work"
+                titleForPrivateProfile="@com.android.safetycenter.resources:string/wear_unlock_title_for_private_profile"
+                searchTerms="@com.android.safetycenter.resources:string/wear_unlock_search_terms"
+                refreshOnPageOpenAllowed="true"
+                initialDisplayState="hidden"/>
+            <dynamic-safety-source
                 id="AndroidBiometrics"
                 packageName="com.android.settings"
                 profile="all_profiles"
@@ -37,6 +67,7 @@
                 titleForWork="@com.android.safetycenter.resources:string/biometrics_title_for_work"
                 titleForPrivateProfile="@com.android.safetycenter.resources:string/biometrics_title_for_private_profile"
                 searchTerms="@com.android.safetycenter.resources:string/biometrics_search_terms"
+                refreshOnPageOpenAllowed="true"
                 initialDisplayState="hidden"/>
         </safety-sources-group>
         <safety-sources-group

@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Ukufinyelela kwe-<xliff:g id="PERM">%1$s</xliff:g> kwale app kuvuliwe ku-<xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Bona zonke izimvume ze-<xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Bona zonke izinhlelo zokusebenza ngale mvume"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Ulwazi"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Amasethingi"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Bonisa ukusetshenziswa kwe-microphone kamsizi"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Amasethingi we-app engasetshenziswanga"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Susa izimvume uma uhlelo lokusebenza lungasetshenziswa"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Ivula amalinki"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Okuzenzakalelayo kokusebenza"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Okuzenzakalelayo kwendawo engasese"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Ilungiselelwe idivayisi"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Amanye"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Lutho"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Okuzenzakalelayo kwesistimu)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Azikho izinhlelo zokusebenza"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"I-<xliff:g id="APP_NAME">%1$s</xliff:g> ingathanda ukulayisha ulwazi lokususa iphutha."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Yabelana ngedatha yokulungisa amaphutha?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Isistimu ithole inkinga."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"I-<xliff:g id="APP_NAME_0">%1$s</xliff:g> icela ukulayisha umbiko wesiphazamisi kusukela kule divayisi othathwe ngomhla ka-<xliff:g id="DATE">%2$s</xliff:g> ngo-<xliff:g id="TIME">%3$s</xliff:g>. Imibiko yesiphazamisi ifaka ulwazi lomuntu siqu olumayelana nedivayisi yakho noma olufakwe ngezinhlelo zokusebenza, isibonelo, amagama abasebenzisi, idatha yendawo, izikhombi zedivayisi, nolwazi lwedivayisi. Yabelana kuphela ngemibiko yesiphazamisi nabantu nezinhlelo zokusebenza ozithembayo ngalolu lwazi. Vumela i-<xliff:g id="APP_NAME_1">%4$s</xliff:g> ukuthi ilayishe umbiko wesiphazamisi?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"I-<xliff:g id="APP_NAME_0">%1$s</xliff:g> icela ukulayisha umbiko wesiphazamisi ovela kule divayisi othathwe ngomhla ka-<xliff:g id="DATE">%2$s</xliff:g> ngo-<xliff:g id="TIME">%3$s</xliff:g>. Imibiko yesiphazamisi ifaka ulwazi lomuntu siqu olumayelana nedivayisi yakho noma olufakwe ngama-app, ngokwesibonelo, amagama abasebenzisi, idatha yendawo, izikhombi zedivayisi, nolwazi lwedivayisi. Yabelana kuphela ngemibiko yesiphazamisi nabantu nama-app owathembayo ngalolu lwazi.\n\n Vumela i-<xliff:g id="APP_NAME_1">%4$s</xliff:g> ukuthi ilayishe umbiko wesiphazamisi?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Kube nephutha ukucubungula umbiko wesiphazamisi we-<xliff:g id="APP_NAME">%1$s</xliff:g>. Ngakho-ke ukwabelana ngedatha yokususa isiphazamiso inqatshiwe. Uxolo ngokuphazamisa."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Vumela"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Phika"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Vumela amasethingi akhawulelwe"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Amasethingi akhawulelwe"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Ukuze uphephe, leli sethingi okwamanje alitholakali."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Isenzo asitholakali ngenkathi ufona"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Ukuvumela ama-app ukuthi afake amanye ama-app akuvunyelwe phakathi nekholi yefoni.\n\n Amaqola, ngokuvamile acela lolu hlobo lwesenzo phakathi nezingxoxo zekholi, ngakho-ke kuvinjiwe ukuze uvikeleke. Uma uqondiswa ukuthi wenze lesi senzo ngumuntu ongamazi, kungase kube umkhonyovu."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Ayikwazi ukuqedela isenzo phakathi nekholi"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Leli sethingi livinjiwe ukuze kuvikelwe idivayisi yakho nedatha.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Amaqola angase azame ukufaka ama-app ayingozi ngokukucela ukuthi ufake ama-app angaziwa avela emthonjeni omusha."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Amaqola angase azame ukulawula idivayisi yakho ngokukucela ukuthi uvumele ukufinyelela ukutholakala kwe-app."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"I-app inqatshelwe ukufinyelela ku-<xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"I-app icele ukufinyelela emvumweni ezwelayo okungabeka imininingwane yakho siqu neyezimali engozini.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Kungenzeka ukuthi i-app ingasebenzi kahle ngaphandle kwemvume enomkhawulo. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Funda ukuthi ungakuvumela kanjani ukufinyelela&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"I-app iye yanqatshelwa ukufinyelela ukuze ibe yi-<xliff:g id="ROLE_NAME">%1$s</xliff:g> ezenzakalelayo"</string>

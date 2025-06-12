@@ -553,14 +553,14 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         if (detailResIds.getSecond() != null) {
             // If the permissions are individually controlled, also show a link to the page that
             // lets you control them.
-            mDetails.setExtraWidgetIconRes(R.drawable.ic_settings);
+            mDetails.setExtraWidgetIcon(R.drawable.ic_settings, getContext().getString(
+                    R.string.app_permission_settings_button));
             Bundle args = AllAppPermissionsFragment.createArgs(mPackageName, mPermGroupName, mUser);
             mDetails.setOnSecondTargetClickListener((v) ->
                     mViewModel.showAllPermissions(this, args));
             mDetails.setSummary(getPreferenceManager().getContext().getString(
                     detailResIds.getFirst(), detailResIds.getSecond()));
         } else {
-            mDetails.setOnSecondTargetClickListener(null);
             mDetails.setSummary(getPreferenceManager().getContext().getString(
                     detailResIds.getFirst()));
         }
@@ -569,7 +569,8 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
 
     private void setAdminSupportDetail(EnforcedAdmin admin) {
         if (admin != null) {
-            mDetails.setExtraWidgetIconRes(R.drawable.ic_info_outline);
+            mDetails.setExtraWidgetIcon(R.drawable.ic_info_outline, getContext().getString(
+                    R.string.app_permission_info_button));
             mDetails.setOnSecondTargetClickListener((v) ->
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), admin));
         } else {

@@ -24,17 +24,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import com.android.permissioncontroller.R
-import com.android.permissioncontroller.permission.ui.wear.elements.AlertDialog
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
-import com.android.permissioncontroller.permission.ui.wear.elements.ToggleChip
-import com.android.permissioncontroller.permission.ui.wear.elements.ToggleChipToggleControl
 import com.android.permissioncontroller.permission.ui.wear.model.RevokeDialogArgs
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.DialogButtonContent
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionConfirmationDialog
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControl
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlType
+import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 
 @Composable
 fun WearAppPermissionGroupsScreen(helper: WearAppPermissionGroupsHelper) {
+    val materialUIVersion = ResourceHelper.materialUIVersionInSettings
     val packagePermGroups = helper.viewModel.packagePermGroupsLiveData.observeAsState(null)
     val autoRevoke = helper.viewModel.autoRevokeLiveData.observeAsState(null)
     val appPermissionUsages = helper.wearViewModel.appPermissionUsages.observeAsState(emptyList())
@@ -43,6 +46,9 @@ fun WearAppPermissionGroupsScreen(helper: WearAppPermissionGroupsHelper) {
         helper.locationProviderInterceptDialogViewModel.dialogVisibilityLiveData.observeAsState(
             false
         )
+    val locationProviderDialogArgs =
+        helper.locationProviderInterceptDialogViewModel.locationProviderInterceptDialogArgs
+            .observeAsState(null)
 
     var isLoading by remember { mutableStateOf(true) }
 
@@ -50,17 +56,18 @@ fun WearAppPermissionGroupsScreen(helper: WearAppPermissionGroupsHelper) {
         WearAppPermissionGroupsContent(
             isLoading,
             helper.getPermissionGroupChipParams(appPermissionUsages.value),
-            helper.getAutoRevokeChipParam(autoRevoke.value)
+            helper.getAutoRevokeChipParam(autoRevoke.value),
         )
         RevokeDialog(
+            materialUIVersion = materialUIVersion,
             showDialog = showRevokeDialog.value,
-            args = helper.revokeDialogViewModel.revokeDialogArgs
+            args = helper.revokeDialogViewModel.revokeDialogArgs,
         )
-        if (showLocationProviderDialog.value) {
-            LocationProviderDialogScreen(
-                helper.locationProviderInterceptDialogViewModel.locationProviderInterceptDialogArgs
-            )
-        }
+        LocationProviderDialogScreen(
+            showDialog = showLocationProviderDialog.value,
+            onDismissRequest = { helper.locationProviderInterceptDialogViewModel.dismissDialog() },
+            args = locationProviderDialogArgs.value,
+        )
     }
 
     if (isLoading && !packagePermGroups.value.isNullOrEmpty()) {
@@ -72,30 +79,32 @@ fun WearAppPermissionGroupsScreen(helper: WearAppPermissionGroupsHelper) {
 internal fun WearAppPermissionGroupsContent(
     isLoading: Boolean,
     permissionGroupChipParams: List<PermissionGroupChipParam>,
-    autoRevokeChipParam: AutoRevokeChipParam?
+    autoRevokeChipParam: AutoRevokeChipParam?,
 ) {
     ScrollableScreen(title = stringResource(R.string.app_permissions), isLoading = isLoading) {
         if (permissionGroupChipParams.isEmpty()) {
-            item { Chip(label = stringResource(R.string.no_permissions), onClick = {}) }
+            item {
+                WearPermissionButton(label = stringResource(R.string.no_permissions), onClick = {})
+            }
         } else {
             for (info in permissionGroupChipParams) {
                 item {
                     if (info.checked != null) {
-                        ToggleChip(
-                            checked = info.checked,
+                        WearPermissionToggleControl(
+                            toggleControl = WearPermissionToggleControlType.Switch,
                             label = info.label,
+                            checked = info.checked,
                             enabled = info.enabled,
-                            toggleControl = ToggleChipToggleControl.Switch,
-                            onCheckedChanged = info.onCheckedChanged
+                            onCheckedChanged = info.onCheckedChanged,
                         )
                     } else {
-                        Chip(
+                        WearPermissionButton(
                             label = info.label,
                             labelMaxLines = Integer.MAX_VALUE,
                             secondaryLabel = info.summary?.let { info.summary },
                             secondaryLabelMaxLines = Integer.MAX_VALUE,
                             enabled = info.enabled,
-                            onClick = info.onClick
+                            onClick = info.onClick,
                         )
                     }
                 }
@@ -103,12 +112,12 @@ internal fun WearAppPermissionGroupsContent(
             autoRevokeChipParam?.let {
                 if (it.visible) {
                     item {
-                        ToggleChip(
+                        WearPermissionToggleControl(
                             checked = it.checked,
                             label = stringResource(it.labelRes),
-                            labelMaxLine = 3,
-                            toggleControl = ToggleChipToggleControl.Switch,
-                            onCheckedChanged = it.onCheckedChanged
+                            labelMaxLines = 3,
+                            toggleControl = WearPermissionToggleControlType.Switch,
+                            onCheckedChanged = it.onCheckedChanged,
                         )
                     }
                 }
@@ -118,14 +127,19 @@ internal fun WearAppPermissionGroupsContent(
 }
 
 @Composable
-internal fun RevokeDialog(showDialog: Boolean, args: RevokeDialogArgs?) {
-    args?.let {
-        AlertDialog(
-            showDialog = showDialog,
-            message = stringResource(it.messageId),
-            onOKButtonClick = it.onOkButtonClick,
-            onCancelButtonClick = it.onCancelButtonClick,
-            scalingLazyListState = rememberScalingLazyListState()
+internal fun RevokeDialog(
+    materialUIVersion: WearPermissionMaterialUIVersion,
+    showDialog: Boolean,
+    args: RevokeDialogArgs?,
+) {
+
+    args?.run {
+        WearPermissionConfirmationDialog(
+            materialUIVersion = materialUIVersion,
+            show = showDialog,
+            message = stringResource(messageId),
+            positiveButtonContent = DialogButtonContent(onClick = onOkButtonClick),
+            negativeButtonContent = DialogButtonContent(onClick = onCancelButtonClick),
         )
     }
 }

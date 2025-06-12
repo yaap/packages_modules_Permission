@@ -105,7 +105,7 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
         }
 
         PermissionUsageViewModelFactory factory = new PermissionUsageViewModelFactory(
-                        getActivity().getApplication(), this, new Bundle());
+                        getActivity().getApplication());
         mViewModel = new ViewModelProvider(this, factory)
                 .get(PermissionUsageViewModel.class);
 

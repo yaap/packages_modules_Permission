@@ -22,6 +22,7 @@ import java.time.Duration
 import kotlinx.coroutines.DEBUG_PROPERTY_NAME
 import kotlinx.coroutines.DEBUG_PROPERTY_VALUE_AUTO
 import kotlinx.coroutines.DEBUG_PROPERTY_VALUE_ON
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
@@ -68,6 +69,20 @@ object Coroutines {
         runBlockingWithTimeout(timeout) { waitFor(checkPeriod, condition) }
     }
 
+    /** Check an assertion passes, with a timeout if it does not. */
+    fun assertWithTimeout(
+        timeout: Duration = TIMEOUT_LONG,
+        checkPeriod: Duration = CHECK_PERIOD,
+        assertion: () -> Unit,
+    ) {
+        try {
+            runBlockingWithTimeout(timeout) { assertThatWaiting(checkPeriod, assertion) }
+        } catch (ex: TimeoutCancellationException) {
+            // Rerun the assertion to generate a meaningful error message that isn't just "timeout"
+            assertion()
+        }
+    }
+
     /** Retries a [fallibleAction] until no errors are thrown or a timeout occurs. */
     fun waitForSuccessWithTimeout(
         timeout: Duration = TIMEOUT_LONG,
@@ -102,6 +117,21 @@ object Coroutines {
     private suspend fun waitFor(checkPeriod: Duration = CHECK_PERIOD, condition: () -> Boolean) {
         while (!condition()) {
             delay(checkPeriod.toMillis())
+        }
+    }
+
+    /** Check an assertion passes using coroutines. */
+    private suspend fun assertThatWaiting(
+        checkPeriod: Duration = CHECK_PERIOD,
+        assertion: () -> Unit,
+    ) {
+        while (true) {
+            try {
+                assertion()
+                break
+            } catch (ex: AssertionError) {
+                delay(checkPeriod.toMillis())
+            }
         }
     }
 

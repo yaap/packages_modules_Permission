@@ -22,7 +22,6 @@ import androidx.annotation.IntDef
 import com.android.permissioncontroller.R
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
-import java.util.Locale
 
 object WearUtils {
     @Retention(AnnotationRetention.SOURCE)
@@ -48,7 +47,7 @@ object WearUtils {
                 res.getString(
                     R.string.wear_app_perms_7d_access,
                     summaryTimestamp.third,
-                    summaryTimestamp.first
+                    summaryTimestamp.first,
                 )
             else -> ""
         }
@@ -57,7 +56,7 @@ object WearUtils {
     @JvmStatic
     private fun getPermissionLastAccessSummaryTimestamp(
         lastAccessTime: Long?,
-        context: Context
+        context: Context,
     ): Triple<String, Int, String> {
         val midnightToday =
             (ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS).toEpochSecond() * 1000L)
@@ -77,9 +76,5 @@ object WearUtils {
                 else if (isLastAccessTodayOrYesterday) LAST_24H_YESTERDAY else LAST_7D
         }
         return Triple(lastAccessTimeFormatted, lastAccessType, lastAccessDateFormatted)
-    }
-
-    fun String.capitalize(): String = replaceFirstChar {
-        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
     }
 }

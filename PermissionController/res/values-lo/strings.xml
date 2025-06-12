@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="PERM">%1$s</xliff:g> ເຂົ້າເຖິງແອັບນີ້ຢູ່ <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"ເບິ່ງສິດອະນຸຍາດ <xliff:g id="APP">%1$s</xliff:g> ທັງໝົດ"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"ເບິ່ງແອັບທັງໝົດທີ່ມີສິດອະນຸຍາດນີ້"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"ຂໍ້ມູນ"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"ການຕັ້ງຄ່າ"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"ສະແດງການໃຊ້ໄມໂຄຣໂຟນຂອງຜູ້ຊ່ວຍ"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"ການຕັ້ງຄ່າແອັບທີ່ບໍ່ໄດ້ໃຊ້"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"ລຶບສິດອະນຸຍາດຫາກບໍ່ໄດ້ໃຊ້ແອັບ"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"ການເປີດລິ້ງ"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"ຄ່າເລີ່ມຕົ້ນສຳລັບບ່ອນເຮັດວຽກ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ຄ່າເລີ່ມຕົ້ນສຳລັບພື້ນທີ່ສ່ວນບຸກຄົນ"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"ໄດ້ຮັບການເພີ່ມປະສິດທິພາບສຳລັບອຸປະກອນ"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"ອື່ນໆ"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ບໍ່ມີ"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ຄ່າເລີ່ມຕົ້ນຂອງລະບົບ)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ບໍ່ມີແອັບ"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການອັບໂຫລດຂໍ້ມູນການດີບັກ."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"ແບ່ງປັນຂໍ້ມູນການດີບັກບໍ?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"ລະບົບກວດພົບບັນຫາ."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ກຳລັງຮ້ອງຂໍໃຫ້ອັບໂຫລດລາຍງານຂໍ້ຜິດພາດຈາກອຸປະກອນນີ້ຖືກບັນທຶກມາເມື່ອ <xliff:g id="DATE">%2$s</xliff:g> ເວລາ <xliff:g id="TIME">%3$s</xliff:g>. ລາຍງານຂໍ້ຜິດພາດຕ່າງໆຈະຮວມເອົາຂໍ້ມູນສ່ວນຕົວກ່ຽວກັບອຸປະກອນຂອງທ່ານ ຫຼື ຂໍ້ມູນທີ່ຈັດເກັບໄວ້ໂດຍແອັບ, ຕົວຢ່າງ ເຊັ່ນ: ຊື່ຜູ້ໃຊ້, ຂໍ້ມູນສະຖານທີ່, ຕົວລະບຸອຸປະກອນ ແລະ ຂໍ້ມູນເຄືອຂ່າຍ. ກະລຸນາແບ່ງປັນລາຍງານຂໍ້ຜິດພາດໃຫ້ສະເພາະຄົນ ແລະ ແອັບທີ່ທ່ານເຊື່ອຖືໃຫ້ເຂົ້າເຖິງຂໍ້ມູນນີ້ໄດ້ເທົ່ານັ້ນ. ອະນຸຍາດໃຫ້ <xliff:g id="APP_NAME_1">%4$s</xliff:g> ອັບໂຫລດລາຍງານຂໍ້ຜິດພາດບໍ?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ກຳລັງຮ້ອງຂໍໃຫ້ອັບໂຫຼດລາຍງານຂໍ້ຜິດພາດຈາກອຸປະກອນນີ້ທີ່ບັນທຶກໃນວັນທີ <xliff:g id="DATE">%2$s</xliff:g> ເວລາ <xliff:g id="TIME">%3$s</xliff:g>. ລາຍງານຂໍ້ຜິດພາດຕ່າງໆຈະຮວມເອົາຂໍ້ມູນສ່ວນຕົວກ່ຽວກັບອຸປະກອນຂອງທ່ານ ຫຼື ຂໍ້ມູນທີ່ບັນທຶກໄວ້ໂດຍແອັບ, ຕົວຢ່າງ: ຊື່ຜູ້ໃຊ້, ຂໍ້ມູນສະຖານທີ່, ຕົວລະບຸອຸປະກອນ ແລະ ຂໍ້ມູນເຄືອຂ່າຍ. ໃຫ້ແບ່ງປັນລາຍງານຂໍ້ຜິດພາດກັບຄົນ ແລະ ແອັບທີ່ທ່ານເຊື່ອຖືດ້ວຍຂໍ້ມູນນີ້ໄດ້ເທົ່ານັ້ນ. \n\nອະນຸຍາດໃຫ້ <xliff:g id="APP_NAME_1">%4$s</xliff:g> ອັບໂຫຼດລາຍງານຂໍ້ຜິດພາດບໍ?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"ເກີດບັນຫາໃນການປະມວນຜົນລາຍງານຂໍ້ຜິດພາດສຳລັບ <xliff:g id="APP_NAME">%1$s</xliff:g>. ດັ່ງນັ້ນການແບ່ງປັນຂໍ້ມູນການດີບັກແບບລະອຽດຈຶ່ງຖືກປະຕິເສດ. ຂໍອະໄພສຳລັບການລົບກວນດັ່ງກ່າວ."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"ອະນຸຍາດ"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"ປະຕິເສດ"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"ອະນຸຍາດການຕັ້ງຄ່າທີ່ຈຳກັດ"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"ການຕັ້ງຄ່າທີ່ຈຳກັດ"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ຕອນນີ້ຈຶ່ງບໍ່ສາມາດໃຊ້ການຕັ້ງຄ່ານີ້ໄດ້."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"ການດຳເນີນການບໍ່ພ້ອມນຳໃຊ້ໃນຂະນະທີ່ກຳລັງໂທລະສັບ"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"ບໍ່ອະນຸຍາດໃຫ້ແອັບຕິດຕັ້ງແອັບອື່ນໆໃນລະຫວ່າງການໂທ.\n\n ສະແກມເມີມັກຈະຮ້ອງຂໍການດຳເນີນການປະເພດນີ້ໃນລະຫວ່າງການສົນທະນາທາງໂທລະສັບ, ດັ່ງນັ້ນລະບົບຈຶ່ງບລັອກໄວ້ເພື່ອປົກປ້ອງທ່ານ. ຫາກມີຄົນທີ່ທ່ານບໍ່ຮູ້ຈັກບອກໃຫ້ທ່ານດຳເນີນການດັ່ງກ່າວ, ນັ້ນອາດເປັນສະແກມ."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"ບໍ່ສາມາດດຳເນີນການໃຫ້ສຳເລັດໄດ້ໃນລະຫວ່າງການໂທ"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"ການຕັ້ງຄ່ານີ້ຖືກບລັອກເພື່ອປົກປ້ອງອຸປະກອນ ແລະ ຂໍ້ມູນຂອງທ່ານ.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ສະແກມເມີອາດຈະພະຍາຍາມຕິດຕັ້ງແອັບທີ່ເປັນອັນຕະລາຍໂດຍການຂໍໃຫ້ທ່ານຕິດຕັ້ງແອັບທີ່ບໍ່ຮູ້ຈັກຈາກແຫຼ່ງໃໝ່."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ສະແກມເມີອາດຈະພະຍາຍາມຄວບຄຸມອຸປະກອນຂອງທ່ານໂດຍການຂໍໃຫ້ທ່ານອະນຸຍາດສິດເຂົ້າເຖິງສໍາລັບແອັບ."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"ແອັບຖືກປະຕິເສດສິດເຂົ້າເຖິງຫາ <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"ແອັບໄດ້ຮ້ອງຂໍການສິດເຖິງການອະນຸຍາດທີ່ລະອຽດອ່ອນ ເຊິ່ງສາມາດເຮັດໃຫ້ຂໍ້ມູນສ່ວນຕົວ ແລະ ຂໍ້ມູນການເງິນຂອງທ່ານມີຄວາມສ່ຽງ.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>ມັນເປັນໄປໄດ້ວ່າແອັບດັ່ງກ່າວຈະບໍ່ເຮັດວຽກຢ່າງຖືກຕ້ອງໂດຍບໍ່ມີການອະນຸຍາດທີ່ຖືກຈຳກັດໄວ້ນີ້. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;ສຶກສາວິທີອະນຸຍາດສິດເຂົ້າເຖິງ&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"ແອັບຖືກປະຕິເສດສິດເຂົ້າເຖິງໃຫ້ເປັນ <xliff:g id="ROLE_NAME">%1$s</xliff:g> ຄ່າເລີ່ມຕົ້ນ"</string>

@@ -75,7 +75,7 @@
     <string name="app_disable_dlg_positive" msgid="7418444149981904940">"غیرفعال کردن برنامه"</string>
     <string name="app_disable_dlg_text" msgid="3126943217146120240">"‏اگر این برنامه را غیرفعال کنید، ممکن است Android و سایر برنامه‌های دیگر عملکرد موردانتظار را نداشته باشند. به‌خاطر داشته باشید که نمی‌توانید این برنامه را حذف کنید، چون از برنامه‌های ازپیش نصب‌شده روی دستگاه است. این برنامه، با غیرفعال کردن، خاموش می‌شود و در دستگاه پنهان می‌شود."</string>
     <string name="app_permission_manager" msgid="3903811137630909550">"مدیر اجازه‌ها"</string>
-    <string name="never_ask_again" msgid="4728762438198560329">"دوباره سؤال نشود"</string>
+    <string name="never_ask_again" msgid="4728762438198560329">"دوباره پرسیده نشود"</string>
     <string name="no_permissions" msgid="3881676756371148563">"مجوزی موجود نیست"</string>
     <string name="additional_permissions" msgid="5801285469338873430">"اجازه‌های جانبی"</string>
     <string name="app_permissions_info_button_label" msgid="7633312050729974623">"باز کردن اطلاعات برنامه"</string>
@@ -147,7 +147,7 @@
     <string name="permission_usage_any_permission" msgid="6358023078298106997">"همه اجازه‌ها"</string>
     <string name="permission_usage_any_time" msgid="3802087027301631827">"هر زمانی"</string>
     <string name="permission_usage_last_n_days" msgid="7882626467375714145">"{count,plural, =1{# روز گذشته}one{# روز گذشته}other{# روز گذشته}}"</string>
-    <string name="permission_usage_last_n_hours" msgid="8490466053680267858">"{count,plural, =1{# ساعت گذشته}one{# ساعت گذشته}other{# ساعت گذشته}}"</string>
+    <string name="permission_usage_last_n_hours" msgid="8490466053680267858">"{count,plural, =1{# ساعت پیش}one{# ساعت پیش}other{# ساعت پیش}}"</string>
     <string name="permission_usage_last_n_minutes" msgid="7817864229878281983">"{count,plural, =1{# دقیقه گذشته}one{# دقیقه گذشته}other{# دقیقه گذشته}}"</string>
     <string name="no_permission_usages" msgid="9119517454177289331">"هیچ مجوزی استفاده نشده است"</string>
     <string name="permission_usage_list_title_any_time" msgid="8718257027381592407">"آخرین دسترسی در هرزمانی"</string>
@@ -200,8 +200,10 @@
     <string name="app_permission_title" msgid="2090897901051370711">"اجازه <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"دسترسی <xliff:g id="PERM">%1$s</xliff:g> برای این برنامه"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"دسترسی <xliff:g id="PERM">%1$s</xliff:g> از این برنامه در <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"مشاهده همه اجازه‌های <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"دیدن همه اجازه‌های <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"دیدن همه برنامه‌هایی که این مجوز را دارند"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"اطلاعات"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"تنظیمات"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"نمایش میزان استفاده «دستیار» از میکروفون"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"تنظیمات برنامه‌های استفاده‌نشده"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"اگر از برنامه استفاده نمی‌شود، اجازه‌ها برداشته شوند"</string>
@@ -273,7 +275,7 @@
     <string name="unused_apps_notification_content" msgid="9195026773244581246">"اجازه‌ها و فایل‌های موقت حذف شده‌اند و اعلان‌ها متوقف شده‌اند. برای مرور، تک‌ضرب بزنید."</string>
     <string name="unused_apps_safety_center_card_title" msgid="5638409355530099149">"مرور برنامه‌هایی که اجازه‌های آن‌ها برداشته شده است"</string>
     <string name="unused_apps_safety_center_card_content" msgid="1088557243627427820">"اجازه‌ها و فایل‌های موقت مربوط به برنامه‌هایی که مدتی از آن‌ها استفاده نکرده‌اید برداشته شدند و اعلان‌ها متوقف شدند."</string>
-    <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"مرور برنامه‌ها"</string>
+    <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"بازبینی برنامه‌ها"</string>
     <string name="post_drive_permission_decision_reminder_title" msgid="1290697371418139976">"بررسی اجازه‌های اخیر"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_1_permission" msgid="670521503734140711">"درحین رانندگی، به <xliff:g id="APP">%1$s</xliff:g> اجازه دسترسی به <xliff:g id="PERMISSION">%2$s</xliff:g> را دادید"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_2_permissions" msgid="671791184670801301">"درحین رانندگی، به <xliff:g id="APP">%1$s</xliff:g> اجازه دسترسی به <xliff:g id="PERMISSION_1">%2$s</xliff:g> و <xliff:g id="PERMISSION_2">%3$s</xliff:g> را دادید"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"باز کردن پیوندها"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"پیش‌فرض برای کار"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"برنامه‌های پیش‌فرض برای فضای خصوصی"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"بهینه‌سازی‌شده برای دستگاه"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"موارد دیگر"</string>
     <string name="default_app_none" msgid="9084592086808194457">"هیچ‌کدام"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(پیش‌فرض سیستم)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"برنامه‌ای موجود نیست"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد اطلاعات اشکال‌زدایی را بارگذاری کند."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"داده‌های اشکال‌زدایی هم‌رسانی شود؟"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"سیستم مشکلی را تشخیص داده است."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> درخواست بارگذاری گزارش اشکالی را دارد که در <xliff:g id="DATE">%2$s</xliff:g> ساعت <xliff:g id="TIME">%3$s</xliff:g> در این دستگاه پیش آمده است. گزارش‌های اشکال شامل اطلاعات شخصی درباره دستگاه شما است یا اطلاعاتی که توسط برنامه‌ها گزارش شده است، برای مثال نام‌های کاربر، داده‌های مکان، شناسه‌های دستگاه و اطلاعات شبکه. گزارش‌های اشکال را تنها با افراد و برنامه‌هایی هم‌رسانی کنید که به آن‌ها در این‌باره اعتماد دارید. به <xliff:g id="APP_NAME_1">%4$s</xliff:g> اجازه بارگذاری گزارش اشکال داده شود؟"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> درخواست بارگذاری گزارش اشکالی را دارد که در <xliff:g id="DATE">%2$s</xliff:g> ساعت <xliff:g id="TIME">%3$s</xliff:g> در این دستگاه پیش آمده است. گزارش‌های اشکال شامل اطلاعات شخصی درباره دستگاه شما است یا اطلاعاتی که توسط برنامه‌ها گزارش شده است، برای مثال، نام‌های کاربری، داده‌های مکان، شناسه‌های دستگاه و اطلاعات شبکه. گزارش‌های اشکال را فقط با افراد و برنامه‌هایی هم‌رسانی کنید که به آن‌ها در این‌باره اعتماد دارید.\n\nبه <xliff:g id="APP_NAME_1">%4$s</xliff:g> اجازه بارگذاری گزارش اشکال داده شود؟"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"هنگام پردازش گزارش اشکال برای <xliff:g id="APP_NAME">%1$s</xliff:g> خطایی رخ داد. بنابراین هم‌رسانی داده‌های اشکال‌زدایی دقیق رد شد. از وقفه پیش‌آمده پوزش می‌طلبیم."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"اجازه دادن"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"مجاز نبودن"</string>
@@ -572,7 +576,7 @@
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"اسکن کردن دستگاه"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"رد کردن"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"این هشدار رد شود؟"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"هرزمان خواستید تنظیمات ایمنی و حریم خصوصی را مرور کنید تا محافظت بیشتری اضافه کنید"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"هرزمان خواستید تنظیمات ایمنی و حریم خصوصی را بازنگری کنید تا محافظت بیشتری اضافه کنید"</string>
     <string name="safety_center_issue_card_confirm_dismiss_button" msgid="5884137843083634556">"رد شدن"</string>
     <string name="safety_center_issue_card_cancel_dismiss_button" msgid="2874578798877712346">"لغو"</string>
     <string name="safety_center_entries_category_title" msgid="34356964062813115">"تنظیمات"</string>
@@ -662,7 +666,7 @@
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"آشنایی با هم‌رسانی داده‌ها"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"داده‌های مکانتان اکنون با اشخاص ثالث هم‌رسانی می‌شود"</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"داده‌های مکانتان برای اهداف تبلیغاتی یا بازاریابی اکنون با اشخاص ثالث هم‌رسانی می‌شود"</string>
-    <string name="updated_in_last_days" msgid="8371811947153042322">"{count,plural, =0{در روز گذشته به‌روزرسانی شده است}=1{در روز گذشته به‌روزرسانی شده است}one{در # روز به‌روزرسانی شده است}other{در # روز به‌روزرسانی شده است}}"</string>
+    <string name="updated_in_last_days" msgid="8371811947153042322">"{count,plural, =0{در روز پیش به‌روزرسانی شده}=1{در روز پیش به‌روزرسانی شده}one{در # روز به‌روزرسانی شده}other{در # روز به‌روزرسانی شده}}"</string>
     <string name="no_updates_at_this_time" msgid="9031085635689982935">"درحال‌حاضر هیچ به‌روزرسانی‌ای وجود ندارد"</string>
     <string name="safety_label_changes_notification_title" msgid="4479955083472203839">"به‌روزرسانی‌های هم‌رسانی داده"</string>
     <string name="safety_label_changes_notification_desc" msgid="7808764283266234675">"برخی‌از برنامه‌ها روش هم‌رسانی داده‌های مکان شما را تغییر داده‌اند"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"مجاز کردن تنظیمات محدودشده"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"تنظیم محدودشده"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"برای حفظ امنیت شما، درحال‌حاضر این تنظیم دردسترس نیست."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"اقدام درطول تماس تلفنی دردسترس نیست"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"درطول تماس تلفنی، اجازه دادن به برنامه‌ها برای نصب برنامه‌های دیگر مجاز نیست.\n\n افراد کلاهبردار اغلب این نوع اقدامات را درطول مکالمه‌های تلفنی درخواست می‌کنند، بنابراین این کار برای محافظت از شما مسدود شده است. اگر شخص ناآشنایی شما را ترغیب به انجام این اقدام می‌کند، ممکن است موضوع کلاهبرداری باشد."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"این کنش درطول تماس تکمیل نمی‌شود"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"برای محافظت از دستگاه و داده‌های شما، این تنظیم مسدود شده است.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>کلاهبرداران ممکن است با درخواست نصب برنامه‌های ناشناس از منبعی جدید تلاش کنند برنامه‌های مضر نصب کنند."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>کلاهبرداران ممکن است با درخواست مجاز کردن دسترسی به تنظیم دسترس‌پذیری یکی از برنامه‌ها تلاش کنند کنترل دستگاهتان را به‌دست بگیرند."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"درخواست برنامه برای دسترسی به <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> رد شد"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"‏این برنامه درخواست دسترسی به اجازه‌ای حساس را داشته است که می‌تواند اطلاعات شخصی و مالی‌تان را درمعرض خطر قرار دهد.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>ممکن است برنامه بدون این اجازه محدودشده به‌درستی کار نکند. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;با نحوه اعطای دسترسی آشنا شوید&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"درخواست دسترسی برنامه برای تبدیل شدن به <xliff:g id="ROLE_NAME">%1$s</xliff:g> پیش‌فرض رد شد"</string>

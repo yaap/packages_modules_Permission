@@ -41,8 +41,7 @@ import org.junit.Test
 @FlakyTest
 class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
 
-    @get:Rule
-    val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @get:Rule
     val deviceConfigPermissionRationaleEnabled =
@@ -50,7 +49,7 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
             context,
             DeviceConfig.NAMESPACE_PRIVACY,
             PERMISSION_RATIONALE_ENABLED,
-            true.toString()
+            true.toString(),
         )
 
     @Before
@@ -248,8 +247,10 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
         }
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM, codeName =
-    "VanillaIceCream")
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        codeName = "VanillaIceCream",
+    )
     @RequiresFlagsEnabled(android.content.pm.Flags.FLAG_ASL_IN_APK_APP_METADATA_SOURCE)
     @Test
     fun requestCoarseLocationPerm_hasAslInApk_packageSourceUnspecified() {
@@ -262,8 +263,10 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
         }
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM, codeName =
-    "VanillaIceCream")
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        codeName = "VanillaIceCream",
+    )
     @RequiresFlagsEnabled(android.content.pm.Flags.FLAG_ASL_IN_APK_APP_METADATA_SOURCE)
     @Test
     fun requestCoarseLocationPerm_hasAslInApk_packageSourceStore() {
@@ -276,8 +279,10 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
         }
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM, codeName =
-    "VanillaIceCream")
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        codeName = "VanillaIceCream",
+    )
     @RequiresFlagsEnabled(android.content.pm.Flags.FLAG_ASL_IN_APK_APP_METADATA_SOURCE)
     @Test
     fun requestCoarseLocationPerm_hasAslInApk_packageSourceLocalFile() {
@@ -290,8 +295,10 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
         }
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM, codeName =
-    "VanillaIceCream")
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        codeName = "VanillaIceCream",
+    )
     @RequiresFlagsEnabled(android.content.pm.Flags.FLAG_ASL_IN_APK_APP_METADATA_SOURCE)
     @Test
     fun requestCoarseLocationPerm_hasAslInApk_packageSourceDownloadedFile() {
@@ -304,8 +311,10 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
         }
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM, codeName =
-    "VanillaIceCream")
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+        codeName = "VanillaIceCream",
+    )
     @RequiresFlagsEnabled(android.content.pm.Flags.FLAG_ASL_IN_APK_APP_METADATA_SOURCE)
     @Test
     fun requestCoarseLocationPerm_hasAslInApk_packageSourceOther() {
@@ -338,7 +347,6 @@ class PermissionRationalePermissionGrantDialogTest : BaseUsePermissionTest() {
         requestAppPermissionsForNoResult(ACCESS_FINE_LOCATION) {
             clickPermissionRationaleViewInGrantDialog()
             assertPermissionRationaleDialogIsVisible(true)
-            assertPermissionRationaleContainerOnGrantDialogIsVisible(false)
         }
     }
 

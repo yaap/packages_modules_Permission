@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> дээрх энэ аппын <xliff:g id="PERM">%1$s</xliff:g>-д хандах эрх"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g>-н бүх зөвшөөрлийг харах"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Энэ зөвшөөрөлтэй бүх аппыг харах"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Мэдээлэл"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Тохиргоо"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Туслах микрофон ашиглалтыг харуулах"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Ашиглаагүй аппын тохиргоо"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Аппыг ашигладаггүй бол зөвшөөрлийг нь хасах"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Холбоосыг нээх сонголт"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Ажлын өгөгдмөл апп"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Хаалттай орон зайн өгөгдмөл"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Төхөөрөмжид зориулж оновчилсон"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Бусад"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Тохируулсан апп алга"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Системийн өгөгдмөл)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Апп алга"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> алдаа засах мэдээллийг байршуулах хүсэлтэй байна."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Дебаг хийх өгөгдлийг хуваалцах уу?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Систем асуудал илрүүллээ."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> энэ төхөөрөмжөөс <xliff:g id="DATE">%2$s</xliff:g>-н <xliff:g id="TIME">%3$s</xliff:g>-д авсан алдааны мэдээг байршуулах хүсэлт тавьж байна. Алдааны мэдээнд таны төхөөрөмжийн талаарх эсвэл хэрэглэгчийн нэр, байршлын өгөгдөл, төхөөрөмжийн танигч болон сүлжээний мэдээлэл зэрэг аппуудын бүртгэсэн хувийн мэдээллийг агуулна. Та алдааны мэдээг зөвхөн энэ мэдээллийг хуваалцахдаа итгэлтэй байгаа хүмүүс болон аппуудтай хуваалцана уу. <xliff:g id="APP_NAME_1">%4$s</xliff:g>-д алдааны мэдээг байршуулахыг зөвшөөрөх үү?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> энэ төхөөрөмжөөс <xliff:g id="DATE">%2$s</xliff:g>-ны <xliff:g id="TIME">%3$s</xliff:g>-нд авсан алдааны мэдээг байршуулахыг хүсэж байна. Алдааны мэдээнд таны төхөөрөмж болон хэрэглэгчийн нэр, байршлын өгөгдөл, төхөөрөмж танигч, сүлжээний мэдээлэл зэрэг аппын бүртгэсэн хувийн мэдээлэл багтдаг. Та алдааны мэдээг зөвхөн итгэдэг хүн, апптайгаа хуваалцаарай.\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g>-д алдааны мэдээ байршуулахыг зөвшөөрөх үү?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g>-н алдааны мэдээг боловсруулахад алдаа гарсан тул алдаа засах дэлгэрэнгүй өгөгдлийг хуваалцахаас татгалзлаа. Төвөг удсанд хүлцэл өчье."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Зөвшөөрөх"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Татгалзах"</string>
@@ -629,7 +633,7 @@
     <string name="mic_toggle_title" msgid="2649991093496110162">"Микрофоны хандалт"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"Апп болон үйлчилгээнд"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"Апп болон үйлчилгээнд. Энэ тохиргоо унтраалттай тохиолдолд таныг яаралтай тусламжийн утасны дугаар луу залгах үед микрофоны өгөгдлийг хуваалцсан хэвээр байж магадгүй."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"Байршилд хандах эрхтэй аппууд, үйлчилгээнүүдийг хараарай"</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"Байршилд хандах эрхтэй апп, үйлчилгээнүүдийг хараарай"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Түр санах ойн хандалтыг харуулах"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Аппууд таны хуулсан текст, зураг эсвэл бусад контентод хандах үед мессеж харуулах"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Нууц үгнүүдийг харуулах"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Хязгаарлагдсан тохиргоог зөвшөөрөх"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Хязгаарлагдсан тохиргоо"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Таны аюулгүй байдлын үүднээс энэ тохиргоо одоогоор боломжгүй байна."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Утасны дуудлага хийж байхад үйлдэл хийх боломжгүй"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Утасны дуудлагын үеэр аппуудад бусад апп суулгахыг зөвшөөрдөггүй.\n\n Залилагчид утасны дуудлагын харилцан ярианы үеэр ийм төрлийн үйлдлийг ихэвчлэн хүсдэг тул таныг хамгаалахаар уг үйлдлийг блоклосон. Хэрэв таны танихгүй хүн ийм үйлдэл хийлгэхээр таныг чиглүүлж байгаа бол энэ нь заль мэх байж болно."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Дуудлагын үеэр үйлдэл гүйцэтгэх боломжгүй"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Таны төхөөрөмж, өгөгдлийг хамгаалахын тулд энэ тохиргоог блоклосон.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Залилагч танаас шинэ эх сурвалжаас тодорхойгүй апп суулгахыг хүсэж хор хөнөөлтэй апп суулгахаар оролдож магадгүй."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Залилагч танаас аппын хандалтын эрхийг зөвшөөрөхийг хүсэж таны төхөөрөмжийн хяналтыг гартаа авахаар оролдож магадгүй."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Аппад <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>-д хандах эрх олгохоос татгалзсан"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Апп нь таны хувийн болон санхүүгийн мэдээллийг эрсдэлд оруулж болох эмзэг зөвшөөрөлд хандах эрх хүссэн.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Энэ хязгаарлагдмал зөвшөөрөлгүйгээр уг апп зохих ёсоор ажиллахгүй байх боломжтой. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Хандах эрхийг хэрхэн зөвшөөрөх талаар мэдэж авах&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Аппад өгөгдмөл <xliff:g id="ROLE_NAME">%1$s</xliff:g> болох эрх олгохоос татгалзсан"</string>

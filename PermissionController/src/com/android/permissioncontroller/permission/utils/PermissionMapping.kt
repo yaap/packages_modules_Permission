@@ -27,6 +27,7 @@ import android.util.Log
 import com.android.modules.utils.build.SdkLevel
 import com.android.permission.safetylabel.DataCategoryConstants
 import com.android.permissioncontroller.permission.model.livedatatypes.LightAppPermGroup
+import com.android.permissioncontroller.permission.utils.v31.AdminRestrictedPermissionsUtils
 
 /**
  * This file contains the canonical mapping of permission to permission group, used in the
@@ -44,7 +45,7 @@ object PermissionMapping {
         listOf(
             Manifest.permission_group.LOCATION,
             Manifest.permission_group.CAMERA,
-            Manifest.permission_group.MICROPHONE
+            Manifest.permission_group.MICROPHONE,
         )
 
     @JvmField
@@ -54,7 +55,7 @@ object PermissionMapping {
             listOf(
                 Manifest.permission_group.STORAGE,
                 Manifest.permission_group.READ_MEDIA_AURAL,
-                Manifest.permission_group.READ_MEDIA_VISUAL
+                Manifest.permission_group.READ_MEDIA_VISUAL,
             )
 
     val PARTIAL_MEDIA_PERMISSIONS: MutableSet<String> = mutableSetOf()
@@ -145,6 +146,24 @@ object PermissionMapping {
             PLATFORM_PERMISSIONS[Manifest.permission.RANGING] =
                 Manifest.permission_group.NEARBY_DEVICES
         }
+        // Android XR permissions
+        if (android.xr.Flags.xrManifestEntries()) {
+            PLATFORM_PERMISSIONS[Manifest.permission.EYE_TRACKING_COARSE] =
+                Manifest.permission_group.XR_TRACKING
+            PLATFORM_PERMISSIONS[Manifest.permission.FACE_TRACKING] =
+                Manifest.permission_group.XR_TRACKING
+            PLATFORM_PERMISSIONS[Manifest.permission.HAND_TRACKING] =
+                Manifest.permission_group.XR_TRACKING
+            PLATFORM_PERMISSIONS[Manifest.permission.SCENE_UNDERSTANDING_COARSE] =
+                Manifest.permission_group.XR_TRACKING
+
+            PLATFORM_PERMISSIONS[Manifest.permission.EYE_TRACKING_FINE] =
+                Manifest.permission_group.XR_TRACKING_SENSITIVE
+            PLATFORM_PERMISSIONS[Manifest.permission.HEAD_TRACKING] =
+                Manifest.permission_group.XR_TRACKING_SENSITIVE
+            PLATFORM_PERMISSIONS[Manifest.permission.SCENE_UNDERSTANDING_FINE] =
+                Manifest.permission_group.XR_TRACKING_SENSITIVE
+        }
 
         // Any updates to the permissions for the CALL_LOG permission group must also be made in
         // Permissions {@link com.android.role.controller.model.Permissions} in the role
@@ -181,13 +200,18 @@ object PermissionMapping {
                 Manifest.permission_group.CAMERA
         }
 
-        PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS] = Manifest.permission_group.SENSORS
-
         if (SdkLevel.isAtLeastT()) {
             PLATFORM_PERMISSIONS[Manifest.permission.POST_NOTIFICATIONS] =
                 Manifest.permission_group.NOTIFICATIONS
-            PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS_BACKGROUND] =
+        }
+
+        if (!Flags.replaceBodySensorPermissionEnabled()) {
+            PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS] =
                 Manifest.permission_group.SENSORS
+            if (SdkLevel.isAtLeastT()) {
+                PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS_BACKGROUND] =
+                    Manifest.permission_group.SENSORS
+            }
         }
 
         for ((permission, permissionGroup) in PLATFORM_PERMISSIONS) {
@@ -327,6 +351,9 @@ object PermissionMapping {
             PLATFORM_PERMISSIONS[permission] = HEALTH_PERMISSION_GROUP
             PLATFORM_PERMISSION_GROUPS[HEALTH_PERMISSION_GROUP]?.add(permission)
             HEALTH_PERMISSIONS_SET.add(permission)
+            if (Flags.replaceBodySensorPermissionEnabled()) {
+                AdminRestrictedPermissionsUtils.addAdminRestrictedPermission(permission)
+            }
         }
     }
 
@@ -352,12 +379,6 @@ object PermissionMapping {
         }
     }
 
-    /** Returns true if the given permission is a health platform permission. */
-    @JvmStatic
-    fun isHealthPermission(permissionName: String): Boolean {
-        return HEALTH_PERMISSIONS_SET.contains(permissionName)
-    }
-
     /**
      * Returns the platform permission group for the permission that the provided op backs, if any.
      */
@@ -381,11 +402,7 @@ object PermissionMapping {
         if (opName == AppOpsManager.OPSTR_PHONE_CALL_CAMERA) {
             return Manifest.permission_group.CAMERA
         }
-        if (
-            SdkLevel.isAtLeastV() &&
-                Flags.locationBypassPrivacyDashboardEnabled() &&
-                opName == AppOpsManager.OPSTR_EMERGENCY_LOCATION
-        ) {
+        if (SdkLevel.isAtLeastV() && opName == AppOpsManager.OPSTR_EMERGENCY_LOCATION) {
             return Manifest.permission_group.LOCATION
         }
 

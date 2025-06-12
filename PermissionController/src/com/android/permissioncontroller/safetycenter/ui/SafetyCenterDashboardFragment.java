@@ -35,7 +35,6 @@ import android.safetycenter.SafetyCenterData;
 import android.safetycenter.SafetyCenterEntry;
 import android.safetycenter.SafetyCenterEntryGroup;
 import android.safetycenter.SafetyCenterEntryOrGroup;
-import android.safetycenter.SafetyCenterIssue;
 import android.safetycenter.SafetyCenterStaticEntry;
 import android.safetycenter.SafetyCenterStaticEntryGroup;
 import android.util.Log;
@@ -52,6 +51,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.safetycenter.ui.expressive.SafetyBannerMessagePreference;
+import com.android.permissioncontroller.safetycenter.ui.model.IssueUiData;
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterUiData;
 import com.android.permissioncontroller.safetycenter.ui.model.StatusUiData;
 import com.android.safetycenter.internaldata.SafetyCenterBundles;
@@ -61,7 +62,6 @@ import com.android.settingslib.widget.SettingsThemeHelper;
 import kotlin.Unit;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /** Dashboard fragment for the Safety Center. */
@@ -81,6 +81,7 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
             new CollapsableGroupCardHelper();
     private PreferenceGroup mIssuesGroup;
     private PreferenceGroup mEntriesGroup;
+    @Nullable private PreferenceGroup mPrivacyEntriesGroup;
     private PreferenceGroup mStaticEntriesGroup;
     private boolean mIsQuickSettingsFragment;
 
@@ -214,7 +215,7 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
 
         // TODO(b/208212820): Only update entries that have changed since last
         // update, rather than deleting and re-adding all.
-        updateIssues(context, data.getIssues(), uiData.getResolvedIssues());
+        updateIssues(context, uiData);
 
         if (!mIsQuickSettingsFragment) {
             updateSafetyEntries(context, data.getEntriesOrGroups());
@@ -222,19 +223,29 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
         }
     }
 
-    private void updateIssues(
-            Context context, List<SafetyCenterIssue> issues, Map<String, String> resolvedIssues) {
+    private void updateIssues(Context context, SafetyCenterUiData uiData) {
         mIssuesGroup.removeAll();
-        getCollapsableIssuesCardHelper()
-                .addIssues(
-                        context,
-                        getSafetyCenterViewModel(),
-                        getChildFragmentManager(),
-                        mIssuesGroup,
-                        issues,
-                        emptyList(),
-                        resolvedIssues,
-                        getActivity().getTaskId());
+        if (SettingsThemeHelper.isExpressiveTheme(context)) {
+            for (IssueUiData issueUiData : uiData.getIssueUiDatas()) {
+                mIssuesGroup.addPreference(
+                        new SafetyBannerMessagePreference(
+                                context,
+                                issueUiData,
+                                getSafetyCenterViewModel(),
+                                getChildFragmentManager()));
+            }
+        } else {
+            getCollapsableIssuesCardHelper()
+                    .addIssues(
+                            context,
+                            getSafetyCenterViewModel(),
+                            getChildFragmentManager(),
+                            mIssuesGroup,
+                            uiData.getSafetyCenterData().getIssues(),
+                            emptyList(),
+                            uiData.getResolvedIssues(),
+                            requireActivity().getTaskId());
+        }
     }
 
     // TODO(b/208212820): Add groups and move to separate controller
@@ -253,12 +264,17 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
             if (SdkLevel.isAtLeastV()
                     && group != null
                     && Objects.equals(group.getId(), PRIVACY_SOURCES_GROUP_ID)) {
-                // Add an extra header before the privacy sources
-                PreferenceCategory category = new ComparablePreferenceCategory(context);
-                SafetyCenterResourcesApk safetyCenterResourcesApk =
-                        new SafetyCenterResourcesApk(requireContext());
-                category.setTitle(safetyCenterResourcesApk.getStringByName("privacy_title"));
-                mEntriesGroup.addPreference(category);
+                // Add a special group for the privacy sources
+                mPrivacyEntriesGroup = new ComparablePreferenceCategory(context);
+                mPrivacyEntriesGroup.setTitle(
+                        new SafetyCenterResourcesApk(requireContext())
+                                .getStringByName("privacy_title"));
+                mEntriesGroup.addPreference(mPrivacyEntriesGroup);
+
+                mPrivacyEntriesGroup.addPreference(
+                        new SafetyHomepageEntryPreference(
+                                context, group, getSafetyCenterSessionId()));
+                continue;
             }
 
             if (SafetyCenterUiFlags.getShowSubpages() && group != null) {
@@ -317,10 +333,14 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
     private void updateStaticSafetyEntries(Context context, SafetyCenterData data) {
         mStaticEntriesGroup.removeAll();
 
-        for (SafetyCenterStaticEntryGroup group : data.getStaticEntryGroups()) {
-            if (group.getTitle().toString().isEmpty()) {
-                // Interpret an empty title as signal to not create a titled category
-                addStaticEntriesTo(context, data, mStaticEntriesGroup, group.getStaticEntries());
+        List<SafetyCenterStaticEntryGroup> staticEntryGroups = data.getStaticEntryGroups();
+        for (int i = 0, size = staticEntryGroups.size(); i < size; i++) {
+            SafetyCenterStaticEntryGroup group = staticEntryGroups.get(i);
+
+            if (i == 0 && group.getTitle().toString().isEmpty() && mPrivacyEntriesGroup != null) {
+                // Interpret an empty title for the first group as signal to extend the privacy
+                // category.
+                addStaticEntriesTo(context, data, mPrivacyEntriesGroup, group.getStaticEntries());
             } else {
                 PreferenceCategory category = new ComparablePreferenceCategory(context);
                 category.setTitle(group.getTitle());

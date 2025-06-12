@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> పరికరంలో ఈ యాప్‌నకు <xliff:g id="PERM">%1$s</xliff:g> యాక్సెస్"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"అన్ని \'<xliff:g id="APP">%1$s</xliff:g>\' అనుమతులను చూడండి"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"ఈ అనుమతి ఉన్న అన్ని యాప్‌లను చూడండి"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"సమాచారం"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"సెట్టింగ్‌లు"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"అసిస్టెంట్ మైక్రోఫోన్ వినియోగాన్ని చూపు"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"ఉపయోగించని యాప్ సెట్టింగ్‌లు"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"యాప్‌ని ఉపయోగించకపోతే, అనుమతులను తీసివేయండి"</string>
@@ -355,7 +357,7 @@
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"ఈ యాప్‌లు మీ స్క్రీన్, చర్యలు, ఇన్‌పుట్‌లను చూడగలవు, చర్యలను అమలు చేయగలవు, అలాగే ప్రదర్శనను నియంత్రించగలవు."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"ఆటోమేటిక్ డిజిటల్ అసిస్టెంట్ యాప్"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"డిజిటల్ అసిస్టెంట్ యాప్"</string>
-    <string name="role_assistant_description" msgid="6622458130459922952">"సహాయక యాప్‌లు మీరు వీక్షిస్తున్న స్క్రీన్‌పై ఉన్న సమాచారం ఆధారంగా మీకు సహాయపడగలవు. కొన్ని యాప్‌లు మీకు సమగ్రమైన సహాయాన్ని అందించడానికి లాంచర్‌కు, వాయిస్ ఇన్‌పుట్ సర్వీసులకు రెండింటికీ సపోర్ట్‌ చేస్తాయి."</string>
+    <string name="role_assistant_description" msgid="6622458130459922952">"మీ ముందున్న స్క్రీన్‌లోని సమాచారం ఆధారంగా సహాయక (అసిస్ట్) యాప్‌లు, మీకు హెల్ప్ చేయగలవు. కొన్ని యాప్‌లు, మీకు ఈజీగా సాయం చేయడానికి లాంచర్‌కు, వాయిస్ ఇన్‌పుట్ సర్వీసులకు రెండింటికీ సపోర్ట్‌ ఇస్తాయి."</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ఆటోమేటిక్ బ్రౌజర్ యాప్"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"బ్రౌజర్ యాప్"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"మీకు ఇంటర్నెట్‌కు యాక్సెస్‌ ఇచ్చి, ట్యాప్ చేయడానికి లింక్‌ల‌ను డిస్‌ప్లే చేసే యాప్‌లు"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"లింక్‌లను తెరవడం"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"వర్క్‌ ప్లేస్ కోసం ఆటోమేటిక్"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ఆటోమేటిక్‌గా ప్రైవేట్ స్పేస్"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"పరికరం కోసం ఆప్టిమైజ్ చేసినవి"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"ఇతర యాప్‌లు"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ఏదీ కాదు"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(సిస్టమ్ ఆటోమేటిక్)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ఏ యాప్ లేదు"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g>డీబగ్గింగ్ సమాచారాన్ని అప్‌లో డ్ చేయదలుచుకుంటున్నారు."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"డీబగ్గింగ్ డేటాను షేర్ చేయమంటారా?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"సిస్టమ్ ఒక సమస్యను గుర్తించింది."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> <xliff:g id="DATE">%2$s</xliff:g>న <xliff:g id="TIME">%3$s</xliff:g>కు ఈ డివైజ్‌లో జ‌నరేట్ అయిన‌ డీబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయండి అని అభ్యర్థిస్తోంది. బగ్ రిపోర్ట్‌లు మీ డివైజ్‌ లేదా లాగిన్ చేసిన యాప్‌ల వ్యక్తిగత సమాచారం, ఉదాహరణకు యూజ‌ర్‌ పేర్లు, లొకేష‌న్‌ డేటా, డివైజ్ గుర్తింపుల‌తో పాటు నెట్‌వర్క్ సమాచారాన్ని కలిగి ఉంటాయి. ఈ సమాచారం విషయంలో మీకు నమ్మకం ఉన్న‌ వ్యక్తులకు, యాప్‌లకు మాత్రమే బగ్ రిపోర్ట్‌ వివరాలను షేర్ చేయండి. బగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయడానికి <xliff:g id="APP_NAME_1">%4$s</xliff:g>ను అనుమతించాలా?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>, <xliff:g id="DATE">%2$s</xliff:g>న <xliff:g id="TIME">%3$s</xliff:g>కు ఈ పరికరంలో తీసిన డీబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయమని రిక్వెస్ట్ చేస్తోంది. బగ్ రిపోర్ట్‌లలో మీ పరికరం లేదా లాగిన్ చేసిన యాప్‌లలోని వ్యక్తిగత సమాచారం ఉంటుంది, ఉదాహరణకు యూజర్ నేమ్‌లు, లొకేషన్ డేటా, పరికర ఐడెంటిఫయర్‌లు, ఇంకా నెట్‌వర్క్ సమాచారం వంటివి. మీకు ఈ సమాచారం విషయంలో నమ్మకమైన వ్యక్తులకు, యాప్‌లకు మాత్రమే బగ్ రిపోర్ట్ వివరాలను షేర్ చేయండి.\n\nబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయడానికి <xliff:g id="APP_NAME_1">%4$s</xliff:g>‌ను అనుమతించాలా?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> కోసం బగ్ రిపోర్ట్‌ ప్రాసెస్ చేయడంలో ఎర్రర్ ఉంది. కాబట్టి వివరణాత్మక డీబగ్గింగ్ డేటాను షేర్ చేయడాన్ని నిరాకరించారు. అంతరాయానికి చింతిస్తున్నాము."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"అనుమతించండి"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"తిరస్కరించు"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"పరిమితం చేసిన సెట్టింగ్‌లను అనుమతించండి"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"పరిమితం చేయబడిన సెట్టింగ్"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"మీ సెక్యూరిటీ కోసం, ఈ సెట్టింగ్ ప్రస్తుతం అందుబాటులో లేదు."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"ఫోన్ కాల్‌లో ఉండగా ఈ చర్య అందుబాటులో ఉండదు"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"ఫోన్ కాల్ మాట్లాడే సమయంలో ఇతర యాప్‌లను ఇన్‌స్టాల్ చేయడానికి యాప్‌లను అనుమతించడానికి వీలు లేదు.\n\n ఫోన్ కాల్ సంభాషణల సమయంలో స్కామర్‌లు తరచుగా ఈ రకమైన చర్యను రిక్వెస్ట్ చేస్తారు, కాబట్టి మిమ్మల్ని రక్షించడానికి ఈ ఫీచర్ బ్లాక్ చేయబడుతుంది. మీకు తెలియని వారు ఈ చర్య తీసుకోవాల్సిందిగా మిమ్మల్ని గైడ్ చేస్తే, అది స్కామ్ కావచ్చు."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"కాల్ మాట్లాడే సమయంలో చర్యను పూర్తి చేయడం కుదరదు"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"మీ పరికరాన్ని, డేటాను సురక్షితంగా ఉంచేందుకు ఈ సెట్టింగ్ బ్లాక్ చేయబడింది.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>స్కామర్‌లు మిమ్మల్ని కొత్త సోర్స్ నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయమని అడగడం ద్వారా హానికరమైన యాప్‌లను ఇన్‌స్టాల్ చేయడానికి ట్రై చేయవచ్చు."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>స్కామర్‌లు మిమ్నల్ని యాప్ కోసం యాక్సెసిబిలిటీ యాక్సెస్‌ను అనుమతించమని అడగడం ద్వారా మీ పరికరాన్ని కంట్రోల్ చేసే అవకాశం ఉంది."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"యాప్ <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>‌కు యాక్సెస్ తిరస్కరించబడింది"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"మీ వ్యక్తిగత, ఆర్థిక సమాచారాన్ని ప్రమాదంలో పడేసే గోప్యమైన సమాచార యాక్సెస్ అనుమతికి యాప్ యాక్సెస్‌ను రిక్వెస్ట్ చేయడం జరిగింది.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>ఈ అదనపు అవసరాలు గల అనుమతి లేకుండా యాప్ సరిగ్గా పని చేయకపోయే అవకాశం ఉంది. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;యాక్సెస్‌ను అనుమతించడం ఎలాగో తెలుసుకోండి&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"ఆటోమేటిక్ <xliff:g id="ROLE_NAME">%1$s</xliff:g>‌గా ఉండటానికి యాప్‌నకు యాక్సెస్ నిరాకరించబడింది"</string>

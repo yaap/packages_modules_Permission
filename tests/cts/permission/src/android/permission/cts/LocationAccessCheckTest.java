@@ -77,6 +77,7 @@ import androidx.test.filters.SdkSuppress;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.compatibility.common.util.DeviceConfigStateChangerRule;
+import com.android.compatibility.common.util.UserHelper;
 import com.android.compatibility.common.util.mainline.MainlineModule;
 import com.android.compatibility.common.util.mainline.ModuleDetector;
 import com.android.modules.utils.build.SdkLevel;
@@ -198,6 +199,8 @@ public class LocationAccessCheckTest {
             new CtsNotificationListenerHelperRule(sContext);
 
     private static boolean sWasLocationEnabled = true;
+
+    private UserHelper mUserHelper = new UserHelper(sContext);
 
     @BeforeClass
     public static void beforeClassSetup() throws Exception {
@@ -465,6 +468,14 @@ public class LocationAccessCheckTest {
     @Before
     public void beforeEachTestSetup() throws Throwable {
         assumeIsNotLowRamDevice();
+
+        // TODO(b/380297485): Remove this assumption once NotificationListeners are supported on
+        // visible background users.
+        // Skipping each test for visible background users as all test cases depend on
+        // NotificationListeners.
+        assumeFalse("NotificationListeners are not yet supported on visible background users",
+                mUserHelper.isVisibleBackgroundUser());
+
         wakeUpAndDismissKeyguard();
         bindService();
         resetPermissionControllerBeforeEachTest();

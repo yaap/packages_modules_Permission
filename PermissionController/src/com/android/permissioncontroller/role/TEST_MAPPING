@@ -7,6 +7,9 @@
                     "exclude-annotation": "androidx.test.filters.FlakyTest"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases"
         }
     ],
     "mainline-presubmit": [
@@ -24,6 +27,9 @@
                     "exclude-annotation": "androidx.test.filters.FlakyTest"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases[com.google.android.permission.apex]"
         }
     ],
     "permission-mainline-presubmit": [
@@ -41,11 +47,17 @@
                     "exclude-annotation": "androidx.test.filters.FlakyTest"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases"
         }
     ],
     "postsubmit": [
         {
             "name": "CtsRoleTestCases"
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases"
         }
     ],
     "mainline-postsubmit": [
@@ -60,6 +72,9 @@
                     "exclude-filter": "android.app.role.cts.RoleManagerTest#removeSmsRoleHolderThenPermissionIsRevoked"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases[com.google.android.permission.apex]"
         }
     ]
 }

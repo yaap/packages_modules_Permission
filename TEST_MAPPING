@@ -45,6 +45,9 @@
       "name" : "CtsRoleTestCases"
     },
     {
+      "name" : "CtsRoleMultiUserTestCases"
+    },
+    {
       "name" : "CtsPermissionMultiUserTestCases"
     },
     {

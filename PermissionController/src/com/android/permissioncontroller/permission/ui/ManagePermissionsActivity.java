@@ -42,6 +42,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.permission.PermissionManager;
+import android.permission.flags.Flags;
 import android.provider.Settings;
 import android.safetycenter.SafetyCenterManager;
 import android.safetycenter.SafetyEvent;
@@ -450,7 +451,15 @@ public final class ManagePermissionsActivity extends SettingsActivity {
 
                 if (Utils.isHealthPermissionUiEnabled() && permissionGroupName
                                 .equals(HEALTH_PERMISSION_GROUP)) {
-                    Utils.navigateToHealthConnectSettings(this);
+                    // On Handheld, PrivacyDashboard and PermissionManager have the same UI.
+                    // On Wear, PrivacyDashboard and PermissionManager have different UI,
+                    // PermissionController needs to add an extra in the intent to instruct
+                    // HealthConnect how to differentiate.
+                    if (DeviceUtils.isWear(this) && Flags.replaceBodySensorPermissionEnabled()) {
+                        Utils.navigateToWearHealthConnectSettingsPrivacyDashboard(this);
+                    } else {
+                        Utils.navigateToHealthConnectSettings(this);
+                    }
                     finishAfterTransition();
                     return;
                 }

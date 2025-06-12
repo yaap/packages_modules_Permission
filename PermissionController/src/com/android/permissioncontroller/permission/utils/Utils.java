@@ -35,6 +35,7 @@ import static android.app.AppOpsManager.MODE_ALLOWED;
 import static android.app.AppOpsManager.OPSTR_LEGACY_STORAGE;
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Intent.EXTRA_PACKAGE_NAME;
+import static android.content.Intent.EXTRA_REASON;
 import static android.content.pm.PackageManager.FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT;
 import static android.content.pm.PackageManager.FLAG_PERMISSION_RESTRICTION_SYSTEM_EXEMPT;
 import static android.content.pm.PackageManager.FLAG_PERMISSION_RESTRICTION_UPGRADE_EXEMPT;
@@ -77,6 +78,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.SensorPrivacyManager;
 import android.health.connect.HealthConnectManager;
+import android.health.connect.HealthPermissions;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Parcelable;
@@ -113,6 +115,7 @@ import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.model.AppPermissionGroup;
 import com.android.permissioncontroller.permission.model.livedatatypes.LightAppPermGroup;
 import com.android.permissioncontroller.permission.model.livedatatypes.LightPackageInfo;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import kotlin.Triple;
 
@@ -547,8 +550,14 @@ public final class Utils {
         if (group.equals(Manifest.permission_group.UNDEFINED)) {
             List<PermissionInfo> undefinedPerms = new ArrayList<>();
             for (PermissionInfo permissionInfo : installedRuntime) {
+                if (Flags.replaceBodySensorPermissionEnabled()
+                    && (permissionInfo.name.equals(Manifest.permission.BODY_SENSORS) ||
+                    permissionInfo.name.equals(Manifest.permission.BODY_SENSORS_BACKGROUND))) {
+                    continue;
+                }
+
                 String permGroup =
-                        PermissionMapping.getGroupOfPlatformPermission(permissionInfo.name);
+                    PermissionMapping.getGroupOfPlatformPermission(permissionInfo.name);
                 if (permGroup == null || permGroup.equals(Manifest.permission_group.UNDEFINED)) {
                     undefinedPerms.add(permissionInfo);
                 }
@@ -1061,6 +1070,14 @@ public final class Utils {
     }
 
     /**
+     * Whether Expressive Design is enabled on this device.
+     */
+    public static boolean isExpressiveDesignEnabled(@NonNull Context context) {
+        return SdkLevel.isAtLeastB() && DeviceUtils.isHandheld()
+                && SettingsThemeHelper.isExpressiveTheme(context);
+    }
+
+    /**
      * Returns true if the group name passed is that of the Platform health group.
      * @param permGroupName name of the group that needs to be checked.
      */
@@ -1100,15 +1117,42 @@ public final class Utils {
             return false;
         }
 
+        // Only show Fitness&Wellness chip on Wear if the app is requesting system permissions.
+        if (Flags.replaceBodySensorPermissionEnabled()
+                && pm.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
+            Set<String> requestedPermissions = new HashSet<>(packageInfo.getRequestedPermissions());
+            for (PermissionInfo permission : permissions) {
+                if (!requestedPermissions.contains(permission.name)) {
+                    continue;
+                }
+                String appOpStr = AppOpsManager.permissionToOp(permission.name);
+                if (appOpStr != null
+                        && !appOpStr.equals(AppOpsManager.OPSTR_READ_WRITE_HEALTH_DATA)) {
+                    // Found system health permission. Show the chip.
+                    return true;
+                }
+            }
+            // No valid system permissions are requested.
+            return false;
+        }
+
         // Check in permission is already granted as we should not hide it in the UX at that point.
         List<String> grantedPermissions = packageInfo.getGrantedPermissions();
         for (PermissionInfo permission : permissions) {
             boolean isCurrentlyGranted = grantedPermissions.contains(permission.name);
             if (isCurrentlyGranted) {
-                Log.d(LOG_TAG, "At least one Health permission group permission is granted, "
+                Log.d(
+                    LOG_TAG,
+                    "At least one Health permission group permission is granted, "
                         + "show permission group entry");
                 return true;
             }
+        }
+
+        // When none health permission is granted, exempt health permission view usage intent filter
+        // if all the requested health permissions are from permission splits.
+        if (isRequestFromSplitHealthPermission(packageInfo)) {
+            return true;
         }
 
         Intent viewUsageIntent = new Intent(Intent.ACTION_VIEW_PERMISSION_USAGE);
@@ -1122,6 +1166,55 @@ public final class Utils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns true if the request is being made as the result of a split health permission from
+     * BODY_SENSORS call.
+     */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private static boolean isRequestFromSplitHealthPermission(LightPackageInfo packageInfo) {
+        // Sdk check to make sure HealthConnectManager.isHealthPermission() is supported.
+        if (!SdkLevel.isAtLeastU() || !Flags.replaceBodySensorPermissionEnabled()) {
+            return false;
+        }
+
+        PermissionControllerApplication app = PermissionControllerApplication.get();
+        PackageManager pm = app.getPackageManager();
+        String packageName = packageInfo.getPackageName();
+        UserHandle user = UserHandle.getUserHandleForUid(packageInfo.getUid());
+        Context context = Utils.getUserContext(app, user);
+
+        List<String> requestedHealthPermissions = new ArrayList<>();
+        for (String permission : packageInfo.getRequestedPermissions()) {
+            if (HealthConnectManager.isHealthPermission(context, permission)) {
+                requestedHealthPermissions.add(permission);
+            }
+        }
+
+        if (!isValidSplitHealthPermissions(requestedHealthPermissions)) {
+            return false;
+        }
+
+        int targetSdk = packageInfo.getTargetSdkVersion();
+        for (String perm : requestedHealthPermissions) {
+            if (!isFromSplitPermission(pm.getPermissionFlags(perm, packageName, user), targetSdk)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isValidSplitHealthPermissions(List<String> permissions) {
+        return (permissions.size() == 1 && permissions.contains(HealthPermissions.READ_HEART_RATE))
+            || (permissions.size() == 2 && permissions.contains(HealthPermissions.READ_HEART_RATE)
+            && permissions.contains(HealthPermissions.READ_HEALTH_DATA_IN_BACKGROUND));
+    }
+
+    private static boolean isFromSplitPermission(int permissionFlag, int targetSdk) {
+        return (targetSdk >= Build.VERSION_CODES.M)
+            ? (permissionFlag & PackageManager.FLAG_PERMISSION_REVOKE_WHEN_REQUESTED) != 0
+            : (permissionFlag & PackageManager.FLAG_PERMISSION_REVIEW_REQUIRED) != 0;
     }
 
     /**
@@ -1494,6 +1587,19 @@ public final class Utils {
     public static void navigateToHealthConnectSettings(@NonNull Context context) {
         Intent healthConnectIntent = new Intent(ACTION_MANAGE_HEALTH_PERMISSIONS);
         context.startActivity(healthConnectIntent);
+    }
+
+
+    /**
+     * Navigate to health connect settings Wear privacy dashboard.
+     *
+     * @param context The current Context
+     */
+    public static void navigateToWearHealthConnectSettingsPrivacyDashboard(
+        @NonNull Context context) {
+        Intent privacyDashboardHealthConnectIntent = new Intent(ACTION_MANAGE_HEALTH_PERMISSIONS);
+        privacyDashboardHealthConnectIntent.putExtra(EXTRA_REASON, "privacy_dashboard");
+        context.startActivity(privacyDashboardHealthConnectIntent);
     }
 
     /**

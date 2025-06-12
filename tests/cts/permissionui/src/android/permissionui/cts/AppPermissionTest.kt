@@ -18,7 +18,9 @@ package android.permissionui.cts
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission_group.SMS
+import android.app.AppOpsManager
 import android.os.Build
+import android.os.Process
 import android.permission.flags.Flags
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.CheckFlagsRule
@@ -31,8 +33,11 @@ import androidx.test.filters.SdkSuppress
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
 import com.android.compatibility.common.util.DeviceConfigStateChangerRule
+import com.android.compatibility.common.util.SystemUtil.eventually
+import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity
 import com.android.modules.utils.build.SdkLevel
 import com.google.common.truth.Truth
+import org.junit.Assert.assertEquals
 import org.junit.Assume
 import org.junit.Before
 import org.junit.Rule
@@ -296,6 +301,9 @@ class AppPermissionTest : BaseUsePermissionTest() {
             APP_APK_NAME_LATEST
         )
 
+        // TODO: b/388960315 - Remove wait after addressing race condition
+        waitForModeDefault(APP_PACKAGE_NAME)
+
         navigateToIndividualPermissionSetting(SMS)
 
         assertAllowButtonIsDisabledAndRestrictedSettingDialogPoppedUp()
@@ -311,6 +319,8 @@ class AppPermissionTest : BaseUsePermissionTest() {
     @Test
     fun installFromLocalFile_disabledAllowRadioButtonAndIfClickedAndRestrictedSettingDialog_SMSPermGroup() {
         installPackageWithInstallSourceAndMetadataFromLocalFile(APP_APK_NAME_LATEST)
+        // TODO: b/388960315 - Remove wait after addressing race condition
+        waitForModeDefault(APP_PACKAGE_NAME)
 
         navigateToIndividualPermissionSetting(SMS)
 
@@ -339,6 +349,28 @@ class AppPermissionTest : BaseUsePermissionTest() {
             By.text(getPermissionControllerString(APP_PERMISSION_RATIONALE_TITLE_TEXT)),
             expected
         )
+    }
+
+    private fun waitForModeDefault(packageName: String) {
+        val appOpsManager = context.getSystemService(AppOpsManager::class.java)!!
+        eventually {
+            val uid = context.packageManager.getApplicationInfoAsUser(
+                packageName,
+                /* flags */ 0,
+                Process.myUserHandle()
+            ).uid
+            runWithShellPermissionIdentity {
+                assertEquals(
+                    "Timed out waiting for package mode to change to MODE_DEFAULT",
+                    appOpsManager.checkOpNoThrow(
+                        AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS,
+                        uid,
+                        packageName,
+                    ),
+                    AppOpsManager.MODE_DEFAULT,
+                )
+            }
+        }
     }
 
     companion object {

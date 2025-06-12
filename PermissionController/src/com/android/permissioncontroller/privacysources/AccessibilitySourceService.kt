@@ -48,7 +48,6 @@ import androidx.annotation.GuardedBy
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.WorkerThread
-import androidx.core.util.Preconditions
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.Constants
 import com.android.permissioncontroller.PermissionControllerStatsLog
@@ -712,7 +711,7 @@ class AccessibilityPackageResetHandler : BroadcastReceiver() {
             return
         }
 
-        val data = Preconditions.checkNotNull(intent.data)
+        val data = requireNotNull(intent.data)
         val coroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
         coroutineScope.launch(Dispatchers.Default) {
             if (DEBUG) {

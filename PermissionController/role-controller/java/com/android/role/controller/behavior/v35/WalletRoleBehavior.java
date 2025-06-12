@@ -41,6 +41,7 @@ import com.android.modules.utils.build.SdkLevel;
 import com.android.role.controller.model.Role;
 import com.android.role.controller.model.RoleBehavior;
 import com.android.role.controller.util.CollectionUtils;
+import com.android.role.controller.util.RoleFlags;
 import com.android.role.controller.util.UserUtils;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -62,8 +63,25 @@ public class WalletRoleBehavior implements RoleBehavior {
     @Override
     public boolean isAvailableAsUser(@NonNull Role role, @NonNull UserHandle user,
             @NonNull Context context) {
-        return SdkLevel.isAtLeastV() && Flags.walletRoleEnabled()
-                && !UserUtils.isProfile(user, context);
+        if (!(SdkLevel.isAtLeastV() && Flags.walletRoleEnabled())) {
+            return false;
+        }
+
+        if (Flags.walletRoleCrossUserEnabled() && RoleFlags.isProfileGroupExclusivityAvailable()) {
+            return !UserUtils.isPrivateProfile(user, context);
+        } else {
+            return !UserUtils.isProfile(user, context);
+        }
+    }
+
+    @Nullable
+    @Override
+    public Integer getExclusivity() {
+        if (Flags.walletRoleCrossUserEnabled() && RoleFlags.isProfileGroupExclusivityAvailable()) {
+            return Role.EXCLUSIVITY_PROFILE_GROUP;
+        }
+
+        return Role.EXCLUSIVITY_USER;
     }
 
     @Nullable

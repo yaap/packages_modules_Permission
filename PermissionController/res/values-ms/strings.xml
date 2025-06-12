@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"akses <xliff:g id="PERM">%1$s</xliff:g> untuk apl ini pada <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Lihat semua kebenaran <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Lihat semua apl dengan kebenaran ini"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Maklumat"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Tetapan"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Tunjukkan penggunaan mikrofon pembantu"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Tetapan apl yang tidak digunakan"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Alih keluar kebenaran jika apl tidak digunakan"</string>
@@ -362,7 +364,7 @@
     <string name="role_browser_request_title" msgid="2895200507835937192">"Tetapkan <xliff:g id="APP_NAME">%1$s</xliff:g> sebagai apl penyemak imbas lalai anda?"</string>
     <string name="role_browser_request_description" msgid="5888803407905985941">"Kebenaran tidak diperlukan"</string>
     <string name="role_dialer_label" msgid="1100224146343237968">"Apl telefon lalai"</string>
-    <string name="role_dialer_short_label" msgid="7186888549465352489">"Apl Telefon"</string>
+    <string name="role_dialer_short_label" msgid="7186888549465352489">"Apl telefon"</string>
     <string name="role_dialer_description" msgid="8768708633696539612">"Apl yang membenarkan anda membuat dan menerima panggilan telefon pada peranti anda"</string>
     <string name="role_dialer_request_title" msgid="5959618560705912058">"Tetapkan <xliff:g id="APP_NAME">%1$s</xliff:g> sebagai apl telefon lalai anda?"</string>
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Apl ini akan diberikan akses kepada Kamera, Kenalan, Mikrofon, Telefon dan SMS anda"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Membuka pautan"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Lalai untuk kerja"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Lalai untuk ruang privasi"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Dioptimumkan untuk peranti"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Lain-lain"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Tiada"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Ciri lalai sistem)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Tiada apl"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> mahu memuat naik maklumat penyahpepijatan."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Kongsi data penyahpepijatan?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Sistem telah mengesan masalah."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> mahu memuat naik laporan pepijat daripada peranti ini yang diambil pada <xliff:g id="DATE">%2$s</xliff:g> pada <xliff:g id="TIME">%3$s</xliff:g>. Laporan pepijat termasuk maklumat peribadi tentang peranti anda atau yang dilog oleh apl, contohnya, nama pengguna, data lokasi, pengecam peranti dan maklumat rangkaian. Kongsi laporan pepijat dengan orang dan apl yang anda percayai sahaja berhubung maklumat ini. Benarkan <xliff:g id="APP_NAME_1">%4$s</xliff:g> memuat naik laporan pepijat?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> meminta untuk memuat naik laporan pepijat daripada peranti ini yang diambil pada <xliff:g id="DATE">%2$s</xliff:g> pada pukul <xliff:g id="TIME">%3$s</xliff:g>. Laporan pepijat termasuk maklumat peribadi tentang peranti anda atau yang dilog oleh apl, contohnya, nama pengguna, data lokasi, pengecam peranti dan maklumat rangkaian. Hanya kongsi laporan pepijat ini dengan orang dan apl yang anda percayai dengan maklumat ini.\n\nBenarkan <xliff:g id="APP_NAME_1">%4$s</xliff:g> untuk memuat naik laporan pepijat?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Ralat telah berlaku semasa memproses laporan pepijat untuk <xliff:g id="APP_NAME">%1$s</xliff:g>. Oleh sebab itu, perkongsian data penyahpepijatan yang terperinci telah ditolak. Kami memohon maaf kerana gangguan ini."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Benarkan"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Tolak"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Benarkan tetapan terhad"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Tetapan terhad"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Untuk keselamatan anda, tetapan ini tidak tersedia pada masa ini."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Tindakan tidak tersedia semasa panggilan telefon"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Tindakan membenarkan apl memasang apl lain adalah tidak dibenarkan semasa panggilan telefon.\n\n Penipu sering meminta jenis tindakan ini semasa perbualan panggilan telefon, maka tindakan ini disekat untuk melindungi anda. Jika anda dibimbing untuk mengambil tindakan ini oleh seseorang yang anda tidak kenali, perkara ini mungkin merupakan komplot."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Tidak dapat melengkapkan tindakan semasa panggilan"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Tetapan ini disekat untuk melindungi peranti dan data anda.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Penipu mungkin cuba memasang apl berbahaya dengan meminta anda memasang apl yang tidak diketahui daripada sumber baharu."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Penipu mungkin cuba mengawal peranti anda dengan meminta anda membenarkan akses kebolehaksesan untuk apl."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Akses apl kepada <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> telah ditolak"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Apl meminta akses kepada kebenaran sensitif yang boleh mengakibatkan risiko terhadap maklumat peribadi dan kewangan anda.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Apl tersebut mungkin tidak dapat berfungsi dengan betul tanpa kebenaran terhad ini. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Ketahui cara membenarkan akses&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Akses apl untuk menjadi <xliff:g id="ROLE_NAME">%1$s</xliff:g> lalai telah ditolak"</string>

@@ -54,6 +54,12 @@ public final class AdminRestrictedPermissionsUtils {
         if (SdkLevel.isAtLeastT()) {
             ADMIN_RESTRICTED_SENSORS_PERMISSIONS.add(Manifest.permission.BODY_SENSORS_BACKGROUND);
         }
+
+    }
+
+    /** Adds a new permission to the list of admin restricted permissions. */
+    public static void addAdminRestrictedPermission(String permission) {
+        ADMIN_RESTRICTED_SENSORS_PERMISSIONS.add(permission);
     }
 
     /**
@@ -91,7 +97,6 @@ public final class AdminRestrictedPermissionsUtils {
         boolean isAdminRestrictedSensorPermissionGroup = permissionGroup != null
                 && PermissionMapping.getPlatformPermissionNamesOfGroup(permissionGroup).stream()
                 .anyMatch(ADMIN_RESTRICTED_SENSORS_PERMISSIONS::contains);
-
         if (!ADMIN_RESTRICTED_SENSORS_PERMISSIONS.contains(permission)
                 && !isAdminRestrictedSensorPermissionGroup) {
             return true;

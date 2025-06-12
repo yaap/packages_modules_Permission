@@ -25,7 +25,7 @@
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{Преземено дејство}one{Преземени дејства}other{Преземени дејства}}"</string>
     <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"Прегледајте ги поставките"</string>
     <string name="overall_severity_level_ok_review_summary" msgid="7743619617413076275">"Проверете го списокот со поставки"</string>
-    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"Уредот можеби е изложен на ризик"</string>
+    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"Уредот може да е изложен на ризик"</string>
     <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"Уредот е изложен на ризик"</string>
     <string name="overall_severity_level_data_recommendation_title" msgid="1424269714861655302">"Податоците можеби се под ризик"</string>
     <string name="overall_severity_level_critical_data_warning_title" msgid="1012704126634698604">"Податоците се под ризик"</string>

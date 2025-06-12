@@ -638,6 +638,12 @@
     <!-- Text for linking to the page that shows the apps with a given permission [CHAR LIMIT=none] -->
     <string name="app_permission_footer_permission_apps_link">See all apps with this permission</string>
 
+    <!-- Content description for button with an info icon [CHAR LIMIT=none] -->
+    <string name="app_permission_info_button">Information</string>
+
+    <!-- Content description for button with a settings icon [CHAR LIMIT=none] -->
+    <string name="app_permission_settings_button">Settings</string>
+
     <!-- Label for the assistant mic display switch [CHAR LIMIT=60] -->
     <string name="assistant_mic_label">Show assistant microphone usage</string>
 
@@ -1331,6 +1337,12 @@
     <!-- Title for category of default apps for private profile [CHAR LIMIT=50] -->
     <string name="default_apps_for_private_profile">Default for private space</string>
 
+    <!-- Title for category of apps that are optimized for the device [CHAR LIMIT=50] -->
+    <string name="default_app_recommended">Optimized for device</string>
+
+    <!-- Title for category of other apps [CHAR LIMIT=50] -->
+    <string name="default_app_others">Others</string>
+
     <!-- Summary of a default app when there is no app set [CHAR LIMIT=60] -->
     <string name="default_app_none">None</string>
 
@@ -1397,9 +1409,7 @@
 
     <!-- Content for dialog shown when the user should confirm an incident / bug report.
     [CHAR LIMIT=none] -->
-    <string name="incident_report_dialog_text">"<xliff:g id="app_name" example="Gmail">%1$s</xliff:g> is requesting to upload a bug report from this device taken on <xliff:g id="date" example="December 26, 2018">%2$s</xliff:g> at <xliff:g id="time" example="1:20 PM">%3$s</xliff:g>. Bug reports include personal information about your device or logged by apps, for example, user names, location data, device identifiers, and network information. Only share bug reports with people and apps you trust with this information.
-
-Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug report?"</string>
+    <string name="incident_report_dialog_text">"<xliff:g id="app_name" example="Gmail">%1$s</xliff:g> is requesting to upload a bug report from this device taken on <xliff:g id="date" example="December 26, 2018">%2$s</xliff:g> at <xliff:g id="time" example="1:20 PM">%3$s</xliff:g>. Bug reports include personal information about your device or logged by apps, for example, user names, location data, device identifiers, and network information. Only share bug reports with people and apps you trust with this information.\n\nAllow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug report?"</string>
 
     <!-- Content for dialog shown when there was an error parsing the incident / bug report.
     [CHAR LIMIT=none] -->
@@ -2017,11 +2027,17 @@ Allow <xliff:g id="app_name" example="Gmail">%4$s</xliff:g> to upload a bug repo
     <string name="enhanced_confirmation_dialog_desc">For your security, this setting is currently unavailable.</string>
 
     <!--Title for dialog displayed to tell user that settings are blocked due to the phone state (such as being in a call with an unknown number) [CHAR LIMIT=50] -->
-    <string name="enhanced_confirmation_phone_state_dialog_title">Action not available while on a phone call</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title">Can\u2019t complete action during call</string>
     <!--Content for dialog displayed to tell user that settings are blocked due to the phone state (such as being in a call with an unknown number) [CHAR LIMIT=NONE] -->
-    <string name="enhanced_confirmation_phone_state_dialog_desc">Allowing apps to install other apps is not allowed during a phone call.\n\n
-    Scammers often request this type of action during phone call conversations, so it\u2019s blocked to protect you. If you are being guided to take this action
-    by someone you don\u2019t know, it might be a scam.</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc">This setting is blocked to protect your device and data.<xliff:g id="scam_use_setting_description" example="scammers may ask you to allow apps to install other apps">%1$s</xliff:g></string>
+
+    <!--Content explaining that the "install other apps" setting is blocked due to the phone state in a dialog displayed to the user [CHAR LIMIT=NONE] -->
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc"><xliff:g id="empty_line">\n\n</xliff:g>Scammers may try to install harmful apps by asking you to install unknown apps from a new source.</string>
+
+    <!--Content explaining that the "enable accessibility service" setting is blocked due to the phone state in a dialog displayed to the user [CHAR LIMIT=NONE] -->
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc"><xliff:g id="empty_line">\n\n</xliff:g>Scammers may try to take control of your device by asking you to allow accessibility access for an app.</string>
+    <!--Content explaining that a generic setting is blocked due to the phone state in a dialog displayed to the user. currently empty [CHAR LIMIT=NONE] -->
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" />
 
     <!--Title for dialog displayed to tell user that permissions are blocked by setting restrictions [CHAR LIMIT=50] -->
     <string name="enhanced_confirmation_dialog_title_permission">App was denied access to <xliff:g id="permission_name" example="contacts">%1$s</xliff:g></string>

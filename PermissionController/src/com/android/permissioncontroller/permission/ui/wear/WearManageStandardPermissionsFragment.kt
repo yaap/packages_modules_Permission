@@ -27,13 +27,13 @@ import com.android.permissioncontroller.Constants
 import com.android.permissioncontroller.permission.ui.handheld.ManageCustomPermissionsFragment
 import com.android.permissioncontroller.permission.ui.handheld.PermissionAppsFragment
 import com.android.permissioncontroller.permission.ui.model.ManageStandardPermissionsViewModel
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 
 class WearManageStandardPermissionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val activity = requireActivity()
         val application = activity.getApplication()
@@ -42,20 +42,20 @@ class WearManageStandardPermissionsFragment : Fragment() {
         val viewModel: ManageStandardPermissionsViewModel =
             ViewModelProvider(
                     this,
-                    ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+                    ViewModelProvider.AndroidViewModelFactory.getInstance(application),
                 )
                 .get(ManageStandardPermissionsViewModel::class.java)
 
         val onPermGroupClick: (String) -> Unit = { permGroupName ->
             viewModel.showPermissionApps(
                 this,
-                PermissionAppsFragment.createArgs(permGroupName, sessionId)
+                PermissionAppsFragment.createArgs(permGroupName, sessionId),
             )
         }
         val onCustomPermGroupClick = {
             viewModel.showCustomPermissions(
                 this,
-                ManageCustomPermissionsFragment.createArgs(sessionId)
+                ManageCustomPermissionsFragment.createArgs(sessionId),
             )
         }
         val onAutoRevokeClick = {
@@ -69,7 +69,7 @@ class WearManageStandardPermissionsFragment : Fragment() {
                         viewModel,
                         onPermGroupClick,
                         onCustomPermGroupClick,
-                        onAutoRevokeClick
+                        onAutoRevokeClick,
                     )
                 }
             }

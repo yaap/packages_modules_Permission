@@ -25,8 +25,15 @@ import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.permission.flags.Flags;
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.role.ui.RoleApplicationItem;
 import com.android.role.controller.model.Role;
+import com.android.role.controller.util.SignedPackage;
+import com.android.role.controller.util.SignedPackageUtils;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 /***
  * Class for UI behavior of Assistant role
@@ -39,12 +46,24 @@ public class AssistantRoleUiBehavior implements RoleUiBehavior {
             @NonNull Context context) {
         boolean isAutomotive =
                 context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE);
-
         if (isAutomotive) {
             return null;
         }
-
         return new Intent(Settings.ACTION_VOICE_INPUT_SETTINGS);
+    }
+
+    @NonNull
+    @Override
+    public Predicate<RoleApplicationItem> getRecommendedApplicationFilter(
+            @NonNull Role role, @NonNull Context context) {
+        if (Flags.defaultAppsRecommendationEnabled()) {
+            List<SignedPackage> signedPackages = SignedPackage.parseList(
+                    context.getResources().getString(R.string.config_recommendedAssistants));
+            return applicationItem -> SignedPackageUtils.matchesAny(
+                    applicationItem.getApplicationInfo(), signedPackages, context);
+        } else {
+            return RoleUiBehavior.super.getRecommendedApplicationFilter(role, context);
+        }
     }
 
     @Nullable

@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Acesso a <xliff:g id="PERM">%1$s</xliff:g> para esta app no dispositivo <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Ver todas as autorizações da app <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Ver todas as apps com esta autorização"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Informações"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Definições"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Mostrar utilização do microfone do assistente"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Definições de apps não usadas"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Remover autorizações se a app não for utilizada"</string>
@@ -353,7 +355,7 @@
     <string name="accessibility_service_dialog_title_multiple" msgid="5527879210683548175">"<xliff:g id="NUM_SERVICES">%s</xliff:g> aplicações de acessibilidade têm acesso total ao seu dispositivo"</string>
     <string name="accessibility_service_dialog_bottom_text_single" msgid="1128666197822205958">"O serviço <xliff:g id="SERVICE_NAME">%s</xliff:g> pode ver o seu ecrã, as ações e as entradas, efetuar ações e controlar o ecrã."</string>
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Estas aplicações podem ver o ecrã, as ações e as entradas, efetuar ações e controlar o ecrã."</string>
-    <string name="role_assistant_label" msgid="4727586018198208128">"App assistente digital predefinida"</string>
+    <string name="role_assistant_label" msgid="4727586018198208128">"App de assistente digital predefinida"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App assistente digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"As apps de assistência podem ser-lhe úteis com base em informações do ecrã que está a ver. Algumas apps são compatíveis com serviços de iniciação e de entrada de texto por voz para oferecer assistência integrada."</string>
     <string name="role_browser_label" msgid="2877796144554070207">"App navegador predefinida"</string>
@@ -362,13 +364,13 @@
     <string name="role_browser_request_title" msgid="2895200507835937192">"Quer definir o <xliff:g id="APP_NAME">%1$s</xliff:g> como a app de navegador predefinida?"</string>
     <string name="role_browser_request_description" msgid="5888803407905985941">"Não são necessárias autorizações."</string>
     <string name="role_dialer_label" msgid="1100224146343237968">"App de telefone predefinida"</string>
-    <string name="role_dialer_short_label" msgid="7186888549465352489">"App Telefone"</string>
+    <string name="role_dialer_short_label" msgid="7186888549465352489">"App de telefone"</string>
     <string name="role_dialer_description" msgid="8768708633696539612">"Apps que permitem fazer e receber chamadas no seu dispositivo"</string>
     <string name="role_dialer_request_title" msgid="5959618560705912058">"Quer definir o <xliff:g id="APP_NAME">%1$s</xliff:g> como a app de telefone predefinida?"</string>
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Esta app fica com acesso à sua Câmara, Contactos, Microfone, Telefone e SMS"</string>
     <string name="role_dialer_search_keywords" msgid="3324448983559188087">"telefone"</string>
     <string name="role_sms_label" msgid="8456999857547686640">"App de SMS predefinida"</string>
-    <string name="role_sms_short_label" msgid="4371444488034692243">"app de SMS"</string>
+    <string name="role_sms_short_label" msgid="4371444488034692243">"App de SMS"</string>
     <string name="role_sms_description" msgid="3424020199148153513">"Apps que permitem usar o seu número de telefone para enviar e receber mensagens de texto, fotos, vídeos e muito mais."</string>
     <string name="role_sms_request_title" msgid="7953552109601185602">"Quer definir o <xliff:g id="APP_NAME">%1$s</xliff:g> como app SMS predefinida?"</string>
     <string name="role_sms_request_description" msgid="2691004766132144886">"Esta app fica com acesso à sua Câmara, Contactos, Ficheiros e multimédia, Microfone, Telefone e SMS"</string>
@@ -380,7 +382,7 @@
     <string name="role_emergency_request_description" msgid="131645948770262850">"Não são necessárias autorizações."</string>
     <string name="role_emergency_search_keywords" msgid="1920007722599213358">"em caso de emergência"</string>
     <string name="role_home_label" msgid="3871847846649769412">"App página inicial predefinida"</string>
-    <string name="role_home_short_label" msgid="8544733747952272337">"App Página inicial"</string>
+    <string name="role_home_short_label" msgid="8544733747952272337">"App de página inicial"</string>
     <string name="role_home_description" msgid="7997371519626556675">"Também conhecidas por \"launcher\" são apps que substituem os ecrãs principais no Android e dão acesso aos conteúdos e às funcionalidades do seu dispositivo"</string>
     <string name="role_home_request_title" msgid="738136983453341081">"Quer definir o <xliff:g id="APP_NAME">%1$s</xliff:g> como a app Página inicial predefinida?"</string>
     <string name="role_home_request_description" msgid="2658833966716057673">"Não são necessárias autorizações."</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Abertura de links"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predefinição para o trabalho"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predefinição para espaço privado"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Otimizadas para o dispositivo"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Outras"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nenhuma"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predefinição do sistema)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Sem apps"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"A app <xliff:g id="APP_NAME">%1$s</xliff:g> quer carregar informações de depuração."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Quer partilhar dados de depuração?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"O sistema detetou um problema."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"A app <xliff:g id="APP_NAME_0">%1$s</xliff:g> está a solicitar o carregamento de um relatório de erro a partir deste dispositivo realizado a <xliff:g id="DATE">%2$s</xliff:g> à(s) <xliff:g id="TIME">%3$s</xliff:g>. Os relatórios de erros incluem informações pessoais acerca do seu dispositivo ou registadas por app, por exemplo, nomes de utilizador, dados de localização, identificadores do dispositivo e informações da rede. Apenas partilhe relatórios de erros com pessoas e apps nas quais confia. Permite que a app <xliff:g id="APP_NAME_1">%4$s</xliff:g> carregue um relatório de erro?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"A app <xliff:g id="APP_NAME_0">%1$s</xliff:g> está a pedir o carregamento de um relatório de erro a partir deste dispositivo realizado a <xliff:g id="DATE">%2$s</xliff:g> à(s) <xliff:g id="TIME">%3$s</xliff:g>. Os relatórios de erros incluem informações pessoais acerca do seu dispositivo ou registadas por apps, por exemplo, nomes de utilizador, dados de localização, identificadores do dispositivo e informações da rede. Partilhe relatórios de erros apenas com pessoas e apps nas quais confia.\n\nPermite que a app <xliff:g id="APP_NAME_1">%4$s</xliff:g> carregue um relatório de erro?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Ocorreu um erro ao processar o relatório de erro para a app <xliff:g id="APP_NAME">%1$s</xliff:g>. Como tal, a partilha dos dados de depuração detalhados foi negada. Pedimos desculpa pela interrupção."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Permitir"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Recusar"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Permitir definições restritas"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Definição restrita"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Para sua segurança, esta definição está indisponível atualmente."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Ação não disponível durante uma chamada"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Não é permitido permitir que as apps instalem outras apps durante uma chamada telefónica.\n\n Os autores de esquemas pedem frequentemente este tipo de ação durante as conversas telefónicas, por isso, a opção é bloqueada para sua proteção. Se alguém que não conhece lhe pedir para realizar esta ação, pode tratar-se de um esquema."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Não é possível concluir a ação durante a chamada"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Esta definição está bloqueada para proteger o seu dispositivo e dados.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Os autores de esquemas podem tentar instalar apps prejudiciais pedindo-lhe para instalar apps desconhecidas de uma nova origem."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Os autores de esquemas podem tentar assumir o controlo do seu dispositivo pedindo-lhe para permitir o acesso de acessibilidade para uma app."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"O acesso a <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> foi negado à app"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"A app pediu acesso a uma autorização confidencial que pode pôr em risco as suas informações pessoais e financeiras.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que a app não funcione corretamente sem esta autorização restrita. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Saiba como permitir o acesso&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"O acesso à função predefinida <xliff:g id="ROLE_NAME">%1$s</xliff:g> foi negado à app"</string>

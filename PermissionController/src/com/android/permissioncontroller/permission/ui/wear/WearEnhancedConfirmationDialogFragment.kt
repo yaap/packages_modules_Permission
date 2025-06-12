@@ -27,7 +27,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.android.permissioncontroller.ecm.EnhancedConfirmationDialogActivity
 import com.android.permissioncontroller.permission.ui.wear.model.WearEnhancedConfirmationViewModel
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 
 class WearEnhancedConfirmationDialogFragment : DialogFragment() {
     private lateinit var enhancedConfirmationDialogActivity: EnhancedConfirmationDialogActivity
@@ -42,7 +42,7 @@ class WearEnhancedConfirmationDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val title =
             arguments?.getString(KEY_TITLE) ?: throw RuntimeException("ECM Title can't be null")

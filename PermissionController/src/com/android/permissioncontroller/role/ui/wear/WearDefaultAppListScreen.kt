@@ -29,11 +29,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.LiveData
 import androidx.wear.compose.material.Text
 import com.android.permissioncontroller.R
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
-import com.android.permissioncontroller.permission.ui.wear.elements.chipDefaultColors
-import com.android.permissioncontroller.permission.ui.wear.elements.chipDisabledColors
 import com.android.permissioncontroller.role.ui.RoleItem
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButtonStyle
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 
 @Composable
 fun WearDefaultAppListScreen(
@@ -52,20 +52,20 @@ fun WearDefaultAppListScreen(
         }
         preferences.forEach { pref ->
             item {
-                Chip(
+                WearPermissionButton(
                     label = pref.label,
-                    icon = pref.icon,
-                    colors =
-                        if (pref.isEnabled()) {
-                            chipDefaultColors()
+                    iconBuilder = pref.icon?.let { WearPermissionIconBuilder.builder(it) },
+                    style =
+                        if (pref.isEnabled) {
+                            WearPermissionButtonStyle.Secondary
                         } else {
-                            chipDisabledColors()
+                            WearPermissionButtonStyle.DisabledLike
                         },
                     secondaryLabel = pref.summary?.toString(),
                     onClick = pref.getOnClicked(),
                     modifier = Modifier.fillMaxWidth(),
                     labelMaxLines = Int.MAX_VALUE,
-                    secondaryLabelMaxLines = Integer.MAX_VALUE
+                    secondaryLabelMaxLines = Integer.MAX_VALUE,
                 )
             }
         }

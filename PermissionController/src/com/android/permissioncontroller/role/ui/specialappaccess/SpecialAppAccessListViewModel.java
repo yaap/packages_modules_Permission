@@ -26,6 +26,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.android.permissioncontroller.role.ui.MergeRoleListLiveData;
 import com.android.permissioncontroller.role.ui.RoleItem;
 import com.android.permissioncontroller.role.ui.RoleListLiveData;
 import com.android.permissioncontroller.role.ui.RoleListSortFunction;

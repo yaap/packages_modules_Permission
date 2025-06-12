@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> پر اس ایپ تک رسائی حاصل کریں<xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g> کی سبھی اجازتیں دیکھیں"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"اس اجازت والی سبھی ایپس دیکھیں"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"معلومات"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"ترتیبات"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"اسسٹنٹ مائیکروفون کا استعمال دکھائیں"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"غیر استعمال شدہ ایپ کی ترتیبات"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"ایپ کے استعمال نہ ہونے پر اجازتیں ہٹائیں"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"شروعاتی لنکس"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"کام کیلئے ڈیفالٹ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"پرائیویٹ اسپیس کے لیے ڈیفالٹ"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"آلہ کیلئے بہتر بنایا گیا"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"دیگر"</string>
     <string name="default_app_none" msgid="9084592086808194457">"کوئی نہیں"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(سسٹم ڈیفالٹ)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"کوئی ایپس نہیں ہیں"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> ڈیبگنگ کی معلومات اپ لوڈ کرنا چاہتی ہے۔"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"ڈیبگنگ ڈیٹا کا اشتراک کریں؟"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"سسٹم نے ایک مسئلے کا پتا لگایا ہے۔"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> <xliff:g id="DATE">%2$s</xliff:g> کو <xliff:g id="TIME">%3$s</xliff:g> پر اس آلہ سے لی گئی بگ رپورٹ اپ لوڈ کرنے کی درخواست کر رہی ہے۔ بگ رپورٹس میں آپ کے آلہ کے بارے میں یا ایپس کے ذریعے لاگ کی گئی ذاتی معلومات، جیسے کہ صارف کے نام، مقام کا ڈیٹا، آلہ کے شناخت کاران اور نیٹ ورک کی معلومات شامل ہوتی ہیں۔ صرف ان ہی لوگوں اور ایپس کے ساتھ بگ رپورٹس کا اشتراک کریں جن پر آپ کو اس معلومات کے تعلق سے بھروسہ ہے۔ <xliff:g id="APP_NAME_1">%4$s</xliff:g> کو بگ رپورٹ اپ لوڈ کرنے کی اجازت دیں؟"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> <xliff:g id="DATE">%2$s</xliff:g> کو <xliff:g id="TIME">%3$s</xliff:g> پر اس آلہ سے لی گئی بگ رپورٹ اپ لوڈ کرنے کی درخواست کر رہی ہے۔ بگ رپورٹس میں آپ کے آلہ کے بارے میں ذاتی معلومات یا ایپس کے ذریعے لاگ کی گئی معلومات، جیسے کہ صارف کے نام، مقام کا ڈیٹا، آلہ کے شناخت کاران اور نیٹ ورک کی معلومات شامل ہوتی ہیں۔ صرف ان ہی لوگوں اور ایپس کے ساتھ بگ رپورٹس کا اشتراک کریں جن پر آپ کو اس معلومات کے تعلق سے بھروسہ ہے۔\n\n <xliff:g id="APP_NAME_1">%4$s</xliff:g> کو بگ رپورٹ اپ لوڈ کرنے کی اجازت دیں؟"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> کیلئے بگ رپورٹ پر کارروائی کرنے میں ایک خرابی تھی۔ اس لئے ڈیبگنگ کے مفصل ڈیٹا کے اشتراک کی اجازت نہیں دی گئی۔ رکاوٹ کیلئے معذرت۔"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"اجازت دیں"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"مسترد کریں"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"پابندی والی ترتیبات کی اجازت دیں"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"محدود ترتیب"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"آپ کی سیکیورٹی کیلئے، یہ ترتیب فی الحال دستیاب نہیں ہے۔"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"فون کال کے دوران کارروائی دستیاب نہیں ہے"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"فون کال کے دوران ایپس کو دوسری ایپس انسٹال کرنے کی اجازت دینا ممنوع ہے۔\n\n دھوکے باز اکثر فون کال گفتگوؤں کے دوران اس قسم کی کارروائی کی درخواست کرتے ہیں، اس لیے اسے آپ کی حفاظت کے لیے مسدود کر دیا جاتا ہے۔ اگر آپ کو کسی ایسے شخص کے ذریعے سے یہ کارروائی کرنے کے لیے رہنمائی کی جا رہی ہے جس کو آپ نہیں جانتے ہیں تو یہ ایک فریب کاری ہو سکتی ہے۔"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"کال کے دوران کارروائی مکمل نہیں کر سکتے"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"اس ترتیب کو آپ کے آلے اور ڈیٹا کی حفاظت کے لیے بلاک کر دیا گیا ہے۔<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>دھوکے باز آپ سے کسی نئے ذریعہ سے نامعلوم ایپس انسٹال کرنے کے لیے کہہ کر نقصان دہ ایپس انسٹال کرنے کی کوشش کر سکتے ہیں۔"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>دھوکے باز آپ سے کسی ایپ کے لیے ایکسیسبیلٹی رسائی کی اجازت دینے کے لیے کہہ کر آپ کے آلے کا کنٹرول حاصل کرنے کی کوشش کر سکتے ہیں۔"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"<xliff:g id="PERMISSION_NAME">%1$s</xliff:g> تک ایپ کی رسائی کو مسترد کر دیا گیا"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"‏ایپ نے ایک حساس اجازت تک رسائی کی درخواست کی ہے جو آپ کی ذاتی اور مالی معلومات کو خطرے میں ڈال سکتی ہے۔<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>یہ ممکن ہے کہ اس محدود اجازت کے بغیر ایپ ٹھیک سے کام نہ کرے۔ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;رسائی کی اجازت دینے کا طریقہ جانیں&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"ڈیفالٹ <xliff:g id="ROLE_NAME">%1$s</xliff:g> ہونے کے لیے ایپ کی رسائی کو مسترد کر دیا گیا"</string>

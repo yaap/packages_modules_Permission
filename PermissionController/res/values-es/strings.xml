@@ -195,13 +195,15 @@
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Permitir acceso limitado"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Ubicación precisa"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"Ubicación aproximada"</string>
-    <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Usar ubic. precisa"</string>
+    <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Ubicación precisa"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Cuando la ubicación precisa está desactivada, las aplicaciones pueden consultar tu ubicación aproximada"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"Permiso de <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"Acceso a <xliff:g id="PERM">%1$s</xliff:g> para esta aplicación"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Acceso de <xliff:g id="PERM">%1$s</xliff:g> a esta aplicación en <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Ver todos los permisos de <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Ver todas las aplicaciones con este permiso"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Información"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Ajustes"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Mostrar el uso del micrófono del Asistente"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Ajustes de aplicaciones sin usar"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Quitar permisos si la aplicación no se usa"</string>
@@ -250,13 +252,13 @@
     <string name="app_permission_most_recent_denied_summary" msgid="7659497197737708112">"Actualmente denegado / Último acceso: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="app_permission_never_accessed_summary" msgid="401346181461975090">"No ha accedido nunca"</string>
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"Denegado / Último acceso: Nunca"</string>
-    <string name="allowed_header" msgid="7769277978004790414">"Permitidas"</string>
+    <string name="allowed_header" msgid="7769277978004790414">"Con permiso"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Con permiso siempre"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Permitidas solo mientras se usan"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Pueden acceder solo al contenido multimedia"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Pueden gestionar todos los archivos"</string>
     <string name="ask_header" msgid="2633816846459944376">"Preguntar siempre"</string>
-    <string name="denied_header" msgid="903209608358177654">"No permitido"</string>
+    <string name="denied_header" msgid="903209608358177654">"Sin permiso"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> en <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Ver más aplicaciones que pueden acceder a todos los archivos"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 día}many{# días}other{# días}}"</string>
@@ -355,7 +357,7 @@
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Estas aplicaciones pueden ver tu pantalla, lo que haces y lo que introduces; realizar acciones; y controlar la pantalla."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"Aplicación de asistente digital predeterminada"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplicación de asistente digital"</string>
-    <string name="role_assistant_description" msgid="6622458130459922952">"Las aplicaciones de asistencia te ayudan según la información que aparezca en la pantalla. Algunas aplicaciones admiten tanto el menú de aplicaciones como los servicios de entrada de voz para ofrecerte asistencia integrada."</string>
+    <string name="role_assistant_description" msgid="6622458130459922952">"Las aplicaciones de asistencia te ayudan a partir de la información que aparezca en la pantalla. Algunas aplicaciones admiten tanto el menú de aplicaciones como los servicios de entrada de voz para ofrecerte asistencia integrada."</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Aplicación de navegador predeterminada"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplicación de navegador"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Son las aplicaciones que te permiten acceder a Internet y abren los enlaces que tocas"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Abrir enlaces"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predeterminadas para trabajo"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predeterminadas para el espacio privado"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizadas para el dispositivo"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Otras"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ninguna"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predeterminado del sistema)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"No hay aplicaciones"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> quiere subir información de depuración."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"¿Quieres compartir datos de depuración?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"El sistema ha detectado un problema."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> solicita subir el informe de errores de este dispositivo generado el <xliff:g id="DATE">%2$s</xliff:g> a las <xliff:g id="TIME">%3$s</xliff:g>. Los informes de errores incluyen información personal sobre el dispositivo o datos registrados por las aplicaciones, como nombres de usuario, datos de ubicación, identificadores del dispositivo e información de red. Comparte estos informes únicamente con personas y aplicaciones de confianza. ¿Permitir que <xliff:g id="APP_NAME_1">%4$s</xliff:g> suba un informe de errores?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> solicita subir el informe de errores de este dispositivo generado el <xliff:g id="DATE">%2$s</xliff:g> a las <xliff:g id="TIME">%3$s</xliff:g>. Los informes de errores incluyen información personal sobre el dispositivo o datos registrados por las aplicaciones, como nombres de usuario, datos de ubicación, identificadores del dispositivo e información de red. Comparte estos informes únicamente con personas y aplicaciones de confianza.\n\n¿Permitir que <xliff:g id="APP_NAME_1">%4$s</xliff:g> suba un informe de errores?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"No se ha podido procesar el informe de errores de <xliff:g id="APP_NAME">%1$s</xliff:g>, por lo que no se han podido compartir los datos de depuración detallados. Sentimos las molestias."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Permitir"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Denegar"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Permitir ajustes restringidos"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Ajuste restringido"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Por seguridad, este ajuste no está disponible actualmente."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Acción no disponible durante una llamada"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"No es posible permitir que las aplicaciones instalen otras aplicaciones durante una llamada telefónica.\n\n Los estafadores suelen solicitar este tipo de acciones durante las conversaciones telefónicas, por lo que esta acción se bloquea para protegerte. Si alguien que no conoces te indica que debes realizar esta acción, podría tratarse de una estafa."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"No se puede completar la acción durante una llamada"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Este ajuste está bloqueado para proteger tu dispositivo y tus datos.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Los estafadores pueden pedirte que instales aplicaciones de una fuente nueva para instalar aplicaciones dañinas."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Los estafadores pueden solicitarte acceso a los ajustes de accesibilidad de una aplicación para intentar tomar el control de tu dispositivo."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Se ha denegado el acceso a <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> a la aplicación"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"La aplicación ha solicitado acceso a un permiso sensible que puede poner en riesgo tu información personal y financiera.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Es posible que la aplicación no funcione correctamente sin este permiso restringido. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Consulta cómo permitir el acceso&lt;/a&gt;."</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Se ha denegado el acceso para que la aplicación sea <xliff:g id="ROLE_NAME">%1$s</xliff:g> predeterminada"</string>

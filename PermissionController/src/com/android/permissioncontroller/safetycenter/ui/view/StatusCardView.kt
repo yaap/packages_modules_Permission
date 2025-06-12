@@ -21,6 +21,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextSwitcher
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +36,7 @@ constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    defStyleRes: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
@@ -44,10 +45,28 @@ constructor(
 
     val statusImageView: ImageView by lazyView(R.id.status_image)
     val titleAndSummaryContainerView: LinearLayout by lazyView(R.id.status_title_and_summary)
-    val titleView: TextView by lazyView(R.id.status_title)
-    val summaryView: TextView by lazyView(R.id.status_summary)
+    private val titleView: TextSwitcher by lazyView(R.id.status_title)
+    private val summaryView: TextSwitcher by lazyView(R.id.status_summary)
     val reviewSettingsButton: MaterialButton by lazyView(R.id.review_settings_button)
     val rescanButton: MaterialButton by lazyView(R.id.rescan_button)
+
+    fun showText(statusUiData: StatusUiData) {
+        titleView.updateText(statusUiData.title)
+        summaryView.updateText(statusUiData.getSummary(context))
+    }
+
+    private fun TextSwitcher.updateText(newText: CharSequence) {
+        val currentText: CharSequence? = (currentView as TextView).text
+        if (currentText == newText) {
+            return
+        }
+
+        if (currentText.isNullOrBlank()) {
+            setCurrentText(newText)
+        } else {
+            setText(newText)
+        }
+    }
 
     fun showButtons(statusUiData: StatusUiData) {
         rescanButton.isEnabled = !statusUiData.isRefreshInProgress

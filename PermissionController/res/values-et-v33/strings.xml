@@ -30,9 +30,10 @@
     <string name="safety_center_more_issues_card_title" msgid="7425844746197493312">"Rohkem teavitusi"</string>
     <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"Hoiatused, millest on loobutud"</string>
     <string name="safety_center_more_issues_card_expand_action" msgid="7109451851052272946">"{count,plural, =1{Laiendage ja vaadake veel ühte hoiatust}other{Laiendage ja vaadake veel # hoiatust}}"</string>
+    <string name="safety_center_more_issues_card_collapse_action" msgid="7485597582198474637">"Ahenda"</string>
     <string name="safety_center_issue_card_prefix_content_description" msgid="1447445289637043544">"Hoiatus. <xliff:g id="ISSUE_CARD_TITLE">%1$s</xliff:g>"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="8548932070610766651">"Toiming on lõpetatud"</string>
-    <string name="safety_center_qs_status_summary" msgid="5193925895830451177">"Kontrollige seadeid, mis võivad teie seadme kaitset tõhusamaks muuta"</string>
+    <string name="safety_center_qs_status_summary" msgid="5193925895830451177">"Kontrollige seadeid, mis võivad teie seadme kaitset tõhusamaks muuta."</string>
     <string name="safety_center_qs_page_landing" msgid="1717368301679228128">"Turvalisuse ja privaatsuse kiirseaded"</string>
     <string name="safety_center_qs_close_button" msgid="1352313308176244599">"Sule"</string>
     <string name="safety_center_qs_expand_action" msgid="2193190557696484169">"Laienda ja kuva valikud"</string>

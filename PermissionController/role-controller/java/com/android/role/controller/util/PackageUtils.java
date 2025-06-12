@@ -57,7 +57,7 @@ public final class PackageUtils {
     }
 
     /**
-     * Retrieve if a package is a system package.
+     * Check whether a package is a system package.
      *
      * @param packageName the name of the package
      * @param user the user of the package
@@ -92,5 +92,23 @@ public final class PackageUtils {
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
+    }
+
+    /**
+     * Check whether a package has a signing certificate.
+     *
+     * @param packageName the name of the package
+     * @param certificate the signing certificate
+     * @param user the user of the package
+     * @param context the {@code Context} to retrieve system services
+     *
+     * @return whether the package has the signing certificate.
+     */
+    public static boolean hasSigningCertificateAsUser(@NonNull String packageName,
+            @NonNull byte[] certificate, @NonNull UserHandle user, @NonNull Context context) {
+        Context userContext = UserUtils.getUserContext(context, user);
+        PackageManager userPackageManager = userContext.getPackageManager();
+        return userPackageManager.hasSigningCertificate(packageName, certificate,
+                PackageManager.CERT_INPUT_SHA256);
     }
 }

@@ -16,16 +16,14 @@
 
 package com.android.permissioncontroller.permission.ui.model
 
-import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.modules.utils.build.SdkLevel
-import com.android.permission.flags.Flags
 import com.android.permissioncontroller.PermissionControllerApplication
+import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiState
-import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModelV2
 import com.google.common.truth.Truth
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -42,15 +40,14 @@ class PermissionUsageDetailsViewModelTest {
     @JvmField @Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_LIVEDATA_REFACTOR_PERMISSION_TIMELINE_ENABLED)
     fun verifyUiStateIsGeneratedSuccessfully() {
         Assume.assumeTrue(SdkLevel.isAtLeastS())
         lateinit var uiState: PermissionUsageDetailsUiState.Success
         val viewModel =
-            PermissionUsageDetailsViewModelV2.create(
+            PermissionUsageDetailsViewModel.create(
                 PermissionControllerApplication.get(),
                 SavedStateHandle(mapOf("show7Days" to true, "showSystem" to true)),
-                LOCATION_PERMISSION_GROUP
+                LOCATION_PERMISSION_GROUP,
             )
         val countDownLatch = CountDownLatch(1)
 

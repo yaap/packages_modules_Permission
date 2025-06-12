@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Aplikacja ma przyznane uprawnienie <xliff:g id="PERM">%1$s</xliff:g> na tym urządzeniu: <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Zobacz wszystkie uprawnienia aplikacji <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Wyświetl wszystkie aplikacje z tym uprawnieniem"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Informacje"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Ustawienia"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Pokaż użycie mikrofonu w Asystencie"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Ustawienia nieużywanych aplikacji"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Usuń uprawnienia, jeśli aplikacja jest nieużywana"</string>
@@ -251,7 +253,7 @@
     <string name="app_permission_never_accessed_summary" msgid="401346181461975090">"Nigdy nie użyto"</string>
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"Odmowa / nigdy nie użyto"</string>
     <string name="allowed_header" msgid="7769277978004790414">"Ma dostęp"</string>
-    <string name="allowed_always_header" msgid="6455903312589013545">"Mają ciągły dostęp"</string>
+    <string name="allowed_always_header" msgid="6455903312589013545">"Ciągły dostęp"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Mają dostęp tylko podczas używania"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Zezwolono na dostęp tylko do multimediów"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Zezwolono na zarządzanie wszystkimi plikami"</string>
@@ -346,7 +348,7 @@
     <string name="no_apps_allowed" msgid="7718822655254468631">"Nie zezwolono żadnym aplikacjom"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Brak aplikacji z uprawnieniami dla wszystkich plików"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Brak aplikacji z uprawnieniami tylko dla multimediów"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"Nie zabroniono dostępu żadnym aplikacjom"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"Nie odmówiono dostępu żadnym aplikacjom"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Wybrana"</string>
     <string name="settings" msgid="5409109923158713323">"Ustawienia"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"Usługa <xliff:g id="SERVICE_NAME">%s</xliff:g> ma pełny dostęp do urządzenia"</string>
@@ -409,7 +411,7 @@
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"notatki"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"Domyślna aplikacja portfela"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"Aplikacja portfela cyfrowego"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"Aby ułatwić sobie wykonywanie różny form transakcji, w aplikacjach portfeli cyfrowych można przechowywać karty kredytowe i lojalnościowe, kluczyki do samochodu i inne rzeczy."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"Aby ułatwić sobie wykonywanie różnych form transakcji, w aplikacjach portfeli cyfrowych można przechowywać karty kredytowe i lojalnościowe, kluczyki do samochodu i inne rzeczy."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"Ustawić aplikację <xliff:g id="APP_NAME">%1$s</xliff:g> jako domyślną aplikację portfela cyfrowego?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"Nie potrzebuje uprawnień"</string>
     <string name="request_role_current_default" msgid="738722892438247184">"Bieżąca aplikacja domyślna"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otwieranie linków"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Domyślne do pracy"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Domyślne dla przestrzeni prywatnej"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Zoptymalizowane dla danego urządzenia"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Inne"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Brak"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Domyślna aplikacja systemowa)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Brak aplikacji"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> chce przesłać informacje debugowania."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Udostępnić dane debugowania?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"System wykrył problem."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> prosi o zezwolenie na przesłanie raportu o błędzie z tego urządzenia. Raport utworzono <xliff:g id="DATE">%2$s</xliff:g> o <xliff:g id="TIME">%3$s</xliff:g>. Raporty o błędach zawierają dane prywatne powiązane z Twoim urządzeniem lub zarejestrowane w aplikacjach, na przykład nazwy użytkowników, dane o lokalizacji, identyfikatory urządzeń i informacje o sieciach. Raporty o błędach zawierające te informacje udostępniaj tylko osobom i aplikacjom, którym ufasz. Zezwolić aplikacji <xliff:g id="APP_NAME_1">%4$s</xliff:g> na przesłanie raportu o błędzie?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> prosi o zezwolenie na przesłanie raportu o błędzie z tego urządzenia, który utworzono <xliff:g id="DATE">%2$s</xliff:g> o <xliff:g id="TIME">%3$s</xliff:g>. Raporty o błędach zawierają dane osobowe powiązane z Twoim urządzeniem lub zarejestrowane w aplikacjach, na przykład nazwy użytkowników, dane o lokalizacji, identyfikatory urządzeń i informacje o sieciach. Udostępniaj je wyłącznie zaufanym osobom i aplikacjom.\n\nZezwolić aplikacji <xliff:g id="APP_NAME_1">%4$s</xliff:g> na przesłanie raportu o błędzie?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Podczas przetwarzania zgłoszenia błędu w aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> wystąpił błąd. Odmówiono udostępnienia szczegółowych danych debugowania. Przepraszamy za niedogodności."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Zezwól"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Odmów"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Zezwól na ustawienia z ograniczonym dostępem"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Ustawienie z ograniczonym dostępem"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Ze względów bezpieczeństwa to ustawienie jest obecnie niedostępne."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Działanie niedostępne podczas rozmowy telefonicznej"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Podczas rozmowy telefonicznej nie można zezwolić aplikacjom na instalowanie innych aplikacji.\n\n Oszuści często proszą o takie działania podczas rozmów telefonicznych, dlatego blokujemy je, aby Cię chronić. Jeśli ktoś, kogo nie znasz, prosi Cię o podjęcie tego działania, może to być oszustwo."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Nie można wykonywać działania podczas połączenia"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"To ustawienie jest zablokowane, aby chronić Twoje urządzenie i dane.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Oszuści mogą próbować zainstalować szkodliwe aplikacje, prosząc o instalację nieznanych programów z nowego źródła."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Oszuści mogą próbować przejąć kontrolę nad Twoim urządzeniem, prosząc o przyznanie uprawnień do ułatwień dostępu aplikacji."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikacja nie otrzymała dostępu do uprawnień <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Aplikacja wymaga dostępu do uprawnień newralgicznych, co może zagrażać Twoim danym osobowym i informacjom finansowym.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Możliwe, że bez tego uprawnienia z ograniczeniami aplikacja nie będzie działać poprawnie. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Jak zezwolić na dostęp&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Aplikacja nie otrzymała dostępu jako domyślna <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

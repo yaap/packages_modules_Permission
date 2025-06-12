@@ -29,7 +29,7 @@ class EnhancedConfirmationManagerLocalImpl implements EnhancedConfirmationManage
     private final EnhancedConfirmationService mService;
 
     EnhancedConfirmationManagerLocalImpl(EnhancedConfirmationService service) {
-        if (Flags.enhancedConfirmationInCallApisEnabled()) {
+        if (Flags.unknownCallPackageInstallBlockingEnabled()) {
             mService = service;
         } else {
             mService = null;

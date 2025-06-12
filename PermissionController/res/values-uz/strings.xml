@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>da bu ilova uchun <xliff:g id="PERM">%1$s</xliff:g> kirish ruxsati"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g> uchun berilgan barcha ruxsatlar"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Bu ruxsatga ega barcha ilovalar"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Axborot"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Sozlamalar"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Assistent uchun mikrofondan foydalanishni koʻrsatish"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Ishlatilmagan ilova sozlamalari"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Ishlatilmayotgan ilovalardan ruxsatlarni olib tashlash"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Havolalarni ochish"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Ish uchun birlamchi"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Maxfiy makon uchun standart"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Qurilma uchun optimallangan"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Boshqalar"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Hech qanday"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Birlamchi)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Hech qanday ilova topilmadi"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasi nosozliklarni aniqlash axborotini yuklamoqchi."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Nosozliklarni aniqlash axboroti ulashilsinmi?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Tizim muammo topdi."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ilovasi bu qurilmadan <xliff:g id="DATE">%2$s</xliff:g> sanasida <xliff:g id="TIME">%3$s</xliff:g> da olingan xatoliklar hisobotini yuklashni talab etmoqda. Xatoliklar hisobotiga foydalanuvchi nomlari, joylashuv axboroti, qurilma identifikatorlari va tarmoq maʼlumotlari kabi qurilmangiz yoki qayd qilingan ilovalar haqida shaxsiy maʼlumotlar kiradi. Bunday maʼlumotlarni faqat ishonchli odamlar va ilovalarga yuboring. <xliff:g id="APP_NAME_1">%4$s</xliff:g> ilovasiga xatoliklar hisobotini yuklashga ruxsat berilsinmi?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ilovasi bu qurilmadan <xliff:g id="DATE">%2$s</xliff:g> sanasida <xliff:g id="TIME">%3$s</xliff:g> da olingan xatoliklar hisobotini yuklashni talab etmoqda. Xatoliklar hisobotiga foydalanuvchi nomlari, joylashuv axboroti, qurilma identifikatorlari va tarmoq maʼlumotlari kabi qurilmangiz yoki qayd qilingan ilovalar haqida shaxsiy maʼlumotlar kiradi. Bunday maʼlumotlarni faqat ishonchli odamlar va ilovalarga yuboring.\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> ilovasiga xatoliklar hisobotini yuklashga ruxsat berilsinmi?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> uchun nosozlik axborotini yuborishda xatolik yuz berdi, shuning uchun batafsil nosozlik axborotini uzatish taqiqlandi. Nosozlik uchun uzr soʻraymiz."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Ruxsat"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Rad etish"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Cheklangan sozlamalarga ruxsat berish"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Cheklangan sozlama"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Xavfsizlik maqsadida bu sozlama hozir ishlamaydi."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Telefon chaqiruvi paytida amal ishlamaydi"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Telefon chaqiruvi paytida ilovalarga boshqa ilovalarni oʻrnatishga ruxsat berish mumkin emas.\n\n Tovlamachilar koʻpincha telefon chaqiruvi orqali suhbatlar paytida shu turdagi amalni bajarishni soʻraydi, shu bois u sizni himoyalash uchun bloklanadi. Sizga notanish biror kishi shu amalni bajarishga undasa, bu tovlamachilik boʻlishi mumkin."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Chaqiruv paytida bu amalni bajarish imkonsiz"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Qurilma va maʼlumotlarni himoyalash maqsadida bu sozlama bloklandi.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Firibgarlar yangi manbadan notanish ilovalarni oʻrnatishga ruxsat soʻrab, zararli ilovalarni oʻrnatishga urinishi mumkin."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Firibgarlar ilova uchun maxsus imkoniyatlarga ruxsat berishni soʻrab, qurilmani boshqarishga urinishi mumkin."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Ilovaga <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> ruxsati berilmadi"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Ilova maxfiy maʼlumotlarga kirish uchun ruxsat soʻramoqda. Ruxsat bersangiz, shaxsiy va moliyaviy maʼlumotlaringiz xavf ostida qolishi mumkin.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g> Bu cheklangan ruxsatsiz ilova toʻgʻri ishlamasligi mumkin. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Qanday ruxsat berish haqida batafsil&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Ilovadan <xliff:g id="ROLE_NAME">%1$s</xliff:g> turkumidagi standart sifatida foydalanish taqiqlangan"</string>

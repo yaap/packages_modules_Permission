@@ -165,7 +165,7 @@ object KotlinUtils {
         val first: A,
         val second: B,
         val third: C,
-        val fourth: D
+        val fourth: D,
     )
 
     /**
@@ -179,7 +179,7 @@ object KotlinUtils {
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 PROPERTY_CAMERA_MIC_ICONS_ENABLED,
-                true
+                true,
             )
     }
 
@@ -190,7 +190,7 @@ object KotlinUtils {
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 PROPERTY_LOCATION_INDICATORS_ENABLED,
-                false
+                false,
             )
     }
 
@@ -211,7 +211,7 @@ object KotlinUtils {
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 PROPERTY_PHOTO_PICKER_PROMPT_ENABLED,
-                true
+                true,
             )
     }
 
@@ -236,7 +236,7 @@ object KotlinUtils {
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 PERMISSION_RATIONALE_ENABLED,
-                true
+                true,
             )
     }
 
@@ -249,7 +249,7 @@ object KotlinUtils {
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED,
-                true
+                true,
             ) &&
             !DeviceUtils.isAuto(context) &&
             !DeviceUtils.isTelevision(context) &&
@@ -262,7 +262,7 @@ object KotlinUtils {
         return DeviceConfig.getLong(
             DeviceConfig.NAMESPACE_PRIVACY,
             PROPERTY_SAFETY_LABEL_CHANGES_JOB_INTERVAL_MILLIS,
-            Duration.ofDays(30).toMillis()
+            Duration.ofDays(30).toMillis(),
         )
     }
 
@@ -278,7 +278,7 @@ object KotlinUtils {
      */
     fun <K> getMapAndListDifferences(
         newValues: Collection<K>,
-        oldValues: Map<K, *>
+        oldValues: Map<K, *>,
     ): Pair<Set<K>, Set<K>> {
         val mapHas = oldValues.keys.toMutableSet()
         val listHas = newValues.toMutableSet()
@@ -301,7 +301,7 @@ object KotlinUtils {
     fun sortPreferenceGroup(
         group: PreferenceGroup,
         compare: (lhs: Preference, rhs: Preference) -> Int,
-        hasHeader: Boolean
+        hasHeader: Boolean,
     ) {
         val preferences = mutableListOf<Preference>()
         for (i in 0 until group.preferenceCount) {
@@ -369,7 +369,7 @@ object KotlinUtils {
         return groupInfo.loadSafeLabel(
             context.packageManager,
             0f,
-            TextUtils.SAFE_STRING_FLAG_FIRST_LINE or TextUtils.SAFE_STRING_FLAG_TRIM
+            TextUtils.SAFE_STRING_FLAG_FIRST_LINE or TextUtils.SAFE_STRING_FLAG_TRIM,
         )
     }
 
@@ -407,7 +407,7 @@ object KotlinUtils {
                 .loadSafeLabel(
                     context.packageManager,
                     20000.toFloat(),
-                    TextUtils.SAFE_STRING_FLAG_TRIM
+                    TextUtils.SAFE_STRING_FLAG_TRIM,
                 )
         } catch (e: PackageManager.NameNotFoundException) {
             permName
@@ -431,7 +431,7 @@ object KotlinUtils {
                     Utils.applyTint(
                         context,
                         permInfo.loadUnbadgedIcon(context.packageManager),
-                        android.R.attr.colorControlNormal
+                        android.R.attr.colorControlNormal,
                     )
             }
 
@@ -445,7 +445,7 @@ object KotlinUtils {
             Utils.applyTint(
                 context,
                 context.getDrawable(R.drawable.ic_perm_device_info),
-                android.R.attr.colorControlNormal
+                android.R.attr.colorControlNormal,
             )
         }
     }
@@ -461,7 +461,8 @@ object KotlinUtils {
     fun getPermInfoDescription(context: Context, permName: String): CharSequence {
         return try {
             val permInfo = context.packageManager.getPermissionInfo(permName, 0)
-            permInfo.loadDescription(context.packageManager) ?: ""
+            permInfo.loadDescription(context.packageManager)
+                ?: permInfo.loadLabel(context.packageManager)
         } catch (e: PackageManager.NameNotFoundException) {
             ""
         }
@@ -511,7 +512,7 @@ object KotlinUtils {
     fun getBadgedPackageIconBitmap(
         application: Application,
         user: UserHandle,
-        packageName: String
+        packageName: String,
     ): Bitmap? {
         val drawable = getBadgedPackageIcon(application, packageName, user)
 
@@ -547,7 +548,7 @@ object KotlinUtils {
             Bitmap.createBitmap(
                 pkgIcon.intrinsicWidth,
                 pkgIcon.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
+                Bitmap.Config.ARGB_8888,
             )
         // Draw the icon so it can be displayed.
         val canvas = Canvas(pkgIconBmp)
@@ -597,7 +598,7 @@ object KotlinUtils {
         activity: Activity,
         uid: Int,
         requestedPermissions: List<String>,
-        requestCode: Int
+        requestCode: Int,
     ) {
         // A clone profile doesn't have a MediaProvider. If the app's user is a clone profile, open
         // the photo picker in the parent profile
@@ -653,7 +654,7 @@ object KotlinUtils {
             return opsManager.unsafeCheckOpNoThrow(
                 OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
                 uid,
-                packageName
+                packageName,
             ) == MODE_ALLOWED
         }
         return true
@@ -692,7 +693,7 @@ object KotlinUtils {
         app: Application,
         group: LightAppPermGroup,
         vararg flags: Pair<Int, Boolean>,
-        filterPermissions: List<String> = group.permissions.keys.toList()
+        filterPermissions: List<String> = group.permissions.keys.toList(),
     ): LightAppPermGroup {
         var flagMask = 0
         var flagsToSet = 0
@@ -718,7 +719,7 @@ object KotlinUtils {
                     permName,
                     group.packageName,
                     group.userHandle,
-                    *flags
+                    *flags,
                 )
             }
             newPerms[permName] =
@@ -727,7 +728,7 @@ object KotlinUtils {
                     perm.permInfo,
                     perm.isGranted,
                     perm.flags or flagsToSet,
-                    perm.foregroundPerms
+                    perm.foregroundPerms,
                 )
         }
         return LightAppPermGroup(
@@ -735,7 +736,8 @@ object KotlinUtils {
             group.permGroupInfo,
             newPerms,
             group.hasInstallToRuntimeSplit,
-            group.specialLocationGrant
+            group.specialLocationGrant,
+            group.specialFixedStorageGrant,
         )
     }
 
@@ -766,7 +768,7 @@ object KotlinUtils {
             isOneTime,
             userFixed,
             withoutAppOps,
-            filterPermissions
+            filterPermissions,
         )
     }
 
@@ -785,7 +787,7 @@ object KotlinUtils {
     fun grantBackgroundRuntimePermissions(
         app: Application,
         group: LightAppPermGroup,
-        filterPermissions: Collection<String> = group.permissions.keys
+        filterPermissions: Collection<String> = group.permissions.keys,
     ): LightAppPermGroup {
         return grantRuntimePermissions(
             app,
@@ -794,7 +796,7 @@ object KotlinUtils {
             isOneTime = false,
             userFixed = false,
             withoutAppOps = false,
-            filterPermissions = filterPermissions
+            filterPermissions = filterPermissions,
         )
     }
 
@@ -806,7 +808,7 @@ object KotlinUtils {
         isOneTime: Boolean = false,
         userFixed: Boolean = false,
         withoutAppOps: Boolean = false,
-        filterPermissions: Collection<String> = group.permissions.keys
+        filterPermissions: Collection<String> = group.permissions.keys,
     ): LightAppPermGroup {
         val deviceId = group.deviceId
         val newPerms = group.permissions.toMutableMap()
@@ -837,7 +839,7 @@ object KotlinUtils {
                         group.packageInfo.packageName,
                         PERMISSION_CONTROLLER_CHANGED_FLAG_MASK,
                         permFlags,
-                        user
+                        user,
                     )
                 }
             }
@@ -846,7 +848,7 @@ object KotlinUtils {
         if (shouldKillForAnyPermission) {
             (app.getSystemService(ActivityManager::class.java) as ActivityManager).killUid(
                 group.packageInfo.uid,
-                KILL_REASON_APP_OP_CHANGE
+                KILL_REASON_APP_OP_CHANGE,
             )
         }
         val newGroup =
@@ -855,7 +857,8 @@ object KotlinUtils {
                 group.permGroupInfo,
                 newPerms,
                 group.hasInstallToRuntimeSplit,
-                group.specialLocationGrant
+                group.specialLocationGrant,
+                group.specialFixedStorageGrant,
             )
         // If any permission in the group is one time granted, start one time permission session.
         if (newGroup.permissions.any { it.value.isOneTime && it.value.isGranted }) {
@@ -867,7 +870,7 @@ object KotlinUtils {
                         Utils.getOneTimePermissionsTimeout(),
                         Utils.getOneTimePermissionsKilledDelay(false),
                         ONE_TIME_PACKAGE_IMPORTANCE_LEVEL_TO_RESET_TIMER,
-                        ONE_TIME_PACKAGE_IMPORTANCE_LEVEL_TO_KEEP_SESSION_ALIVE
+                        ONE_TIME_PACKAGE_IMPORTANCE_LEVEL_TO_KEEP_SESSION_ALIVE,
                     )
             } else {
                 context
@@ -876,7 +879,7 @@ object KotlinUtils {
                         group.packageName,
                         Utils.getOneTimePermissionsTimeout(),
                         ONE_TIME_PACKAGE_IMPORTANCE_LEVEL_TO_RESET_TIMER,
-                        ONE_TIME_PACKAGE_IMPORTANCE_LEVEL_TO_KEEP_SESSION_ALIVE
+                        ONE_TIME_PACKAGE_IMPORTANCE_LEVEL_TO_KEEP_SESSION_ALIVE,
                     )
             }
         }
@@ -904,7 +907,7 @@ object KotlinUtils {
         group: LightAppPermGroup,
         isOneTime: Boolean,
         userFixed: Boolean = false,
-        withoutAppOps: Boolean = false
+        withoutAppOps: Boolean = false,
     ): Pair<LightPermission, Boolean> {
         val pkgInfo = group.packageInfo
         val user = UserHandle.getUserHandleForUid(pkgInfo.uid)
@@ -942,7 +945,7 @@ object KotlinUtils {
                         group.packageName,
                         PERMISSION_CONTROLLER_CHANGED_FLAG_MASK,
                         oldFlags,
-                        user
+                        user,
                     )
                     // TODO: Update this method once AppOp is device aware
                     disallowAppOp(app, perm, group)
@@ -1018,7 +1021,7 @@ object KotlinUtils {
                 group.packageInfo.packageName,
                 PERMISSION_CONTROLLER_CHANGED_FLAG_MASK,
                 newFlags,
-                user
+                user,
             )
         }
 
@@ -1047,7 +1050,7 @@ object KotlinUtils {
         userFixed: Boolean = false,
         oneTime: Boolean = false,
         forceRemoveRevokedCompat: Boolean = false,
-        filterPermissions: Collection<String> = group.permissions.keys
+        filterPermissions: Collection<String> = group.permissions.keys,
     ): LightAppPermGroup {
         return revokeRuntimePermissions(
             app,
@@ -1056,7 +1059,7 @@ object KotlinUtils {
             userFixed,
             oneTime,
             forceRemoveRevokedCompat,
-            filterPermissions
+            filterPermissions,
         )
     }
 
@@ -1079,7 +1082,7 @@ object KotlinUtils {
         userFixed: Boolean = false,
         oneTime: Boolean = false,
         forceRemoveRevokedCompat: Boolean = false,
-        filterPermissions: Collection<String> = group.permissions.keys
+        filterPermissions: Collection<String> = group.permissions.keys,
     ): LightAppPermGroup {
         return revokeRuntimePermissions(
             app,
@@ -1088,7 +1091,7 @@ object KotlinUtils {
             userFixed,
             oneTime,
             forceRemoveRevokedCompat,
-            filterPermissions
+            filterPermissions,
         )
     }
 
@@ -1100,7 +1103,7 @@ object KotlinUtils {
         userFixed: Boolean,
         oneTime: Boolean,
         forceRemoveRevokedCompat: Boolean = false,
-        filterPermissions: Collection<String>
+        filterPermissions: Collection<String>,
     ): LightAppPermGroup {
         val deviceId = group.deviceId
         val wasOneTime = group.isOneTime
@@ -1117,7 +1120,7 @@ object KotlinUtils {
                         userFixed,
                         oneTime,
                         forceRemoveRevokedCompat,
-                        group
+                        group,
                     )
                 newPerms[newPerm.name] = newPerm
                 shouldKillForAnyPermission = shouldKillForAnyPermission || shouldKill
@@ -1127,7 +1130,7 @@ object KotlinUtils {
         if (shouldKillForAnyPermission && !shouldSkipKillForGroup(app, group)) {
             (app.getSystemService(ActivityManager::class.java) as ActivityManager).killUid(
                 group.packageInfo.uid,
-                KILL_REASON_APP_OP_CHANGE
+                KILL_REASON_APP_OP_CHANGE,
             )
         }
 
@@ -1137,7 +1140,8 @@ object KotlinUtils {
                 group.permGroupInfo,
                 newPerms,
                 group.hasInstallToRuntimeSplit,
-                group.specialLocationGrant
+                group.specialLocationGrant,
+                group.specialFixedStorageGrant,
             )
 
         if (wasOneTime && !anyPermsOfPackageOneTimeGranted(app, newGroup.packageInfo, newGroup)) {
@@ -1165,7 +1169,7 @@ object KotlinUtils {
         packageName: String,
         permissionGroupName: String,
         user: UserHandle,
-        postRevokeHandler: Runnable?
+        postRevokeHandler: Runnable?,
     ) {
         GlobalScope.launch(Dispatchers.Main) {
             val group =
@@ -1192,7 +1196,7 @@ object KotlinUtils {
     private fun anyPermsOfPackageOneTimeGranted(
         app: Application,
         packageInfo: LightPackageInfo,
-        group: LightAppPermGroup? = null
+        group: LightAppPermGroup? = null,
     ): Boolean {
         val user = group?.userHandle ?: UserHandle.getUserHandleForUid(packageInfo.uid)
         if (group?.isOneTime == true) {
@@ -1233,7 +1237,7 @@ object KotlinUtils {
         userFixed: Boolean,
         oneTime: Boolean,
         forceRemoveRevokedCompat: Boolean,
-        group: LightAppPermGroup
+        group: LightAppPermGroup,
     ): Pair<LightPermission, Boolean> {
         // Do not touch permissions fixed by the system.
         if (perm.isSystemFixed) {
@@ -1259,14 +1263,14 @@ object KotlinUtils {
                     !isPermissionSplitFromNonRuntime(
                         app,
                         perm.name,
-                        group.packageInfo.targetSdkVersion
+                        group.packageInfo.targetSdkVersion,
                     )
             ) {
                 // Revoke the permission if needed.
                 context.packageManager.revokeRuntimePermission(
                     group.packageInfo.packageName,
                     perm.name,
-                    user
+                    user,
                 )
                 isGranted = false
                 if (forceRemoveRevokedCompat) {
@@ -1311,7 +1315,7 @@ object KotlinUtils {
                 group.packageInfo.packageName,
                 PERMISSION_CONTROLLER_CHANGED_FLAG_MASK,
                 newFlags,
-                user
+                user,
             )
         }
 
@@ -1332,7 +1336,7 @@ object KotlinUtils {
                     .cancelBackgroundAccessWarningNotification(
                         group.packageInfo.packageName,
                         user,
-                        true
+                        true,
                     )
             }
         }
@@ -1372,7 +1376,7 @@ object KotlinUtils {
     private fun allowAppOp(
         app: Application,
         perm: LightPermission,
-        group: LightAppPermGroup
+        group: LightAppPermGroup,
     ): Boolean {
         val packageName = group.packageInfo.packageName
         val uid = group.packageInfo.uid
@@ -1434,7 +1438,7 @@ object KotlinUtils {
     private fun disallowAppOp(
         app: Application,
         perm: LightPermission,
-        group: LightAppPermGroup
+        group: LightAppPermGroup,
     ): Boolean {
         val packageName = group.packageInfo.packageName
         val uid = group.packageInfo.uid
@@ -1473,7 +1477,7 @@ object KotlinUtils {
         uid: Int,
         packageName: String,
         mode: Int,
-        manager: AppOpsManager
+        manager: AppOpsManager,
     ): Boolean {
         val currentMode = manager.unsafeCheckOpRaw(op, uid, packageName)
         if (currentMode == mode) {
@@ -1492,7 +1496,7 @@ object KotlinUtils {
             app,
             POST_NOTIFICATIONS,
             group.packageName,
-            group.userHandle
+            group.userHandle,
         )
     }
 
@@ -1512,7 +1516,7 @@ object KotlinUtils {
         app: Application,
         permission: String,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): Boolean {
         val userContext: Context = Utils.getUserContext(app, user)
         if (
@@ -1556,7 +1560,7 @@ object KotlinUtils {
         var resolveInfos =
             context.packageManager.queryIntentActivities(
                 intentToResolve,
-                MATCH_DIRECT_BOOT_AWARE or MATCH_DIRECT_BOOT_UNAWARE
+                MATCH_DIRECT_BOOT_AWARE or MATCH_DIRECT_BOOT_UNAWARE,
             )
 
         if (resolveInfos.size <= 0) {
@@ -1566,7 +1570,7 @@ object KotlinUtils {
             resolveInfos =
                 context.packageManager.queryIntentActivities(
                     intentToResolve,
-                    MATCH_DIRECT_BOOT_AWARE or MATCH_DIRECT_BOOT_UNAWARE
+                    MATCH_DIRECT_BOOT_AWARE or MATCH_DIRECT_BOOT_UNAWARE,
                 )
         }
         return resolveInfos.size > 0
@@ -1582,14 +1586,14 @@ object KotlinUtils {
     fun setFlagsWhenLocationAccuracyChanged(
         app: Application,
         group: LightAppPermGroup,
-        isFineSelected: Boolean
+        isFineSelected: Boolean,
     ) {
         if (isFineSelected) {
             setGroupFlags(
                 app,
                 group,
                 PackageManager.FLAG_PERMISSION_SELECTED_LOCATION_ACCURACY to true,
-                filterPermissions = listOf(ACCESS_FINE_LOCATION)
+                filterPermissions = listOf(ACCESS_FINE_LOCATION),
             )
             val fineIsOneTime =
                 group.permissions[Manifest.permission.ACCESS_FINE_LOCATION]?.isOneTime ?: false
@@ -1598,20 +1602,20 @@ object KotlinUtils {
                 group,
                 PackageManager.FLAG_PERMISSION_SELECTED_LOCATION_ACCURACY to false,
                 PackageManager.FLAG_PERMISSION_ONE_TIME to fineIsOneTime,
-                filterPermissions = listOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+                filterPermissions = listOf(Manifest.permission.ACCESS_COARSE_LOCATION),
             )
         } else {
             setGroupFlags(
                 app,
                 group,
                 PackageManager.FLAG_PERMISSION_SELECTED_LOCATION_ACCURACY to false,
-                filterPermissions = listOf(ACCESS_FINE_LOCATION)
+                filterPermissions = listOf(ACCESS_FINE_LOCATION),
             )
             setGroupFlags(
                 app,
                 group,
                 PackageManager.FLAG_PERMISSION_SELECTED_LOCATION_ACCURACY to true,
-                filterPermissions = listOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+                filterPermissions = listOf(Manifest.permission.ACCESS_COARSE_LOCATION),
             )
         }
     }
@@ -1629,7 +1633,7 @@ object KotlinUtils {
                 DeviceConfig.getBoolean(
                     DeviceConfig.NAMESPACE_PRIVACY,
                     SAFETY_PROTECTION_RESOURCES_ENABLED,
-                    false
+                    false,
                 ) &&
                 context
                     .getResources()
@@ -1658,7 +1662,7 @@ object KotlinUtils {
     fun getAppStoreIntent(
         context: Context,
         installerPackageName: String?,
-        packageName: String?
+        packageName: String?,
     ): Intent? {
         val intent: Intent = Intent(Intent.ACTION_SHOW_APP_INFO).setPackage(installerPackageName)
         val result: Intent? = resolveActivityForIntent(context, intent)
@@ -1720,7 +1724,7 @@ object KotlinUtils {
 /** Get the [value][LiveData.getValue], suspending until [isInitialized] if not yet so */
 suspend fun <T, LD : LiveData<T>> LD.getInitializedValue(
     observe: LD.(Observer<T?>) -> Unit = { observeForever(it) },
-    isValueInitialized: LD.() -> Boolean = { value != null }
+    isValueInitialized: LD.() -> Boolean = { value != null },
 ): T? {
     return if (isValueInitialized()) {
         value
@@ -1754,7 +1758,7 @@ suspend fun <T, LD : LiveData<T>> LD.getInitializedValue(
 suspend inline fun <T, R> Iterable<T>.mapInParallel(
     context: CoroutineContext,
     scope: CoroutineScope = GlobalScope,
-    crossinline transform: suspend CoroutineScope.(T) -> R
+    crossinline transform: suspend CoroutineScope.(T) -> R,
 ): List<R> = map { scope.async(context) { transform(it) } }.map { it.await() }
 
 /**
@@ -1765,7 +1769,7 @@ suspend inline fun <T, R> Iterable<T>.mapInParallel(
 suspend inline fun <T> Iterable<T>.forEachInParallel(
     context: CoroutineContext,
     scope: CoroutineScope = GlobalScope,
-    crossinline action: suspend CoroutineScope.(T) -> Unit
+    crossinline action: suspend CoroutineScope.(T) -> Unit,
 ) {
     mapInParallel(context, scope) { action(it) }
 }

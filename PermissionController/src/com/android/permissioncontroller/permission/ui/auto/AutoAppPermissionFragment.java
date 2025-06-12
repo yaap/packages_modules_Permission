@@ -182,10 +182,8 @@ public class AutoAppPermissionFragment extends AutoSettingsFrameFragment
         if (SdkLevel.isAtLeastV()) {
             mSensorPrivacyManager = requireContext().getSystemService(SensorPrivacyManager.class);
             mCameraPrivacyAllowlist = mSensorPrivacyManager.getCameraPrivacyAllowlist();
-            if (Flags.addBannersToPrivacySensitiveAppsForAaos()) {
-                mAutomotiveLocationBypassAllowlist =
-                        LocationUtils.getAutomotiveLocationBypassAllowlist(requireContext());
-            }
+            mAutomotiveLocationBypassAllowlist =
+                    LocationUtils.getAutomotiveLocationBypassAllowlist(requireContext());
         }
     }
 
@@ -317,13 +315,11 @@ public class AutoAppPermissionFragment extends AutoSettingsFrameFragment
             if (Manifest.permission_group.CAMERA.equals(mPermGroupName)) {
                 mViewModel.getSensorStatusLiveData().observe(this, this::setSensorStatus);
             }
-            if (Flags.addBannersToPrivacySensitiveAppsForAaos()) {
-                if (Manifest.permission_group.LOCATION.equals(mPermGroupName)) {
-                    mViewModel.getSensorStatusLiveData().observe(this, this::setSensorStatus);
-                }
-                if (Manifest.permission_group.MICROPHONE.equals(mPermGroupName)) {
-                    mViewModel.getSensorStatusLiveData().observe(this, this::setSensorStatus);
-                }
+            if (Manifest.permission_group.LOCATION.equals(mPermGroupName)) {
+                mViewModel.getSensorStatusLiveData().observe(this, this::setSensorStatus);
+            }
+            if (Manifest.permission_group.MICROPHONE.equals(mPermGroupName)) {
+                mViewModel.getSensorStatusLiveData().observe(this, this::setSensorStatus);
             }
         }
 

@@ -18,6 +18,7 @@ package android.app.role.cts;
 
 import static com.android.bedstead.multiuser.MultiUserDeviceStateExtensionsKt.privateProfile;
 import static com.android.compatibility.common.util.SystemUtil.callWithShellPermissionIdentity;
+import static com.android.compatibility.common.util.SystemUtil.eventually;
 import static com.android.compatibility.common.util.SystemUtil.runShellCommand;
 import static com.android.compatibility.common.util.SystemUtil.runShellCommandOrThrow;
 import static com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity;
@@ -26,6 +27,7 @@ import static com.android.compatibility.common.util.UiAutomatorUtils2.waitFindOb
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeFalse;
@@ -45,7 +47,6 @@ import android.os.Build;
 import android.os.Process;
 import android.os.UserHandle;
 import android.permission.flags.Flags;
-import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
@@ -104,7 +105,6 @@ public class RoleManagerTest {
 
     private static final String ROLE_NAME = RoleManager.ROLE_BROWSER;
     private static final String ROLE_PHONE_NAME = RoleManager.ROLE_DIALER;
-    private static final String ROLE_SMS_NAME = RoleManager.ROLE_SMS;
     private static final String PROFILE_GROUP_EXCLUSIVE_ROLE_NAME =
             RoleManager.ROLE_RESERVED_FOR_TESTING_PROFILE_GROUP_EXCLUSIVITY;
     private static final String ROLE_SHORT_LABEL = "Browser app";
@@ -167,6 +167,9 @@ public class RoleManagerTest {
             sIsWatch
                     ? By.text("Don\u2019t ask again")
                     : By.res("com.android.permissioncontroller:id/dont_ask_again");
+
+    private static final BySelector PERMISSION_APP_LABEL =
+            By.pkg(sPackageManager.getPermissionControllerPackageName()).text(APP_LABEL);
 
     @Rule
     public CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -284,13 +287,20 @@ public class RoleManagerTest {
     @RequiresFlagsEnabled(Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED)
     @FlakyTest(bugId = 288468003, detail = "CtsRoleTestCases is breaching 20min SLO")
     public void requestRoleThenBlockRequestRoleDialogByRestrictedSettingDialog() throws Exception {
-        assumeTrue(sRoleManager.isRoleAvailable(RoleManager.ROLE_SMS));
         assumeFalse(sIsWatch || sIsAutomotive || sIsTelevision);
+        assumeTrue(sRoleManager.isRoleAvailable(RoleManager.ROLE_SMS));
+        assumeFalse(callWithShellPermissionIdentity(
+                () -> getRoleHolders(RoleManager.ROLE_SMS)).contains(APP_PACKAGE_NAME));
+
+        // TODO: b/388960315 - Remove wait after addressing race condition
+        runWithShellPermissionIdentity(
+                () -> waitForEnhancedConfirmationRestrictedAppOpMode(sContext, APP_PACKAGE_NAME,
+                        AppOpsManager.MODE_DEFAULT));
         runWithShellPermissionIdentity(
                 () -> setEnhancedConfirmationRestrictedAppOpMode(sContext, APP_PACKAGE_NAME,
                         AppOpsManager.MODE_ERRORED));
 
-        requestRole(ROLE_SMS_NAME);
+        requestRole(RoleManager.ROLE_SMS);
         waitFindObject(ENHANCED_CONFIRMATION_DIALOG_SELECTOR, TIMEOUT_MILLIS);
 
         pressBack();
@@ -467,7 +477,7 @@ public class RoleManagerTest {
     private void respondToRoleRequest(boolean allow)
             throws InterruptedException, UiObjectNotFoundException {
         if (allow) {
-            waitFindObject(By.text(APP_LABEL)).click();
+            waitFindObject(PERMISSION_APP_LABEL).click();
         }
         Pair<Integer, Intent> result = clickButtonAndWaitForResult(allow);
         int expectedResult = allow ? Activity.RESULT_OK : Activity.RESULT_CANCELED;
@@ -713,6 +723,10 @@ public class RoleManagerTest {
             throws Exception {
         assumeTrue(sRoleManager.isRoleAvailable(RoleManager.ROLE_DIALER));
         assumeFalse(sIsWatch || sIsAutomotive || sIsTelevision);
+        // TODO: b/388960315 - Remove wait after addressing race condition
+        runWithShellPermissionIdentity(
+                () -> waitForEnhancedConfirmationRestrictedAppOpMode(sContext, APP_PACKAGE_NAME,
+                        AppOpsManager.MODE_DEFAULT));
         runWithShellPermissionIdentity(
                 () -> setEnhancedConfirmationRestrictedAppOpMode(sContext, APP_PACKAGE_NAME,
                         AppOpsManager.MODE_ERRORED));
@@ -817,6 +831,13 @@ public class RoleManagerTest {
     @FlakyTest
     @Test
     public void openDefaultAppListThenIsNotDefaultAppInList() throws Exception {
+        assumeFalse(callWithShellPermissionIdentity(
+                () -> getRoleHolders(RoleManager.ROLE_BROWSER)).contains(APP_PACKAGE_NAME));
+        assumeFalse(callWithShellPermissionIdentity(
+                () -> getRoleHolders(RoleManager.ROLE_DIALER)).contains(APP_PACKAGE_NAME));
+        assumeFalse(callWithShellPermissionIdentity(
+                () -> getRoleHolders(RoleManager.ROLE_SMS)).contains(APP_PACKAGE_NAME));
+
         sContext.startActivity(new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
                 .addCategory(Intent.CATEGORY_DEFAULT)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -857,7 +878,6 @@ public class RoleManagerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE)
     @EnsureHasPrivateProfile(installInstrumentedApp = OptionalBoolean.TRUE)
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
             codeName = "VanillaIceCream")
@@ -873,6 +893,9 @@ public class RoleManagerTest {
         assertThat(privateProfile).isNotNull();
         installPackage(APP_APK_PATH, privateProfile);
         installPackage(APP_CLONE_APK_PATH, privateProfile);
+
+        UiAutomatorUtils.getUiDevice().waitForIdle(30 * 1000);
+
         addRoleHolderAsUser(ROLE_NAME, APP_CLONE_PACKAGE_NAME, privateProfile);
 
         sContext.startActivity(new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
@@ -921,6 +944,19 @@ public class RoleManagerTest {
         waitFindObject(By.text(APP_LABEL));
 
         pressBack();
+    }
+
+    private void waitForEnhancedConfirmationRestrictedAppOpMode(@NonNull Context context,
+            @NonNull String packageName, int expectedMode)
+            throws PackageManager.NameNotFoundException {
+        final AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
+        eventually(() -> {
+            int uid = context.getPackageManager().getApplicationInfo(packageName, 0).uid;
+            int actualMode = appOpsManager.checkOpNoThrow(
+                    AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS, uid, packageName);
+            assertEquals("Even after waiting, a test app's post-install"
+                    + " ACCESS_RESTRICTED_SETTINGS op mode is incorrect", expectedMode, actualMode);
+        });
     }
 
     private void setEnhancedConfirmationRestrictedAppOpMode(@NonNull Context context,
@@ -1168,6 +1204,8 @@ public class RoleManagerTest {
     @Test
     public void removeSmsRoleHolderThenPermissionIsRevoked() throws Exception {
         assumeTrue(sRoleManager.isRoleAvailable(RoleManager.ROLE_SMS));
+        assumeFalse(callWithShellPermissionIdentity(
+                () -> getRoleHolders(RoleManager.ROLE_SMS)).contains(APP_PACKAGE_NAME));
 
         String smsRoleHolder = getRoleHolders(RoleManager.ROLE_SMS).get(0);
         addRoleHolder(RoleManager.ROLE_SMS, APP_PACKAGE_NAME);
@@ -1402,16 +1440,6 @@ public class RoleManagerTest {
         });
     }
 
-    @RequiresFlagsDisabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @Test
-    public void cannotGetDefaultHoldersForTestFlagDisabled() throws Exception {
-        runWithShellPermissionIdentity(() -> {
-            assertThrows(IllegalStateException.class, () ->
-                    sRoleManager.getDefaultHoldersForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME));
-        });
-    }
-
     @RequiresFlagsEnabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
@@ -1438,18 +1466,6 @@ public class RoleManagerTest {
             assertThrows(IllegalArgumentException.class, () ->
                     sRoleManager.getDefaultHoldersForTest(
                             RoleManager.ROLE_SYSTEM_ACTIVITY_RECOGNIZER));
-        });
-    }
-
-    @RequiresFlagsDisabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @Test
-    public void cannotSetDefaultHoldersForTestFlagDisabled() throws Exception {
-        List<String> testRoleHolders = List.of("a", "b", "c");
-        runWithShellPermissionIdentity(() -> {
-            assertThrows(IllegalStateException.class, () ->
-                    sRoleManager.setDefaultHoldersForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME,
-                            testRoleHolders));
         });
     }
 
@@ -1489,6 +1505,17 @@ public class RoleManagerTest {
     @RequiresFlagsEnabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
+    public void cannotSetDefaultHoldersForTestNullPackageNames() throws Exception {
+        runWithShellPermissionIdentity(() -> {
+            assertThrows(NullPointerException.class, () ->
+                    sRoleManager.setDefaultHoldersForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME,
+                            null));
+        });
+    }
+
+    @RequiresFlagsEnabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @Test
     public void setAndGetDefaultHolders() throws Exception {
         List<String> testRoleHolders = List.of("a", "b", "c");
         runWithShellPermissionIdentity(() -> {
@@ -1520,31 +1547,6 @@ public class RoleManagerTest {
     @RequiresFlagsEnabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
-    public void setAndGetDefaultHoldersNullRoleHolders() throws Exception {
-        List<String> initialRoleHolders = List.of("a", "b", "c");
-        runWithShellPermissionIdentity(() -> {
-            sRoleManager.setDefaultHoldersForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME,
-                    initialRoleHolders);
-            sRoleManager.setDefaultHoldersForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME, null);
-            List<String> roleHolders =
-                    sRoleManager.getDefaultHoldersForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME);
-            assertThat(roleHolders).isEqualTo(Collections.emptyList());
-        });
-    }
-
-    @RequiresFlagsDisabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @Test
-    public void cannotGetIsRoleVisibleForTestFlagDisabled() throws Exception {
-        runWithShellPermissionIdentity(() -> {
-            assertThrows(IllegalStateException.class, () ->
-                    sRoleManager.isRoleVisibleForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME));
-        });
-    }
-
-    @RequiresFlagsEnabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @Test
     public void cannotGetIsRoleVisibleForTestNoPermissions() throws Exception {
         assertThrows(SecurityException.class, () ->
                 sRoleManager.isRoleVisibleForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME));
@@ -1567,16 +1569,6 @@ public class RoleManagerTest {
         runWithShellPermissionIdentity(() -> {
             assertThrows(IllegalArgumentException.class, () ->
                     sRoleManager.isRoleVisibleForTest(RoleManager.ROLE_SYSTEM_ACTIVITY_RECOGNIZER));
-        });
-    }
-
-    @RequiresFlagsDisabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @Test
-    public void cannotSetRoleVisibleForTestFlagDisabled() throws Exception {
-        runWithShellPermissionIdentity(() -> {
-            assertThrows(IllegalStateException.class, () ->
-                    sRoleManager.setRoleVisibleForTest(PROFILE_GROUP_EXCLUSIVE_ROLE_NAME, false));
         });
     }
 

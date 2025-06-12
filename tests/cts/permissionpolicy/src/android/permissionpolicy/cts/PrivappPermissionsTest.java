@@ -30,6 +30,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
@@ -142,6 +143,9 @@ public class PrivappPermissionsTest {
                 Set<String> granted = filterValues(requestedPrivPermissions,
                         isGranted -> isGranted).keySet();
 
+                Set<String> factoryGranted = intersection(factoryRequestedPrivPermissions,
+                        granted);
+
                 Set<String> factoryNotGranted = difference(factoryRequestedPrivPermissions,
                         granted);
 
@@ -176,7 +180,14 @@ public class PrivappPermissionsTest {
                     }
                 }
 
-                Set<String> grantedNotInWhitelist = difference(granted, whitelist);
+                // If an updated module app has a shared user, it may be getting a privileged
+                // permission through another APK-in-APEX which supports updatable privileged
+                // permission allowlist, and CTS should keep passing for it.
+                boolean isUpdatedSystemAppWithSharedUser =
+                        (pkg.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+                                && pkg.sharedUserId != null;
+                Set<String> grantedNotInWhitelist = difference(
+                        isUpdatedSystemAppWithSharedUser ? factoryGranted : granted, whitelist);
                 Set<String> factoryNotGrantedNotRemovedNotInDenylist = difference(difference(
                         factoryNotGranted, removed), denylist);
 

@@ -17,6 +17,7 @@
 package com.android.safetycenter.config
 
 import android.content.Context
+import android.os.UserHandle
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.compatibility.common.util.SystemUtil.runShellCommand
@@ -124,9 +125,12 @@ class ParserConfigOverlayTest {
             "/data/local/tmp/com/safetycenter/config/tests/SafetyCenterConfigTestsOverlay.apk"
         private const val STATE_ENABLED = "STATE_ENABLED"
 
-        private fun getStateForOverlay(overlayPackage: String): String? {
+        private fun getStateForOverlay(uid: Int, overlayPackage: String): String? {
+
             val result: String =
-                runShellCommand("cmd overlay dump --user 0 state $overlayPackage").lines().first()
+                runShellCommand("cmd overlay dump --user $uid state $overlayPackage")
+                    .lines()
+                    .first()
             if (!result.startsWith("STATE_")) {
                 return null
             }
@@ -136,10 +140,11 @@ class ParserConfigOverlayTest {
         @JvmStatic
         @BeforeClass
         fun install() {
+            val uid = UserHandle.myUserId()
             runShellCommand("pm install -r --force-sdk --force-queryable $OVERLAY_PATH")
-            waitForWithTimeout { getStateForOverlay(OVERLAY_PACKAGE) != null }
-            runShellCommand("cmd overlay enable --user 0 $OVERLAY_PACKAGE")
-            waitForWithTimeout { getStateForOverlay(OVERLAY_PACKAGE) == STATE_ENABLED }
+            waitForWithTimeout { getStateForOverlay(uid, OVERLAY_PACKAGE) != null }
+            runShellCommand("cmd overlay enable --user $uid $OVERLAY_PACKAGE")
+            waitForWithTimeout { getStateForOverlay(uid, OVERLAY_PACKAGE) == STATE_ENABLED }
         }
 
         @JvmStatic

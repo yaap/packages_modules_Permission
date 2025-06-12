@@ -57,6 +57,18 @@
                 value="/data/local/tmp/pc-permissionui/PermissionUiUseTwoAdditionalPermissionsApp.apk" />
         <option name="push-file" key="PermissionUiReadCalendarPermissionApp.apk"
                 value="/data/local/tmp/pc-permissionui/PermissionUiReadCalendarPermissionApp.apk" />
+        <option name="push-file" key="PermissionUiUseLegacyBodySensorsPermissionApp.apk"
+            value="/data/local/tmp/pc-permissionui/PermissionUiUseLegacyBodySensorsPermissionApp.apk" />
+        <option name="push-file" key="PermissionUiUseReadHeartRatePermissionApp.apk"
+            value="/data/local/tmp/pc-permissionui/PermissionUiUseReadHeartRatePermissionApp.apk" />
+        <option name="push-file" key="PermissionUiUseLegacyBodySensorsPermissionTargetSdk22App.apk"
+            value="/data/local/tmp/pc-permissionui/PermissionUiUseLegacyBodySensorsPermissionTargetSdk22App.apk" />
+    </target_preparer>
+
+    <!-- Wake the screen, and dismiss keyguard -->
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="input keyevent KEYCODE_WAKEUP" />
+        <option name="run-command" value="wm dismiss-keyguard" />
     </target_preparer>
 
     <!-- Uninstall test-apps -->

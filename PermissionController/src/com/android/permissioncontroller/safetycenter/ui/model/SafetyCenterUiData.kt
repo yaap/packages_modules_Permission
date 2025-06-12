@@ -29,11 +29,19 @@ import com.android.safetycenter.internaldata.SafetyCenterIds
 import com.android.safetycenter.internaldata.SafetyCenterIssueKey
 
 /** UI model representation of Safety Center Data */
+@RequiresApi(TIRAMISU)
 data class SafetyCenterUiData(
     val safetyCenterData: SafetyCenterData,
-    val resolvedIssues: Map<IssueId, ActionId> = emptyMap()
+    private val taskId: Int,
+    private val sameTaskSourceIds: List<String>,
+    val resolvedIssues: Map<IssueId, ActionId> = emptyMap(),
 ) {
-    @RequiresApi(TIRAMISU)
+
+    val issueUiDatas: List<IssueUiData> by
+        lazy(LazyThreadSafetyMode.NONE) {
+            safetyCenterData.issues.map { toIssueUiData(it, isDismissed = false) }
+        }
+
     fun getMatchingIssue(issueKey: SafetyCenterIssueKey): SafetyCenterIssue? {
         return safetyCenterData.issues.find {
             SafetyCenterIds.issueIdFromString(it.id).safetyCenterIssueKey == issueKey
@@ -67,7 +75,7 @@ data class SafetyCenterUiData(
     @RequiresApi(UPSIDE_DOWN_CAKE)
     private fun selectMatchingIssuesForGroup(
         groupId: String,
-        issues: List<SafetyCenterIssue>
+        issues: List<SafetyCenterIssue>,
     ): List<SafetyCenterIssue> {
         val issuesToGroups = safetyCenterData.extras.getBundle(ISSUES_TO_GROUPS_BUNDLE_KEY)
         return issues.filter {
@@ -82,6 +90,18 @@ data class SafetyCenterUiData(
 
     /** Returns the [SafetyCenterData.getDismissedIssues] that are meant to be visible in the UI. */
     @RequiresApi(UPSIDE_DOWN_CAKE)
-    fun SafetyCenterData.visibleDismissedIssues() =
+    private fun SafetyCenterData.visibleDismissedIssues() =
         dismissedIssues.filter { it.severityLevel > ISSUE_SEVERITY_LEVEL_OK }
+
+    /** Converts a [SafetyCenterIssue] into [IssueUiData]. */
+    private fun toIssueUiData(issue: SafetyCenterIssue, isDismissed: Boolean) =
+        IssueUiData(issue, isDismissed, resolvedIssues[issue.id], getLaunchTaskIdForIssue(issue))
+
+    private fun getLaunchTaskIdForIssue(issue: SafetyCenterIssue): Int? {
+        val sourceId: String =
+            SafetyCenterIds.issueIdFromString(issue.id)
+                .getSafetyCenterIssueKey()
+                .getSafetySourceId()
+        return if (sameTaskSourceIds.contains(sourceId)) taskId else null
+    }
 }

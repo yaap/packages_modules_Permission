@@ -18,49 +18,39 @@ package com.android.permissioncontroller.permission.ui.wear
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.wear.compose.foundation.SwipeToDismissValue
-import androidx.wear.compose.foundation.rememberSwipeToDismissBoxState
-import androidx.wear.compose.material.ChipDefaults
-import androidx.wear.compose.material.MaterialTheme
-import androidx.wear.compose.material.SwipeToDismissBox
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.material3.WearPermissionScaffold
+import androidx.wear.compose.material3.Dialog
 import com.android.permissioncontroller.permission.ui.wear.model.LocationProviderInterceptDialogArgs
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionMaterialUIVersion
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButtonStyle
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionScaffold
 
 @Composable
-fun LocationProviderDialogScreen(args: LocationProviderInterceptDialogArgs?) {
-    args?.apply {
-        val state = rememberSwipeToDismissBoxState()
-        LaunchedEffect(state.currentValue) {
-            // If the swipe is complete
-            if (state.currentValue == SwipeToDismissValue.Dismissed) {
-                onOkButtonClick()
-            }
-        }
-        SwipeToDismissBox(state = state) { isBackground ->
+fun LocationProviderDialogScreen(
+    showDialog: Boolean,
+    onDismissRequest: () -> Unit,
+    args: LocationProviderInterceptDialogArgs?,
+) {
+    Dialog(visible = showDialog, onDismissRequest = onDismissRequest) {
+        args?.run {
             WearPermissionScaffold(
-                materialUIVersion = WearPermissionMaterialUIVersion.MATERIAL2_5,
                 showTimeText = false,
                 image = iconId,
                 title = stringResource(titleId),
                 subtitle = message,
-                isLoading = isBackground,
+                isLoading = false,
                 content = {
                     item {
-                        Chip(
+                        WearPermissionButton(
                             label = stringResource(locationSettingsId),
-                            onClick = onLocationSettingsClick,
                             modifier = Modifier.fillMaxWidth(),
-                            textColor = MaterialTheme.colors.surface,
-                            colors = ChipDefaults.primaryChipColors(),
+                            onClick = onLocationSettingsClick,
+                            style = WearPermissionButtonStyle.Primary,
                         )
                     }
                     item {
-                        Chip(
+                        WearPermissionButton(
                             label = stringResource(okButtonTitleId),
                             onClick = onOkButtonClick,
                             modifier = Modifier.fillMaxWidth(),

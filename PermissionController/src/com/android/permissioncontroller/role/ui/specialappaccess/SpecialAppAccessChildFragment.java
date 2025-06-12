@@ -23,7 +23,6 @@ import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.ArrayMap;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +36,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.role.ui.ManageRoleHolderStateLiveData;
+import com.android.permissioncontroller.role.ui.RoleApplicationItem;
 import com.android.permissioncontroller.role.ui.RoleApplicationPreference;
 import com.android.permissioncontroller.role.utils.RoleUiBehaviorUtils;
 import com.android.role.controller.model.Role;
@@ -107,12 +107,12 @@ public class SpecialAppAccessChildFragment<PF extends PreferenceFragmentCompat
                 activity.getApplication());
         mViewModel = new ViewModelProvider(this, viewModelFactory)
                 .get(SpecialAppAccessViewModel.class);
-        mViewModel.getRoleLiveData().observe(this, this::onRoleChanged);
+        mViewModel.getLiveData().observe(this, this::onApplicationListChanged);
         mViewModel.observeManageRoleHolderState(this, this::onManageRoleHolderStateChanged);
     }
 
-    private void onRoleChanged(
-            @NonNull List<Pair<ApplicationInfo, Boolean>> qualifyingApplications) {
+    private void onApplicationListChanged(
+            @NonNull List<RoleApplicationItem> applicationItems) {
         PF preferenceFragment = requirePreferenceFragment();
         PreferenceManager preferenceManager = preferenceFragment.getPreferenceManager();
         Context context = preferenceManager.getContext();
@@ -138,14 +138,12 @@ public class SpecialAppAccessChildFragment<PF extends PreferenceFragmentCompat
             }
         }
 
-        int qualifyingApplicationsSize = qualifyingApplications.size();
-        for (int i = 0; i < qualifyingApplicationsSize; i++) {
-            Pair<ApplicationInfo, Boolean> qualifyingApplication = qualifyingApplications.get(i);
-            ApplicationInfo qualifyingApplicationInfo = qualifyingApplication.first;
-            boolean isHolderPackage = qualifyingApplication.second;
-
-            String key = qualifyingApplicationInfo.packageName + '_'
-                    + qualifyingApplicationInfo.uid;
+        int applicationItemsSize = applicationItems.size();
+        for (int i = 0; i < applicationItemsSize; i++) {
+            RoleApplicationItem applicationItem = applicationItems.get(i);
+            ApplicationInfo applicationInfo = applicationItem.getApplicationInfo();
+            String key = applicationInfo.packageName + '_'
+                    + applicationInfo.uid;
             RoleApplicationPreference roleApplicationPreference =
                     (RoleApplicationPreference) oldPreferences.get(key);
             TwoStatePreference preference;
@@ -153,24 +151,23 @@ public class SpecialAppAccessChildFragment<PF extends PreferenceFragmentCompat
                 roleApplicationPreference = preferenceFragment.createApplicationPreference();
                 preference = roleApplicationPreference.asTwoStatePreference();
                 preference.setKey(key);
-                preference.setIcon(Utils.getBadgedIcon(context, qualifyingApplicationInfo));
-                preference.setTitle(Utils.getFullAppLabel(qualifyingApplicationInfo, context));
+                preference.setIcon(Utils.getBadgedIcon(context, applicationInfo));
+                preference.setTitle(Utils.getFullAppLabel(applicationInfo, context));
                 preference.setPersistent(false);
                 preference.setOnPreferenceChangeListener((preference2, newValue) -> false);
                 preference.setOnPreferenceClickListener(this);
                 preference.getExtras().putParcelable(PREFERENCE_EXTRA_APPLICATION_INFO,
-                        qualifyingApplicationInfo);
+                        applicationInfo);
             } else {
                 preference = roleApplicationPreference.asTwoStatePreference();
             }
 
-            preference.setChecked(isHolderPackage);
-            UserHandle user = UserHandle.getUserHandleForUid(qualifyingApplicationInfo.uid);
+            preference.setChecked(applicationItem.isHolderApplication());
+            UserHandle user = UserHandle.getUserHandleForUid(applicationInfo.uid);
             roleApplicationPreference.setRestrictionIntent(
-                    mRole.getApplicationRestrictionIntentAsUser(qualifyingApplicationInfo, user,
-                            context));
+                    mRole.getApplicationRestrictionIntentAsUser(applicationInfo, user, context));
             RoleUiBehaviorUtils.prepareApplicationPreferenceAsUser(mRole, roleApplicationPreference,
-                    qualifyingApplicationInfo, user, context);
+                    applicationInfo, user, context);
             preferenceScreen.addPreference(preference);
         }
 

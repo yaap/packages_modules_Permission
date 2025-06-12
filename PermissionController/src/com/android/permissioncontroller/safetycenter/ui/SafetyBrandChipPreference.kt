@@ -45,6 +45,11 @@ internal class SafetyBrandChipPreference(context: Context, attrs: AttributeSet) 
         super.onBindViewHolder(holder)
         val brandChipButton = holder.findViewById(R.id.brand_chip)!!
         brandChipButton.setOnClickListener(brandChipClickListener)
+        SafetyCenterTouchTarget.configureSize(
+            brandChipButton,
+            R.dimen.sc_icon_button_touch_target_size,
+            useWidthHeightFix = true,
+        )
     }
 
     /**

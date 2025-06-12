@@ -13,6 +13,9 @@
             "file_patterns": ["res/xml/roles\\.xml"]
         },
         {
+            "name": "CtsRoleMultiUserTestCases"
+        },
+        {
             "name": "PermissionUiTestCases",
             "options": [
                 {
@@ -47,6 +50,9 @@
                 }
             ],
             "file_patterns": ["res/xml/roles\\.xml"]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases[com.google.android.permission.apex]"
         },
         {
             "name": "PermissionControllerMockingTests[com.google.android.permission.apex]",
@@ -109,6 +115,9 @@
                 }
             ],
             "file_patterns": ["res/xml/roles\\.xml"]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases"
         },
         {
             "name": "PermissionControllerMockingTests",
@@ -213,6 +222,24 @@
         },
         {
             "name": "CtsPermissionUiTestCases[com.google.android.permission.apex]"
+        }
+    ],
+    "wear-presubmit": [
+        {
+            "name": "CtsPermissionUiTestCases",
+            "options": [
+                {
+                    "exclude-annotation": "androidx.test.filters.FlakyTest"
+                }
+            ]
+        },
+        {
+            "name": "CtsRoleTestCases",
+            "options": [
+                {
+                    "exclude-annotation": "androidx.test.filters.FlakyTest"
+                }
+            ]
         }
     ],
     "imports": [

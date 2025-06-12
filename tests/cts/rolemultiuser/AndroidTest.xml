@@ -41,7 +41,7 @@
 
     <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
         <option name="cleanup" value="true" />
-        <option name="push" value="CtsRoleMultiUserTestApp.apk->/data/local/tmp/cts-role/CtsRoleMultiUserTestApp.apk" />
+        <option name="push" value="CtsRoleTestApp.apk->/data/local/tmp/cts-role/CtsRoleTestApp.apk" />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.AndroidJUnitTest" >

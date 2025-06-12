@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 8.4.0-alpha01" type="baseline" client="" dependencies="true" name="" variant="all" version="8.4.0-alpha01">
-
-    <issue
-        id="NewApi"
-        message="Class requires API level 34 (current min is 31): `android.app.AppOpsManager.OnOpNotedListener`"
-        errorLine1="    AppOpsManager.OnOpNotedListener,"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/data/v31/AllLightHistoricalPackageOpsLiveData.kt"
-            line="46"
-            column="5"/>
-    </issue>
+<issues format="6" by="lint 8.4.0-alpha01" type="baseline" client="" dependencies="true" name=""
+    variant="all" version="8.4.0-alpha01">
 
     <issue
         id="NewApi"
@@ -20,7 +10,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="504"
-            column="31"/>
+            column="31" />
     </issue>
 
     <issue
@@ -31,7 +21,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="505"
-            column="34"/>
+            column="34" />
     </issue>
 
     <issue
@@ -42,7 +32,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="509"
-            column="41"/>
+            column="41" />
     </issue>
 
     <issue
@@ -53,7 +43,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="513"
-            column="41"/>
+            column="41" />
     </issue>
 
     <issue
@@ -64,7 +54,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="515"
-            column="59"/>
+            column="59" />
     </issue>
 
     <issue
@@ -75,7 +65,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="518"
-            column="42"/>
+            column="42" />
     </issue>
 
     <issue
@@ -86,7 +76,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="519"
-            column="42"/>
+            column="42" />
     </issue>
 
     <issue
@@ -97,7 +87,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="521"
-            column="18"/>
+            column="18" />
     </issue>
 
     <issue
@@ -108,7 +98,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionFragment.java"
             line="522"
-            column="29"/>
+            column="29" />
     </issue>
 
     <issue
@@ -119,7 +109,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="709"
-            column="31"/>
+            column="31" />
     </issue>
 
     <issue
@@ -130,7 +120,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="710"
-            column="34"/>
+            column="34" />
     </issue>
 
     <issue
@@ -141,7 +131,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="714"
-            column="41"/>
+            column="41" />
     </issue>
 
     <issue
@@ -152,7 +142,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="718"
-            column="41"/>
+            column="41" />
     </issue>
 
     <issue
@@ -163,7 +153,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="720"
-            column="59"/>
+            column="59" />
     </issue>
 
     <issue
@@ -174,7 +164,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="722"
-            column="67"/>
+            column="67" />
     </issue>
 
     <issue
@@ -185,7 +175,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="722"
-            column="42"/>
+            column="42" />
     </issue>
 
     <issue
@@ -196,7 +186,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="724"
-            column="18"/>
+            column="18" />
     </issue>
 
     <issue
@@ -207,7 +197,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/handheld/AppPermissionFragment.java"
             line="725"
-            column="29"/>
+            column="29" />
     </issue>
 
     <issue
@@ -218,7 +208,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionsFragment.java"
             line="159"
-            column="35"/>
+            column="35" />
     </issue>
 
     <issue
@@ -229,7 +219,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/AppPermissionsFragment.java"
             line="367"
-            column="35"/>
+            column="35" />
     </issue>
 
     <issue
@@ -240,7 +230,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="463"
-            column="31"/>
+            column="31" />
     </issue>
 
     <issue
@@ -251,7 +241,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="464"
-            column="34"/>
+            column="34" />
     </issue>
 
     <issue
@@ -262,7 +252,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="468"
-            column="41"/>
+            column="41" />
     </issue>
 
     <issue
@@ -273,7 +263,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="472"
-            column="41"/>
+            column="41" />
     </issue>
 
     <issue
@@ -284,7 +274,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="474"
-            column="59"/>
+            column="59" />
     </issue>
 
     <issue
@@ -295,7 +285,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="476"
-            column="67"/>
+            column="67" />
     </issue>
 
     <issue
@@ -306,7 +296,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="476"
-            column="42"/>
+            column="42" />
     </issue>
 
     <issue
@@ -317,7 +307,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="478"
-            column="18"/>
+            column="18" />
     </issue>
 
     <issue
@@ -328,7 +318,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/auto/AutoAppPermissionFragment.java"
             line="479"
-            column="29"/>
+            column="29" />
     </issue>
 
     <issue
@@ -339,7 +329,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/model/GrantPermissionsViewModel.kt"
             line="1059"
-            column="45"/>
+            column="45" />
     </issue>
 
     <issue
@@ -350,7 +340,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/data/HibernatedPackagesLiveData.kt"
             line="48"
-            column="74"/>
+            column="74" />
     </issue>
 
     <issue
@@ -361,7 +351,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/data/HibernatedPackagesLiveData.kt"
             line="51"
-            column="44"/>
+            column="44" />
     </issue>
 
     <issue
@@ -372,7 +362,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/IssueCardAnimator.kt"
             line="47"
-            column="37"/>
+            column="37" />
     </issue>
 
     <issue
@@ -383,7 +373,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/utils/KotlinUtils.kt"
             line="653"
-            column="29"/>
+            column="29" />
     </issue>
 
     <issue
@@ -394,7 +384,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/utils/KotlinUtils.kt"
             line="662"
-            column="18"/>
+            column="18" />
     </issue>
 
     <issue
@@ -405,7 +395,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/utils/KotlinUtils.kt"
             line="1689"
-            column="48"/>
+            column="48" />
     </issue>
 
     <issue
@@ -416,7 +406,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/model/livedatatypes/LightPackageInfo.kt"
             line="140"
-            column="72"/>
+            column="72" />
     </issue>
 
     <issue
@@ -427,7 +417,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/model/livedatatypes/LightPackageInfo.kt"
             line="140"
-            column="62"/>
+            column="62" />
     </issue>
 
     <issue
@@ -438,7 +428,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="288"
-            column="19"/>
+            column="19" />
     </issue>
 
     <issue
@@ -449,7 +439,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="291"
-            column="48"/>
+            column="48" />
     </issue>
 
     <issue
@@ -460,7 +450,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="291"
-            column="30"/>
+            column="30" />
     </issue>
 
     <issue
@@ -471,7 +461,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="292"
-            column="30"/>
+            column="30" />
     </issue>
 
     <issue
@@ -482,7 +472,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="292"
-            column="39"/>
+            column="39" />
     </issue>
 
     <issue
@@ -493,7 +483,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="298"
-            column="5"/>
+            column="5" />
     </issue>
 
     <issue
@@ -504,7 +494,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="298"
-            column="12"/>
+            column="12" />
     </issue>
 
     <issue
@@ -515,7 +505,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="301"
-            column="34"/>
+            column="34" />
     </issue>
 
     <issue
@@ -526,7 +516,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/model/LiveSafetyCenterViewModel.kt"
             line="308"
-            column="13"/>
+            column="13" />
     </issue>
 
     <issue
@@ -537,7 +527,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/MoreIssuesCardAnimator.kt"
             line="110"
-            column="21"/>
+            column="21" />
     </issue>
 
     <issue
@@ -548,7 +538,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/ui/MoreIssuesCardAnimator.kt"
             line="110"
-            column="46"/>
+            column="46" />
     </issue>
 
     <issue
@@ -559,7 +549,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/PermissionAppsFragment.java"
             line="114"
-            column="35"/>
+            column="35" />
     </issue>
 
     <issue
@@ -570,7 +560,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/television/PermissionAppsFragment.java"
             line="365"
-            column="35"/>
+            column="35" />
     </issue>
 
     <issue
@@ -581,7 +571,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/ui/model/PermissionAppsViewModel.kt"
             line="100"
-            column="43"/>
+            column="43" />
     </issue>
 
     <issue
@@ -592,7 +582,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/service/PermissionControllerServiceImpl.java"
             line="521"
-            column="43"/>
+            column="43" />
     </issue>
 
     <issue
@@ -603,7 +593,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/service/PermissionControllerServiceImpl.java"
             line="521"
-            column="75"/>
+            column="75" />
     </issue>
 
     <issue
@@ -614,7 +604,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/service/PermissionControllerServiceImpl.java"
             line="522"
-            column="48"/>
+            column="48" />
     </issue>
 
     <issue
@@ -625,7 +615,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/permission/service/PermissionControllerServiceImpl.java"
             line="522"
-            column="24"/>
+            column="24" />
     </issue>
 
     <issue
@@ -636,7 +626,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/service/SafetyCenterBackgroundRefreshJobService.java"
             line="85"
-            column="42"/>
+            column="42" />
     </issue>
 
     <issue
@@ -647,7 +637,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/service/SafetyCenterBackgroundRefreshJobService.java"
             line="97"
-            column="34"/>
+            column="34" />
     </issue>
 
     <issue
@@ -658,7 +648,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/service/SafetyCenterBackgroundRefreshJobService.java"
             line="141"
-            column="73"/>
+            column="73" />
     </issue>
 
     <issue
@@ -669,7 +659,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/service/SafetyCenterBackgroundRefreshJobService.java"
             line="146"
-            column="34"/>
+            column="34" />
     </issue>
 
     <issue
@@ -680,7 +670,7 @@
         <location
             file="packages/modules/Permission/PermissionController/src/com/android/permissioncontroller/safetycenter/service/SafetyCenterBackgroundRefreshJobService.java"
             line="152"
-            column="29"/>
+            column="29" />
     </issue>
 
 </issues>

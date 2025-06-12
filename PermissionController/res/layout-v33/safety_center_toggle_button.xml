@@ -35,8 +35,10 @@
             android:text="@string/available"/>
     </LinearLayout>
 
+    <!-- The X scale controls the direction of the arrow, based on the language direction -->
     <ImageView
         android:id="@+id/arrow_icon"
         style="@style/SafetyCenterQsToggleArrow"
+        android:scaleX="@integer/mirror_x_scale"
         android:visibility="gone"/>
 </LinearLayout>

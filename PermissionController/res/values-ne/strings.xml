@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"यो एपलाई <xliff:g id="DEVICE_NAME">%2$s</xliff:g> को <xliff:g id="PERM">%1$s</xliff:g> प्रयोग गर्ने अनुमति"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g> सँग भएका सबै अनुमति हेर्नुहोस्"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"यो अनुमति पाएका सबै एपहरू हेर्नुहोस्"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"जानकारी"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"सेटिङ"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"सहायकको माइक्रोफोन प्रयोगसम्बन्धी डेटा देखाउनुहोस्"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"प्रयोग नगरिएको एपसम्बन्धी सेटिङ"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"यो एप प्रयोग नहुँदा यसलाई दिइएका अनुमतिहरू रद्द गर्नुहोस्"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"लिंकहरू खोल्दा"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"कार्यका लागि डिफल्ट"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"निजी स्पेसका लागि डिफल्ट एपहरू"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"यो डिभाइसका लागि अप्टिमाइज गरिएका"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"अन्य"</string>
     <string name="default_app_none" msgid="9084592086808194457">"कुनै पनि होइन"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(सिस्टम डिफल्ट)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"कुनै पनि एप छैन"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> डिबग प्रक्रियासम्बन्धी जानकारी अपलोड गर्न चाहन्छ।"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"डिबग प्रक्रियासम्बन्धी डेटा सेयर गर्ने हो?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"प्रणालीले कुनै समस्या फेला पारेको छ"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ले <xliff:g id="DATE">%2$s</xliff:g> <xliff:g id="TIME">%3$s</xliff:g> मा यो डिभाइसबाट लिएको बगको रिपोर्ट अपलोड गर्ने अनुरोध गर्दै छ। बग रिपोर्टमा प्रयोगकर्ताका नाम, लोकेसन डेटा, डिभाइसका पहिचानकर्ता र नेटवर्कसम्बन्धी जानकारी जस्ता तपाईंको डिभाइसको व्यक्तिगत जानकारी वा एपले लग गरेको जानकारी समावेश छ। तपाईंलाई यो जानकारी दिँदा फरक पर्दैन जस्तो लाग्ने विश्वसनीय मान्छे वा एपसँग मात्र बग रिपोर्टहरू सेयर गर्नुहोस्। <xliff:g id="APP_NAME_1">%4$s</xliff:g> लाई बग रिपोर्ट अपलोड गर्न दिने हो?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ले <xliff:g id="DATE">%2$s</xliff:g> का दिन <xliff:g id="TIME">%3$s</xliff:g> मा यो डिभाइसबाट लिइएको त्रुटिसम्बन्धी रिपोर्ट अपलोड गर्न अनुरोध गर्दै छ। त्रुटिसम्बन्धी रिपोर्टमा तपाईंको डिभाइसका बारेमा वा एपहरूले लग गरेका युजरनेम, लोकेसन डेटा, डिभाइस आइडेन्टिफायर र नेटवर्कसम्बन्धी जानकारीलगायतका व्यक्तिगत जानकारी समावेश हुन्छन्। तपाईंलाई यो जानकारी दिँदा फरक पर्दैन जस्तो लाग्ने विश्वसनीय मान्छे र एपहरूसँग मात्र त्रुटिसम्बन्धी रिपोर्टहरू सेयर गर्नुहोस्।\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> लाई त्रुटिसम्बन्धी रिपोर्ट अपलोड गर्न दिने हो?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> को बगसम्बन्धी रिपोर्ट प्रक्रियामा लैजाने क्रममा त्रुटि भयो। त्यस कारण विस्तृत डिबग प्रक्रियासम्बन्धी डेटा आदान प्रदान गर्ने कार्य अस्वीकार गरिएको छ। व्यवधानका लागि क्षमा गर्नुहोला।"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"अनुमति दिनुहोस्"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"अनुमति नदिनुहोस्"</string>
@@ -471,10 +475,10 @@
     <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; मा भएका फोटो तथा मिडिया एक्सेस गर्ने अनुमति दिने हो?"</string>
     <string name="permgrouprequest_contacts" msgid="8391550064551053695">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई तपाईंका कन्ट्याक्टहरू एक्सेस गर्ने अनुमति दिने हो?"</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; मा भएका तपाईंका कन्ट्याक्ट एक्सेस गर्ने अनुमति दिने हो?"</string>
-    <string name="permgrouprequest_location" msgid="6990232580121067883">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई यो डिभाइसको लोकेसन प्रयोग दिने हो?"</string>
+    <string name="permgrouprequest_location" msgid="6990232580121067883">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई यो डिभाइसको लोकेसन प्रयोग गर्न दिने हो?"</string>
     <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g> को&lt;/b&gt; लोकेसन एक्सेस गर्ने अनुमति दिने हो?"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"तपाईंले एप प्रयोग गरिरहेका बेला मात्र उक्त एपले स्थानमाथि पहुँच राख्न सक्ने छ"</string>
-    <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई यो डिभाइसको लोकेसन प्रयोग दिने हो?"</string>
+    <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई यो डिभाइसको लोकेसन प्रयोग गर्न दिने हो?"</string>
     <string name="permgroupbackgroundrequest_device_aware_location" msgid="1264484517831380016">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; लाई &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g> को&lt;/b&gt; लोकेसन एक्सेस गर्ने अनुमति दिने हो?"</string>
     <string name="permgroupbackgroundrequestdetail_location" msgid="8021219324989662957">"तपाईं उक्त एप प्रयोग नगरिरहेका बेलामा लगायत जुनसुकै समयमा यो एपले तपाईंको स्थानमाथि पहुँच राख्न सक्छ। "<annotation id="link">"सेटिङमा गई अनुमति दिनुहोस्।"</annotation></string>
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; का लागि स्थानसम्बन्धी पहुँच परिवर्तन गर्ने हो?"</string>
@@ -580,10 +584,10 @@
     <string name="security_settings" msgid="3808106921175271317">"सुरक्षासम्बन्धी सेटिङ"</string>
     <string name="sensor_permissions_qs" msgid="1022267900031317472">"अनुमति"</string>
     <string name="safety_privacy_qs_tile_title" msgid="727301867710374052">"सुरक्षा तथा गोपनीयता"</string>
-    <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"स्थिति जाँच गर्नुहोस्"</string>
+    <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"स्थिति जाँच्नुहोस्"</string>
     <string name="privacy_controls_qs" msgid="5780144882040591169">"तपाईंका गोपनीयतासम्बन्धी सेटिङ"</string>
     <string name="security_settings_button_label_qs" msgid="8280343822465962330">"थप सेटिङ"</string>
-    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"क्यामेरा प्रयोग गर्ने अनुमति"</string>
+    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"क्यामेरा एक्सेस"</string>
     <string name="microphone_toggle_label_qs" msgid="8132912469813396552">"माइक एक्सेस"</string>
     <string name="permissions_removed_qs" msgid="8957319130625294572">"अनुमति हटाइएको छ"</string>
     <string name="camera_usage_qs" msgid="4394233566086665994">"हालसालै गरिएको क्यामेराको प्रयोगसम्बन्धी जानकारी हेर्नुहोस्"</string>
@@ -625,7 +629,7 @@
     <string name="safety_center_background_location_access_revoked" msgid="6972274943343442213">"अनुमति बदलियो"</string>
     <string name="safety_center_view_recent_location_access" msgid="3524391299490678243">"हालसालै कहिले लोकेसनसम्बन्धी प्रयोग गरिएको थियो हेर्नुहोस्"</string>
     <string name="privacy_controls_title" msgid="7605929972256835199">"गोपनीयतासम्बन्धी सेटिङ"</string>
-    <string name="camera_toggle_title" msgid="1251201397431837666">"क्यामेरा प्रयोग गर्ने अनुमति"</string>
+    <string name="camera_toggle_title" msgid="1251201397431837666">"क्यामेरा एक्सेस"</string>
     <string name="mic_toggle_title" msgid="2649991093496110162">"माइक्रोफोन प्रयोग गर्ने अनुमति"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"एप तथा सेवाहरूका हकमा"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"एप तथा सेवाहरूका हकमा। यो सेटिङ अफ गरिएको अवस्थामा तपाईंले आपत्‍कालीन नम्बरमा कल गर्नुभयो भने माइक्रोफोनसम्बन्धी डेटा अझै पनि सेयर गरिन सक्छ।"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"प्रतिबन्ध लगाइएका सेटिङ अनलक गर्नुहोस्"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"प्रतिबन्ध लगाइएका सेटिङ"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"तपाईंको खाताको सुरक्षार्थ यो सेटिङ हाल उपलब्ध छैन।"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"फोन कल चलिरहेका बेला यो कारबाही गर्न मिल्दैन"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"फोन कल चलिरहेका बेला एपहरूलाई अन्य एप इन्स्टल गर्ने अनुमति दिन मिल्दैन।\n\n स्क्याम गर्ने व्यक्तिले फोन कलका क्रममा प्रायः यस प्रकारको कारबाही गर्न अनुरोध गर्ने भएकाले तपाईंको सुरक्षार्थ यो कारबाही गर्न रोक लगाइएको हो। तपाईंलाई कुनै अपरिचित व्यक्तिले यो कारबाही गर्ने मार्गदर्शन गर्दै छ भने त्यो जालसाजी हुन सक्छ।"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"कल भइरहेका बेला यो कारबाही पूरा गर्न सकिँदैन"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"तपाईंको डिभाइस र जानकारी सुरक्षित राख्न यो सेटिङ ब्लक गरिएको छ।<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>स्क्याम गर्ने व्यक्तिहरू तपाईंलाई कुनै नयाँ स्रोतबाट अज्ञात एपहरू इन्स्टल गर्न लगाएर तपाईंको डिभाइसमा हानिकारक एपहरू इन्स्टल गर्ने प्रयास गर्न सक्छन्।"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>स्क्याम गर्ने व्यक्तिहरू तपाईंलाई कुनै एपलाई सर्वसुलभता सेवा प्रयोग गर्ने अनुमति दिन लगाएर तपाईंको डिभाइस नियन्त्रण गर्ने प्रयास गर्न सक्छन्।"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"एपले <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> प्रयोग गर्न मागेको अनुमति अस्वीकार गरिएको छ"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"यो एपले तपाईंको व्यक्तिगत तथा वित्तीय जानकारी जोखिममा पार्न सक्ने खालको संवेदनशील अनुमति मागेको छ।<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>तपाईले उक्त प्रतिबन्धित अनुमति नदिएका खण्डमा यो एपले राम्रोसँग काम नगर्न सक्छ। &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;अनुमति दिने तरिका सिक्नुहोस्&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"यो एपले डिफल्ट <xliff:g id="ROLE_NAME">%1$s</xliff:g> का रूपमा काम गर्न मागेको अनुमति अस्वीकार गरिएको छ"</string>

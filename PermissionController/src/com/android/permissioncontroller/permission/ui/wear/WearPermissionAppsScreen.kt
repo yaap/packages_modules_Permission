@@ -19,7 +19,6 @@ package com.android.permissioncontroller.permission.ui.wear
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -28,13 +27,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Text
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.Category
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ListSubheader
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionListSubHeader
 
 /** Compose the screen associated to a [WearPermissionAppsFragment]. */
 @Composable
@@ -46,6 +45,10 @@ fun WearPermissionAppsScreen(helper: WearPermissionAppsHelper) {
         helper.locationProviderDialogViewModel.dialogVisibilityLiveData.observeAsState(false)
     val appPermissionUsages = helper.wearViewModel.appPermissionUsages.observeAsState(emptyList())
     var isLoading by remember { mutableStateOf(true) }
+    val dialogArgs =
+        helper.locationProviderDialogViewModel.locationProviderInterceptDialogArgs.observeAsState(
+            null
+        )
 
     val title = helper.getTitle()
     val subTitle = helper.getSubTitle()
@@ -53,21 +56,21 @@ fun WearPermissionAppsScreen(helper: WearPermissionAppsHelper) {
     val chipsByCategory =
         helper.getChipsByCategory(categorizedApps.value, appPermissionUsages.value)
     Box(modifier = Modifier.fillMaxSize()) {
-        val dialogArgs = helper.locationProviderDialogViewModel.locationProviderInterceptDialogArgs
-        if (showLocationProviderDialog.value && dialogArgs != null) {
-            LocationProviderDialogScreen(dialogArgs)
-        } else {
-            WearPermissionAppsContent(
-                chipsByCategory = chipsByCategory,
-                showSystem = showSystem.value,
-                hasSystemApps = hasSystemApps.value,
-                title = title,
-                subtitle = subTitle,
-                showAlways = showAlways,
-                isLoading = isLoading,
-                onShowSystemClick = helper.onShowSystemClick
-            )
-        }
+        WearPermissionAppsContent(
+            chipsByCategory = chipsByCategory,
+            showSystem = showSystem.value,
+            hasSystemApps = hasSystemApps.value,
+            title = title,
+            subtitle = subTitle,
+            showAlways = showAlways,
+            isLoading = isLoading,
+            onShowSystemClick = helper.onShowSystemClick,
+        )
+        LocationProviderDialogScreen(
+            showDialog = showLocationProviderDialog.value,
+            onDismissRequest = { helper.locationProviderDialogViewModel.dismissDialog() },
+            args = dialogArgs.value,
+        )
     }
     if (isLoading && categorizedApps.value.isNotEmpty()) {
         isLoading = false
@@ -84,7 +87,7 @@ internal fun WearPermissionAppsContent(
     subtitle: String,
     showAlways: Boolean,
     isLoading: Boolean,
-    onShowSystemClick: (showSystem: Boolean) -> Unit
+    onShowSystemClick: (showSystem: Boolean) -> Unit,
 ) {
     ScrollableScreen(title = title, subtitle = subtitle, isLoading = isLoading) {
         val firstItemIndex = categoryOrder.indexOfFirst { !chipsByCategory[it].isNullOrEmpty() }
@@ -94,29 +97,22 @@ internal fun WearPermissionAppsContent(
                 continue
             }
             item {
-                ListSubheader(
-                    modifier =
-                        Modifier.padding(
-                            top = if (index == firstItemIndex) 0.dp else 12.dp,
-                            bottom = 4.dp,
-                            start = 14.dp,
-                            end = 14.dp
-                        )
-                ) {
+                WearPermissionListSubHeader(isFirstItemInAList = index == firstItemIndex) {
                     Text(text = stringResource(getCategoryString(category, showAlways)))
                 }
             }
             chips.forEach {
                 item {
-                    Chip(
+                    WearPermissionButton(
                         label = it.title,
                         labelMaxLines = Int.MAX_VALUE,
                         secondaryLabel = it.summary,
                         secondaryLabelMaxLines = Int.MAX_VALUE,
-                        icon = it.icon,
+                        iconBuilder =
+                            it.icon?.let { icon -> WearPermissionIconBuilder.builder(icon) },
                         enabled = it.enabled,
                         onClick = { it.onClick() },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
                     )
                 }
             }
@@ -124,7 +120,7 @@ internal fun WearPermissionAppsContent(
 
         if (hasSystemApps) {
             item {
-                Chip(
+                WearPermissionButton(
                     label =
                         if (showSystem) {
                             stringResource(R.string.menu_hide_system)
@@ -150,6 +146,7 @@ internal fun getCategoryString(category: String, showAlways: Boolean) =
             } else {
                 R.string.allowed_header
             }
+
         Category.ALLOWED_FOREGROUND.categoryName -> R.string.allowed_foreground_header
         Category.ASK.categoryName -> R.string.ask_header
         Category.DENIED.categoryName -> R.string.denied_header
@@ -163,5 +160,5 @@ internal val categoryOrder =
         Category.ALLOWED.categoryName,
         Category.ALLOWED_FOREGROUND.categoryName,
         Category.ASK.categoryName,
-        Category.DENIED.categoryName
+        Category.DENIED.categoryName,
     )

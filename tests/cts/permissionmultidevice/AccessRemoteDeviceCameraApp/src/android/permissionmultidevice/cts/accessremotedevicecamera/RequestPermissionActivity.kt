@@ -16,7 +16,6 @@
 
 package android.permissionmultidevice.cts.accessremotedevicecamera
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -33,17 +32,24 @@ class RequestPermissionActivity : Activity() {
         val deviceId =
             intent.getIntExtra(
                 PackageManager.EXTRA_REQUEST_PERMISSIONS_DEVICE_ID,
-                Context.DEVICE_ID_DEFAULT
+                Context.DEVICE_ID_INVALID,
             )
 
-        requestPermissions(DEVICE_AWARE_PERMISSIONS, 1001, deviceId)
+        val permissions =
+            intent.getStringArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES)!!
+
+        if (deviceId != Context.DEVICE_ID_INVALID) {
+            requestPermissions(permissions, 1001, deviceId)
+        } else {
+            requestPermissions(permissions, 1001)
+        }
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray,
-        deviceId: Int
+        deviceId: Int,
     ) {
         val resultReceiver =
             intent.getParcelableExtra(Intent.EXTRA_RESULT_RECEIVER, RemoteCallback::class.java)
@@ -56,9 +62,5 @@ class RequestPermissionActivity : Activity() {
 
         resultReceiver?.sendResult(result)
         finish()
-    }
-
-    companion object {
-        private val DEVICE_AWARE_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 }

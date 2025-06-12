@@ -32,10 +32,14 @@ import com.android.permissioncontroller.permission.utils.Utils
 class WearLocationProviderInterceptDialogViewModel : ViewModel() {
     private val showDialogLiveData = MutableLiveData<Boolean>()
     val dialogVisibilityLiveData: LiveData<Boolean> = showDialogLiveData
-    var locationProviderInterceptDialogArgs: LocationProviderInterceptDialogArgs? = null
+    private val _locationProviderInterceptDialogArgs =
+        MutableLiveData<LocationProviderInterceptDialogArgs?>()
+    var locationProviderInterceptDialogArgs: LiveData<LocationProviderInterceptDialogArgs?> =
+        _locationProviderInterceptDialogArgs
 
     init {
         showDialogLiveData.value = false
+        _locationProviderInterceptDialogArgs.value = null
     }
 
     private fun applicationInfo(context: Context, packageName: String): ApplicationInfo? {
@@ -51,7 +55,7 @@ class WearLocationProviderInterceptDialogViewModel : ViewModel() {
     fun showDialog(context: Context, packageName: String) {
         val applicationInfo = applicationInfo(context, packageName) ?: return
         val appLabel = Utils.getAppLabel(applicationInfo, context)
-        locationProviderInterceptDialogArgs =
+        _locationProviderInterceptDialogArgs.value =
             LocationProviderInterceptDialogArgs(
                 iconId = R.drawable.ic_dialog_alert_material,
                 titleId = android.R.string.dialog_alert_title,
@@ -61,13 +65,13 @@ class WearLocationProviderInterceptDialogViewModel : ViewModel() {
                 onOkButtonClick = { dismissDialog() },
                 onLocationSettingsClick = {
                     context.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-                }
+                },
             )
         showDialogLiveData.value = true
     }
 
     fun dismissDialog() {
-        locationProviderInterceptDialogArgs = null
+        _locationProviderInterceptDialogArgs.value = null
         showDialogLiveData.value = false
     }
 }
@@ -75,7 +79,8 @@ class WearLocationProviderInterceptDialogViewModel : ViewModel() {
 /** Factory for an AppPermissionGroupsRevokeDialogViewModel */
 class WearLocationProviderInterceptDialogViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return WearLocationProviderInterceptDialogViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return WearLocationProviderInterceptDialogViewModel() as T
     }
 }
 
@@ -86,5 +91,5 @@ data class LocationProviderInterceptDialogArgs(
     val okButtonTitleId: Int,
     val locationSettingsId: Int,
     val onOkButtonClick: () -> Unit,
-    val onLocationSettingsClick: () -> Unit
+    val onLocationSettingsClick: () -> Unit,
 )

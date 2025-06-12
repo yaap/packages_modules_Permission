@@ -19,16 +19,16 @@ package com.android.permissioncontroller.permission.ui.viewmodel.v31
 import android.app.Application
 import android.content.Context
 import android.os.Build
-import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
-import androidx.savedstate.SavedStateRegistryOwner
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.android.permissioncontroller.DeviceUtils
 import com.android.permissioncontroller.permission.data.repository.v31.PermissionRepository
 import com.android.permissioncontroller.permission.domain.model.v31.PermissionGroupUsageModel
@@ -189,24 +189,16 @@ sealed class PermissionUsagesUiState {
 
 /** Factory for [PermissionUsageViewModel]. */
 @RequiresApi(Build.VERSION_CODES.S)
-class PermissionUsageViewModelFactory(
-    private val app: Application,
-    owner: SavedStateRegistryOwner,
-    defaultArgs: Bundle
-) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
+class PermissionUsageViewModelFactory(private val app: Application) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-        key: String,
-        modelClass: Class<T>,
-        handle: SavedStateHandle
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         val permissionRepository = PermissionRepository.getInstance(app)
         val permissionUsageUseCase = GetPermissionGroupUsageUseCase.create(app)
         return PermissionUsageViewModel(
             app,
             permissionRepository,
             permissionUsageUseCase,
-            savedState = handle
+            savedState = extras.createSavedStateHandle()
         )
             as T
     }

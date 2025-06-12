@@ -23,7 +23,6 @@ import android.os.UserHandle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -129,11 +128,12 @@ public interface RoleBehavior {
      * @param user the user to check for
      * @param context the `Context` to retrieve system services
      *
-     * @return whether this role should be visible to user
+     * @return whether this role should be visible to user, or {@code null} if not overridden
      */
-    default boolean isVisibleAsUser(@NonNull Role role, @NonNull UserHandle user,
+    @Nullable
+    default Boolean isVisibleAsUser(@NonNull Role role, @NonNull UserHandle user,
             @NonNull Context context) {
-        return true;
+        return null;
     }
 
     /**

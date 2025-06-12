@@ -227,8 +227,7 @@ class GetPermissionGroupUsageDetailsUseCase(
         }
     }
 
-    private fun isLocationByPassEnabled(): Boolean =
-        SdkLevel.isAtLeastV() && Flags.locationBypassPrivacyDashboardEnabled()
+    private fun isLocationByPassEnabled(): Boolean = SdkLevel.isAtLeastV()
 
     /**
      * Determine if an op should be in its own cluster and hence display as an individual entry in

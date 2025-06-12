@@ -33,9 +33,9 @@
     <string name="permission_manager_title" msgid="5277347862821255015">"Управувач со дозволи"</string>
     <string name="permission_manager_summary" msgid="8099852107340970790">"Го контролира пристапот на апликациите до вашите податоци"</string>
     <string name="permission_manager_search_terms" msgid="2895147613099694722">"Дозволи, Управувач со дозволи"</string>
-    <string name="privacy_controls_title" msgid="5322875777945432395">"Контроли за приватноста"</string>
+    <string name="privacy_controls_title" msgid="5322875777945432395">"Контроли за приватност"</string>
     <string name="privacy_controls_summary" msgid="2402066941190435424">"Го контролира пристапот на уредот до микрофонот, камерата и друго"</string>
-    <string name="privacy_controls_search_terms" msgid="3774472175934304165">"Приватност, Контроли на приватноста"</string>
+    <string name="privacy_controls_search_terms" msgid="3774472175934304165">"Приватност, Контроли за приватност"</string>
     <string name="advanced_title" msgid="8745436380690561172">"Повеќе поставки"</string>
     <string name="advanced_security_title" msgid="1126833338772188155">"Повеќе поставки за безбедност"</string>
     <string name="advanced_security_summary" msgid="6172253327022425123">"Шифрирање, акредитиви и друго"</string>

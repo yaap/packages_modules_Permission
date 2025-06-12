@@ -25,10 +25,10 @@ import com.android.permissioncontroller.R
 import com.android.permissioncontroller.hibernation.isHibernationEnabled
 import com.android.permissioncontroller.permission.ui.model.UnusedAppsViewModel.UnusedPeriod
 import com.android.permissioncontroller.permission.ui.model.UnusedAppsViewModel.UnusedPeriod.Companion.allPeriods
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.Icon
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
 import com.android.permissioncontroller.permission.ui.wear.model.WearUnusedAppsViewModel
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 
 @Composable
 fun WearUnusedAppsScreen(viewModel: WearUnusedAppsViewModel) {
@@ -38,12 +38,11 @@ fun WearUnusedAppsScreen(viewModel: WearUnusedAppsViewModel) {
     val infoMsgCategoryVisibility =
         viewModel.infoMsgCategoryVisibilityLiveData.observeAsState(false)
     val unusedAppChips = viewModel.unusedAppChipsLiveData.observeAsState(mapOf())
-
     ScrollableScreen(
         showTimeText = true,
         title = getScreenTitle(),
         isLoading = loading.value,
-        subtitle = getSubTitle(!infoMsgCategoryVisibility.value)
+        subtitle = getSubTitle(!infoMsgCategoryVisibility.value),
     ) {
         for (period in allPeriods) {
             if (!unusedAppChips.value.containsKey(period)) {
@@ -57,19 +56,22 @@ fun WearUnusedAppsScreen(viewModel: WearUnusedAppsViewModel) {
             }
             for (unusedAppChip in unusedAppChips.value[period]!!.values) {
                 item {
-                    Chip(
+                    WearPermissionButton(
                         label = unusedAppChip.label,
                         secondaryLabel = unusedAppChip.summary,
-                        icon = unusedAppChip.icon,
-                        iconContentDescription = unusedAppChip.contentDescription,
-                        onClick = unusedAppChip.onClick
+                        iconBuilder =
+                            unusedAppChip.icon?.let {
+                                WearPermissionIconBuilder.builder(it)
+                                    .contentDescription(unusedAppChip.contentDescription)
+                            },
+                        onClick = unusedAppChip.onClick,
                     )
                 }
             }
         }
         // For info_msg_category
         if (infoMsgCategoryVisibility.value) {
-            item { Icon(icon = R.drawable.ic_info_outline, contentDescription = null) }
+            item { WearPermissionIconBuilder.builder(R.drawable.ic_info_outline).build() }
             if (isHibernationEnabled()) {
                 item { Text(text = stringResource(R.string.unused_apps_page_summary)) }
             } else {
@@ -108,5 +110,5 @@ private fun posByPeriod(period: UnusedPeriod) =
 private fun categoryTitleByPeriod(period: UnusedPeriod) =
     MessageFormat.format(
         stringResource(R.string.last_opened_category_title),
-        mapOf("count" to period.months)
+        mapOf("count" to period.months),
     )

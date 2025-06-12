@@ -27,7 +27,6 @@ import android.app.AppOpsManager.OP_FLAG_TRUSTED_PROXIED
 import android.app.AppOpsManager.OP_FLAG_TRUSTED_PROXY
 import android.app.Application
 import android.os.UserHandle
-import android.permission.flags.Flags
 import android.util.Log
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.DeviceUtils
@@ -74,7 +73,7 @@ interface AppOpRepository {
      */
     fun getDiscreteOps(
         opNames: List<String>,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
     ): Flow<List<DiscretePackageOpsModel>>
 
     companion object {
@@ -82,7 +81,7 @@ interface AppOpRepository {
 
         fun getInstance(
             application: Application,
-            permissionRepository: PermissionRepository
+            permissionRepository: PermissionRepository,
         ): AppOpRepository =
             instance
                 ?: synchronized(this) {
@@ -104,7 +103,7 @@ class AppOpRepositoryImpl(
 
     override fun getDiscreteOps(
         opNames: List<String>,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
     ): Flow<List<DiscretePackageOpsModel>> {
         return callbackFlow {
                 var job: Job? = null
@@ -112,7 +111,7 @@ class AppOpRepositoryImpl(
 
                 fun sendUpdate() {
                     if (job == null || job?.isActive == false) {
-                        job = coroutineScope.launch { trySend(getDiscreteOps(opNames)) }
+                        job = coroutineScope.launch(dispatcher) { trySend(getDiscreteOps(opNames)) }
                     }
                 }
 
@@ -227,10 +226,10 @@ class AppOpRepositoryImpl(
                     packageOps.ops.map { opEntry ->
                         AppOpUsageModel(
                             opEntry.opStr,
-                            opEntry.getLastAccessTime(OPS_LAST_ACCESS_FLAGS)
+                            opEntry.getLastAccessTime(OPS_LAST_ACCESS_FLAGS),
                         )
                     },
-                    UserHandle.getUserHandleForUid(packageOps.uid).identifier
+                    UserHandle.getUserHandleForUid(packageOps.uid).identifier,
                 )
             }
     }
@@ -252,7 +251,7 @@ class AppOpRepositoryImpl(
         if (SdkLevel.isAtLeastT()) {
             opNames.add(AppOpsManager.OPSTR_RECEIVE_AMBIENT_TRIGGER_AUDIO)
         }
-        if (SdkLevel.isAtLeastV() && Flags.locationBypassPrivacyDashboardEnabled()) {
+        if (SdkLevel.isAtLeastV()) {
             opNames.add(AppOpsManager.OPSTR_EMERGENCY_LOCATION)
         }
         return opNames

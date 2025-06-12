@@ -32,6 +32,8 @@ import android.safetycenter.SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN
 import android.safetycenter.SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED
 import android.safetycenter.SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_ICON
 import android.safetycenter.SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_RECOMMENDATION
+import android.safetycenter.SafetyCenterEntryGroup
+import android.safetycenter.SafetyCenterEntryOrGroup
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING
 import android.safetycenter.SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK
@@ -278,6 +280,32 @@ class SafetyCenterTestData(context: Context) {
             .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
             .setSeverityUnspecifiedIconType(SEVERITY_UNSPECIFIED_ICON_TYPE_NO_RECOMMENDATION)
             .build()
+
+    fun singletonSafetyCenterEntryOrGroup(
+        groupId: String,
+        entry: SafetyCenterEntry,
+        groupSummary: String? = null,
+    ) =
+        // TODO: b/361404288 - Replace with platform version check
+        if (SafetyCenterFlags.showSubpages) {
+            val summary =
+                if (groupSummary == null && entry.severityLevel > ENTRY_SEVERITY_LEVEL_OK) {
+                    entry.summary
+                } else groupSummary ?: "OK"
+
+            SafetyCenterEntryOrGroup(
+                SafetyCenterEntryGroup.Builder(groupId, "OK")
+                    .setSeverityLevel(entry.severityLevel)
+                    .setSeverityUnspecifiedIconType(
+                        SEVERITY_UNSPECIFIED_ICON_TYPE_NO_RECOMMENDATION
+                    )
+                    .setSummary(summary)
+                    .setEntries(listOf(entry))
+                    .build()
+            )
+        } else {
+            SafetyCenterEntryOrGroup(entry)
+        }
 
     /**
      * Returns an information [SafetyCenterIssue] for the given source and user id that is

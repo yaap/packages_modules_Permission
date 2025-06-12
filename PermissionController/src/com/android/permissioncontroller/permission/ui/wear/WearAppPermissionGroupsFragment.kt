@@ -48,7 +48,7 @@ import com.android.permissioncontroller.permission.ui.wear.model.WearAppPermissi
 import com.android.permissioncontroller.permission.ui.wear.model.WearAppPermissionUsagesViewModelFactory
 import com.android.permissioncontroller.permission.ui.wear.model.WearLocationProviderInterceptDialogViewModel
 import com.android.permissioncontroller.permission.ui.wear.model.WearLocationProviderInterceptDialogViewModelFactory
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 import java.time.Instant
 import java.util.concurrent.TimeUnit
 
@@ -63,7 +63,7 @@ class WearAppPermissionGroupsFragment : Fragment(), PermissionsUsagesChangeCallb
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val packageName = arguments?.getString(Intent.EXTRA_PACKAGE_NAME) ?: ""
         val user =
@@ -93,7 +93,7 @@ class WearAppPermissionGroupsFragment : Fragment(), PermissionsUsagesChangeCallb
         val viewModel =
             ViewModelProvider(
                 owner = this,
-                factory = AppPermissionGroupsViewModelFactory(packageName, user, sessionId)
+                factory = AppPermissionGroupsViewModelFactory(packageName, user, sessionId),
             )[AppPermissionGroupsViewModel::class.java]
 
         wearViewModel =
@@ -103,13 +103,13 @@ class WearAppPermissionGroupsFragment : Fragment(), PermissionsUsagesChangeCallb
         val revokeDialogViewModel =
             ViewModelProvider(
                 owner = this,
-                factory = AppPermissionGroupsRevokeDialogViewModelFactory()
+                factory = AppPermissionGroupsRevokeDialogViewModelFactory(),
             )[AppPermissionGroupsRevokeDialogViewModel::class.java]
 
         val locationProviderInterceptDialogViewModel =
             ViewModelProvider(
                 owner = this,
-                factory = WearLocationProviderInterceptDialogViewModelFactory()
+                factory = WearLocationProviderInterceptDialogViewModelFactory(),
             )[WearLocationProviderInterceptDialogViewModel::class.java]
 
         val context = requireContext()
@@ -125,7 +125,7 @@ class WearAppPermissionGroupsFragment : Fragment(), PermissionsUsagesChangeCallb
                 maxOf(
                     System.currentTimeMillis() -
                         TimeUnit.DAYS.toMillis(aggregateDataFilterBeginDays),
-                    Instant.EPOCH.toEpochMilli()
+                    Instant.EPOCH.toEpochMilli(),
                 )
             permissionUsages.load(
                 null,
@@ -137,7 +137,7 @@ class WearAppPermissionGroupsFragment : Fragment(), PermissionsUsagesChangeCallb
                 false,
                 false,
                 this,
-                false
+                false,
             )
         }
         helper =
@@ -151,7 +151,7 @@ class WearAppPermissionGroupsFragment : Fragment(), PermissionsUsagesChangeCallb
                 viewModel = viewModel,
                 wearViewModel = wearViewModel,
                 revokeDialogViewModel = revokeDialogViewModel,
-                locationProviderInterceptDialogViewModel = locationProviderInterceptDialogViewModel
+                locationProviderInterceptDialogViewModel = locationProviderInterceptDialogViewModel,
             )
 
         return ComposeView(activity).apply {

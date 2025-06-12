@@ -22,10 +22,12 @@ import android.os.Process.myUserHandle
 import android.os.UserHandle
 import android.permission.cts.PermissionUtils.install
 import android.permission.cts.PermissionUtils.uninstallApp
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 private const val APK = "/data/local/tmp/pc-inprocess/AppThatUsesCameraPermission.apk"
@@ -33,6 +35,8 @@ private const val PKG = "com.android.permissioncontroller.tests.appthatrequestpe
 
 class AttributionLabelLiveDataTest {
     private val context = InstrumentationRegistry.getInstrumentation().context as Context
+
+    @JvmField @Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun installAttributingApp() {

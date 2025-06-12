@@ -85,11 +85,12 @@ interface IRoleManager {
     boolean isApplicationVisibleForRoleAsUser(in String roleName, in String packageName,
             int userId);
 
-    List<String> getDefaultHoldersForTest(in String roleName);
+    List<String> getDefaultHoldersForTestAsUser(in String roleName, int userId);
 
-    void setDefaultHoldersForTest(in String roleName, in List<String> packageNames);
+    void setDefaultHoldersForTestAsUser(in String roleName, in List<String> packageNames,
+            int userId);
 
-    boolean isRoleVisibleForTest(in String roleName);
+    boolean isRoleVisibleForTestAsUser(in String roleName, int userId);
 
-    void setRoleVisibleForTest(in String roleName, boolean visible);
+    void setRoleVisibleForTestAsUser(in String roleName, boolean visible, int userId);
 }

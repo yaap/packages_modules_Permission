@@ -584,7 +584,8 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
             // If the permissions are individually controlled, also show a link to the page that
             // lets you control them.
             mDivider.setVisibility(View.VISIBLE);
-            showRightIcon(R.drawable.ic_settings);
+            showRightIcon(R.drawable.ic_settings, getContext().getString(
+                    R.string.app_permission_settings_button));
             Bundle args = AllAppPermissionsFragment.createArgs(mPackageName, mPermGroupName, mUser);
             mWidgetFrame.setOnClickListener(v -> mViewModel.showAllPermissions(this, args));
             mPermissionDetails.setText(getPreferenceManager().getContext().getString(
@@ -599,7 +600,8 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
 
     private void setAdminSupportDetail(EnforcedAdmin admin) {
         if (admin != null) {
-            showRightIcon(R.drawable.ic_info);
+            showRightIcon(R.drawable.ic_info, getContext().getString(
+                    R.string.app_permission_info_button));
             mWidgetFrame.setOnClickListener(v ->
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), admin)
             );
@@ -613,10 +615,11 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
      *
      * @param iconId the resourceId of the drawable to use.
      */
-    private void showRightIcon(int iconId) {
+    private void showRightIcon(int iconId, @NonNull String contentDescription) {
         mWidgetFrame.removeAllViews();
         ImageView imageView = new ImageView(getPreferenceManager().getContext());
         imageView.setImageResource(iconId);
+        imageView.setContentDescription(contentDescription);
         mWidgetFrame.addView(imageView);
         mWidgetFrame.setVisibility(View.VISIBLE);
     }

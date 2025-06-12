@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"此應用程式在<xliff:g id="DEVICE_NAME">%2$s</xliff:g>上的<xliff:g id="PERM">%1$s</xliff:g>存取權"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"查看「<xliff:g id="APP">%1$s</xliff:g>」的所有權限"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"查看擁有此權限的所有應用程式"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"資料"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"設定"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"顯示「Google 助理」麥克風使用情況"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"不使用的應用程式設定"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"如不使用應用程式，即移除權限"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"開啟連結"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"預設用於工作"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"私人空間的預設應用程式"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"已針對你的裝置優化"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"其他"</string>
     <string name="default_app_none" msgid="9084592086808194457">"無"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(系統預設)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"沒有應用程式"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」要求上載偵錯資料。"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"分享偵錯資料？"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"系統偵測到問題。"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"「<xliff:g id="APP_NAME_0">%1$s</xliff:g>」要求上載此裝置於 <xliff:g id="DATE">%2$s</xliff:g> <xliff:g id="TIME">%3$s</xliff:g> 傳送的錯誤報告。錯誤報告包括你的裝置或應用程式記錄的個人資料，例如使用者名稱、位置資料、裝置識別碼和網絡資訊。只與你信任可存取這些資料的使用者和應用程式分享錯誤報告。要允許「<xliff:g id="APP_NAME_1">%4$s</xliff:g>」上載錯誤報告嗎？"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"「<xliff:g id="APP_NAME_0">%1$s</xliff:g>」要求上載此裝置於 <xliff:g id="DATE">%2$s</xliff:g><xliff:g id="TIME">%3$s</xliff:g>傳送的錯誤報告。錯誤報告包括與裝置相關的個人資料或應用程式記錄的個人資料，例如使用者名稱、位置資料、裝置識別碼和網絡資訊。請只與你信任的使用者和應用程式分享錯誤報告。\n\n要允許「<xliff:g id="APP_NAME_1">%4$s</xliff:g>」上載錯誤報告嗎？"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"系統處理「<xliff:g id="APP_NAME">%1$s</xliff:g>」的錯誤報告時發生錯誤，因此已拒絕分享詳細的偵錯資料。很抱歉發生中斷情況。"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"允許"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"拒絕"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"允許受限設定"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"受限設定"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"為安全起見，系統目前不提供此設定。"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"通話期間無法執行此操作"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"通話期間，應用程式不可安裝其他應用程式。\n\n由於騙徒經常在電話對話中要求這類操作，因此我們封鎖此功能以保障你的安全。如果有陌生人引導你執行此操作，那可能是詐騙。"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"通話期間無法完成操作"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"系統已封鎖此設定，以保護你的裝置和資料。<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>騙徒可能會要求你從新的來源安裝不明應用程式，以試圖安裝有害應用程式。"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>騙徒可能會要求你允許應用程式存取無障礙功能，以試圖控制你的裝置。"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"系統已拒絕授予應用程式「<xliff:g id="PERMISSION_NAME">%1$s</xliff:g>」存取權"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"應用程式要求存取敏感資料權限，授予此權限可能會危害你的個人和財務資料。<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>如沒有此受限制權限，應用程式可能無法正常運作。&lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;進一步瞭解如何授予存取權&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"系統已拒絕授予應用程式作為預設<xliff:g id="ROLE_NAME">%1$s</xliff:g>的存取權"</string>

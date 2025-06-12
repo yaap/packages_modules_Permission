@@ -23,7 +23,7 @@
     <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"مشکلی پیدا نشد"</string>
     <string name="overall_severity_level_tip_summary" msgid="1935765582243024999">"{count,plural, =1{دیدن توصیه}one{دیدن توصیه}other{دیدن توصیه‌ها}}"</string>
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{اقدام انجام شد}one{اقدام انجام شد}other{اقدامات انجام شد}}"</string>
-    <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"مرور تنظیمات"</string>
+    <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"بازبینی تنظیمات"</string>
     <string name="overall_severity_level_ok_review_summary" msgid="7743619617413076275">"بررسی فهرست تنظیمات"</string>
     <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"دستگاه ممکن است درمعرض خطر باشد"</string>
     <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"دستگاه درمعرض خطر است"</string>

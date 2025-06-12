@@ -7,6 +7,9 @@
                     "exclude-annotation": "androidx.test.filters.FlakyTest"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases"
         }
     ],
     "mainline-presubmit": [
@@ -24,6 +27,9 @@
                     "exclude-annotation": "androidx.test.filters.FlakyTest"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases[com.google.android.permission.apex]"
         }
     ],
     "permission-mainline-presubmit": [
@@ -41,6 +47,9 @@
                     "exclude-annotation": "androidx.test.filters.FlakyTest"
                 }
             ]
+        },
+        {
+            "name": "CtsRoleMultiUserTestCases"
         }
     ],
     "postsubmit": [

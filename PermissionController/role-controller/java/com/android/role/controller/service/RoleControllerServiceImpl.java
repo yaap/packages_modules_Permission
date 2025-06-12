@@ -173,7 +173,7 @@ public class RoleControllerServiceImpl extends RoleControllerService {
             // or fallback holders, if any.
             currentPackageNames = mUserRoleManager.getRoleHolders(roleName);
             currentPackageNamesSize = currentPackageNames.size();
-            boolean isStaticRole = role.isStatic();
+            boolean isStaticRole = role.isStatic(mContext);
             if (currentPackageNamesSize == 0 || isStaticRole) {
                 List<String> packageNamesToAdd = null;
                 if (addedRoleNames.contains(roleName) || isStaticRole) {

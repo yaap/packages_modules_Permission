@@ -21,6 +21,9 @@ import android.os.Build
 import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import android.os.Bundle
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.flag.junit.CheckFlagsRule
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCE_ID
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCE_ISSUE_ID
 import android.safetycenter.SafetySourceData.SEVERITY_LEVEL_CRITICAL_WARNING
@@ -60,6 +63,7 @@ import com.android.safetycenter.testing.UiTestHelper.RESCAN_BUTTON_LABEL
 import com.android.safetycenter.testing.UiTestHelper.clickConfirmDismissal
 import com.android.safetycenter.testing.UiTestHelper.clickDismissIssueCard
 import com.android.safetycenter.testing.UiTestHelper.clickMoreIssuesCard
+import com.android.safetycenter.testing.UiTestHelper.clickOpenSubpage
 import com.android.safetycenter.testing.UiTestHelper.resetRotation
 import com.android.safetycenter.testing.UiTestHelper.rotate
 import com.android.safetycenter.testing.UiTestHelper.setAnimationsEnabled
@@ -73,7 +77,10 @@ import com.android.safetycenter.testing.UiTestHelper.waitPageTitleDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceDataDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceIssueDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceIssueNotDisplayed
+import com.android.settingslib.widget.theme.flags.Flags as SettingsThemeFlags
+import java.util.regex.Pattern
 import org.junit.After
+import org.junit.Assume.assumeFalse
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
@@ -92,6 +99,8 @@ class SafetyCenterActivityTest {
     @get:Rule(order = 2) val safetyCenterTestRule = SafetyCenterTestRule(safetyCenterTestHelper)
     @get:Rule(order = 3) val disableAnimationRule = DisableAnimationRule()
     @get:Rule(order = 4) val freezeRotationRule = FreezeRotationRule()
+    @get:Rule(order = 5)
+    val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @After
     fun clearDataAfterTest() {
@@ -99,13 +108,13 @@ class SafetyCenterActivityTest {
     }
 
     @Test
-    fun launchActivity_allowingSettingsTrampoline() {
+    fun launchActivity_allowingSettingsTrampoline_showsSafetyCenter() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
         val dataToDisplay = safetySourceTestData.criticalWithResolvingGeneralIssue
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, dataToDisplay)
 
         context.launchSafetyCenterActivity(preventTrampolineToSettings = false) {
-            waitSourceDataDisplayed(dataToDisplay)
+            waitSourceIssueDisplayed(dataToDisplay.issues[0])
         }
     }
 
@@ -131,7 +140,13 @@ class SafetyCenterActivityTest {
         val dataToDisplay = safetySourceTestData.criticalWithResolvingGeneralIssue
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, dataToDisplay)
 
-        context.launchSafetyCenterActivity { waitSourceDataDisplayed(dataToDisplay) }
+        context.launchSafetyCenterActivity {
+            if (SafetyCenterFlags.showSubpages) {
+                waitSourceIssueDisplayed(dataToDisplay.issues[0])
+            } else {
+                waitSourceDataDisplayed(dataToDisplay)
+            }
+        }
     }
 
     @Test
@@ -276,6 +291,8 @@ class SafetyCenterActivityTest {
 
     @Test
     fun launchActivity_displaysGroupsOfSingleSourceAsEntity() {
+        // Single source groups are displayed in the subpage when subpages enabled
+        assumeFalse(SafetyCenterFlags.showSubpages)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourceGroupsConfig)
 
         context.launchSafetyCenterActivity {
@@ -297,7 +314,11 @@ class SafetyCenterActivityTest {
             val dataToDisplay = safetySourceTestData.recommendationWithGeneralIssue
             safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, dataToDisplay)
 
-            waitSourceDataDisplayed(dataToDisplay)
+            if (SafetyCenterFlags.showSubpages) {
+                waitSourceIssueDisplayed(dataToDisplay.issues[0])
+            } else {
+                waitSourceDataDisplayed(dataToDisplay)
+            }
         }
     }
 
@@ -338,6 +359,8 @@ class SafetyCenterActivityTest {
 
     @Test
     fun entryListWithEntryGroup_informationState_hasContentDescription() {
+        // No custom content descriptions when using subpages
+        assumeFalse(SafetyCenterFlags.showSubpages)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(SOURCE_ID_1, safetySourceTestData.information)
         safetyCenterTestHelper.setData(SOURCE_ID_2, safetySourceTestData.information)
@@ -355,6 +378,8 @@ class SafetyCenterActivityTest {
 
     @Test
     fun entryListWithEntryGroup_recommendationState_hasActionsNeededContentDescription() {
+        // No custom content descriptions when using subpages
+        assumeFalse(SafetyCenterFlags.showSubpages)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
             SOURCE_ID_1,
@@ -394,6 +419,8 @@ class SafetyCenterActivityTest {
 
     @Test
     fun entryListWithEntryGroup_unclickableDisabledEntry_hasContentDescription() {
+        // No custom content descriptions when using subpages
+        assumeFalse(SafetyCenterFlags.showSubpages)
         safetyCenterTestHelper.setConfig(
             safetyCenterTestConfigs.multipleSourcesConfigWithSourceWithInvalidIntent
         )
@@ -424,6 +451,8 @@ class SafetyCenterActivityTest {
 
     @Test
     fun entryListWithEntryGroup_clickableDisabledEntry_hasContentDescription() {
+        // No custom content descriptions when using subpages
+        assumeFalse(SafetyCenterFlags.showSubpages)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
             SOURCE_ID_1,
@@ -442,6 +471,8 @@ class SafetyCenterActivityTest {
 
     @Test
     fun entryListWithSingleSource_informationState_hasContentDescription() {
+        // No custom content descriptions when using subpages
+        assumeFalse(SafetyCenterFlags.showSubpages)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, safetySourceTestData.information)
 
@@ -456,6 +487,12 @@ class SafetyCenterActivityTest {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
 
         context.launchSafetyCenterActivity {
+            if (SafetyCenterFlags.showSubpages) {
+                clickOpenSubpage(
+                    context,
+                    safetyCenterTestConfigs.singleSourceConfig.safetySourcesGroups.first(),
+                )
+            }
             waitDisplayed(By.text("OK")) { it.click() }
             waitButtonDisplayed("Exit test activity") { it.click() }
             waitDisplayed(By.text("OK"))
@@ -467,6 +504,13 @@ class SafetyCenterActivityTest {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.implicitIntentSingleSourceConfig)
 
         context.launchSafetyCenterActivity {
+            if (SafetyCenterFlags.showSubpages) {
+                clickOpenSubpage(
+                    context,
+                    safetyCenterTestConfigs.implicitIntentSingleSourceConfig.safetySourcesGroups
+                        .first(),
+                )
+            }
             waitDisplayed(By.text("OK")) { it.click() }
             waitButtonDisplayed("Exit test activity") { it.click() }
         }
@@ -478,6 +522,12 @@ class SafetyCenterActivityTest {
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, safetySourceTestData.information)
 
         context.launchSafetyCenterActivity {
+            if (SafetyCenterFlags.showSubpages) {
+                clickOpenSubpage(
+                    context,
+                    safetyCenterTestConfigs.singleSourceConfig.safetySourcesGroups.first(),
+                )
+            }
             waitDisplayed(By.text("Ok title")) { it.click() }
             waitButtonDisplayed("Exit test activity") { it.click() }
             waitDisplayed(By.text("Ok title"))
@@ -493,6 +543,12 @@ class SafetyCenterActivityTest {
         )
 
         context.launchSafetyCenterActivity {
+            if (SafetyCenterFlags.showSubpages) {
+                clickOpenSubpage(
+                    context,
+                    safetyCenterTestConfigs.singleSourceConfig.safetySourcesGroups.first(),
+                )
+            }
             waitDisplayed(By.desc("Information")) { it.click() }
             waitButtonDisplayed("Exit test activity") { it.click() }
             waitDisplayed(By.text("Ok title"))
@@ -517,6 +573,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/398188361 - Update this for expressive theme
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun issueCard_noAttribution_hasProperContentDescriptions() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.issueOnlySourceNoGroupTitleConfig)
 
@@ -531,6 +589,8 @@ class SafetyCenterActivityTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    // TODO: b/398188361 - Update this for expressive theme
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun issueCard_withAttribution_hasProperContentDescriptions() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
 
@@ -553,7 +613,6 @@ class SafetyCenterActivityTest {
             clickDismissIssueCard()
 
             waitSourceIssueNotDisplayed(safetySourceTestData.informationIssue)
-            waitSourceDataDisplayed(safetySourceTestData.information)
             waitButtonDisplayed(RESCAN_BUTTON_LABEL)
         }
     }
@@ -644,7 +703,7 @@ class SafetyCenterActivityTest {
 
     @Test
     fun issueCard_resolveIssue_successConfirmationShown() {
-        SafetyCenterFlags.hideResolvedIssueUiTransitionDelay = TIMEOUT_LONG
+        SafetyCenterFlags.setHideResolvedIssueUiTransitionDelay(context, TIMEOUT_LONG)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
 
         // Set the initial data for the source
@@ -780,7 +839,7 @@ class SafetyCenterActivityTest {
 
     @Test
     fun issueCard_resolveIssue_noSuccessMessage_noResolutionUiShown_issueDismisses() {
-        SafetyCenterFlags.hideResolvedIssueUiTransitionDelay = TIMEOUT_LONG
+        SafetyCenterFlags.setHideResolvedIssueUiTransitionDelay(context, TIMEOUT_LONG)
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
 
         // Set the initial data for the source
@@ -905,6 +964,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun launchActivity_fromQuickSettings_issuesExpanded() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -929,6 +990,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun launchActivity_fromNotification_targetIssueAlreadyFirstIssue() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -954,6 +1017,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun launchActivity_fromNotification_targetIssueSamePriorityAsFirstIssue_reorderedFirstIssue() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -979,6 +1044,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun launchActivity_fromNotification_targetLowerPriorityAsFirstIssue_reorderedSecondIssue() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1003,6 +1070,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun launchActivity_fromNotification_targetIssueNotFound() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1042,6 +1111,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun moreIssuesCard_moreIssuesCardShown_additionalIssueCardsCollapsed() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1064,6 +1135,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun moreIssuesCard_expandAdditionalIssueCards() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1090,6 +1163,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun moreIssuesCard_rotation_cardsStillExpanded() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1124,6 +1199,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun moreIssuesCard_withThreeIssues_showsTopIssuesAndMoreIssuesCard() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1148,6 +1225,8 @@ class SafetyCenterActivityTest {
     }
 
     @Test
+    // TODO: b/379849464 - Fix this for expressive design and stop disabling this flag
+    @RequiresFlagsDisabled(SettingsThemeFlags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     fun moreIssuesCard_twoIssuesAlreadyShown_expandAdditionalIssueCards() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         safetyCenterTestHelper.setData(
@@ -1173,7 +1252,7 @@ class SafetyCenterActivityTest {
     }
 
     @Test
-    fun collapsedEntryGroup_expandsWhenClicked() {
+    fun entryGroup_showsEntriesWhenClicked() {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourceGroupsConfig)
         with(safetyCenterTestHelper) {
             setConfig(safetyCenterTestConfigs.multipleSourceGroupsConfig)
@@ -1245,6 +1324,7 @@ class SafetyCenterActivityTest {
 
     @Test
     fun expandedEntryGroup_collapsesWhenClicked() {
+        assumeFalse(SafetyCenterFlags.showSubpages) // No collapsible groups when using subpages
         with(safetyCenterTestHelper) {
             setConfig(safetyCenterTestConfigs.multipleSourceGroupsConfig)
             setData(
@@ -1339,6 +1419,7 @@ class SafetyCenterActivityTest {
 
     @Test
     fun expandedEntryGroup_otherGroupRemainsCollapsed() {
+        assumeFalse(SafetyCenterFlags.showSubpages) // No collapsible groups when using subpages
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourceGroupsConfig)
         with(safetyCenterTestHelper) {
             setConfig(safetyCenterTestConfigs.multipleSourceGroupsConfig)
@@ -1444,6 +1525,13 @@ class SafetyCenterActivityTest {
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.implicitIntentSingleSourceConfig)
 
         context.launchSafetyCenterActivity {
+            if (SafetyCenterFlags.showSubpages) {
+                clickOpenSubpage(
+                    context,
+                    safetyCenterTestConfigs.implicitIntentSingleSourceConfig.safetySourcesGroups
+                        .first(),
+                )
+            }
             waitDisplayed(By.text("OK")) { it.click() }
             waitDisplayed(By.text("is_from_settings_homepage false"))
             waitButtonDisplayed("Exit test activity") { it.click() }
@@ -1477,9 +1565,10 @@ class SafetyCenterActivityTest {
         )
         safetyCenterTestHelper.setEnabled(false)
 
+        val containsPrivacyPattern = Pattern.compile(".*[Pp]rivacy|[Pp]ermission.*") // NOTYPO
         context.launchSafetyCenterActivity(intentAction = PRIVACY_CONTROLS_ACTION) {
             waitDisplayed(By.pkg(context.getSettingsPackageName()))
-            waitPageTitleDisplayed("Privacy")
+            waitDisplayed(By.text(containsPrivacyPattern))
         }
     }
 

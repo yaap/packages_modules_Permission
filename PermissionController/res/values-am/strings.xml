@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> ላይ ለዚህ መተግበሪያ የ<xliff:g id="PERM">%1$s</xliff:g> መዳረሻ"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"ሁሉንም <xliff:g id="APP">%1$s</xliff:g> ፈቃዶች ይመልከቱ"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"ከዚህ መተግበሪያ ጋር ሁሉንም መተግበሪያዎች ይመልከቱ"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"መረጃ"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"ቅንብሮች"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"የረዳት ማይክሮፎን አጠቃቀምን አሳይ"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"ሥራ ላይ ያልዋሉ የመተግበሪያ ቅንብሮች"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"መተግበሪያ ጥቅም ላይ ካልዋለ ፈቃዶችን አስወግድ"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"አገናኞችን በመክፈት ላይ"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"ለሥራ ነባሪ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ለግል ቦታ ነባሪ"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"ለመሣሪያ የተባ"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"ሌሎች"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ምንም"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(የሥርዓት ነባሪ)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"መተግበሪያዎች የሉም"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> የሳንካ ማረሚያ መረጃን መስቀል ይፈልጋል።"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"የሳንካ ማረሚያ ውሂብ ይጋራ?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"ስርዓቱ አንድ ችግር አግኝቷል።"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> የሳንካ ሪፖርት ከዚህ መሣሪያ በ<xliff:g id="DATE">%2$s</xliff:g> ላይ በ<xliff:g id="TIME">%3$s</xliff:g> የተወሰደ የሳንካ ሪፖርትን ለመስቀል እየጠየቀ ነው። የሳንካ ሪፖርቶች ስለ የእርስዎ መሣሪያ ወይም በመተግበሪያዎች የተመዘገበ ለምሳሌ እንደ የተጠቃሚ ስሞች፣ የመገኛ አካባቢ ውሂብ፣ የመሣሪያ ለይቶ ማወቂያዎች እና የአውታረ መረብ መረጃን ያካትታል። ይህን መረጃ ከሚያምኗቸው ሰዎች እና መተግበሪያዎች ጋር ብቻ የሳንካ ሪፖርቶችን ያጋሩ። የሳንካ ሪፖርትን <xliff:g id="APP_NAME_1">%4$s</xliff:g> እንዲሰቅል ይፈቀድ?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> የሳንካ ሪፖርት ከዚህ መሣሪያ <xliff:g id="DATE">%2$s</xliff:g> <xliff:g id="TIME">%3$s</xliff:g> ላይ የተወሰደ የሳንካ ሪፖርትን ለመስቀል እየጠየቀ ነው። የሳንካ ሪፖርቶች ስለ የእርስዎ መሣሪያ ወይም በመተግበሪያዎች የተመዘገበ ለምሳሌ እንደ የተጠቃሚ ስሞች፣ የቦታ ውሂብ፣ የመሣሪያ ለዪዎች እና የአውታረ መረብ መረጃን ያካትታል። የሳንካ ሪፖርቶችን በዚህ መረጃ ከሚያምኗቸው ሰዎች እና መተግበሪያዎች ጋር ብቻ ያጋሩ። \n\n <xliff:g id="APP_NAME_1">%4$s</xliff:g> የሳንካ ሪፖርትን እንዲሰቅል ይፈቀድ?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"የ<xliff:g id="APP_NAME">%1$s</xliff:g> የሳንካ ሪፖርትን ማስሄድ ላይ አንድ ስህተት ነበር። ስለዚህ ዝርዝር የማረሚያ ውሂቡን ማጋራት ተከልክሏል። ለመቋረጡ ይቅርታ እንጠይቃለን።"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"ፍቀድ"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"ከልክል"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"የተገደቡ ቅንብሮችን ፍቀድ"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"የተገደበ ቅንብር"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"ለእርስዎ ደህንነት ሲባል ይህ ቅንብር በአሁኑ ጊዜ አይገኝም።"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"በስልክ ጥሪ ላይ ሳለ እርምጃ አይገኝም"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"መተግበሪያዎች በስልክ ጥሪ ወቅት ሌሎች መተግበሪያዎችን እንዲጭኑ መፍቀድ አይፈቀድም።\n\n አጭበርባሪዎች ብዙ ጊዜ እንደዚህ ዓይነት እርምጃ በስልክ ጥሪ ውይይቶች ወቅት ይጠይቃሉ፣ ስለዚህ እርስዎን ለመጠበቅ ታግዷል። ይህን እርምጃ በማያውቁት ሰው እንዲወስዱ እየተመሩ ከሆነ፣ ማጭበርበር ሊሆን ይችላል።"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"በጥሪ ወቅት እርምጃን ማጠናቀቅ አይቻልም"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"የእርስዎን መሣሪያ እና ውሂብ ለመጠበቅ ይህ ቅንብር ታግዷል። <xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>አጭበርባሪዎች እርስዎ ከአዲስ ምንጭ ላይ የማይታወቁ መተግበሪያዎችን እንዲጭኑ በመጠየቅ ጎጂ መተግበሪያዎችን ለመጫን ሊሞክሩ ይችላሉ።"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>አጭበርባሪዎች እርስዎ ለአንድ መተግበሪያ የተደራሽነት መዳረሻ እንዲፈቅዱ በመጠየቅ የመሣሪያዎን ቁጥጥር ሊወስዱ ይችላሉ።"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"መተግበሪያ የ<xliff:g id="PERMISSION_NAME">%1$s</xliff:g> መዳረሻ ተከልክሏል"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"መተግበሪያው የእርስዎን የግል እና የፋይናንስ መረጃ አደጋ ላይ የሚጥል አደገኛ ፈቃድ እንዲደርስ ጠይቋል።<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>ያለዚህ የተገደበ ፈቃድ መተግበሪያው በትክክል ላይሰራ ይችላል። &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;እንዴት መዳረሻን እንደሚፈቅዱ ይረዱ&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"መተግበሪያ ነባሪ <xliff:g id="ROLE_NAME">%1$s</xliff:g> የመሆን መዳረሻ ተከልክሏል"</string>

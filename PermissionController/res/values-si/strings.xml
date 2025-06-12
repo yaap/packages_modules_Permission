@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> මත මෙම යෙදුම සඳහා <xliff:g id="PERM">%1$s</xliff:g> ප්‍රවේශය"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"සියලුම <xliff:g id="APP">%1$s</xliff:g> අවසර බලන්න"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"මෙම අවසරය සහිත සියලුම යෙදුම් බලන්න"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"තොරතුරු"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"සැකසීම්"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"සහායක මයික්‍රෆෝන භාවිතය පෙන්වන්න"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"භාවිත නොකළ යෙදුම් සැකසීම්"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"යෙදුම භාවිත කර නැති නම් අවසර ඉවත් කරන්න"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"සබැඳි විවෘත කිරීම"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"වැඩ සඳහා පෙරනිමි"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"රහසිගත අවකාශය සඳහා පෙරනිමිය"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"උපාංගය සඳහා ප්‍රශස්ත කර ඇත"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"වෙනත්"</string>
     <string name="default_app_none" msgid="9084592086808194457">"කිසිවක් නැත"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(පද්ධතිය පෙරනිමි)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"යෙදුම් නොමැත"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> නිදොසීම් තොරතුරු උඩුගත කිරීමට කැමතිය."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"නිදොසීම් දත්ත බෙදා ගන්නද?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"පද්ධතිය ගැටලුවක් අනාවරණ කර ඇත."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> මෙම උපාංගයෙන් <xliff:g id="DATE">%2$s</xliff:g> හි <xliff:g id="TIME">%3$s</xliff:g> හිදී ගෙන ඇති දෝෂ වාර්තාවක් උඩුගත කිරීමට ඉල්ලා සිටී. දෝෂ වාර්තාවල ඔබේ උපාංගය පිළිබඳ හෝ යෙදුම් විසින් සටහන් කර ඇති පුද්ගලික තොරතුරු, උදාහරණයක් ලෙස, පරිශීලක නාම, ස්ථාන දත්ත, උපාංග හැඳුනුම්කාරක සහ ජාල තොරතුරු ඇතුළත් වේ. ඔබ මෙම තොරතුරු සමඟ විශ්වාස කරන පුද්ගලයින් සහ යෙදුම් සමඟ පමණක් දෝෂ වාර්තා බෙදා ගන්න. <xliff:g id="APP_NAME_1">%4$s</xliff:g> හට දෝෂ වාර්තාවක් උඩුගත කිරීමට ඉඩ දෙන්න ද?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> මෙම උපාංගයෙන් <xliff:g id="DATE">%2$s</xliff:g> හි <xliff:g id="TIME">%3$s</xliff:g> හිදී ගෙන ඇති දෝෂ වාර්තාවක් උඩුගත කිරීමට ඉල්ලා සිටී. දෝෂ වාර්තාවල ඔබේ උපාංගය පිළිබඳ හෝ යෙදුම් විසින් සටහන් කර ඇති පුද්ගලික තොරතුරු, උදාහරණයක් ලෙස, පරිශීලක නාම, ස්ථාන දත්ත, උපාංග හැඳුනුම්කාරක සහ ජාල තොරතුරු ඇතුළත් වේ. ඔබ මෙම තොරතුරු සමඟ විශ්වාස කරන පුද්ගලයින් සහ යෙදුම් සමඟ පමණක් දෝෂ වාර්තා බෙදා ගන්න.\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> හට දෝෂ වාර්තාවක් උඩුගත කිරීමට ඉඩ දෙන්න ද?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> සඳහා දෝෂ වාර්තාව සැකසීමේ දෝෂයක් ඇති විය. එබැවින් විස්තරාත්මක නිදොසීම් දත්ත බෙදා ගැනීම ප්‍රතික්‍ෂේප කර ඇත. බාධා කිරීම ගැන කනගාටුයි."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"ඉඩ දෙන්න"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"ප්‍රතික්ෂේප කරන්න"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"සීමා කළ සැකසීම්වලට ඉඩ දෙන්න"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"සීමා කළ සැකසීම"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"ඔබේ ආරක්ෂාව සඳහා, මෙම සැකසීම දැනට නොමැත."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"දුරකථන ඇමතුමක සිටින අතරතුර ක්‍රියාව ලබා ගත නොහැක."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"දුරකථන ඇමතුමක් අතරතුර යෙදුම් වලට වෙනත් යෙදුම් ස්ථාපනය කිරීමට ඉඩ නොදෙයි.\n\n වංචාකරුවන් බොහෝ විට දුරකථන ඇමතුම් සංවාද අතරතුර මෙවැනි ක්‍රියාමාර්ග ඉල්ලා සිටින බැවින්, ඔබව ආරක්ෂා කිරීමට එය අවහිර කර ඇත. ඔබ නොදන්නා කෙනෙකු විසින් මෙම ක්‍රියාමාර්ගය ගැනීමට ඔබට මඟ පෙන්වනු ලැබුවහොත්, එය වංචාවක් විය හැක."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"ඇමතුම අතරතුර ක්‍රියාව සම්පූර්ණ කළ නොහැක."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"ඔබේ උපාංගය සහ දත්ත ආරක්ෂා කිරීමට මෙම සැකසීම අවහිර කර ඇත. <xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>වංචාකරුවන් නව මූලාශ්‍රයකින් නොදන්නා යෙදුම් ස්ථාපනය කරන ලෙස ඉල්ලා සිටීමෙන් හානිකර යෙදුම් ස්ථාපනය කිරීමට උත්සාහ කළ හැක."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>වංචාකරුවන් යෙදුමක් සඳහා ප්‍රවේශ්‍යතා ප්‍රවේශයට ඉඩ දෙන ලෙස ඉල්ලා සිටීමෙන් ඔබේ උපාංගයේ පාලනය ලබා ගැනීමට උත්සාහ කළ හැක."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"යෙදුම <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> වෙත ප්‍රවේශය ප්‍රතික්ෂේප කරන ලදි"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"යෙදුම ඔබේ පුද්ගලික සහ මූල්‍ය තොරතුරු අවදානමට ලක් කළ හැකි සංවේදී අවසරයකට ප්‍රවේශය ඉල්ලා ඇත.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>මෙම සීමා කළ අවසරය නොමැතිව යෙදුම නිසි ලෙස ක්‍රියා නොකරනු ඇත. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;ප්‍රවේශයට ඉඩ දෙන ආකාරය දැන ගන්න&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"යෙදුම පෙරනිමි <xliff:g id="ROLE_NAME">%1$s</xliff:g> වීමට ප්‍රවේශය ප්‍රතික්ෂේප කරන ලදි"</string>

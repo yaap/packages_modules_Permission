@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> adlı cihazda bu uygulamanın <xliff:g id="PERM">%1$s</xliff:g> erişimi"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Tüm <xliff:g id="APP">%1$s</xliff:g> izinlerini göster"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Bu izne sahip tüm uygulamaları göster"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Bilgi"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Ayarlar"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Yardımcı mikrofon kullanımını göster"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Kullanılmayan uygulama ayarları"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Uygulama kullanılmıyorsa izinleri kaldır"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Bağlantıları açma"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"İş için varsayılan"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Özel alan için varsayılan"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Cihaz için optimize edilenler"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Diğer"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Yok"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sistem varsayılanı)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Uygulama yok"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g>, hata ayıklama bilgilerini yüklemek istiyor."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Hata ayıklama verileri paylaşılsın mı?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Sistem bir sorun algıladı."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>, bu cihazda <xliff:g id="DATE">%2$s</xliff:g> saat <xliff:g id="TIME">%3$s</xliff:g> itibarıyla kaydedilen hata raporunu yüklemek istiyor. Hata raporları cihazınızla ilgili veya uygulamalar tarafından günlüğe kaydedilmiş kişisel bilgiler (örneğin kullanıcı adları, konum verisi, cihaz tanımlayıcılar ve ağ bilgileri) içerir. Hata raporlarını yalnızca bu bilgileri verme konusunda güvendiğiniz kişi ve uygulamalarla paylaşın. <xliff:g id="APP_NAME_1">%4$s</xliff:g> uygulamasının hata raporu yüklemesine izin verilsin mi?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>, bu cihazda <xliff:g id="DATE">%2$s</xliff:g> saat <xliff:g id="TIME">%3$s</xliff:g> itibarıyla kaydedilen hata raporunu yüklemek istiyor. Hata raporları cihazınızla ilgili veya uygulamalar tarafından günlüğe kaydedilmiş kişisel bilgiler (örneğin kullanıcı adları, konum verisi, cihaz tanımlayıcılar ve ağ bilgileri) içerir. Hata raporlarını yalnızca bu bilgileri verme konusunda güvendiğiniz kişi ve uygulamalarla paylaşın. \n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> uygulamasının hata raporu yüklemesine izin verilsin mi?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> hata raporunu işlemeyle ilgili sorun oluştu. Ayrıntılı hata ayıklama verilerinin paylaşılması reddedildi. Kesinti için üzgünüz."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"İzin ver"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Reddet"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Kısıtlanmış ayarlara izin verme"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Kısıtlanmış ayar"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Güvenliğiniz için bu ayar şu anda kullanılamıyor."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"İşlem, telefon görüşmesi sırasında yapılamaz"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Telefon görüşmesi sırasında uygulamaların başka uygulama yüklemesine izin verilmez.\n\n Dolandırıcıların genellikle telefon görüşmesi sırasında talep ettiği bu tür işlemler sizi korumak için engellenir. Tanımadığınız biri tarafından bu işlemi yapmanız isteniyorsa dolandırılıyor olabilirsiniz."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"İşlem, arama sırasında tamamlanamaz"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Bu ayar, cihazınızı ve verilerinizi korumak için engellenmiştir.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Dolandırıcılar, yeni bir kaynaktan bilinmeyen uygulamaları yüklemenizi isteyerek zararlı uygulamalar yüklemeye çalışabilir."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Dolandırıcılar, bir uygulama için erişilebilirlik erişimine izin vermenizi isteyerek cihazınızın kontrolünü ele geçirmeye çalışabilir."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Uygulamanın <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> iznine erişimi reddedildi"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Uygulama, kişisel ve finansal bilgilerinizi riske atabilecek hassas bir izne erişim istedi.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Bu kısıtlı izin olmadan uygulama düzgün çalışmayabilir. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Erişime nasıl izin vereceğinizi öğrenin&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Uygulamanın varsayılan <xliff:g id="ROLE_NAME">%1$s</xliff:g> olarak kullanılma erişimi reddedildi"</string>

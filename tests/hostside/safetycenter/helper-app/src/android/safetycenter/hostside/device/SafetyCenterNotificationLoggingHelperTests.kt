@@ -69,6 +69,12 @@ class SafetyCenterNotificationLoggingHelperTests {
     @Test
     fun sendNotification() {
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, newTestDataWithNotifiableIssue())
+        TestNotificationListener.waitForSingleNotificationMatching(
+            NotificationCharacteristics(
+                actions = listOf("See issue"),
+                safetySourceId = SINGLE_SOURCE_ID,
+            )
+        )
     }
 
     @Test
@@ -104,7 +110,7 @@ class SafetyCenterNotificationLoggingHelperTests {
                 statusBarNotificationWithChannel.statusBarNotification.notification.contentIntent
             SafetyCenterActivityLauncher.executeBlockAndExit(
                 launchActivity = { PendingIntentSender.send(contentIntent) },
-                block = {} // No action required
+                block = {}, // No action required
             )
         }
     }

@@ -54,7 +54,7 @@ package android.app.role {
     method @FlaggedApi("com.android.permission.flags.cross_user_role_enabled") @RequiresPermission(allOf={android.Manifest.permission.INTERACT_ACROSS_USERS_FULL, android.Manifest.permission.MANAGE_ROLE_HOLDERS, android.Manifest.permission.MANAGE_DEFAULT_APPLICATIONS}, conditional=true) public void setActiveUserForRole(@NonNull String, @NonNull android.os.UserHandle, int);
     method @RequiresPermission(android.Manifest.permission.BYPASS_ROLE_QUALIFICATION) public void setBypassingRoleQualification(boolean);
     method @RequiresPermission(android.Manifest.permission.MANAGE_DEFAULT_APPLICATIONS) public void setDefaultApplication(@NonNull String, @Nullable String, int, @NonNull java.util.concurrent.Executor, @NonNull java.util.function.Consumer<java.lang.Boolean>);
-    method @FlaggedApi("com.android.permission.flags.cross_user_role_enabled") @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public void setDefaultHoldersForTest(@NonNull String, @Nullable java.util.List<java.lang.String>);
+    method @FlaggedApi("com.android.permission.flags.cross_user_role_enabled") @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public void setDefaultHoldersForTest(@NonNull String, @NonNull java.util.List<java.lang.String>);
     method @FlaggedApi("android.permission.flags.system_server_role_controller_enabled") @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public void setRoleFallbackEnabled(@NonNull String, boolean);
     method @Deprecated @RequiresPermission("com.android.permissioncontroller.permission.MANAGE_ROLES_FROM_CONTROLLER") public void setRoleNamesFromController(@NonNull java.util.List<java.lang.String>);
     method @FlaggedApi("com.android.permission.flags.cross_user_role_enabled") @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public void setRoleVisibleForTest(@NonNull String, boolean);
@@ -64,6 +64,7 @@ package android.app.role {
     field @FlaggedApi("com.android.permission.flags.cross_user_role_enabled") public static final String ROLE_RESERVED_FOR_TESTING_PROFILE_GROUP_EXCLUSIVITY = "android.app.role.RESERVED_FOR_TESTING_PROFILE_GROUP_EXCLUSIVITY";
     field public static final String ROLE_SYSTEM_ACTIVITY_RECOGNIZER = "android.app.role.SYSTEM_ACTIVITY_RECOGNIZER";
     field public static final String ROLE_SYSTEM_CALL_STREAMING = "android.app.role.SYSTEM_CALL_STREAMING";
+    field @FlaggedApi("android.content.pm.sdk_dependency_installer") public static final String ROLE_SYSTEM_DEPENDENCY_INSTALLER = "android.app.role.SYSTEM_DEPENDENCY_INSTALLER";
     field public static final String ROLE_SYSTEM_SUPERVISION = "android.app.role.SYSTEM_SUPERVISION";
     field public static final String ROLE_SYSTEM_WELLBEING = "android.app.role.SYSTEM_WELLBEING";
   }

@@ -24,6 +24,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Process
+import android.os.UserManager
 import android.permission.flags.Flags
 import android.platform.test.annotations.AppModeFull
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -52,21 +54,26 @@ import org.junit.Test
  */
 @AppModeFull(reason = "Instant apps cannot install packages")
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-@RequiresFlagsEnabled(Flags.FLAG_ENHANCED_CONFIRMATION_IN_CALL_APIS_ENABLED)
+@RequiresFlagsEnabled(Flags.FLAG_UNKNOWN_CALL_PACKAGE_INSTALL_BLOCKING_ENABLED)
 // @CddTest(requirement = "TBD")
 class EnhancedConfirmationInCallTest {
     private val ecm = context.getSystemService(EnhancedConfirmationManager::class.java)!!
+    private val aom = context.getSystemService(AppOpsManager::class.java)!!
     private val packageManager = context.packageManager
     private val addedContacts = mutableMapOf<String, List<Uri>>()
+    private val phoneOnlyRestrictedSetting = AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES
+    private val phoneAndEcmRestrictedSetting = AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES
 
     @JvmField
     @Rule
     val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Before
-    fun assumeNotAutoOrTv() {
+    fun assumeNotAutoTvOrHsum() {
         Assume.assumeFalse(packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK))
         Assume.assumeFalse(packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE))
+        // TODO b/408470449: remove once call extras are fixed
+        Assume.assumeFalse(UserManager.isHeadlessSystemUserMode())
     }
 
     companion object {
@@ -149,20 +156,32 @@ class EnhancedConfirmationInCallTest {
     fun tearDown() {
         voipService.endCallAndWaitForInactive()
         addedContacts.keys.forEach { removeContact(it) }
+        runWithShellPermissionIdentity {
+            aom.setUidMode(
+                AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS,
+                Process.myUid(),
+                AppOpsManager.MODE_ALLOWED,
+            )
+        }
     }
 
-    private fun isSettingRestricted(): Boolean {
+    private fun isSettingRestricted(settingsIdentifier: String): Boolean {
         return callWithShellPermissionIdentity {
-            ecm.isRestricted(context.packageName, AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES)
+            ecm.isRestricted(context.packageName, settingsIdentifier)
         }
+    }
+
+    private fun areSettingsRestricted(): Boolean {
+        return isSettingRestricted(phoneOnlyRestrictedSetting) &&
+            isSettingRestricted(phoneAndEcmRestrictedSetting)
     }
 
     @Test
     fun testIncomingCall_NonContact() {
         voipService.createCallAndWaitForActive(NON_CONTACT_DISPLAY_NAME, NON_CONTACT_PHONE_NUMBER)
-        Assert.assertTrue(isSettingRestricted())
+        Assert.assertTrue(areSettingsRestricted())
         voipService.endCallAndWaitForInactive()
-        Assert.assertFalse(isSettingRestricted())
+        Assert.assertFalse(areSettingsRestricted())
     }
 
     @Test
@@ -170,9 +189,9 @@ class EnhancedConfirmationInCallTest {
         addContact(CONTACT_DISPLAY_NAME, CONTACT_PHONE_NUMBER)
         // If no phone number is given, the display name will be checked
         voipService.createCallAndWaitForActive(CONTACT_DISPLAY_NAME, CONTACT_PHONE_NUMBER)
-        Assert.assertFalse(isSettingRestricted())
+        Assert.assertFalse(areSettingsRestricted())
         voipService.endCallAndWaitForInactive()
-        Assert.assertFalse(isSettingRestricted())
+        Assert.assertFalse(areSettingsRestricted())
     }
 
     @Test
@@ -180,9 +199,9 @@ class EnhancedConfirmationInCallTest {
         addContact(CONTACT_DISPLAY_NAME, CONTACT_PHONE_NUMBER)
         // If the phone number matches, the display name is not checked
         voipService.createCallAndWaitForActive(NON_CONTACT_DISPLAY_NAME, CONTACT_PHONE_NUMBER)
-        Assert.assertFalse(isSettingRestricted())
+        Assert.assertFalse(areSettingsRestricted())
         voipService.endCallAndWaitForInactive()
-        Assert.assertFalse(isSettingRestricted())
+        Assert.assertFalse(areSettingsRestricted())
     }
 
     @Test
@@ -192,10 +211,26 @@ class EnhancedConfirmationInCallTest {
         voipService.createCallAndWaitForActive(tempContactDisplay, tempContactPhone)
         addContact(tempContactDisplay, tempContactPhone)
         // State should not be recomputed just because the contact is newly added
-        Assert.assertTrue(isSettingRestricted())
+        Assert.assertTrue(areSettingsRestricted())
         voipService.endCallAndWaitForInactive()
         voipService.createCallAndWaitForActive(tempContactDisplay, tempContactPhone)
         // A new call should recognize our contact, and mark the call as trusted
-        Assert.assertFalse(isSettingRestricted())
+        Assert.assertFalse(areSettingsRestricted())
+    }
+
+    @Test
+    fun testCallOnlyRestrictedSetting_notRestrictedIfEcmSet() {
+        // Set the current app to be restricted by ECM
+        runWithShellPermissionIdentity {
+            aom.setUidMode(
+                AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS,
+                Process.myUid(),
+                AppOpsManager.MODE_ERRORED,
+            )
+        }
+        // The ecm and phone restricted setting is restricted
+        Assert.assertFalse(isSettingRestricted(phoneOnlyRestrictedSetting))
+        // But the phone only restriction is not
+        Assert.assertFalse(isSettingRestricted(phoneAndEcmRestrictedSetting))
     }
 }

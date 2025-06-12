@@ -68,7 +68,7 @@ class AutoPermissionUsageFragment : AutoSettingsFrameFragment() {
                 ?: (arguments?.getLong(Constants.EXTRA_SESSION_ID, Constants.INVALID_SESSION_ID)
                     ?: Constants.INVALID_SESSION_ID)
 
-        val factory = PermissionUsageViewModelFactory(requireActivity().application, this, Bundle())
+        val factory = PermissionUsageViewModelFactory(requireActivity().application)
         mViewModel = ViewModelProvider(this, factory)[PermissionUsageViewModel::class.java]
         mViewModel.permissionUsagesUiLiveData.observe(this, this::updateAllUI)
         setLoading(true)

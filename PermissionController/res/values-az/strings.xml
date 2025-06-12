@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> cihazında bu tətbiq üçün <xliff:g id="PERM">%1$s</xliff:g> girişi"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Bütün <xliff:g id="APP">%1$s</xliff:g> icazələrinə baxın"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Bu icazəyə sahib olan bütün tətbiqlərə baxın"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Məlumat"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Ayarlar"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Assistent üçün mikrofon istifadəsini göstərin"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"İstifadə edilməyən tətbiq ayarları"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Tətbiq işlənməyəndə icazə ləğv edilsin"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Linklərin açılması"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"İş üçün defolt"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Şəxsi sahə üçün defolt"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Cihaz üçün optimallaşdırılıb"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Digərləri"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Yoxdur"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sistem defoltu)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Tətbiq yoxdur"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> sazlama məlumatını yükləmək istəyir."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Sazlama datası paylaşılsın?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Sistem xətası aşkarlandı."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> bu cihazdan <xliff:g id="DATE">%2$s</xliff:g>, <xliff:g id="TIME">%3$s</xliff:g> tarixində götürülmüş baq hesabatını yükləmək istəyir. Baq hesabatlarına istifadəçi adları, məkan datası, cihaz identifikatorları və şəbəkə məlumatı kimi cihaz və ya tətbiqlər haqqında məxfi məlumat daxildir. Baq hesabatlarını yalnız güvəndiyiniz şəxs və tətbiqlərlə paylaşın. <xliff:g id="APP_NAME_1">%4$s</xliff:g> tətbiqinə baq hesabatını yükləməyə icazə verilsin?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> bu cihazdan <xliff:g id="DATE">%2$s</xliff:g>, <xliff:g id="TIME">%3$s</xliff:g> tarixində götürülmüş baq hesabatını yükləmək istəyir. Baq hesabatlarına istifadəçi adları, məkan datası, cihaz identifikatorları və şəbəkə məlumatı kimi cihaz və ya tətbiqlər haqqında məxfi məlumat daxildir. Baq hesabatlarını yalnız güvəndiyiniz şəxs və tətbiqlərlə paylaşın. \n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> tətbiqinə baq hesabatını yükləmək icazəsi verilsin?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> üçün baq hesabatı işlənərkən xəta baş verdi. Sazlanma datası haqqında ətraflı məlumatın paylaşılması rədd edildi. Problemə görə üzr istəyirik."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"İcazə verin"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Rədd edin"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Məhdudlaşdırılmış ayarlara icazə verin"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Məhdudlaşdırılmış ayar"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Güvənlik üçün bu ayar əlçatan deyil."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Telefon zəngi zamanı əməliyyat mümkün deyil"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Telefon zəngi zamanı tətbiqlərin digər tətbiqləri quraşdırmağına icazə verilmir.\n\n Fırıldaqçılar, adətən, telefon danışıqları zamanı bu cür əməliyyatları həyata keçirməyinizi tələb edirlər, ona görə də sizi qorumaq bloklanıb. Tanımadığınız şəxs tərəfindən bu əməliyyatları həyata keçirməyiniz istənilsə, bu, fırıldaqçılıq ola bilər."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Zəng zamanı əməliyyatı tamamlamaq olmur"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Cihaz və datanızı qorumaq üçün bu ayar bloklanıb.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Fırıldaqçılar yeni mənbədən naməlum tətbiqlər quraşdırmağınızı istəyərək zərərli tətbiqlər quraşdırmağa cəhd edə bilərlər."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Fırıldaqçılar tətbiq üçün xüsusi imkanlara giriş verməyinizi istəyərək cihazınızı idarə etməyə cəhd edə bilərlər."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Tətbiqə <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> icazəsinə giriş verilmədi"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Tətbiq şəxsi və maliyyə məlumatlarınızı riskə ata biləcək həssas məlumat icazəsinə giriş istədi.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Bu məhdud icazə olmadan tətbiq düzgün işləməyə bilər. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Girişə icazə vermək haqqında ətraflı&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Tətbiqə defolt <xliff:g id="ROLE_NAME">%1$s</xliff:g> roluna giriş verilmədi"</string>

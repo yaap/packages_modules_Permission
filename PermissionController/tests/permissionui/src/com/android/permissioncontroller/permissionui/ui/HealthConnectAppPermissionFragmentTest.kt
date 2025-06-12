@@ -16,10 +16,16 @@
 
 package com.android.permissioncontroller.permissionui.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
+import android.permission.flags.Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import com.android.compatibility.common.util.SystemUtil.eventually
 import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity
@@ -28,7 +34,10 @@ import com.android.compatibility.common.util.UiAutomatorUtils2.waitUntilObjectGo
 import com.android.permissioncontroller.permissionui.wakeUpScreen
 import org.junit.After
 import org.junit.Assume.assumeFalse
+import org.junit.Assume.assumeTrue
 import org.junit.Before
+import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -41,10 +50,17 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE, codeName = "UpsideDownCake")
 class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
+
+    @Rule @JvmField val mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+
+    private lateinit var context: Context
+
     @Before fun assumeNotTelevision() = assumeFalse(isTelevision)
 
     @Before
-    fun wakeScreenUp() {
+    fun setUp() {
+        context = InstrumentationRegistry.getInstrumentation().context
+
         wakeUpScreen()
     }
 
@@ -52,8 +68,14 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
     fun uninstallTestApp() {
         uninstallTestApps()
     }
+
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
+    )
     @Test
-    fun usedHealthConnectPermissionsAreListed() {
+    fun usedHealthConnectPermissionsAreListed_handHeldDevices() {
+        assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
         installTestAppThatUsesHealthConnectPermission()
 
         startManageAppPermissionsActivity()
@@ -61,13 +83,90 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
         eventually { waitFindObject(By.text(HEALTH_CONNECT_LABEL)) }
     }
 
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
-    fun invalidUngrantedUsedHealthConnectPermissionsAreNotListed() {
+    @Ignore("b/405152547")
+    fun usedHealthConnectPermissionsAreListed_handHeldDevices_healthFitnessBrand() {
+        assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
+        installTestAppThatUsesHealthConnectPermission()
+
+        startManageAppPermissionsActivity()
+
+        eventually { waitFindObject(By.text(HEALTH_FITNESS_LABEL)) }
+    }
+
+    @Test
+    fun invalidUngrantedUsedHealthConnectPermissionsAreNotListed_handHeldDevices() {
+        assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
         installInvalidTestAppThatUsesHealthConnectPermission()
 
         startManageAppPermissionsActivity()
 
         waitUntilObjectGone(By.text(HEALTH_CONNECT_LABEL), TIMEOUT_SHORT)
+        waitUntilObjectGone(By.text(HEALTH_FITNESS_LABEL), TIMEOUT_SHORT)
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    fun startManageAppPermissionsActivity_wearDevices_requestLegacyBodySensorsUngranted_fitnessAndWellnessShowsUp() {
+        assumeTrue(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
+        installTestAppThatUsesLegacyBodySensorsPermissions()
+
+        startManageAppPermissionsActivity()
+
+        eventually { waitFindObject(By.text(FITNESS_AND_WELLNESS_LABEL)) }
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    fun startManageAppPermissionsActivity_wearDevices_requestReadHeartRateUngranted_fitnessAndWellnessShowsUp() {
+        assumeTrue(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
+        installTestAppThatUsesReadHeartRatePermissions()
+
+        startManageAppPermissionsActivity()
+
+        eventually { waitFindObject(By.text(FITNESS_AND_WELLNESS_LABEL)) }
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    @Ignore("b/405152547")
+    fun startManageAppPermissionsActivity_handHeldDevices_requestLegacyBodySensorsUngranted_healthConnectShowsUp() {
+        assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
+        installTestAppThatUsesLegacyBodySensorsPermissions()
+
+        startManageAppPermissionsActivity()
+
+        eventually { waitFindObject(By.text(HEALTH_FITNESS_LABEL)) }
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    @Ignore("b/405152547")
+    fun startManageAppPermissionsActivity_handHeldDevices_requestLegacyBodySensorsTargetSdk22Ungranted_healthConnectShowsUp() {
+        assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
+        installTestAppThatUsesLegacyBodySensorsPermissionsTargetSdk22()
+
+        startManageAppPermissionsActivity()
+
+        eventually { waitFindObject(By.text(HEALTH_FITNESS_LABEL)) }
+    }
+
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    fun startManageAppPermissionsActivity_handHeldDevices_requestReadHeartRateUngranted_healthConnectNotShowsUp() {
+        assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
+        installTestAppThatUsesReadHeartRatePermissions()
+
+        startManageAppPermissionsActivity()
+
+        waitUntilObjectGone(By.text(HEALTH_FITNESS_LABEL), TIMEOUT_SHORT)
     }
 
     private fun startManageAppPermissionsActivity() {
@@ -83,8 +182,10 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
     }
 
     companion object {
+        private const val FITNESS_AND_WELLNESS_LABEL = "Fitness and wellness"
         // Health connect label uses a non breaking space
         private const val HEALTH_CONNECT_LABEL = "Health\u00A0Connect"
+        private const val HEALTH_FITNESS_LABEL = "Health, fitness and wellness"
         private const val HEALTH_CONNECT_PERMISSION_READ_FLOORS_CLIMBED =
             "android.permission.health.READ_FLOORS_CLIMBED"
 

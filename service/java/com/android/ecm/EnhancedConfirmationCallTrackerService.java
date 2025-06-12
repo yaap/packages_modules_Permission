@@ -28,6 +28,9 @@ import android.telecom.InCallService;
 
 import com.android.server.LocalManagerRegistry;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * @hide
  *
@@ -41,10 +44,12 @@ import com.android.server.LocalManagerRegistry;
 public class EnhancedConfirmationCallTrackerService extends InCallService {
     private EnhancedConfirmationManagerLocal mEnhancedConfirmationManagerLocal;
 
+    private final ExecutorService mBackgroundExecutor = Executors.newSingleThreadExecutor();
+
     @Override
     public void onCreate() {
         super.onCreate();
-        if (Flags.enhancedConfirmationInCallApisEnabled()) {
+        if (Flags.unknownCallPackageInstallBlockingEnabled()) {
             mEnhancedConfirmationManagerLocal =
                     LocalManagerRegistry.getManager(EnhancedConfirmationManagerLocal.class);
         }
@@ -56,7 +61,7 @@ public class EnhancedConfirmationCallTrackerService extends InCallService {
             return;
         }
 
-        mEnhancedConfirmationManagerLocal.addOngoingCall(call);
+        mBackgroundExecutor.submit(() -> mEnhancedConfirmationManagerLocal.addOngoingCall(call));
     }
 
     @Override
@@ -65,7 +70,8 @@ public class EnhancedConfirmationCallTrackerService extends InCallService {
             return;
         }
 
-        mEnhancedConfirmationManagerLocal.removeOngoingCall(call.getDetails().getId());
+        mBackgroundExecutor.submit(() ->
+                mEnhancedConfirmationManagerLocal.removeOngoingCall(call.getDetails().getId()));
     }
 
     /**
@@ -73,7 +79,8 @@ public class EnhancedConfirmationCallTrackerService extends InCallService {
      */
     public boolean onUnbind(@Nullable Intent intent) {
         if (mEnhancedConfirmationManagerLocal != null) {
-            mEnhancedConfirmationManagerLocal.clearOngoingCalls();
+            mBackgroundExecutor.submit(() ->
+                    mEnhancedConfirmationManagerLocal.clearOngoingCalls());
         }
         return super.onUnbind(intent);
     }

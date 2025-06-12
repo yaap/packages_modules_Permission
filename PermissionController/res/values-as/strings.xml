@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>ত এই এপৰ <xliff:g id="PERM">%1$s</xliff:g>ৰ এক্সেছ"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"আটাইবোৰ <xliff:g id="APP">%1$s</xliff:g> অনুমতি চাওক"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"এই অনুমতি থকা আটাইবোৰ এপ্ চাওক"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"তথ্য"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"ছেটিং"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"সহায়ক মাইক্ৰ’ফ’নৰ ব্যৱহাৰ দেখুৱাওক"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"ব্যৱহাৰ নকৰা এপৰ ছেটিং"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"যদি এপ্‌টো ব্যৱহাৰ কৰা নাই অনুমতিসমূহ আঁতৰাওক"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"লিংকসমূহ খুলি থকা হৈছে"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"কৰ্মস্থানৰ বাবে ডিফ’ল্ট"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"প্ৰাইভেট স্পে’চৰ বাবে ডিফ’ল্ট"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"ডিভাইচৰ বাবে অপ্টিমাইজ কৰা হৈছে"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"অন্য"</string>
     <string name="default_app_none" msgid="9084592086808194457">"নাই"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ছিষ্টেম ডিফ\'ল্ট)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"কোনো এপ্‌ নাই"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ ডিবাগ তথ্য আপল’ড কৰিব বিচাৰিছে।"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"ডিবাগ কৰা ডেটা শ্বেয়াৰ কৰিবনে?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"ছিষ্টেমটোৱে কিবা সমস্যা চিনাক্ত কৰিছে।"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>এ এই ডিভাইচটোৰ <xliff:g id="DATE">%2$s</xliff:g> তাৰিখে <xliff:g id="TIME">%3$s</xliff:g>ত সংগ্ৰহ কৰা এটা বাগ ৰিপ’ৰ্ট আপল’ড কৰাৰ অনুমতি বিচাৰিছে। সেই বাগ ৰিপ’ৰ্টটোত আপোনাৰ ডিভাইচটোৰ বিষয়ে ব্যক্তিগত তথ্য বা এপে লগ কৰা তথ্য, যেনে ব্যৱহাৰকাৰীৰ নাম, অৱস্থান ডেটা, ডিভাইচ পৰিচায়ক আৰু নেটৱৰ্ক সম্পৰ্কীয় তথ্য ইত্যাদি অন্তৰ্ভুক্ত থাকিব। এইখিনি তথ্যৰ ক্ষেত্ৰত কেৱল আপুনি বিশ্বাস কৰা ব্যক্তি বা এপৰ সৈতেহে বাগ ৰিপ’ৰ্ট শ্বেয়াৰ কৰক। <xliff:g id="APP_NAME_1">%4$s</xliff:g>ক বাগ ৰিপ’ৰ্ট আপল’ড কৰাৰ অনুমতি দিবনে?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>এ এই ডিভাইচটোৰ <xliff:g id="DATE">%2$s</xliff:g> তাৰিখে <xliff:g id="TIME">%3$s</xliff:g>ত সংগ্ৰহ কৰা এটা বাগ ৰিপ’ৰ্ট আপল’ড কৰাৰ অনুমতি বিচাৰিছে। সেই বাগ ৰিপ’ৰ্টটোত আপোনাৰ ডিভাইচটোৰ বিষয়ে ব্যক্তিগত তথ্য বা এপে লগ কৰা তথ্য, যেনে ব্যৱহাৰকাৰীৰ নাম, অৱস্থানৰ ডেটা, ডিভাইচ পৰিচায়ক আৰু নেটৱৰ্ক সম্পৰ্কীয় তথ্য ইত্যাদি অন্তৰ্ভুক্ত থাকে। এই তথ্যৰ ক্ষেত্ৰত কেৱল আপুনি বিশ্বাস কৰা ব্যক্তি বা এপৰ সৈতে বাগ ৰিপ’ৰ্ট শ্বেয়াৰ কৰক। \n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g>ক বাগ ৰিপ’ৰ্ট আপল’ড কৰাৰ অনুমতি দিবনে?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g>ৰ বিষয়ে বাগ ৰিপ’ৰ্টটোৰ প্ৰক্ৰিয়া চলাওঁতে আসোঁৱাহ হৈছে। গতিকে বিতং ডিবাগিং ডেটা শ্বেয়াৰ কৰিবলৈ অস্বীকাৰ কৰা হৈছে। এই ব্যাঘাতৰ বাবে দুঃখিত।"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"অনুমতি দিয়ক"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"অস্বীকাৰ কৰক"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"প্ৰতিবন্ধিত ছেটিঙৰ অনুমতি দিয়ক"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"প্ৰতিবন্ধিত ছেটিং"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"আপোনাৰ সুৰক্ষাৰ বাবে, এই ছেটিংটো বৰ্তমান উপলব্ধ নহয়।"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"ফ’ন কল চলি থকাৰ সময়ত এই কাৰ্যটো কৰিব নোৱাৰি"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"ফ’ন কল চলি থকাৰ সময়ত এপক অন্য এপ্‌ ইনষ্টল কৰিবলৈ দিয়াৰ অনুমতি নাই।\n\n ফ’ন কল চলি থকাৰ সময়ত প্ৰৱঞ্চকে প্ৰায়েই এই ধৰণৰ কাৰ্য কৰিবলৈ অনুৰোধ কৰে, গতিকে আপোনাক সুৰক্ষিত কৰিবলৈ এয়া অৱৰোধ কৰা হয়। যদি আপোনাক আপুনি চিনি নোপোৱা কোনো লোকে এই কাৰ্যটো কৰিবলৈ নিৰ্দেশনা দিয়ে, সেয়া প্ৰৱঞ্চনা হ’ব পাৰে।"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"কলৰ সময়ত কাৰ্য সম্পূৰ্ণ কৰিব নোৱাৰি"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"আপোনাৰ ডিভাইচ আৰু ডেটা সুৰক্ষিত কৰিবলৈ এই ছেটিংটো অৱৰোধ কৰা হৈছে।<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>স্কেমাৰসকলে আপোনাক এটা নতুন উৎসৰ পৰা অজ্ঞাত এপ্‌সমূহ ইনষ্টল কৰিবলৈ কৈ ক্ষতিকাৰক এপ্‌সমূহ ইনষ্টল কৰিবলৈ চেষ্টা কৰিব পাৰে।"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>স্কেমাৰসকলে আপোনাক এটা এপৰ বাবে সাধ্য সুবিধাৰ এক্সেছৰ অনুমতি দিবলৈ কৈ আপোনাৰ ডিভাইচৰ নিয়ন্ত্ৰণ ল’বলৈ চেষ্টা কৰিব পাৰে।"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"এপ্‌টোক <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>ৰ এক্সেছ প্ৰত্যাখ্যান কৰা হৈছে"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"এপ্‌টোৱে সংবেদনশীল অনুমতি এক্সেছ কৰিবলৈ অনুৰোধ কৰিছে, যিটোৱে আপোনাৰ ব্যক্তিগত আৰু বিত্তীয় তথ্য বিপদাপন্ন কৰিব পাৰে।<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>এপ্‌টোৱে এই প্ৰতিবন্ধিত অনুমতিটোৰ অবিহনে সঠিককৈ কাম নকৰাটো সম্ভৱ হ’ব পাৰে। &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;কেনেকৈ এক্সেছৰ অনুমতি দিব লাগে জানক&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"এপ্‌টোক ডিফ’ল্ট <xliff:g id="ROLE_NAME">%1$s</xliff:g>ৰ এক্সেছ প্ৰত্যাখ্যান কৰা হৈছে"</string>

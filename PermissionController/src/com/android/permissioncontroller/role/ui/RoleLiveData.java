@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.UserHandle;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -38,7 +37,7 @@ import java.util.List;
 /**
  * {@link LiveData} for a role.
  */
-public class RoleLiveData extends AsyncTaskLiveData<List<Pair<ApplicationInfo, Boolean>>>
+public class RoleLiveData extends AsyncTaskLiveData<List<RoleApplicationItem>>
         implements OnRoleHoldersChangedListener {
 
     private static final String LOG_TAG = RoleLiveData.class.getSimpleName();
@@ -77,12 +76,12 @@ public class RoleLiveData extends AsyncTaskLiveData<List<Pair<ApplicationInfo, B
 
     @Override
     @WorkerThread
-    protected List<Pair<ApplicationInfo, Boolean>> loadValueInBackground() {
+    protected List<RoleApplicationItem> loadValueInBackground() {
         RoleManager roleManager = mContext.getSystemService(RoleManager.class);
         List<String> holderPackageNames = roleManager.getRoleHoldersAsUser(mRole.getName(), mUser);
 
         List<String> qualifyingPackageNames = mRole.getQualifyingPackagesAsUser(mUser, mContext);
-        List<Pair<ApplicationInfo, Boolean>> qualifyingApplications = new ArrayList<>();
+        List<RoleApplicationItem> applicationItems = new ArrayList<>();
         int qualifyingPackageNamesSize = qualifyingPackageNames.size();
         for (int i = 0; i < qualifyingPackageNamesSize; i++) {
             String qualifyingPackageName = qualifyingPackageNames.get(i);
@@ -98,9 +97,10 @@ public class RoleLiveData extends AsyncTaskLiveData<List<Pair<ApplicationInfo, B
                 continue;
             }
             boolean isHolderApplication = holderPackageNames.contains(qualifyingPackageName);
-            qualifyingApplications.add(new Pair<>(qualifyingApplicationInfo, isHolderApplication));
+            applicationItems.add(
+                    new RoleApplicationItem(qualifyingApplicationInfo, isHolderApplication));
         }
 
-        return qualifyingApplications;
+        return applicationItems;
     }
 }

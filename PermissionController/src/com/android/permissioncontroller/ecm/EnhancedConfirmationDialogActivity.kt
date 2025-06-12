@@ -55,6 +55,7 @@ import com.android.role.controller.model.Roles
 class EnhancedConfirmationDialogActivity : FragmentActivity() {
     companion object {
         private const val KEY_WAS_CLEAR_RESTRICTION_ALLOWED = "KEY_WAS_CLEAR_RESTRICTION_ALLOWED"
+        private const val REASON_PHONE_STATE = "phone_state"
     }
 
     private var wasClearRestrictionAllowed: Boolean = false
@@ -77,6 +78,7 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
         val packageName = intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)
         val settingIdentifier = intent.getStringExtra(Intent.EXTRA_SUBJECT)
         val isEcmInApp = intent.getBooleanExtra(EXTRA_IS_ECM_IN_APP, false)
+        val reason = intent.getStringExtra(Intent.EXTRA_REASON)
 
         require(uid != Process.INVALID_UID) { "EXTRA_UID cannot be null or invalid" }
         require(!packageName.isNullOrEmpty()) { "EXTRA_PACKAGE_NAME cannot be null or empty" }
@@ -84,9 +86,9 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
         wasClearRestrictionAllowed =
             setClearRestrictionAllowed(packageName, UserHandle.getUserHandleForUid(uid))
 
-        val setting = Setting.fromIdentifier(this, settingIdentifier, isEcmInApp)
+        val setting = Setting.fromIdentifier(this, settingIdentifier, isEcmInApp, reason)
         if (
-            SettingType.fromIdentifier(this, settingIdentifier, isEcmInApp) ==
+            SettingType.fromIdentifier(this, settingIdentifier, isEcmInApp, reason) ==
                 SettingType.BLOCKED_DUE_TO_PHONE_STATE &&
                 !Flags.unknownCallPackageInstallBlockingEnabled()
         ) {
@@ -127,8 +129,10 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
                 context: Context,
                 settingIdentifier: String,
                 isEcmInApp: Boolean,
+                reason: String?,
             ): Setting {
-                val settingType = SettingType.fromIdentifier(context, settingIdentifier, isEcmInApp)
+                val settingType =
+                    SettingType.fromIdentifier(context, settingIdentifier, isEcmInApp, reason)
                 val label =
                     when (settingType) {
                         SettingType.PLATFORM_PERMISSION ->
@@ -149,7 +153,8 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
                 var message: CharSequence?
                 if (settingType == SettingType.BLOCKED_DUE_TO_PHONE_STATE) {
                     title = settingType.titleRes?.let { context.getString(it) }
-                    message = settingType.messageRes?.let { context.getString(it) }
+                    val settingMessage = getPhoneStateSettingMessage(context, settingIdentifier)
+                    message = settingType.messageRes?.let { context.getString(it, settingMessage) }
                 } else {
                     val url =
                         context.getString(R.string.help_url_action_disabled_by_restricted_settings)
@@ -158,6 +163,21 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
                         settingType.messageRes?.let { Html.fromHtml(context.getString(it, url), 0) }
                 }
                 return Setting(title, message)
+            }
+
+            private fun getPhoneStateSettingMessage(
+                context: Context,
+                settingsIdentifier: String,
+            ): String {
+                return context.getString(
+                    when (settingsIdentifier) {
+                        AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE ->
+                            R.string.enhanced_confirmation_phone_state_dialog_a11y_desc
+                        AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES ->
+                            R.string.enhanced_confirmation_phone_state_dialog_install_desc
+                        else -> R.string.enhanced_confirmation_phone_state_dialog_generic_desc
+                    }
+                )
             }
         }
     }
@@ -189,10 +209,10 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
                 context: Context,
                 settingIdentifier: String,
                 isEcmInApp: Boolean,
+                restrictionReason: String?,
             ): SettingType {
                 return when {
-                    settingIdentifier == AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES ->
-                        BLOCKED_DUE_TO_PHONE_STATE
+                    restrictionReason == REASON_PHONE_STATE -> BLOCKED_DUE_TO_PHONE_STATE
                     !isEcmInApp -> OTHER
                     PermissionMapping.isRuntimePlatformPermission(settingIdentifier) &&
                         PermissionMapping.getGroupOfPlatformPermission(settingIdentifier) != null ->
@@ -257,7 +277,7 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
 
             return AlertDialog.Builder(dialogActivity)
                 .setView(createDialogView(dialogActivity, title, message))
-                .setPositiveButton(R.string.enhanced_confirmation_dialog_ok) { _, _ ->
+                .setPositiveButton(R.string.dialog_close) { _, _ ->
                     dialogActivity.onDialogResult(DialogResult.Okay)
                 }
                 .create()

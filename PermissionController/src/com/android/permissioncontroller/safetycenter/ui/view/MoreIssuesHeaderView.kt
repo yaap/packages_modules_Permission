@@ -35,7 +35,7 @@ constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    defStyleRes: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
@@ -55,32 +55,36 @@ constructor(
         nextData: MoreIssuesCardData,
         title: String,
         @DrawableRes overrideChevronIconResId: Int?,
-        onClick: () -> Unit
+        onClick: () -> Unit,
     ) {
         titleView.text = title
         updateStatusIcon(previousData?.severityLevel, nextData.severityLevel)
         updateExpandCollapseButton(
             previousData?.isExpanded,
             nextData.isExpanded,
-            overrideChevronIconResId
+            overrideChevronIconResId,
         )
         updateIssueCount(previousData?.hiddenIssueCount, nextData.hiddenIssueCount)
         updateBackground(previousData?.isExpanded, nextData.isExpanded)
         setOnClickListener { onClick() }
 
-        val expansionString =
-            StringUtils.getIcuPluralsString(
-                context,
-                R.string.safety_center_more_issues_card_expand_action,
-                nextData.hiddenIssueCount
-            )
+        val actionString =
+            if (nextData.isExpanded) {
+                context.getString(R.string.safety_center_more_issues_card_collapse_action)
+            } else {
+                StringUtils.getIcuPluralsString(
+                    context,
+                    R.string.safety_center_more_issues_card_expand_action,
+                    nextData.hiddenIssueCount,
+                )
+            }
         // Replacing the on-click label to indicate the number of hidden issues. The on-click
         // command is set to null so that it uses the existing expansion behaviour.
         ViewCompat.replaceAccessibilityAction(
             this,
             AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK,
-            expansionString,
-            null
+            actionString,
+            null,
         )
     }
 
@@ -96,7 +100,7 @@ constructor(
     private fun updateExpandCollapseButton(
         wasExpanded: Boolean?,
         isExpanded: Boolean,
-        @DrawableRes overrideChevronIconResId: Int?
+        @DrawableRes overrideChevronIconResId: Int?,
     ) {
         expandCollapseLayout.isVisible = true
         if (overrideChevronIconResId != null) {
@@ -105,12 +109,12 @@ constructor(
             if (isExpanded) {
                 expandCollapseIcon.animate(
                     R.drawable.more_issues_expand_anim,
-                    R.drawable.ic_collapse_issues
+                    R.drawable.ic_collapse_issues,
                 )
             } else {
                 expandCollapseIcon.animate(
                     R.drawable.more_issues_collapse_anim,
-                    R.drawable.ic_expand_issues
+                    R.drawable.ic_expand_issues,
                 )
             }
         } else {
@@ -132,7 +136,7 @@ constructor(
                 statusIconView,
                 previousSeverityLevel,
                 endSeverityLevel,
-                selectIconResId(endSeverityLevel)
+                selectIconResId(endSeverityLevel),
             )
         } else {
             statusIconView.setImageResource(selectIconResId(endSeverityLevel))
@@ -198,7 +202,7 @@ constructor(
                     bottomRadiusStart,
                     bottomRadiusStart,
                     bottomRadiusStart,
-                    bottomRadiusStart
+                    bottomRadiusStart,
                 )
             setCornerRadii(ripple, cornerRadii)
             if (bottomRadiusEnd != bottomRadiusStart) {

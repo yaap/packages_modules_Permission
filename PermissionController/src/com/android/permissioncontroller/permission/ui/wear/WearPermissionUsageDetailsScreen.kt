@@ -30,22 +30,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.wear.compose.material.ChipDefaults
-import androidx.wear.compose.material.MaterialTheme
 import com.android.permissioncontroller.R
-import com.android.permissioncontroller.permission.ui.model.v31.BasePermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.AppPermissionAccessUiInfo
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiState
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
 import com.android.permissioncontroller.permission.utils.KotlinUtils
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButtonStyle
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun WearPermissionUsageDetailsScreen(
     permissionGroup: String,
-    viewModel: BasePermissionUsageDetailsViewModel
+    viewModel: PermissionUsageDetailsViewModel,
 ) {
     val context = LocalContext.current
     val uiData = viewModel.getPermissionUsagesDetailsInfoUiLiveData().observeAsState(null)
@@ -56,7 +55,7 @@ fun WearPermissionUsageDetailsScreen(
     val subtitle =
         stringResource(
             R.string.permission_group_usage_title,
-            KotlinUtils.getPermGroupLabel(context, permissionGroup)
+            KotlinUtils.getPermGroupLabel(context, permissionGroup),
         )
 
     val hasSystemApps: Boolean =
@@ -80,7 +79,7 @@ fun WearPermissionUsageDetailsScreen(
                     uiInfo.accessStartTime,
                     uiInfo.accessEndTime,
                     uiInfo.showingAttribution,
-                    uiInfo.attributionTags
+                    uiInfo.attributionTags,
                 )
             context.startActivityAsUser(intent, uiInfo.userHandle)
         }
@@ -108,7 +107,7 @@ fun WearPermissionUsageDetailsScreen(
         onShowSystemClick,
         appPermissionAccessUiInfoList,
         onChipClick,
-        onManagePermissionClick
+        onManagePermissionClick,
     )
 
     if (isLoading && uiData.value != null) {
@@ -126,29 +125,30 @@ internal fun WearPermissionUsageDetailsContent(
     onShowSystemClick: (Boolean) -> Unit,
     appPermissionAccessUiInfoList: List<AppPermissionAccessUiInfo>,
     onChipClick: (AppPermissionAccessUiInfo) -> Unit,
-    onManagePermissionClick: () -> Unit
+    onManagePermissionClick: () -> Unit,
 ) {
     ScrollableScreen(title = title, subtitle = subtitle, isLoading = isLoading) {
         if (appPermissionAccessUiInfoList.isEmpty()) {
-            item { Chip(label = stringResource(R.string.no_apps), onClick = {}) }
+            item { WearPermissionButton(label = stringResource(R.string.no_apps), onClick = {}) }
         } else {
             for (uiInfo in appPermissionAccessUiInfoList) {
                 item {
-                    Chip(
+                    WearPermissionButton(
                         label = uiInfo.packageLabel,
                         labelMaxLines = Int.MAX_VALUE,
                         secondaryLabel =
                             DateFormat.getTimeFormat(LocalContext.current)
                                 .format(uiInfo.accessEndTime),
                         secondaryLabelMaxLines = Int.MAX_VALUE,
-                        icon = uiInfo.badgedPackageIcon,
-                        onClick = { onChipClick(uiInfo) }
+                        iconBuilder =
+                            uiInfo.badgedPackageIcon?.let { WearPermissionIconBuilder.builder(it) },
+                        onClick = { onChipClick(uiInfo) },
                     )
                 }
             }
             if (hasSystemApps) {
                 item {
-                    Chip(
+                    WearPermissionButton(
                         label =
                             if (showSystem) {
                                 stringResource(R.string.menu_hide_system)
@@ -162,10 +162,9 @@ internal fun WearPermissionUsageDetailsContent(
                 }
             }
             item {
-                Chip(
+                WearPermissionButton(
                     label = stringResource(R.string.manage_permission),
-                    textColor = MaterialTheme.colors.background,
-                    colors = ChipDefaults.primaryChipColors(),
+                    style = WearPermissionButtonStyle.Primary,
                     onClick = { onManagePermissionClick() },
                 )
             }

@@ -40,7 +40,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.spy
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -102,7 +102,7 @@ class PersistedStoragePackageUninstalledReceiverTest {
 
         receiver.onReceive(context, intent)
 
-        verifyZeroInteractions(permissionEventStorage)
+        verifyNoMoreInteractions(permissionEventStorage)
     }
 
     @Test

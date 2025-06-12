@@ -44,7 +44,7 @@ class WearPermissionUsageFragment : Fragment() {
         val sessionId: Long =
             arguments?.getLong(Constants.EXTRA_SESSION_ID) ?: Constants.INVALID_SESSION_ID
 
-        val factory = PermissionUsageViewModelFactory(requireActivity().application, this, Bundle())
+        val factory = PermissionUsageViewModelFactory(requireActivity().application)
         val viewModel = ViewModelProvider(this, factory).get(PermissionUsageViewModel::class.java)
 
         return ComposeView(requireContext()).apply {

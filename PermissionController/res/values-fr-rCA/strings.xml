@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Accès <xliff:g id="PERM">%1$s</xliff:g> pour cette appli sur <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Afficher toutes les autorisations pour <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Afficher toutes les applis qui possèdent cette autorisation"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Renseignements"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Paramètres"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Afficher l\'usage du microphone de l\'assistant"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Paramètres des applis inutilisées"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Retirer les autorisations si l\'appli est inutilisée"</string>
@@ -355,14 +357,14 @@
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Ces applis peuvent voir votre écran, vos actions et ce que vous entrez; elles peuvent également effectuer des actions et contrôler l\'écran."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"Assistant numérique par défaut"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Appli d\'assistant numérique"</string>
-    <string name="role_assistant_description" msgid="6622458130459922952">"Les applis d\'assistance peuvent vous aider en fonction de l\'information affichée à l\'écran. Certaines applis sont compatibles à la fois avec le lanceur d\'applis et les services d\'entrée vocale, vous permettant de bénéficier d\'une assistance intégrée."</string>
+    <string name="role_assistant_description" msgid="6622458130459922952">"Les applis d\'assistance peuvent se servir des informations à l\'écran pour vous aider. Certaines applis sont compatibles à la fois avec le lanceur d\'applis et les services d\'entrée vocale pour vous offrir une assistance intégrée."</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Appli de navigation par défaut"</string>
-    <string name="role_browser_short_label" msgid="6745009127123292296">"Appli de navigateur"</string>
+    <string name="role_browser_short_label" msgid="6745009127123292296">"Appli de navigation"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Applis qui vous donnent accès à Internet et qui affichent des liens que vous pouvez toucher"</string>
     <string name="role_browser_request_title" msgid="2895200507835937192">"Définir <xliff:g id="APP_NAME">%1$s</xliff:g> comme appli par défaut pour la navigation?"</string>
     <string name="role_browser_request_description" msgid="5888803407905985941">"Aucune autorisation nécessaire"</string>
-    <string name="role_dialer_label" msgid="1100224146343237968">"Appli de téléphone par défaut"</string>
-    <string name="role_dialer_short_label" msgid="7186888549465352489">"Appli Téléphone"</string>
+    <string name="role_dialer_label" msgid="1100224146343237968">"Appli Téléphone par défaut"</string>
+    <string name="role_dialer_short_label" msgid="7186888549465352489">"Appli de téléphone"</string>
     <string name="role_dialer_description" msgid="8768708633696539612">"Applis qui vous permettent de faire et de recevoir des appels téléphoniques sur votre appareil"</string>
     <string name="role_dialer_request_title" msgid="5959618560705912058">"Définir <xliff:g id="APP_NAME">%1$s</xliff:g> comme appli de téléphonie par défaut?"</string>
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Cette appli aura accès à votre appareil photo, à vos contacts, à votre microphone, à votre téléphone et à vos messages texte"</string>
@@ -380,8 +382,8 @@
     <string name="role_emergency_request_description" msgid="131645948770262850">"Aucune autorisation nécessaire"</string>
     <string name="role_emergency_search_keywords" msgid="1920007722599213358">"En cas d\'urgence"</string>
     <string name="role_home_label" msgid="3871847846649769412">"Appli d\'accueil par défaut"</string>
-    <string name="role_home_short_label" msgid="8544733747952272337">"Appli sur l\'écran d\'accueil"</string>
-    <string name="role_home_description" msgid="7997371519626556675">"Applis qui remplacent les écrans d\'accueil sur votre appareil Android et qui vous donnent accès au contenu et aux fonctionnalités de votre appareil"</string>
+    <string name="role_home_short_label" msgid="8544733747952272337">"Appli d\'accueil"</string>
+    <string name="role_home_description" msgid="7997371519626556675">"Applis, aussi appelées lanceurs d\'applis, qui remplacent les écrans d\'accueil sur votre appareil Android et qui vous donnent accès au contenu et aux fonctionnalités de votre appareil"</string>
     <string name="role_home_request_title" msgid="738136983453341081">"Définir <xliff:g id="APP_NAME">%1$s</xliff:g> comme appli d\'écran d\'accueil par défaut?"</string>
     <string name="role_home_request_description" msgid="2658833966716057673">"Aucune autorisation nécessaire"</string>
     <string name="role_home_search_keywords" msgid="3830755001192666285">"lanceur d\'applis"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Ouverture des liens"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Par défaut pour util. profess."</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Applis par défaut pour l\'Espace privé"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimisée pour l\'appareil"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Autres"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Aucune"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Paramètre(s) système par défaut)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Aucune appli"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> souhaite téléverser des données de débogage."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Partager les données de débogage?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Le système a détecté un problème."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"L\'appli <xliff:g id="APP_NAME_0">%1$s</xliff:g> souhaite téléverser un rapport de bogue créé le <xliff:g id="DATE">%2$s</xliff:g> à <xliff:g id="TIME">%3$s</xliff:g> sur cet appareil. Les rapports de bogue contiennent des données personnelles relatives à votre appareil ou enregistrées par des applis, comme des noms d\'utilisateur, des données de localisation, des identifiants d\'appareils et des renseignements relatifs au réseau. Ne partagez les rapports de bogue qu\'avec des personnes et des applis que vous jugez fiables. Autoriser l\'appli <xliff:g id="APP_NAME_1">%4$s</xliff:g> à téléverser un rapport de bogue?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"L\'appli <xliff:g id="APP_NAME_0">%1$s</xliff:g> souhaite téléverser un rapport de bogue créé le <xliff:g id="DATE">%2$s</xliff:g> à <xliff:g id="TIME">%3$s</xliff:g> sur cet appareil. Les rapports de bogue contiennent des données personnelles relatives à votre appareil ou enregistrées par des applis, comme des noms d\'utilisateur, des données de localisation, des identifiants d\'appareils et des renseignements relatifs au réseau. Ne partagez les rapports de bogue qu\'avec des personnes et des applis que vous jugez fiables.\n\nAutoriser l\'appli <xliff:g id="APP_NAME_1">%4$s</xliff:g> à téléverser un rapport de bogue?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Une erreur s\'est produite lors du traitement du rapport de bogue pour <xliff:g id="APP_NAME">%1$s</xliff:g>, alors le partage des données de débogage détaillées a été refusé. Nous sommes désolés de l\'interruption."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Autoriser"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Refuser"</string>
@@ -583,7 +587,7 @@
     <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"Vérification de l\'état"</string>
     <string name="privacy_controls_qs" msgid="5780144882040591169">"Paramètres de confidentialité"</string>
     <string name="security_settings_button_label_qs" msgid="8280343822465962330">"Plus de paramètres"</string>
-    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"Accès à la caméra"</string>
+    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"Accès à l\'appareil photo"</string>
     <string name="microphone_toggle_label_qs" msgid="8132912469813396552">"Accès au microphone"</string>
     <string name="permissions_removed_qs" msgid="8957319130625294572">"L\'autorisation a été retirée"</string>
     <string name="camera_usage_qs" msgid="4394233566086665994">"Consulter les utilisations récentes de l\'appareil photo"</string>
@@ -625,11 +629,11 @@
     <string name="safety_center_background_location_access_revoked" msgid="6972274943343442213">"Accès modifié"</string>
     <string name="safety_center_view_recent_location_access" msgid="3524391299490678243">"Voir les utilisations récentes de la position"</string>
     <string name="privacy_controls_title" msgid="7605929972256835199">"Paramètres de confidentialité"</string>
-    <string name="camera_toggle_title" msgid="1251201397431837666">"Accès à la caméra"</string>
+    <string name="camera_toggle_title" msgid="1251201397431837666">"Accès à l\'appareil photo"</string>
     <string name="mic_toggle_title" msgid="2649991093496110162">"Accès au microphone"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"Pour les applis et les services"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"Pour les applis et les services. Si ce paramètre est désactivé, il est possible que les données du microphone soient partagées lorsque vous appelez un numéro d\'urgence."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"Voir les applis et les services qui ont accès à votre emplacement"</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"Voyez les applis et les services qui ont accès à votre position"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Afficher l\'accès au presse-papiers"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Un message s\'affiche lorsque les applis accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Afficher les mots de passe"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Autoriser les paramètres restreints"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Paramètre restreint"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Pour protéger votre sécurité, ce paramètre n\'est pas accessible actuellement."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Action non proposée lors d\'un appel téléphonique"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Autoriser les applis à installer d\'autres applis n\'est pas permis lors d\'un appel téléphonique.\n\n Les escrocs demandent souvent ce type d\'action lors de conversations téléphoniques, alors ces actions sont bloquées pour vous protéger. Si quelqu\'un que vous ne connaissez pas vous guide dans cette démarche, il pourrait s\'agir d\'une escroquerie."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Impossible d\'effectuer l\'action pendant un appel"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Ce paramètre est bloqué pour protéger votre appareil et vos données.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Les escrocs peuvent tenter d\'installer des applis nuisibles en vous demandant d\'installer des applis inconnues à partir d\'une nouvelle source."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Les escrocs peuvent tenter de prendre le contrôle de votre appareil en vous demandant d\'autoriser l\'accès au service d\'accessibilité pour une appli."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"L\'appli n\'a pas obtenu l\'accès à <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"L\'appli a demandé l\'accès à une autorisation sensible qui pose un risque pour vos renseignements personnels et financiers.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Il est possible que l\'appli ne fonctionne pas correctement sans cette autorisation limitée. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Découvrir comment autoriser l\'accès&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"L\'appli n\'a pas obtenu l\'accès pour avoir le rôle<xliff:g id="ROLE_NAME">%1$s</xliff:g> par défaut"</string>

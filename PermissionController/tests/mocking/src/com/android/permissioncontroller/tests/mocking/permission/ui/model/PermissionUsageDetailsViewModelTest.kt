@@ -30,8 +30,8 @@ import com.android.permissioncontroller.PermissionControllerApplication
 import com.android.permissioncontroller.appops.data.model.v31.DiscretePackageOpsModel
 import com.android.permissioncontroller.appops.data.model.v31.DiscretePackageOpsModel.DiscreteOpModel
 import com.android.permissioncontroller.permission.domain.usecase.v31.GetPermissionGroupUsageDetailsUseCase
+import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiState
-import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModelV2
 import com.android.permissioncontroller.permission.utils.LocationUtils
 import com.android.permissioncontroller.permission.utils.StringUtils
 import com.android.permissioncontroller.permission.utils.Utils
@@ -67,7 +67,7 @@ import org.mockito.quality.Strictness
 
 /**
  * These unit tests are for new permission timeline implementation, the new view model class is
- * [PermissionUsageDetailsViewModelV2]
+ * [PermissionUsageDetailsViewModel]
  */
 @RunWith(AndroidJUnit4::class)
 class PermissionUsageDetailsViewModelTest {
@@ -107,7 +107,7 @@ class PermissionUsageDetailsViewModelTest {
                     any(),
                     anyInt(),
                     anyInt(),
-                    any(Array<String>::class.java)
+                    any(Array<String>::class.java),
                 )
             )
             .thenReturn("Duration Summary")
@@ -119,7 +119,7 @@ class PermissionUsageDetailsViewModelTest {
                     systemPackageName to
                         getPackageInfoModel(
                             systemPackageName,
-                            applicationFlags = ApplicationInfo.FLAG_SYSTEM
+                            applicationFlags = ApplicationInfo.FLAG_SYSTEM,
                         ),
                 )
                 .toMutableMap()
@@ -127,7 +127,7 @@ class PermissionUsageDetailsViewModelTest {
         packageRepository =
             FakePackageRepository(
                 packageInfos,
-                packagesAndLabels = mapOf(testPackageName to testPackageLabel)
+                packagesAndLabels = mapOf(testPackageName to testPackageLabel),
             )
     }
 
@@ -140,9 +140,7 @@ class PermissionUsageDetailsViewModelTest {
     fun verifyOnlyNonSystemAppsAreShown() = runTest {
         val accessTimeMillis = (getCurrentTime() - TimeUnit.HOURS.toMillis(5))
         val appOpEvents =
-            listOf(
-                DiscreteOpModel(AppOpsManager.OPSTR_COARSE_LOCATION, accessTimeMillis, -1),
-            )
+            listOf(DiscreteOpModel(AppOpsManager.OPSTR_COARSE_LOCATION, accessTimeMillis, -1))
         val discretePackageOps = flow {
             emit(
                 listOf(
@@ -176,8 +174,8 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_COARSE_LOCATION,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(1)
-                ),
+                    TimeUnit.MINUTES.toMillis(1),
+                )
             )
         val discretePackageOps = flow {
             emit(
@@ -192,7 +190,7 @@ class PermissionUsageDetailsViewModelTest {
             getViewModel(
                 LOCATION_PERMISSION_GROUP,
                 discretePackageOps,
-                savedStateMap = mapOf("show7Days" to false, "showSystem" to true)
+                savedStateMap = mapOf("show7Days" to false, "showSystem" to true),
             )
         val uiState = getPermissionUsageDetailsUiState(underTest)
 
@@ -210,13 +208,13 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_COARSE_LOCATION,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(1)
-                ),
+                    TimeUnit.MINUTES.toMillis(1),
+                )
             )
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
@@ -225,7 +223,7 @@ class PermissionUsageDetailsViewModelTest {
             getViewModel(
                 LOCATION_PERMISSION_GROUP,
                 discretePackageOps,
-                savedStateMap = mapOf("show7Days" to false, "showSystem" to false)
+                savedStateMap = mapOf("show7Days" to false, "showSystem" to false),
             )
         val uiState = getPermissionUsageDetailsUiState(underTest)
 
@@ -240,13 +238,13 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_COARSE_LOCATION,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(1)
-                ),
+                    TimeUnit.MINUTES.toMillis(1),
+                )
             )
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(systemPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(systemPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
@@ -255,7 +253,7 @@ class PermissionUsageDetailsViewModelTest {
             getViewModel(
                 LOCATION_PERMISSION_GROUP,
                 discretePackageOps,
-                savedStateMap = mapOf("show7Days" to false, "showSystem" to false)
+                savedStateMap = mapOf("show7Days" to false, "showSystem" to false),
             )
         val uiState = getPermissionUsageDetailsUiState(underTest)
 
@@ -271,18 +269,18 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_CAMERA,
                     accessStartWithIn24Hours,
-                    TimeUnit.MINUTES.toMillis(5)
+                    TimeUnit.MINUTES.toMillis(5),
                 ),
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_CAMERA,
                     accessStartBefore24Hours,
-                    TimeUnit.MINUTES.toMillis(7)
+                    TimeUnit.MINUTES.toMillis(7),
                 ),
             )
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
@@ -304,18 +302,18 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_CAMERA,
                     accessTimeWithIn24Hours,
-                    TimeUnit.MINUTES.toMillis(5)
+                    TimeUnit.MINUTES.toMillis(5),
                 ),
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_CAMERA,
                     accessTimeBefore24Hours,
-                    TimeUnit.MINUTES.toMillis(7)
+                    TimeUnit.MINUTES.toMillis(7),
                 ),
             )
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
@@ -344,13 +342,13 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_CAMERA,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(5)
-                ),
+                    TimeUnit.MINUTES.toMillis(5),
+                )
             )
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
@@ -371,13 +369,13 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_CAMERA,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(1)
-                ),
+                    TimeUnit.MINUTES.toMillis(1),
+                )
             )
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
@@ -397,22 +395,16 @@ class PermissionUsageDetailsViewModelTest {
         whenever(application.getString(anyInt())).thenReturn("emergency attr label")
         val accessTimeMillis = (getCurrentTime() - TimeUnit.HOURS.toMillis(5))
         val appOpEvents =
-            listOf(
-                DiscreteOpModel(AppOpsManager.OPSTR_EMERGENCY_LOCATION, accessTimeMillis, -1),
-            )
+            listOf(DiscreteOpModel(AppOpsManager.OPSTR_EMERGENCY_LOCATION, accessTimeMillis, -1))
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
 
-        val underTest =
-            getViewModel(
-                LOCATION_PERMISSION_GROUP,
-                discretePackageOps,
-            )
+        val underTest = getViewModel(LOCATION_PERMISSION_GROUP, discretePackageOps)
         val uiState = getPermissionUsageDetailsUiState(underTest)
         assertThat(uiState.appPermissionAccessUiInfoList.size).isEqualTo(1)
         val timelineRow = uiState.appPermissionAccessUiInfoList.first()
@@ -429,21 +421,15 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_COARSE_LOCATION,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(1)
-                ),
+                    TimeUnit.MINUTES.toMillis(1),
+                )
             )
         val actualData =
-            listOf(
-                DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
-            )
+            listOf(DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents))
         val discretePackageOps = MutableStateFlow(emptyList<DiscretePackageOpsModel>())
         discretePackageOps.emit(emptyList())
 
-        val underTest =
-            getViewModel(
-                LOCATION_PERMISSION_GROUP,
-                discretePackageOps,
-            )
+        val underTest = getViewModel(LOCATION_PERMISSION_GROUP, discretePackageOps)
         val result by collectLastValue(underTest.permissionUsageDetailsUiStateFlow)
         var uiState = result as PermissionUsageDetailsUiState.Success
         assertThat(uiState.appPermissionAccessUiInfoList).isEmpty()
@@ -463,22 +449,18 @@ class PermissionUsageDetailsViewModelTest {
                 DiscreteOpModel(
                     AppOpsManager.OPSTR_COARSE_LOCATION,
                     accessTimeMillis,
-                    TimeUnit.MINUTES.toMillis(1)
-                ),
+                    TimeUnit.MINUTES.toMillis(1),
+                )
             )
 
         val discretePackageOps = flow {
             emit(
                 listOf(
-                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents),
+                    DiscretePackageOpsModel(testPackageName, currentUser.identifier, appOpEvents)
                 )
             )
         }
-        val underTest =
-            getViewModel(
-                LOCATION_PERMISSION_GROUP,
-                discretePackageOps,
-            )
+        val underTest = getViewModel(LOCATION_PERMISSION_GROUP, discretePackageOps)
 
         val uiState = getPermissionUsageDetailsUiState(underTest)
         assertThat(uiState.show7Days).isFalse()
@@ -517,20 +499,20 @@ class PermissionUsageDetailsViewModelTest {
         permissionGroup: String,
         discretePackageOps: Flow<List<DiscretePackageOpsModel>>,
         savedStateMap: Map<String, Boolean> = mapOf("show7Days" to false, "showSystem" to false),
-        pkgRepository: PackageRepository = packageRepository
+        pkgRepository: PackageRepository = packageRepository,
     ) =
-        PermissionUsageDetailsViewModelV2(
+        PermissionUsageDetailsViewModel(
             application,
             getPermissionGroupUsageDetailsUseCase(permissionGroup, discretePackageOps),
             SavedStateHandle(savedStateMap),
             permissionGroup,
             scope = backgroundScope,
             StandardTestDispatcher(testScheduler),
-            packageRepository = pkgRepository
+            packageRepository = pkgRepository,
         )
 
     private fun TestScope.getPermissionUsageDetailsUiState(
-        viewModel: PermissionUsageDetailsViewModelV2
+        viewModel: PermissionUsageDetailsViewModel
     ): PermissionUsageDetailsUiState.Success {
         val result by collectLastValue(viewModel.permissionUsageDetailsUiStateFlow)
         return result as PermissionUsageDetailsUiState.Success
@@ -542,7 +524,7 @@ class PermissionUsageDetailsViewModelTest {
         permissionsFlags: List<Int> =
             listOf(
                 PackageInfo.REQUESTED_PERMISSION_GRANTED,
-                PackageInfo.REQUESTED_PERMISSION_GRANTED
+                PackageInfo.REQUESTED_PERMISSION_GRANTED,
             ),
         applicationFlags: Int = 0,
     ) = PackageInfoModel(packageName, requestedPermissions, permissionsFlags, applicationFlags)

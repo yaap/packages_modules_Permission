@@ -36,6 +36,12 @@ private const val TWO_ADDITIONAL_PERM_USER_APK =
     "$APK_DIRECTORY/PermissionUiUseTwoAdditionalPermissionsApp.apk"
 private const val ADDITIONAL_PERM_DEFINER_APK =
     "$APK_DIRECTORY/PermissionUiDefineAdditionalPermissionApp.apk"
+private const val LEGACY_BODY_SENSORS_APK =
+    "$APK_DIRECTORY/PermissionUiUseLegacyBodySensorsPermissionApp.apk"
+private const val READ_HEART_RATE_APK =
+    "$APK_DIRECTORY/PermissionUiUseReadHeartRatePermissionApp.apk"
+private const val LEGACY_BODY_SENSORS_TARGET_SDK_22_APK =
+    "$APK_DIRECTORY/PermissionUiUseLegacyBodySensorsPermissionTargetSdk22App.apk"
 
 // All 4 of the AppThatUses_X_Permission(s) applications share the same package name.
 private const val PERM_DEFINER_PACKAGE =
@@ -68,6 +74,12 @@ fun installTestAppThatUsesAdditionalPermission() = install(ADDITIONAL_PERM_USER_
 fun installTestAppThatUsesTwoAdditionalPermissions() = install(TWO_ADDITIONAL_PERM_USER_APK)
 
 fun installTestAppThatDefinesAdditionalPermissions() = install(ADDITIONAL_PERM_DEFINER_APK)
+
+fun installTestAppThatUsesLegacyBodySensorsPermissions() = install(LEGACY_BODY_SENSORS_APK)
+
+fun installTestAppThatUsesReadHeartRatePermissions() = install(READ_HEART_RATE_APK)
+
+fun installTestAppThatUsesLegacyBodySensorsPermissionsTargetSdk22() = install(LEGACY_BODY_SENSORS_TARGET_SDK_22_APK)
 
 fun uninstallTestApps() {
     uninstallApp(PERM_USER_PACKAGE)

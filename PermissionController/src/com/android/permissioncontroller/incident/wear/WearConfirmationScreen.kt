@@ -29,14 +29,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.material.CircularProgressIndicator
-import com.android.permissioncontroller.permission.ui.wear.elements.AlertDialog
-import com.android.permissioncontroller.permission.ui.wear.elements.SingleButtonAlertDialog
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
+import com.android.permissioncontroller.wear.permission.components.material3.DialogButtonContent
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionConfirmationDialog
+import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 
 @Composable
 fun WearConfirmationScreen(viewModel: WearConfirmationActivityViewModel) {
+    val materialUIVersion = ResourceHelper.materialUIVersionInSettings
     // Wear screen doesn't show incident/bug report's optional reasons and images.
     val showDialog = viewModel.showDialogLiveData.observeAsState(false)
     val showDenyReport = viewModel.showDenyReportLiveData.observeAsState(false)
@@ -47,27 +48,25 @@ fun WearConfirmationScreen(viewModel: WearConfirmationActivityViewModel) {
         if (isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else {
-            if (showDenyReport.value) {
-                contentArgs.value?.let {
-                    SingleButtonAlertDialog(
-                        showDialog = showDialog.value,
-                        title = it.title,
-                        message = it.message,
-                        onButtonClick = it.onDenyClick,
-                        scalingLazyListState = ScalingLazyListState(0)
+            contentArgs.value?.apply {
+                if (showDenyReport.value) {
+                    WearPermissionConfirmationDialog(
+                        materialUIVersion = materialUIVersion,
+                        show = showDialog.value,
+                        title = title,
+                        message = message,
+                        positiveButtonContent = DialogButtonContent(onClick = onDenyClick),
+                    )
+                } else {
+                    WearPermissionConfirmationDialog(
+                        materialUIVersion = materialUIVersion,
+                        show = showDialog.value,
+                        title = title,
+                        message = message,
+                        positiveButtonContent = DialogButtonContent(onClick = onOkClick),
+                        negativeButtonContent = DialogButtonContent(onClick = onCancelClick),
                     )
                 }
-                return
-            }
-            contentArgs.value?.let {
-                AlertDialog(
-                    showDialog = showDialog.value,
-                    title = it.title,
-                    message = it.message,
-                    onOKButtonClick = it.onOkClick,
-                    onCancelButtonClick = it.onCancelClick,
-                    scalingLazyListState = ScalingLazyListState(0)
-                )
             }
         }
     }

@@ -30,7 +30,6 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +43,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.os.BundleCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -51,12 +51,15 @@ import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.utils.PackageRemovalMonitor;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.permissioncontroller.role.UserPackage;
 import com.android.permissioncontroller.role.model.UserDeniedManager;
 import com.android.permissioncontroller.role.utils.PackageUtils;
 import com.android.permissioncontroller.role.utils.RoleUiBehaviorUtils;
 import com.android.permissioncontroller.role.utils.UiUtils;
+import com.android.permissioncontroller.role.utils.UserUtils;
 import com.android.role.controller.model.Role;
 import com.android.role.controller.model.Roles;
+import com.android.settingslib.utils.applications.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +111,7 @@ public class RequestRoleFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setCancelable(false);
 
         Bundle arguments = getArguments();
         mPackageName = arguments.getString(Intent.EXTRA_PACKAGE_NAME);
@@ -233,7 +237,7 @@ public class RequestRoleFragment extends DialogFragment {
         ViewModelProvider.Factory viewModelFactory = new RequestRoleViewModel.Factory(mRole,
                 requireActivity().getApplication());
         mViewModel = new ViewModelProvider(this, viewModelFactory).get(RequestRoleViewModel.class);
-        mViewModel.getRoleLiveData().observe(this, this::onRoleDataChanged);
+        mViewModel.getLiveData().observe(this, this::onApplicationListChanged);
         mViewModel.getManageRoleHolderStateLiveData().observe(this,
                 this::onManageRoleHolderStateChanged);
     }
@@ -269,9 +273,9 @@ public class RequestRoleFragment extends DialogFragment {
         setDeniedOnceAndFinish();
     }
 
-    private void onRoleDataChanged(
-            @NonNull List<Pair<ApplicationInfo, Boolean>> qualifyingApplications) {
-        mAdapter.replace(qualifyingApplications);
+    private void onApplicationListChanged(
+            @NonNull List<RoleApplicationItem> applicationItems) {
+        mAdapter.replace(applicationItems);
         updateUi();
     }
 
@@ -293,29 +297,31 @@ public class RequestRoleFragment extends DialogFragment {
     }
 
     private void setRoleHolder() {
-        String packageName = mAdapter.getCheckedPackageName();
+        UserPackage userPackage = mAdapter.getCheckedUserPackage();
         Context context = requireContext();
-        UserHandle user = Process.myUserHandle();
-        if (packageName == null) {
+        if (userPackage == null) {
             reportRequestResult(PermissionControllerStatsLog
                             .ROLE_REQUEST_RESULT_REPORTED__RESULT__USER_DENIED_GRANTED_ANOTHER,
                     null);
+            UserHandle user = mRole.getExclusivity() == Role.EXCLUSIVITY_PROFILE_GROUP
+                    ? UserUtils.getProfileParentOrSelf(Process.myUserHandle(), context)
+                    : Process.myUserHandle();
             mRole.onNoneHolderSelectedAsUser(user, context);
             mViewModel.getManageRoleHolderStateLiveData().clearRoleHoldersAsUser(mRoleName, 0, user,
                     context);
         } else {
-            boolean isRequestingApplication = Objects.equals(packageName, mPackageName);
+            boolean isRequestingApplication = isRequestingApplication(userPackage);
             if (isRequestingApplication) {
                 reportRequestResult(PermissionControllerStatsLog
                         .ROLE_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED, null);
             } else {
                 reportRequestResult(PermissionControllerStatsLog
                         .ROLE_REQUEST_RESULT_REPORTED__RESULT__USER_DENIED_GRANTED_ANOTHER,
-                        packageName);
+                        userPackage);
             }
             int flags = isRequestingApplication ? RoleManager.MANAGE_HOLDERS_FLAG_DONT_KILL_APP : 0;
             mViewModel.getManageRoleHolderStateLiveData().setRoleHolderAsUser(mRoleName,
-                    packageName, true, flags, user, context);
+                    userPackage.packageName, true, flags, userPackage.user, context);
         }
     }
 
@@ -329,11 +335,13 @@ public class RequestRoleFragment extends DialogFragment {
                 ManageRoleHolderStateLiveData liveData =
                         mViewModel.getManageRoleHolderStateLiveData();
                 String packageName = liveData.getLastPackageName();
-                if (packageName != null) {
-                    mRole.onHolderSelectedAsUser(packageName, liveData.getLastUser(),
-                            requireContext());
+                UserHandle user = liveData.getLastUser();
+                UserPackage userPackage = packageName != null && user != null
+                        ? UserPackage.of(user, packageName) : null;
+                if (userPackage != null) {
+                    mRole.onHolderSelectedAsUser(packageName, user, requireContext());
                 }
-                if (Objects.equals(packageName, mPackageName)) {
+                if (isRequestingApplication(userPackage)) {
                     Log.i(LOG_TAG, "Application added as a role holder, role: " + mRoleName
                             + ", package: " + mPackageName);
                     clearDeniedSetResultOkAndFinish();
@@ -357,8 +365,8 @@ public class RequestRoleFragment extends DialogFragment {
         boolean dontAskAgain = mDontAskAgainCheck != null && mDontAskAgainCheck.isChecked();
         mAdapter.setDontAskAgain(dontAskAgain);
         AlertDialog dialog = getDialog();
-        boolean hasRoleData = mViewModel.getRoleLiveData().getValue() != null;
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(enabled && hasRoleData
+        boolean hasApplicationList = mViewModel.getLiveData().getValue() != null;
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(enabled && hasApplicationList
                 && (dontAskAgain || !mAdapter.isHolderApplicationChecked()));
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(enabled);
     }
@@ -383,20 +391,23 @@ public class RequestRoleFragment extends DialogFragment {
         requireActivity().finish();
     }
 
-    private void reportRequestResult(int result, @Nullable String grantedAnotherPackageName) {
-        String holderPackageName = getHolderPackageName();
-        reportRequestResult(getApplicationUid(mPackageName), mPackageName, mRoleName,
-                getQualifyingApplicationCount(), getQualifyingApplicationUid(holderPackageName),
-                holderPackageName, getQualifyingApplicationUid(grantedAnotherPackageName),
-                grantedAnotherPackageName, result);
+    private void reportRequestResult(int result, @Nullable UserPackage grantedUserPackage) {
+        UserPackage holderUserPackage = getHolderUserPackage();
+        reportRequestResult(getRequestingApplicationUid(), mPackageName, mRoleName,
+                getQualifyingApplicationCount(),
+                getQualifyingApplicationUid(holderUserPackage),
+                holderUserPackage != null ? holderUserPackage.packageName : null,
+                getQualifyingApplicationUid(grantedUserPackage),
+                grantedUserPackage != null ? grantedUserPackage.packageName : null,
+                result);
     }
 
-    private int getApplicationUid(@NonNull String packageName) {
-        int uid = getQualifyingApplicationUid(packageName);
+    private int getRequestingApplicationUid() {
+        int uid = getQualifyingApplicationUid(UserPackage.of(Process.myUserHandle(), mPackageName));
         if (uid != -1) {
             return uid;
         }
-        ApplicationInfo applicationInfo = PackageUtils.getApplicationInfo(packageName,
+        ApplicationInfo applicationInfo = PackageUtils.getApplicationInfo(mPackageName,
                 requireActivity());
         if (applicationInfo == null) {
             return -1;
@@ -404,19 +415,19 @@ public class RequestRoleFragment extends DialogFragment {
         return applicationInfo.uid;
     }
 
-    private int getQualifyingApplicationUid(@Nullable String packageName) {
-        if (packageName == null || mAdapter == null) {
+    private int getQualifyingApplicationUid(@Nullable UserPackage userPackage) {
+        if (userPackage == null || mAdapter == null) {
             return -1;
         }
         int count = mAdapter.getCount();
         for (int i = 0; i < count; i++) {
-            Pair<ApplicationInfo, Boolean> qualifyingApplication = mAdapter.getItem(i);
-            if (qualifyingApplication == null) {
+            RoleApplicationItem applicationItem = mAdapter.getItem(i);
+            if (applicationItem == null) {
                 // Skip the "None" item.
                 continue;
             }
-            ApplicationInfo applicationInfo = qualifyingApplication.first;
-            if (Objects.equals(applicationInfo.packageName, packageName)) {
+            ApplicationInfo applicationInfo = applicationItem.getApplicationInfo();
+            if (Objects.equals(UserPackage.from(applicationInfo), userPackage)) {
                 return applicationInfo.uid;
             }
         }
@@ -436,11 +447,15 @@ public class RequestRoleFragment extends DialogFragment {
     }
 
     @Nullable
-    private String getHolderPackageName() {
+    private UserPackage getHolderUserPackage() {
         if (mAdapter == null) {
             return null;
         }
-        return mAdapter.mHolderPackageName;
+        return mAdapter.mHolderUserPackage;
+    }
+
+    private boolean isRequestingApplication(@Nullable UserPackage userPackage) {
+        return Objects.equals(userPackage, UserPackage.of(Process.myUserHandle(), mPackageName));
     }
 
     static void reportRequestResult(int requestingUid, String requestingPackageName,
@@ -466,8 +481,8 @@ public class RequestRoleFragment extends DialogFragment {
 
         private static final String STATE_USER_CHECKED = Adapter.class.getName()
                 + ".state.USER_CHECKED";
-        private static final String STATE_CHECKED_PACKAGE_NAME = Adapter.class.getName()
-                + ".state.CHECKED_PACKAGE_NAME";
+        private static final String STATE_CHECKED_USER_PACKAGE = Adapter.class.getName()
+                + ".state.CHECKED_USER_PACKAGE";
 
         private static final int LAYOUT_TRANSITION_DURATION_MILLIS = 150;
 
@@ -479,11 +494,10 @@ public class RequestRoleFragment extends DialogFragment {
 
         // We'll use a null to represent the "None" item.
         @NonNull
-        private final List<Pair<ApplicationInfo, Boolean>> mQualifyingApplications =
-                new ArrayList<>();
+        private final List<RoleApplicationItem> mApplicationItems = new ArrayList<>();
 
         @Nullable
-        private String mHolderPackageName;
+        private UserPackage mHolderUserPackage;
 
         private boolean mDontAskAgain;
 
@@ -492,7 +506,7 @@ public class RequestRoleFragment extends DialogFragment {
         private boolean mUserChecked;
 
         @Nullable
-        private String mCheckedPackageName;
+        private UserPackage mCheckedUserPackage;
 
         Adapter(@NonNull ListView listView, @NonNull Role role) {
             mListView = listView;
@@ -502,14 +516,20 @@ public class RequestRoleFragment extends DialogFragment {
         public void onSaveInstanceState(@NonNull Bundle outState) {
             outState.putBoolean(STATE_USER_CHECKED, mUserChecked);
             if (mUserChecked) {
-                outState.putString(STATE_CHECKED_PACKAGE_NAME, mCheckedPackageName);
+                if (mCheckedUserPackage != null) {
+                    outState.putParcelable(STATE_CHECKED_USER_PACKAGE, mCheckedUserPackage);
+                } else {
+                    outState.remove(STATE_CHECKED_USER_PACKAGE);
+                }
             }
         }
 
         public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
             mUserChecked = savedInstanceState.getBoolean(STATE_USER_CHECKED);
             if (mUserChecked) {
-                mCheckedPackageName = savedInstanceState.getString(STATE_CHECKED_PACKAGE_NAME);
+                mCheckedUserPackage =
+                        BundleCompat.getParcelable(savedInstanceState, STATE_CHECKED_USER_PACKAGE,
+                                UserPackage.class);
             }
         }
 
@@ -520,50 +540,52 @@ public class RequestRoleFragment extends DialogFragment {
             mDontAskAgain = dontAskAgain;
             if (mDontAskAgain) {
                 mUserChecked = false;
-                mCheckedPackageName = mHolderPackageName;
+                mCheckedUserPackage = mHolderUserPackage;
             }
             notifyDataSetChanged();
         }
 
         public void onItemClicked(int position) {
-            Pair<ApplicationInfo, Boolean> qualifyingApplication = getItem(position);
-            if (qualifyingApplication == null) {
+            RoleApplicationItem applicationItem = getItem(position);
+            if (applicationItem == null) {
                 mUserChecked = true;
-                mCheckedPackageName = null;
+                mCheckedUserPackage = null;
             } else {
-                ApplicationInfo applicationInfo = qualifyingApplication.first;
+                ApplicationInfo applicationInfo = applicationItem.getApplicationInfo();
+                UserHandle user = UserHandle.getUserHandleForUid(applicationInfo.uid);
                 Intent restrictionIntent = mRole.getApplicationRestrictionIntentAsUser(
-                        applicationInfo, Process.myUserHandle(), mListView.getContext());
+                        applicationInfo, user, mListView.getContext());
                 if (restrictionIntent != null) {
                     mListView.getContext().startActivity(restrictionIntent);
                     return;
                 } else {
                     mUserChecked = true;
-                    mCheckedPackageName = applicationInfo.packageName;
+                    mCheckedUserPackage = UserPackage.from(applicationInfo);
                 }
             }
             notifyDataSetChanged();
         }
 
-        public void replace(@NonNull List<Pair<ApplicationInfo, Boolean>> qualifyingApplications) {
-            mQualifyingApplications.clear();
+        public void replace(@NonNull List<RoleApplicationItem> applicationItems) {
+            mApplicationItems.clear();
             if (mRole.shouldShowNone()) {
-                mQualifyingApplications.add(0, null);
+                mApplicationItems.add(0, null);
             }
-            mQualifyingApplications.addAll(qualifyingApplications);
-            mHolderPackageName = getHolderPackageName(qualifyingApplications);
+            mApplicationItems.addAll(applicationItems);
+            mHolderUserPackage = getHolderUserPackage(applicationItems);
 
-            if (mUserChecked && mCheckedPackageName != null) {
+            if (mUserChecked && mCheckedUserPackage != null) {
                 boolean isCheckedPackageNameFound = false;
                 int count = getCount();
                 for (int i = 0; i < count; i++) {
-                    Pair<ApplicationInfo, Boolean> qualifyingApplication = getItem(i);
-                    if (qualifyingApplication == null) {
+                    RoleApplicationItem applicationItem = getItem(i);
+                    if (applicationItem == null) {
                         continue;
                     }
-                    String packageName = qualifyingApplication.first.packageName;
+                    UserPackage userPackage =
+                            UserPackage.from(applicationItem.getApplicationInfo());
 
-                    if (Objects.equals(packageName, mCheckedPackageName)) {
+                    if (Objects.equals(userPackage, mCheckedUserPackage)) {
                         mUserChecked = true;
                         isCheckedPackageNameFound = true;
                         break;
@@ -571,44 +593,40 @@ public class RequestRoleFragment extends DialogFragment {
                 }
                 if (!isCheckedPackageNameFound) {
                     mUserChecked = false;
-                    mCheckedPackageName = null;
+                    mCheckedUserPackage = null;
                 }
             }
 
             if (!mUserChecked) {
-                mCheckedPackageName = mHolderPackageName;
+                mCheckedUserPackage = mHolderUserPackage;
             }
 
             notifyDataSetChanged();
         }
 
         @Nullable
-        private static String getHolderPackageName(
-                @NonNull List<Pair<ApplicationInfo, Boolean>> qualifyingApplications) {
-            int qualifyingApplicationSize = qualifyingApplications.size();
-            for (int i = 0; i < qualifyingApplicationSize; i++) {
-                Pair<ApplicationInfo, Boolean> qualifyingApplication = qualifyingApplications.get(
-                        i);
-                if (qualifyingApplication == null) {
+        private static UserPackage getHolderUserPackage(
+                @NonNull List<RoleApplicationItem> applicationItems) {
+            int applicationItemSize = applicationItems.size();
+            for (int i = 0; i < applicationItemSize; i++) {
+                RoleApplicationItem applicationItem = applicationItems.get(i);
+                if (applicationItem == null) {
                     continue;
                 }
-                ApplicationInfo applicationInfo = qualifyingApplication.first;
-                boolean isHolderApplication = qualifyingApplication.second;
-
-                if (isHolderApplication) {
-                    return applicationInfo.packageName;
+                if (applicationItem.isHolderApplication()) {
+                    return UserPackage.from(applicationItem.getApplicationInfo());
                 }
             }
             return null;
         }
 
         @Nullable
-        public String getCheckedPackageName() {
-            return mCheckedPackageName;
+        public UserPackage getCheckedUserPackage() {
+            return mCheckedUserPackage;
         }
 
         public boolean isHolderApplicationChecked() {
-            return Objects.equals(mCheckedPackageName, mHolderPackageName);
+            return Objects.equals(mCheckedUserPackage, mHolderUserPackage);
         }
 
         @Override
@@ -623,13 +641,13 @@ public class RequestRoleFragment extends DialogFragment {
 
         @Override
         public int getCount() {
-            return mQualifyingApplications.size();
+            return mApplicationItems.size();
         }
 
         @Nullable
         @Override
-        public Pair<ApplicationInfo, Boolean> getItem(int position) {
-            return mQualifyingApplications.get(position);
+        public RoleApplicationItem getItem(int position) {
+            return mApplicationItems.get(position);
         }
 
         @Override
@@ -638,9 +656,9 @@ public class RequestRoleFragment extends DialogFragment {
                 // Work around AbsListView.confirmCheckedPositionsById() not respecting our count.
                 return ListView.INVALID_ROW_ID;
             }
-            Pair<ApplicationInfo, Boolean> qualifyingApplication = getItem(position);
-            return qualifyingApplication == null ? 0
-                    : qualifyingApplication.first.packageName.hashCode();
+            RoleApplicationItem applicationItem = getItem(position);
+            return applicationItem == null ? 0
+                    : applicationItem.getApplicationInfo().packageName.hashCode();
         }
 
         @Override
@@ -648,12 +666,11 @@ public class RequestRoleFragment extends DialogFragment {
             if (!mDontAskAgain) {
                 return true;
             }
-            Pair<ApplicationInfo, Boolean> qualifyingApplication = getItem(position);
-            if (qualifyingApplication == null) {
-                return mHolderPackageName == null;
+            RoleApplicationItem applicationItem = getItem(position);
+            if (applicationItem == null) {
+                return mHolderUserPackage == null;
             } else {
-                boolean isHolderApplication = qualifyingApplication.second;
-                return isHolderApplication;
+                return applicationItem.isHolderApplication();
             }
         }
 
@@ -675,45 +692,53 @@ public class RequestRoleFragment extends DialogFragment {
                         LAYOUT_TRANSITION_DURATION_MILLIS);
             }
 
-            Pair<ApplicationInfo, Boolean> qualifyingApplication = getItem(position);
+            RoleApplicationItem applicationItem = getItem(position);
             ApplicationInfo applicationInfo;
             boolean restricted;
             boolean checked;
             Drawable icon;
             String title;
             String subtitle;
-            if (qualifyingApplication == null) {
+            String contentDescription;
+            if (applicationItem == null) {
                 applicationInfo = null;
                 restricted = false;
-                checked = mCheckedPackageName == null;
+                checked = mCheckedUserPackage == null;
                 icon = AppCompatResources.getDrawable(context, R.drawable.ic_remove_circle);
                 title = context.getString(R.string.default_app_none);
-                subtitle = mHolderPackageName != null ? context.getString(
+                subtitle = mHolderUserPackage == null ? context.getString(
                         R.string.request_role_current_default) : null;
+                contentDescription = null;
             } else {
-                applicationInfo = qualifyingApplication.first;
+                applicationInfo = applicationItem.getApplicationInfo();
+                UserPackage userPackage = UserPackage.from(applicationInfo);
                 restricted = mRole.getApplicationRestrictionIntentAsUser(applicationInfo,
-                        Process.myUserHandle(), context) != null;
-                checked = Objects.equals(applicationInfo.packageName, mCheckedPackageName);
+                        userPackage.user, context) != null;
+                checked = Objects.equals(userPackage, mCheckedUserPackage);
                 icon = Utils.getBadgedIcon(context, applicationInfo);
                 title = Utils.getAppLabel(applicationInfo, context);
-                boolean isHolderApplication = qualifyingApplication.second;
-                subtitle = isHolderApplication
+                subtitle = applicationItem.isHolderApplication()
                         ? context.getString(R.string.request_role_current_default)
                         : checked ? context.getString(mRole.getRequestDescriptionResource()) : null;
+                contentDescription = AppUtils.getAppContentDescription(context,
+                        userPackage.packageName, userPackage.user.getIdentifier());
             }
 
             boolean enabled = isEnabled(position);
             UiUtils.setViewTreeEnabled(view, enabled && !restricted);
             view.setEnabled(enabled);
             view.setChecked(checked);
+
             holder.iconImage.setImageDrawable(icon);
             holder.titleText.setText(title);
+            holder.titleText.setContentDescription(contentDescription);
             holder.subtitleText.setVisibility(!TextUtils.isEmpty(subtitle) ? View.VISIBLE
                     : View.GONE);
             holder.subtitleText.setText(subtitle);
-            RoleUiBehaviorUtils.prepareRequestRoleItemViewAsUser(mRole, holder, applicationInfo,
-                    Process.myUserHandle(), context);
+            if (applicationInfo != null) {
+                RoleUiBehaviorUtils.prepareRequestRoleItemViewAsUser(mRole, holder, applicationInfo,
+                        UserHandle.getUserHandleForUid(applicationInfo.uid), context);
+            }
 
             return view;
         }

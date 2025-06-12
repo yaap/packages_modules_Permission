@@ -186,7 +186,7 @@ public class HomeRoleBehavior implements RoleBehavior {
     }
 
     @Override
-    public boolean isVisibleAsUser(@NonNull Role role, @NonNull UserHandle user,
+    public Boolean isVisibleAsUser(@NonNull Role role, @NonNull UserHandle user,
             @NonNull Context context) {
         return VisibilityMixin.isVisible("config_showDefaultHome", false, user, context);
     }

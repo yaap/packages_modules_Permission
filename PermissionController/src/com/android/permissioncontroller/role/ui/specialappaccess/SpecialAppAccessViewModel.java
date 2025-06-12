@@ -17,12 +17,10 @@
 package com.android.permissioncontroller.role.ui.specialappaccess;
 
 import android.app.Application;
-import android.content.pm.ApplicationInfo;
 import android.os.Process;
 import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -33,6 +31,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.permissioncontroller.role.ui.ManageRoleHolderStateLiveData;
+import com.android.permissioncontroller.role.ui.MergeRoleLiveData;
+import com.android.permissioncontroller.role.ui.RoleApplicationItem;
 import com.android.permissioncontroller.role.ui.RoleLiveData;
 import com.android.permissioncontroller.role.ui.RoleSortFunction;
 import com.android.permissioncontroller.role.utils.UserUtils;
@@ -51,7 +51,7 @@ public class SpecialAppAccessViewModel extends AndroidViewModel {
     private final Role mRole;
 
     @NonNull
-    private final LiveData<List<Pair<ApplicationInfo, Boolean>>> mRoleLiveData;
+    private final LiveData<List<RoleApplicationItem>> mLiveData;
 
     @NonNull
     private final ArrayMap<String, ManageRoleHolderStateLiveData> mManageRoleHolderStateLiveDatas =
@@ -67,17 +67,17 @@ public class SpecialAppAccessViewModel extends AndroidViewModel {
         UserHandle workProfile = UserUtils.getWorkProfile(application);
         RoleSortFunction sortFunction = new RoleSortFunction(application);
         if (workProfile == null) {
-            mRoleLiveData = Transformations.map(roleLiveData, sortFunction);
+            mLiveData = Transformations.map(roleLiveData, sortFunction);
         } else {
             RoleLiveData workRoleLiveData = new RoleLiveData(role, workProfile, application);
-            mRoleLiveData = Transformations.map(new MergeRoleLiveData(roleLiveData,
+            mLiveData = Transformations.map(new MergeRoleLiveData(roleLiveData,
                     workRoleLiveData), sortFunction);
         }
     }
 
     @NonNull
-    public LiveData<List<Pair<ApplicationInfo, Boolean>>> getRoleLiveData() {
-        return mRoleLiveData;
+    public LiveData<List<RoleApplicationItem>> getLiveData() {
+        return mLiveData;
     }
 
     /**

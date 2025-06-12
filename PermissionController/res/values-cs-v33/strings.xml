@@ -17,7 +17,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="role_dialer_request_description" msgid="6188305064871543419">"Tato aplikace vám bude moci zasílat oznámení a bude mít přístup k fotoaparátu, kontaktům, mikrofonu, telefonu a SMS"</string>
-    <string name="role_sms_request_description" msgid="1506966389698625395">"Tato aplikace vám bude moci zasílat oznámení a bude mít přístup k fotoaparátu, kontaktům, souborům, mikrofonu, telefonu a SMS"</string>
+    <string name="role_sms_request_description" msgid="1506966389698625395">"Tato aplikace vám bude moct zasílat oznámení a bude mít přístup k fotoaparátu, kontaktům, souborům, mikrofonu, telefonu a SMS"</string>
     <string name="permission_description_summary_storage" msgid="1917071243213043858">"Aplikace s tímto oprávněním mají přístup ke všem souborům v tomto zařízení"</string>
     <string name="work_policy_title" msgid="832967780713677409">"Informace o vašich pracovních zásadách"</string>
     <string name="work_policy_summary" msgid="3886113358084963931">"Nastavení spravuje IT administrátor"</string>
@@ -30,6 +30,7 @@
     <string name="safety_center_more_issues_card_title" msgid="7425844746197493312">"Další upozornění"</string>
     <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"Zavřená upozornění"</string>
     <string name="safety_center_more_issues_card_expand_action" msgid="7109451851052272946">"{count,plural, =1{Rozbalením zobrazíte jedno další upozornění}few{Rozbalením zobrazíte # další upozornění}many{Rozbalením zobrazíte # dalšího upozornění}other{Rozbalením zobrazíte # dalších upozornění}}"</string>
+    <string name="safety_center_more_issues_card_collapse_action" msgid="7485597582198474637">"Sbalit"</string>
     <string name="safety_center_issue_card_prefix_content_description" msgid="1447445289637043544">"Upozornění. <xliff:g id="ISSUE_CARD_TITLE">%1$s</xliff:g>"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="8548932070610766651">"Akce dokončena"</string>
     <string name="safety_center_qs_status_summary" msgid="5193925895830451177">"Zkontrolujte nastavení, která mohou zvýšit ochranu vašeho zařízení"</string>

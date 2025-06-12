@@ -32,7 +32,7 @@
     <string name="grant_dialog_button_deny_and_dont_ask_again" msgid="1748925431574312595">"Рұқсат бермеу және қайта сұрамау"</string>
     <string name="grant_dialog_button_no_upgrade" msgid="8344732743633736625">"\"Қолданбаны пайдаланған кездегі\" рұқсатты қалдыру"</string>
     <string name="grant_dialog_button_no_upgrade_one_time" msgid="5125892775684968694">"\"Тек осы жолы\" күйінде қалдыру"</string>
-    <string name="grant_dialog_button_more_info" msgid="213350268561945193">"Толығырақ"</string>
+    <string name="grant_dialog_button_more_info" msgid="213350268561945193">"Толық ақпарат"</string>
     <string name="grant_dialog_button_allow_all" msgid="5939066403732409516">"Бәріне рұқсат беру"</string>
     <string name="grant_dialog_button_always_allow_all" msgid="1719900027660252167">"Әрдайым бәріне рұқсат беру"</string>
     <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"Шектеулі рұқсат беру"</string>
@@ -134,7 +134,7 @@
     <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"Қолданбалардың соңғы 24 сағатта <xliff:g id="PERMGROUP">%1$s</xliff:g> рұқсатын пайдалану хронологиясы"</string>
     <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"Қолданбалардың соңғы 7 күнде <xliff:g id="PERMGROUP">%1$s</xliff:g> рұқсатын пайдалану хронологиясы"</string>
     <string name="permission_usage_access_dialog_subtitle" msgid="4171772805196955753">"Бұл қолданба <xliff:g id="PERMGROUP">%1$s</xliff:g> рұқсатын қолданған кезде"</string>
-    <string name="permission_usage_access_dialog_learn_more" msgid="7121468469493184613">"Толығырақ"</string>
+    <string name="permission_usage_access_dialog_learn_more" msgid="7121468469493184613">"Толық ақпарат"</string>
     <string name="learn_more_content_description" msgid="8673699744544502539">"<xliff:g id="PERMGROUP">%1$s</xliff:g> туралы толық ақпарат"</string>
     <string name="manage_permission_summary" msgid="4117555482684114317">"Қолданбаның <xliff:g id="PERMGROUP">%1$s</xliff:g> пайдалану рұқсатын басқарады."</string>
     <string name="auto_permission_usage_timeline_summary" msgid="2713135806453218703">"<xliff:g id="ACCESS_TIME">%1$s</xliff:g> • <xliff:g id="SUMMARY_TEXT">%2$s</xliff:g>"</string>
@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Құрылғыдағы (<xliff:g id="DEVICE_NAME">%2$s</xliff:g>) осы қолданбаның рұқсаты: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Барлық <xliff:g id="APP">%1$s</xliff:g> рұқсаттарын көру"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Осы рұқсатқа ие барлық қолданбаларды көру"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Ақпарат"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Параметрлер"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Assistant микрофонының пайдаланылуын көрсету"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Пайдаланылмайтын қолданба параметрлері"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Қолданба пайдаланылмаса, рұқсаттарды өшіру"</string>
@@ -409,7 +411,7 @@
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"ескертпелер"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"Әдепкі әмиян қолданбасы"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"Әмиян қолданбасы"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"Әмиян қолданбаларында несиелік және тұрақты клиент карталарын, көлік кілттерін, сондай-ақ басқа да транзакция түрлері үшін қолайлы заттарды сақтауға болады."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"Әмиян қолданбаларында несиелік және тұрақты клиент карталарын, көлік кілттерін, әртүрлі транзакциялар үшін қолайлы басқа да заттарды сақтауға болады."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"<xliff:g id="APP_NAME">%1$s</xliff:g> қолданбасын әдепкі әмиян қолданбасы ретінде орнату керек пе?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"Рұқсаттар қажет емес."</string>
     <string name="request_role_current_default" msgid="738722892438247184">"Ағымдағы әдепкі қолданба"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Сілтемелер ашу"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Жұмыс үшін әдепкі қолданба"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Құпия кеңістікке арналған әдепкі қолданбалар"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Құрылғы үшін оңтайландырылған"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Басқа"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Жоқ"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(жүйенің әдепкі қолданбасы)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Қолданба жоқ"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> қолданбасы түзету туралы ақпаратты жүктеп салғысы келеді."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Түзету туралы деректер бөлісілсін бе?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Жүйе мәселені анықтады."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> қолданбасы осы құрылғыдан <xliff:g id="DATE">%2$s</xliff:g> күні <xliff:g id="TIME">%3$s</xliff:g> кезінде алынған қате туралы есепті жүктеп салуды сұрауда. Мұндай есептерге құрылғыңыз туралы немесе қолданбалар арқылы тіркелген жеке ақпарат (пайдаланушы аттары, геодерек, құрылғы идентификаторлары және желі туралы ақпарат) кіреді. Қате туралы есептерді тек сенімді адамдармен және қолданбалармен бөлісіңіз. <xliff:g id="APP_NAME_1">%4$s</xliff:g> қолданбасына қате туралы есепті жүктеп салуға рұқсат етілсін бе?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> қолданбасы осы құрылғыдан <xliff:g id="DATE">%2$s</xliff:g> күні <xliff:g id="TIME">%3$s</xliff:g> кезінде алынған қате туралы есепті жүктеп салуды сұрап тұр. Мұндай есептерге құрылғыңыз туралы немесе қолданбалар арқылы тіркелген жеке ақпарат (пайдаланушы аттары, геодерек, құрылғы идентификаторлары және желі туралы ақпарат) кіреді. Қате туралы есептерді тек сенімді адамдармен және қолданбалармен бөлісіңіз.\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> қолданбасына қате туралы есепті жүктеп салуға рұқсат етілсін бе?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> қолданбасының қате туралы есебін өңдеу кезінде қате шықты. Түзету туралы толық деректерді бөлісуден бас тартылды. Кедергі келтіргеніміз үшін кешірім сұраймыз."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Рұқсат беру"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Тыйым салу"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Шектелген параметрлерге рұқсат беру"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Шектелген параметр"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Қауіпсіздік мақсатында бұл параметрді қазір пайдалану мүмкін емес."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Телефон қоңырауы кезінде бұл әрекет мүмкін емес"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Телефон қоңырауы кезінде қолданбаларға басқа қолданбаларды орнатуға тыйым салынады.\n\n Алаяқтар телефонмен сөйлесу кезінде көбіне осындай әрекеттерді жасауды сұрайды, сондықтан сізді қорғау үшін бұл әрекет блокталған. Таныс емес адам осылай әрекет етуге нұсқау берсе, бұл алаяқтық болуы мүмкін."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Қоңырау кезінде әрекетті аяқтау мүмкін емес"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Бұл параметр құрылғы мен деректерді қорғау үшін блокталған.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Алаяқтар жаңа дереккөзден белгісіз қолданбалар орнатуыңызды сұрап, зиянды қолданбалар орнатқысы келуі мүмкін."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Алаяқтар қолданбаның арнайы мүмкіндіктерін пайдалануға рұқсат беруіңізді сұрап, құрылғыңызды басқарғысы келуі мүмкін."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Қолданбаға <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> рұқсаты берілмеді"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Қолданба жеке және қаржылық ақпаратыңызға қауіп төндіруі мүмкін құпия ақпарат рұқсатын сұрады.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Қолданба бұл шектеулі рұқсатсыз дұрыс жұмыс істемеуі мүмкін. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Рұқсат беру туралы ақпарат&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Қолданбаға әдепкі <xliff:g id="ROLE_NAME">%1$s</xliff:g> болу рұқсаты берілмеді"</string>

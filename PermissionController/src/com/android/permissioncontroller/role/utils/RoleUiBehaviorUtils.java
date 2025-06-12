@@ -26,12 +26,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.permissioncontroller.role.ui.RequestRoleItemView;
+import com.android.permissioncontroller.role.ui.RoleApplicationItem;
 import com.android.permissioncontroller.role.ui.RoleApplicationPreference;
 import com.android.permissioncontroller.role.ui.RolePreference;
 import com.android.permissioncontroller.role.ui.behavior.RoleUiBehavior;
 import com.android.role.controller.model.Role;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Utility methods for Role UI behavior
@@ -114,6 +116,19 @@ public final class RoleUiBehaviorUtils {
         uiBehavior.prepareApplicationPreferenceAsUser(
                 role, preference.asTwoStatePreference(), applicationInfo, user,
                 context);
+    }
+
+    /**
+     * @see RoleUiBehavior#getRecommendedApplicationFilter
+     */
+    @NonNull
+    public static Predicate<RoleApplicationItem> getRecommendedApplicationFilter(
+            @NonNull Role role, @NonNull Context context) {
+        RoleUiBehavior uiBehavior = getUiBehavior(role);
+        if (uiBehavior == null) {
+            return applicationItem -> false;
+        }
+        return uiBehavior.getRecommendedApplicationFilter(role, context);
     }
 
     /**

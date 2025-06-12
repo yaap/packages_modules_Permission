@@ -26,10 +26,12 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.permissioncontroller.role.ui.RequestRoleItemView;
+import com.android.permissioncontroller.role.ui.RoleApplicationItem;
 import com.android.permissioncontroller.role.ui.TwoTargetPreference;
 import com.android.role.controller.model.Role;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /***
  * Interface for UI behavior for roles
@@ -90,6 +92,20 @@ public interface RoleUiBehavior {
     default void prepareApplicationPreferenceAsUser(@NonNull Role role,
             @NonNull Preference preference, @NonNull ApplicationInfo applicationInfo,
             @NonNull UserHandle user, @NonNull Context context) {}
+
+    /**
+     * Get the filter for recommended applications of this role.
+     *
+     * @param role the role to get the recommended application filter for
+     * @param context the {@code Context} to retrieve system services
+     *
+     * @return the filter for recommended applications
+     */
+    @NonNull
+    default Predicate<RoleApplicationItem> getRecommendedApplicationFilter(
+            @NonNull Role role, @NonNull Context context) {
+        return applicationItem -> false;
+    }
 
     /**
      * Get the confirmation message for adding an application as a holder of this role.

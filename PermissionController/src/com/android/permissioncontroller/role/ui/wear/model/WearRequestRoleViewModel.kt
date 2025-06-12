@@ -17,16 +17,18 @@
 package com.android.permissioncontroller.role.ui.wear.model
 
 import android.os.Bundle
+import androidx.core.os.BundleCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.android.permissioncontroller.role.UserPackage
 
 /** ViewModel for WearRequestRoleScreen. */
 class WearRequestRoleViewModel : ViewModel() {
     val dontAskAgain = MutableLiveData<Boolean>(false)
-    val selectedPackageName = MutableLiveData<String?>(null)
+    val selectedPackage = MutableLiveData<UserPackage?>(null)
     var isHolderChecked: Boolean = false
-    var holderPackageName: String? = null
+    var holderPackage: UserPackage? = null
 
     fun dontAskAgain(): Boolean {
         return dontAskAgain.value ?: false
@@ -34,20 +36,25 @@ class WearRequestRoleViewModel : ViewModel() {
 
     fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(STATE_DONT_ASK_AGAIN, dontAskAgain())
-        outState.putString(STATE_SELECTED_PACKAGE_NAME, selectedPackageName.value)
+        outState.putParcelable(STATE_SELECTED_USER_PACKAGE, selectedPackage.value)
         outState.putBoolean(STATE_IS_HOLDER_CHECKED, isHolderChecked)
     }
 
     fun onRestoreInstanceState(savedInstanceState: Bundle) {
         dontAskAgain.value = savedInstanceState.getBoolean(STATE_DONT_ASK_AGAIN)
-        selectedPackageName.value = savedInstanceState.getString(STATE_SELECTED_PACKAGE_NAME)
         isHolderChecked = savedInstanceState.getBoolean(STATE_IS_HOLDER_CHECKED)
+        selectedPackage.value =
+            BundleCompat.getParcelable(
+                savedInstanceState,
+                STATE_SELECTED_USER_PACKAGE,
+                UserPackage::class.java,
+            )
     }
 
     companion object {
         const val STATE_DONT_ASK_AGAIN = "WearRequestRoleViewModel.state.DONT_ASK_AGAIN"
-        const val STATE_SELECTED_PACKAGE_NAME =
-            "WearRequestRoleViewModel.state.SELECTED_PACKAGE_NAME"
+        const val STATE_SELECTED_USER_PACKAGE =
+            "WearRequestRoleViewModel.state.SELECTED_USER_PACKAGE"
         const val STATE_IS_HOLDER_CHECKED = "WearRequestRoleViewModel.state.IS_HOLDER_CHECKED"
     }
 }
@@ -55,6 +62,7 @@ class WearRequestRoleViewModel : ViewModel() {
 /** Factory for a WearRequestRoleViewModel */
 class WearRequestRoleViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return WearRequestRoleViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return WearRequestRoleViewModel() as T
     }
 }

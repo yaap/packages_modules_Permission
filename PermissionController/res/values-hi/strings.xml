@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> पर इस ऐप्लिकेशन के लिए <xliff:g id="PERM">%1$s</xliff:g> का ऐक्सेस"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g> को मिली सभी अनुमतियां देखें"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"इस अनुमति वाले सभी ऐप्लिकेशन देखें"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"जानकारी"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"सेटिंग"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"असिस्टेंट माइक्रोफ़ोन के इस्तेमाल से जुड़ा डेटा दिखाएं"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"इस्तेमाल न हो रहे ऐप के लिए सेटिंग"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"ऐप्लिकेशन का इस्तेमाल न होने पर अनुमतियां हटाएं"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"खुलने वाले लिंक"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"काम के लिए डिफ़ॉल्ट"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"प्राइवेट स्पेस के लिए डिफ़ॉल्ट ऐप्लिकेशन"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"डिवाइस के लिए ऑप्टिमाइज़ किया गया"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"अन्य"</string>
     <string name="default_app_none" msgid="9084592086808194457">"कोई नहीं"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(सिस्टम डिफ़ॉल्ट)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"कोई ऐप्लिकेशन नहीं"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> डीबग करने की जानकारी अपलोड करना चाहता है."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"डीबग करने से जुड़ा डेटा शेयर करना चाहते हैं?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"सिस्टम को किसी समस्या का पता चला है."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> इस डिवाइस से <xliff:g id="DATE">%2$s</xliff:g> को <xliff:g id="TIME">%3$s</xliff:g> बजे ली गई गड़बड़ी की रिपोर्ट अपलोड करने की मंज़ूरी मांग रहा है. गड़बड़ी की रिपोर्ट में आपके डिवाइस के बारे में या ऐप्लिकेशन की ओर से लॉग की गई निजी जानकारी शामिल होती है, जैसे कि उपयोगकर्ता नाम, जगह की जानकारी का डेटा, डिवाइस पहचानकर्ता, और नेटवर्क की जानकारी. गड़बड़ी की रिपोर्ट सिर्फ़ उन लोगों और ऐप्लिकेशन के साथ शेयर करें जिन पर आप इस जानकारी को लेकर भरोसा करते हैं. क्या आप <xliff:g id="APP_NAME_1">%4$s</xliff:g> को गड़बड़ी की रिपोर्ट अपलोड करने देना चाहते हैं?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> इस डिवाइस से <xliff:g id="DATE">%2$s</xliff:g> को <xliff:g id="TIME">%3$s</xliff:g> बजे ली गई गड़बड़ी की रिपोर्ट अपलोड करने की मंज़ूरी मांग रहा है. गड़बड़ी की रिपोर्ट में आपके डिवाइस के बारे में या ऐप्लिकेशन की ओर से लॉग की गई निजी जानकारी शामिल होती है, जैसे कि उपयोगकर्ता नाम, जगह की जानकारी का डेटा, डिवाइस आइडेंटिफ़ायर, और नेटवर्क की जानकारी. गड़बड़ी की रिपोर्ट सिर्फ़ उन लोगों और ऐप्लिकेशन के साथ शेयर करें जिन पर आपको इस जानकारी को लेकर भरोसा हो.\n\nक्या <xliff:g id="APP_NAME_1">%4$s</xliff:g> को गड़बड़ी की रिपोर्ट अपलोड करने की अनुमति देनी है?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> के लिए गड़बड़ी की रिपोर्ट तैयार करने में दिक्कत हुई. इसलिए, डीबग करने के बारे में ज़्यादा जानकारी का डेटा शेयर नहींं किया जा सका. रुकावट के लिए खेद है."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"अनुमति दें"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"अनुमति न दें"</string>
@@ -630,8 +634,8 @@
     <string name="perm_toggle_description" msgid="7801326363741451379">"ऐप्लिकेशन और सेवाओं के लिए"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"ऐप्लिकेशन और सेवाओं के लिए. इस सेटिंग के बंद होने पर भी, माइक्रोफ़ोन डेटा को शेयर किया जा सकता है. ऐसा तब होता है, जब किसी आपातकालीन नंबर पर कॉल किया जाता है."</string>
     <string name="location_settings_subtitle" msgid="2328360561197430695">"उन ऐप्लिकेशन और सेवाओं को देखें जिनके पास जगह की जानकारी का ऐक्सेस है"</string>
-    <string name="show_clip_access_notification_title" msgid="5168467637351109096">"क्लिपबोर्ड का डेटा ऐक्सेस किए जाने पर मैसेज दिखाएं"</string>
-    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"जब कोई ऐप्लिकेशन आपके कॉपी किए गए टेक्स्ट, इमेज या अन्य कॉन्टेंट को ऐक्सेस करे, तो मैसेज दिखाएं"</string>
+    <string name="show_clip_access_notification_title" msgid="5168467637351109096">"क्लिपबोर्ड का डेटा ऐक्सेस किए जाने पर मैसेज पाएं"</string>
+    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"जब कोई ऐप्लिकेशन आपके कॉपी किए गए टेक्स्ट, इमेज या अन्य कॉन्टेंट को ऐक्सेस करेगा, तो आपको मैसेज दिखेगा"</string>
     <string name="show_password_title" msgid="2877269286984684659">"पासवर्ड दिखाएं"</string>
     <string name="show_password_summary" msgid="1110166488865981610">"टाइप करते समय वर्ण दिखाएं"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"इस ऐप्लिकेशन ने बताया है कि यह जगह की जानकारी का डेटा, तीसरे पक्ष के साथ शेयर कर सकता है"</string>
@@ -656,7 +660,7 @@
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"जगह की जानकारी का डेटा शेयर किया जा सकता है"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"इस ऐप्लिकेशन में बताया गया है कि यह तीसरे पक्ष के साथ जगह की जानकारी का डेटा शेयर कर सकता है"</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"जगह की जानकारी का डेटा शेयर करने के तरीके के बारे में अपडेट"</string>
-    <string name="data_sharing_updates_summary" msgid="764113985772233889">"उन ऐप्लिकेशन को देखा जा सकता है जिन्होंने आपकी जगह की जानकारी का डेटा शेयर करने का अपना तरीका बदल दिया है"</string>
+    <string name="data_sharing_updates_summary" msgid="764113985772233889">"उन ऐप्लिकेशन को देखें जिन्होंने आपकी जगह की जानकारी का डेटा शेयर करने के लिए, अपनी गतिविधियों में बदलाव किया है"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"इन ऐप्लिकेशन ने आपकी जगह की जानकारी के डेटा को शेयर करने का तरीका बदल दिया है. ऐसा हो सकता है कि ये ऐप्लिकेशन पहले जगह की जानकारी का डेटा शेयर न करते हों या फिर अब ये विज्ञापन या मार्केटिंग के लिए यह डेटा शेयर करें."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"इन ऐप्लिकेशन के डेवलपरों ने, डेटा शेयर करने के अपने तरीकों के बारे में ऐप स्टोर पर जानकारी दी है. वे समय-समय पर इस जानकारी को अपडेट कर सकते हैं.\n\nडेटा शेयर करने के तरीके अलग-अलग हो सकते हैं. ये आपकी जगह, उम्र, ऐप्लिकेशन के वर्शन, और उसके इस्तेमाल के हिसाब से तय किए जाते हैं."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"डेटा शेयर करने की नीतियों के बारे में जानें"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"पाबंदी वाली सेटिंग को अनुमति दें"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"इस सेटिंग पर पाबंदी लगाई गई है"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"आपकी सुरक्षा के लिए, यह सेटिंग फ़िलहाल उपलब्ध नहीं है."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"फ़ोन कॉल के दौरान, कार्रवाई नहीं की जा सकती"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"फ़ोन कॉल के दौरान, ऐप्लिकेशन को अन्य ऐप्लिकेशन इंस्टॉल करने की अनुमति नहीं है.\n\n फ़ोन पर बातचीत करते हुए, धोखाधड़ी करने वाले लोग अक्सर इस तरह की कार्रवाई करने का अनुरोध करते हैं. इसलिए, आपको सुरक्षित रखने के लिए यह अनुमति नहीं दी जाती है. अगर कोई अनज़ान व्यक्ति, आपको यह कार्रवाई करने के लिए कहता है, तो हो सकता है कि आपके साथ धोखाधड़ी की जा रही हो."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"कॉल के दौरान कार्रवाई पूरी नहीं की जा सकती"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"आपके डिवाइस और डेटा को सुरक्षित रखने के लिए, यह सेटिंग ब्लॉक की गई है. <xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>धोखाधड़ी करने वाले लोग, आपको नए सोर्स से अनजान ऐप्लिकेशन इंस्टॉल करने के लिए कहकर, आपके डिवाइस पर नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल कराने की कोशिश कर सकते हैं."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>धोखाधड़ी करने वाले लोग, आपके डिवाइस में मौजूद किसी ऐप्लिकेशन को ऐक्सेस करने की अनुमति लेकर, आपके डिवाइस को कंट्रोल करने की कोशिश कर सकते हैं."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"ऐप्लिकेशन को, <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> को ऐक्सेस करने की अनुमति नहीं मिली"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"इस ऐप्लिकेशन ने संवेदनशील जानकारी ऐक्सेस करने का अनुरोध किया है. इसे अनुमति देने पर, आपकी निजी और वित्तीय जानकारी की सुरक्षा को खतरा हो सकता है.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>हालांकि, हो सकता है कि पाबंदी वाली अनुमति न मिलने पर, ऐप्लिकेशन सही तरह से काम न करें. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;ऐक्सेस देने का तरीका जानें&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"ऐप्लिकेशन को डिफ़ॉल्ट <xliff:g id="ROLE_NAME">%1$s</xliff:g> के तौर पर सेट करने की अनुमति नहीं दी गई"</string>

@@ -54,7 +54,7 @@ import com.android.permissioncontroller.PermissionControllerApplication;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.ui.ManagePermissionsActivity;
 import com.android.permissioncontroller.permission.ui.handheld.SettingsWithLargeHeader;
-import com.android.permissioncontroller.permission.ui.model.v31.BasePermissionUsageDetailsViewModel;
+import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.AppPermissionAccessUiInfo;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsUiState;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsViewModelFactory;
@@ -89,7 +89,7 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
     private MenuItem mShow7DaysDataMenu;
     private MenuItem mShow24HoursDataMenu;
 
-    private BasePermissionUsageDetailsViewModel mViewModel;
+    private PermissionUsageDetailsViewModel mViewModel;
 
     private long mSessionId;
 
@@ -103,9 +103,9 @@ public class PermissionUsageDetailsFragment extends SettingsWithLargeHeader {
         }
         PermissionUsageDetailsViewModelFactory factory =
                 new PermissionUsageDetailsViewModelFactory(
-                        PermissionControllerApplication.get(), this, mPermissionGroup);
+                        PermissionControllerApplication.get(), mPermissionGroup);
         mViewModel =
-                new ViewModelProvider(this, factory).get(BasePermissionUsageDetailsViewModel.class);
+                new ViewModelProvider(this, factory).get(PermissionUsageDetailsViewModel.class);
 
         if (savedInstanceState != null) {
             mSessionId = savedInstanceState.getLong(SESSION_ID_KEY);

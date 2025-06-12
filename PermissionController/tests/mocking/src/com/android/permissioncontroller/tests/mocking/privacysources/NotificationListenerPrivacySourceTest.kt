@@ -55,7 +55,7 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -209,7 +209,7 @@ class NotificationListenerPrivacySourceTest {
 
         privacySource.safetyCenterEnabledChanged(context, false)
 
-        verifyZeroInteractions(mockSafetyCenterManager)
+        verifyNoMoreInteractions(mockSafetyCenterManager)
     }
 
     @Test
@@ -281,7 +281,7 @@ class NotificationListenerPrivacySourceTest {
             SafetyCenterReceiver.RefreshEvent.UNKNOWN
         )
 
-        verifyZeroInteractions(mockSafetyCenterManager)
+        verifyNoMoreInteractions(mockSafetyCenterManager)
     }
 
     private fun setNotificationListenerCheckEnabled(enabled: Boolean) {

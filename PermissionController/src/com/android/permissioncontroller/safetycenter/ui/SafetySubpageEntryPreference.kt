@@ -49,7 +49,7 @@ class SafetySubpageEntryPreference(
     context: Context,
     private val launchTaskId: Int?,
     private val entry: SafetyCenterEntry,
-    private val viewModel: SafetyCenterViewModel
+    private val viewModel: SafetyCenterViewModel,
 ) : TwoTargetPreference(context), ComparablePreference {
 
     init {
@@ -108,9 +108,7 @@ class SafetySubpageEntryPreference(
     }
 
     private fun isPrivateProfileSupported(): Boolean {
-        return SdkLevel.isAtLeastV() &&
-            com.android.permission.flags.Flags.privateProfileSupported() &&
-            android.os.Flags.allowPrivateProfile()
+        return SdkLevel.isAtLeastV() && com.android.permission.flags.Flags.privateProfileSupported()
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
@@ -125,7 +123,7 @@ class SafetySubpageEntryPreference(
                     PendingIntentSender.send(iconAction.pendingIntent, launchTaskId)
                     viewModel.interactionLogger.recordForEntry(
                         Action.ENTRY_ICON_ACTION_CLICKED,
-                        entry
+                        entry,
                     )
                 } catch (ex: Exception) {
                     Log.e(TAG, "Failed to execute icon action intent for $entry", ex)

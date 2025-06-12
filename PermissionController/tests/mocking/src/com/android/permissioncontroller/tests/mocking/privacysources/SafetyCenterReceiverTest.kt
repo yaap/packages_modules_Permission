@@ -40,10 +40,10 @@ import com.android.permissioncontroller.privacysources.SafetyCenterReceiver.Refr
 import com.android.permissioncontroller.privacysources.SafetyCenterReceiver.RefreshEvent.EVENT_REFRESH_REQUESTED
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
@@ -55,7 +55,7 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -74,7 +74,7 @@ class SafetyCenterReceiverTest {
         val application = Mockito.mock(PermissionControllerApplication::class.java)
     }
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val unconfinedCoroutineDispatcher = UnconfinedTestDispatcher()
 
     @Mock lateinit var mockSafetyCenterManager: SafetyCenterManager
     @Mock lateinit var mockPackageManager: PackageManager
@@ -88,7 +88,7 @@ class SafetyCenterReceiverTest {
     private fun privacySourceMap(context: Context) =
         mapOf(
             TEST_PRIVACY_SOURCE_ID to mockPrivacySource,
-            TEST_PRIVACY_SOURCE_ID_2 to mockPrivacySource2
+            TEST_PRIVACY_SOURCE_ID_2 to mockPrivacySource2,
         )
 
     @Before
@@ -110,28 +110,28 @@ class SafetyCenterReceiverTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(UserManager::class.java)
+                    eq(UserManager::class.java),
                 )
             )
             .thenReturn(mockUserManager)
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(SafetyCenterManager::class.java)
+                    eq(SafetyCenterManager::class.java),
                 )
             )
             .thenReturn(mockSafetyCenterManager)
         whenever(mockUserManager.isProfile).thenReturn(false)
 
-        safetyCenterReceiver = SafetyCenterReceiver(::privacySourceMap, testCoroutineDispatcher)
+        safetyCenterReceiver =
+            SafetyCenterReceiver(::privacySourceMap, unconfinedCoroutineDispatcher)
 
-        Dispatchers.setMain(testCoroutineDispatcher)
+        Dispatchers.setMain(unconfinedCoroutineDispatcher)
     }
 
     @After
     fun cleanup() {
         Dispatchers.resetMain()
-        testCoroutineDispatcher.cleanupTestCoroutines()
 
         mockitoSession.finishMocking()
     }
@@ -141,91 +141,104 @@ class SafetyCenterReceiverTest {
                 DeviceConfig.getInt(
                     eq(DeviceConfig.NAMESPACE_PRIVACY),
                     eq(SafetyCenterQsTileService.QS_TILE_COMPONENT_SETTING_FLAGS),
-                    ArgumentMatchers.anyInt()
+                    ArgumentMatchers.anyInt(),
                 )
             )
             .thenReturn(PackageManager.DONT_KILL_APP)
     }
 
     @Test
-    fun onReceive_actionSafetyCenterEnabledChanged() = runBlockingTest {
-        mockQSTileSettingsFlag()
-        safetyCenterReceiver.onReceive(application, Intent(ACTION_SAFETY_CENTER_ENABLED_CHANGED))
+    fun onReceive_actionSafetyCenterEnabledChanged() =
+        runTest(UnconfinedTestDispatcher()) {
+            mockQSTileSettingsFlag()
+            safetyCenterReceiver.onReceive(
+                application,
+                Intent(ACTION_SAFETY_CENTER_ENABLED_CHANGED),
+            )
 
-        verify(mockPrivacySource).safetyCenterEnabledChanged(application, true)
-        verify(mockPrivacySource2).safetyCenterEnabledChanged(application, true)
-    }
-
-    @Test
-    fun onReceive_actionSafetyCenterEnabledChanged_safetyCenterDisabled() = runBlockingTest {
-        mockQSTileSettingsFlag()
-        whenever(mockSafetyCenterManager.isSafetyCenterEnabled).thenReturn(false)
-
-        safetyCenterReceiver.onReceive(application, Intent(ACTION_SAFETY_CENTER_ENABLED_CHANGED))
-        advanceUntilIdle()
-
-        verify(mockPrivacySource).safetyCenterEnabledChanged(application, false)
-        verify(mockPrivacySource2).safetyCenterEnabledChanged(application, false)
-    }
+            verify(mockPrivacySource).safetyCenterEnabledChanged(application, true)
+            verify(mockPrivacySource2).safetyCenterEnabledChanged(application, true)
+        }
 
     @Test
-    fun onReceive_actionBootCompleted() = runBlockingTest {
-        val intent = Intent(ACTION_BOOT_COMPLETED)
+    fun onReceive_actionSafetyCenterEnabledChanged_safetyCenterDisabled() =
+        runTest(UnconfinedTestDispatcher()) {
+            mockQSTileSettingsFlag()
+            whenever(mockSafetyCenterManager.isSafetyCenterEnabled).thenReturn(false)
 
-        safetyCenterReceiver.onReceive(application, intent)
-        advanceUntilIdle()
+            safetyCenterReceiver.onReceive(
+                application,
+                Intent(ACTION_SAFETY_CENTER_ENABLED_CHANGED),
+            )
+            advanceUntilIdle()
 
-        verify(mockPrivacySource)
-            .rescanAndPushSafetyCenterData(application, intent, EVENT_DEVICE_REBOOTED)
-        verify(mockPrivacySource2)
-            .rescanAndPushSafetyCenterData(application, intent, EVENT_DEVICE_REBOOTED)
-    }
-
-    @Test
-    fun onReceive_actionBootCompleted_safetyCenterDisabled() = runBlockingTest {
-        whenever(mockSafetyCenterManager.isSafetyCenterEnabled).thenReturn(false)
-        val intent = Intent(ACTION_BOOT_COMPLETED)
-
-        safetyCenterReceiver.onReceive(application, intent)
-        advanceUntilIdle()
-
-        verifyZeroInteractions(mockPrivacySource)
-        verifyZeroInteractions(mockPrivacySource2)
-    }
+            verify(mockPrivacySource).safetyCenterEnabledChanged(application, false)
+            verify(mockPrivacySource2).safetyCenterEnabledChanged(application, false)
+        }
 
     @Test
-    fun onReceive_actionRefreshSafetySources() = runBlockingTest {
-        val intent = Intent(ACTION_REFRESH_SAFETY_SOURCES)
-        intent.putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, arrayOf(TEST_PRIVACY_SOURCE_ID))
+    fun onReceive_actionBootCompleted() =
+        runTest(UnconfinedTestDispatcher()) {
+            val intent = Intent(ACTION_BOOT_COMPLETED)
 
-        safetyCenterReceiver.onReceive(application, intent)
-        advanceUntilIdle()
+            safetyCenterReceiver.onReceive(application, intent)
+            advanceUntilIdle()
 
-        verify(mockPrivacySource)
-            .rescanAndPushSafetyCenterData(application, intent, EVENT_REFRESH_REQUESTED)
-        verifyZeroInteractions(mockPrivacySource2)
-    }
-
-    @Test
-    fun onReceive_actionRefreshSafetySources_noSourcesSpecified() = runBlockingTest {
-        val intent = Intent(ACTION_REFRESH_SAFETY_SOURCES)
-
-        safetyCenterReceiver.onReceive(application, intent)
-        advanceUntilIdle()
-
-        verifyZeroInteractions(mockPrivacySource)
-        verifyZeroInteractions(mockPrivacySource2)
-    }
+            verify(mockPrivacySource)
+                .rescanAndPushSafetyCenterData(application, intent, EVENT_DEVICE_REBOOTED)
+            verify(mockPrivacySource2)
+                .rescanAndPushSafetyCenterData(application, intent, EVENT_DEVICE_REBOOTED)
+        }
 
     @Test
-    fun onReceive_actionRefreshSafetySources_safetyCenterDisabled() = runBlockingTest {
-        whenever(mockSafetyCenterManager.isSafetyCenterEnabled).thenReturn(false)
-        val intent = Intent(ACTION_REFRESH_SAFETY_SOURCES)
+    fun onReceive_actionBootCompleted_safetyCenterDisabled() =
+        runTest(UnconfinedTestDispatcher()) {
+            whenever(mockSafetyCenterManager.isSafetyCenterEnabled).thenReturn(false)
+            val intent = Intent(ACTION_BOOT_COMPLETED)
 
-        safetyCenterReceiver.onReceive(application, intent)
-        advanceUntilIdle()
+            safetyCenterReceiver.onReceive(application, intent)
+            advanceUntilIdle()
 
-        verifyZeroInteractions(mockPrivacySource)
-        verifyZeroInteractions(mockPrivacySource2)
-    }
+            verifyNoMoreInteractions(mockPrivacySource)
+            verifyNoMoreInteractions(mockPrivacySource2)
+        }
+
+    @Test
+    fun onReceive_actionRefreshSafetySources() =
+        runTest(UnconfinedTestDispatcher()) {
+            val intent = Intent(ACTION_REFRESH_SAFETY_SOURCES)
+            intent.putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, arrayOf(TEST_PRIVACY_SOURCE_ID))
+
+            safetyCenterReceiver.onReceive(application, intent)
+            advanceUntilIdle()
+
+            verify(mockPrivacySource)
+                .rescanAndPushSafetyCenterData(application, intent, EVENT_REFRESH_REQUESTED)
+            verifyNoMoreInteractions(mockPrivacySource2)
+        }
+
+    @Test
+    fun onReceive_actionRefreshSafetySources_noSourcesSpecified() =
+        runTest(UnconfinedTestDispatcher()) {
+            val intent = Intent(ACTION_REFRESH_SAFETY_SOURCES)
+
+            safetyCenterReceiver.onReceive(application, intent)
+            advanceUntilIdle()
+
+            verifyNoMoreInteractions(mockPrivacySource)
+            verifyNoMoreInteractions(mockPrivacySource2)
+        }
+
+    @Test
+    fun onReceive_actionRefreshSafetySources_safetyCenterDisabled() =
+        runTest(UnconfinedTestDispatcher()) {
+            whenever(mockSafetyCenterManager.isSafetyCenterEnabled).thenReturn(false)
+            val intent = Intent(ACTION_REFRESH_SAFETY_SOURCES)
+
+            safetyCenterReceiver.onReceive(application, intent)
+            advanceUntilIdle()
+
+            verifyNoMoreInteractions(mockPrivacySource)
+            verifyNoMoreInteractions(mockPrivacySource2)
+        }
 }

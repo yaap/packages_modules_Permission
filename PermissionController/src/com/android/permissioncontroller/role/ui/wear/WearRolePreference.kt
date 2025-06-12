@@ -19,6 +19,7 @@ package com.android.permissioncontroller.role.ui.wear
 import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 import com.android.permissioncontroller.role.ui.RolePreference
 import com.android.permissioncontroller.role.ui.TwoTargetPreference.OnSecondTargetClickListener
 import com.android.settingslib.widget.TwoTargetPreference
@@ -28,11 +29,19 @@ class WearRolePreference(
     context: Context,
     val label: String,
     val onDefaultClicked: () -> Unit = {},
-    private var restrictionIntent: Intent? = null
+    private var restrictionIntent: Intent? = null,
+    private var summaryContentDescription: String? = null,
 ) : TwoTargetPreference(context), RolePreference {
 
     override fun setOnSecondTargetClickListener(listener: OnSecondTargetClickListener?) {
         // no-op
+    }
+
+    override fun setSummaryContentDescription(summaryContentDescription: String?) {
+        if (this.summaryContentDescription != summaryContentDescription) {
+            this.summaryContentDescription = summaryContentDescription
+            notifyChanged()
+        }
     }
 
     override fun setRestrictionIntent(restrictionIntent: Intent?) {
@@ -41,6 +50,14 @@ class WearRolePreference(
     }
 
     override fun asPreference(): Preference = this
+
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        super.onBindViewHolder(holder)
+
+        holder.findViewById(android.R.id.summary)?.let {
+            it.contentDescription = summaryContentDescription
+        }
+    }
 
     fun getOnClicked(): () -> Unit =
         restrictionIntent?.let { { context.startActivity(it) } } ?: onDefaultClicked

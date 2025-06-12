@@ -74,7 +74,7 @@
     <string name="days_ago" msgid="6650359081551335629">"{count,plural, =0{Dnes}=1{Pred 1 dňom}few{Pred # dňami}many{Pred # dňa}other{Pred # dňami}}"</string>
     <string name="app_disable_dlg_positive" msgid="7418444149981904940">"Deaktivovať aplikáciu"</string>
     <string name="app_disable_dlg_text" msgid="3126943217146120240">"Ak aplikáciu deaktivujete, systém a ďalšie aplikácie už nemusia fungovať podľa očakávaní. Upozorňujeme, že túto aplikáciu nemôžete odstrániť, pretože bola vo vašom zariadení predinštalovaná. Deaktiváciou ju vypnete a skryjete v zariadení."</string>
-    <string name="app_permission_manager" msgid="3903811137630909550">"Správca povolení"</string>
+    <string name="app_permission_manager" msgid="3903811137630909550">"Správa povolení"</string>
     <string name="never_ask_again" msgid="4728762438198560329">"Nabudúce sa nepýtať"</string>
     <string name="no_permissions" msgid="3881676756371148563">"Žiadne povolenia"</string>
     <string name="additional_permissions" msgid="5801285469338873430">"Ďalšie povolenia"</string>
@@ -86,7 +86,7 @@
     <string name="default_permission_description" msgid="4624464917726285203">"umožňuje vykonať neznámu akciu"</string>
     <string name="app_permissions_group_summary" msgid="8788419008958284002">"Povolené pri <xliff:g id="COUNT_0">%1$d</xliff:g> z(o) <xliff:g id="COUNT_1">%2$d</xliff:g> aplik."</string>
     <string name="app_permissions_group_summary2" msgid="4329922444840521150">"Počet povolených aplikácií: <xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="menu_show_system" msgid="4254021607027872504">"Zobraziť systémové"</string>
+    <string name="menu_show_system" msgid="4254021607027872504">"Zobraziť systémové aplikácie"</string>
     <string name="menu_hide_system" msgid="3855390843744028465">"Skryť systémové aplikácie"</string>
     <string name="menu_show_7_days_data" msgid="8979611198508523706">"Zobraziť 7 dní"</string>
     <string name="menu_show_24_hours_data" msgid="8228054833323380780">"Zobraziť 24 hodín"</string>
@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Prístup k položke <xliff:g id="PERM">%1$s</xliff:g> pre túto aplikáciu v zariadení <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Zobraziť všetky povolenia aplikácie <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Zobraziť všetky aplikácie s týmto povolením"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Informácia"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Nastavenia"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Zobraziť používanie mikrofónu Asistentom"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Nastavenia nepoužívaných aplikácií"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Odstrániť povolenia, ak sa aplikácia nepoužíva"</string>
@@ -355,7 +357,7 @@
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Tieto aplikácie si môžu zobraziť vašu obrazovku, akcie a vstupy, vykonávať akcie a ovládať obrazovku."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"Predvolený digitálny asistent"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digitálny asistent"</string>
-    <string name="role_assistant_description" msgid="6622458130459922952">"Asistenčné aplikácie vám pomáhajú na základe informácií zo zobrazenej obrazovky. Niektoré aplikácie podporujú spúšťač aj služby hlasového vstupu, aby vám poskytli integrovanú pomoc."</string>
+    <string name="role_assistant_description" msgid="6622458130459922952">"Asistenčné aplikácie pomáhajú na základe informácií zo zobrazenej obrazovky. Niektoré aplikácie podporujú spúšťače aj hlasový vstup, a ponúkajú tak integrovanú asistenciu."</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Predvolený prehliadač"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Prehliadač"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplikácie, ktoré umožňujú prehliadať internet a otvárať webové odkazy"</string>
@@ -368,7 +370,7 @@
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Tejto aplikácii bude udelený prístup k vašej kamere, kontaktom, mikrofónu, telefónu a správam SMS"</string>
     <string name="role_dialer_search_keywords" msgid="3324448983559188087">"vytáčanie"</string>
     <string name="role_sms_label" msgid="8456999857547686640">"Predvolená aplikácia na SMS"</string>
-    <string name="role_sms_short_label" msgid="4371444488034692243">"aplikáciou na SMS"</string>
+    <string name="role_sms_short_label" msgid="4371444488034692243">"Aplikácia na SMS"</string>
     <string name="role_sms_description" msgid="3424020199148153513">"Aplikácie, ktoré vám pomocou telefónneho čísla umožňujú posielať a prijímať krátke textové správy, fotky, videá a iné"</string>
     <string name="role_sms_request_title" msgid="7953552109601185602">"Chcete <xliff:g id="APP_NAME">%1$s</xliff:g> nastaviť ako predvolenú aplikáciu na SMS?"</string>
     <string name="role_sms_request_description" msgid="2691004766132144886">"Tejto aplikácii bude udelený prístup k vašej kamere, kontaktom, súborom a médiám, mikrofónu, telefónu aj správam SMS"</string>
@@ -438,7 +440,9 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otváranie odkazov"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predvolené na prácu"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predvolené pre súkromný priestor"</string>
-    <string name="default_app_none" msgid="9084592086808194457">"Žiadna"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimalizované pre zariadenie"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Iné"</string>
+    <string name="default_app_none" msgid="9084592086808194457">"Žiadna aplikácia"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predvolené systémom)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Žiadne aplikácie"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Ďalšie služby NFC"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> chce nahrať informácie o ladení."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Chcete zdieľať údaje ladenia?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Systém zistil problém."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> žiada o nahranie hlásenia chyby z tohto zariadenia vytvoreného <xliff:g id="DATE">%2$s</xliff:g> o <xliff:g id="TIME">%3$s</xliff:g>. Hlásenia chýb zahŕňajú osobné údaje o zariadení alebo osobné údaje zapísané aplikáciami, napríklad používateľské mená, údaje o polohe, identifikátory zariadenia a informácie o sieti. Hlásenia chýb zdieľajte iba s dôveryhodnými osobami a aplikáciami. Chcete povoliť aplikácii <xliff:g id="APP_NAME_1">%4$s</xliff:g> nahrať hlásenie chyby?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"Aplikácia <xliff:g id="APP_NAME_0">%1$s</xliff:g> žiada o nahranie hlásenia chyby z tohto zariadenia vytvoreného <xliff:g id="DATE">%2$s</xliff:g> o <xliff:g id="TIME">%3$s</xliff:g>. Hlásenia chýb zahŕňajú osobné údaje o zariadení alebo osobné údaje zapísané aplikáciami, napríklad používateľské mená, údaje o polohe, identifikátory zariadenia a informácie o sieti. Hlásenia chýb zdieľajte iba s dôveryhodnými osobami a aplikáciami.\n\nChcete povoliť aplikácii <xliff:g id="APP_NAME_1">%4$s</xliff:g> nahrať hlásenie chyby?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Pri spracúvaní hlásenia chyby pre <xliff:g id="APP_NAME">%1$s</xliff:g> sa vyskytla chyba. Zdieľanie podrobných údajov o ladení bolo preto zamietnuté. Ospravedlňujeme sa za prerušenie."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Povoliť"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Zamietnuť"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Povoliť obmedzené nastavenia"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Obmedzené nastavenie"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Z bezpečnostných dôvodov nie je toto nastavenie momentálne k dispozícii."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Akcia nie je počas telefonovania k dispozícii"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Počas telefonického hovoru nie je povolená inštalácia aplikácií inými aplikáciami.\n\n Podvodníci často žiadajú o tento typ akcie počas telefonických hovorov, preto je daná akcia zablokovaná z dôvodu vašej ochrany. Ak vás o túto akciu žiada niekto, koho nepoznáte, môže ísť o podvod."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Počas hovoru sa akcia nedá dokončiť"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Toto nastavenie je zablokované, aby sa zaistila ochrana vášho zariadenia a údajov. <xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Podvodníci sa môžu pokúsiť nainštalovať škodlivé aplikácie tým, že vás požiadajú o inštaláciu neznámych aplikácií z nového zdroja."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Podvodníci sa môžu pokúsiť získať kontrolu nad vaším zariadením tým, že vás v prípade nejakej aplikácie požiadajú o povolenie prístupu k dostupnosti."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikácii bol prístup k povoleniu <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> zamietnutý"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Táto aplikácia vyžaduje prístup k citlivému povoleniu, čo môže ohroziť vaše osobné údaje a finančné informácie.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Je možné, že bez tohto obmedzeného povolenia nebude aplikácia správne fungovať. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Ako povoliť prístup&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Aplikácii bol zamietnutý prístup a predvolene nemôže byť <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

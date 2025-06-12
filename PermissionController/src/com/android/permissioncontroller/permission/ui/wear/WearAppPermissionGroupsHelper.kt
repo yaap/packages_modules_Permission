@@ -44,6 +44,7 @@ import com.android.permissioncontroller.permission.ui.wear.model.WearAppPermissi
 import com.android.permissioncontroller.permission.ui.wear.model.WearLocationProviderInterceptDialogViewModel
 import com.android.permissioncontroller.permission.utils.ArrayUtils
 import com.android.permissioncontroller.permission.utils.LocationUtils
+import com.android.permissioncontroller.permission.utils.PermissionMapping
 import com.android.permissioncontroller.permission.utils.Utils
 import com.android.permissioncontroller.permission.utils.legacy.LegacySafetyNetLogger
 import com.android.permissioncontroller.permission.utils.navigateSafe
@@ -59,7 +60,7 @@ class WearAppPermissionGroupsHelper(
     val wearViewModel: WearAppPermissionUsagesViewModel,
     val revokeDialogViewModel: AppPermissionGroupsRevokeDialogViewModel,
     val locationProviderInterceptDialogViewModel: WearLocationProviderInterceptDialogViewModel,
-    private val toggledGroups: ArraySet<AppPermissionGroup> = ArraySet()
+    private val toggledGroups: ArraySet<AppPermissionGroup> = ArraySet(),
 ) {
     fun getPermissionGroupChipParams(
         appPermissionUsages: List<AppPermissionUsage>
@@ -71,7 +72,7 @@ class WearAppPermissionGroupsHelper(
         viewModel.extractGroupUsageLastAccessTime(
             groupUsageLastAccessTime,
             appPermissionUsages,
-            packageName
+            packageName,
         )
         val groupUiInfos = viewModel.packagePermGroupsLiveData.value
         val groups: List<AppPermissionGroup> = appPermissions.permissionGroups
@@ -92,7 +93,7 @@ class WearAppPermissionGroupsHelper(
 
         groups
             .filter { Utils.shouldShowPermission(context, it) }
-            .partition { it.declaringPackage == Utils.OS_PKG }
+            .partition { PermissionMapping.isPlatformPermissionGroup(it.name) }
             .let { it.first.plus(it.second) }
             .forEach { group ->
                 if (Utils.areGroupPermissionsIndividuallyControlled(context, group.name)) {
@@ -107,7 +108,7 @@ class WearAppPermissionGroupsHelper(
                                 checked = group.areRuntimePermissionsGranted(arrayOf(perm.name)),
                                 onCheckedChanged = { checked ->
                                     run { onPermissionGrantedStateChanged(group, perm, checked) }
-                                }
+                                },
                             )
                         )
                     }
@@ -123,10 +124,10 @@ class WearAppPermissionGroupsHelper(
                                         getSummary(
                                             category,
                                             it,
-                                            groupUsageLastAccessTime[it.groupName]
+                                            groupUsageLastAccessTime[it.groupName],
                                         )
                                     },
-                                onClick = { onPermissionGroupClicked(group, category.categoryName) }
+                                onClick = { onPermissionGroupClicked(group, category.categoryName) },
                             )
                         )
                     }
@@ -138,7 +139,7 @@ class WearAppPermissionGroupsHelper(
     private fun getSummary(
         category: Category?,
         groupUiInfo: GroupUiInfo,
-        lastAccessTime: Long?
+        lastAccessTime: Long?,
     ): String {
         val grantSummary =
             getGrantSummary(category, groupUiInfo)?.let { context.getString(it) } ?: ""
@@ -196,7 +197,7 @@ class WearAppPermissionGroupsHelper(
     private fun onPermissionGrantedStateChanged(
         group: AppPermissionGroup,
         perm: PermissionInfo,
-        checked: Boolean
+        checked: Boolean,
     ) {
         if (checked) {
             group.grantRuntimePermissions(true, false, arrayOf(perm.name))
@@ -247,7 +248,7 @@ class WearAppPermissionGroupsHelper(
                             revokeDialogViewModel.hasConfirmedRevoke = true
                         }
                         revokeDialogViewModel.dismissDialog()
-                    }
+                    },
                 )
             } else {
                 revokePermissionInGroup(group, perm.name)
@@ -261,7 +262,7 @@ class WearAppPermissionGroupsHelper(
                 if ("user" == Build.TYPE) {
                     Log.e(
                         TAG,
-                        "The impossible happens, permission $permName is not in group $group.name."
+                        "The impossible happens, permission $permName is not in group $group.name.",
                     )
                     null
                 } else {
@@ -291,13 +292,13 @@ class WearAppPermissionGroupsHelper(
     private fun showRevocationWarningDialog(
         messageId: Int,
         onOkButtonClick: () -> Unit,
-        onCancelButtonClick: () -> Unit = { revokeDialogViewModel.dismissDialog() }
+        onCancelButtonClick: () -> Unit = { revokeDialogViewModel.dismissDialog() },
     ) {
         revokeDialogViewModel.revokeDialogArgs =
             RevokeDialogArgs(
                 messageId = messageId,
                 onOkButtonClick = onOkButtonClick,
-                onCancelButtonClick = onCancelButtonClick
+                onCancelButtonClick = onCancelButtonClick,
             )
         revokeDialogViewModel.showDialogLiveData.value = true
     }
@@ -315,13 +316,15 @@ class WearAppPermissionGroupsHelper(
             LocationUtils.isLocationGroupAndControllerExtraPackage(
                 context,
                 permGroupName,
-                packageName
+                packageName,
             )
         ) {
             // Redirect to location controller extra package settings.
             LocationUtils.startLocationControllerExtraPackageSettings(context, user)
-        } else if (permGroupName.equals(HEALTH_PERMISSION_GROUP)
-            && android.permission.flags.Flags.replaceBodySensorPermissionEnabled()) {
+        } else if (
+            permGroupName.equals(HEALTH_PERMISSION_GROUP) &&
+                android.permission.flags.Flags.replaceBodySensorPermissionEnabled()
+        ) {
             // Redirect to Health&Fitness UI
             Utils.navigateToAppHealthConnectSettings(fragment.requireContext(), packageName, user)
         } else {
@@ -333,7 +336,7 @@ class WearAppPermissionGroupsHelper(
                     user,
                     caller,
                     sessionId,
-                    grantCategory
+                    grantCategory,
                 )
             fragment.findNavController().navigateSafe(R.id.perm_groups_to_app, args)
         }
@@ -364,7 +367,7 @@ class WearAppPermissionGroupsHelper(
                         viewModel.setAutoRevoke(checked)
                         Log.w(TAG, "setAutoRevoke $checked")
                     }
-                }
+                },
             )
         }
 
@@ -382,12 +385,12 @@ data class PermissionGroupChipParam(
     val enabled: Boolean = true,
     val checked: Boolean? = null,
     val onClick: () -> Unit = {},
-    val onCheckedChanged: (Boolean) -> Unit = {}
+    val onCheckedChanged: (Boolean) -> Unit = {},
 )
 
 data class AutoRevokeChipParam(
     val labelRes: Int,
     val visible: Boolean,
     val checked: Boolean = false,
-    val onCheckedChanged: (Boolean) -> Unit
+    val onCheckedChanged: (Boolean) -> Unit,
 )

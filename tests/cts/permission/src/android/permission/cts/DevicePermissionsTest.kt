@@ -22,6 +22,10 @@ import android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND_S
 import android.app.Instrumentation
 import android.companion.virtual.VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT
 import android.companion.virtual.VirtualDeviceManager.VirtualDevice
+import android.companion.virtual.VirtualDeviceParams
+import android.companion.virtual.VirtualDeviceParams.DEVICE_POLICY_CUSTOM
+import android.companion.virtual.VirtualDeviceParams.DEVICE_POLICY_DEFAULT
+import android.companion.virtual.VirtualDeviceParams.POLICY_TYPE_AUDIO
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager.FLAG_PERMISSION_ONE_TIME
@@ -33,10 +37,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build
 import android.os.UserHandle
 import android.permission.PermissionManager
-import android.permission.flags.Flags
 import android.platform.test.annotations.AppModeFull
-import android.platform.test.annotations.RequiresFlagsDisabled
-import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.virtualdevice.cts.common.VirtualDeviceRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -66,18 +67,25 @@ class DevicePermissionsTest {
     private lateinit var permissionManager: PermissionManager
 
     @get:Rule
-    var mVirtualDeviceRule = VirtualDeviceRule.withAdditionalPermissions(
+    var mVirtualDeviceRule =
+        VirtualDeviceRule.withAdditionalPermissions(
             Manifest.permission.GRANT_RUNTIME_PERMISSIONS,
             Manifest.permission.MANAGE_ONE_TIME_PERMISSION_SESSIONS,
             Manifest.permission.REVOKE_RUNTIME_PERMISSIONS,
-            Manifest.permission.GET_RUNTIME_PERMISSIONS
+            Manifest.permission.GET_RUNTIME_PERMISSIONS,
         )
 
     @Rule @JvmField val mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Before
     fun setup() {
-        virtualDevice = mVirtualDeviceRule.createManagedVirtualDevice()
+        virtualDevice =
+            mVirtualDeviceRule.createManagedVirtualDevice(
+                // Without custom audio policy, the RECORD_AUDIO permission won't be device aware.
+                VirtualDeviceParams.Builder()
+                    .setDevicePolicy(POLICY_TYPE_AUDIO, DEVICE_POLICY_CUSTOM)
+                    .build()
+            )
         virtualDeviceContext = defaultDeviceContext.createDeviceContext(virtualDevice.deviceId)
         permissionManager = virtualDeviceContext.getSystemService(PermissionManager::class.java)!!
         persistentDeviceId = virtualDevice.persistentDeviceId!!
@@ -89,43 +97,47 @@ class DevicePermissionsTest {
         runShellCommandOrThrow("pm uninstall $TEST_PACKAGE_NAME")
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testDeviceAwareRuntimePermissionIsGranted() {
-        grantPermissionAndAssertGranted(Manifest.permission.CAMERA, virtualDeviceContext)
+    fun virtualDeviceDefaultPolicy_deviceAwarePermissionFallsBackToDefaultDevice() {
+        virtualDevice =
+            mVirtualDeviceRule.createManagedVirtualDevice(
+                // With default audio policy, the RECORD_AUDIO permission won't be device aware.
+                VirtualDeviceParams.Builder()
+                    .setDevicePolicy(POLICY_TYPE_AUDIO, DEVICE_POLICY_DEFAULT)
+                    .build()
+            )
+        virtualDeviceContext = defaultDeviceContext.createDeviceContext(virtualDevice.deviceId)
+
+        grantPermissionAndAssertGranted(DEVICE_AWARE_PERMISSION, defaultDeviceContext)
+        assertPermission(DEVICE_AWARE_PERMISSION, PERMISSION_GRANTED, virtualDeviceContext)
     }
 
-    @RequiresFlagsDisabled(Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED)
     @Test
-    fun testDeviceAwareRuntimePermissionGrantIsInherited() {
-        grantPermissionAndAssertGranted(Manifest.permission.CAMERA, defaultDeviceContext)
+    fun virtualDeviceCustomPolicy_deviceAwarePermissionGrantedOnVirtualDevice() {
+        // When a device aware permission is granted on the default device, it's not automatically
+        // granted on the virtual device.
+        grantPermissionAndAssertGranted(DEVICE_AWARE_PERMISSION, defaultDeviceContext)
+        assertPermission(DEVICE_AWARE_PERMISSION, PERMISSION_DENIED, virtualDeviceContext)
 
-        assertPermission(Manifest.permission.CAMERA, PERMISSION_GRANTED, virtualDeviceContext)
+        grantPermissionAndAssertGranted(DEVICE_AWARE_PERMISSION, virtualDeviceContext)
     }
 
     @Test
-    fun testNonDeviceAwareRuntimePermissionGrantIsInherited() {
+    fun normalPermissionGrantedOnDefaultDevice_isGrantedOnVirtualDevice() {
         grantPermissionAndAssertGranted(NON_DEVICE_AWARE_PERMISSION, defaultDeviceContext)
 
         assertPermission(NON_DEVICE_AWARE_PERMISSION, PERMISSION_GRANTED, virtualDeviceContext)
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testDeviceAwareRuntimePermissionIsRevoked() {
+    fun virtualDeviceCustomPolicy_deviceAwarePermissionIsRevoked() {
         grantPermissionAndAssertGranted(DEVICE_AWARE_PERMISSION, virtualDeviceContext)
 
         revokePermissionAndAssertDenied(DEVICE_AWARE_PERMISSION, virtualDeviceContext)
     }
 
     @Test
-    fun testNonDeviceAwareRuntimePermissionIsRevokedForDefaultDevice() {
+    fun normalPermissionRevokedFromVirtualDevice_isAlsoRevokedOnDefaultDevice() {
         grantPermissionAndAssertGranted(NON_DEVICE_AWARE_PERMISSION, defaultDeviceContext)
         assertPermission(NON_DEVICE_AWARE_PERMISSION, PERMISSION_GRANTED, virtualDeviceContext)
         // Revoke call from virtualDeviceContext should revoke for default device as well.
@@ -134,24 +146,24 @@ class DevicePermissionsTest {
     }
 
     @Test
-    fun testNormalPermissionGrantIsInherited() {
+    fun normalPermission_isInheritedOnVirtualDevice() {
         assertPermission(Manifest.permission.INTERNET, PERMISSION_GRANTED, virtualDeviceContext)
     }
 
     @Test
-    fun testSignaturePermissionGrantIsInherited() {
+    fun signaturePermission_isInheritedOnVirtualDevice() {
         assertPermission(CUSTOM_SIGNATURE_PERMISSION, PERMISSION_GRANTED, virtualDeviceContext)
     }
 
     @Test
-    fun testOneTimePermissionIsRevoked() {
+    fun virtualDeviceCustomPolicy_oneTimePermissionIsRevoked() {
         grantPermissionAndAssertGranted(DEVICE_AWARE_PERMISSION, virtualDeviceContext)
         virtualDeviceContext.packageManager.updatePermissionFlags(
             DEVICE_AWARE_PERMISSION,
             TEST_PACKAGE_NAME,
             FLAG_PERMISSION_ONE_TIME,
             FLAG_PERMISSION_ONE_TIME,
-            UserHandle.of(virtualDeviceContext.userId)
+            UserHandle.of(virtualDeviceContext.userId),
         )
 
         permissionManager.startOneTimePermissionSession(
@@ -159,19 +171,15 @@ class DevicePermissionsTest {
             0,
             0,
             IMPORTANCE_FOREGROUND,
-            IMPORTANCE_FOREGROUND_SERVICE
+            IMPORTANCE_FOREGROUND_SERVICE,
         )
         eventually {
             assertPermission(DEVICE_AWARE_PERMISSION, PERMISSION_DENIED, virtualDeviceContext)
         }
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testRevokeSelfPermissionOnKill() {
+    fun virtualDeviceCustomPolicy_revokeSelfPermissionOnKill_permissionIsRevoked() {
         grantPermissionAndAssertGranted(DEVICE_AWARE_PERMISSION, virtualDeviceContext)
 
         revokeSelfPermission(DEVICE_AWARE_PERMISSION, virtualDeviceContext)
@@ -180,105 +188,90 @@ class DevicePermissionsTest {
         }
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testGrantAndRevokeDeviceAwarePermissionByPersistentDeviceId() {
-        val deviceAwarePermission = DEVICE_AWARE_PERMISSION
-
+    fun usePersistentDeviceIdToRevokeDeviceAwarePermission_permissionIsRevoked() {
         permissionManager.grantRuntimePermission(
             TEST_PACKAGE_NAME,
-            deviceAwarePermission,
-            persistentDeviceId
+            DEVICE_AWARE_PERMISSION,
+            persistentDeviceId,
         )
 
         assertThat(
                 permissionManager.checkPermission(
-                    deviceAwarePermission,
+                    DEVICE_AWARE_PERMISSION,
                     TEST_PACKAGE_NAME,
-                    virtualDevice.persistentDeviceId!!
+                    virtualDevice.persistentDeviceId!!,
                 )
             )
             .isEqualTo(PERMISSION_GRANTED)
 
         assertThat(
                 permissionManager.checkPermission(
-                    deviceAwarePermission,
+                    DEVICE_AWARE_PERMISSION,
                     TEST_PACKAGE_NAME,
-                    PERSISTENT_DEVICE_ID_DEFAULT
+                    PERSISTENT_DEVICE_ID_DEFAULT,
                 )
             )
             .isEqualTo(PERMISSION_DENIED)
 
         permissionManager.revokeRuntimePermission(
             TEST_PACKAGE_NAME,
-            deviceAwarePermission,
+            DEVICE_AWARE_PERMISSION,
             persistentDeviceId,
-            "test"
+            "test",
         )
 
         assertThat(
                 permissionManager.checkPermission(
-                    deviceAwarePermission,
+                    DEVICE_AWARE_PERMISSION,
                     TEST_PACKAGE_NAME,
-                    virtualDevice.persistentDeviceId!!
+                    virtualDevice.persistentDeviceId!!,
                 )
             )
             .isEqualTo(PERMISSION_DENIED)
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testUpdateAndGetPermissionFlagsByPersistentDeviceId() {
-        val deviceAwarePermission = DEVICE_AWARE_PERMISSION
+    fun updateAndGetPermissionFlagsByPersistentDeviceId() {
         val flagMask = FLAG_PERMISSION_USER_SET or FLAG_PERMISSION_USER_FIXED
         val flag = FLAG_PERMISSION_USER_SET
 
         assertThat(
                 permissionManager.getPermissionFlags(
                     TEST_PACKAGE_NAME,
-                    deviceAwarePermission,
-                    persistentDeviceId
+                    DEVICE_AWARE_PERMISSION,
+                    persistentDeviceId,
                 )
             )
             .isEqualTo(0)
 
         permissionManager.updatePermissionFlags(
             TEST_PACKAGE_NAME,
-            deviceAwarePermission,
+            DEVICE_AWARE_PERMISSION,
             persistentDeviceId,
             flagMask,
-            flag
+            flag,
         )
 
         assertThat(
                 permissionManager.getPermissionFlags(
                     TEST_PACKAGE_NAME,
-                    deviceAwarePermission,
-                    persistentDeviceId
+                    DEVICE_AWARE_PERMISSION,
+                    persistentDeviceId,
                 )
             )
             .isEqualTo(FLAG_PERMISSION_USER_SET)
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testAllPermissionStatesApiGrantForVirtualDevice() {
+    fun permissionGrantedOnVirtualDevice_reflectedInGetAllPermissionStatesApi() {
         // Setting a flag explicitly so that the permission consistently stays in the state
         permissionManager.updatePermissionFlags(
             TEST_PACKAGE_NAME,
             DEVICE_AWARE_PERMISSION,
             PERSISTENT_DEVICE_ID_DEFAULT,
             FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED,
-            FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED
+            FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED,
         )
 
         assertThat(
@@ -291,7 +284,7 @@ class DevicePermissionsTest {
         permissionManager.grantRuntimePermission(
             TEST_PACKAGE_NAME,
             DEVICE_AWARE_PERMISSION,
-            persistentDeviceId
+            persistentDeviceId,
         )
 
         val permissionStateMap =
@@ -312,7 +305,7 @@ class DevicePermissionsTest {
             TEST_PACKAGE_NAME,
             DEVICE_AWARE_PERMISSION,
             persistentDeviceId,
-            "test"
+            "test",
         )
 
         assertThat(
@@ -323,12 +316,8 @@ class DevicePermissionsTest {
             .isFalse()
     }
 
-    @RequiresFlagsEnabled(
-        Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED,
-        Flags.FLAG_DEVICE_AWARE_PERMISSIONS_ENABLED
-    )
     @Test
-    fun testAllPermissionStatesApiFlagsForVirtualDevice() {
+    fun setPermissionFlagOnVirtualDevice_reflectedInGetAllPermissionStatesApi() {
         val flagMask = FLAG_PERMISSION_USER_SET or FLAG_PERMISSION_USER_FIXED
         val flag = FLAG_PERMISSION_USER_SET
 
@@ -340,7 +329,7 @@ class DevicePermissionsTest {
             DEVICE_AWARE_PERMISSION,
             persistentDeviceId,
             flagMask,
-            flag
+            flag,
         )
 
         assertThat(
@@ -349,7 +338,7 @@ class DevicePermissionsTest {
                         .getAllPermissionStates(TEST_PACKAGE_NAME, persistentDeviceId)[
                             DEVICE_AWARE_PERMISSION]!!
                         .flags,
-                    flag
+                    flag,
                 )
             )
             .isTrue()
@@ -360,15 +349,14 @@ class DevicePermissionsTest {
                         .getAllPermissionStates(TEST_PACKAGE_NAME, persistentDeviceId)[
                             DEVICE_AWARE_PERMISSION]!!
                         .flags,
-                    FLAG_PERMISSION_USER_FIXED
+                    FLAG_PERMISSION_USER_FIXED,
                 )
             )
             .isFalse()
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED)
     @Test
-    fun testAllPermissionStatesApiGrantForDefaultDevice() {
+    fun permissionGrantedOnDefaultDevice_reflectedInGetAllPermissionStatesApi() {
         // Setting a flag explicitly so that the permission consistently stays in the state upon
         // revoke
         permissionManager.updatePermissionFlags(
@@ -376,13 +364,13 @@ class DevicePermissionsTest {
             DEVICE_AWARE_PERMISSION,
             PERSISTENT_DEVICE_ID_DEFAULT,
             FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED,
-            FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED
+            FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED,
         )
 
         permissionManager.grantRuntimePermission(
             TEST_PACKAGE_NAME,
             DEVICE_AWARE_PERMISSION,
-            PERSISTENT_DEVICE_ID_DEFAULT
+            PERSISTENT_DEVICE_ID_DEFAULT,
         )
 
         assertThat(
@@ -404,7 +392,7 @@ class DevicePermissionsTest {
             TEST_PACKAGE_NAME,
             DEVICE_AWARE_PERMISSION,
             PERSISTENT_DEVICE_ID_DEFAULT,
-            "test"
+            "test",
         )
 
         assertThat(
@@ -416,9 +404,8 @@ class DevicePermissionsTest {
             .isFalse()
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED)
     @Test
-    fun testAllPermissionStatesApiFlagsForDefaultDevice() {
+    fun setPermissionFlagOnDefaultDevice_reflectedInGetAllPermissionStatesApi() {
         val flagMask = FLAG_PERMISSION_USER_SET or FLAG_PERMISSION_USER_FIXED
         val flag = FLAG_PERMISSION_USER_SET
 
@@ -434,7 +421,7 @@ class DevicePermissionsTest {
             DEVICE_AWARE_PERMISSION,
             PERSISTENT_DEVICE_ID_DEFAULT,
             flagMask,
-            flag
+            flag,
         )
 
         assertThat(
@@ -443,7 +430,7 @@ class DevicePermissionsTest {
                         .getAllPermissionStates(TEST_PACKAGE_NAME, PERSISTENT_DEVICE_ID_DEFAULT)[
                             DEVICE_AWARE_PERMISSION]!!
                         .flags,
-                    flag
+                    flag,
                 )
             )
             .isTrue()
@@ -454,19 +441,18 @@ class DevicePermissionsTest {
                         .getAllPermissionStates(TEST_PACKAGE_NAME, PERSISTENT_DEVICE_ID_DEFAULT)[
                             DEVICE_AWARE_PERMISSION]!!
                         .flags,
-                    FLAG_PERMISSION_USER_FIXED
+                    FLAG_PERMISSION_USER_FIXED,
                 )
             )
             .isFalse()
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_DEVICE_AWARE_PERMISSION_APIS_ENABLED)
     @Test
-    fun testAllPermissionStatesApiThatNonDeviceAwareRuntimePermissionGrantIsNotInherited() {
+    fun getAllPermissionStates_normalPermissionIsNotInherited() {
         permissionManager.grantRuntimePermission(
             TEST_PACKAGE_NAME,
             NON_DEVICE_AWARE_PERMISSION,
-            PERSISTENT_DEVICE_ID_DEFAULT
+            PERSISTENT_DEVICE_ID_DEFAULT,
         )
 
         assertThat(
@@ -501,7 +487,7 @@ class DevicePermissionsTest {
         context.packageManager.grantRuntimePermission(
             TEST_PACKAGE_NAME,
             permissionName,
-            UserHandle.of(context.userId)
+            UserHandle.of(context.userId),
         )
         assertPermission(permissionName, PERMISSION_GRANTED, context)
     }
@@ -510,18 +496,14 @@ class DevicePermissionsTest {
         context.packageManager.revokeRuntimePermission(
             TEST_PACKAGE_NAME,
             permissionName,
-            UserHandle.of(context.userId)
+            UserHandle.of(context.userId),
         )
         assertPermission(permissionName, PERMISSION_DENIED, context)
     }
 
-    private fun assertPermission(
-        permissionName: String,
-        permissionState: Int,
-        context: Context,
-    ) {
-        assertThat(context.packageManager.checkPermission(permissionName, TEST_PACKAGE_NAME))
-            .isEqualTo(permissionState)
+    private fun assertPermission(permissionName: String, permissionState: Int, context: Context) {
+        val uid = defaultDeviceContext.packageManager.getApplicationInfo(TEST_PACKAGE_NAME, 0).uid
+        assertThat(context.checkPermission(permissionName, -1, uid)).isEqualTo(permissionState)
     }
 
     companion object {

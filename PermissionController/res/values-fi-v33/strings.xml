@@ -16,8 +16,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="role_dialer_request_description" msgid="6188305064871543419">"Sovellus saa luvan lähettää sinulle ilmoituksia ja pääsyn kameraan, yhteystietoihin, mikrofoniin, puhelimeen ja tekstiviesteihin"</string>
-    <string name="role_sms_request_description" msgid="1506966389698625395">"Sovellus saa luvan lähettää sinulle ilmoituksia ja pääsyn kameraan, yhteystietoihin, tiedostoihin, mikrofoniin, puhelimeen ja tekstiviesteihin"</string>
+    <string name="role_dialer_request_description" msgid="6188305064871543419">"Sovellus saa luvan lähettää sinulle ilmoituksia ja se saa pääsyn kameraan, yhteystietoihin, mikrofoniin, puhelimeen ja tekstiviesteihin"</string>
+    <string name="role_sms_request_description" msgid="1506966389698625395">"Sovellus saa luvan lähettää sinulle ilmoituksia ja se saa pääsyn kameraan, yhteystietoihin, tiedostoihin, mikrofoniin, puhelimeen ja tekstiviesteihin"</string>
     <string name="permission_description_summary_storage" msgid="1917071243213043858">"Sovellukset, joilla on tämä lupa, saavat pääsyn kaikkiin laitteen tiedostoihin"</string>
     <string name="work_policy_title" msgid="832967780713677409">"Työkäytäntötietosi"</string>
     <string name="work_policy_summary" msgid="3886113358084963931">"IT-järjestelmänvalvojan ylläpitämät asetukset"</string>
@@ -30,6 +30,7 @@
     <string name="safety_center_more_issues_card_title" msgid="7425844746197493312">"Lisää ilmoituksia"</string>
     <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"Hylätyt hälytykset"</string>
     <string name="safety_center_more_issues_card_expand_action" msgid="7109451851052272946">"{count,plural, =1{Laajenna ja katso yksi muu ilmoitus}other{Laajenna ja katso # muuta ilmoitusta}}"</string>
+    <string name="safety_center_more_issues_card_collapse_action" msgid="7485597582198474637">"Tiivistä"</string>
     <string name="safety_center_issue_card_prefix_content_description" msgid="1447445289637043544">"Hälytys. <xliff:g id="ISSUE_CARD_TITLE">%1$s</xliff:g>"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="8548932070610766651">"Toiminto suoritettu"</string>
     <string name="safety_center_qs_status_summary" msgid="5193925895830451177">"Tarkista asetukset, jotka voivat parantaa laitteesi turvallisuutta"</string>

@@ -374,7 +374,8 @@ class SafetyCenterMultiUsersTest {
                 safetyCenterTestData.safetyCenterStatusUnknown,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
                         safetyCenterTestData.safetyCenterEntryDefault(
                             SINGLE_SOURCE_ALL_PROFILE_ID,
                             deviceState.additionalUser().id(),
@@ -382,7 +383,8 @@ class SafetyCenterMultiUsersTest {
                                 createTestActivityRedirectPendingIntentForUser(
                                     deviceState.additionalUser().userHandle()
                                 ),
-                        )
+                        ),
+                        "No info yet",
                     )
                 ),
                 emptyList(),
@@ -1227,8 +1229,10 @@ class SafetyCenterMultiUsersTest {
                 safetyCenterTestData.safetyCenterStatusUnknown,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ALL_PROFILE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ALL_PROFILE_ID),
+                        "No info yet",
                     )
                 ),
                 emptyList(),
@@ -1298,8 +1302,10 @@ class SafetyCenterMultiUsersTest {
                 safetyCenterTestData.safetyCenterStatusUnknown,
                 emptyList(),
                 listOf(
-                    SafetyCenterEntryOrGroup(
-                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ALL_PROFILE_ID)
+                    safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
+                        SINGLE_SOURCE_GROUP_ID,
+                        safetyCenterTestData.safetyCenterEntryDefault(SINGLE_SOURCE_ALL_PROFILE_ID),
+                        "No info yet",
                     )
                 ),
                 emptyList(),

@@ -18,12 +18,14 @@ package com.android.permissioncontroller.permission
 
 import android.content.Context
 import android.os.Build
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.permissioncontroller.permission.utils.PermissionMapping
 import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import org.junit.Rule
 import org.junit.Test
 
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.S, codeName = "S")
@@ -31,6 +33,8 @@ class GetPermissionGroupInfoTest {
     private val context = InstrumentationRegistry.getInstrumentation().context as Context
     private val packageManager = context.packageManager
     private val timeoutMs: Long = 10000
+
+    @JvmField @Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
     fun assertAllPlatformPermGroupPermListsMatch() {

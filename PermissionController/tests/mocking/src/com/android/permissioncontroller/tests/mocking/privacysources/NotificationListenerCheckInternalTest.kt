@@ -30,7 +30,6 @@ import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyEvent
 import android.safetycenter.SafetySourceData
 import android.safetycenter.SafetySourceIssue
-import androidx.core.util.Preconditions
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
@@ -464,9 +463,7 @@ class NotificationListenerCheckInternalTest {
         }
 
         val safetySourceIssue =
-            Preconditions.checkNotNull(
-                notificationListenerCheck.createSafetySourceIssue(testComponent, 0)
-            )
+            checkNotNull(notificationListenerCheck.createSafetySourceIssue(testComponent, 0))
 
         val expectedId = "notification_listener_${testComponent.flattenToString()}"
         val expectedTitle =

@@ -40,7 +40,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.android.modules.utils.build.SdkLevel;
-import com.android.permission.flags.Flags;
 import com.android.permissioncontroller.PermissionControllerApplication;
 import com.android.permissioncontroller.R;
 
@@ -117,7 +116,7 @@ public class LocationUtils {
     /** Checks if the provided package is an automotive location bypass allowlisted package. */
     public static boolean isAutomotiveLocationBypassAllowlistedPackage(
             Context context, String packageName) {
-        return SdkLevel.isAtLeastV() && Flags.addBannersToPrivacySensitiveAppsForAaos()
+        return SdkLevel.isAtLeastV()
                 && getAutomotiveLocationBypassAllowlist(context).contains(packageName);
     }
 

@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         android:minWidth="60dp"
         android:layout_marginTop="19dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:textColor="?android:attr/textColorSecondary"
     />
 
     <LinearLayout

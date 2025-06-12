@@ -17,6 +17,7 @@
 package com.android.permissioncontroller.role.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.TwoStatePreference;
 
 /**
@@ -29,4 +30,9 @@ public interface RoleApplicationPreference extends RestrictionAwarePreference {
      */
     @NonNull
     TwoStatePreference asTwoStatePreference();
+
+    /**
+     * Sets the preference's content description.
+     */
+    void setContentDescription(@Nullable String contentDescription);
 }

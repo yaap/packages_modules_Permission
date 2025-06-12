@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> でこのアプリに <xliff:g id="PERM">%1$s</xliff:g> へのアクセス権が付与されています"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"「<xliff:g id="APP">%1$s</xliff:g>」アプリの権限をすべて表示"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"この権限があるアプリをすべて表示"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"情報"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"設定"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"アシスタントのマイクの使用を表示"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"使用していないアプリの設定"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"アプリが使用されていない場合に権限を削除"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"リンクを開く"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"デフォルトの仕事用アプリ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"プライベート スペースのデフォルト"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"デバイス向けに最適化"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"その他"</string>
     <string name="default_app_none" msgid="9084592086808194457">"なし"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"（システムのデフォルト）"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"アプリなし"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> がデバッグ情報のアップロードをリクエストしています。"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"デバッグデータを共有しますか？"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"システムで問題が検出されました。"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> が、<xliff:g id="DATE">%2$s</xliff:g>、<xliff:g id="TIME">%3$s</xliff:g>にこのデバイスから取得したバグレポートのアップロードをリクエストしています。バグレポートには、ユーザー名、位置情報、デバイスの識別情報、ネットワーク情報など、デバイスに関する個人情報やアプリで記録された個人情報が含まれます。この情報を含むバグレポートは、信頼できる人やアプリとのみ共有してください。<xliff:g id="APP_NAME_1">%4$s</xliff:g> にバグレポートのアップロードを許可しますか？"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> が、<xliff:g id="DATE">%2$s</xliff:g>の<xliff:g id="TIME">%3$s</xliff:g>にこのデバイスから取得したバグレポートのアップロードをリクエストしています。バグレポートには、ユーザー名、位置情報、デバイスの識別情報、ネットワーク情報など、デバイスに関する個人情報やアプリで記録された個人情報が含まれます。この情報を含むバグレポートは、信頼できる人やアプリとのみ共有してください。\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> にバグレポートのアップロードを許可しますか？"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> のバグレポートの処理中にエラーが発生しました。詳細なデバッグデータの共有が許可されませんでした。ご不便をおかけして申し訳ありません。"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"許可"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"許可しない"</string>
@@ -487,8 +491,8 @@
     <string name="permgrouprequest_device_aware_fineupgrade" msgid="4453775952305587571">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;の位置情報に対する &lt;b&gt;<xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g>&lt;/b&gt; のアクセス権を「おおよそ」から「正確」に変更しますか？"</string>
     <string name="permgrouprequest_coarselocation" msgid="7244605063736425232">"このデバイスのおおよその位置情報へのアクセスを &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
     <string name="permgrouprequest_device_aware_coarselocation" msgid="8367540370912066757">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;のおおよその位置情報へのアクセスを &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
-    <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"正確"</string>
-    <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"おおよそ"</string>
+    <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"正確な位置"</string>
+    <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"おおよその位置"</string>
     <string name="permgrouprequest_calendar" msgid="1493150855673603806">"カレンダーへのアクセスを「&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;」に許可しますか？"</string>
     <string name="permgrouprequest_device_aware_calendar" msgid="7161929851377463612">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;内のカレンダーへのアクセスを &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
     <string name="permgrouprequest_sms" msgid="5672063688745420991">"SMS メッセージの送信と表示を「&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;」に許可しますか？"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"制限付き設定を許可"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"制限付き設定"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"セキュリティ保護のため、この設定は現在利用できません。"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"この操作は通話中はできません"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"通話中にアプリが他のアプリをインストールすることはできません。\n\n このような操作は、詐欺師が電話での会話中に要求することが多いため、ユーザー保護を目的に禁止されています。知らない相手からこのような操作を求められた場合は、詐欺の可能性があります。"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"通話中は操作を完了できません"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"デバイスとデータを保護するため、この設定はブロックされています。<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>詐欺師が新しいソースから不明なアプリをインストールするようユーザーに持ちかけ、有害なアプリをインストールしようとする可能性があります。"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>詐欺師が、ユーザー補助機能へのアクセスをアプリに許可するようユーザーに依頼して、デバイスを操作しようとする可能性があります。"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"アプリは<xliff:g id="PERMISSION_NAME">%1$s</xliff:g>へのアクセスを拒否されました"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"機密情報に関わる権限へのアクセスをアプリがリクエストしました。この権限へのアクセスは、あなたの個人情報や財務情報を危険にさらす恐れがあります。<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>この制限付きの権限がないとアプリは正しく動作しない可能性があります。&lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;アクセスを許可する方法の詳細&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"アプリはデフォルトの<xliff:g id="ROLE_NAME">%1$s</xliff:g>としてのアクセスを拒否されました"</string>

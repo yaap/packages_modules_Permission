@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.UserHandle
-import android.permission.flags.Flags
 import androidx.annotation.VisibleForTesting
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.permission.data.repository.v31.PermissionRepository
@@ -99,5 +98,4 @@ private fun isTelecomPackage(packageName: String, permissionGroup: String): Bool
             permissionGroup == Manifest.permission_group.MICROPHONE)
 }
 
-fun isLocationByPassEnabled(): Boolean =
-    SdkLevel.isAtLeastV() && Flags.locationBypassPrivacyDashboardEnabled()
+fun isLocationByPassEnabled(): Boolean = SdkLevel.isAtLeastV()

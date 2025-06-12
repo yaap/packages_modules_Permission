@@ -21,6 +21,7 @@
     package="android.permissionmultidevice.cts.accessremotedevicecamera">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application>
         <activity android:name=".RequestPermissionActivity" android:exported="true" />

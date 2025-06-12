@@ -16,8 +16,6 @@
 
 package com.android.permissioncontroller.role.ui.wear
 
-import android.content.pm.ApplicationInfo
-import android.util.Pair
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,27 +23,32 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import androidx.wear.compose.material.ToggleChipDefaults
-import com.android.permissioncontroller.permission.ui.wear.elements.AlertDialog
-import com.android.permissioncontroller.permission.ui.wear.elements.ListFooter
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
-import com.android.permissioncontroller.permission.ui.wear.elements.ToggleChip
-import com.android.permissioncontroller.permission.ui.wear.elements.ToggleChipToggleControl
-import com.android.permissioncontroller.permission.ui.wear.elements.toggleChipDisabledColors
+import com.android.permissioncontroller.role.ui.RoleApplicationItem
 import com.android.permissioncontroller.role.ui.wear.model.ConfirmDialogArgs
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.material3.DialogButtonContent
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionConfirmationDialog
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionListFooter
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControl
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlStyle
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlType
+import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 
 @Composable
 fun WearDefaultAppScreen(helper: WearDefaultAppHelper) {
-    val roleLiveData = helper.viewModel.roleLiveData.observeAsState(emptyList())
+    val roleLiveData = helper.viewModel.liveData.observeAsState(emptyList())
     val showConfirmDialog =
         helper.confirmDialogViewModel.showConfirmDialogLiveData.observeAsState(false)
     var isLoading by remember { mutableStateOf(true) }
+    val materialUIVersion = ResourceHelper.materialUIVersionInSettings
     Box {
         WearDefaultAppContent(isLoading, roleLiveData.value, helper)
         ConfirmDialog(
+            materialUIVersion = materialUIVersion,
             showDialog = showConfirmDialog.value,
-            args = helper.confirmDialogViewModel.confirmDialogArgs
+            args = helper.confirmDialogViewModel.confirmDialogArgs,
         )
     }
     if (isLoading && roleLiveData.value.isNotEmpty()) {
@@ -56,56 +59,60 @@ fun WearDefaultAppScreen(helper: WearDefaultAppHelper) {
 @Composable
 private fun WearDefaultAppContent(
     isLoading: Boolean,
-    qualifyingApplications: List<Pair<ApplicationInfo, Boolean>>,
-    helper: WearDefaultAppHelper
+    applicationItems: List<RoleApplicationItem>,
+    helper: WearDefaultAppHelper,
 ) {
     ScrollableScreen(title = helper.getTitle(), isLoading = isLoading) {
-        helper.getNonePreference(qualifyingApplications)?.let {
+        helper.getNonePreference(applicationItems)?.let {
             item {
-                ToggleChip(
+                WearPermissionToggleControl(
                     label = it.title.toString(),
-                    icon = it.icon,
+                    iconBuilder = it.icon?.let { WearPermissionIconBuilder.builder(it) },
                     checked = it.checked,
                     onCheckedChanged = it.onDefaultCheckChanged,
-                    toggleControl = ToggleChipToggleControl.Radio,
-                    labelMaxLine = Integer.MAX_VALUE
+                    toggleControl = WearPermissionToggleControlType.Radio,
+                    labelMaxLines = Integer.MAX_VALUE,
                 )
             }
         }
-        for (pref in helper.getPreferences(qualifyingApplications)) {
+        for (pref in helper.getPreferences(applicationItems)) {
             item {
-                ToggleChip(
+                WearPermissionToggleControl(
                     label = pref.title.toString(),
-                    icon = pref.icon,
-                    colors =
+                    iconBuilder = pref.icon?.let { WearPermissionIconBuilder.builder(it) },
+                    style =
                         if (pref.isEnabled) {
-                            ToggleChipDefaults.toggleChipColors()
+                            WearPermissionToggleControlStyle.Default
                         } else {
-                            toggleChipDisabledColors()
+                            WearPermissionToggleControlStyle.DisabledLike
                         },
                     secondaryLabel = pref.summary?.toString(),
                     checked = pref.checked,
                     onCheckedChanged = pref.getOnCheckChanged(),
-                    toggleControl = ToggleChipToggleControl.Radio,
-                    labelMaxLine = Integer.MAX_VALUE,
-                    secondaryLabelMaxLine = Integer.MAX_VALUE
+                    toggleControl = WearPermissionToggleControlType.Radio,
+                    labelMaxLines = Integer.MAX_VALUE,
+                    secondaryLabelMaxLines = Integer.MAX_VALUE,
                 )
             }
         }
 
-        item { ListFooter(description = helper.getDescription()) }
+        item { WearPermissionListFooter(label = helper.getDescription()) }
     }
 }
 
 @Composable
-private fun ConfirmDialog(showDialog: Boolean, args: ConfirmDialogArgs?) {
-    args?.let {
-        AlertDialog(
-            showDialog = showDialog,
-            message = it.message,
-            onOKButtonClick = it.onOkButtonClick,
-            onCancelButtonClick = it.onCancelButtonClick,
-            scalingLazyListState = rememberScalingLazyListState()
+private fun ConfirmDialog(
+    materialUIVersion: WearPermissionMaterialUIVersion,
+    showDialog: Boolean,
+    args: ConfirmDialogArgs?,
+) {
+    args?.run {
+        WearPermissionConfirmationDialog(
+            materialUIVersion = materialUIVersion,
+            show = showDialog,
+            message = message,
+            positiveButtonContent = DialogButtonContent(onClick = onOkButtonClick),
+            negativeButtonContent = DialogButtonContent(onClick = onCancelButtonClick),
         )
     }
 }

@@ -22,6 +22,10 @@
 
     <application>
         <uses-library android:name="android.test.runner" />
+
+        <activity
+            android:name=".WaitForResultActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"/>
     </application>
 
     <instrumentation

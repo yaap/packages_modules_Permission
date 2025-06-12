@@ -37,11 +37,24 @@ public class UserUtils {
     private UserUtils() {}
 
     /**
+     * Returns the parent of a given user, or user if it has no parent (e.g. it is the primary
+     * user)
+     */
+    @NonNull
+    public static UserHandle getProfileParentOrSelf(@NonNull UserHandle user,
+            @NonNull Context context) {
+        return com.android.role.controller.util.UserUtils.getProfileParentOrSelf(user, context);
+    }
+
+    /**
      * Get the work profile of current user, if any.
+     * <p>
+     * If {@link Process#myUserHandle()} is the work profile, then {@code null} is returned
      *
      * @param context the {@code Context} to retrieve system services
      *
-     * @return the work profile of current user, or {@code null} if none
+     * @return the work profile of current user, or {@code null} if none or if work profile is the
+     * current process user
      */
     @Nullable
     public static UserHandle getWorkProfile(@NonNull Context context) {
@@ -56,6 +69,30 @@ public class UserUtils {
             if (Objects.equals(profile, user)) {
                 continue;
             }
+            if (!userManager.isManagedProfile(profile.getIdentifier())) {
+                continue;
+            }
+            return profile;
+        }
+        return null;
+    }
+
+    /**
+     * Get the work profile of current profile-group, if any.
+     * <p>
+     * {@link Process#myUserHandle()} may be the work profile, and is a valid returned value
+     *
+     * @param context the {@code Context} to retrieve system services
+     *
+     * @return the work profile in the current profile-group, or {@code null} if none
+     */
+    @Nullable
+    public static UserHandle getWorkProfileOrSelf(@NonNull Context context) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        List<UserHandle> profiles = userManager.getUserProfiles();
+        int profilesSize = profiles.size();
+        for (int i = 0; i < profilesSize; i++) {
+            UserHandle profile = profiles.get(i);
             if (!userManager.isManagedProfile(profile.getIdentifier())) {
                 continue;
             }
@@ -94,9 +131,15 @@ public class UserUtils {
         return null;
     }
 
+    /**
+     * Returns whether the user is a private profile or not.
+     *
+     * @param userHandle the {@code UserHandle} to check is private profile
+     * @param context the {@code Context} to retrieve system services
+     */
     private static boolean isPrivateProfile(@NonNull UserHandle userHandle,
             @NonNull Context context) {
-        if (!SdkLevel.isAtLeastV() || !android.os.Flags.allowPrivateProfile()) {
+        if (!SdkLevel.isAtLeastV()) {
             return false;
         }
         Context userContext = context.createContextAsUser(userHandle, /* flags= */ 0);

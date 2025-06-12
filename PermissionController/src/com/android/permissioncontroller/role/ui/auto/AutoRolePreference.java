@@ -19,6 +19,7 @@ package com.android.permissioncontroller.role.ui.auto;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
@@ -31,11 +32,16 @@ import com.android.permissioncontroller.role.ui.RestrictionAwarePreferenceMixin;
 import com.android.permissioncontroller.role.ui.RolePreference;
 import com.android.permissioncontroller.role.ui.TwoTargetPreference;
 
+import java.util.Objects;
+
 /**
  * Preference for use in auto lists. Extends {@link TwoTargetPreference} in order to make sure of
  * shared logic between phone and auto settings UI.
  */
 public class AutoRolePreference extends Preference implements RolePreference {
+
+    @Nullable
+    private String mSummaryContentDescription;
 
     private RestrictionAwarePreferenceMixin mRestrictionAwarePreferenceMixin =
             new RestrictionAwarePreferenceMixin(this);
@@ -62,6 +68,14 @@ public class AutoRolePreference extends Preference implements RolePreference {
     public void setOnSecondTargetClickListener(@Nullable OnSecondTargetClickListener listener) {}
 
     @Override
+    public void setSummaryContentDescription(@Nullable String summaryContentDescription) {
+        if (!Objects.equals(mSummaryContentDescription, summaryContentDescription)) {
+            mSummaryContentDescription = summaryContentDescription;
+            notifyChanged();
+        }
+    }
+
+    @Override
     public void setRestrictionIntent(@Nullable Intent restrictionIntent) {
         mRestrictionAwarePreferenceMixin.setRestrictionIntent(restrictionIntent);
     }
@@ -69,6 +83,9 @@ public class AutoRolePreference extends Preference implements RolePreference {
     @Override
     public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        TextView summaryText = (TextView) holder.findViewById(android.R.id.summary);
+        summaryText.setContentDescription(mSummaryContentDescription);
 
         mRestrictionAwarePreferenceMixin.onAfterBindViewHolder(holder);
     }

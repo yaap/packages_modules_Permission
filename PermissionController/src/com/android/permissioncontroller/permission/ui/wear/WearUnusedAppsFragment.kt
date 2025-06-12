@@ -41,14 +41,14 @@ import com.android.permissioncontroller.permission.ui.model.UnusedAppsViewModel.
 import com.android.permissioncontroller.permission.ui.model.UnusedAppsViewModelFactory
 import com.android.permissioncontroller.permission.ui.wear.model.WearUnusedAppsViewModel
 import com.android.permissioncontroller.permission.ui.wear.model.WearUnusedAppsViewModel.UnusedAppChip
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
 import com.android.permissioncontroller.permission.utils.KotlinUtils
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 import com.android.settingslib.utils.applications.AppUtils
 import java.text.Collator
 
 /**
  * This is a condensed version of
- * [com.android.permissioncontroller.permission.ui.UnusedAppsFragment.kt], tailored for Wear.
+ * [com.android.permissioncontroller.permission.ui.UnusedAppsFragment], tailored for Wear.
  *
  * A fragment displaying all applications that are unused as well as the option to remove them and
  * to open them.
@@ -62,7 +62,7 @@ class WearUnusedAppsFragment : Fragment() {
     private var sessionId: Long = 0L
     private var isFirstLoad = false
     private var categoryVisibilities: MutableList<Boolean> =
-        MutableList(UnusedPeriod.values().size) { false }
+        MutableList(UnusedPeriod.entries.size) { false }
     private var unusedAppsMap: MutableMap<UnusedPeriod, MutableMap<String, UnusedAppChip>> =
         initUnusedAppsMap()
 
@@ -87,7 +87,7 @@ class WearUnusedAppsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         isFirstLoad = true
         context = requireContext()
@@ -101,7 +101,7 @@ class WearUnusedAppsFragment : Fragment() {
         wearViewModel =
             ViewModelProvider(
                     this,
-                    ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+                    ViewModelProvider.AndroidViewModelFactory.getInstance(application),
                 )
                 .get(WearUnusedAppsViewModel::class.java)
         viewModel.unusedPackageCategoriesLiveData.observe(
@@ -111,7 +111,7 @@ class WearUnusedAppsFragment : Fragment() {
                     updatePackages(pkgs)
                     updateWearViewModel(false)
                 }
-            }
+            },
         )
 
         if (!viewModel.unusedPackageCategoriesLiveData.isInitialized) {
@@ -125,7 +125,7 @@ class WearUnusedAppsFragment : Fragment() {
                         updateWearViewModel(false)
                     }
                 },
-                SHOW_LOAD_DELAY_MS
+                SHOW_LOAD_DELAY_MS,
             )
         } else {
             updatePackages(viewModel.unusedPackageCategoriesLiveData.value!!)
@@ -192,14 +192,14 @@ class WearUnusedAppsFragment : Fragment() {
                                 getString(
                                     R.string.auto_revoked_app_summary_two,
                                     importantLabel,
-                                    otherLabel
+                                    otherLabel,
                                 )
                             }
                             else ->
                                 getString(
                                     R.string.auto_revoked_app_summary_many,
                                     importantLabel,
-                                    "${revokedPerms.size - 1}"
+                                    "${revokedPerms.size - 1}",
                                 )
                         }
 
@@ -215,9 +215,9 @@ class WearUnusedAppsFragment : Fragment() {
                             AppUtils.getAppContentDescription(
                                 context,
                                 pkgName,
-                                user.getIdentifier()
+                                user.getIdentifier(),
                             ),
-                            onChipClicked
+                            onChipClicked,
                         )
                     unusedAppsMap[period]!!.put(key, chip)
                 }
@@ -242,7 +242,7 @@ class WearUnusedAppsFragment : Fragment() {
             for (period in allPeriods) {
                 Log.i(
                     LOG_TAG,
-                    "sessionId: $sessionId $period unused: " + "${categorizedPackages[period]}"
+                    "sessionId: $sessionId $period unused: " + "${categorizedPackages[period]}",
                 )
                 for (revokedPackageInfo in categorizedPackages[period]!!) {
                     for (groupName in revokedPackageInfo.revokedGroups) {
@@ -251,7 +251,7 @@ class WearUnusedAppsFragment : Fragment() {
                             revokedPackageInfo.packageName,
                             revokedPackageInfo.user,
                             groupName,
-                            isNewlyRevoked
+                            isNewlyRevoked,
                         )
                     }
                 }
@@ -292,7 +292,7 @@ class WearUnusedAppsFragment : Fragment() {
 
     private fun compareUnusedApps(
         lhs: Pair<String, UnusedAppChip>,
-        rhs: Pair<String, UnusedAppChip>
+        rhs: Pair<String, UnusedAppChip>,
     ): Int {
         var result = collator.compare(lhs.second.label, rhs.second.label)
         if (result == 0) {
@@ -303,7 +303,7 @@ class WearUnusedAppsFragment : Fragment() {
 
     private fun updateWearViewModel(isLoading: Boolean) {
         wearViewModel.loadingLiveData.value = isLoading
-        wearViewModel.unusedPeriodCategoryVisibilitiesLiveData.setValue(categoryVisibilities)
+        wearViewModel.unusedPeriodCategoryVisibilitiesLiveData.value = categoryVisibilities
 
         // Need to copy to non mutable maps or compose will not update correctly
         val map = mutableMapOf<UnusedPeriod, Map<String, UnusedAppChip>>()
@@ -311,6 +311,6 @@ class WearUnusedAppsFragment : Fragment() {
             map.put(period, unusedAppsMap[period]!!.toMap())
         }
 
-        wearViewModel.unusedAppChipsLiveData.setValue(map.toMap())
+        wearViewModel.unusedAppChipsLiveData.value = map.toMap()
     }
 }

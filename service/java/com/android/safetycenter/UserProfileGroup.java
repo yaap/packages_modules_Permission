@@ -129,9 +129,8 @@ public final class UserProfileGroup {
      * is disabled.
      */
     public static UserProfileGroup fromUser(Context context, @UserIdInt int userId) {
-        Context userContext = UserUtils.getUserContext(userId, context);
-        List<UserHandle> userProfiles = UserUtils.getUserProfiles(userContext);
-        int profileParentUserId = UserUtils.getProfileParentIdOrSelf(userId, userContext);
+        List<UserHandle> userProfiles = UserUtils.getUserProfiles(userId, context);
+        int profileParentUserId = UserUtils.getProfileParentIdOrSelf(userId, context);
 
         int[] managedProfilesUserIds = new int[userProfiles.size()];
         int[] managedRunningProfilesUserIds = new int[userProfiles.size()];

@@ -24,8 +24,8 @@ import android.content.ContextWrapper
 import android.content.pm.ComponentInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.os.Looper
 import android.os.UserHandle
+import androidx.arch.core.executor.ArchTaskExecutor
 import java.util.concurrent.Executors
 import kotlinx.coroutines.asCoroutineDispatcher
 
@@ -51,8 +51,8 @@ val IPC = Executors.newFixedThreadPool(IPC_THREAD_POOL_COUNT).asCoroutineDispatc
 
 /** Assert that an operation is running on main thread */
 fun ensureMainThread() =
-    check(Looper.myLooper() == Looper.getMainLooper()) {
-        "Only meant to be used on the main thread"
+    check(ArchTaskExecutor.getInstance().isMainThread) {
+        ("Only meant to be used on the main thread, current thread is " + Thread.currentThread())
     }
 
 /** A more readable version of [PackageManager.updatePermissionFlags] */
@@ -72,5 +72,7 @@ fun PackageManager.updatePermissionFlags(
 val ResolveInfo.componentInfo: ComponentInfo
     get() {
         return (activityInfo as ComponentInfo?)
-            ?: serviceInfo ?: providerInfo ?: throw IllegalStateException("Missing ComponentInfo!")
+            ?: serviceInfo
+            ?: providerInfo
+            ?: throw IllegalStateException("Missing ComponentInfo!")
     }

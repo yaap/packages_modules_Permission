@@ -81,7 +81,7 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
                 cursor.addSafetySourcesGroupRow(
                     safetySourcesGroup,
                     safetyCenterResourcesApk,
-                    screenTitle
+                    screenTitle,
                 )
             }
             safetySourcesGroup.safetySources
@@ -93,7 +93,7 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
                         safetySource,
                         safetyCenterResourcesApk,
                         safetyCenterManager,
-                        screenTitle
+                        screenTitle,
                     )
                 }
         }
@@ -123,14 +123,14 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
             collectAllRemovableKeys(
                 safetyCenterManager,
                 keysToRemove,
-                staticEntryGroupsAreRemovable = SdkLevel.isAtLeastU()
+                staticEntryGroupsAreRemovable = SdkLevel.isAtLeastU(),
             )
             keepActiveEntriesFromRemoval(safetyCenterManager, context, keysToRemove)
         } else {
             collectAllRemovableKeys(
                 safetyCenterManager,
                 keysToRemove,
-                staticEntryGroupsAreRemovable = true
+                staticEntryGroupsAreRemovable = true,
             )
         }
 
@@ -169,8 +169,6 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
     ) {
         val searchTerms =
             safetyCenterResourcesApk.getNotEmptyStringOrNull(safetySource.searchTermsResId)
-        var isPersonalEntryAdded = false
-        var isWorkEntryAdded = false
 
         fun MatrixCursor.addIndexableRow(title: CharSequence, profileType: ProfileType) =
             newRow()
@@ -181,40 +179,41 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
                 .add(COLUMN_INTENT_ACTION, Intent.ACTION_SAFETY_CENTER)
                 .add(COLUMN_SCREEN_TITLE, screenTitle)
 
-        if (safetySource.id == BIOMETRIC_SOURCE_ID) {
-            // Correct Biometric Unlock title is only available when Biometric SafetySource have
-            // sent the data to SafetyCenter. Only the main user and the work profile send data for
-            // the Biometric Safety Source.
+        // If we prefer live title instead of config title for this entry, check for live source
+        // data first. Then later, add all missing entries that weren't found in live source data.
+        // Even if we index hidden entries, those will be filtered out via queryNonIndexableKeys.
+        var isSourceDataPersonalEntryAdded = false
+        var isSourceDataWorkEntryAdded = false
+        if (biometricsSources.contains(safetySource.id)) {
             context.getSystemService(UserManager::class.java)?.let { userManager ->
                 safetyCenterManager.safetyEntries
-                    .associateBy { it.entryId }
-                    .filter { it.key.safetySourceId == BIOMETRIC_SOURCE_ID }
+                    .filter { it.entryId.safetySourceId == safetySource.id }
                     .forEach {
-                        val isWorkProfile = userManager.isManagedProfile(it.key.userId)
+                        val isWorkProfile = userManager.isManagedProfile(it.entryId.userId)
                         if (isWorkProfile) {
-                            isWorkEntryAdded = true
-                            addIndexableRow(it.value.title, ProfileType.MANAGED)
+                            addIndexableRow(it.title, ProfileType.MANAGED)
+                            isSourceDataWorkEntryAdded = true
                         } else {
-                            addIndexableRow(it.value.title, ProfileType.PRIMARY)
-                            isPersonalEntryAdded = true
+                            addIndexableRow(it.title, ProfileType.PRIMARY)
+                            isSourceDataPersonalEntryAdded = true
                         }
                     }
             }
         }
 
-        if (!isPersonalEntryAdded) {
+        if (!isSourceDataPersonalEntryAdded) {
             safetyCenterResourcesApk.getNotEmptyStringOrNull(safetySource.titleResId)?.let {
                 addIndexableRow(title = it, ProfileType.PRIMARY)
             }
         }
 
         if (safetySource.profile == SafetySource.PROFILE_ALL) {
-            if (!isWorkEntryAdded) {
+            if (!isSourceDataWorkEntryAdded) {
                 safetyCenterResourcesApk
                     .getNotEmptyStringOrNull(safetySource.titleForWorkResId)
                     ?.let { addIndexableRow(title = it, ProfileType.MANAGED) }
             }
-            if (safetySource.id != BIOMETRIC_SOURCE_ID && isPrivateProfileSupported()) {
+            if (!biometricsSources.contains(safetySource.id) && isPrivateProfileSupported()) {
                 safetyCenterResourcesApk
                     .getNotEmptyStringOrNull(safetySource.titleForPrivateProfileResId)
                     ?.let { addIndexableRow(title = it, ProfileType.PRIVATE) }
@@ -242,13 +241,12 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
         get() =
             safetyCenterConfig?.safetySourcesGroups?.asSequence()?.filter {
                 it.type != SAFETY_SOURCES_GROUP_TYPE_HIDDEN
-            }
-                ?: emptySequence()
+            } ?: emptySequence()
 
     private fun collectAllRemovableKeys(
         safetyCenterManager: SafetyCenterManager,
         keysToRemove: MutableSet<String>,
-        staticEntryGroupsAreRemovable: Boolean
+        staticEntryGroupsAreRemovable: Boolean,
     ) {
         safetyCenterManager.safetySourcesGroupsWithEntries
             .filter {
@@ -279,7 +277,7 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
     private fun keepActiveEntriesFromRemoval(
         safetyCenterManager: SafetyCenterManager,
         context: Context,
-        keysToRemove: MutableSet<String>
+        keysToRemove: MutableSet<String>,
     ) {
         val safetyCenterData = safetyCenterManager.safetyCenterData
         safetyCenterData.entriesOrGroups.forEach { entryOrGroup ->
@@ -306,7 +304,7 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
     private fun keepEntryFromRemoval(
         entryId: SafetyCenterEntryId,
         context: Context,
-        keysToRemove: MutableSet<String>
+        keysToRemove: MutableSet<String>,
     ) {
         val userContext = context.createContextAsUser(UserHandle.of(entryId.userId), /* flags= */ 0)
         val userUserManager = userContext.getSystemService(UserManager::class.java) ?: return
@@ -333,13 +331,17 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
         get() = SafetyCenterIds.entryIdFromString(id)
 
     private fun isPrivateProfileSupported(): Boolean {
-        return SdkLevel.isAtLeastV() &&
-            com.android.permission.flags.Flags.privateProfileSupported() &&
-            android.os.Flags.allowPrivateProfile()
+        return SdkLevel.isAtLeastV() && com.android.permission.flags.Flags.privateProfileSupported()
     }
 
     companion object {
         private const val BIOMETRIC_SOURCE_ID = "AndroidBiometrics"
+        private const val FACE_SOURCE_ID = "AndroidFaceUnlock"
+        private const val FINGERPRINT_SOURCE_ID = "AndroidFingerprintUnlock"
+        private const val WEAR_SOURCE_ID = "AndroidWearUnlock"
+
+        private val biometricsSources =
+            listOf(BIOMETRIC_SOURCE_ID, FACE_SOURCE_ID, FINGERPRINT_SOURCE_ID, WEAR_SOURCE_ID)
 
         private val privacyControlKeys: List<String>
             get() = Pref.values().map { it.key }
@@ -373,6 +375,6 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
     enum class ProfileType {
         PRIMARY,
         MANAGED,
-        PRIVATE
+        PRIVATE,
     }
 }

@@ -16,13 +16,17 @@
 
 package android.permissionui.cts
 
+import android.content.pm.PackageManager
+import android.health.connect.HealthPermissions
 import android.os.Build
-import android.permission.flags.Flags
+import android.permission.flags.Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED
 import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.filters.FlakyTest
 import androidx.test.filters.SdkSuppress
 import org.junit.Assume.assumeFalse
+import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -30,6 +34,12 @@ import org.junit.Test
 /** Runtime permission behavior tests for permission splits. */
 @FlakyTest
 class PermissionSplitTest : BaseUsePermissionTest() {
+
+    companion object {
+        @JvmStatic
+        private val supportHeartrate =
+            packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_HEART_RATE)
+    }
 
     @Rule @JvmField val mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
@@ -62,28 +72,113 @@ class PermissionSplitTest : BaseUsePermissionTest() {
         testLocationPermissionSplit(false)
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.TIRAMISU, codeName = "Tiramisu")
-    @RequiresFlagsDisabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    // TODO: b/388596433 - Update maxSdkVersion to VANILLA_ICE_CREAM after SDK bumps.
+    // TODO: b/383440585 - Remove this test when flag annotation issue is fixed.
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.TIRAMISU,
+        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+    )
     @Test
-    fun testBodySensorSplit() {
+    fun testBodySensorSplitOnTToU() {
         installPackage(APP_APK_PATH_31)
-        testBodySensorPermissionSplit(true)
+        testBodySensorPermissionSplitToBodySensorsBackground(true)
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.TIRAMISU, codeName = "Tiramisu")
-    @RequiresFlagsDisabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    // Before SDK_INT bumps to 36, the in-development B images are using SDK_INT=35(V). This will
+    // cause test failures on main builds where replaceBodySensor flag is enabled to remove Sensor
+    // group UI. As a workaround, we move SDK_INT=35 tests out and requires replaceBodySensor flag
+    // disabled when running on these images.
+    // TODO: b/388596433 - Update minSdkVersion to BAKLAVA after SDK bumps.
+    // TODO: b/383440585 - Update minSdkVersion to TIRAMISU when flag annotation issue is fixed.
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    @RequiresFlagsDisabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
-    fun testBodySensorSplit32() {
+    fun testBodySensorSplitPostV_replaceBodySensorFlagDisabled() {
+        installPackage(APP_APK_PATH_31)
+        testBodySensorPermissionSplitToBodySensorsBackground(true)
+    }
+
+    // TODO: b/388596433 - Update maxSdkVersion to VANILLA_ICE_CREAM after SDK bumps.
+    // TODO: b/383440585 - Remove this test when flag annotation issue is fixed.
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.TIRAMISU,
+        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+    )
+    @Test
+    fun testBodySensorSplit32OnTToU() {
         installPackage(APP_APK_PATH_32)
-        testBodySensorPermissionSplit(true)
+        testBodySensorPermissionSplitToBodySensorsBackground(true)
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.TIRAMISU, codeName = "Tiramisu")
-    @RequiresFlagsDisabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    // Before SDK_INT bumps to 36, the in-development B images are using SDK_INT=35(V). This will
+    // cause test failures on main builds where replaceBodySensor flag is enabled to remove Sensor
+    // group UI. As a workaround, we move SDK_INT=35 tests out and requires replaceBodySensor flag
+    // disabled when running on these images.
+    // TODO: b/388596433 - Update minSdkVersion to BAKLAVA after SDK bumps.
+    // TODO: b/383440585 - Update minSdkVersion to TIRAMISU when flag annotation issue is fixed.
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    @RequiresFlagsDisabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
-    fun testBodySensorNonSplit() {
+    fun testBodySensorSplit32PostV_replaceBodySensorFlagDisabled() {
+        installPackage(APP_APK_PATH_32)
+        testBodySensorPermissionSplitToBodySensorsBackground(true)
+    }
+
+    // TODO: b/388596433 - Update maxSdkVersion to VANILLA_ICE_CREAM after SDK bumps.
+    // TODO: b/383440585 - Remove this test when flag annotation issue is fixed.
+    @SdkSuppress(
+        minSdkVersion = Build.VERSION_CODES.TIRAMISU,
+        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+    )
+    @Test
+    fun testBodySensorNonSplitOnTToU() {
         installPackage(APP_APK_PATH_LATEST)
-        testBodySensorPermissionSplit(false)
+        testBodySensorPermissionSplitToBodySensorsBackground(false)
+    }
+
+    // Before SDK_INT bumps to 36, the in-development B images are using SDK_INT=35(V). This will
+    // cause test failures on main builds where replaceBodySensor flag is enabled to remove Sensor
+    // group UI. As a workaround, we move SDK_INT=35 tests out and requires replaceBodySensor flag
+    // disabled when running on these images.
+    // TODO: b/388596433 - Update minSdkVersion to BAKLAVA after SDK bumps.
+    // TODO: b/383440585 - Update minSdkVersion to TIRAMISU when flag annotation issue is fixed.
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    @RequiresFlagsDisabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    fun testBodySensorNonSplitPostV_replaceBodySensorFlagDisabled() {
+        installPackage(APP_APK_PATH_LATEST)
+        testBodySensorPermissionSplitToBodySensorsBackground(false)
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
+    @Test
+    fun testBodySensorSplitOnBaklava_splitToReadHeartRate() {
+        assumeTrue(supportHeartrate)
+        installPackage(APP_APK_PATH_30_WITH_BACKGROUND)
+        assertAppHasPermission(android.Manifest.permission.BODY_SENSORS, false)
+        assertAppHasPermission(HealthPermissions.READ_HEART_RATE, false)
+        assertAppHasPermission(android.Manifest.permission.BODY_SENSORS_BACKGROUND, false)
+        assertAppHasPermission(HealthPermissions.READ_HEALTH_DATA_IN_BACKGROUND, false)
+
+        requestAppPermissionsAndAssertResult(
+            android.Manifest.permission.BODY_SENSORS to true,
+            waitForWindowTransition = false,
+        ) {
+            clickAllowReadHeartRate()
+        }
+
+        requestAppPermissionsAndAssertResult(
+            android.Manifest.permission.BODY_SENSORS_BACKGROUND to true,
+            waitForWindowTransition = false,
+        ) {
+            clickAlwaysAllowReadHealthDataInBackground()
+        }
+
+        assertAppHasPermission(android.Manifest.permission.BODY_SENSORS, true)
+        assertAppHasPermission(HealthPermissions.READ_HEART_RATE, true)
+        assertAppHasPermission(android.Manifest.permission.BODY_SENSORS_BACKGROUND, true)
+        assertAppHasPermission(HealthPermissions.READ_HEALTH_DATA_IN_BACKGROUND, true)
     }
 
     private fun testLocationPermissionSplit(expectSplit: Boolean) {
@@ -92,7 +187,7 @@ class PermissionSplitTest : BaseUsePermissionTest() {
 
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.ACCESS_FINE_LOCATION to true,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             if (expectSplit) {
                 clickPermissionRequestSettingsLinkAndAllowAlways()
@@ -108,13 +203,14 @@ class PermissionSplitTest : BaseUsePermissionTest() {
         assertAppHasPermission(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION, expectSplit)
     }
 
-    private fun testBodySensorPermissionSplit(expectSplit: Boolean) {
+    private fun testBodySensorPermissionSplitToBodySensorsBackground(expectSplit: Boolean) {
+        assumeTrue(supportHeartrate)
         assertAppHasPermission(android.Manifest.permission.BODY_SENSORS, false)
         assertAppHasPermission(android.Manifest.permission.BODY_SENSORS_BACKGROUND, false)
 
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.BODY_SENSORS to true,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             if (expectSplit) {
                 clickPermissionRequestSettingsLinkAndAllowAlways()

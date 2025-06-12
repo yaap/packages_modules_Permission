@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Build
+import android.os.Process
 import android.os.UserManager
 import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyEvent
@@ -46,7 +47,7 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -118,6 +119,8 @@ class WorkPolicyInfoTest {
         whenever(PermissionControllerApplication.get()).thenReturn(application)
         whenever(application.applicationContext).thenReturn(application)
         workPolicyInfo = WorkPolicyInfo(mockWorkPolicyUtils)
+        val userId = Process.myUserHandle().identifier
+        whenever(mockWorkPolicyUtils.managedProfileUserId).thenReturn(userId)
     }
 
     @After
@@ -166,7 +169,7 @@ class WorkPolicyInfoTest {
     fun safetyCenterEnabledChanged_safetyCenterDisabled() {
         workPolicyInfo.safetyCenterEnabledChanged(context, false)
 
-        verifyZeroInteractions(mockSafetyCenterManager)
+        verifyNoMoreInteractions(mockSafetyCenterManager)
     }
 
     @Test
@@ -193,7 +196,7 @@ class WorkPolicyInfoTest {
 
         workPolicyInfo.safetyCenterEnabledChanged(context, false)
 
-        verifyZeroInteractions(mockSafetyCenterManager)
+        verifyNoMoreInteractions(mockSafetyCenterManager)
     }
 
     @Test

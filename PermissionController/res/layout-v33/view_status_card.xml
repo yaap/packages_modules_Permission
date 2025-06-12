@@ -30,15 +30,34 @@
         android:id="@+id/status_title_and_summary"
         style="?attr/scStatusTitleAndSummaryContainerStyle">
 
-        <TextView
+        <TextSwitcher
             android:id="@+id/status_title"
-            android:text="@string/summary_placeholder"
-            style="@style/SafetyCenterStatusTitle" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inAnimation="@anim/text_switcher_fade_in"
+            android:outAnimation="@anim/text_switcher_fade_out">
+            <TextView
+                android:text="@string/summary_placeholder"
+                style="@style/SafetyCenterStatusTitle" />
+            <TextView
+                android:text="@string/summary_placeholder"
+                style="@style/SafetyCenterStatusTitle" />
+        </TextSwitcher>
 
-        <TextView
+
+        <TextSwitcher
             android:id="@+id/status_summary"
-            android:text="@string/summary_placeholder"
-            style="@style/SafetyCenterStatusSummary" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inAnimation="@anim/text_switcher_fade_in"
+            android:outAnimation="@anim/text_switcher_fade_out">
+            <TextView
+                android:text="@string/summary_placeholder"
+                style="@style/SafetyCenterStatusSummary" />
+            <TextView
+                android:text="@string/summary_placeholder"
+                style="@style/SafetyCenterStatusSummary" />
+        </TextSwitcher>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Barrier

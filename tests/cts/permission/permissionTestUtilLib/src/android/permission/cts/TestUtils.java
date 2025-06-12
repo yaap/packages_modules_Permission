@@ -19,7 +19,10 @@ package android.permission.cts;
 import static com.android.compatibility.common.util.SystemUtil.runShellCommand;
 
 import android.app.UiAutomation;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Process;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -201,5 +204,48 @@ public class TestUtils {
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * This method checks for the minimum screen size described in <a href="https://source.android.com/docs/compatibility/14/android-14-cdd#7111_screen_size_and_shape">CDD</a>
+     */
+    public static boolean isCddCompliantScreenSize() {
+        if ((Resources.getSystem().getConfiguration().uiMode & Configuration.UI_MODE_TYPE_MASK)
+                == Configuration.UI_MODE_TYPE_WATCH) {
+            Log.d(LOG_TAG, "UI mode is UI_MODE_TYPE_WATCH, skipping the min dp check");
+            return true;
+        }
+
+        int screenSize = Resources.getSystem().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK;
+        return switch (screenSize) {
+            case Configuration.SCREENLAYOUT_SIZE_SMALL -> hasMinScreenSize(426, 320);
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL -> hasMinScreenSize(480, 320);
+            case Configuration.SCREENLAYOUT_SIZE_LARGE -> hasMinScreenSize(640, 480);
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE -> hasMinScreenSize(960, 720);
+            default -> {
+                Log.e(LOG_TAG, "Unknown screen size: " + screenSize);
+                yield true;
+            }
+        };
+    }
+
+    private static boolean hasMinScreenSize(int minWidthDp, int minHeightDp) {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float widthDp = (160f / metrics.densityDpi) * metrics.widthPixels;
+        float heightDp = (160f / metrics.densityDpi) * metrics.heightPixels;
+
+        // CDD does not seem to follow width & height convention correctly, hence checking both ways
+        boolean hasMinScreenSize = (widthDp >= minWidthDp && heightDp >= minHeightDp)
+                || (widthDp >= minHeightDp && heightDp >= minWidthDp);
+        if (!hasMinScreenSize) {
+            Log.d(LOG_TAG,
+                    "Does not meet min screen size criteria, actual width/height = "
+                            + metrics.widthPixels + "/" + metrics.heightPixels
+                            + " expected minimum width/height = " + minWidthDp + "/" + minHeightDp
+                            + " dpi="
+                            + metrics.densityDpi);
+        }
+        return hasMinScreenSize;
     }
 }

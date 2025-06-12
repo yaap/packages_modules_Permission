@@ -29,7 +29,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.permissioncontroller.PermissionControllerApplication
 import com.android.permissioncontroller.permission.ui.ManagePermissionsActivity
-import com.android.permissioncontroller.permission.ui.model.v31.BasePermissionUsageDetailsViewModel
+import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.PermissionUsageDetailsViewModelFactory
 
 /**
@@ -42,7 +42,7 @@ class WearPermissionUsageDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val permissionGroup =
             arguments?.getString(Intent.EXTRA_PERMISSION_GROUP_NAME)
@@ -56,11 +56,10 @@ class WearPermissionUsageDetailsFragment : Fragment() {
         val factory =
             PermissionUsageDetailsViewModelFactory(
                 PermissionControllerApplication.get(),
-                this,
-                permissionGroup
+                permissionGroup,
             )
         val viewModel =
-            ViewModelProvider(this, factory).get(BasePermissionUsageDetailsViewModel::class.java)
+            ViewModelProvider(this, factory).get(PermissionUsageDetailsViewModel::class.java)
         viewModel.updateShowSystemAppsToggle(showSystem)
 
         return ComposeView(requireContext()).apply {

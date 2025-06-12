@@ -89,6 +89,7 @@ android_library {
     ],
 
     //javacflags: ["-Werror"],
+    kotlin_lang_version: "1.9",
     kotlincflags: [
         "-Werror",
         "-opt-in=kotlinx.coroutines.DelicateCoroutinesApi",
@@ -130,6 +131,7 @@ android_library {
         "SettingsLibSearchWidget",
         "SettingsLibLayoutPreference",
         "SettingsLibBarChartPreference",
+        "SettingsLibBannerMessagePreference",
         "SettingsLibActionBarShadow",
         "SettingsLibProgressBar",
         "SettingsLibCollapsingToolbarBaseActivity",
@@ -152,15 +154,16 @@ android_library {
         "safety-label",
         "role-controller",
         "android.permission.flags-aconfig-java-export",
+        "android.xr.flags-aconfig-java-export",
         "com.android.permission.flags-aconfig-java-export",
         "androidx.compose.foundation_foundation",
         "androidx.compose.runtime_runtime",
         "androidx.compose.runtime_runtime-livedata",
         "androidx.compose.ui_ui",
-        "androidx.wear.compose_compose-material",
         "androidx.wear.compose_compose-material3",
         "android.content.pm.flags-aconfig-java-export",
         "android.os.flags-aconfig-java-export",
+        "wear-permission-components",
     ],
 
     lint: {

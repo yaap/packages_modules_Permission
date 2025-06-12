@@ -52,14 +52,17 @@ class PermissionTapjackingTest : BaseUsePermissionTest() {
         requestAppPermissionsForNoResult(ACCESS_FINE_LOCATION) {}
 
         val buttonCenter =
-            waitFindObject(By.text(getPermissionControllerString(ALLOW_FOREGROUND_BUTTON_TEXT))
-                    .displayId(displayId))
+            waitFindObject(
+                    By.text(getPermissionControllerString(ALLOW_FOREGROUND_BUTTON_TEXT))
+                        .displayId(displayId)
+                )
                 .visibleCenter
 
         // Wait for overlay to hide the dialog
         context.sendBroadcast(Intent(ACTION_SHOW_OVERLAY).putExtra(EXTRA_FULL_OVERLAY, true))
         waitFindObject(
-                By.res("android.permissionui.cts.usepermission:id/overlay").displayId(displayId))
+            By.res("android.permissionui.cts.usepermission:id/overlay").displayId(displayId)
+        )
 
         tryClicking(buttonCenter)
     }
@@ -76,18 +79,19 @@ class PermissionTapjackingTest : BaseUsePermissionTest() {
         assertAppHasPermission(ACCESS_FINE_LOCATION, false)
         requestAppPermissionsForNoResult(ACCESS_FINE_LOCATION) {}
 
-        val foregroundButtonCenter =
-            waitFindObject(By.text(getPermissionControllerString(ALLOW_FOREGROUND_BUTTON_TEXT))
-                    .displayId(displayId))
-                .visibleCenter
         val oneTimeButton =
-            waitFindObjectOrNull(By.text(getPermissionControllerString(ALLOW_ONE_TIME_BUTTON_TEXT))
-                    .displayId(displayId))
+            waitFindObjectOrNull(
+                By.text(getPermissionControllerString(ALLOW_ONE_TIME_BUTTON_TEXT))
+                    .displayId(displayId)
+            )
+
         // If one-time button is not available, fallback to deny button
         val overlayButtonBounds =
             oneTimeButton?.visibleBounds
-                ?: waitFindObject(By.text(getPermissionControllerString(DENY_BUTTON_TEXT))
-                        .displayId(displayId))
+                ?: waitFindObject(
+                        By.text(getPermissionControllerString(DENY_BUTTON_TEXT))
+                            .displayId(displayId)
+                    )
                     .visibleBounds
 
         // Wait for overlay to hide the dialog
@@ -100,7 +104,15 @@ class PermissionTapjackingTest : BaseUsePermissionTest() {
                 .putExtra(OVERLAY_BOTTOM, overlayButtonBounds.bottom)
         )
         waitFindObject(
-                By.res("android.permissionui.cts.usepermission:id/overlay").displayId(displayId))
+            By.res("android.permissionui.cts.usepermission:id/overlay").displayId(displayId)
+        )
+
+        val foregroundButtonCenter =
+            waitFindObject(
+                    By.text(getPermissionControllerString(ALLOW_FOREGROUND_BUTTON_TEXT))
+                        .displayId(displayId)
+                )
+                .visibleCenter
 
         tryClicking(foregroundButtonCenter)
     }
@@ -119,7 +131,7 @@ class PermissionTapjackingTest : BaseUsePermissionTest() {
                     }
                     assertAppHasPermission(ACCESS_FINE_LOCATION, true)
                 },
-                10000
+                10000,
             )
         } catch (e: RuntimeException) {
             // expected
@@ -140,22 +152,26 @@ class PermissionTapjackingTest : BaseUsePermissionTest() {
                 }
                 assertAppHasPermission(ACCESS_FINE_LOCATION, true)
             },
-            10000
+            10000,
         )
     }
 
     private fun click(buttonCenter: Point) {
-        val downTime = SystemClock.uptimeMillis()
-        val x= buttonCenter.x.toFloat()
-        val y = buttonCenter.y.toFloat()
-        var event = MotionEvent.obtain(downTime, downTime, MotionEvent.ACTION_DOWN,x , y, 0)
-        event.displayId = displayId
-        uiAutomation.injectInputEvent(event, true)
+        if (isAutomotiveVisibleBackgroundUser) {
+            val downTime = SystemClock.uptimeMillis()
+            val x = buttonCenter.x.toFloat()
+            val y = buttonCenter.y.toFloat()
+            var event = MotionEvent.obtain(downTime, downTime, MotionEvent.ACTION_DOWN, x, y, 0)
+            event.displayId = displayId
+            uiAutomation.injectInputEvent(event, true)
 
-        val upTime = SystemClock.uptimeMillis()
-        event = MotionEvent.obtain(upTime, upTime, MotionEvent.ACTION_UP, x, y, 0)
-        event.displayId = displayId
-        uiAutomation.injectInputEvent(event, true)
+            val upTime = SystemClock.uptimeMillis()
+            event = MotionEvent.obtain(upTime, upTime, MotionEvent.ACTION_UP, x, y, 0)
+            event.displayId = displayId
+            uiAutomation.injectInputEvent(event, true)
+        } else {
+            uiDevice.click(buttonCenter.x, buttonCenter.y)
+        }
     }
 
     companion object {

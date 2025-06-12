@@ -56,7 +56,7 @@ class DrivingDecisionReminderService : Service() {
     data class PermissionReminder(
         val packageName: String,
         val permissionGroup: String,
-        val user: UserHandle
+        val user: UserHandle,
     )
 
     private var scheduled = false
@@ -85,7 +85,7 @@ class DrivingDecisionReminderService : Service() {
             context: Context,
             packageName: String,
             permissionGroup: String,
-            user: UserHandle
+            user: UserHandle,
         ): Intent {
             val intent = Intent(context, DrivingDecisionReminderService::class.java)
             intent.putExtra(EXTRA_PACKAGE_NAME, packageName)
@@ -101,7 +101,7 @@ class DrivingDecisionReminderService : Service() {
         fun startServiceIfCurrentlyRestricted(
             context: Context,
             packageName: String,
-            permGroupName: String
+            permGroupName: String,
         ) {
             Car.createCar(context, /* handler= */ null, Car.CAR_WAIT_TIMEOUT_DO_NOT_WAIT) {
                 car: Car,
@@ -120,20 +120,20 @@ class DrivingDecisionReminderService : Service() {
                                         context,
                                         packageName,
                                         permGroupName,
-                                        Process.myUserHandle()
+                                        Process.myUserHandle(),
                                     )
                                 )
                             }
                         } else {
                             DumpableLog.e(
                                 LOG_TAG,
-                                "Reminder service not created because CarUxRestrictions is null"
+                                "Reminder service not created because CarUxRestrictions is null",
                             )
                         }
                     } else {
                         DumpableLog.e(
                             LOG_TAG,
-                            "Reminder service not created because CarUxRestrictionsManager is null"
+                            "Reminder service not created because CarUxRestrictionsManager is null",
                         )
                     }
                 }
@@ -145,7 +145,7 @@ class DrivingDecisionReminderService : Service() {
             val notificationManager = context.getSystemService(NotificationManager::class.java)!!
             notificationManager.cancel(
                 DrivingDecisionReminderService::class.java.simpleName,
-                Constants.PERMISSION_DECISION_REMINDER_NOTIFICATION_ID
+                Constants.PERMISSION_DECISION_REMINDER_NOTIFICATION_ID,
             )
         }
     }
@@ -183,7 +183,7 @@ class DrivingDecisionReminderService : Service() {
             } else {
                 DumpableLog.w(
                     LOG_TAG,
-                    "Car service disconnected, no notification will be scheduled"
+                    "Car service disconnected, no notification will be scheduled",
                 )
                 stopSelf()
             }
@@ -198,7 +198,7 @@ class DrivingDecisionReminderService : Service() {
             if (!restrictions.isRequiresDistractionOptimization) {
                 DumpableLog.d(
                     LOG_TAG,
-                    "UX restrictions no longer required - showing reminder notification"
+                    "UX restrictions no longer required - showing reminder notification",
                 )
                 showRecentGrantDecisionsPostDriveNotification()
                 stopSelf()
@@ -230,14 +230,14 @@ class DrivingDecisionReminderService : Service() {
             NotificationChannel(
                 Constants.PERMISSION_REMINDER_CHANNEL_ID,
                 getString(R.string.permission_reminders),
-                NotificationManager.IMPORTANCE_HIGH
+                NotificationManager.IMPORTANCE_HIGH,
             )
         notificationManager.createNotificationChannel(permissionReminderChannel)
 
         notificationManager.notify(
             DrivingDecisionReminderService::class.java.simpleName,
             Constants.PERMISSION_DECISION_REMINDER_NOTIFICATION_ID,
-            createNotification(createNotificationTitle(), createNotificationContent())
+            createNotification(createNotificationTitle(), createNotificationContent()),
         )
 
         logNotificationPresented()
@@ -266,26 +266,26 @@ class DrivingDecisionReminderService : Service() {
                 applicationContext,
                 R.string.post_drive_permission_decision_reminder_summary_multi_apps,
                 (packageLabels.size - 1),
-                packageLabelsDistinct[0]
+                packageLabelsDistinct[0],
             )
         } else if (permissionGroupNamesDistinct.size == 2) {
             getString(
                 R.string.post_drive_permission_decision_reminder_summary_1_app_2_permissions,
                 packageLabelsDistinct[0],
                 permissionGroupNamesDistinct[0],
-                permissionGroupNamesDistinct[1]
+                permissionGroupNamesDistinct[1],
             )
         } else if (permissionGroupNamesDistinct.size > 2) {
             getString(
                 R.string.post_drive_permission_decision_reminder_summary_1_app_multi_permission,
                 permissionGroupNamesDistinct.size,
-                packageLabelsDistinct[0]
+                packageLabelsDistinct[0],
             )
         } else {
             getString(
                 R.string.post_drive_permission_decision_reminder_summary_1_app_1_permission,
                 packageLabelsDistinct[0],
-                permissionGroupNamesDistinct[0]
+                permissionGroupNamesDistinct[0],
             )
         }
     }
@@ -302,9 +302,9 @@ class DrivingDecisionReminderService : Service() {
                 putExtra(Constants.EXTRA_SESSION_ID, sessionId)
                 putExtra(
                     AutoReviewPermissionDecisionsFragment.EXTRA_SOURCE,
-                    AutoReviewPermissionDecisionsFragment.EXTRA_SOURCE_NOTIFICATION
+                    AutoReviewPermissionDecisionsFragment.EXTRA_SOURCE_NOTIFICATION,
                 )
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
         val pendingIntent =
             PendingIntent.getActivity(
@@ -313,14 +313,14 @@ class DrivingDecisionReminderService : Service() {
                 clickIntent,
                 PendingIntent.FLAG_ONE_SHOT or
                     PendingIntent.FLAG_UPDATE_CURRENT or
-                    PendingIntent.FLAG_IMMUTABLE
+                    PendingIntent.FLAG_IMMUTABLE,
             )
 
         val settingsIcon =
             KotlinUtils.getSettingsIcon(
                 application,
                 permissionReminders.first().user,
-                applicationContext.packageManager
+                applicationContext.packageManager,
             )
 
         val b =
@@ -342,7 +342,7 @@ class DrivingDecisionReminderService : Service() {
                     Notification.Action.Builder(
                             /* icon= */ null,
                             getString(R.string.go_to_settings),
-                            pendingIntent
+                            pendingIntent,
                         )
                         .build()
                 )
@@ -358,7 +358,7 @@ class DrivingDecisionReminderService : Service() {
         PermissionControllerStatsLog.write(
             PermissionControllerStatsLog.PERMISSION_REMINDER_NOTIFICATION_INTERACTED,
             sessionId,
-            PERMISSION_REMINDER_NOTIFICATION_INTERACTED__RESULT__NOTIFICATION_PRESENTED
+            PERMISSION_REMINDER_NOTIFICATION_INTERACTED__RESULT__NOTIFICATION_PRESENTED,
         )
     }
 }

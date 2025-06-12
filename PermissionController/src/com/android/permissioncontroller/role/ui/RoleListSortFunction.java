@@ -23,30 +23,23 @@ import androidx.annotation.NonNull;
 
 import kotlin.jvm.functions.Function1;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 /**
- * A function for {@link androidx.lifecycle#map(androidx.lifecycle.LiveData, Function1)}
+ * A function for
+ * {@link androidx.lifecycle.Transformations#map(androidx.lifecycle.LiveData, Function1)}
  * that sorts a live data for role list.
  */
-public class RoleListSortFunction implements Function1<List<RoleItem>, List<RoleItem>> {
-
-    @NonNull
-    private final Comparator<RoleItem> mComparator;
+public class RoleListSortFunction extends ListLiveDataSortFunction<RoleItem> {
 
     public RoleListSortFunction(@NonNull Context context) {
-        Collator collator = Collator.getInstance(context.getResources().getConfiguration()
-                .getLocales().get(0));
-        mComparator = Comparator.comparing(roleItem -> context.getString(
-                roleItem.getRole().getShortLabelResource()), collator);
+        super(createComparator(context));
     }
 
-    @Override
-    public List<RoleItem> invoke(List<RoleItem> p1) {
-        List<RoleItem> sorted = new ArrayList<>(p1);
-        sorted.sort(mComparator);
-        return sorted;
+    private static Comparator<RoleItem> createComparator(@NonNull Context context) {
+        Collator collator = Collator.getInstance(context.getResources().getConfiguration()
+                .getLocales().get(0));
+        return Comparator.comparing(item -> context.getString(
+                item.getRole().getShortLabelResource()), collator);
     }
 }

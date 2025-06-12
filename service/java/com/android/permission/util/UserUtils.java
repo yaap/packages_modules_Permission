@@ -65,13 +65,12 @@ public final class UserUtils {
             DevicePolicyManager devicePolicyManager =
                     context.getSystemService(DevicePolicyManager.class);
             if (!devicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()) {
-                // For profileGroup exclusive roles users on BYOD are free to choose personal o
+                // For profileGroup exclusive roles users on BYOD are free to choose personal or
                 // work profile app regardless of DISALLOW_DEBUGGING_FEATURES
                 return;
             }
 
-            Context userContext = UserUtils.getUserContext(userId, context);
-            List<UserHandle> profiles = getUserProfiles(userContext, true);
+            List<UserHandle> profiles = getUserProfiles(userId, context, true);
             final int profilesSize = profiles.size();
             for (int i = 0; i < profilesSize; i++) {
                 int profileId = profiles.get(i).getIdentifier();
@@ -112,26 +111,29 @@ public final class UserUtils {
         }
     }
 
-    /** Returns all the enabled user profiles on the device. */
+    /** Returns all the enabled user profiles on the device for a specified user. */
     @NonNull
-    public static List<UserHandle> getUserProfiles(@NonNull Context context) {
-        return getUserProfiles(context, false);
+    public static List<UserHandle> getUserProfiles(@UserIdInt int userId,
+            @NonNull Context context) {
+        return getUserProfiles(userId, context, false);
     }
 
     /**
-     * Returns all the enabled user profiles on the device
+     * Returns all the enabled user profiles on the device for a specified user
      *
+     * @param userId the user id to check
      * @param context the {@link Context}
      * @param excludePrivate {@code true} to exclude private profiles from returned list of users
      */
     @NonNull
-    public static List<UserHandle> getUserProfiles(@NonNull Context context,
+    public static List<UserHandle> getUserProfiles(@UserIdInt int userId, @NonNull Context context,
             boolean excludePrivate) {
-        UserManager userManager = context.getSystemService(UserManager.class);
         // This call requires the QUERY_USERS permission.
         final long identity = Binder.clearCallingIdentity();
         try {
-            List<UserHandle> profiles = userManager.getUserProfiles();
+            Context userContext = getUserContext(userId, context);
+            UserManager userUserManager = userContext.getSystemService(UserManager.class);
+            List<UserHandle> profiles = userUserManager.getUserProfiles();
             if (!excludePrivate) {
                 return profiles;
             }
@@ -139,7 +141,7 @@ public final class UserUtils {
             final int profilesSize = profiles.size();
             for (int i = 0; i < profilesSize; i++) {
                 UserHandle user = profiles.get(i);
-                if (!isPrivateProfile(user.getIdentifier(), context)) {
+                if (!isPrivateProfile(user.getIdentifier(), userContext)) {
                     filteredProfiles.add(user);
                 }
             }
@@ -164,11 +166,11 @@ public final class UserUtils {
     @Nullable
     private static UserHandle getProfileParent(@UserIdInt int userId, @NonNull Context context) {
         Context userContext = getUserContext(userId, context);
-        UserManager userManager = userContext.getSystemService(UserManager.class);
+        UserManager userUserManager = userContext.getSystemService(UserManager.class);
         // This call requires the INTERACT_ACROSS_USERS permission.
         final long identity = Binder.clearCallingIdentity();
         try {
-            return userManager.getProfileParent(UserHandle.of(userId));
+            return userUserManager.getProfileParent(UserHandle.of(userId));
         } finally {
             Binder.restoreCallingIdentity(identity);
         }
@@ -201,8 +203,8 @@ public final class UserUtils {
         final long identity = Binder.clearCallingIdentity();
         try {
             Context userContext = getUserContext(userId, context);
-            UserManager userManager = userContext.getSystemService(UserManager.class);
-            return userManager != null && userManager.isPrivateProfile();
+            UserManager userUserManager = userContext.getSystemService(UserManager.class);
+            return userUserManager != null && userUserManager.isPrivateProfile();
         } finally {
             Binder.restoreCallingIdentity(identity);
         }

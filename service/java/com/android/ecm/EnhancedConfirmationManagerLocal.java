@@ -34,10 +34,10 @@ import android.telecom.Call;
 @TargetApi(Build.VERSION_CODES.BAKLAVA)
 public interface EnhancedConfirmationManagerLocal {
     /**
-     * Inform the enhanced confirmation service of an ongoing call
+     * Inform the enhanced confirmation service of an ongoing call.
      *
      * @param call The call to potentially track
-     *
+     * @throws IllegalStateException if called on the main thread
      */
     void addOngoingCall(@NonNull Call call);
 
@@ -45,12 +45,14 @@ public interface EnhancedConfirmationManagerLocal {
      * Inform the enhanced confirmation service that a call has ended
      *
      * @param callId The ID of the call to stop tracking
+     * @throws IllegalStateException if called on the main thread
      *
      */
     void removeOngoingCall(@NonNull String callId);
 
     /**
      * Informs the enhanced confirmation service it should clear out any ongoing calls
+     * @throws IllegalStateException if called on the main thread
      */
     void clearOngoingCalls();
 }

@@ -33,24 +33,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.compose.foundation.SwipeToDismissValue
-import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.rememberSwipeToDismissBoxState
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.SwipeToDismissBox
 import com.android.permissioncontroller.R
-import com.android.permissioncontroller.permission.ui.wear.elements.AlertDialog
-import com.android.permissioncontroller.permission.ui.wear.elements.CheckYourPhoneScreen
-import com.android.permissioncontroller.permission.ui.wear.elements.CheckYourPhoneState
-import com.android.permissioncontroller.permission.ui.wear.elements.CheckYourPhoneState.InProgress
-import com.android.permissioncontroller.permission.ui.wear.elements.CheckYourPhoneState.Success
-import com.android.permissioncontroller.permission.ui.wear.elements.Chip
-import com.android.permissioncontroller.permission.ui.wear.elements.ScrollableScreen
-import com.android.permissioncontroller.permission.ui.wear.elements.dismiss
-import com.android.permissioncontroller.permission.ui.wear.elements.findActivity
 import com.android.permissioncontroller.permission.ui.wear.model.WearEnhancedConfirmationViewModel
 import com.android.permissioncontroller.permission.ui.wear.model.WearEnhancedConfirmationViewModel.ScreenState
+import com.android.permissioncontroller.wear.permission.components.CheckYourPhoneScreen
+import com.android.permissioncontroller.wear.permission.components.CheckYourPhoneState
+import com.android.permissioncontroller.wear.permission.components.CheckYourPhoneState.InProgress
+import com.android.permissioncontroller.wear.permission.components.CheckYourPhoneState.Success
+import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
+import com.android.permissioncontroller.wear.permission.components.dismiss
+import com.android.permissioncontroller.wear.permission.components.findActivity
+import com.android.permissioncontroller.wear.permission.components.material2.Chip
+import com.android.permissioncontroller.wear.permission.components.material3.DialogButtonContent
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionConfirmationDialog
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
+import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 
 @Composable
 fun WearEnhancedConfirmationScreen(
@@ -58,6 +60,7 @@ fun WearEnhancedConfirmationScreen(
     title: String?,
     message: CharSequence?,
 ) {
+    val materialUIVersion = ResourceHelper.materialUIVersionInSettings
     var dismissed by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val ecmScreenState = remember { viewModel.screenState }
@@ -97,7 +100,7 @@ fun WearEnhancedConfirmationScreen(
                         onClick = { dismiss(activity) },
                         modifier = Modifier.fillMaxWidth(),
                         textColor = MaterialTheme.colors.surface,
-                        colors = ChipDefaults.primaryChipColors()
+                        colors = ChipDefaults.primaryChipColors(),
                     )
                 }
                 item {
@@ -107,27 +110,30 @@ fun WearEnhancedConfirmationScreen(
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
-            }
+            },
         )
 
     @Composable
     fun ShowCheckYourPhoneDialog(state: CheckYourPhoneState) =
         CheckYourPhoneScreen(
             title = stringResource(id = R.string.wear_check_your_phone_title),
-            state = state
+            state = state,
         )
 
     @Composable
     fun ShowRemoteConnectionErrorDialog() =
-        AlertDialog(
+        WearPermissionConfirmationDialog(
+            materialUIVersion = materialUIVersion,
+            show = true,
             title = stringResource(R.string.wear_phone_connection_error),
             message = stringResource(R.string.wear_phone_connection_should_retry),
-            iconRes = R.drawable.ic_error,
-            showDialog = true,
-            okButtonIcon = R.drawable.ic_refresh,
-            onOKButtonClick = { viewModel.openUriOnPhone(context) },
-            onCancelButtonClick = { dismiss(activity) },
-            scalingLazyListState = ScalingLazyListState(1)
+            iconRes = WearPermissionIconBuilder.builder(R.drawable.ic_error),
+            positiveButtonContent =
+                DialogButtonContent(
+                    icon = WearPermissionIconBuilder.builder(R.drawable.ic_refresh),
+                    onClick = { viewModel.openUriOnPhone(context) },
+                ),
+            negativeButtonContent = DialogButtonContent(onClick = { dismiss(activity) }),
         )
 
     SwipeToDismissBox(state = state) { isBackground ->

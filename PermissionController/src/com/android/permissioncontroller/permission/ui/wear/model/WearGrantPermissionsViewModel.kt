@@ -43,6 +43,9 @@ class WearGrantPermissionsViewModel : ViewModel() {
     /** A livedata which stores the permission group button visibilities. */
     val buttonVisibilitiesLiveData = MutableLiveData<List<Boolean>>()
 
+    /** A livedata to control screen visibility */
+    val showDialog = MutableLiveData<Boolean>()
+
     init {
         groupNameLiveData.value = ""
         iconLiveData.value = null
@@ -51,12 +54,14 @@ class WearGrantPermissionsViewModel : ViewModel() {
         locationVisibilitiesLiveData.value = emptyList()
         preciseLocationCheckedLiveData.value = false
         buttonVisibilitiesLiveData.value = emptyList()
+        showDialog.value = false
     }
 }
 
 /** Factory for a WearGrantPermissionsViewModel */
 class WearGrantPermissionsViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return WearGrantPermissionsViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return WearGrantPermissionsViewModel() as T
     }
 }

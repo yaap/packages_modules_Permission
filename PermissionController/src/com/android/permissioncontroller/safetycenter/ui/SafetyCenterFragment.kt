@@ -33,7 +33,6 @@ import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterUiData
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterViewModel
 import com.android.safetycenter.resources.SafetyCenterResourcesApk
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
-import com.android.settingslib.widget.SettingsThemeHelper
 
 /** A base fragment that represents a page in Safety Center. */
 @RequiresApi(TIRAMISU)
@@ -57,17 +56,11 @@ abstract class SafetyCenterFragment : SettingsBasePreferenceFragment() {
          * subpages i.e. non expand-and-collapse type entries. Hence, we check that the flag is
          * enabled before using an adapter that does the highlighting and scrolling. */
         val adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder> =
-            if (
-                SafetyCenterUiFlags.getShowSubpages() &&
-                    !SettingsThemeHelper.isExpressiveTheme(requireContext())
-            ) {
-                // TODO: b/378433878 - Create highlight adapter for settings expressive theme, which
-                // has a different base class.
+            if (SafetyCenterUiFlags.getShowSubpages()) {
                 highlightManager.createAdapter(preferenceScreen)
             } else {
                 super.onCreateAdapter(preferenceScreen)
             }
-
         /* By default, the PreferenceGroupAdapter does setHasStableIds(true). Since each Preference
          * is internally allocated with an auto-incremented ID, it does not allow us to gracefully
          * update only changed preferences based on SafetyPreferenceComparisonCallback. In order to
@@ -83,10 +76,15 @@ abstract class SafetyCenterFragment : SettingsBasePreferenceFragment() {
                 .split(",")
         safetyCenterSessionId = requireArguments().getLong(EXTRA_SESSION_ID, INVALID_SESSION_ID)
 
+        val activity = requireActivity()
         safetyCenterViewModel =
             ViewModelProvider(
-                    requireActivity(),
-                    LiveSafetyCenterViewModelFactory(requireActivity().getApplication()),
+                    activity,
+                    LiveSafetyCenterViewModelFactory(
+                        activity.application,
+                        activity.taskId,
+                        sameTaskSourceIds,
+                    ),
                 )
                 .get(SafetyCenterViewModel::class.java)
         safetyCenterViewModel.safetyCenterUiLiveData.observe(this) { uiData: SafetyCenterUiData? ->
@@ -97,8 +95,7 @@ abstract class SafetyCenterFragment : SettingsBasePreferenceFragment() {
             displayErrorDetails(errorDetails)
         }
 
-        val safetyCenterIntent: ParsedSafetyCenterIntent =
-            requireActivity().intent.toSafetyCenterIntent()
+        val safetyCenterIntent: ParsedSafetyCenterIntent = activity.intent.toSafetyCenterIntent()
         val isQsFragment =
             getArguments()?.getBoolean(QUICK_SETTINGS_SAFETY_CENTER_FRAGMENT, false) ?: false
         collapsableIssuesCardHelper =

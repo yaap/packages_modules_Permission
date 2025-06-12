@@ -49,7 +49,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -125,7 +125,7 @@ class PermissionStorageTimeChangeReceiverTest {
         receiver.onReceive(context, Intent(Intent.ACTION_TIME_CHANGED))
 
         verify(receiver, never()).onTimeChanged(anyLong())
-        verifyZeroInteractions(editor)
+        verifyNoMoreInteractions(editor)
     }
 
     @Test
@@ -133,7 +133,7 @@ class PermissionStorageTimeChangeReceiverTest {
         receiver.onReceive(context, Intent(Intent.ACTION_MANAGE_PERMISSIONS))
 
         verify(receiver, never()).onTimeChanged(anyLong())
-        verifyZeroInteractions(editor)
+        verifyNoMoreInteractions(editor)
     }
 
     @Test

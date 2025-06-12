@@ -197,6 +197,7 @@ object UiTestHelper {
     /** Opens the subpage by clicking on the group title. */
     fun clickOpenSubpage(context: Context, group: SafetySourcesGroup) {
         waitDisplayed(By.text(context.getString(group.titleResId))) { it.click() }
+        getUiDevice().waitForIdle()
     }
 
     /** Clicks the more issues card button to show or hide additional issues. */

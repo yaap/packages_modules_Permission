@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"សិទ្ធិចូលប្រើ <xliff:g id="PERM">%1$s</xliff:g> សម្រាប់កម្មវិធីនេះនៅលើ <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"មើល​ការអនុញ្ញាតទាំងអស់ឱ្យទៅ <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"មើលកម្មវិធី​ទាំងអស់​ដែលមាន​ការអនុញ្ញាត​នេះ"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"ព័ត៌មាន"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"ការកំណត់"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"បង្ហាញការប្រើប្រាស់​មីក្រូហ្វូនរបស់ជំនួយការ"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"ការកំណត់កម្មវិធីដែលមិនប្រើ"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"ដកការ​អនុញ្ញាតចេញ ប្រសិនបើ​មិនប្រើប្រាស់​កម្មវិធី"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"ការបើកតំណ"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"លំនាំដើម​សម្រាប់ការងារ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"លំនាំដើមសម្រាប់លំហឯកជន"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"បានបង្កើនប្រសិទ្ធភាពសម្រាប់ឧបករណ៍"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"ផ្សេងទៀត"</string>
     <string name="default_app_none" msgid="9084592086808194457">"គ្មាន"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(លំនាំដើមប្រព័ន្ធ)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"គ្មានកម្មវិធី​ទេ​"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> ចង់​បង្ហោះ​ព័ត៌មាននៃ​ការជួសជុល។"</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"ចែករំលែក​ទិន្នន័យ​នៃការ​ជួសជុល​ឬ?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"ប្រព័ន្ធ​បានរកឃើញ​បញ្ហា​មួយ។"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> កំពុង​ស្នើសុំ​បង្ហោះ​របាយការណ៍​អំពី​បញ្ហាពី​ឧបករណ៍​នេះ ដែល​បាន​ធ្វើឡើង​នៅថ្ងៃទី <xliff:g id="DATE">%2$s</xliff:g> នៅម៉ោង <xliff:g id="TIME">%3$s</xliff:g>។ របាយការណ៍​អំពី​បញ្ហា​រួមមាន​ព័ត៌មានផ្ទាល់ខ្លួន​អំពី​ឧបករណ៍​របស់អ្នក​ ឬ​ដែលបាន​កត់ត្រា​ដោយ​កម្មវិធី​ដូចជា ឈ្មោះ​អ្នកប្រើប្រាស់ ទិន្នន័យទីតាំង ព័ត៌មាន​សម្គាល់​ឧបករណ៍ និង​ព័ត៌មាន​បណ្ដាញ​ជាដើម។ ចែករំលែក​របាយការណ៍​អំពី​បញ្ហា​ជាមួយ​កម្មវិធី និង​មនុស្សដែល​អ្នកទុកចិត្ត​ប៉ុណ្ណោះ ពាក់ព័ន្ធនឹង​ព័ត៌មាន​នេះ។ អនុញ្ញាត​ឱ្យ <xliff:g id="APP_NAME_1">%4$s</xliff:g> បង្ហោះ​របាយការណ៍​អំពី​បញ្ហាទេ?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> កំពុងស្នើសុំ​បង្ហោះ​របាយការណ៍​អំពី​បញ្ហាពី​ឧបករណ៍​នេះ ដែល​បាន​ធ្វើឡើង​នៅថ្ងៃទី <xliff:g id="DATE">%2$s</xliff:g> នៅម៉ោង <xliff:g id="TIME">%3$s</xliff:g>។ របាយការណ៍​អំពី​បញ្ហា​រួមមាន​ព័ត៌មានផ្ទាល់ខ្លួន​អំពី​ឧបករណ៍​របស់អ្នក​ ឬ​ដែលបាន​កត់ត្រា​ដោយ​កម្មវិធី​ដូចជា ឈ្មោះ​អ្នកប្រើប្រាស់ ទិន្នន័យទីតាំង លេខកូដសម្គាល់​ឧបករណ៍ និង​ព័ត៌មាន​បណ្ដាញ​ជាដើម។ ចែករំលែក​របាយការណ៍​អំពី​បញ្ហា​ជាមួយ​មនុស្ស និងកម្មវិធីដែល​អ្នកទុកចិត្តតែ​ប៉ុណ្ណោះ ពាក់ព័ន្ធនឹង​ព័ត៌មាន​នេះ។\n\nអនុញ្ញាត​ឱ្យ <xliff:g id="APP_NAME_1">%4$s</xliff:g> បង្ហោះ​របាយការណ៍​អំពី​បញ្ហាដែរទេ?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"មាន​បញ្ហា​ក្នុងការ​ដំណើរការ​របាយការណ៍អំពីបញ្ហា​សម្រាប់ <xliff:g id="APP_NAME">%1$s</xliff:g> ។ ដូច្នេះ ការចែករំលែក​ទិន្នន័យ​ជួសជុល​លម្អិត​ត្រូវបានបដិសេធ។ សូមអភ័យទោស​ចំពោះ​ការរំខាន។"</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"អនុញ្ញាត"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"បដិសេធ"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"អនុញ្ញាតការកំណត់​ដែលបានដាក់កំហិត"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"ការកំណត់​ដែលបានដាក់កំហិត"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"ដើម្បីសុវត្ថិភាព​របស់អ្នក បច្ចុប្បន្នមិនអាចប្រើការកំណត់នេះបានទេ។"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"មិនអាចធ្វើសកម្មភាពបានទេ ពេលកំពុងហៅទូរសព្ទ"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"ការអនុញ្ញាតឱ្យកម្មវិធីដំឡើងកម្មវិធីផ្សេងទៀតមិនត្រូវបានអនុញ្ញាតអំឡុងពេលហៅទូរសព្ទទេ។\n\n ជារឿយៗ ជនឆបោកស្នើសុំសកម្មភាពប្រភេទនេះអំឡុងពេលសន្ទនាតាមទូរសព្ទ ដូច្នេះសកម្មភាពនេះត្រូវបានទប់ស្កាត់ដើម្បីការពារអ្នក។ ប្រសិនបើអ្នកត្រូវបានណែនាំឱ្យធ្វើសកម្មភាពនេះដោយនរណាម្នាក់ដែលអ្នកមិនស្គាល់ វាអាចជាការឆបោក។"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"មិនអាចបញ្ចប់សកម្មភាពក្នុងអំឡុងពេលហៅទូរសព្ទបានទេ"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"ការកំណត់នេះត្រូវបានទប់ស្កាត់ ដើម្បីការពារឧបករណ៍ និងទិន្នន័យរបស់អ្នក។<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ជនឆបោកអាចនឹងព្យាយាមដំឡើងកម្មវិធីបង្កគ្រោះថ្នាក់ ដោយស្នើសុំឱ្យអ្នកដំឡើងកម្មវិធីមិនស្គាល់ពីប្រភពថ្មី។"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ជនឆបោកអាចនឹងព្យាយាមគ្រប់គ្រងឧបករណ៍របស់អ្នក ដោយស្នើសុំឱ្យអ្នកអនុញ្ញាតសិទ្ធិចូលប្រើប្រាស់មុខងារភាពងាយស្រួលសម្រាប់កម្មវិធី។"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"កម្មវិធីត្រូវបានបដិសេធមិនឱ្យចូលប្រើ<xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"កម្មវិធីបានស្នើសុំសិទ្ធិចូលប្រើការអនុញ្ញាត​ដែលមានលក្ខណៈរសើប ដែលអាចធ្វើឱ្យព័ត៌មានហិរញ្ញវត្ថុ និងព័ត៌មានផ្ទាល់ខ្លួនរបស់អ្នកប្រឈមនឹងហានិភ័យ។<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>កម្មវិធីអាចនឹងមិនដំណើរការបានត្រឹមត្រូវទេ ប្រសិនបើគ្មានការអនុញ្ញាតដែលមានការរឹតបន្តឹងនេះ។ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;ស្វែងយល់អំពីរបៀបផ្ដល់សិទ្ធិចូលប្រើ&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"កម្មវិធីត្រូវបានបដិសេធមិនឱ្យចូលប្រើជា<xliff:g id="ROLE_NAME">%1$s</xliff:g>លំនាំដើម"</string>

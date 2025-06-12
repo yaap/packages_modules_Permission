@@ -29,6 +29,7 @@ android_test {
         "src/**/*.kt",
     ],
     static_libs: [
+        "aconfig_settingstheme_exported_flags_java_lib",
         "androidx.test.rules",
         "androidx.test.ext.junit",
         "compatibility-device-preconditions",

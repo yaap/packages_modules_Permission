@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="PERM">%1$s</xliff:g> access for this app on <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"See all <xliff:g id="APP">%1$s</xliff:g> permissions"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"See all apps with this permission"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Information"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Settings"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Show assistant microphone usage"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Unused app settings"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Remove permissions if app isn’t used"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Opening links"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Default for work"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Default for private space"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimized for device"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Others"</string>
     <string name="default_app_none" msgid="9084592086808194457">"None"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(System default)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"No apps"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> would like to upload debugging information."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Share debugging data?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"The system has detected a problem."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> is requesting to upload a bug report from this device taken on <xliff:g id="DATE">%2$s</xliff:g> at <xliff:g id="TIME">%3$s</xliff:g>. Bug reports include personal information about your device or logged by apps, for example, user names, location data, device identifiers, and network information. Only share bug reports with people and apps you trust with this information. Allow <xliff:g id="APP_NAME_1">%4$s</xliff:g> to upload a bug report?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> is requesting to upload a bug report from this device taken on <xliff:g id="DATE">%2$s</xliff:g> at <xliff:g id="TIME">%3$s</xliff:g>. Bug reports include personal information about your device or logged by apps, for example, user names, location data, device identifiers, and network information. Only share bug reports with people and apps you trust with this information.\n\nAllow <xliff:g id="APP_NAME_1">%4$s</xliff:g> to upload a bug report?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"There was an error processing the bug report for <xliff:g id="APP_NAME">%1$s</xliff:g>. So sharing the detailed debugging data has been denied. Sorry for the interruption."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Allow"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Deny"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Allow restricted settings"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Restricted setting"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"For your security, this setting is currently unavailable."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Action not available while on a phone call"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Allowing apps to install other apps is not allowed during a phone call.\n\n Scammers often request this type of action during phone call conversations, so it’s blocked to protect you. If you are being guided to take this action by someone you don’t know, it might be a scam."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Can’t complete action during call"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"This setting is blocked to protect your device and data.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Scammers may try to install harmful apps by asking you to install unknown apps from a new source."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Scammers may try to take control of your device by asking you to allow accessibility access for an app."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"App was denied access to <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"The app requested access to a sensitive permission which can put your personal and financial info at risk.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>It\'s possible the app won\'t work properly without this restricted permission. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Learn how to allow access&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"App was denied access to be default <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

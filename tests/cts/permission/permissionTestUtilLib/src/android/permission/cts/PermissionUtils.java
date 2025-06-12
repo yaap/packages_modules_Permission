@@ -103,12 +103,23 @@ public class PermissionUtils {
      * @param apkFile The apk to install
      */
     public static void install(@NonNull String apkFile) {
+        install(apkFile, false);
+    }
+
+    /**
+     * Install an APK.
+     *
+     * @param apkFile The apk to install
+     * @param grantPermissions whether to grant requested runtime permissions
+     */
+    public static void install(@NonNull String apkFile, boolean grantPermissions) {
         final int sdkVersion = Build.VERSION.SDK_INT
                 + (Build.VERSION.RELEASE_OR_CODENAME.equals("REL") ? 0 : 1);
         boolean forceQueryable = sdkVersion > Build.VERSION_CODES.Q;
         runShellCommandOrThrow("pm install -r --force-sdk "
                 + (SdkLevel.isAtLeastU() ? "--bypass-low-target-sdk-block " : "")
                 + (forceQueryable ? "--force-queryable " : "")
+                + (grantPermissions ? "-g " : "")
                 + apkFile);
     }
 
@@ -373,7 +384,7 @@ public class PermissionUtils {
         simulateReboot(packageName, intentAction, broadcastReceiver);
 
         while ((System.currentTimeMillis() - startTime) < timeout
-                && !jobStatus.contains("waiting")) {
+                && !isJobScheduled(jobStatus)) {
             String cmd =
                     "cmd jobscheduler get-job-state -u " + Process.myUserHandle().getIdentifier()
                             + " " + packageName + " " + jobId;
@@ -385,9 +396,14 @@ public class PermissionUtils {
                 // ignore interrupt
             }
         }
-        if (!jobStatus.contains("waiting")) {
+        if (!isJobScheduled(jobStatus)) {
             throw new IllegalStateException("The job didn't get scheduled in time.");
         }
+    }
+
+    private static boolean isJobScheduled(String jobStatus) throws Exception {
+        return jobStatus.contains("waiting") || jobStatus.contains("pending")
+            || jobStatus.contains("ready") || jobStatus.contains("active");
     }
 
     private static void simulateReboot(@NonNull String packageName, @NonNull String intentAction,

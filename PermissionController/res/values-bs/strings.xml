@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Pristup aplikaciji \"<xliff:g id="PERM">%1$s</xliff:g>\" za ovu aplikaciju na uređaju \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Prikaži sva odobrenja aplikacije <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Prikaži sve aplikacije s ovim odobrenjem"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"Informacije"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"Postavke"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Prikaži korištenje mikrofona asistenta"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"Postavke za nekorištene aplikacije"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"Ukloni odobrenja ako se aplikacija ne koristi"</string>
@@ -355,7 +357,7 @@
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Ove aplikacije mogu pregledati vaš ekran, radnje i unose, izvršavati radnje i kontrolirati ekran."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"Zadani digitalni asistent"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplikacija digitalnog asistenta"</string>
-    <string name="role_assistant_description" msgid="6622458130459922952">"Aplikacije za pomoć vam mogu pomoći na osnovu informacija s ekrana koji pregledate. Neke aplikacije podržavaju i usluge pokretača i glasovnog unosa kako bi vam pružile sveukupnu pomoć."</string>
+    <string name="role_assistant_description" msgid="6622458130459922952">"Aplikacije za pomoć vam mogu pomoći na osnovu informacija s ekrana koji pregledate. Neke aplikacije podržavaju i usluge pokretača i glasovnog unosa kako bi vam pružile integriranu pomoć."</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Zadana aplikacija preglednika"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplikacija preglednika"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplikacije koje vam pružaju pristup internetu i prikazuju linkove koje možete dodirnuti"</string>
@@ -368,7 +370,7 @@
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Ova aplikacija će dobiti pristup vašoj Kameri, Kontaktima, Mikrofonu, Telefonu i SMS-u"</string>
     <string name="role_dialer_search_keywords" msgid="3324448983559188087">"brojčana tastatura"</string>
     <string name="role_sms_label" msgid="8456999857547686640">"Zadana aplikacija za SMS"</string>
-    <string name="role_sms_short_label" msgid="4371444488034692243">"aplikacija za SMS"</string>
+    <string name="role_sms_short_label" msgid="4371444488034692243">"Aplikacija za SMS"</string>
     <string name="role_sms_description" msgid="3424020199148153513">"Aplikacije koje vam omogućavaju korištenje broja telefona za slanje i primanje kratkih SMS-ova, fotografija, videozapisa i drugog"</string>
     <string name="role_sms_request_title" msgid="7953552109601185602">"Postaviti aplikaciju <xliff:g id="APP_NAME">%1$s</xliff:g> kao zadanu aplikaciju za SMS?"</string>
     <string name="role_sms_request_description" msgid="2691004766132144886">"Ova aplikacija će dobiti pristup vašoj Kameri, Kontaktima, Fajlovima i medijima, Mikrofonu, Telefonu i SMS-u"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otvaranje linkova"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Uobičajeno za rad"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Zadano za privatni prostor"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizirano za uređaj"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"Drugo"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nema"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sistemski zadano)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Nema aplikacija"</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> želi otpremiti informacije o otklanjanju grešaka."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"Podijeliti podatke o otklanjanju grešaka?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"Sistem je otkrio problem."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> traži da s ovog uređaja otpremi izvještaj o greškama napravljen <xliff:g id="DATE">%2$s</xliff:g> u <xliff:g id="TIME">%3$s</xliff:g>. Izvještaji o greškama uključuju lične informacije o vašem uređaju ili koje su zabilježile aplikacije, npr. korisnička imena, podatke o lokaciji, identifikatore uređaja i informacije o mreži. Izvještaje o greškama dijelite samo s osobama i aplikacijama kojim vjerujete. Dozvoliti aplikaciji <xliff:g id="APP_NAME_1">%4$s</xliff:g> da otpremi izvještaj o greškama?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"Aplikacija <xliff:g id="APP_NAME_0">%1$s</xliff:g> traži da s uređaja otpremi izvještaj o grešci kreiran na dan <xliff:g id="DATE">%2$s</xliff:g> u <xliff:g id="TIME">%3$s</xliff:g>. Izvještaji o greškama uključuju lične informacije o uređaju ili informacije koje su zabilježile aplikacije, npr. korisnička imena, podatke o lokaciji, identifikatore uređaja i informacije o mreži. Dijelite izvještaje o greškama samo s osobama i aplikacijama koje smatrate pouzdanima.\n\nDozvoliti aplikaciji <xliff:g id="APP_NAME_1">%4$s</xliff:g> da otpremi izvještaj o grešci?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"Došlo je do greške prilikom obrade izvještaja o greškama za aplikaciju <xliff:g id="APP_NAME">%1$s</xliff:g>. Stoga je odbijeno dijeljenje detaljnih podataka o otklanjanju grešaka. Izvinjavamo se na prekidu."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"Dozvoli"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"Odbij"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"Dozvoli ograničene postavke"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Ograničena postavka"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Radi vaše sigurnosti postavka trenutno nije dostupna."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"Radnja nije dostupna tokom telefonskog poziva"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"Dozvoljavanje aplikacijama da instaliraju druge aplikacije nije dozvoljeno tokom telefonskog poziva.\n\n Prevaranti često traže ovu vrstu radnje tokom telefonskih razgovora, pa ovo blokiramo da vas zaštitimo. Ako neko koga ne poznajete traži da poduzmete ovu radnju, to može biti prevara."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Nije moguće izvršiti radnju tokom poziva"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Blokirali smo postavku da zaštitimo vaš uređaj i podatke.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Prevaranti mogu pokušati instalirati štetne aplikacije traženjem da instalirate nepoznate aplikacije iz novog izvora."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Prevaranti mogu pokušati preuzeti kontrolu nad uređajem traženjem da dozvolite pristup funkcijama pristupačnosti za aplikaciju."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Aplikaciji je odbijen pristup odobrenju <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Aplikacija je zatražila pristup osjetljivom odobrenju, što može ugroziti vaše lične i finansijske informacije.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Moguće je da aplikacija neće ispravno raditi bez ovog ograničenog odobrenja. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Saznajte kako dozvoliti pristup&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Aplikaciji je odbijen pristup da bude zadana <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>

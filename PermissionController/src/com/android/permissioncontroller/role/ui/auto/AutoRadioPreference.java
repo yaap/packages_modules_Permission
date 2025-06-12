@@ -19,6 +19,7 @@ package com.android.permissioncontroller.role.ui.auto;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,9 +31,14 @@ import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.role.ui.RestrictionAwarePreferenceMixin;
 import com.android.permissioncontroller.role.ui.RoleApplicationPreference;
 
+import java.util.Objects;
+
 /** Preference used to represent apps that can be picked as a default app. */
 public class AutoRadioPreference extends TwoStatePreference implements
         RoleApplicationPreference {
+
+    @Nullable
+    private String mContentDescription;
 
     private final RestrictionAwarePreferenceMixin mRestrictionAwarePreferenceMixin =
             new RestrictionAwarePreferenceMixin(this);
@@ -56,7 +62,18 @@ public class AutoRadioPreference extends TwoStatePreference implements
         RadioButton radioButton = (RadioButton) holder.findViewById(R.id.radio_button);
         radioButton.setChecked(isChecked());
 
+        TextView titleText = (TextView) holder.findViewById(android.R.id.title);
+        titleText.setContentDescription(mContentDescription);
+
         mRestrictionAwarePreferenceMixin.onAfterBindViewHolder(holder);
+    }
+
+    @Override
+    public void setContentDescription(@Nullable String contentDescription) {
+        if (!Objects.equals(mContentDescription, contentDescription)) {
+            mContentDescription = contentDescription;
+            notifyChanged();
+        }
     }
 
     @Override

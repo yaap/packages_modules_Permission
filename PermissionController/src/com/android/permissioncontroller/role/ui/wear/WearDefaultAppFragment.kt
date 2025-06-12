@@ -27,11 +27,11 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.android.permissioncontroller.permission.ui.wear.theme.WearPermissionTheme
 import com.android.permissioncontroller.role.ui.DefaultAppViewModel
 import com.android.permissioncontroller.role.ui.ManageRoleHolderStateLiveData
 import com.android.permissioncontroller.role.ui.wear.model.DefaultAppConfirmDialogViewModel
 import com.android.permissioncontroller.role.ui.wear.model.DefaultAppConfirmDialogViewModelFactory
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 import com.android.role.controller.model.Role
 import com.android.role.controller.model.Roles
 
@@ -46,14 +46,13 @@ class WearDefaultAppFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val roleName = arguments?.getString(Intent.EXTRA_ROLE_NAME) ?: ""
         val user =
             arguments?.let {
                 BundleCompat.getParcelable(it, Intent.EXTRA_USER, UserHandle::class.java)!!
-            }
-                ?: UserHandle.SYSTEM
+            } ?: UserHandle.SYSTEM
 
         val activity = requireActivity()
         role =
@@ -82,7 +81,7 @@ class WearDefaultAppFragment : Fragment() {
                             user,
                             role,
                             viewModel,
-                            confirmDialogViewModel
+                            confirmDialogViewModel,
                         )
                     )
                 }

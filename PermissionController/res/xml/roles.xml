@@ -654,6 +654,12 @@
                 minSdkVersion="33" />
             <permission name="android.permission.MANAGE_SAFETY_CENTER"
                 minSdkVersion="33" />
+            <permission name="android.permission.ASSOCIATE_COMPANION_DEVICES" minSdkVersion="36" />
+            <permission name="android.permission.CREATE_VIRTUAL_DEVICE" minSdkVersion="33" />
+            <permission name="android.permission.ADD_TRUSTED_DISPLAY" minSdkVersion="33" />
+            <permission name="android.permission.ADD_ALWAYS_UNLOCKED_DISPLAY" minSdkVersion="33" />
+            <permission name="android.permission.ADD_MIRROR_DISPLAY"
+                featureFlag="android.companion.virtualdevice.flags.Flags.enableLimitedVdmRole" />
             <permission name="android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE"
                 minSdkVersion="33" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT"
@@ -716,15 +722,14 @@
                 minSdkVersion="35" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_AUDIT_LOGGING"
                 minSdkVersion="35" />
-            <permission name="android.permission.EXECUTE_APP_FUNCTIONS"
-                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
-            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED"
-                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
-            <permission name="android.permission.COPY_ACCOUNTS"
-                featureFlag="android.app.admin.flags.Flags.splitCreateManagedProfileEnabled" />
-            <permission name="android.permission.REMOVE_ACCOUNTS"
-                featureFlag="android.app.admin.flags.Flags.splitCreateManagedProfileEnabled" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_MTE"
+                minSdkVersion="36" />
         </permissions>
+        <!-- App ops needed to allow background access to audio APIs for CTS -->
+        <app-ops>
+            <app-op name="android:control_audio" mode="allowed" minSdkVersion="36"/>
+            <app-op name="android:control_audio_partial" mode="allowed" minSdkVersion="36"/>
+        </app-ops>
     </role>
 
     <role
@@ -895,8 +900,8 @@
             <permission name="android.permission.READ_SMS" minSdkVersion="33" />
             <permission name="android.permission.READ_PEOPLE_DATA" />
             <permission name="android.permission.READ_GLOBAL_APP_SEARCH_DATA" />
-            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED"
-                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
+            <permission name="android.permission.READ_BLOCKED_NUMBERS"
+                featureFlag="android.permission.flags.Flags.grantReadBlockedNumbersToSystemUiIntelligence" />
         </permissions>
     </role>
 
@@ -1032,6 +1037,8 @@
             <!-- If this role holder has a NotificationListenerService, let that service receive
                  notifications with sensitive content unredacted-->
             <permission name="android.permission.RECEIVE_SENSITIVE_NOTIFICATIONS" minSdkVersion="35"/>
+            <permission name="android.permission.ACCESS_TEXT_CLASSIFIER_BY_TYPE" minSdkVersion="36"
+                featureFlag="android.permission.flags.Flags.textClassifierChoiceApiEnabled"/>
         </permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
@@ -1226,7 +1233,6 @@
       -->
     <role
         name="android.app.role.COMPANION_DEVICE_APP_STREAMING"
-        allowBypassingQualification="true"
         behavior="v33.CompanionDeviceAppStreamingRoleBehavior"
         description="@string/role_app_streaming_description"
         exclusive="false"
@@ -1302,7 +1308,7 @@
 
     <role
         name="android.app.role.COMPANION_DEVICE_NEARBY_DEVICE_STREAMING"
-        allowBypassingQualification="true"
+        behavior="v34.CompanionDeviceNearbyDeviceStreamingRoleBehavior"
         exclusive="false"
         exclusivity="none"
         minSdkVersion="34"
@@ -1318,6 +1324,7 @@
 
      <role
         name="android.app.role.SYSTEM_SUPERVISION"
+        behavior="v33.SystemSupervisionRoleBehavior"
         defaultHolders="config_systemSupervision"
         exclusive="true"
         exclusivity="user"
@@ -1491,10 +1498,8 @@
             <permission name="android.permission.MANAGE_DEVICE_POLICY_SMS" minSdkVersion="35" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_APP_FUNCTIONS"
                 featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
-            <permission name="android.permission.COPY_ACCOUNTS"
-                featureFlag="android.app.admin.flags.Flags.splitCreateManagedProfileEnabled" />
-            <permission name="android.permission.REMOVE_ACCOUNTS"
-                featureFlag="android.app.admin.flags.Flags.splitCreateManagedProfileEnabled" />
+            <permission name="android.permission.MANAGE_DEFAULT_APPLICATIONS" minSdkVersion="36"
+                featureFlag="com.android.permission.flags.Flags.crossUserRoleEnabled" />
         </permissions>
     </role>
 
@@ -1834,7 +1839,7 @@
         defaultHolders="config_defaultWallet"
         description="@string/role_wallet_description"
         exclusive="true"
-        exclusivity="user"
+        exclusivity="profileGroup"
         label="@string/role_wallet_label"
         minSdkVersion="35"
         overrideUserWhenGranting="true"
@@ -1874,19 +1879,21 @@
       -->
     <role
         name="android.app.role.RESERVED_FOR_TESTING_PROFILE_GROUP_EXCLUSIVITY"
-        behavior="ReservedForTestingProfileGroupExclusivityRoleBehavior"
+        behavior="v36.ReservedForTestingProfileGroupExclusivityRoleBehavior"
         description="@string/role_for_testing_profile_group_exclusivity_description"
         exclusive="true"
         exclusivity="profileGroup"
         fallBackToDefaultHolder="true"
         featureFlag="com.android.permission.flags.Flags.crossUserRoleEnabled"
         label="@string/role_for_testing_profile_group_exclusivity_label"
+        minSdkVersion="36"
         requestable="true"
         requestDescription="@string/role_for_testing_profile_group_exclusivity_request_description"
         requestTitle="@string/role_for_testing_profile_group_exclusivity_request_title"
         shortLabel="@string/role_for_testing_profile_group_exclusivity_short_label"
         showNone="true"
-        visible="true"/>
+        uiBehavior="v36.ReservedForTestingProfileGroupExclusivityRoleUiBehavior"
+        visible="false"/>
 
     <!---
       ~ A role for the vendor package that provides privacy-preserving intelligent processor for
@@ -1921,9 +1928,27 @@
         systemOnly="true"
         visible="false">
         <permissions>
-            <permission name="android.permission.READ_GLOBAL_APP_SEARCH_DATA" />
-            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED"
-                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
+            <permission name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+            <permission name="android.permission.ACCESS_COARSE_LOCATION" />
+            <permission name="android.permission.ACCESS_FINE_LOCATION" />
+            <permission name="android.permission.READ_MEDIA_IMAGES" />
+            <permission name="android.permission.READ_MEDIA_VIDEO" />
         </permissions>
     </role>
+
+    <role
+        name="android.app.role.COMPANION_DEVICE_VIRTUAL_DEVICE"
+        allowBypassingQualification="true"
+        exclusive="false"
+        exclusivity="none"
+        featureFlag="android.companion.virtualdevice.flags.Flags.enableLimitedVdmRole"
+        systemOnly="true"
+        visible="false">
+        <permissions>
+            <permission-set name="nearby_devices" />
+            <permission-set name="notifications" />
+            <permission name="android.permission.CREATE_VIRTUAL_DEVICE"/>
+        </permissions>
+    </role>
+
 </roles>

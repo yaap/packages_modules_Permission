@@ -65,15 +65,6 @@ flag {
 }
 
 flag {
-    name: "livedata_refactor_permission_timeline_enabled"
-    is_exported: true
-    namespace: "permissions"
-    description: "This flag is used to enable modern app architecture implementation for timeline page"
-    bug: "354234946"
-    is_fixed_read_only: true
-}
-
-flag {
     name: "odad_notifications_supported"
     is_exported: true
     namespace: "permissions"
@@ -119,6 +110,18 @@ flag {
 }
 
 flag {
+    name: "cross_user_role_ux_bugfix_enabled"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag enables cross-user roles support ux bug fixes"
+    bug: "367732307"
+    is_fixed_read_only: true
+    metadata {
+      purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
     name: "permission_timeline_attribution_label_fix"
     is_exported: true
     namespace: "permissions"
@@ -151,5 +154,23 @@ flag {
     namespace: "permissions"
     description: "This flag is used to enable Expressive Design for Settings pages inside PermissionController"
     bug: "375480184"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "default_apps_recommendation_enabled"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag enables the recommended section in default apps"
+    bug: "388234667"
+    is_fixed_read_only: true
+}
+
+flag {
+    name: "fix_safety_center_touch_target"
+    is_exported: true
+    namespace: "permissions"
+    description: "This flag fixes an issue with the SafetyCenterTouchTarget code"
+    bug: "399872661"
     is_fixed_read_only: true
 }

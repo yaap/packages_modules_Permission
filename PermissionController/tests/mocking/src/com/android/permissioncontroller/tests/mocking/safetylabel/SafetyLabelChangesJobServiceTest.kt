@@ -46,7 +46,7 @@ import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -121,14 +121,14 @@ class SafetyLabelChangesJobServiceTest {
 
         receiver.onReceive(application, Intent(Intent.ACTION_BOOT_COMPLETED))
 
-        verifyZeroInteractions(mockJobScheduler)
+        verifyNoMoreInteractions(mockJobScheduler)
     }
 
     @Test
     fun onReceiveInvalidIntentAction_jobNotScheduled() {
         receiver.onReceive(application, Intent(Intent.ACTION_DEFAULT))
 
-        verifyZeroInteractions(mockJobScheduler)
+        verifyNoMoreInteractions(mockJobScheduler)
     }
 
     @Test

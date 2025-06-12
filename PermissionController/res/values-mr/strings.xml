@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"या अ‍ॅपसाठी <xliff:g id="DEVICE_NAME">%2$s</xliff:g> वरील <xliff:g id="PERM">%1$s</xliff:g> चा अ‍ॅक्सेस"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"सर्व <xliff:g id="APP">%1$s</xliff:g> परवानग्या पहा"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"ही परवानगी असलेली सर्व अ‍ॅप्स पहा"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"माहिती"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"सेटिंग्ज"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"Assistant ने मायक्रोफोनचा केलेला वापर दाखवा"</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"न वापरलेली ॲप सेटिंग्ज"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"अ‍ॅप वापरले नसल्यास, परवानग्या काढून टाका"</string>
@@ -418,9 +420,9 @@
     <string name="phone_call_uses_microphone" msgid="233569591461187177">"मायक्रोफोन &lt;b&gt;फोन कॉल&lt;/b&gt; मध्ये वापरत आहे"</string>
     <string name="phone_call_uses_microphone_and_camera" msgid="6291898755681748189">"कॅमेरा आणि मायक्रोफोन &lt;b&gt;व्हिडिओ कॉल&lt;/b&gt; मध्ये वापरत आहे"</string>
     <string name="phone_call_uses_camera" msgid="2048417022147857418">"कॅमेरा &lt;b&gt;व्हिडिओ कॉल&lt;/b&gt; मध्ये वापरत आहे"</string>
-    <string name="system_uses_microphone" msgid="576672130318877143">"सिस्टम सेवा वापरून मायक्रोफोन ॲक्सेस करत आहे"</string>
-    <string name="system_uses_microphone_and_camera" msgid="5124478304275138804">"सिस्टम सेवा वापरून कॅमेरा आणि मायक्रोफोन ॲक्सेस करत आहे"</string>
-    <string name="system_uses_camera" msgid="1911223105234441470">"सिस्टम सेवा वापरून कॅमेरा ॲक्सेस करत आहे"</string>
+    <string name="system_uses_microphone" msgid="576672130318877143">"सिस्टीम सेवा वापरून मायक्रोफोन ॲक्सेस करत आहे"</string>
+    <string name="system_uses_microphone_and_camera" msgid="5124478304275138804">"सिस्टीम सेवा वापरून कॅमेरा आणि मायक्रोफोन ॲक्सेस करत आहे"</string>
+    <string name="system_uses_camera" msgid="1911223105234441470">"सिस्टीम सेवा वापरून कॅमेरा ॲक्सेस करत आहे"</string>
     <string name="other_use" msgid="6564855051022776692">"इतर वापर:"</string>
     <string name="ongoing_usage_dialog_ok" msgid="103556809118460072">"समजले"</string>
     <string name="ongoing_usage_dialog_title" msgid="683836493556628569">"<xliff:g id="TYPES_LIST">%s</xliff:g> चा अलीकडील वापर"</string>
@@ -438,8 +440,10 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"उघडणार्‍या लिंक"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"कार्यासाठी डीफॉल्ट"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"खाजगी स्पेससाठी डीफॉल्ट"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"ऑप्टिमाइझ केलेले डिव्हाइस"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"इतर"</string>
     <string name="default_app_none" msgid="9084592086808194457">"काहीही नाही"</string>
-    <string name="default_app_system_default" msgid="6218386768175513760">"(सिस्टम डीफॉल्ट)"</string>
+    <string name="default_app_system_default" msgid="6218386768175513760">"(सिस्टीम डीफॉल्ट)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"अ‍ॅप्स नाहीत"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"इतर NFC सेवा"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"निवडले"</string>
@@ -456,14 +460,14 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> ला डीबगिंग माहिती अपलोड करायला आवडेल."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"डीबगिंग डेटा शेअर करायचा आहे का?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"सिस्टममध्ये समस्या आली"</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> <xliff:g id="DATE">%2$s</xliff:g> रोजी <xliff:g id="TIME">%3$s</xliff:g> वाजता घेतलेल्या या डिव्हाइसमधून बग रिपोर्ट अपलोड करण्याची विनंती करत आहे. बग रिपोर्टमध्ये तुमच्या डिव्हाइसविषयीच्या किंवा अ‍ॅप्सने लॉग केलेल्या वैयक्तिक माहितीचा समावेश अहे, उदाहरणार्थ वापरकर्ता नावे, स्थान डेटा, डिव्हाइस आयडेंटिफायर आणि नेटवर्क माहिती. या माहितीसह फक्त तुम्हाला विश्वास असलेल्या लोकांसह आणि अ‍ॅप्ससह बग रिपोर्ट शेअर करा. <xliff:g id="APP_NAME_1">%4$s</xliff:g> ला बग रिपोर्ट अपलोड करण्याची अनुमती द्यायची का?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> हे <xliff:g id="DATE">%2$s</xliff:g> रोजी <xliff:g id="TIME">%3$s</xliff:g> वाजता या डिव्हाइसमधून घेतलेला बग रिपोर्ट अपलोड करण्याची विनंती करत आहे. बग रिपोर्टमध्ये तुमच्या डिव्हाइसविषयीच्या किंवा अ‍ॅप्सने लॉग केलेल्या वैयक्तिक माहितीचा समावेश आहे, उदाहरणार्थ वापरकर्ता नावे, स्थान डेटा, डिव्हाइस आयडेंटिफायर आणि नेटवर्क माहिती. ही माहिती वापरून फक्त तुम्हाला विश्वास असलेल्या लोकांसोबत आणि अ‍ॅप्ससोबत बग रिपोर्ट शेअर करा.\n\n<xliff:g id="APP_NAME_1">%4$s</xliff:g> ला बग रिपोर्ट अपलोड करण्याची अनुमती द्यायची आहे का?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> च्या बग रिपोर्टवर प्रक्रिया करताना एरर आली. त्यामुळे तपशीलवार डीबगिंग डेटा शेअर करणे नाकारले गेले आहे. व्यत्ययाबद्दल क्षमस्व."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"अनुमती द्या"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"नकार द्या"</string>
     <string name="adjust_user_sensitive_title" msgid="4196724451314280527">"प्रगत सेटिंग्ज"</string>
     <string name="menu_adjust_user_sensitive" msgid="6497923610654425780">"प्रगत सेटिंग्ज"</string>
-    <string name="adjust_user_sensitive_globally_title" msgid="8649190949066029174">"सिस्टम अ‍ॅपचा वापर दाखवा"</string>
-    <string name="adjust_user_sensitive_globally_summary" msgid="129467818433773912">"स्टेटस बार, डॅशबोर्ड आणि इतरत्र परवानग्यांसाठी सिस्टम अ‍ॅपचा वापर दाखवा"</string>
+    <string name="adjust_user_sensitive_globally_title" msgid="8649190949066029174">"सिस्टीम ॲपचा वापर दाखवा"</string>
+    <string name="adjust_user_sensitive_globally_summary" msgid="129467818433773912">"स्टेटस बार, डॅशबोर्ड आणि इतरत्र परवानग्यांसाठी सिस्टीम ॲपचा वापर दाखवा"</string>
     <string name="adjust_user_sensitive_per_app_header" msgid="4543506440989005648">"पुढील गोष्टींचा वापर ठळक करा"</string>
     <string name="assistant_record_audio_user_sensitive_title" msgid="5532123360322362378">"असिस्टंट ट्रिगर डिटेक्शन दाखवा"</string>
     <string name="assistant_record_audio_user_sensitive_summary" msgid="6482937591816401619">"व्हॉइस असिस्टंट अ‍ॅक्टिव्हेट करण्यासाठी मायक्रोफोन वापरला जाईल तेव्हा स्टेटस बारमध्ये आयकन दाखवा"</string>
@@ -542,7 +546,7 @@
     <string name="auto_granted_permission_notification_body" msgid="5040234389205471318">"तुमची संस्था <xliff:g id="APP_NAME">%1$s</xliff:g> ला तुमचे स्थान अ‍ॅक्सेस करण्याची अनुमती देते"</string>
     <string name="other_permissions_label" msgid="8986184335503271992">"इतर परवानग्या"</string>
     <string name="not_used_permissions_label" msgid="3939839426115141264">"सिस्टमद्वारे वापरल्या जाणाऱ्या परवानग्या"</string>
-    <string name="not_used_permissions_description" msgid="7595514824169388718">"फक्त सिस्टम ॲप्लिकेशनद्वारे वापरल्या जाणाऱ्या परवानग्या."</string>
+    <string name="not_used_permissions_description" msgid="7595514824169388718">"फक्त सिस्टीम ॲप्लिकेशनद्वारे वापरल्या जाणाऱ्या परवानग्या."</string>
     <string name="additional_permissions_label" msgid="7693557637462569046">"अतिरिक्त परवानग्या"</string>
     <string name="additional_permissions_description" msgid="2186611950890732112">"अ‍ॅप्लिकेशनद्वारे परिभाषित केलेल्या परवानग्या."</string>
     <string name="privdash_label_camera" msgid="1426440033626198096">"कॅमेरा"</string>
@@ -571,7 +575,7 @@
     <string name="safety_center_dashboard_page_title" msgid="2810774008694315854">"सुरक्षा आणि गोपनीयता"</string>
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"डिव्हाइस स्कॅन करा"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"डिसमिस करा"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"ही सूचना डिसमिस करायची का?"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"हा अलर्ट डिसमिस करायचा का?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"आणखी संरक्षण जोडण्यासाठी, तुमच्या सुरक्षा आणि गोपनीयता सेटिंग्जचे कधीही पुनरावलोकन करा"</string>
     <string name="safety_center_issue_card_confirm_dismiss_button" msgid="5884137843083634556">"डिसमिस करा"</string>
     <string name="safety_center_issue_card_cancel_dismiss_button" msgid="2874578798877712346">"रद्द करा"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"प्रतिबंधित सेटिंग्जना अनुमती द्या"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"प्रतिबंधित सेटिंग"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"तुमच्या सुरक्षेसाठी, हे सेटिंग सध्या उपलब्ध नाही."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"फोन कॉलवर असताना कृती उपलब्ध नाही"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"फोन कॉलदरम्यान ॲप्सना इतर ॲप्स इंस्टॉल करण्याची अनुमती नाही.\n\n घोटाळेबाज व्यक्ती फोन कॉल संभाषणांदरम्यान, याप्रकारच्या कृतीची विनंती करतात, यामुळे तुमचे संरक्षण करण्यासाठी ती ब्लॉक केली आहे. तुम्ही ओळखत नसलेल्या एखाद्या व्यक्तीने ही कारवाई करण्यासाठी तुम्हाला मार्गदर्शन केले जात असल्यास, हा घोटाळा असू शकतो."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"कॉलदरम्यान कृती पूर्ण करू शकत नाही"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"तुमच्या डिव्हाइसचे आणि डेटाचे संरक्षण करण्यासाठी हे सेटिंग ब्लॉक केले आहे.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>घोटाळेबाज व्यक्ती तुम्हाला नवीन स्रोतामधून अज्ञात अ‍ॅप्स इंस्टॉल करण्यास सांगून हानिकारक अ‍ॅप्‍स इंस्टॉल करण्याचा प्रयत्न करू शकतात."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>घोटाळेबाज व्यक्ती तुम्हाला अ‍ॅपसाठी अ‍ॅक्सेसिबिलिटी अ‍ॅक्सेसची अनुमती देण्यास सांगून तुमच्या डिव्हाइसचे नियंत्रण मिळवण्याचा प्रयत्न करू शकतात."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"अ‍ॅपचा <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> साठीचा अ‍ॅक्सेस नाकारला गेला आहे"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"ॲपने संवेदनशील परवानगीसाठी अ‍ॅक्सेसची विनंती केली आहे, ज्यामुळे तुमची वैयक्तिक आणि आर्थिक माहिती धोक्यात येऊ शकते.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>या प्रतिबंधित परवानगीशिवाय ॲप कदाचित योग्यरीत्या काम करणार नाही. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;अ‍ॅक्सेसला अनुमती कशी द्यावी हे जाणून घ्या&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"अ‍ॅपचा डीफॉल्ट <xliff:g id="ROLE_NAME">%1$s</xliff:g> असण्यासाठीचा अ‍ॅक्सेस नाकारला गेला आहे"</string>

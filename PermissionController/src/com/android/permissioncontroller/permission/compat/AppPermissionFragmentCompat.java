@@ -44,8 +44,8 @@ public class AppPermissionFragmentCompat {
      */
     @NonNull
     public static PreferenceFragmentCompat createFragment(@NonNull Context context) {
-        if (SdkLevel.isAtLeastV() && (Flags.appPermissionFragmentUsesPreferences()
-                || context.getResources().getBoolean(
+        if ((SdkLevel.isAtLeastB() && Flags.appPermissionFragmentUsesPreferences())
+                || (SdkLevel.isAtLeastV() && context.getResources().getBoolean(
                 R.bool.config_usePreferenceForAppPermissionSettings))) {
             return new AppPermissionFragment();
         } else {

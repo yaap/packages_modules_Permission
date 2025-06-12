@@ -24,7 +24,7 @@
     <string name="dialog_close" msgid="6840699812532384661">"إغلاق"</string>
     <string name="available" msgid="6007778121920339498">"متاح"</string>
     <string name="blocked" msgid="9195547604866033708">"محظور"</string>
-    <string name="on" msgid="280241003226755921">"مفعَّلة"</string>
+    <string name="on" msgid="280241003226755921">"الميزة مفعَّلة"</string>
     <string name="off" msgid="1438489226422866263">"إيقاف"</string>
     <string name="uninstall_or_disable" msgid="4496612999740858933">"إلغاء التثبيت أو الإيقاف"</string>
     <string name="app_not_found_dlg_title" msgid="6029482906093859756">"لم يتمّ العثور على التطبيق."</string>
@@ -84,7 +84,7 @@
     <string name="storage_supergroup_warning_allow" msgid="103093462784523190">"‏تمّ تصميم هذا التطبيق لإصدار قديم من Android. إذا منحته هذا الإذن، سيتم السماح بوصوله إلى كل مساحة التخزين (بما في ذلك الصور والفيديوهات والموسيقى والصوت والملفات الأخرى)."</string>
     <string name="storage_supergroup_warning_deny" msgid="6420765672683284347">"‏تمّ تصميم هذا التطبيق لإصدار قديم من Android. إذا رفضت منحه هذا الإذن، سيتم رفض وصوله إلى كل مساحة التخزين (بما في ذلك الصور والفيديوهات والموسيقى والصوت والملفات الأخرى)."</string>
     <string name="default_permission_description" msgid="4624464917726285203">"تنفيذ إجراء غير معروف"</string>
-    <string name="app_permissions_group_summary" msgid="8788419008958284002">"تمّ السماح لـ <xliff:g id="COUNT_0">%1$d</xliff:g> من أصل <xliff:g id="COUNT_1">%2$d</xliff:g> تطبيق."</string>
+    <string name="app_permissions_group_summary" msgid="8788419008958284002">"عدد التطبيقات المسموح لها: <xliff:g id="COUNT_0">%1$d</xliff:g> من أصل <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="app_permissions_group_summary2" msgid="4329922444840521150">"التطبيقات التي تم منحها الإذن: <xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="menu_show_system" msgid="4254021607027872504">"إظهار تطبيقات النظام"</string>
     <string name="menu_hide_system" msgid="3855390843744028465">"إخفاء تطبيقات النظام"</string>
@@ -202,6 +202,8 @@
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"إذن \"<xliff:g id="PERM">%1$s</xliff:g>\" لهذا التطبيق على \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"الاطّلاع على جميع أذونات تطبيق \"<xliff:g id="APP">%1$s</xliff:g>\""</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"الاطّلاع على جميع التطبيقات التي لديها هذا الإذن"</string>
+    <string name="app_permission_info_button" msgid="8973692370208562556">"معلومات"</string>
+    <string name="app_permission_settings_button" msgid="4582916817451973752">"الإعدادات"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"‏عرض أذونات استخدام ميكروفون \"مساعد Google\""</string>
     <string name="unused_apps_category_title" msgid="2988455616845243901">"إعدادات التطبيقات غير المُستخدَمة"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"إزالة الأذونات في حال عدم استخدام التطبيق"</string>
@@ -251,7 +253,7 @@
     <string name="app_permission_never_accessed_summary" msgid="401346181461975090">"لم يستخدم الإذن مطلقًا"</string>
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"تم الرفض / لم يسبق الحصول على الإذن"</string>
     <string name="allowed_header" msgid="7769277978004790414">"التطبيقات المسموح لها"</string>
-    <string name="allowed_always_header" msgid="6455903312589013545">"تطبيقات مسموح لها بالوصول طوال الوقت"</string>
+    <string name="allowed_always_header" msgid="6455903312589013545">"الإذن ممنوحٌ طوال الوقت"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"تطبيقات يمكنها الوصول عند استخدامها فقط"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"التطبيقات المسموح لها بالوصول إلى الوسائط فقط"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"التطبيقات المسموح لها بإدارة كل الملفات"</string>
@@ -438,6 +440,8 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"فتح الروابط"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"التطبيقات التلقائية للعمل"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"التطبيقات التلقائية في المساحة الخاصّة"</string>
+    <string name="default_app_recommended" msgid="5669584821778942909">"متوافقة مع الجهاز"</string>
+    <string name="default_app_others" msgid="7793029848126079876">"غير ذلك"</string>
     <string name="default_app_none" msgid="9084592086808194457">"غير محدَّد"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(الإعداد التلقائي للنظام)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ليست هناك تطبيقات."</string>
@@ -456,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"يريد تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> تحميل معلومات تصحيح الأخطاء."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"هل تريد مشاركة بيانات تصحيح الأخطاء؟"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"رصَد النظام مشكلة."</string>
-    <string name="incident_report_dialog_text" msgid="5675553296891757523">"يطلب تطبيق <xliff:g id="APP_NAME_0">%1$s</xliff:g> تحميل تقرير للأخطاء من هذا الجهاز تم تسجيله بتاريخ <xliff:g id="DATE">%2$s</xliff:g> في <xliff:g id="TIME">%3$s</xliff:g>. وتشمل تقارير الأخطاء المعلومات الشخصية حول جهازك أو المعلومات التي سجلتها التطبيقات، مثل أسماء المستخدمين وبيانات الموقع الجغرافي ومعرّفات الأجهزة ومعلومات الشبكة. ويجب عدم مشاركة تقارير الأخطاء إلا مع المستخدمين والتطبيقات التي تثق بمشاركة هذه المعلومات معها. هل تريد السماح لتطبيق <xliff:g id="APP_NAME_1">%4$s</xliff:g> بتحميل تقرير أخطاء؟"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"‏يطلب تطبيق \"<xliff:g id="APP_NAME_0">%1$s</xliff:g>\" تحميل تقرير خطأ من هذا الجهاز تم تسجيله بتاريخ ‎<xliff:g id="DATE">%2$s</xliff:g> في <xliff:g id="TIME">%3$s</xliff:g>. وتشمل تقارير الأخطاء معلومات شخصية حول جهازك أو تلك التي سجّلتها التطبيقات، مثل أسماء المستخدمين وبيانات الموقع الجغرافي ومعرّفات الأجهزة ومعلومات الشبكة. ويجب عدم مشاركة تقارير الأخطاء إلا مع المستخدمين والتطبيقات الموثوقة بمشاركة هذه المعلومات معها.\n\n هل المطلوب السماح لتطبيق \"<xliff:g id="APP_NAME_1">%4$s</xliff:g>\" بتحميل تقرير خطأ؟"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"حدث خطأ أثناء معالجة تقرير الخطأ لتطبيق <xliff:g id="APP_NAME">%1$s</xliff:g>، ولذلك تم رفض مشاركة بيانات تصحيح الأخطاء التفصيلية. نأسف للمقاطعة."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"سماح"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"رفض"</string>
@@ -471,7 +475,7 @@
     <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"‏هل تريد السماح لـ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الصور والوسائط على &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;؟"</string>
     <string name="permgrouprequest_contacts" msgid="8391550064551053695">"‏هل تريد السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى جهات الاتصال؟"</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"‏هل تريد السماح لـ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى جهات اتصالك على &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;؟"</string>
-    <string name="permgrouprequest_location" msgid="6990232580121067883">"‏هل تريد السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الموقع الجغرافي لهذا الجهاز؟"</string>
+    <string name="permgrouprequest_location" msgid="6990232580121067883">"‏هل مطلوب السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الموقع الجغرافي لهذا الجهاز؟"</string>
     <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"‏هل تريد السماح لـ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الموقع الجغرافي الخاص بـ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;؟"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"لن يكون بإمكان التطبيق الوصول إلى الموقع الجغرافي إلا عند استخدامك لهذا التطبيق."</string>
     <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"‏هل تريد السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الموقع الجغرافي لهذا الجهاز؟"</string>
@@ -491,7 +495,7 @@
     <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"تقريبي"</string>
     <string name="permgrouprequest_calendar" msgid="1493150855673603806">"‏هل تريد السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى التقويم؟"</string>
     <string name="permgrouprequest_device_aware_calendar" msgid="7161929851377463612">"‏هل تريد السماح لـ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى تقويمك على &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;؟"</string>
-    <string name="permgrouprequest_sms" msgid="5672063688745420991">"‏هل تريد السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بإرسال رسائل SMS وعرضها؟"</string>
+    <string name="permgrouprequest_sms" msgid="5672063688745420991">"‏هل مطلوب السماح لتطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> بإرسال رسائل SMS وعرضها؟"</string>
     <string name="permgrouprequest_device_aware_sms" msgid="6639977653040502291">"‏هل تريد السماح لـ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بإرسال الرسائل القصيرة وعرضها على &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;؟"</string>
     <string name="permgrouprequest_storage" msgid="8717773092518621602">"‏هل تريد السماح لتطبيق &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الصور والوسائط والملفات على جهازك؟"</string>
     <string name="permgrouprequest_device_aware_storage" msgid="6933251810928606636">"‏هل تريد السماح لـ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; بالوصول إلى الصور والوسائط والملفات على &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;؟"</string>
@@ -674,8 +678,15 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"السماح بالإعدادات المحظورة"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"الإعداد محظور"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"للحفاظ على أمانك، هذا الإعداد غير متوفِّر حاليًا."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5230100829862738467">"لا يتوفّر هذا الإجراء أثناء إجراء مكالمة هاتفية"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="8782160971908273849">"لا يُسمح للتطبيقات بتثبيت تطبيقات أخرى أثناء إجراء مكالمة هاتفية.\n\n يطلب المخادِعون غالبًا هذا النوع من الإجراءات أثناء المكالمات الهاتفية، لذا تم حظره لحماية بياناتك. إذا طلبَ منك شخص غير معروف اتّخاذ هذا الإجراء، قد يكون ذلك عملية خداع."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"يتعذّر إكمال الإجراء أثناء إجراء مكالمة"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"تم حظر هذا الإعداد لحماية الجهاز والبيانات.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>قد يطلب منك المخادِعون تثبيت تطبيقات غير معروفة من مصدر جديد في محاولة لتثبيت تطبيقات ضارّة."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
+
+</xliff:g>قد يحاول المخادِعون التحكّم في جهازك من خلال طلب السماح بوصول أحد التطبيقات إلى ميزات تسهيل الاستخدام."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"تم منع التطبيق من الوصول إلى <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"‏طلب التطبيق أحد أذونات الوصول إلى المعلومات الحساسة، ما قد يعرّض معلوماتك الشخصية والمالية للخطر.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>من المحتمل ألا يعمل التطبيق بشكل صحيح إذا لم يحصل على هذا الإذن المقيَّد. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;مزيد من المعلومات حول كيفية منح الأذونات&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"لم يُسمَح للتطبيق بأن يكون <xliff:g id="ROLE_NAME">%1$s</xliff:g> التلقائي"</string>

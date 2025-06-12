@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
@@ -39,6 +41,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.util.Pair;
 import androidx.preference.Preference;
 
+import com.android.launcher3.icons.IconFactory;
+import com.android.permissioncontroller.role.ui.RequestRoleItemView;
 import com.android.permissioncontroller.role.ui.TwoTargetPreference;
 import com.android.permissioncontroller.role.ui.behavior.RoleUiBehavior;
 import com.android.role.controller.model.Role;
@@ -70,6 +74,21 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
     }
 
     @Override
+    public void prepareRequestRoleItemViewAsUser(@NonNull Role role,
+            @NonNull RequestRoleItemView itemView, @NonNull ApplicationInfo applicationInfo,
+            @NonNull UserHandle user, @NonNull Context context) {
+        if (isSystemApplication(applicationInfo)) {
+            Pair<Drawable, CharSequence> bannerAndLabel = getLabelAndIconIfItExists(
+                    applicationInfo, user, context);
+
+            if (bannerAndLabel != null) {
+                itemView.getIconImageView().setImageDrawable(bannerAndLabel.first);
+                itemView.getTitleTextView().setText(bannerAndLabel.second);
+            }
+        }
+    }
+
+    @Override
     public void prepareApplicationPreferenceAsUser(@NonNull Role role,
             @NonNull Preference preference, @NonNull ApplicationInfo applicationInfo,
             @NonNull UserHandle user, @NonNull Context context) {
@@ -81,21 +100,8 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
             @NonNull ApplicationInfo applicationInfo, boolean setTitle, @NonNull UserHandle user,
             @NonNull Context context) {
         if (isSystemApplication(applicationInfo)) {
-            List<ApduServiceInfo> serviceInfos = getNfcServicesForPackage(
-                    applicationInfo.packageName, user, context);
-
-            Pair<Drawable, CharSequence> bannerAndLabel = null;
-            // If the flag is enabled , attempt to fetch it from property
-            if (Flags.walletRoleIconPropertyEnabled()) {
-                bannerAndLabel =
-                        getBannerAndLabelFromPackageProperty(context, user,
-                                applicationInfo.packageName);
-            }
-            // If it's null, indicating that the property is not set, perform a legacy icon lookup.
-            if (bannerAndLabel == null) {
-                bannerAndLabel =
-                        getNonPaymentServiceBannerAndLabelIfExists(serviceInfos, user, context);
-            }
+            Pair<Drawable, CharSequence> bannerAndLabel = getLabelAndIconIfItExists(
+                    applicationInfo, user, context);
             if (bannerAndLabel != null) {
                 preference.setIcon(bannerAndLabel.first);
                 if (setTitle) {
@@ -105,6 +111,26 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
                 }
             }
         }
+    }
+
+    @Nullable
+    private Pair<Drawable, CharSequence> getLabelAndIconIfItExists(
+            @NonNull ApplicationInfo applicationInfo,
+            @NonNull UserHandle user,
+            @NonNull Context context) {
+        Pair<Drawable, CharSequence> result = null;
+        // If the flag is enabled , attempt to fetch it from property
+        if (Flags.walletRoleIconPropertyEnabled()) {
+            result = getBannerAndLabelFromPackageProperty(context, user,
+                    applicationInfo.packageName);
+        }
+        if (result != null) {
+            return result;
+        }
+        List<ApduServiceInfo> serviceInfos = getNfcServicesForPackage(
+                applicationInfo.packageName, user, context);
+        // If it's null, indicating that the property is not set, perform a legacy icon lookup.
+        return getNonPaymentServiceBannerAndLabelIfExists(serviceInfos, user, context);
     }
 
 
@@ -122,7 +148,7 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
                 PackageManager.Property iconProperty = packageManager.getProperty(
                         ApduServiceInfo.PROPERTY_WALLET_PREFERRED_BANNER_AND_LABEL, componentName);
                 if (iconProperty.isBoolean() && iconProperty.getBoolean()) {
-                    return loadBannerAndLabel(serviceInfo, packageManager);
+                    return loadBannerAndLabel(serviceInfo, packageManager, context, user);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 continue;
@@ -186,7 +212,8 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
         for (int i = 0; i < apduServiceInfoSize; i++) {
             ApduServiceInfo serviceInfo = apduServiceInfos.get(i);
             if (serviceInfo.getAids().isEmpty()) {
-                bannerAndLabel = loadBannerAndLabel(serviceInfo, userPackageManager);
+                bannerAndLabel = loadBannerAndLabel(serviceInfo, userPackageManager, context,
+                        user);
                 if (bannerAndLabel != null) {
                     return bannerAndLabel;
                 }
@@ -197,7 +224,8 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
                     String aid = aids.get(j);
                     String category = serviceInfo.getCategoryForAid(aid);
                     if (!CardEmulation.CATEGORY_PAYMENT.equals(category)) {
-                        bannerAndLabel = loadBannerAndLabel(serviceInfo, userPackageManager);
+                        bannerAndLabel = loadBannerAndLabel(serviceInfo, userPackageManager,
+                                context, user);
                         if (bannerAndLabel != null) {
                             return bannerAndLabel;
                         }
@@ -210,8 +238,20 @@ public class WalletRoleUiBehavior implements RoleUiBehavior {
 
     @Nullable
     private Pair<Drawable, CharSequence> loadBannerAndLabel(@NonNull ApduServiceInfo info,
-            @NonNull PackageManager userPackageManager) {
+            @NonNull PackageManager userPackageManager, @NonNull Context context,
+            @NonNull UserHandle user) {
         Drawable drawable = info.loadBanner(userPackageManager);
+        if (drawable != null) {
+            try (IconFactory factory = IconFactory.obtain(context)) {
+                Bitmap badged =
+                        factory.createBadgedIconBitmap(drawable, user,
+                                false).icon;
+                if (badged != null) {
+                    drawable = new BitmapDrawable(context.getResources(), badged);
+                }
+            }
+        }
+
         CharSequence label = info.loadLabel(userPackageManager);
         if (drawable != null && !TextUtils.isEmpty(label)) {
             return new Pair<>(drawable, label);

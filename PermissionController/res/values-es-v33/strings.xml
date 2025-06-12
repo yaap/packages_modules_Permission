@@ -30,9 +30,10 @@
     <string name="safety_center_more_issues_card_title" msgid="7425844746197493312">"Más alertas"</string>
     <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"Alertas ignoradas"</string>
     <string name="safety_center_more_issues_card_expand_action" msgid="7109451851052272946">"{count,plural, =1{Amplía para ver una alerta más}many{Amplía para ver # alertas más}other{Amplía para ver # alertas más}}"</string>
+    <string name="safety_center_more_issues_card_collapse_action" msgid="7485597582198474637">"Ocultar"</string>
     <string name="safety_center_issue_card_prefix_content_description" msgid="1447445289637043544">"Alerta. <xliff:g id="ISSUE_CARD_TITLE">%1$s</xliff:g>"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="8548932070610766651">"Acción completada"</string>
-    <string name="safety_center_qs_status_summary" msgid="5193925895830451177">"Comprueba los ajustes que pueden proteger más tu dispositivo"</string>
+    <string name="safety_center_qs_status_summary" msgid="5193925895830451177">"Comprueba los ajustes que pueden ofrecer una mayor protección a tu dispositivo"</string>
     <string name="safety_center_qs_page_landing" msgid="1717368301679228128">"Ajustes rápidos de seguridad y privacidad"</string>
     <string name="safety_center_qs_close_button" msgid="1352313308176244599">"Cerrar"</string>
     <string name="safety_center_qs_expand_action" msgid="2193190557696484169">"Desplegar y mostrar opciones"</string>

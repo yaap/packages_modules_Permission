@@ -25,6 +25,8 @@ interface IEnhancedConfirmationManager {
 
     boolean isRestricted(in String packageName, in String settingIdentifier, int userId);
 
+    String getRestrictionReason(in String packageName, in String settingIdentifier, int userId);
+
     void clearRestriction(in String packageName, int userId);
 
     boolean isClearRestrictionAllowed(in String packageName, int userId);
