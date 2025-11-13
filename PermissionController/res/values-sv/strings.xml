@@ -16,7 +16,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name" msgid="6098036489833144040">"Behörighetsansvarig"</string>
+    <string name="app_name" msgid="6098036489833144040">"Behörighetsinställning"</string>
     <string name="ok" msgid="1936281769725676272">"OK"</string>
     <string name="permission_search_keyword" msgid="1214451577494730543">"behörigheter"</string>
     <string name="cancel" msgid="8943320028373963831">"Avbryt"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Digital assistentapp, standard"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digital assistentapp"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Med assistentappar kan du få hjälp som baseras på den information som visas på den aktuella skärmen. Vissa appar har stöd för både översikts- och röstinmatningstjänster för att hjälpa dig."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Rekommenderas av <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Standard­webbläsarapp"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Webbläsarapp"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Appar som visar länkar du trycker på och du använder för att ansluta till internet"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Öppna länkar"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Standardinställning för jobbet"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Standard för privat utrymme"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimerade för enheten"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Andra"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ingen"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(System­standard)"</string>

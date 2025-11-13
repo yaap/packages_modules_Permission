@@ -260,7 +260,7 @@
     <string name="ask_header" msgid="2633816846459944376">"Питај сваки пут"</string>
     <string name="denied_header" msgid="903209608358177654">"Није дозвољено"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> на уређају <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Прикажи још апликација са приступом свим фајловима"</string>
+    <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Погледајте још апликација које имају приступ свим фајловима"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 дан}one{# дан}few{# дана}other{# дана}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# сат}one{# сат}few{# сата}other{# сати}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# минут}one{# минут}few{# минута}other{# минута}}"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Подразумевани дигитални помоћник"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Апликација дигиталног помоћника"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Апликације за помоћ могу да вам помогну на основу информација са екрана који гледате. Неке апликације подржавају услуге покретача и гласовног уноса да би вам пружиле интегрисану помоћ."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Препоручује <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Подразумевана апл. прегледача"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Апликација прегледача"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Апликације које вам дају приступ интернету и приказују линкове које можете да додирнете"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Отварање линкова"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Подразумевана за посао"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Подразумевано за приватан простор"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Оптимизовано за уређај"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Друго"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ништа"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Подразумевана системска)"</string>

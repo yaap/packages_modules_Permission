@@ -29,6 +29,7 @@ import android.permission.cts.CtsNotificationListenerServiceUtils.assertNotifica
 import android.permission.cts.CtsNotificationListenerServiceUtils.cancelNotification
 import android.permission.cts.CtsNotificationListenerServiceUtils.cancelNotifications
 import android.permission.cts.CtsNotificationListenerServiceUtils.getNotification
+import android.permission.cts.CtsNotificationListenerServiceUtils.isNotificationListenerSupported
 import android.permission.cts.SafetyCenterUtils.assertSafetyCenterIssueDoesNotExist
 import android.permission.cts.SafetyCenterUtils.assertSafetyCenterIssueExist
 import android.permission.cts.SafetyCenterUtils.assertSafetyCenterStarted
@@ -50,8 +51,8 @@ import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionId
 import com.android.modules.utils.build.SdkLevel
 import org.junit.After
 import org.junit.Assert
-import org.junit.Assume
 import org.junit.Assume.assumeFalse
+import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Rule
@@ -76,6 +77,7 @@ class AccessibilityPrivacySourceTest {
         ComponentName(context, AccessibilityTestService::class.java).flattenToString()
     private val safetyCenterIssueId = "accessibility_$accessibilityTestService"
     private val safetyCenterManager = context.getSystemService(SafetyCenterManager::class.java)
+    private val isNotificationListenerSupported = isNotificationListenerSupported(context)
 
     @get:Rule val screenRecordRule = ScreenRecordRule(false, false)
 
@@ -103,7 +105,9 @@ class AccessibilityPrivacySourceTest {
 
     @Before
     fun setup() {
-        Assume.assumeTrue(deviceSupportsSafetyCenter(context))
+        assumeTrue(deviceSupportsSafetyCenter(context))
+        // Skip tests if NotificationListener not available
+        assumeTrue("Test requires using NotificationListener", isNotificationListenerSupported)
         InstrumentedAccessibilityService.disableAllServices()
         runShellCommand("input keyevent KEYCODE_WAKEUP")
         resetPermissionController()
@@ -119,7 +123,9 @@ class AccessibilityPrivacySourceTest {
 
     @After
     fun cleanup() {
-        cancelNotifications(permissionControllerPackage)
+        if (isNotificationListenerSupported) {
+            cancelNotifications(permissionControllerPackage)
+        }
         runWithShellPermissionIdentity { safetyCenterManager?.clearAllSafetySourceDataForTests() }
     }
 

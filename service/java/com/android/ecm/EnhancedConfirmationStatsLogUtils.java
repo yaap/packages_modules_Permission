@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.ecm
+package com.android.ecm;
 
-import android.permission.flags.Flags
-import android.util.Log
-import com.android.internal.annotations.Keep
-import com.android.modules.utils.build.SdkLevel
-import com.android.permissioncontroller.PermissionControllerStatsLog
+import android.permission.flags.Flags;
+import android.util.Log;
+
+import com.android.internal.annotations.Keep;
+import com.android.modules.utils.build.SdkLevel;
+import com.android.permissioncontroller.PermissionControllerStatsLog;
 
 /**
  * Provides ECM-related metrics logging for Permission APEX services.
@@ -28,18 +29,19 @@ import com.android.permissioncontroller.PermissionControllerStatsLog
  * @hide
  */
 @Keep
-object EnhancedConfirmationStatsLogUtils {
-    private val LOG_TAG = EnhancedConfirmationStatsLogUtils::class.java.simpleName
+public class EnhancedConfirmationStatsLogUtils {
+    private static final String LOG_TAG = EnhancedConfirmationStatsLogUtils.class.getSimpleName();
 
-    fun logRestrictionCleared(uid: Int) {
+    /** @hide */
+    public static void logRestrictionCleared(int uid) {
         if (!SdkLevel.isAtLeastV() || !Flags.enhancedConfirmationModeApisEnabled()) {
-            return
+            return;
         }
-        Log.v(LOG_TAG, "ENHANCED_CONFIRMATION_RESTRICTION_CLEARED: uid='$uid'")
+        Log.v(LOG_TAG, "ENHANCED_CONFIRMATION_RESTRICTION_CLEARED: uid=" + uid);
 
         PermissionControllerStatsLog.write(
-            PermissionControllerStatsLog.ENHANCED_CONFIRMATION_RESTRICTION_CLEARED,
-            uid
-        )
+                PermissionControllerStatsLog.ENHANCED_CONFIRMATION_RESTRICTION_CLEARED,
+                uid
+        );
     }
 }

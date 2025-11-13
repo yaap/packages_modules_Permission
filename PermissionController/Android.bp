@@ -100,7 +100,6 @@ android_library {
         "android.car-stubs",
         "safety-center-annotations",
     ],
-
     static_libs: [
         "permissioncontroller-protos",
         "iconloader_sc_mainline_prod",
@@ -137,10 +136,12 @@ android_library {
         "SettingsLibCollapsingToolbarBaseActivity",
         "SettingsLibActivityEmbedding",
         "SettingsLibSettingsTheme",
+        "SettingsLibCategory",
         "SettingsLibFooterPreference",
         "SettingsLibSelectorWithWidgetPreference",
         "SettingsLibTwoTargetPreference",
         "SettingsLibIllustrationPreference",
+        "SettingsLibZeroStatePreference",
         "androidx.annotation_annotation",
         "permissioncontroller-statsd",
         "car-ui-lib",
@@ -164,7 +165,12 @@ android_library {
         "android.content.pm.flags-aconfig-java-export",
         "android.os.flags-aconfig-java-export",
         "wear-permission-components",
+        "androidx.appsearch_appsearch",
+        "androidx.appsearch_appsearch-builtin-types",
+        "appfunctions-schema",
     ],
+
+    optional_uses_libs: ["com.android.extensions.appfunctions"],
 
     lint: {
         error_checks: ["Recycle"],
@@ -193,6 +199,9 @@ android_app {
     use_resource_processor: true,
     rename_resources_package: false,
     privapp_allowlist: ":privapp_allowlist_com.android.permissioncontroller.xml",
+    flags_packages: [
+        "com.android.permission.flags-aconfig",
+    ],
 
     static_libs: ["PermissionController-lib"],
 
@@ -208,5 +217,9 @@ android_app {
     apex_available: [
         "//apex_available:platform",
         "com.android.permission",
+    ],
+    licenses: [
+        "packages_modules_Permission_PermissionController_license",
+        "opensourcerequest",
     ],
 }

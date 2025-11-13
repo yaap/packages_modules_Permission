@@ -703,4 +703,10 @@
         android:label="@string/car_permission_label_inject_vehicle_properties"
         android:description="@string/car_permission_desc_inject_vehicle_properties"
         android:featureFlag="android.car.feature.car_property_simulation" />
+    <permission
+        android:name="android.car.permission.READ_PROPERTY_VENDOR_STATUS"
+        android:protectionLevel="signature|privileged"
+        android:label="@string/car_permission_label_read_property_vendor_status"
+        android:description="@string/car_permission_desc_read_property_vendor_status"
+        android:featureFlag="android.car.feature.car_property_status_detailed_not_available" />
 </manifest>

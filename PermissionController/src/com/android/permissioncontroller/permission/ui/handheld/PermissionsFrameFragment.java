@@ -29,7 +29,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,8 +38,13 @@ import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.ui.handheld.v35.SectionPreferenceGroupAdapter;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.settingslib.widget.ActionBarShadowController;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
-public abstract class PermissionsFrameFragment extends PreferenceFragmentCompat {
+// TODO: b/375480009 - After using SettingsBasePreferenceFragment as the base class for our
+//  fragments, we must ensure that we migrate to SettingsPreferenceGroupAdapter, and that doing so
+//  does not break UI customization.
+public abstract class PermissionsFrameFragment extends SettingsBasePreferenceFragment {
     private static final String LOG_TAG = PermissionsFrameFragment.class.getSimpleName();
 
     static final int MENU_ALL_PERMS = Menu.FIRST + 1;
@@ -124,7 +128,8 @@ public abstract class PermissionsFrameFragment extends PreferenceFragmentCompat 
 
     @Override
     public RecyclerView.Adapter onCreateAdapter(@NonNull PreferenceScreen preferenceScreen) {
-        if (SdkLevel.isAtLeastV() && DeviceUtils.isHandheld(requireContext())) {
+        if (SdkLevel.isAtLeastV() && DeviceUtils.isHandheld(requireContext())
+                && !SettingsThemeHelper.isExpressiveTheme(requireContext())) {
             return new SectionPreferenceGroupAdapter(preferenceScreen);
         } else {
             return super.onCreateAdapter(preferenceScreen);

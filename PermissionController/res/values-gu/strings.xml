@@ -102,7 +102,7 @@
     <string name="permission_summary_disabled_by_policy_background_only" msgid="221995005556362660">"પૉલિસી દ્વારા બૅકગ્રાઉન્ડ ઍક્સેસને બંધ કરવામાં આવ્યો છે"</string>
     <string name="permission_summary_enabled_by_policy_background_only" msgid="8287675974767104279">"પૉલિસી દ્વારા બૅકગ્રાઉન્ડ ઍક્સેસને ચાલુ કરવામાં આવ્યો છે"</string>
     <string name="permission_summary_enabled_by_policy_foreground_only" msgid="3844582916889767831">"પૉલિસી દ્વારા ફૉરગ્રાઉન્ડ ઍક્સેસને ચાલુ કરવામાં આવ્યો છે"</string>
-    <string name="permission_summary_enforced_by_admin" msgid="822702574117248700">"વ્યવસ્થાપક દ્વારા નિયંત્રિત"</string>
+    <string name="permission_summary_enforced_by_admin" msgid="822702574117248700">"ઍડમિન દ્વારા નિયંત્રિત"</string>
     <string name="permission_summary_disabled_by_admin_background_only" msgid="3127091456731845646">"વ્યવસ્થાપકે બૅકગ્રાઉન્ડ ઍક્સેસ બંધ કર્યો છે"</string>
     <string name="permission_summary_enabled_by_admin_background_only" msgid="9132423838440275757">"વ્યવસ્થાપકે બૅકગ્રાઉન્ડ ઍક્સેસ ચાલુ કર્યો છે"</string>
     <string name="permission_summary_enabled_by_admin_foreground_only" msgid="1298432715610745358">"વ્યવસ્થાપકે ફૉરગ્રાઉન્ડ ઍક્સેસ ચાલુ કર્યો છે"</string>
@@ -195,8 +195,8 @@
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"મર્યાદિત ઍક્સેસની મંજૂરી આપો"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"ચોક્કસ સ્થાન"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"અંદાજિત સ્થાન"</string>
-    <string name="app_permission_location_accuracy" msgid="7166912915040018669">"ચોક્કસ લોકેશનનો ઉપયોગ કરો"</string>
-    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"જ્યારે ચોક્કસ લોકેશન બંધ હોય, ત્યારે ઍપ તમારા અંદાજિત લોકેશનને ઍક્સેસ કરી શકે છે"</string>
+    <string name="app_permission_location_accuracy" msgid="7166912915040018669">"સચોટ લોકેશનનો ઉપયોગ કરો"</string>
+    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"જ્યારે સચોટ લોકેશન બંધ હોય, ત્યારે ઍપ તમારા અંદાજિત લોકેશનને ઍક્સેસ કરી શકે છે"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g>ની પરવાનગી"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"આ ઍપ માટે <xliff:g id="PERM">%1$s</xliff:g>નો ઍક્સેસ"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> પર આ ઍપ માટે <xliff:g id="PERM">%1$s</xliff:g>નો ઍક્સેસ"</string>
@@ -252,7 +252,7 @@
     <string name="app_permission_most_recent_denied_summary" msgid="7659497197737708112">"હાલમાં નકારેલી / છેલ્લો ઍક્સેસ: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="app_permission_never_accessed_summary" msgid="401346181461975090">"ક્યારેય ઍક્સેસ કરેલ નથી"</string>
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"નકારી / ક્યારેય ઍક્સેસ કરી નથી"</string>
-    <string name="allowed_header" msgid="7769277978004790414">"મંજૂર"</string>
+    <string name="allowed_header" msgid="7769277978004790414">"મંજૂરી છે"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"હંમેશાં માટે મંજૂરી આપી છે"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"માત્ર ઉપયોગમાં હોય ત્યારે જ મંજૂરી છે"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"માત્ર મીડિયા ઍક્સેસ કરવાની મંજૂરી છે"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ડિફૉલ્ટ ડિજિટલ આસિસ્ટંટ ઍપ"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ડિજિટલ આસિસ્ટંટ ઍપ"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"તમે જોઈ રહ્યા હો તે સ્ક્રીન પરની માહિતીના આધારે સહાયક ઍપ તમને સહાય કરી શકે છે. કેટલીક ઍપ તમને એકીકૃત સહાયતા આપવા માટે લૉન્ચર અને વૉઇસ ઇનપુટ સેવાઓ બંનેને સમર્થન આપે છે."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> દ્વારા સુઝાવ આપેલી"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ડિફૉલ્ટ બ્રાઉઝર ઍપ"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"બ્રાઉઝર ઍપ"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"ઍપ કે જે તમને ઇન્ટરનેટનો ઍક્સેસ આપે અને તમે જેના પર ટૅપ કરો તે લિંક દર્શાવે"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"લિંક ખોલવી"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"કાર્ય માટે ડિફૉલ્ટ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ખાનગી સ્પેસ માટે ડિફૉલ્ટ"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ડિવાઇસ માટે ઑપ્ટિમાઇઝ કરેલી છે"</string>
     <string name="default_app_others" msgid="7793029848126079876">"અન્ય"</string>
     <string name="default_app_none" msgid="9084592086808194457">"કોઈ નહીં"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(સિસ્ટમ ડિફૉલ્ટ)"</string>
@@ -491,7 +491,7 @@
     <string name="permgrouprequest_device_aware_fineupgrade" msgid="4453775952305587571">"<xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g>નો &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; પરનો લોકેશનનો ઍક્સેસ અંદાજિતમાંથી બદલીને ચોક્કસ કરીએ?"</string>
     <string name="permgrouprequest_coarselocation" msgid="7244605063736425232">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને આ ડિવાઇસના અંદાજિત લોકેશનને ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_device_aware_coarselocation" msgid="8367540370912066757">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;નું અંદાજિત લોકેશન ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
-    <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"ચોક્કસ"</string>
+    <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"સચોટ"</string>
     <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"અંદાજિત"</string>
     <string name="permgrouprequest_calendar" msgid="1493150855673603806">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને તમારા કૅલેન્ડરને ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_device_aware_calendar" msgid="7161929851377463612">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; પર તમારું કૅલેન્ડર ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
@@ -503,7 +503,7 @@
     <string name="permgrouprequest_storage_pre_q" msgid="168130651144569428">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને આ ડિવાઇસ પર &lt;b&gt;ફોટા, વીડિયો, મ્યુઝિક, ઑડિયો અને અન્ય ફાઇલો&lt;b&gt;ના ઍક્સેસની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_read_media_aural" msgid="2593365397347577812">"શું &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને આ ડિવાઇસ પરની મ્યુઝિક અને ઑડિયો ફાઇલો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_device_aware_read_media_aural" msgid="7927884506238101064">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; પર મ્યુઝિક અને ઑડિયો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
-    <string name="permgrouprequest_read_media_visual" msgid="5548780620779729975">"શું &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને આ ડિવાઇસ પરના ફોટા અને વીડિયો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
+    <string name="permgrouprequest_read_media_visual" msgid="5548780620779729975">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને આ ડિવાઇસ પરના ફોટા અને વીડિયો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_device_aware_read_media_visual" msgid="3122576538319059333">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; પર ફોટા અને વીડિયો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_more_photos" msgid="128933814654231321">"શું &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને આ ડિવાઇસ પરના વધુ ફોટા અને વીડિયો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
     <string name="permgrouprequest_device_aware_more_photos" msgid="1703469013613723053">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ને &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; પર વધુ ફોટા અને વીડિયો ઍક્સેસ કરવાની મંજૂરી આપીએ?"</string>
@@ -633,7 +633,7 @@
     <string name="mic_toggle_title" msgid="2649991093496110162">"માઇક્રોફોનનો ઍક્સેસ"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"ઍપ અને સેવાઓ માટે"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"ઍપ અને સેવાઓ માટે. આ સેટિંગ બંધ હોવા છતાં પણ, જ્યારે તમે ઇમર્જન્સી નંબર પર કૉલ કરો ત્યારે કદાચ માઇક્રોફોનનો ડેટા શેર કરવામાં આવી શકે."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"લોકેશનનો ઍક્સેસ ધરાવતી ઍપ અને તેની સેવાઓ જુઓ"</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"લોકેશનનો ઍક્સેસ ધરાવતી ઍપ અને સેવાઓ જુઓ"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"ક્લિપબોર્ડનો ઍક્સેસ બતાવો"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"જ્યારે ઍપ તમે કૉપિ કરેલી ટેક્સ્ટ, છબીઓ કે અન્ય કન્ટેન્ટનો ઍક્સેસ કરે, ત્યારે મેસેજ બતાવો"</string>
     <string name="show_password_title" msgid="2877269286984684659">"પાસવર્ડ બતાવો"</string>
@@ -678,7 +678,7 @@
     <string name="allow_restricted_settings" msgid="8073000189478396881">"પ્રતિબંધિત સેટિંગને મંજૂરી આપો"</string>
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"પ્રતિબંધિત સેટિંગ"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"તમારી સુરક્ષા માટે, આ સેટિંગ હાલમાં ઉપલબ્ધ નથી."</string>
-    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"કૉલ દરમિયાન ક્રિયા પૂર્ણ કરી શકાતી નથી"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"કૉલ દરમિયાન ઍક્શન પૂર્ણ કરી શકાતી નથી"</string>
     <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"તમારા ડિવાઇસ અને ડેટાને સુરક્ષિત રાખવા માટે આ સેટિંગ બ્લૉક કરવામાં આવ્યું છે.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 

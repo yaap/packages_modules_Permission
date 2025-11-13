@@ -27,7 +27,7 @@
     <string name="biometrics_search_terms" msgid="6040319118762671981">"Fingerabdruck, Finger, Fingerabdruck hinzufügen, Entsperrung per Gesichtserkennung, Gesicht"</string>
     <string name="privacy_sources_title" msgid="4061110826457365957">"Datenschutz"</string>
     <string name="privacy_sources_summary" msgid="4089719981155120864">"Dashboard, Berechtigungen, Einstellungen"</string>
-    <string name="permission_usage_title" msgid="3633779688945350407">"Privatsphäre­dashboard"</string>
+    <string name="permission_usage_title" msgid="3633779688945350407">"Privatsphäre-Dashboard"</string>
     <string name="permission_usage_summary" msgid="5323079206029964468">"Anzeigen, welche Apps zuletzt Berechtigungen genutzt haben"</string>
     <string name="permission_usage_search_terms" msgid="3852343592870257104">"Privatsphäre, Privatsphäredashboard"</string>
     <string name="permission_manager_title" msgid="5277347862821255015">"Berechtigungsmanager"</string>

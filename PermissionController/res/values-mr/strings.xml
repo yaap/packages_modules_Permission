@@ -102,7 +102,7 @@
     <string name="permission_summary_disabled_by_policy_background_only" msgid="221995005556362660">"धोरणामुळे बॅकग्राउंड अ‍ॅक्सेस बंद केला आहे"</string>
     <string name="permission_summary_enabled_by_policy_background_only" msgid="8287675974767104279">"धोरणामुळे बॅकग्राउंड अ‍ॅक्सेस सुरू केला आहे"</string>
     <string name="permission_summary_enabled_by_policy_foreground_only" msgid="3844582916889767831">"धोरणामुळे फोरग्राउंड अ‍ॅक्सेस सुरू केला आहे"</string>
-    <string name="permission_summary_enforced_by_admin" msgid="822702574117248700">"प्रशासकाने नियंत्रित केलेले"</string>
+    <string name="permission_summary_enforced_by_admin" msgid="822702574117248700">"ॲडमिनद्वारे नियंत्रित"</string>
     <string name="permission_summary_disabled_by_admin_background_only" msgid="3127091456731845646">"प्रशासकाने बॅकग्राउंड अ‍ॅक्सेस बंद केला आहे"</string>
     <string name="permission_summary_enabled_by_admin_background_only" msgid="9132423838440275757">"प्रशासकाने बॅकग्राउंड अ‍ॅक्सेस सुरू केला आहे"</string>
     <string name="permission_summary_enabled_by_admin_foreground_only" msgid="1298432715610745358">"प्रशासकाने फोरग्राउंड अ‍ॅक्सेस सुरू केला आहे"</string>
@@ -128,7 +128,7 @@
     <string name="permission_usage_title" msgid="1568233336351734538">"गोपनीयता डॅशबोर्ड"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"कोणत्या ॲप्सनी अलीकडे परवानग्या वापरल्या ते पहा"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g> वापर"</string>
-    <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"इतर परवानग्या पाहणे"</string>
+    <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"इतर परवानग्या पहा"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g> आणि आणखी <xliff:g id="NUM">%3$s</xliff:g>"</string>
     <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"ॲप्सनी मागील २४ तासांमध्ये तुमचे <xliff:g id="PERMGROUP">%1$s</xliff:g> वापरलेल्याची टाइमलाइन"</string>
@@ -164,7 +164,7 @@
     <string name="permission_usage_bar_chart_title_last_minute" msgid="820450867183487607">"मागील एका मिनिटातील परवानगी वापर"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{मागील # दिवसामध्ये न वापरलेली}other{मागील # दिवसांमध्ये न वापरलेली}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{मागील # तासामध्ये न वापरलेली}other{मागील # तासांमध्ये न वापरलेली}}"</string>
-    <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{एका अ‍ॅपने वापरल्या}other{# अ‍ॅप्सनी वापरल्या}}"</string>
+    <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{एका अ‍ॅपने वापरली}other{# अ‍ॅप्सनी वापरली}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"डॅशबोर्डमध्ये सर्व पहा"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"यानुसार फिल्टर केले: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"फिल्टर काढून टाका"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"डीफॉल्ट डिजिटल साहाय्यक अ‍ॅप"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"डिजिटल असिस्टंट अ‍ॅप"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"साहाय्यक अ‍ॅप्स तुम्ही पाहत असलेल्या स्क्रीनवरील माहितीच्या आधारावर तुम्हाला मदत करू शकतात. काही अ‍ॅप्स तुम्हाला एकत्रित साहाय्य देण्यासाठी लाँचर आणि व्हॉइस इनपुट सेवा दोन्हींना सपोर्ट करतात."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> द्वारे शिफारस केलेले"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"डीफॉल्ट ब्राउझर अ‍ॅप"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ब्राउझर अ‍ॅप"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"तुम्हाला इंटरनेटचा आणि तुम्ही टॅप करत असलेल्या डिस्प्ले लिंकचा अ‍ॅक्सेस देणारी अ‍ॅप्स"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"उघडणार्‍या लिंक"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"कार्यासाठी डीफॉल्ट"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"खाजगी स्पेससाठी डीफॉल्ट"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ऑप्टिमाइझ केलेले डिव्हाइस"</string>
     <string name="default_app_others" msgid="7793029848126079876">"इतर"</string>
     <string name="default_app_none" msgid="9084592086808194457">"काहीही नाही"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(सिस्टीम डीफॉल्ट)"</string>

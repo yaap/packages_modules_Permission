@@ -260,7 +260,7 @@
     <string name="ask_header" msgid="2633816846459944376">"Vra elke keer"</string>
     <string name="denied_header" msgid="903209608358177654">"Nie toegelaat nie"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> op <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Sien meer programme wat toegang tot alle lêers het"</string>
+    <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Sien meer apps wat toegang tot alle lêers het"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 dag}other{# dae}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# uur}other{# uur}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# minuut}other{# minute}}"</string>
@@ -348,7 +348,7 @@
     <string name="no_apps_allowed" msgid="7718822655254468631">"Geen apps toegelaat nie"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Geen programme het toestemming vir alle lêers nie"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Geen programme het toestemming net vir media nie"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"Geen programme geweier nie"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"Geen apps geweier nie"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Gekies"</string>
     <string name="settings" msgid="5409109923158713323">"Instellings"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"<xliff:g id="SERVICE_NAME">%s</xliff:g> het volle toegang tot jou toestel"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Verstekdigitaleassistentapp"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digitaleassistentapp"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Bystandapps kan jou help op grond van inligting vanaf die skerm waarna jy kyk. Sommige apps steun sowel lanseerder- as steminvoerdienste om vir jou geïntegreerde bystand te gee."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Aanbeveel deur <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Verstekblaaier"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Blaaierapp"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps wat jou toegang tot die internet gee en na vertoonskakels waarop jy tik"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Oopmaak van skakels"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Verstek vir werk"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Verstek vir privaat ruimte"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Geoptimeer vir toestel"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Ander"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Geen"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Stelselverstek)"</string>

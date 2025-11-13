@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Կանխադրված թվային օգնական"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Թվային օգնականի հավելված"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Օգնական հավելվածներն աշխատում են էկրանին առկա տեղեկությունների հետ: Որոշ հավելվածներ աջակցում են և՛ գործարկիչի, և՛ ձայնային ներածման ծառայությունները, ինչը ավելի լայն հնարավորություններ է տալիս ձեզ:"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Խորհուրդ է տրվում <xliff:g id="OEM_NAME">%s</xliff:g>-ի կողմից"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Դիտարկիչի կանխադրված հավելված"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Դիտարկիչի հավելված"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Հավելվածներ, որոնց միջոցով կարող եք այցելել կայքեր և բացել հղումներ"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Հղումների բացում"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Կանխադրված՝ աշխատանքի համար"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Կանխադրված հավելվածներ մասնավոր տարածքի համար"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Սարքի համար օպտիմալացված"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Այլ"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Չկա"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Համակարգի կանխադրված հավելված)"</string>

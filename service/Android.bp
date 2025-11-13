@@ -21,7 +21,6 @@ filegroup {
     name: "service-permission-java-sources",
     srcs: [
         "java/**/*.java",
-        "java/**/*.kt",
     ],
     path: "java",
     visibility: ["//visibility:private"],
@@ -90,14 +89,9 @@ java_sdk_library {
         "framework-permission-s-shared",
         "framework-statsd.stubs.module_lib",
         "jsr305",
-
-        // Soong fails to automatically add this dependency because all the
-        // *.kt sources are inside a filegroup.
-        "kotlin-annotations",
         "safety-center-annotations",
     ],
     static_libs: [
-        "kotlin-stdlib",
         "modules-utils-backgroundthread",
         "modules-utils-build",
         "modules-utils-os",
@@ -119,13 +113,6 @@ java_sdk_library {
     },
     exclude_kotlinc_generated_files: true,
     jarjar_rules: "jarjar-rules.txt",
-    kotlincflags: [
-        "-Werror",
-        "-Xjvm-default=all",
-        "-Xno-call-assertions",
-        "-Xno-param-assertions",
-        "-Xno-receiver-assertions",
-    ],
     lint: {
         baseline_filename: "lint-baseline.xml",
     },

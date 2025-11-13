@@ -38,7 +38,6 @@ import android.app.job.JobScheduler
 import android.app.job.JobService
 import android.app.role.RoleManager
 import android.app.usage.UsageStats
-import android.app.usage.UsageStatsManager.INTERVAL_DAILY
 import android.app.usage.UsageStatsManager.INTERVAL_MONTHLY
 import android.content.BroadcastReceiver
 import android.content.ComponentName
@@ -62,6 +61,7 @@ import android.printservice.PrintService
 import android.provider.DeviceConfig
 import android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION
 import android.provider.Settings
+import android.provider.Settings.Global.DEVICE_DEMO_MODE
 import android.provider.Settings.Secure.USER_SETUP_COMPLETE
 import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyEvent
@@ -119,23 +119,17 @@ import java.util.Random
 import java.util.concurrent.TimeUnit
 
 private const val LOG_TAG = "HibernationPolicy"
-const val DEBUG_OVERRIDE_THRESHOLDS = false
-const val DEBUG_HIBERNATION_POLICY = false
 
 private var SKIP_NEXT_RUN = false
 
 private val DEFAULT_UNUSED_THRESHOLD_MS = TimeUnit.DAYS.toMillis(90)
 
 fun getUnusedThresholdMs() =
-    when {
-        DEBUG_OVERRIDE_THRESHOLDS -> TimeUnit.SECONDS.toMillis(1)
-        else ->
-            DeviceConfig.getLong(
-                DeviceConfig.NAMESPACE_PERMISSIONS,
-                Utils.PROPERTY_HIBERNATION_UNUSED_THRESHOLD_MILLIS,
-                DEFAULT_UNUSED_THRESHOLD_MS
-            )
-    }
+    DeviceConfig.getLong(
+        DeviceConfig.NAMESPACE_PERMISSIONS,
+        Utils.PROPERTY_HIBERNATION_UNUSED_THRESHOLD_MILLIS,
+        DEFAULT_UNUSED_THRESHOLD_MS
+    )
 
 private val DEFAULT_CHECK_FREQUENCY_MS = TimeUnit.DAYS.toMillis(15)
 
@@ -281,6 +275,10 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
         val action = intent.action
         val contentResolver = context.contentResolver
         if (action == Intent.ACTION_BOOT_COMPLETED || action == ACTION_SET_UP_HIBERNATION) {
+            if (Settings.Global.getInt(contentResolver, DEVICE_DEMO_MODE, 0) != 0) {
+                DumpableLog.i(LOG_TAG, "Not scheduling hibernation job. Device is retail mode")
+                return
+            }
             if (isUserSetupComplete(contentResolver)) {
                 maybeInitStartTimeUnusedAppTracking(context.sharedPreferences)
             } else {
@@ -297,12 +295,20 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                                 && isUserSetupComplete(contentResolver)) {
                                 contentResolver.unregisterContentObserver(this)
                                 maybeInitStartTimeUnusedAppTracking(context.sharedPreferences)
+
+                                // Retail mode is set during set-up wizard so we need to check
+                                // after if the job should actually be scheduled
+                                if (Settings.Global.getInt(contentResolver, DEVICE_DEMO_MODE, 0)
+                                    != 0) {
+                                    context.getSystemService(JobScheduler::class.java)!!.cancel(
+                                        Constants.HIBERNATION_JOB_ID)
+                                }
                             }
                         }
                     }
                 )
             }
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(
                     LOG_TAG,
                     "scheduleHibernationJob " +
@@ -316,7 +322,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
             // If this user is a profile, then its hibernation/auto-revoke will be handled by the
             // primary user
             if (isProfile(context)) {
-                if (DEBUG_HIBERNATION_POLICY) {
+                if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                     DumpableLog.i(
                         LOG_TAG,
                         "user ${Process.myUserHandle().identifier} is a profile." +
@@ -324,7 +330,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                     )
                 }
                 return
-            } else if (DEBUG_HIBERNATION_POLICY) {
+            } else if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(
                     LOG_TAG,
                     "user ${Process.myUserHandle().identifier} is a profile" +
@@ -381,17 +387,17 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                 .getSystemService(JobScheduler::class.java)!!
                 .getPendingJob(Constants.HIBERNATION_JOB_ID)
         if (existingJob == null) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "No existing job, scheduling a new one")
             }
             scheduleNewJob = true
         } else if (existingJob.intervalMillis != getCheckFrequencyMs()) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Interval frequency has changed, updating job")
             }
             scheduleNewJob = true
         } else {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Job already scheduled.")
             }
         }
@@ -419,10 +425,10 @@ private suspend fun getAppsToHibernate(
     val userStats =
         UsageStatsLiveData[
                 getUnusedThresholdMs(),
-                if (DEBUG_OVERRIDE_THRESHOLDS) INTERVAL_DAILY else INTERVAL_MONTHLY]
+                INTERVAL_MONTHLY]
             .getInitializedValue()
             ?: emptyMap()
-    if (DEBUG_HIBERNATION_POLICY) {
+    if (Log.isLoggable(LOG_TAG, Log.INFO)) {
         for ((user, stats) in userStats) {
             DumpableLog.i(
                 LOG_TAG,
@@ -435,7 +441,7 @@ private suspend fun getAppsToHibernate(
     }
     for (user in unusedApps.keys.toList()) {
         if (user !in userStats.keys) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Ignoring user ${user.identifier}")
             }
             unusedApps.remove(user)
@@ -485,7 +491,7 @@ private suspend fun getAppsToHibernate(
             }
 
         unusedApps[user] = unusedUserApps
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
                 "Unused apps for user ${user.identifier}: " +
@@ -526,7 +532,7 @@ private suspend fun getAppsToHibernate(
                 return@forEachInParallel
             }
 
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(
                     LOG_TAG,
                     "unused app $packageName - last used on " +
@@ -576,17 +582,24 @@ suspend fun isPackageHibernationExemptBySystem(
 ): Boolean {
     val launcherPkgs = LauncherPackagesLiveData.getInitializedValue() ?: emptyList()
     if (!launcherPkgs.contains(pkg.packageName)) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - Package is not on launcher")
         }
         return true
     }
     val exemptServicePkgs = ExemptServicesLiveData[user].getInitializedValue() ?: emptyMap()
     if (!exemptServicePkgs[pkg.packageName].isNullOrEmpty()) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
+            DumpableLog.i(
+                LOG_TAG,
+                "Exempted ${pkg.packageName} - Has exempt components:" +
+                        "${exemptServicePkgs[pkg.packageName]?.joinToString()}",
+            )
+        }
         return true
     }
     if (Utils.isUserDisabledOrWorkProfile(user)) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
                 "Exempted ${pkg.packageName} - $user is disabled or a work profile"
@@ -596,7 +609,7 @@ suspend fun isPackageHibernationExemptBySystem(
     }
 
     if (pkg.uid == Process.SYSTEM_UID) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - Package shares system uid")
         }
         return true
@@ -608,7 +621,7 @@ suspend fun isPackageHibernationExemptBySystem(
         val isFinancedDevice =
             Settings.Global.getInt(context.contentResolver, "device_owner_type", 0) == 1
         if (!isFinancedDevice) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - device is managed")
             }
             return true
@@ -627,7 +640,7 @@ suspend fun isPackageHibernationExemptBySystem(
         )
     }
     if (carrierPrivilegedStatus == CARRIER_PRIVILEGE_STATUS_HAS_ACCESS) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - carrier privileged")
         }
         return true
@@ -639,7 +652,7 @@ suspend fun isPackageHibernationExemptBySystem(
             .checkPermission(Manifest.permission.READ_PRIVILEGED_PHONE_STATE, pkg.packageName) ==
             PERMISSION_GRANTED
     ) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
                 "Exempted ${pkg.packageName} " + "- holder of READ_PRIVILEGED_PHONE_STATE"
@@ -653,7 +666,7 @@ suspend fun isPackageHibernationExemptBySystem(
             .getSystemService(android.app.role.RoleManager::class.java)!!
             .getRoleHolders(RoleManager.ROLE_EMERGENCY)
     if (emergencyRoleHolders.contains(pkg.packageName)) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - emergency app")
         }
         return true
@@ -679,7 +692,7 @@ suspend fun isPackageHibernationExemptBySystem(
             }
         }
         if (hasRegisteredPhoneAccount) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(
                         LOG_TAG,
                         "Exempted ${pkg.packageName} - caller app"
@@ -708,7 +721,7 @@ suspend fun isPackageHibernationExemptBySystem(
         // Grant if app w/ privileged install/update permissions or app is an installer app that
         // updates packages without user action.
         if (hasInstallOrUpdatePermissions || isInstallerOfRecord) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - installer app")
             }
             return true
@@ -719,7 +732,7 @@ suspend fun isPackageHibernationExemptBySystem(
                 .getSystemService(android.app.role.RoleManager::class.java)!!
                 .getRoleHolders(RoleManager.ROLE_SYSTEM_WELLBEING)
         if (roleHolders.contains(pkg.packageName)) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - wellbeing app")
             }
             return true
@@ -732,7 +745,7 @@ suspend fun isPackageHibernationExemptBySystem(
                 .getSystemService(android.app.role.RoleManager::class.java)!!
                 .getRoleHolders(RoleManager.ROLE_DEVICE_POLICY_MANAGEMENT)
         if (roleHolders.contains(pkg.packageName)) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - device policy manager app")
             }
             return true
@@ -745,7 +758,7 @@ suspend fun isPackageHibernationExemptBySystem(
                     pkg.packageName, AppOpsManager.OPSTR_SYSTEM_EXEMPT_FROM_HIBERNATION, pkg.uid]
                 .getInitializedValue() == AppOpsManager.MODE_ALLOWED
     ) {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
                 "Exempted ${pkg.packageName} - has OP_SYSTEM_EXEMPT_FROM_HIBERNATION"
@@ -774,10 +787,6 @@ suspend fun isPackageHibernationExemptByUser(
             .getInitializedValue()
     if (allowlistAppOpMode == AppOpsManager.MODE_DEFAULT) {
         // Initial state - allowlist not explicitly overridden by either user or installer
-        if (DEBUG_OVERRIDE_THRESHOLDS) {
-            // Suppress exemptions to allow debugging
-            return false
-        }
 
         if (hibernationTargetsPreSApps()) {
             // Default on if overridden
@@ -967,12 +976,12 @@ class HibernationJobService : JobService() {
     var jobStartTime: Long = -1L
 
     override fun onStartJob(params: JobParameters?): Boolean {
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(LOG_TAG, "onStartJob")
         }
 
         if (!isUserSetupComplete(contentResolver)) {
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Skipping hibernation job because set-up is not complete")
             }
             jobFinished(params, /* wantsReschedule= */ true)
@@ -983,7 +992,7 @@ class HibernationJobService : JobService() {
 
         if (SKIP_NEXT_RUN) {
             SKIP_NEXT_RUN = false
-            if (DEBUG_HIBERNATION_POLICY) {
+            if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                 DumpableLog.i(LOG_TAG, "Skipping auto revoke first run when scheduled by system")
             }
             jobFinished(params, false)

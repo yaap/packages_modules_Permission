@@ -62,6 +62,7 @@ import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.safetycenter.ui.model.PrivacyControlsViewModel.Pref;
 import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
+import com.android.settingslib.widget.ExpressiveDesignEnabledProvider;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.List;
@@ -69,7 +70,8 @@ import java.util.Objects;
 
 /** Entry-point activity for SafetyCenter. */
 @RequiresApi(TIRAMISU)
-public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity {
+public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
+        implements ExpressiveDesignEnabledProvider {
 
     private static final String TAG = SafetyCenterActivity.class.getSimpleName();
     private static final String PRIVACY_CONTROLS_ACTION = "android.settings.PRIVACY_CONTROLS";
@@ -361,5 +363,12 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean isExpressiveDesignEnabled() {
+        // Expressive design is pre-emptively disabled for Safety Center until implementation is
+        // complete.
+        return false;
     }
 }

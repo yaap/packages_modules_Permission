@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"இயல்பான டிஜிட்டல் அசிஸ்டண்ட்"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"டிஜிட்டல் அசிஸ்டண்ட் ஆப்ஸ்"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"நீங்கள் பார்க்கும் திரையில் உள்ள தகவலின் அடிப்படையில் அசிஸ்ட் ஆப்ஸ் உதவும். ஒருங்கிணைந்த உதவியை வழங்குவதற்காக \'தொடக்கியையும்\' \'குரல் உள்ளீட்டுச் சேவைகளையும்\' சில ஆப்ஸ் பயன்படுத்துகின்றன."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> பரிந்துரைப்பவை"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"உலாவிக்கான இயல்பான ஆப்ஸ்"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"பிரவுசர் ஆப்ஸ்"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"இணையத்திற்கும் திரையில் பார்த்துத் தட்டக்கூடிய இணைப்புகளுக்கும் அணுகலை வழங்கும் ஆப்ஸ்"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"இணைப்புகளைத் திறத்தல்"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"பணிக்கான இயல்பு நிலை ஆப்ஸ்"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ரகசிய இடத்திற்கான இயல்பு"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"சாதனத்திற்காக மேம்படுத்தப்பட்டவை"</string>
     <string name="default_app_others" msgid="7793029848126079876">"மற்றவை"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ஏதுமில்லை"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(சிஸ்டத்தின் இயல்புநிலை)"</string>

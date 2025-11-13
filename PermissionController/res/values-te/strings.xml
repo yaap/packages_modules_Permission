@@ -40,7 +40,7 @@
     <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"మరిన్ని ఫోటోలను ఎంచుకోండి"</string>
     <string name="grant_dialog_button_dont_select_more" msgid="6643552729129461268">"మరిన్ని ఫోటోలను ఎంచుకోవద్దు"</string>
     <string name="grant_dialog_button_deny_anyway" msgid="7225905870668915151">"ఏదేమైనా అనుమతించవద్దు"</string>
-    <string name="grant_dialog_button_dismiss" msgid="1930399742250226393">"విస్మరించు"</string>
+    <string name="grant_dialog_button_dismiss" msgid="1930399742250226393">"విస్మరించండి"</string>
     <string name="current_permission_template" msgid="7452035392573329375">"<xliff:g id="PERMISSION_COUNT">%2$s</xliff:g> యొక్క <xliff:g id="CURRENT_PERMISSION_INDEX">%1$s</xliff:g>"</string>
     <string name="permission_warning_template" msgid="2247087781222679458">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;‌ను ఈ చర్య చేయడానికి అనుమతించాలా? - <xliff:g id="ACTION">%2$s</xliff:g>"</string>
     <string name="permission_add_background_warning_template" msgid="1812914855915092273">"ఈ చర్యను చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;‌ను ఎల్లప్పుడూ అనుమతించాలా? - <xliff:g id="ACTION">%2$s</xliff:g>"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ఆటోమేటిక్ డిజిటల్ అసిస్టెంట్ యాప్"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"డిజిటల్ అసిస్టెంట్ యాప్"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"మీ ముందున్న స్క్రీన్‌లోని సమాచారం ఆధారంగా సహాయక (అసిస్ట్) యాప్‌లు, మీకు హెల్ప్ చేయగలవు. కొన్ని యాప్‌లు, మీకు ఈజీగా సాయం చేయడానికి లాంచర్‌కు, వాయిస్ ఇన్‌పుట్ సర్వీసులకు రెండింటికీ సపోర్ట్‌ ఇస్తాయి."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> ద్వారా సిఫార్సు చేయబడింది"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ఆటోమేటిక్ బ్రౌజర్ యాప్"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"బ్రౌజర్ యాప్"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"మీకు ఇంటర్నెట్‌కు యాక్సెస్‌ ఇచ్చి, ట్యాప్ చేయడానికి లింక్‌ల‌ను డిస్‌ప్లే చేసే యాప్‌లు"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"లింక్‌లను తెరవడం"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"వర్క్‌ ప్లేస్ కోసం ఆటోమేటిక్"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ఆటోమేటిక్‌గా ప్రైవేట్ స్పేస్"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"పరికరం కోసం ఆప్టిమైజ్ చేసినవి"</string>
     <string name="default_app_others" msgid="7793029848126079876">"ఇతర యాప్‌లు"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ఏదీ కాదు"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(సిస్టమ్ ఆటోమేటిక్)"</string>
@@ -460,7 +460,7 @@
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g>డీబగ్గింగ్ సమాచారాన్ని అప్‌లో డ్ చేయదలుచుకుంటున్నారు."</string>
     <string name="incident_report_dialog_title" msgid="669104389325204095">"డీబగ్గింగ్ డేటాను షేర్ చేయమంటారా?"</string>
     <string name="incident_report_dialog_intro" msgid="5897733669850951832">"సిస్టమ్ ఒక సమస్యను గుర్తించింది."</string>
-    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>, <xliff:g id="DATE">%2$s</xliff:g>న <xliff:g id="TIME">%3$s</xliff:g>కు ఈ పరికరంలో తీసిన డీబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయమని రిక్వెస్ట్ చేస్తోంది. బగ్ రిపోర్ట్‌లలో మీ పరికరం లేదా లాగిన్ చేసిన యాప్‌లలోని వ్యక్తిగత సమాచారం ఉంటుంది, ఉదాహరణకు యూజర్ నేమ్‌లు, లొకేషన్ డేటా, పరికర ఐడెంటిఫయర్‌లు, ఇంకా నెట్‌వర్క్ సమాచారం వంటివి. మీకు ఈ సమాచారం విషయంలో నమ్మకమైన వ్యక్తులకు, యాప్‌లకు మాత్రమే బగ్ రిపోర్ట్ వివరాలను షేర్ చేయండి.\n\nబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయడానికి <xliff:g id="APP_NAME_1">%4$s</xliff:g>‌ను అనుమతించాలా?"</string>
+    <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g>, <xliff:g id="DATE">%2$s</xliff:g>న <xliff:g id="TIME">%3$s</xliff:g>కు ఈ డివైజ్‌లో తీసిన డీబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయమని రిక్వెస్ట్ చేస్తోంది. బగ్ రిపోర్ట్‌లలో మీ డివైజ్ లేదా లాగిన్ చేసిన యాప్‌లలోని వ్యక్తిగత సమాచారం ఉంటుంది, ఉదాహరణకు యూజర్ నేమ్‌లు, లొకేషన్ డేటా, డివైజ్ ఐడెంటిఫయర్‌లు, ఇంకా నెట్‌వర్క్ సమాచారం వంటివి. మీకు ఈ సమాచారం విషయంలో నమ్మకమైన వ్యక్తులకు, యాప్‌లకు మాత్రమే బగ్ రిపోర్ట్ వివరాలను షేర్ చేయండి.\n\nబగ్ రిపోర్ట్‌ను అప్‌లోడ్ చేయడానికి <xliff:g id="APP_NAME_1">%4$s</xliff:g>‌ను అనుమతించాలా?"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"<xliff:g id="APP_NAME">%1$s</xliff:g> కోసం బగ్ రిపోర్ట్‌ ప్రాసెస్ చేయడంలో ఎర్రర్ ఉంది. కాబట్టి వివరణాత్మక డీబగ్గింగ్ డేటాను షేర్ చేయడాన్ని నిరాకరించారు. అంతరాయానికి చింతిస్తున్నాము."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"అనుమతించండి"</string>
     <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"తిరస్కరించు"</string>
@@ -475,7 +475,7 @@
     <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;‌లో ఫోటోలు, మీడియాను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;‌కు అనుమతినివ్వాలా?"</string>
     <string name="permgrouprequest_contacts" msgid="8391550064551053695">"మీ కాంటాక్ట్‌లను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ను అనుమతించాలా?"</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;‌లో మీ కాంటాక్ట్‌లను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; యాప్‌ను అనుమతించాలనుకుంటున్నారా?"</string>
-    <string name="permgrouprequest_location" msgid="6990232580121067883">"ఈ పరికర లొకేషన్‌ను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ను అనుమతించాలా?"</string>
+    <string name="permgrouprequest_location" msgid="6990232580121067883">"ఈ డివైజ్‌‌ లొకేషన్‌ను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ను అనుమతించాలా?"</string>
     <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; లొకేషన్‌ను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; యాప్‌ను అనుమతించాలనుకుంటున్నారా?"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"మీరు యాప్‌ను ఉపయోగిస్తున్నప్పుడు మాత్రమే లొకేషన్‌కు యాప్ యాక్సెస్ కలిగి ఉంటుంది"</string>
     <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"ఈ పరికర లొకేషన్‌ను యాక్సెస్ చేయడానికి &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;ను అనుమతించాలా?"</string>
@@ -599,7 +599,7 @@
     <string name="active_call_usage_qs" msgid="8559974395932523391">"ఫోన్ కాల్ ద్వారా ఉపయోగించబడుతోంది"</string>
     <string name="recent_call_usage_qs" msgid="743044899599410935">"ఇటీవల ఫోన్ కాల్‌లో ఉపయోగించబడింది"</string>
     <string name="active_app_usage_qs" msgid="4063912870936464727">"<xliff:g id="APP_NAME">%1$s</xliff:g> ద్వారా ఉపయోగించబడుతోంది"</string>
-    <string name="recent_app_usage_qs" msgid="6650259601306212327">"<xliff:g id="APP_NAME">%1$s</xliff:g> ద్వారా ఇటీవల ఉపయోగించబడింది"</string>
+    <string name="recent_app_usage_qs" msgid="6650259601306212327">"ఇటీవల <xliff:g id="APP_NAME">%1$s</xliff:g> వినియోగించింది"</string>
     <string name="active_app_usage_1_qs" msgid="4325136375823357052">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="ATTRIBUTION_LABEL">%2$s</xliff:g>) ద్వారా ఉపయోగించబడుతోంది"</string>
     <string name="recent_app_usage_1_qs" msgid="261450184773310741">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="ATTRIBUTION_LABEL">%2$s</xliff:g>) ద్వారా ఇటీవల ఉపయోగించబడింది"</string>
     <string name="active_app_usage_2_qs" msgid="6107866785243565283">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="ATTRIBUTION_LABEL">%2$s</xliff:g> • <xliff:g id="PROXY_LABEL">%3$s</xliff:g>) ద్వారా ఉపయోగించబడుతోంది"</string>
@@ -679,7 +679,7 @@
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"పరిమితం చేయబడిన సెట్టింగ్"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"మీ సెక్యూరిటీ కోసం, ఈ సెట్టింగ్ ప్రస్తుతం అందుబాటులో లేదు."</string>
     <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"కాల్ మాట్లాడే సమయంలో చర్యను పూర్తి చేయడం కుదరదు"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"మీ పరికరాన్ని, డేటాను సురక్షితంగా ఉంచేందుకు ఈ సెట్టింగ్ బ్లాక్ చేయబడింది.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"మీ డివైజ్‌ను, డేటాను సురక్షితంగా ఉంచేందుకు ఈ సెట్టింగ్ బ్లాక్ చేయబడింది.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>స్కామర్‌లు మిమ్మల్ని కొత్త సోర్స్ నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయమని అడగడం ద్వారా హానికరమైన యాప్‌లను ఇన్‌స్టాల్ చేయడానికి ట్రై చేయవచ్చు."</string>

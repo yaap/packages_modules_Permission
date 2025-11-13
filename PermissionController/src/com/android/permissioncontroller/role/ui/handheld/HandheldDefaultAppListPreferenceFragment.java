@@ -20,17 +20,17 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.permissioncontroller.role.ui.DefaultAppListChildFragment;
 import com.android.permissioncontroller.role.ui.RolePreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 /**
  * Handheld preference fragment for the list of default apps.
  * <p>
  * Must be added as a child fragment and its parent fragment must implement {@link Parent}.
  */
-public class HandheldDefaultAppListPreferenceFragment extends PreferenceFragmentCompat
+public class HandheldDefaultAppListPreferenceFragment extends SettingsBasePreferenceFragment
         implements DefaultAppListChildFragment.Parent {
 
     /**

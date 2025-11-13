@@ -22,8 +22,8 @@
     <string name="privacy_sources_summary" msgid="4083646673569677049">"Рұқсаттар, бақылау тақтасы, басқару элементтері"</string>
     <string name="health_connect_title" msgid="8318152190040327804">"Health Connect"</string>
     <string name="health_connect_search_terms" msgid="4998970586245680829">"Денсаулық, Health Connect"</string>
-    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Локация деректерін бөлісу жаңартулары"</string>
-    <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"Деректер, Деректерді бөлісу, Деректерді бөлісу жаңартулары, Локация деректерін бөлісу жаңартулары"</string>
+    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Локация деректерін бөлісудегі өзгерістер"</string>
+    <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"Деректер, Деректерді бөлісу, Деректерді бөлісудегі өзгерістер, Локация деректерін бөлісудегі өзгерістер"</string>
     <string name="advanced_title" msgid="6259362998269627310">"Басқа параметрлер"</string>
     <string name="more_settings_title" msgid="9033454654010697185">"Күшейтілген қауіпсіздік пен құпиялық"</string>
     <string name="more_settings_summary" msgid="7086620830002515710">"Автотолтыру, хабарландырулар және тағы басқалар"</string>

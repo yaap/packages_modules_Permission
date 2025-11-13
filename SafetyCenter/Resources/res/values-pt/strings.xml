@@ -24,7 +24,7 @@
     <string name="lock_screen_summary_disabled" msgid="354071230916616692">"Ainda não há informações"</string>
     <string name="lock_screen_search_terms" msgid="2678486357779794826">"Bloqueio do dispositivo, Bloqueio de tela, Tela de bloqueio, Senha, PIN, Padrão"</string>
     <string name="biometrics_title" msgid="5859504610285212938">"Biometria"</string>
-    <string name="biometrics_search_terms" msgid="6040319118762671981">"Impressão digital, Dedo, Adicionar impressão digital, Desbloqueio facial, Rosto"</string>
+    <string name="biometrics_search_terms" msgid="6040319118762671981">"Impressão digital, dedo, adicionar impressão digital, desbloqueio facial, rosto"</string>
     <string name="privacy_sources_title" msgid="4061110826457365957">"Privacidade"</string>
     <string name="privacy_sources_summary" msgid="4089719981155120864">"Painel, permissões, controles"</string>
     <string name="permission_usage_title" msgid="3633779688945350407">"Painel de privacidade"</string>

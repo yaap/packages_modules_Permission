@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Programu msingi ya usaidizi wa kidijitali"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Programu saidizi ya kidijitali"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Programu za usaidizi zinaweza kukusaidia kulingana na maelezo kutoka kwenye skrini unayoangalia. Baadhi ya programu zinaweza kutumia huduma za kifungua programu na kuweka data kwa kutamka ili kukupa usaidizi jumuifu."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Zimependekezwa na <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Programu kuu ya kivinjari"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Programu ya kivinjari"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Programu zinazokupa uwezo wa kufikia intaneti na kuonyesha viungo unavyogusa"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Kufungua viungo"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Programu chaguomsingi kazini"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Programu chaguomsingi za sehemu ya faragha"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Zilizoboreshwa ili kufaa kifaa chako"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Nyingine"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Hakuna"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Programu chaguomsingi ya mfumo)"</string>
@@ -562,7 +562,7 @@
     <string name="blocked_camera_title" msgid="1128510551791284384">"Kamera ya kifaa imezuiwa"</string>
     <string name="blocked_microphone_title" msgid="1631517143648232585">"Maikrofoni ya kifaa imezuiwa"</string>
     <string name="blocked_location_title" msgid="2005608279812892383">"Utambuzi wa mahali kifaa kilipo umezimwa"</string>
-    <string name="blocked_sensor_summary" msgid="4443707628305027375">"Kwa ajili ya programu na huduma"</string>
+    <string name="blocked_sensor_summary" msgid="4443707628305027375">"Kwa programu na huduma"</string>
     <string name="blocked_mic_summary" msgid="8960466941528458347">"Huenda bado data ya maikrofoni ikashirikiwa unapopigia namba ya dharura."</string>
     <string name="blocked_sensor_button_label" msgid="6742092634984289658">"Badilisha"</string>
     <string name="automotive_blocked_camera_title" msgid="6142362431548829416">"Idhini ya kufikia kamera imezimwa"</string>
@@ -662,7 +662,7 @@
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Masasisho ya kushiriki data ya mahali"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Kagua programu zilizobadilisha jinsi zinavyoweza kushiriki data ya mahali ulipo"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Programu hizi zimebadilisha jinsi zinavyoweza kushiriki data ya mahali ulipo. Huenda zilikuwa haziishiriki hapo awali au sasa zinaweza kuishiriki kwa madhumuni ya utangazaji au uuzaji."</string>
-    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Wasanidi wa programu hizi wametoa maelezo kuhusu mbinu zao za kushiriki data kwenye duka la programu. Wanaweza kuyasasisha kadiri muda unavyosonga.\n\nMbinu za kushiriki data zinaweza kutofautiana kulingana na toleo la programu, matumizi, eneo na umri wako."</string>
+    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Wasanidi wa programu hizi wametoa maelezo kuhusu mbinu zao za kuruhusu ufikiaji wa data kwenye duka la programu. Wanaweza kuyasasisha kadiri muda unavyosonga.\n\nMbinu za kuruhusu ufikiaji wa data zinaweza kutofautiana kulingana na toleo la programu, matumizi, eneo na umri wako."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"Pata maelezo kuhusu kushiriki data"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"Sasa data ya mahali ulipo inashirikiwa na wengine"</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"Sasa data ya mahali ulipo inashirikiwa na wengine kwa madhumuni ya utangazaji au uuzaji"</string>
@@ -682,7 +682,7 @@
     <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Mipangilio hii imezuiwa ili kulinda kifaa na data yako.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Walaghai wanaweza kujaribu kuweka programu hatari kwenye kifaa chako kwa kukuomba uweke programu zisizojulikana kutoka chanzo kigeni."</string>
+</xliff:g>Walaghai wanaweza kujaribu kuweka programu hatari kwenye kifaa chako kwa kukuomba uweke programu zisizojulikana kutoka chanzo geni."</string>
     <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Walaghai wanaweza kujaribu kudhibiti kifaa chako kwa kukuomba uruhusu programu ifikie vipengele vya ufikivu."</string>

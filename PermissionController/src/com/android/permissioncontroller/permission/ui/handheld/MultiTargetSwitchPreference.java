@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+// LINT.IfChange
+
 package com.android.permissioncontroller.permission.ui.handheld;
 
 import android.content.Context;
@@ -61,3 +63,4 @@ class MultiTargetSwitchPreference extends SwitchPreference {
         }
     }
 }
+// LINT.ThenChange(../v36/MultiTargetSwitchPreferenceCompat.java)

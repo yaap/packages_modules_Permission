@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Assistant numérique par défaut"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Appli d\'assistant numérique"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Les applis d\'assistance peuvent se servir des informations à l\'écran pour vous aider. Certaines applis sont compatibles à la fois avec le lanceur d\'applis et les services d\'entrée vocale pour vous offrir une assistance intégrée."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recommandées par <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Appli de navigation par défaut"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Appli de navigation"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Applis qui vous donnent accès à Internet et qui affichent des liens que vous pouvez toucher"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Ouverture des liens"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Par défaut pour util. profess."</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Applis par défaut pour l\'Espace privé"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimisée pour l\'appareil"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Autres"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Aucune"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Paramètre(s) système par défaut)"</string>
@@ -659,7 +659,7 @@
     <string name="app_permission_rationale_message" msgid="8511466916077100713">"Sécurité des données"</string>
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"Les données de localisation peuvent être partagées"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Cette appli indique qu\'elle peut partager vos données de localisation avec des tiers"</string>
-    <string name="data_sharing_updates_title" msgid="7996933386875213859">"Mises à jour des pratiques de partage des données pour la localisation"</string>
+    <string name="data_sharing_updates_title" msgid="7996933386875213859">"Mises à jour du partage des données pour la localisation"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Passez en revue les applis qui ont changé la façon dont elles peuvent partager vos données de localisation"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Ces applis ont modifié la façon dont elles peuvent partager vos données de localisation. Elles peuvent ne pas les avoir partagées auparavant, ou peuvent maintenant les partager à des fins d\'annonces ou de marketing."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Les développeurs de ces applis ont fourni des renseignements sur leurs pratiques de partage des données à une boutique d\'applis. Ils peuvent les mettre à jour au fil du temps.\n\nLes pratiques de partage des données peuvent varier en fonction de la version de votre appli, de son utilisation, de votre région et de votre âge."</string>

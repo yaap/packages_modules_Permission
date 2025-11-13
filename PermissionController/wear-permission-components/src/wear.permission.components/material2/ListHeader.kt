@@ -36,6 +36,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.wear.compose.material.LocalContentColor
 import androidx.wear.compose.material.LocalTextStyle
 import androidx.wear.compose.material.MaterialTheme
@@ -71,7 +72,8 @@ fun ListHeader(
     ) {
         CompositionLocalProvider(
             LocalContentColor provides contentColor,
-            LocalTextStyle provides MaterialTheme.typography.title3.copy(hyphens = Hyphens.Auto),
+            LocalTextStyle provides
+                MaterialTheme.typography.title3.copy(hyphens = Hyphens.Auto, lineHeight = 1.1.em),
         ) {
             content()
         }

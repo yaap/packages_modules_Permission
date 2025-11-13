@@ -25,7 +25,7 @@
     <string name="available" msgid="6007778121920339498">"उपलब्ध"</string>
     <string name="blocked" msgid="9195547604866033708">"ब्लक गरिएको"</string>
     <string name="on" msgid="280241003226755921">"अन छ"</string>
-    <string name="off" msgid="1438489226422866263">"निष्क्रिय"</string>
+    <string name="off" msgid="1438489226422866263">"अफ"</string>
     <string name="uninstall_or_disable" msgid="4496612999740858933">"अनइन्स्टल गर्नुहोस् वा असक्षम पार्नुहोस्"</string>
     <string name="app_not_found_dlg_title" msgid="6029482906093859756">"एप फेला परेन"</string>
     <string name="grant_dialog_button_deny" msgid="88262611492697192">"अनुमति नदिनुहोस्"</string>
@@ -234,18 +234,18 @@
     <string name="app_permission_footer_special_file_access" msgid="1884202176147657788">"तपाईंले सबै फाइलहरू व्यवस्थापन गर्ने अनुमति दिनुभयो भने यो एपले यस डिभाइस वा यस डिभाइससँग कनेक्ट गरिएका अन्य डिभाइसको साझा भण्डारणमा भएका सबै फाइलहरू प्रयोग गर्न, परिमार्जन गर्न र मेटाउन सक्छ। यो एपले तपाईंलाई जानकारी नदिइकन ‌फाइलहरू प्रयोग गर्न सक्छ।"</string>
     <string name="special_file_access_dialog" msgid="583804114020740610">"यो एपलाई यस यन्त्र वा यस यन्त्रसँग जोडिएका अन्य भण्डारण डिभाइसमा रहेका फाइलहरू प्रयोग गर्न, परिमार्जन गर्न र मेटाउन दिने हो? यो एपले तपाईंलाई जानकारी नदिइकन ‌फाइलहरू प्रयोग गर्न सक्छ।"</string>
     <string name="permission_description_summary_generic" msgid="5401399408814903391">"यो अनुमति पाएका एपहरूले निम्न कार्य गर्न सक्छन्: <xliff:g id="DESCRIPTION">%1$s</xliff:g>"</string>
-    <string name="permission_description_summary_activity_recognition" msgid="2652850576497070146">"यो अनुमति भएका एपहरूले तपाईंले हिँड्ने, साइकल र गाडी कुदाउने जस्ता क्रियाकलाप गर्दा सृजित हुने डेटा हेर्न तथा प्रयोग गर्न सक्छन्"</string>
+    <string name="permission_description_summary_activity_recognition" msgid="2652850576497070146">"यो अनुमति भएका एपहरूले तपाईंले हिँड्ने, साइकल र गाडी कुदाउने जस्ता क्रियाकलाप गर्दा सृजित हुने डेटा एक्सेस गर्न सक्छन्"</string>
     <string name="permission_description_summary_calendar" msgid="103329982944411010">"यो अनुमति पाएका एपहरूले तपाईंको पात्रो हेर्न तथा चलाउन सक्छन्"</string>
-    <string name="permission_description_summary_call_log" msgid="7321437186317577624">"यो अनुमति भएका एपले फोन कल लग हेर्न तथा प्रयोग गर्न सक्छन्"</string>
+    <string name="permission_description_summary_call_log" msgid="7321437186317577624">"यो अनुमति भएका एपले फोन कल लग एक्सेस गर्न सक्छन्"</string>
     <string name="permission_description_summary_camera" msgid="108004375101882069">"यो अनुमति पाएका एपहरूले फोटो खिच्न र भिडियो रेकर्ड गर्न सक्छन्"</string>
     <string name="permission_description_summary_contacts" msgid="2337798886460408996">"यो अनुमति पाएका एपहरूले तपाईंका कन्ट्याक्टहरू हेर्न सक्छन्"</string>
-    <string name="permission_description_summary_location" msgid="2817531799933480694">"यो अनुमति भएका  एपहरूले यस डिभाइसको लोकेसन हेर्न तथा प्रयोग गर्न सक्छन्"</string>
+    <string name="permission_description_summary_location" msgid="2817531799933480694">"यो अनुमति भएका  एपहरूले यस डिभाइसको लोकेसन एक्सेस गर्न सक्छन्"</string>
     <string name="permission_description_summary_nearby_devices" msgid="8269183818275073741">"यो अनुमति दिइएका एपहरूले नजिकै रहेका डिभाइसहरू भेट्टाउन, ती डिभाइससँग कनेक्ट गर्न र तिनको सापेक्ष स्थिति निर्धारण गर्न सक्छन्"</string>
     <string name="permission_description_summary_microphone" msgid="630834800308329907">"यो अनुमति भएका एपहरूले अडियो रेकर्ड गर्न सक्छन्"</string>
     <string name="permission_description_summary_phone" msgid="4515277217435233619">"यो अनुमति पाएका एपहरूले फोन कल गर्न र तिनको व्यवस्थापन गर्न सक्छन्"</string>
     <string name="permission_description_summary_sensors" msgid="1836045815643119949">"यो अनुमति भएका एपहरूले मुटुको धड्कन जस्ता तपाईं जीवित रहेको संकेत गर्ने शरीरका महत्त्वपूर्ण चालसम्बन्धी डेटा प्रयोग गर्न सक्छन्"</string>
     <string name="permission_description_summary_sms" msgid="725999468547768517">"यो अनुमति पाएका एपहरूले SMS म्यासेज पठाउन र हेर्न सक्छन्"</string>
-    <string name="permission_description_summary_storage" msgid="6575759089065303346">"यो अनुमति भएका एपहरूले तपाईंको डिभाइसमा रहेका फोटो, मिडिया तथा फाइल हेर्न तथा प्रयोग गर्न सक्छन्"</string>
+    <string name="permission_description_summary_storage" msgid="6575759089065303346">"यो अनुमति भएका एपहरूले तपाईंको डिभाइसमा रहेका फोटो, मिडिया तथा फाइल एक्सेस गर्न सक्छन्"</string>
     <string name="permission_description_summary_read_media_aural" msgid="3354728149930482199">"यो अनुमति पाएका एपहरूले यो डिभाइसमा रहेका सङ्गीत र अन्य अडियो फाइलहरू प्रयोग गर्न सक्छन्"</string>
     <string name="permission_description_summary_read_media_visual" msgid="4991801977881732641">"यो अनुमति पाएका एपहरूले यस डिभाइसमा रहेका फोटो र भिडियोहरू प्रयोग गर्न सक्छन्"</string>
     <string name="app_permission_most_recent_summary" msgid="4292074449384040590">"पछिल्लो पटक पहुँच राखिएको समय: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
@@ -291,8 +291,8 @@
     <string name="background_location_access_reminder_notification_title" msgid="1140797924301941262">"<xliff:g id="APP_NAME">%s</xliff:g> ले पृष्ठभूमिमा तपाईंको स्थानमाथिको पहुँच प्राप्त गर्‍यो"</string>
     <string name="background_location_access_reminder_notification_content" msgid="7787084707336546245">"यो एपले सधैँ तपाईंको स्थान प्रयोग गर्न सक्छ। बदल्न ट्याप गर्नुहोस्‌।"</string>
     <string name="notification_listener_reminder_notification_title" msgid="3747210460187479091">"सूचना हेर्ने अनुमति दिइएको एपको समीक्षा गर्नुहोस्"</string>
-    <string name="notification_listener_reminder_notification_content" msgid="831476101108863427">"<xliff:g id="APP_NAME">%s</xliff:g> ले तपाईंका सूचनामा रहेको सामग्री खारेज गर्न, त्यसमा कारबाही गर्न र उक्त सामग्री हेर्न तथा प्रयोग गर्न सक्छ"</string>
-    <string name="notification_listener_warning_card_content" msgid="7840973324284115893">"यो एपले तपाईंका सूचनामा रहेको सामग्री खारेज गर्न, त्यसमा कारबाही गर्न र उक्त सामग्री हेर्न तथा प्रयोग गर्न सक्छ। केही एपहरूलाई अपेक्षाअनुसार कार्य गर्नका निम्ति यस प्रकारको अनुमति दिनु पर्ने हुन्छ।"</string>
+    <string name="notification_listener_reminder_notification_content" msgid="831476101108863427">"<xliff:g id="APP_NAME">%s</xliff:g> ले तपाईंका सूचनामा रहेको सामग्री खारेज गर्न, त्यसमा कारबाही गर्न र उक्त सामग्री एक्सेस गर्न सक्छ"</string>
+    <string name="notification_listener_warning_card_content" msgid="7840973324284115893">"यो एपले तपाईंका सूचनामा रहेको सामग्री खारेज गर्न, त्यसमा कारबाही गर्न र उक्त सामग्री एक्सेस गर्न सक्छ। केही एपहरूलाई अपेक्षाअनुसार कार्य गर्नका निम्ति यस प्रकारको अनुमति दिनु पर्ने हुन्छ।"</string>
     <string name="notification_listener_remove_access_button_label" msgid="7101898782417817097">"अनुमति हटाउनुहोस्"</string>
     <string name="notification_listener_review_app_button_label" msgid="3433073281029143924">"थप विकल्पहरू हेर्नुहोस्"</string>
     <string name="notification_listener_remove_access_success_label" msgid="2477611529875633107">"अनुमति हटाइएको छ"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"डिफल्ट डिजिटल एसिस्टेन्ट एप"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"डिजिटल एसिस्टेन्ट एप"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"सहायक एपहरूले तपाईंले हेर्दै गर्नुभएको स्क्रिनबाट प्राप्त जानकारीमा आधारित भई तपाईंलाई मद्दत गर्न सक्छन्। केही एपहरूले तपाईंलाई एकीकृत सहायता दिन दुवै लन्चर र आवाज संलग्न इनपुट सेवाहरूलाई समर्थन गर्छन्।"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> ले सिफारिस गरेको"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"डिफल्ट ब्राउजर एप"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ब्राउजर"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"तपाईंलाई इन्टरनेट चलाउने दिने र तपाईंले ट्याप गर्ने लिंकहरू देखाउने एपहरू"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"लिंकहरू खोल्दा"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"कार्यका लागि डिफल्ट"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"निजी स्पेसका लागि डिफल्ट एपहरू"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"यो डिभाइसका लागि अप्टिमाइज गरिएका"</string>
     <string name="default_app_others" msgid="7793029848126079876">"अन्य"</string>
     <string name="default_app_none" msgid="9084592086808194457">"कुनै पनि होइन"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(सिस्टम डिफल्ट)"</string>
@@ -452,7 +452,7 @@
     <string name="special_app_access" msgid="5019319067120213797">"एपसम्बन्धी विशेष पहुँच"</string>
     <string name="no_special_app_access" msgid="6950277571805106247">"एपसम्बन्धी कुनै विशेष पहुँच छैन"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"कुनै पनि एप छैन"</string>
-    <string name="home_missing_work_profile_support" msgid="1756855847669387977">"कार्य प्रोफाइल समर्थन गर्दैन"</string>
+    <string name="home_missing_work_profile_support" msgid="1756855847669387977">"वर्क प्रोफाइल समर्थन गर्दैन"</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"टिपोट: तपाईंले आफ्नो यन्त्र पुनः सुरु गर्नुभयो र त्यसमा स्क्रिन लक सेट गरिएको छ भने तपाईंले आफ्नो डिभाइस अनलक नगरेसम्म यो एप सुरु हुन सक्दैन।"</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"सहायकले तपाईंको स्क्रिनमा देखिने वा अनुप्रयोगभित्रबाट पहुँच राख्न सकिने जानकारीलगायत तपाईंको प्रणालीमा प्रयोगमा रहेका एपसम्बन्धी जानकारी पढ्न सक्ने छ।"</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"डिबग प्रक्रियासम्बन्धी डेटा सेयर गर्नुहोस्"</string>

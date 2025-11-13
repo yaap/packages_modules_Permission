@@ -27,6 +27,7 @@ import androidx.annotation.StyleRes
 import androidx.preference.PreferenceViewHolder
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.utils.ResourceUtils
+import com.android.settingslib.widget.SettingsThemeHelper
 import com.android.settingslib.widget.TwoTargetPreference
 
 /**
@@ -62,7 +63,9 @@ class PermissionTwoTargetPreference : TwoTargetPreference {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        layoutResource = R.layout.permission_preference_two_target
+        if (!SettingsThemeHelper.isExpressiveTheme(context)) {
+            layoutResource = R.layout.permission_preference_two_target
+        }
         extraWidgetIconRes =
             ResourceUtils.getResourceIdByAttr(context, attrs, R.attr.extraWidgetIcon)
     }

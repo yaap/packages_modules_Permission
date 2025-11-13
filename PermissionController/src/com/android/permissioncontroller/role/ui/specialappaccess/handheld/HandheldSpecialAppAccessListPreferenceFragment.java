@@ -21,18 +21,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.permissioncontroller.role.ui.RolePreference;
 import com.android.permissioncontroller.role.ui.handheld.HandheldRolePreference;
 import com.android.permissioncontroller.role.ui.specialappaccess.SpecialAppAccessListChildFragment;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 /**
  * Handheld fragment for the list of special app accesses.
  * <p>
  * Must be added as a child fragment and its parent fragment must implement {@link Parent}.
  */
-public class HandheldSpecialAppAccessListPreferenceFragment extends PreferenceFragmentCompat
+public class HandheldSpecialAppAccessListPreferenceFragment extends SettingsBasePreferenceFragment
         implements SpecialAppAccessListChildFragment.Parent {
 
     /**

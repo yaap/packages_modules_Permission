@@ -32,6 +32,7 @@ import android.platform.test.annotations.AppModeFull;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.virtualdevice.cts.common.VirtualDeviceRule;
 
+import androidx.annotation.NonNull;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -44,6 +45,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -219,9 +221,11 @@ public class PermissionUpdateListenerTest {
         }
 
         @Override
-        public void onPermissionsChanged(int uid, String deviceId) {
+        public void onPermissionsChanged(int uid, @NonNull String deviceId) {
             if (uid == mTestAppUid) {
                 mCountDownLatch.countDown();
+
+                Objects.requireNonNull(deviceId, "deviceId cannot be null");
                 mUidDeviceIdsMap.put(uid, deviceId);
             }
         }

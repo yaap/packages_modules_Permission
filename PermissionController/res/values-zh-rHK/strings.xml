@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"預設數碼助理應用程式"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"數碼助理應用程式"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"小幫手應用程式能根據你正在查看的螢幕資訊提供協助。部分應用程式可同時支援啟動器及語音輸入服務，以提供更全面的協助。"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> 的建議"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"預設瀏覽器應用程式"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"瀏覽器應用程式"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"此類應用程式可讓你存取互聯網，並會顯示你輕按的連結"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"開啟連結"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"預設用於工作"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"私人空間的預設應用程式"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"已針對你的裝置優化"</string>
     <string name="default_app_others" msgid="7793029848126079876">"其他"</string>
     <string name="default_app_none" msgid="9084592086808194457">"無"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(系統預設)"</string>

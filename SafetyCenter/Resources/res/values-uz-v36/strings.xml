@@ -17,6 +17,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_function_access_settings_title" msgid="3894819108224606683">"Boshqa ilovalar agent nazorati"</string>
+    <string name="app_function_access_settings_summary" msgid="2719347800336419237">"Qurilmangiz va boshqa ilovalarda amallar bajaring"</string>
     <string name="face_unlock_title" msgid="3991635517593572926">"Yuz"</string>
     <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Ish uchun yuz"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>

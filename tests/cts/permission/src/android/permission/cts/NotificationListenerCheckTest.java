@@ -16,6 +16,8 @@
 
 package android.permission.cts;
 
+import static android.permission.cts.CtsNotificationListenerServiceUtils
+        .isNotificationListenerSupported;
 import static android.permission.cts.PermissionUtils.clearAppState;
 import static android.permission.cts.PermissionUtils.install;
 import static android.permission.cts.PermissionUtils.uninstallApp;
@@ -24,6 +26,7 @@ import static android.permission.cts.TestUtils.eventually;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assume.assumeTrue;
 
 import android.app.ActivityOptions;
 import android.app.PendingIntent;
@@ -34,6 +37,7 @@ import android.service.notification.StatusBarNotification;
 
 import androidx.test.filters.FlakyTest;
 import androidx.test.filters.SdkSuppress;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.modules.utils.build.SdkLevel;
@@ -53,13 +57,17 @@ import org.junit.runner.RunWith;
 @ScreenRecordRule.ScreenRecord
 @FlakyTest
 public class NotificationListenerCheckTest extends BaseNotificationListenerCheckTest {
-
     public final ScreenRecordRule mScreenRecordRule = new ScreenRecordRule(false, false);
+
+    private boolean mNotificationListenerSupported = isNotificationListenerSupported(
+            InstrumentationRegistry.getInstrumentation().getTargetContext());
 
     @Before
     public void setup() throws Throwable {
         // Skip tests if safety center not allowed
         assumeDeviceSupportsSafetyCenter();
+        // Skip tests if NotificationListener not available
+        assumeTrue("Test requires using NotificationListener" , mNotificationListenerSupported);
 
         wakeUpAndDismissKeyguard();
         resetPermissionControllerBeforeEachTest();
@@ -80,8 +88,9 @@ public class NotificationListenerCheckTest extends BaseNotificationListenerCheck
         // Disallow and uninstall the app with NLS for testing
         disallowTestAppNotificationListenerService();
         uninstallApp(TEST_APP_PKG);
-
-        clearNotifications();
+        if (mNotificationListenerSupported) {
+            clearNotifications();
+        }
     }
 
     @Test

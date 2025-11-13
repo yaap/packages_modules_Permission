@@ -202,6 +202,8 @@
           -->
         <permissions>
             <permission name="android.permission.PROVIDE_OWN_AUTOFILL_SUGGESTIONS" minSdkVersion="34" />
+            <permission name="android.permission.REPOSITION_SELF_WINDOWS"
+                featureFlag="com.android.window.flags.Flags.enableWindowRepositioningApi" />
         </permissions>
     </role>
 
@@ -1378,8 +1380,33 @@
                 featureFlag="android.permission.flags.Flags.supervisionRolePermissionUpdateEnabled"/>
             <permission name="android.permission.MANAGE_PROFILE_AND_DEVICE_OWNERS"
                 featureFlag="android.permission.flags.Flags.supervisionRolePermissionUpdateEnabled"/>
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_CAMERA"
+                featureFlag="android.app.admin.flags.Flags.setApplicationRestrictionsCoexistence"/>
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_PROFILES"
+                featureFlag="android.app.admin.flags.Flags.setApplicationRestrictionsCoexistence"/>
         </permissions>
     </role>
+
+    <role
+        name="android.app.role.SUPERVISION"
+        behavior="v36r1.SupervisionRoleBehavior"
+        exclusive="false"
+        exclusivity="none"
+        featureFlag="android.permission.flags.Flags.supervisionRoleEnabled"
+        minSdkVersion="36"
+        systemOnly="true"
+        visible="false" >
+        <required-components>
+            <service permission="android.permission.BIND_SUPERVISION_APP_SERVICE">
+                <intent-filter>
+                    <action name="android.app.action.SUPERVISION_APP_SERVICE" />
+                </intent-filter>
+            </service>
+        </required-components>
+        <permissions>
+        </permissions>
+    </role>
+
 
     <!---
       ~ A role for the package responsible for constructing managed device experiences,

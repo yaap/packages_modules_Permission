@@ -115,7 +115,6 @@ import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.model.AppPermissionGroup;
 import com.android.permissioncontroller.permission.model.livedatatypes.LightAppPermGroup;
 import com.android.permissioncontroller.permission.model.livedatatypes.LightPackageInfo;
-import com.android.settingslib.widget.SettingsThemeHelper;
 
 import kotlin.Triple;
 
@@ -900,7 +899,7 @@ public final class Utils {
      * when the platform is T+, and the package has legacy storage access (i.e., either the package
      * has a targetSdk less than Q, or has a targetSdk equal to Q and has OPSTR_LEGACY_STORAGE).
      *
-     * TODO jaysullivan: This is always calling AppOpsManager; not taking advantage of LiveData
+     * NOTE: This is always calling AppOpsManager; not taking advantage of LiveData
      *
      * @param pkg The package to check
      */
@@ -1067,14 +1066,6 @@ public final class Utils {
         } finally {
             Binder.restoreCallingIdentity(token);
         }
-    }
-
-    /**
-     * Whether Expressive Design is enabled on this device.
-     */
-    public static boolean isExpressiveDesignEnabled(@NonNull Context context) {
-        return SdkLevel.isAtLeastB() && DeviceUtils.isHandheld()
-                && SettingsThemeHelper.isExpressiveTheme(context);
     }
 
     /**

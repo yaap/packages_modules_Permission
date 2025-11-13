@@ -22,7 +22,7 @@
     <string name="privacy_sources_summary" msgid="4083646673569677049">"Autorisations, tableau de bord, commandes"</string>
     <string name="health_connect_title" msgid="8318152190040327804">"Connexion santé"</string>
     <string name="health_connect_search_terms" msgid="4998970586245680829">"Santé, Connexion Santé"</string>
-    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Mises à jour des pratiques de partage des données pour la localisation"</string>
+    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Mises à jour du partage des données pour la localisation"</string>
     <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"Données, Partage des données, Mises à jour du partage des données, Mises à jour du partage des données pour la localisation, partage"</string>
     <string name="advanced_title" msgid="6259362998269627310">"Autres paramètres"</string>
     <string name="more_settings_title" msgid="9033454654010697185">"Plus de sécurité et de confidentialité"</string>

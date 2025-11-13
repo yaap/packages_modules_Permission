@@ -22,8 +22,8 @@
     <string name="privacy_sources_summary" msgid="4083646673569677049">"Permisos, panel, controles"</string>
     <string name="health_connect_title" msgid="8318152190040327804">"Health Connect"</string>
     <string name="health_connect_search_terms" msgid="4998970586245680829">"Health, Health Connect"</string>
-    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Actualizaciones del uso compartido de los datos de ubicación"</string>
-    <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"datos, uso compartido de los datos, actualizaciones del uso compartido de los datos, actualizaciones del uso compartido de los datos de ubicación, uso compartido"</string>
+    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Actualizaciones de los datos compartidos de ubicación"</string>
+    <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"datos, datos compartidos, actualizaciones de los datos compartidos, actualizaciones de los datos compartidos de ubicación, uso compartido"</string>
     <string name="advanced_title" msgid="6259362998269627310">"Otras opciones"</string>
     <string name="more_settings_title" msgid="9033454654010697185">"Mayor seguridad y privacidad"</string>
     <string name="more_settings_summary" msgid="7086620830002515710">"Autocompletar, notificaciones y más"</string>

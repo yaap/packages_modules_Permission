@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Sjálfgefið hjálparaforrit"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Forrit stafræns hjálpara"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Aðstoðarforrit geta notað upplýsingar á skjánum til að hjálpa þér. Sum forrit styðja bæði ræsiforrit og raddinntak til að geta veitt þér heildstæða aðstoð."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> mælti með"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Sjálfgefið vafraforrit"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Vafraforrit"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Forrit sem veita þér aðgang að netinu og birta tengla sem þú ýtir á"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Opnun tengla"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Sjálfgefið fyrir vinnu"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Sjálfgefið fyrir leynirými"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Fínstillt fyrir tæki"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Annað"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ekkert"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sjálfgildi kerfis)"</string>

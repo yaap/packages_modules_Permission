@@ -13,6 +13,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--
+  ~ The overall layout is identical to enhanced_confirmation_dialog_expressive.xml. The difference
+  ~ is in the style/theme used. Consider updating all the files when making changes.
+  -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/enhanced_confirmation_dialog"

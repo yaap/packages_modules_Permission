@@ -914,6 +914,12 @@
                 android:protectionLevel="signature|privileged"
                 android:featureFlag="android.provider.user_keys" />
 
+    <!-- This permission protects a content provider within home/launcher applications, enabling management of home screen metadata such as shortcut placement, launch intents, and labels. -->
+    <!-- @FlaggedApi(android.provider.Flags.FLAG_LAUNCHER_DATA_ACCESS) -->
+    <permission android:name="android.permission.LAUNCHER_DATA_ACCESS"
+      android:protectionLevel="signatureOrSystem"
+      android:featureFlag="android.provider.launcher_data_access" />
+
     <!-- Allows an application to set default account for new contacts.
         <p>This permission is only granted to system applications fulfilling the Contacts app role.
         <p>Protection level: internal|role
@@ -1878,6 +1884,15 @@
         android:description="@string/permdesc_bodySensors_background"
         android:protectionLevel="dangerous"
         android:permissionFlags="hardRestricted" />
+
+   <!-- Allows an app to access moisture intrusion sensor data
+        <p>Protection level: normal
+         @hide
+    -->
+    <permission android:name="android.permission.READ_MOISTURE_INTRUSION"
+                android:permissionGroup="android.permission-group.SENSORS"
+                android:protectionLevel="normal"
+                android:featureFlag="com.android.tradeinmode.flags.trade_in_mode_2025q4"/>
 
     <!-- Allows an app to use fingerprint hardware.
          <p>Protection level: normal
@@ -4343,6 +4358,13 @@
     <permission android:name="android.permission.EMBED_ANY_APP_IN_UNTRUSTED_MODE"
                 android:protectionLevel="internal|role" />
 
+    <!-- Allows an application to make requests to WM Shell for actions or
+         configurations related to select multitasking features like Bubbles.
+         @hide -->
+    <permission android:name="android.permission.REQUEST_SYSTEM_MULTITASKING_CONTROLS"
+                android:protectionLevel="signature|privileged"
+                android:featureFlag="com.android.window.flags.enable_experimental_bubbles_controller" />
+
     <!-- Allows an application to start any activity, regardless of permission
          protection or exported state.
          @hide -->
@@ -4463,7 +4485,22 @@
 
          <p>Not for use by third-party applications. -->
     <permission android:name="android.permission.SYSTEM_APPLICATION_OVERLAY"
-                android:protectionLevel="signature|recents|role|installer"/>
+        android:protectionLevel="signature|recents|role|installer|appop"
+        android:featureFlag="com.android.media.projection.flags.recording_overlay" />
+
+    <!-- @SystemApi @hide Allows an application to create windows using the type
+         {@link android.view.WindowManager.LayoutParams#TYPE_APPLICATION_OVERLAY},
+         shown on top of all other apps.
+
+         Allows an application to use
+         {@link android.view.WindowManager.LayoutsParams#setSystemApplicationOverlay(boolean)}
+         to create overlays that will stay visible, even if another window is requesting overlays to
+         be hidden through {@link android.view.Window#setHideOverlayWindows(boolean)}.
+
+         <p>Not for use by third-party applications. -->
+    <permission android:name="android.permission.SYSTEM_APPLICATION_OVERLAY"
+        android:protectionLevel="signature|recents|role|installer"
+        android:featureFlag="!com.android.media.projection.flags.recording_overlay" />
 
     <!-- @deprecated Use {@link android.Manifest.permission#REQUEST_COMPANION_RUN_IN_BACKGROUND}
          @hide
@@ -5179,6 +5216,14 @@
     Log entries can contain the user's private information. -->
     <permission android:name="android.permission.READ_LOGS"
         android:protectionLevel="signature|privileged|development" />
+
+    <!-- @FlaggedApi("com.android.update_engine.minor_changes_2025q4")
+    Allows an application to read the low-level update engine log files.
+    <p>Not for use by third-party applications, because
+    Log entries can contain the user's private information. -->
+    <permission android:name="android.permission.READ_UPDATE_ENGINE_LOGS"
+        android:protectionLevel="signature|privileged|development"
+        android:featureFlag="com.android.update_engine.minor_changes_2025q4" />
 
     <!-- Configure an application for debugging.
     <p>Not for use by third-party applications. -->
@@ -6513,6 +6558,16 @@
     <permission android:name="android.permission.REQUEST_OBSERVE_DEVICE_UUID_PRESENCE"
                 android:protectionLevel="signature|privileged" />
 
+    <!-- Allow applications to access other companion apps' association and device presence info.
+         <p>Not for use by third-party applications.
+         @FlaggedApi(android.companion.Flags.FLAG_ASSOCIATION_VERIFICATION)
+         @SystemApi
+         @hide
+    -->
+    <permission android:name="android.permission.ACCESS_COMPANION_INFO"
+        android:featureFlag="android.companion.association_verification"
+        android:protectionLevel="signature|privileged" />
+
     <!-- Allows an application to deliver companion messages to system
          -->
     <permission android:name="android.permission.DELIVER_COMPANION_MESSAGES"
@@ -7387,6 +7442,14 @@
     <permission android:name="android.permission.ACCESS_KEYGUARD_SECURE_STORAGE"
         android:protectionLevel="signature|setup" />
 
+    <!-- @hide @SystemApi Allows an application running a foreground service to hide the
+   notification icon from the status bar.
+   <p>Not for use by third-party applications.
+   @FlaggedApi(android.app.Flags.FLAG_HIDE_STATUS_BAR_NOTIFICATION)-->
+    <permission android:name="android.permission.HIDE_STATUS_BAR_NOTIFICATION"
+        android:protectionLevel="signature|privileged"
+        android:featureFlag="android.app.hide_status_bar_notification"/>
+
     <!-- Allows applications to set the initial lockscreen state.
          <p>Not for use by third-party applications. @hide -->
     <permission android:name="android.permission.SET_INITIAL_LOCK"
@@ -8163,6 +8226,18 @@
                 android:description="@string/permdesc_fullScreenIntent"
                 android:protectionLevel="normal|appop" />
 
+    <!-- Required for apps to post promoted notifications.
+         <p>This is required in addition to (not instead of)
+         {@link android.app.Manifest.permission#POST_NOTIFICATIONS}.
+         <p>Protection level: normal|appops
+         @FlaggedApi(android.app.Flags.FLAG_API_RICH_ONGOING_PERMISSION)
+         -->
+    <permission android:name="android.permission.POST_PROMOTED_NOTIFICATIONS"
+        android:label="@string/permlab_postPromotedNotifications"
+        android:description="@string/permdesc_postPromotedNotifications"
+        android:protectionLevel="normal|appop"
+        android:featureFlag="android.app.ui_rich_ongoing"/>
+
     <!-- @SystemApi Required for the privileged assistant apps targeting
          {@link android.os.Build.VERSION_CODES#VANILLA_ICE_CREAM}
          that receive voice trigger from a sandboxed {@link HotwordDetectionService}.
@@ -8477,6 +8552,15 @@
     <permission android:name="android.permission.READ_HOME_APP_SEARCH_DATA"
         android:protectionLevel="internal|role" />
 
+    <!-- Must be required by an {@link com.android.server.appsearch.isolated_storage_service.IsolatedStorageService}
+         to ensure that only the system can bind to it.
+         <p>Protection level: signature
+         @hide
+    -->
+    <permission android:name="android.permission.BIND_APP_SEARCH_ISOLATED_STORAGE_SERVICE"
+        android:protectionLevel="signature"
+        android:featureFlag= "com.android.appsearch.flags.enable_isolated_storage" />
+
     <!-- Allows an assistive application to perform actions on behalf of users inside of
          applications.
          <p>For now, this permission is only granted to the Assistant application selected by
@@ -8497,11 +8581,21 @@
     <!-- Allows an application to perform actions on behalf of users inside of
          applications.
          <p>This permission is currently only granted to privileged system apps.
-         <p>Protection level: internal|privileged
-         @FlaggedApi(android.app.appfunctions.flags.Flags.FLAG_ENABLE_APP_FUNCTION_MANAGER)  -->
+         <p>Protection level: internal|privileged -->
     <permission android:name="android.permission.EXECUTE_APP_FUNCTIONS"
-        android:featureFlag="android.app.appfunctions.flags.enable_app_function_manager"
+        android:featureFlag="!android.permission.flags.app_function_access_api_enabled"
         android:protectionLevel="internal|privileged" />
+
+    <!-- Allows an application to perform actions on behalf of users inside of
+     applications.
+     <p>To execute a function in another app, an application must first hold the
+        android.permission.EXECUTE_APP_FUNCTIONS permission. In addition, the application must be
+        on a device allowlist, and its ability to execute functions is subject to user approval or
+        disapproval.
+     <p>Protection level: normal -->
+    <permission android:name="android.permission.EXECUTE_APP_FUNCTIONS"
+        android:featureFlag="android.permission.flags.app_function_access_api_enabled"
+        android:protectionLevel="normal" />
 
     <!-- Allows an application to display its suggestions using the autofill framework.
          <p>For now, this permission is only granted to the Browser application.
@@ -8514,6 +8608,13 @@
          @hide -->
     <permission android:name="android.permission.CREATE_VIRTUAL_DEVICE"
                 android:protectionLevel="internal|role" />
+
+    <!-- Allows an application access to computer control features.
+     @hide -->
+    <permission android:name="android.permission.ACCESS_COMPUTER_CONTROL"
+        android:protectionLevel="internal|knownSigner"
+        android:knownCerts="@array/config_accessComputerControlKnownSigners"
+        android:featureFlag="android.companion.virtualdevice.flags.computer_control_access"/>
 
     <!-- @SystemApi Must be required by a safety source to send an update using the
              {@link android.safetycenter.SafetyCenterManager}.
@@ -8630,7 +8731,15 @@
          @hide -->
     <permission android:name="android.permission.MANAGE_KEY_GESTURES"
                 android:protectionLevel="signature"
-                android:featureFlag="com.android.hardware.input.manage_key_gestures" />
+                android:featureFlag="!com.android.window.flags.grant_manage_key_gestures_to_recents" />
+
+    <!-- Allows low-level access to manage key gestures.
+         <p>Not for use by third-party applications.
+         @hide -->
+    <permission android:name="android.permission.MANAGE_KEY_GESTURES"
+                android:protectionLevel="signature|recents"
+                android:featureFlag="com.android.window.flags.grant_manage_key_gestures_to_recents" />
+
 
     <!-- Allows applications to register listeners for key activeness through
          InputManagerService.
@@ -8648,6 +8757,17 @@
     -->
     <permission android:name="android.permission.MANAGE_DEVICE_LOCK_STATE"
                 android:protectionLevel="internal|role" />
+
+    <!-- Allows an app to get the device lock enrollment type.
+        <p>This permission is only granted to system applications.
+        <p>Protection level: signature|privileged
+        @SystemApi
+        @FlaggedApi(com.android.devicelock.flags.Flags.FLAG_GET_ENROLLMENT_TYPE)
+        @hide
+    -->
+    <permission android:name="android.permission.GET_DEVICE_LOCK_ENROLLMENT_TYPE"
+        android:protectionLevel="signature|privileged"
+        android:featureFlag="com.android.devicelock.flags.get_enrollment_type" />
 
     <!-- @SystemApi Required by a WearableSensingService to
           ensure that only the caller with this permission can bind to it.
@@ -9003,6 +9123,38 @@
     <permission android:name="android.permission.ACCESS_TEXT_CLASSIFIER_BY_TYPE"
         android:protectionLevel="signature|role|privileged"
         android:featureFlag="android.permission.flags.text_classifier_choice_api_enabled"/>
+
+    <!--
+        @SystemApi
+        @FlaggedApi(android.permission.flags.Flags.FLAG_SUPERVISION_ROLE_ENABLED)
+        Must be required by a {@link android.app.supervision.SupervisionAppService},
+        to ensure that only the system can bind to it.
+        <p>Protection level: signature
+        @hide
+    -->
+    <permission android:name="android.permission.BIND_SUPERVISION_APP_SERVICE"
+        android:protectionLevel="signature"
+        android:featureFlag="android.permission.flags.supervision_role_enabled" />
+
+    <!-- @SystemApi
+        @FlaggedApi(android.permission.flags.Flags.FLAG_APP_FUNCTION_ACCESS_API_ENABLED)
+        This permission is required to set the access state flags on an agent, to access
+        AppFunctions of other apps.
+        <p> Protection level: signature|installer
+        @hide
+    -->
+    <permission android:name="android.permission.MANAGE_APP_FUNCTION_ACCESS"
+        android:protectionLevel="signature|installer"
+        android:featureFlag="android.permission.flags.app_function_access_api_enabled"/>
+
+    <!-- Allows an application to programmatically move and resize its tasks when the system is in
+        a state that allows such operations, e.g. in a desktop-like environment. It is only
+        extended to the {@link android.app.role.RoleManager#ROLE_BROWSER default browser}.
+        <p>Protection level: internal|role
+        @FlaggedApi(com.android.window.flags.Flags.FLAG_ENABLE_WINDOW_REPOSITIONING_API) -->
+    <permission android:name="android.permission.REPOSITION_SELF_WINDOWS"
+        android:protectionLevel="internal|role"
+        android:featureFlag="com.android.window.flags.enable_window_repositioning_api" />
 
     <!-- Attribution for Geofencing service. -->
     <attribution android:tag="GeofencingService" android:label="@string/geofencing_service"/>

@@ -22,4 +22,12 @@
     <bool name="is_at_least_v">false</bool>
     <bool name="config_usePreferenceForAppPermissionSettings">false</bool>
     <bool name="config_appPermissionFooterLinkPreferenceSummaryUnderlined">false</bool>
+    <bool name="config_enableExpressiveDesignInPermissionSettings">true</bool>
+    <!-- config for opting out of expressive permission dialogs -->
+    <bool name="config_enableExpressiveDesignInRequestPermissionDialog">true</bool>
+    <!-- config for opting out of expressive enhanced confirmation dialogs -->
+    <bool name="config_enableExpressiveDesignInEnhancedConfirmationDialog">true</bool>
+    <!-- config for opting out of expressive Safety Center. This has no effect currently
+    but may be enabled in a subsequent release -->
+    <bool name="config_enableExpressiveDesignInSafetyCenter">false</bool>
 </resources>

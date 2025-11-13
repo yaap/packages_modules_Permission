@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Default digital assistant app"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digital assistant app"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Assist apps can help you based on information from the screen that you’re viewing. Some apps support both Launcher and voice input services to give you integrated assistance."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recommended by <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Default browser app"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Browser app"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps that give you access to the Internet and display links that you tap"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Opening links"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Default for work"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Default for private space"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimised for device"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Others"</string>
     <string name="default_app_none" msgid="9084592086808194457">"None"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(System default)"</string>

@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Zadani digitalni asistent"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplikacija digitalnog asistenta"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Aplikacije za pomoć vam mogu pomoći na osnovu informacija s ekrana koji pregledate. Neke aplikacije podržavaju i usluge pokretača i glasovnog unosa kako bi vam pružile integriranu pomoć."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Preporučuje <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Zadana aplikacija preglednika"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplikacija preglednika"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplikacije koje vam pružaju pristup internetu i prikazuju linkove koje možete dodirnuti"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otvaranje linkova"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Uobičajeno za rad"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Zadano za privatni prostor"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizirano za uređaj"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Drugo"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nema"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sistemski zadano)"</string>

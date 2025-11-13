@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ডিফ’ল্ট ডিজিটেল সহায়ক এপ্‌"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ডিজিটেল সহায়ক এপ্‌"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"আপুনি চাই থকা স্ক্ৰীনৰ তথ্যৰ ভিত্তিত সহায়ক এপে আপোনাক সহায় কৰিব পাৰে। কিছুমান এপে লঞ্চাৰ আৰু ধ্বনি ইনপুট দুয়োটা সেৱাই আগবঢ়াব পাৰে যাৰ দ্বাৰা আপুনি একীকৃত সহায় লাভ কৰিব পাৰে।"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g>এ চুপাৰিছ কৰা"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ডিফ’ল্ট ব্ৰাউজাৰ এপ্"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ব্ৰাউজাৰ এপ্"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"যিবোৰ এপে আপোনাক ইণ্টাৰনেট আৰু আপুনি টিপা ডিছপ্লে’ লিংকৰ এক্সেছ দিয়ে"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"লিংকসমূহ খুলি থকা হৈছে"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"কৰ্মস্থানৰ বাবে ডিফ’ল্ট"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"প্ৰাইভেট স্পে’চৰ বাবে ডিফ’ল্ট"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ডিভাইচৰ বাবে অপ্টিমাইজ কৰা হৈছে"</string>
     <string name="default_app_others" msgid="7793029848126079876">"অন্য"</string>
     <string name="default_app_none" msgid="9084592086808194457">"নাই"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ছিষ্টেম ডিফ\'ল্ট)"</string>
@@ -679,7 +679,7 @@
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"প্ৰতিবন্ধিত ছেটিং"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"আপোনাৰ সুৰক্ষাৰ বাবে, এই ছেটিংটো বৰ্তমান উপলব্ধ নহয়।"</string>
     <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"কলৰ সময়ত কাৰ্য সম্পূৰ্ণ কৰিব নোৱাৰি"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"আপোনাৰ ডিভাইচ আৰু ডেটা সুৰক্ষিত কৰিবলৈ এই ছেটিংটো অৱৰোধ কৰা হৈছে।<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"আপোনাৰ ডিভাইচ আৰু ডেটা সুৰক্ষিত কৰিবলৈ এই ছেটিং অৱৰোধ কৰা হৈছে।<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>স্কেমাৰসকলে আপোনাক এটা নতুন উৎসৰ পৰা অজ্ঞাত এপ্‌সমূহ ইনষ্টল কৰিবলৈ কৈ ক্ষতিকাৰক এপ্‌সমূহ ইনষ্টল কৰিবলৈ চেষ্টা কৰিব পাৰে।"</string>

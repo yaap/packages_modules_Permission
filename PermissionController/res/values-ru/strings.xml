@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Цифровой помощник по умолчанию"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Цифровой помощник"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Приложения-помощники могут использовать информацию на экране. Для большего удобства некоторые из них поддерживают запуск других приложений и голосовой ввод."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Рекомендовано компанией \"<xliff:g id="OEM_NAME">%s</xliff:g>\""</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Браузер по умолчанию"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Браузер"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Приложения, с помощью которых можно просматривать сайты и переходить по ссылкам."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Переход по ссылкам"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Стандартные для работы"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Приложения по умолчанию для личного пространства"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Оптимизированные для устройства"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Прочие"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Нет"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(по умолчанию)"</string>
@@ -576,7 +576,7 @@
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"Сканировать устройство"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"Закрыть"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"Закрыть оповещение?"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"Проверить и изменить настройки конфиденциальности и безопасности можно в любое время."</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"Проверить и изменить настройки защиты и безопасности можно в любое время."</string>
     <string name="safety_center_issue_card_confirm_dismiss_button" msgid="5884137843083634556">"Закрыть"</string>
     <string name="safety_center_issue_card_cancel_dismiss_button" msgid="2874578798877712346">"Отмена"</string>
     <string name="safety_center_entries_category_title" msgid="34356964062813115">"Настройки"</string>

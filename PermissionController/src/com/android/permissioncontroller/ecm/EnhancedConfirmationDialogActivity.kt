@@ -49,10 +49,13 @@ import com.android.permissioncontroller.permission.utils.KotlinUtils
 import com.android.permissioncontroller.permission.utils.PermissionMapping
 import com.android.permissioncontroller.permission.utils.Utils
 import com.android.role.controller.model.Roles
+import com.android.settingslib.widget.ExpressiveDesignEnabledProvider
+import com.android.settingslib.widget.SettingsThemeHelper
+import com.android.settingslib.widget.theme.flags.Flags as SettingsLibFlags
 
 @Keep
 @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
-class EnhancedConfirmationDialogActivity : FragmentActivity() {
+class EnhancedConfirmationDialogActivity : FragmentActivity(), ExpressiveDesignEnabledProvider {
     companion object {
         private const val KEY_WAS_CLEAR_RESTRICTION_ALLOWED = "KEY_WAS_CLEAR_RESTRICTION_ALLOWED"
         private const val REASON_PHONE_STATE = "phone_state"
@@ -94,6 +97,12 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
         ) {
             finish()
             return
+        }
+
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            setTheme(R.style.Theme_EnhancedConfirmationDialogActivityExpressive_FilterTouches)
+        } else {
+            setTheme(R.style.Theme_EnhancedConfirmationDialog_FilterTouches)
         }
 
         if (DeviceUtils.isWear(this)) {
@@ -248,6 +257,14 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
         }
     }
 
+    override fun isExpressiveDesignEnabled(): Boolean {
+        return SdkLevel.isAtLeastB() &&
+            DeviceUtils.isHandheld() &&
+            SettingsLibFlags.isExpressiveDesignEnabled() &&
+            getResources()
+                .getBoolean(R.bool.config_enableExpressiveDesignInEnhancedConfirmationDialog)
+    }
+
     class EnhancedConfirmationDialogFragment() : DialogFragment() {
         companion object {
             val TAG = EnhancedConfirmationDialogFragment::class.simpleName
@@ -295,7 +312,14 @@ class EnhancedConfirmationDialogActivity : FragmentActivity() {
             message: CharSequence?,
         ): View =
             LayoutInflater.from(context)
-                .inflate(R.layout.enhanced_confirmation_dialog, null)
+                .inflate(
+                    if (SettingsThemeHelper.isExpressiveTheme(dialogActivity)) {
+                        R.layout.enhanced_confirmation_dialog_expressive
+                    } else {
+                        R.layout.enhanced_confirmation_dialog
+                    },
+                    null,
+                )
                 .apply {
                     title?.let {
                         requireViewById<TextView>(R.id.enhanced_confirmation_dialog_title).text = it

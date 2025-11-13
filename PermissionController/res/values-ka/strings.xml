@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ნაგულისხმ. ციფრული ასისტ. აპი"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ციფრული ასისტენტის აპი"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"დახმარების აპებს შეუძლიათ დაგეხმარონ იმ ეკრანიდან მიღებულ ინფორმაციაზე დაყრდნობით, რომელსაც ათვალიერებთ. ზოგიერთი აპის მიერ მხარდაჭერილია როგორც გამშვები, ისე ხმოვანი შეყვანის სერვისები, თქვენთვის კომპლექსური დახმარების გასაწევად."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g>-ის მიერ რეკომენდებული"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ნაგულისხმევი ბრაუზერის აპი"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ბრაუზერის აპი"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"აპები, რომლებიც გაძლევენ წვდომას ინტერნეტზე და გაჩვენებენ ბმულებს, რომლებსაც ეხებით"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"ბმულების გახსნა"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"ნაგულისხმევი სამსახურისთვის"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"კერძო სივრცისთვის ნაგულისხმევი აპები"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ოპტიმიზებულია მოწყობილობისთვის"</string>
     <string name="default_app_others" msgid="7793029848126079876">"სხვა"</string>
     <string name="default_app_none" msgid="9084592086808194457">"არცერთი"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(სისტემის ნაგულისხმევი)"</string>

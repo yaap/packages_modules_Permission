@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="lock_screen_sources_title" msgid="5493678510117489865">"పరికర అన్‌లాక్"</string>
+    <string name="lock_screen_sources_title" msgid="5493678510117489865">"డివైజ్ అన్‌లాక్"</string>
     <string name="biometrics_title_for_work" msgid="1842284049407771568">"వర్క్ యాప్‌ల కోసం బయోమెట్రిక్స్"</string>
     <string name="privacy_sources_summary" msgid="4083646673569677049">"అనుమతులు, డ్యాష్‌బోర్డ్, కంట్రోల్స్"</string>
     <string name="health_connect_title" msgid="8318152190040327804">"Health Connect"</string>

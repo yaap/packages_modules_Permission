@@ -16,9 +16,12 @@
 
 package android.permission.cts
 
+import android.content.Context
 import android.permission.cts.TestUtils.ensure
 import android.permission.cts.TestUtils.eventually
 import android.service.notification.StatusBarNotification
+import com.android.compatibility.common.util.UserHelper
+import com.android.server.notification.Flags.managedServicesConcurrentMultiuser
 import org.junit.Assert
 
 object CtsNotificationListenerServiceUtils {
@@ -123,5 +126,19 @@ object CtsNotificationListenerServiceUtils {
             }
         }
         return null
+    }
+
+    /**
+     * Returns a boolean value indicating whether the device supports NotificationListener.
+     *
+     * @param context the {@link Context}
+     * @return A boolean value indicating whether the device supports NotificationListener.
+     *         It's true if not a visible background user.
+     *         For a visible background user, It's true when the flag is true.
+     */
+    @JvmStatic
+    fun isNotificationListenerSupported(context: Context): Boolean {
+        return !UserHelper(context).isVisibleBackgroundUser() ||
+                managedServicesConcurrentMultiuser()
     }
 }

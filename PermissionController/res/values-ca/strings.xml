@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Assistent digital predeterminat"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplicació d\'assistent digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Les aplicacions d\'assistència et poden ajudar en funció de la informació que es mostri a la pantalla. Algunes aplicacions admeten tant el menú d\'aplicacions com els serveis d\'entrada de veu per oferir-te una assistència integrada."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomanació de: <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Aplicació de navegador predeterminada"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplicació de navegador"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplicacions que et donen accés a Internet i que mostren els enllaços que toques"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Obertura d\'enllaços"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predeterminada per a la feina"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predeterminades per a l\'espai privat"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimitzades per al dispositiu"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Altres"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Cap"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Opció predeterminada del sistema)"</string>
@@ -568,7 +568,7 @@
     <string name="automotive_blocked_camera_title" msgid="6142362431548829416">"L\'accés a Càmera està desactivat"</string>
     <string name="automotive_blocked_microphone_title" msgid="3956311098238620220">"L\'accés al micròfon està desactivat"</string>
     <string name="automotive_blocked_location_title" msgid="6047574747593264689">"L\'accés a la ubicació està desactivat"</string>
-    <string name="automotive_blocked_infotainment_app_summary" msgid="8217099645064950860">"Per a les aplicacions d\'informació i entreteniment"</string>
+    <string name="automotive_blocked_infotainment_app_summary" msgid="8217099645064950860">"Per a les aplicacions d\'infoentreteniment"</string>
     <string name="automotive_blocked_required_app_summary" msgid="8591513745681168088">"Per a les aplicacions requerides"</string>
     <string name="automotive_required_app_title" msgid="2992168288249988735">"Es requereix aquesta aplicació"</string>
     <string name="automotive_required_app_summary" msgid="6514902316658090465">"El fabricant del cotxe requereix aquesta aplicació"</string>

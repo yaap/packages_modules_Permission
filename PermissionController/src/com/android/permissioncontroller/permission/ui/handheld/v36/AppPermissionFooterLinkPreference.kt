@@ -26,9 +26,10 @@ import androidx.annotation.StyleRes
 import androidx.preference.PreferenceViewHolder
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.handheld.PermissionPreference
+import com.android.settingslib.widget.GroupSectionDividerMixin
 
 @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
-class AppPermissionFooterLinkPreference : PermissionPreference {
+class AppPermissionFooterLinkPreference : PermissionPreference, GroupSectionDividerMixin {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)

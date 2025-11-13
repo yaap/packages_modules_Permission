@@ -17,6 +17,9 @@
 package com.android.permissioncontroller.permission.ui.handheld;
 
 import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
+import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_MANAGER_PAGE_INTERACTION;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__ADDITIONAL_PERMISSION_GROUP_CLICKED;
 import static com.android.permissioncontroller.permission.ui.handheld.UtilsKt.pressBack;
 
 import android.os.Bundle;
@@ -25,6 +28,7 @@ import android.view.MenuItem;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.permission.flags.Flags;
+import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesUiInfoLiveData;
 import com.android.permissioncontroller.permission.ui.model.ManageCustomPermissionsViewModel;
 import com.android.permissioncontroller.permission.ui.model.ManageCustomPermissionsViewModelFactory;
@@ -37,7 +41,7 @@ import java.util.HashMap;
 public class ManageCustomPermissionsFragment extends ManagePermissionsFragment {
 
     private ManageCustomPermissionsViewModel mViewModel;
-
+    private long mSessionId;
     /**
      * Create a bundle with the arguments needed by this fragment
      *
@@ -61,7 +65,7 @@ public class ManageCustomPermissionsFragment extends ManagePermissionsFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        mSessionId = getArguments().getLong(EXTRA_SESSION_ID, INVALID_SESSION_ID);
         ManageCustomPermissionsViewModelFactory factory =
                 new ManageCustomPermissionsViewModelFactory(getActivity().getApplication());
         mViewModel = new ViewModelProvider(this, factory)
@@ -80,6 +84,12 @@ public class ManageCustomPermissionsFragment extends ManagePermissionsFragment {
 
     @Override
     public void showPermissionApps(String permissionGroupName) {
+        PermissionControllerStatsLog.write(
+                PERMISSION_MANAGER_PAGE_INTERACTION,
+                mSessionId,
+                PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__ADDITIONAL_PERMISSION_GROUP_CLICKED,
+                permissionGroupName
+        );
         mViewModel.showPermissionApps(this, PermissionAppsFragment.createArgs(
                 permissionGroupName, getArguments().getLong(EXTRA_SESSION_ID)));
     }

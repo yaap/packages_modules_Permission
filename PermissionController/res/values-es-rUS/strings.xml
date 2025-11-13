@@ -348,7 +348,7 @@
     <string name="no_apps_allowed" msgid="7718822655254468631">"No se le otorgó permiso a ninguna app"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Ninguna app tiene el permiso para todos los archivos"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Ninguna app tiene el permiso solo para contenido multimedia"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"No hay apps rechazadas"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"No se le rechazó el permiso a ninguna app"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Seleccionado"</string>
     <string name="settings" msgid="5409109923158713323">"Configuración"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"<xliff:g id="SERVICE_NAME">%s</xliff:g> tiene acceso completo a tu dispositivo"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"App de asistente digital predeterminada"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App de asistente digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Las aplicaciones de asistencia pueden brindarte ayuda en función de la pantalla que estás viendo. Para ofrecerte asistencia integrada, algunas aplicaciones son compatibles con los servicios de selector y entrada de voz."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomendadas por <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Navegador predeterminado"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"App de navegador"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps que te permiten acceder a Internet y ver los vínculos que presionas"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Abrir vínculos"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predeterminadas de trabajo"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Configuración predeterminada del espacio privado"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizadas para el dispositivo"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Otras"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ninguna"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predeterminada del sistema)"</string>
@@ -503,14 +503,14 @@
     <string name="permgrouprequest_storage_pre_q" msgid="168130651144569428">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a &lt;b&gt;fotos, videos, música, audio y otros archivos&lt;/b&gt; del dispositivo?"</string>
     <string name="permgrouprequest_read_media_aural" msgid="2593365397347577812">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a la música y los archivos de audio de este dispositivo?"</string>
     <string name="permgrouprequest_device_aware_read_media_aural" msgid="7927884506238101064">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a la música y al audio en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_read_media_visual" msgid="5548780620779729975">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a las fotos y los videos de este dispositivo?"</string>
+    <string name="permgrouprequest_read_media_visual" msgid="5548780620779729975">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a las fotos y los videos de este dispositivo?"</string>
     <string name="permgrouprequest_device_aware_read_media_visual" msgid="3122576538319059333">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a fotos y videos en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_more_photos" msgid="128933814654231321">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a más fotos y videos del dispositivo?"</string>
     <string name="permgrouprequest_device_aware_more_photos" msgid="1703469013613723053">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a más fotos y videos en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_microphone" msgid="2825208549114811299">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; grabe audio?"</string>
     <string name="permgrouprequest_device_aware_microphone" msgid="8821701550505437951">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; grabe audio en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_microphone" msgid="8510456971528228861">"La app solo podrá grabar audio cuando esté en uso"</string>
-    <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; grabe audio?"</string>
+    <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; grabe audio?"</string>
     <string name="permgroupbackgroundrequest_device_aware_microphone" msgid="3321823187623762958">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; grabe audio en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_microphone" msgid="553702902263681838">"Es posible que esta app quiera grabar audio todo el tiempo, incluso cuando no la estés usando. "<annotation id="link">"Permite el acceso en Configuración."</annotation></string>
     <string name="permgroupupgraderequest_microphone" msgid="1362781696161233341">"¿Cambiar el acceso al micrófono de &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
@@ -518,7 +518,7 @@
     <string name="permgroupupgraderequestdetail_microphone" msgid="2870497719571464239">"Esta app quiere grabar audio todo el tiempo, incluso cuando no la uses. "<annotation id="link">"Permite el acceso en Configuración."</annotation></string>
     <string name="permgrouprequest_activityRecognition" msgid="5415121592794230330">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a tu actividad física?"</string>
     <string name="permgrouprequest_device_aware_activityRecognition" msgid="1243869530588745374">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acceda a tu actividad física en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_camera" msgid="5123097035410002594">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; tome fotos y grabe videos?"</string>
+    <string name="permgrouprequest_camera" msgid="5123097035410002594">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; tome fotos y grabe videos?"</string>
     <string name="permgrouprequest_device_aware_camera" msgid="5340173564041615494">"¿Quieres permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; tome fotos y grabe videos en &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_camera" msgid="9085323239764667883">"La app solo podrá tomar fotos y grabar videos cuando esté en uso"</string>
     <string name="permgroupbackgroundrequest_camera" msgid="1274286575704213875">"¿Permitir que &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; tome fotos y grabe videos?"</string>
@@ -659,11 +659,11 @@
     <string name="app_permission_rationale_message" msgid="8511466916077100713">"Seguridad de los datos"</string>
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"Es posible que se compartan los datos de ubicación"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Esta app indicó que podría compartir tus datos de ubicación con terceros"</string>
-    <string name="data_sharing_updates_title" msgid="7996933386875213859">"Actualizaciones del uso compartido de los datos de ubicación"</string>
+    <string name="data_sharing_updates_title" msgid="7996933386875213859">"Actualizaciones de los datos compartidos de ubicación"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Revisa las apps que cambiaron la forma en que comparten tus datos de ubicación"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Estas apps cambiaron la forma en que podrían compartir tus datos de ubicación. Es posible que no los hayan compartido antes o que ahora los compartan con fines publicitarios o de marketing."</string>
-    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Los desarrolladores de estas apps brindaron información sobre sus prácticas de uso compartido de datos a una tienda de aplicaciones. Podrían actualizarla con el tiempo.\n\nLas prácticas de uso compartido de datos pueden variar según la versión de la app, el uso, la región y la edad."</string>
-    <string name="learn_about_data_sharing" msgid="4200480587079488045">"Más información sobre el uso compartido de datos"</string>
+    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Los desarrolladores de estas apps brindaron información a una tienda de aplicaciones sobre sus formas de compartir datos. Podrían actualizarla con el tiempo.\n\nLas formas de compartir datos pueden variar según la versión de la app, el uso, la región y la edad."</string>
+    <string name="learn_about_data_sharing" msgid="4200480587079488045">"Más información sobre cómo se comparten los datos"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"Tus datos de ubicación ahora se comparten con terceros"</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"Tus datos de ubicación ahora se comparten con terceros para publicidad o marketing"</string>
     <string name="updated_in_last_days" msgid="8371811947153042322">"{count,plural, =0{Se actualizó en el último día}=1{Se actualizó en el último día}many{Se actualizó hace # de días}other{Se actualizó hace # días}}"</string>

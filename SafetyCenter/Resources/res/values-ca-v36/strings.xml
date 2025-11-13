@@ -17,12 +17,14 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_function_access_settings_title" msgid="3894819108224606683">"Control de l\'agent d\'altres aplicacions"</string>
+    <string name="app_function_access_settings_summary" msgid="2719347800336419237">"Dur a terme accions al dispositiu i en altres aplicacions"</string>
     <string name="face_unlock_title" msgid="3991635517593572926">"Cara"</string>
-    <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Cara de la feina"</string>
+    <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Cara per al treball"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>
     <string name="face_unlock_search_terms" msgid="2708195853333028283">"Desbloqueig facial, cara"</string>
     <string name="fingerprint_unlock_title" msgid="5579868242026550596">"Empremta digital"</string>
-    <string name="fingerprint_unlock_title_for_work" msgid="6343690273672384918">"Empremta digital de la feina"</string>
+    <string name="fingerprint_unlock_title_for_work" msgid="6343690273672384918">"Empremta digital per al treball"</string>
     <string name="fingerprint_unlock_title_for_private_profile" msgid="9004513575240235691"></string>
     <string name="fingerprint_unlock_search_terms" msgid="688405183240088603">"Empremta digital, dit, afegir una empremta digital"</string>
     <string name="wear_unlock_title" msgid="1613730442896319515">"Rellotge"</string>

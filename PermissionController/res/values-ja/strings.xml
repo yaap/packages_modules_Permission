@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"デフォルトのデジタル アシスタント アプリ"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"デジタル アシスタント アプリ"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"アシストアプリは、表示している画面の情報に基づいてサポートを提供します。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたサポートを提供します。"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> がおすすめするアプリ"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"デフォルトのブラウザアプリ"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ブラウザアプリ"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"インターネットにアクセスするためのアプリです。タップしたリンクは、このアプリで開きます。"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"リンクを開く"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"デフォルトの仕事用アプリ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"プライベート スペースのデフォルト"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"デバイス向けに最適化"</string>
     <string name="default_app_others" msgid="7793029848126079876">"その他"</string>
     <string name="default_app_none" msgid="9084592086808194457">"なし"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"（システムのデフォルト）"</string>
@@ -507,7 +507,7 @@
     <string name="permgrouprequest_device_aware_read_media_visual" msgid="3122576538319059333">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;内の写真と動画へのアクセスを &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
     <string name="permgrouprequest_more_photos" msgid="128933814654231321">"このデバイス内の他の写真や動画へのアクセスを &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
     <string name="permgrouprequest_device_aware_more_photos" msgid="1703469013613723053">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;内のその他の写真や動画へのアクセスを &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
-    <string name="permgrouprequest_microphone" msgid="2825208549114811299">"音声の録音を「&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;」に許可しますか？"</string>
+    <string name="permgrouprequest_microphone" msgid="2825208549114811299">"音声の録音を &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
     <string name="permgrouprequest_device_aware_microphone" msgid="8821701550505437951">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;での録音を &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>
     <string name="permgrouprequestdetail_microphone" msgid="8510456971528228861">"アプリは、ユーザーがアプリを使用している場合のみ音声を録音できます"</string>
     <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"音声の録音を &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; に許可しますか？"</string>

@@ -29,10 +29,10 @@ import android.service.dreams.DreamService
 import android.service.notification.NotificationListenerService
 import android.service.voice.VoiceInteractionService
 import android.service.wallpaper.WallpaperService
+import android.util.Log
 import android.view.inputmethod.InputMethod
 import com.android.permissioncontroller.DumpableLog
 import com.android.permissioncontroller.PermissionControllerApplication
-import com.android.permissioncontroller.hibernation.DEBUG_HIBERNATION_POLICY
 import com.android.permissioncontroller.permission.utils.Utils.getUserContext
 import kotlinx.coroutines.Job
 
@@ -174,7 +174,7 @@ class ServiceLiveData(
                     }
                     val packageName = resolveInfo.serviceInfo?.packageName
                     if (!isServiceEnabled(packageName)) {
-                        if (DEBUG_HIBERNATION_POLICY) {
+                        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
                             DumpableLog.i(
                                 LOG_TAG,
                                 "Not exempting $packageName - not an active $name " +
@@ -186,7 +186,7 @@ class ServiceLiveData(
                     packageName
                 }
                 .toSet()
-        if (DEBUG_HIBERNATION_POLICY) {
+        if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(LOG_TAG, "Detected ${name}s: $packageNames")
         }
 

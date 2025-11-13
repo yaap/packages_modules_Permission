@@ -348,7 +348,7 @@
     <string name="no_apps_allowed" msgid="7718822655254468631">"Nessuna app autorizzata"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Nessuna app autorizzata per tutti i file"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Nessuna app autorizzata solo per i contenuti multimediali"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"A nessuna app è stata negata l\'autorizzazione"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"Nessuna app non autorizzata"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Selezionato"</string>
     <string name="settings" msgid="5409109923158713323">"Impostazioni"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"<xliff:g id="SERVICE_NAME">%s</xliff:g> ha accesso completo al tuo dispositivo"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"App assistente digitale predefinita"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App assistente digitale"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Le app di assistenza possono aiutarti in base alle informazioni visualizzate nella schermata attiva. Alcune app supportano sia Avvio app sia servizi di input vocale per offrirti assistenza integrata."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"App consigliate da <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"App browser predefinita"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"App browser"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"App che ti forniscono accesso a Internet e mostrano i link che tocchi."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Apertura link"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predefinite per il lavoro"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predefinite per lo spazio privato"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Ottimizzate per il dispositivo"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Altre"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nessuna"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predefinita)"</string>
@@ -539,7 +539,7 @@
     <string name="permgroupbackgroundrequestdetail_sensors" msgid="7726767635834043501">"Per consentire a questa app di accedere sempre ai dati dei sensori del corpo, anche quando non la usi, "<annotation id="link">"vai alle impostazioni"</annotation>"."</string>
     <string name="permgroupupgraderequest_sensors" msgid="7576527638411370468">"Continuare a consentire a &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di accedere ai dati dei sensori del corpo mentre l\'app è in uso?"</string>
     <string name="permgroupupgraderequest_device_aware_sensors" msgid="5542771499929819675">"Continuare a consentire a &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ad accedere ai dati dei sensori del corpo mentre è in uso su &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_notifications" msgid="6396739062335106181">"Consentire all\'app &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di inviarti notifiche?"</string>
+    <string name="permgrouprequest_notifications" msgid="6396739062335106181">"Consentire a &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di inviarti notifiche?"</string>
     <string name="permgrouprequest_device_aware_notifications" msgid="857671638951040514">"Consentire a &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; di inviarti notifiche su &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="auto_granted_permissions" msgid="6009452264824455892">"Autorizzazioni controllate"</string>
     <string name="auto_granted_location_permission_notification_title" msgid="7570818224669050377">"L\'app <xliff:g id="APP_NAME">%1$s</xliff:g> ha accesso alla posizione"</string>

@@ -39,7 +39,7 @@
     <string name="grant_dialog_button_allow_selected_photos" msgid="5497042471576153842">"انتخاب عکس و ویدیو"</string>
     <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"انتخاب موارد بیشتر"</string>
     <string name="grant_dialog_button_dont_select_more" msgid="6643552729129461268">"دیگر چیزی انتخاب نشود"</string>
-    <string name="grant_dialog_button_deny_anyway" msgid="7225905870668915151">"درهرصورت اجازه نیست"</string>
+    <string name="grant_dialog_button_deny_anyway" msgid="7225905870668915151">"به‌هرصورت اجازه ندادن"</string>
     <string name="grant_dialog_button_dismiss" msgid="1930399742250226393">"رد کردن"</string>
     <string name="current_permission_template" msgid="7452035392573329375">"<xliff:g id="CURRENT_PERMISSION_INDEX">%1$s</xliff:g> مجوز از <xliff:g id="PERMISSION_COUNT">%2$s</xliff:g> مجوز"</string>
     <string name="permission_warning_template" msgid="2247087781222679458">"‏به &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; این اجازه داده شود؟ <xliff:g id="ACTION">%2$s</xliff:g>"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"برنامه دستیار دیجیتال پیش‌فرض"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"برنامه دستیار دیجیتال"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"برنامه‌های همیار می‌توانند براساس اطلاعات موجود در صفحه‌ای که در آن هستید، کمکتان کنند. برخی برنامه‌ها از هر دو سرویس راه‌انداز و ورودی صوتی پشتیبانی می‌کنند تا کمک یکپارچه‌ای ارائه دهند."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"توصیه‌شده توسط <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"برنامه مرورگر پیش‌فرض"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"برنامه مرورگر"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"برنامه‌هایی که به شما دسترسی به اینترنت را می‌دهند و پیوندهایی را نشان می‌دهند که روی آن‌ها می‌زنید"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"باز کردن پیوندها"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"پیش‌فرض برای کار"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"برنامه‌های پیش‌فرض برای فضای خصوصی"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"بهینه‌سازی‌شده برای دستگاه"</string>
     <string name="default_app_others" msgid="7793029848126079876">"موارد دیگر"</string>
     <string name="default_app_none" msgid="9084592086808194457">"هیچ‌کدام"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(پیش‌فرض سیستم)"</string>
@@ -576,7 +576,7 @@
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"اسکن کردن دستگاه"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"رد کردن"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"این هشدار رد شود؟"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"هرزمان خواستید تنظیمات ایمنی و حریم خصوصی را بازنگری کنید تا محافظت بیشتری اضافه کنید"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"هرزمان خواستید تنظیمات ایمنی و حریم خصوصی را بازبینی کنید تا محافظت بیشتری اضافه کنید"</string>
     <string name="safety_center_issue_card_confirm_dismiss_button" msgid="5884137843083634556">"رد شدن"</string>
     <string name="safety_center_issue_card_cancel_dismiss_button" msgid="2874578798877712346">"لغو"</string>
     <string name="safety_center_entries_category_title" msgid="34356964062813115">"تنظیمات"</string>

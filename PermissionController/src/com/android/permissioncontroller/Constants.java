@@ -157,6 +157,12 @@ public class Constants {
     public static final String ACTION_MANAGE_AUTO_REVOKE = "manageAutoRevoke";
 
     /**
+     * String action for navigating to the additional permissions screen.
+     */
+    public static final String ACTION_ADDITIONAL_PERMISSIONS =
+            "com.android.permissioncontroller.action.ADDITIONAL_PERMISSIONS";
+
+    /**
      * Key for Notification.Builder.setGroup() for the incident report approval notification.
      */
     public static final String INCIDENT_NOTIFICATION_GROUP_KEY = "incident confirmation";

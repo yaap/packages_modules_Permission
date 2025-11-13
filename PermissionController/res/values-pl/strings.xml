@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Domyślny asystent cyfrowy"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Asystent cyfrowy"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Aplikacje asystujące mogą Ci pomagać na podstawie informacji wyświetlanych na ekranie, który oglądasz. Niektóre aplikacje obsługują programy uruchamiające i usługi rozpoznawania mowy, by zapewnić Ci zintegrowane wsparcie."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Rekomendowane przez: <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Domyślna przeglądarka"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Przeglądarka"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplikacje zapewniające Ci dostęp do internetu i wyświetlające linki, które klikasz"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otwieranie linków"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Domyślne do pracy"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Domyślne dla przestrzeni prywatnej"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Zoptymalizowane dla danego urządzenia"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Inne"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Brak"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Domyślna aplikacja systemowa)"</string>

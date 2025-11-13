@@ -16,16 +16,20 @@
 
 package android.permission.cts;
 
+import static android.permission.cts.CtsNotificationListenerServiceUtils
+        .isNotificationListenerSupported;
 import static android.permission.cts.PermissionUtils.install;
 import static android.permission.cts.PermissionUtils.uninstallApp;
 import static android.permission.cts.TestUtils.ensure;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assume.assumeTrue;
 
 import android.os.Build;
 import android.platform.test.annotations.AppModeFull;
 
 import androidx.test.filters.SdkSuppress;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -43,10 +47,15 @@ import org.junit.runner.RunWith;
 public class NotificationListenerCheckWithSafetyCenterUnsupportedTest
         extends BaseNotificationListenerCheckTest  {
 
+    private boolean mNotificationListenerSupported = isNotificationListenerSupported(
+            InstrumentationRegistry.getInstrumentation().getTargetContext());
+
     @Before
     public void setup() throws Throwable {
         // Skip tests if safety center is supported
         assumeDeviceDoesNotSupportSafetyCenter();
+        // Skip tests if NotificationListener not available
+        assumeTrue("Test requires using NotificationListener" , mNotificationListenerSupported);
 
         wakeUpAndDismissKeyguard();
         resetPermissionControllerBeforeEachTest();
@@ -64,7 +73,9 @@ public class NotificationListenerCheckWithSafetyCenterUnsupportedTest
         disallowTestAppNotificationListenerService();
         uninstallApp(TEST_APP_PKG);
 
-        clearNotifications();
+        if (mNotificationListenerSupported) {
+            clearNotifications();
+        }
     }
 
     @Test

@@ -49,6 +49,7 @@ import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.compat.IntentCompat;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.Objects;
 import java.util.Set;
@@ -138,6 +139,9 @@ public class PermissionHistoryPreference extends Preference {
         setInfoIcon(holder, widgetView, dividerVerticalBar);
 
         View dashLine = widget.findViewById(R.id.permission_history_dash_line);
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+            dashLine.setBackgroundResource(R.drawable.permission_history_dash_line_expressive);
+        }
         dashLine.setVisibility(mIsLastUsage ? View.GONE : View.VISIBLE);
 
         // This Intent should ideally be part of the constructor, passed in from the ViewModel.

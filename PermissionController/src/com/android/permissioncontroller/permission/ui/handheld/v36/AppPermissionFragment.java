@@ -82,7 +82,6 @@ import com.android.permissioncontroller.permission.ui.handheld.PermissionAppsFra
 import com.android.permissioncontroller.permission.ui.handheld.PermissionFooterPreference;
 import com.android.permissioncontroller.permission.ui.handheld.PermissionPreference;
 import com.android.permissioncontroller.permission.ui.handheld.PermissionPreferenceCategory;
-import com.android.permissioncontroller.permission.ui.handheld.PermissionSwitchPreference;
 import com.android.permissioncontroller.permission.ui.handheld.SettingsWithLargeHeader;
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel;
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel.ButtonState;
@@ -96,6 +95,7 @@ import com.android.permissioncontroller.permission.utils.v35.MultiDeviceUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import kotlin.Pair;
 
@@ -130,7 +130,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
     private @NonNull SelectorWithWidgetPreference mAskButton;
     private @NonNull SelectorWithWidgetPreference mDenyButton;
     private @NonNull SelectorWithWidgetPreference mDenyForegroundButton;
-    private @NonNull PermissionSwitchPreference mLocationAccuracySwitch;
+    private @NonNull TwoStatePreference mLocationAccuracySwitch;
     private @NonNull PermissionTwoTargetPreference mDetails;
     private @NonNull AppPermissionFooterLinkPreference mFooterLink1;
     private @NonNull AppPermissionFooterLinkPreference mFooterLink2;
@@ -222,7 +222,12 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         mAskButton = requirePreference("app_permission_ask_radio_button");
         mDenyButton = requirePreference("app_permission_deny_radio_button");
         mDenyForegroundButton = requirePreference("app_permission_deny_foreground_radio_button");
-        mLocationAccuracySwitch = requirePreference("app_permission_location_accuracy_switch");
+        if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
+            mLocationAccuracySwitch =
+                    requirePreference("app_permission_location_accuracy_switch_compat");
+        } else {
+            mLocationAccuracySwitch = requirePreference("app_permission_location_accuracy_switch");
+        }
         mDetails = requirePreference("app_permission_details");
         mFooterLink1 = requirePreference("app_permission_footer_link_1");
         mFooterLink2 = requirePreference("app_permission_footer_link_2");
@@ -311,7 +316,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
     }
 
     private void showPermissionRationaleDialog(Boolean showPermissionRationale) {
-        showPermissionRationaleDialog(showPermissionRationale == Boolean.TRUE);
+        showPermissionRationaleDialog(Objects.equals(showPermissionRationale, Boolean.TRUE));
     }
 
     private void showPermissionRationaleDialog(boolean showPermissionRationale) {

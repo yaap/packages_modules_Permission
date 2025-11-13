@@ -45,6 +45,8 @@ import com.android.permissioncontroller.permission.model.AppPermissionGroup;
 import com.android.permissioncontroller.permission.model.Permission;
 import com.android.permissioncontroller.permission.model.legacy.PermissionApps.PermissionApp;
 
+import kotlin.Triple;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,8 +55,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import kotlin.Triple;
 
 /**
  * Stats for permission usage of an app. This data is for a given time period,
@@ -113,16 +113,6 @@ public final class AppPermissionUsage {
 
     public int getUid() {
         return mPermissionApp.getUid();
-    }
-
-    public long getLastAccessTime() {
-        long lastAccessTime = 0;
-        final int permissionCount = mGroupUsages.size();
-        for (int i = 0; i < permissionCount; i++) {
-            final GroupUsage groupUsage = mGroupUsages.get(i);
-            lastAccessTime = Math.max(lastAccessTime, groupUsage.getLastAccessTime());
-        }
-        return lastAccessTime;
     }
 
     public @NonNull List<GroupUsage> getGroupUsages() {

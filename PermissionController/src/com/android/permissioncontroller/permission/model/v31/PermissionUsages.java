@@ -64,6 +64,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -114,11 +115,11 @@ public final class PermissionUsages implements LoaderCallbacks<List<AppPermissio
 
     /**
      * Start the {@link Loader} to load the permission usages in the background. Loads without a uid
-     * filter.
+     * filter. A loaderManager is required when loading asynchronously
      */
     public void load(@Nullable String filterPackageName,
             @Nullable String[] filterPermissionGroups, long filterBeginTimeMillis,
-            long filterEndTimeMillis, int usageFlags, @NonNull LoaderManager loaderManager,
+            long filterEndTimeMillis, int usageFlags, @Nullable LoaderManager loaderManager,
             boolean getUiInfo, boolean getNonPlatformPermissions,
             @NonNull PermissionsUsagesChangeCallback callback, boolean sync) {
         load(Process.INVALID_UID, filterPackageName, filterPermissionGroups, filterBeginTimeMillis,
@@ -128,11 +129,12 @@ public final class PermissionUsages implements LoaderCallbacks<List<AppPermissio
 
     /**
      * Start the {@link Loader} to load the permission usages in the background. Loads only
-     * permissions for the specified {@code filterUid}.
+     * permissions for the specified {@code filterUid}. A loaderManager is required when loading
+     * asynchronously.
      */
     public void load(int filterUid, @Nullable String filterPackageName,
             @Nullable String[] filterPermissionGroups, long filterBeginTimeMillis,
-            long filterEndTimeMillis, int usageFlags, @NonNull LoaderManager loaderManager,
+            long filterEndTimeMillis, int usageFlags, @Nullable LoaderManager loaderManager,
             boolean getUiInfo, boolean getNonPlatformPermissions,
             @NonNull PermissionsUsagesChangeCallback callback, boolean sync) {
         mCallback = callback;
@@ -150,6 +152,7 @@ public final class PermissionUsages implements LoaderCallbacks<List<AppPermissio
             final List<AppPermissionUsage> usages = loader.loadInBackground();
             onLoadFinished(loader, usages);
         } else {
+            Objects.requireNonNull(loaderManager);
             loaderManager.restartLoader(1, args, this);
         }
     }

@@ -125,7 +125,7 @@
     <string name="current_permissions_category" msgid="4292990083585728880">"Aktuelle Berechtigungen"</string>
     <string name="message_staging" msgid="9110563899955511866">"App wird vorbereitet…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Unbekannt"</string>
-    <string name="permission_usage_title" msgid="1568233336351734538">"Privatsphäre­dashboard"</string>
+    <string name="permission_usage_title" msgid="1568233336351734538">"Privatsphäre-Dashboard"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Ansehen, welche Apps zuletzt Berechtigungen genutzt haben"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g>-Nutzung"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Andere Berechtigungen ansehen"</string>
@@ -254,7 +254,7 @@
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"Abgelehnt/Kein Zugriff auf diese Berechtigung"</string>
     <string name="allowed_header" msgid="7769277978004790414">"Zugelassen"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Immer zugelassen"</string>
-    <string name="allowed_foreground_header" msgid="6845655788447833353">"Nur während Nutzung zugelassen"</string>
+    <string name="allowed_foreground_header" msgid="6845655788447833353">"Nur während der Nutzung zugelassen"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Zugriff nur auf Mediendateien zugelassen"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Verwalten aller Dateien zugelassen"</string>
     <string name="ask_header" msgid="2633816846459944376">"Jedes Mal fragen"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Standard-App digit. Assistent"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App für digitalen Assistenten"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Assistent-Apps können dir bei bestimmten Dingen helfen. Dazu greifen sie auf die Informationen zu, die aktuell auf deinem Bildschirm angezeigt werden. Einige Apps unterstützen sowohl Launcher- als auch Spracheingabedienste."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Empfohlen von <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Standard-Browser-App"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Browser-App"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps, mit denen du auf das Internet zugreifen kannst und die die entsprechende Seite öffnen, wenn du auf einen Link tippst"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Links öffnen"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Standard-Apps für Arbeit"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Standard-Apps für das vertrauliche Profil"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Für dein Gerät optimiert"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Sonstige"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Keine"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(System-Stan­dard­einstellung)"</string>
@@ -531,11 +531,11 @@
     <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"Darf &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; auf deine Anrufliste zugreifen?"</string>
     <string name="permgrouprequest_phone" msgid="1829234136997316752">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; erlauben, Anrufe zu starten und zu verwalten?"</string>
     <string name="permgrouprequest_device_aware_phone" msgid="590399263670349955">"Darf &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; Anrufe tätigen und verwalten?"</string>
-    <string name="permgrouprequest_sensors" msgid="4397358316850652235">"Darf &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; Sensor­daten zu deinen Vitalfunktionen abrufen?"</string>
-    <string name="permgrouprequest_device_aware_sensors" msgid="3874451050573615157">"Darf &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; auf Sensordaten zu deinen Vitalzeichen zugreifen?"</string>
+    <string name="permgrouprequest_sensors" msgid="4397358316850652235">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; erlauben, Sensor­daten zu deinen Vitalfunktionen abzurufen?"</string>
+    <string name="permgrouprequest_device_aware_sensors" msgid="3874451050573615157">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; erlauben, auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; auf Sensordaten zu deinen Vitalzeichen zuzugreifen?"</string>
     <string name="permgroupupgraderequestdetail_sensors" msgid="6651914048792092835">"Die App möchte jederzeit auf die Sensordaten zu deinen Vitalfunktionen zugreifen, auch wenn du sie nicht verwendest. Du kannst das "<annotation id="link">"in den Einstellungen ändern"</annotation>"."</string>
     <string name="permgroupbackgroundrequest_sensors" msgid="5661924322018503886">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; erlauben, auf Sensordaten zu deinen Vitalfunktionen zuzugreifen?"</string>
-    <string name="permgroupbackgroundrequest_device_aware_sensors" msgid="3687673359121603824">"Darf &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; auf die Sensordaten zu deinen Vitalzeichen zugreifen?"</string>
+    <string name="permgroupbackgroundrequest_device_aware_sensors" msgid="3687673359121603824">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; erlauben, auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; auf die Sensordaten zu deinen Vitalzeichen zuzugreifen?"</string>
     <string name="permgroupbackgroundrequestdetail_sensors" msgid="7726767635834043501">"Damit diese App dauerhaft auf Daten des Körpersensors zugreifen kann, auch dann, wenn sie nicht verwendet wird, "<annotation id="link">"rufe die Einstellungen auf"</annotation>"."</string>
     <string name="permgroupupgraderequest_sensors" msgid="7576527638411370468">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; Zugriff auf Körpersensordaten bei Verwendung weiter erlauben?"</string>
     <string name="permgroupupgraderequest_device_aware_sensors" msgid="5542771499929819675">"Darf die App &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; auf deinem Gerät &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; weiterhin auf deine Körpersensordaten zugreifen, während die App genutzt wird?"</string>

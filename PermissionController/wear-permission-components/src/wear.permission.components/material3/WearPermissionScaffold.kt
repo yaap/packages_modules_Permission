@@ -36,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.wear.compose.foundation.ExpandableState
 import androidx.wear.compose.foundation.ScrollInfoProvider
 import androidx.wear.compose.foundation.expandableButton
@@ -377,7 +378,7 @@ private fun ListScopeWrapper.titleItem(
                     text = it,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.optionalTestTag(testTag),
-                    style = style.copy(hyphens = Hyphens.Auto),
+                    style = style.copy(hyphens = Hyphens.Auto, lineHeight = 1.1.em),
                 )
             }
         }

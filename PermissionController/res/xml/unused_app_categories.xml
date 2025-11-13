@@ -15,9 +15,16 @@
   -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">>
 
     <PreferenceCategory
         android:key="info_msg_category"/>
+
+    <com.android.settingslib.widget.ZeroStatePreference
+        android:key="zero_state_preference"
+        android:title="@string/no_unused_apps"
+        android:icon="@drawable/ic_apps_24dp"
+        app:isPreferenceVisible="false"/>
 
 </PreferenceScreen>

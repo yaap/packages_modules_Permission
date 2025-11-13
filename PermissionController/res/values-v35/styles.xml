@@ -30,6 +30,9 @@
         <item name="android:baselineAligned">false</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:gravity">center_vertical</item>
+        <!-- Workaround for b/412863862 to restore the non-clipping behavior on V. -->
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <style name="PermissionPreferenceCategoryTextRelativeLayoutStyle">
@@ -38,6 +41,9 @@
         <item name="android:layout_weight">1</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
+        <!-- Workaround for b/412863862 to restore the non-clipping behavior on V. -->
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <style name="PermissionPreferenceCategoryTitleTextStyle" parent="@style/PreferenceCategoryTitleTextStyle">

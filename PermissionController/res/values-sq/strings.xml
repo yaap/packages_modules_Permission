@@ -260,7 +260,7 @@
     <string name="ask_header" msgid="2633816846459944376">"Pyet çdo herë"</string>
     <string name="denied_header" msgid="903209608358177654">"Nuk lejohet"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> në <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Shiko më shumë aplikacione me qasje tek të gjithë skedarët"</string>
+    <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Shiko më shumë aplikacione me qasje te të gjithë skedarët"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 ditë}other{# ditë}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# orë}other{# orë}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# minutë}other{# minuta}}"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Apl. i parazgjedhur i asistentit dixhital"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplikacioni i asistentit dixhital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Aplikacionet e asistentit të ndihmojnë bazuar në informacionet nga ekrani që je duke shikuar. Disa aplikacione mbështesin shërbimet e nisësit dhe të hyrjes me zë për të të siguruar një ndihmë të integruar."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Rekomanduar nga <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Aplikacioni i parazgjedhur i shfletuesit"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplikacioni i shfletuesit"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplikacionet që të japin qasje në internet dhe që shfaqin lidhjet që troket ti"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Hapja e lidhjeve"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Të parazgjedhura për punën"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Të parazgjedhurat për hapësirën private"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizuar për pajisjen"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Të tjera"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Asnjë"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Parazgjedhja e sistemit)"</string>

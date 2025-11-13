@@ -155,7 +155,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
             "app_location_permission_rationale_subtitle"
         const val HEALTH_PERMISSION_SELECT_HEART_RATE_PLAIN_TEXT = "Heart rate"
         const val HEALTH_PERMISSION_ALLOW_ALL_PLAIN_TEXT = "Allow all"
-        const val HEALTH_PERMISSION_ALLOW_ALWAYS_PLAIN_TEXT = "Allow all the time"
+        const val HEALTH_PERMISSION_ALLOW_ALWAYS_PLAIN_TEXT = "All the time"
         const val GRANT_DIALOG_PERMISSION_RATIONALE_CONTAINER_VIEW =
             "com.android.permissioncontroller:id/permission_rationale_container"
         const val PERMISSION_RATIONALE_ACTIVITY_TITLE_VIEW =
@@ -1213,7 +1213,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
             if (isWatch) {
                 clickAndWaitForWindowTransition(
                     By.text(permissionLabel).displayId(displayId),
-                    40_000,
+                    120_000,
                 )
             } else {
                 clickPermissionControllerUi(By.text(permissionLabel).displayId(displayId))
@@ -1284,7 +1284,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
             navigatedGroupLabels.add(permissionLabel)
             if (useLegacyNavigation) {
                 if (isWatch) {
-                    click(By.text(permissionLabel).displayId(displayId), 40_000)
+                    click(By.text(permissionLabel).displayId(displayId), 120_000)
                 } else if (isAutomotive) {
                     clickPermissionControllerUi(permissionLabel)
                 } else {

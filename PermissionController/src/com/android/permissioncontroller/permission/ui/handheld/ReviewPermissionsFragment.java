@@ -66,6 +66,7 @@ import com.android.permissioncontroller.permission.ui.model.ReviewPermissionsVie
 import com.android.permissioncontroller.permission.ui.model.ReviewPermissionsViewModel.PermissionTarget;
 import com.android.permissioncontroller.permission.utils.KotlinUtils;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ import java.util.Random;
  * If an app does not support runtime permissions the user is prompted via this fragment to select
  * which permissions to grant to the app before first use and if an update changed the permissions.
  */
-public final class ReviewPermissionsFragment extends PreferenceFragmentCompat
+public final class ReviewPermissionsFragment extends SettingsBasePreferenceFragment
         implements View.OnClickListener,
         BasePermissionReviewPreference.PermissionPreferenceChangeListener,
         BasePermissionReviewPreference.PermissionPreferenceOwnerFragment {

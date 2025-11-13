@@ -23,6 +23,7 @@ import android.content.Intent
 import android.content.Intent.ACTION_BOOT_COMPLETED
 import android.content.pm.PackageManager
 import android.os.Build
+import android.permission.flags.Flags
 import android.provider.DeviceConfig
 import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES
@@ -39,6 +40,8 @@ import com.android.permissioncontroller.permission.utils.Utils
 import com.android.permissioncontroller.privacysources.WorkPolicyInfo.Companion.WORK_POLICY_INFO_SOURCE_ID
 import com.android.permissioncontroller.privacysources.v34.AppDataSharingUpdatesPrivacySource
 import com.android.permissioncontroller.privacysources.v34.AppDataSharingUpdatesPrivacySource.Companion.APP_DATA_SHARING_UPDATES_SOURCE_ID
+import com.android.permissioncontroller.privacysources.v36r1.AppFunctionAccessPrivacySource
+import com.android.permissioncontroller.privacysources.v36r1.AppFunctionAccessPrivacySource.Companion.APP_FUNCTION_ACCESS_SOURCE_ID
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
@@ -59,6 +62,10 @@ private fun createMapOfSourceIdsToSources(context: Context): Map<String, Privacy
         sourceMap[APP_DATA_SHARING_UPDATES_SOURCE_ID] = AppDataSharingUpdatesPrivacySource()
     }
 
+    if (SdkLevel.isAtLeastB() && Flags.appFunctionAccessUiEnabled()) {
+        sourceMap[APP_FUNCTION_ACCESS_SOURCE_ID] = AppFunctionAccessPrivacySource()
+    }
+
     return sourceMap
 }
 
@@ -66,13 +73,13 @@ private fun createMapOfSourceIdsToSources(context: Context): Map<String, Privacy
 class SafetyCenterReceiver(
     private val getMapOfSourceIdsToSources: (Context) -> Map<String, PrivacySource> =
         ::createMapOfSourceIdsToSources,
-    private val dispatcher: CoroutineDispatcher = Default
+    private val dispatcher: CoroutineDispatcher = Default,
 ) : BroadcastReceiver() {
 
     enum class RefreshEvent {
         UNKNOWN,
         EVENT_DEVICE_REBOOTED,
-        EVENT_REFRESH_REQUESTED
+        EVENT_REFRESH_REQUESTED,
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -82,7 +89,7 @@ class SafetyCenterReceiver(
         val safetyCenterManager: SafetyCenterManager =
             Utils.getSystemServiceSafe(
                 PermissionControllerApplication.get().applicationContext,
-                SafetyCenterManager::class.java
+                SafetyCenterManager::class.java,
             )
 
         val mapOfSourceIdsToSources = getMapOfSourceIdsToSources(context)
@@ -92,7 +99,7 @@ class SafetyCenterReceiver(
                 safetyCenterEnabledChanged(
                     context,
                     safetyCenterManager.isSafetyCenterEnabled,
-                    mapOfSourceIdsToSources.values
+                    mapOfSourceIdsToSources.values,
                 )
             }
             ACTION_REFRESH_SAFETY_SOURCES -> {
@@ -104,7 +111,7 @@ class SafetyCenterReceiver(
                             intent,
                             RefreshEvent.EVENT_REFRESH_REQUESTED,
                             mapOfSourceIdsToSources,
-                            sourceIdsExtra.toList()
+                            sourceIdsExtra.toList(),
                         )
                     }
                 }
@@ -117,7 +124,7 @@ class SafetyCenterReceiver(
                         intent,
                         RefreshEvent.EVENT_DEVICE_REBOOTED,
                         mapOfSourceIdsToSources,
-                        mapOfSourceIdsToSources.keys.toList()
+                        mapOfSourceIdsToSources.keys.toList(),
                     )
                 }
             }
@@ -127,7 +134,7 @@ class SafetyCenterReceiver(
     private fun safetyCenterEnabledChanged(
         context: Context,
         enabled: Boolean,
-        privacySources: Collection<PrivacySource>
+        privacySources: Collection<PrivacySource>,
     ) {
         privacySources.forEach { source ->
             CoroutineScope(dispatcher).launch {
@@ -148,19 +155,19 @@ class SafetyCenterReceiver(
             DeviceConfig.getInt(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 QS_TILE_COMPONENT_SETTING_FLAGS,
-                PackageManager.DONT_KILL_APP
+                PackageManager.DONT_KILL_APP,
             )
         if (enabled && !wasEnabled) {
             context.packageManager.setComponentEnabledSetting(
                 tileComponent,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                qsTileComponentSettingFlags
+                qsTileComponentSettingFlags,
             )
         } else if (!enabled && wasEnabled) {
             context.packageManager.setComponentEnabledSetting(
                 tileComponent,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                qsTileComponentSettingFlags
+                qsTileComponentSettingFlags,
             )
         }
     }
@@ -170,7 +177,7 @@ class SafetyCenterReceiver(
         intent: Intent,
         refreshEvent: RefreshEvent,
         mapOfSourceIdsToSources: Map<String, PrivacySource>,
-        sourceIdsToRefresh: List<String>
+        sourceIdsToRefresh: List<String>,
     ) {
         for (sourceId in sourceIdsToRefresh) {
             CoroutineScope(dispatcher).launch {

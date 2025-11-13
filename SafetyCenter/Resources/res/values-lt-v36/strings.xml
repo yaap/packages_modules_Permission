@@ -17,6 +17,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_function_access_settings_title" msgid="3894819108224606683">"Kitų programų valdymas naudojant tarpininką"</string>
+    <string name="app_function_access_settings_summary" msgid="2719347800336419237">"Atlikti veiksmus jūsų įrenginyje ir kitose programose"</string>
     <string name="face_unlock_title" msgid="3991635517593572926">"Veidas"</string>
     <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Atrakinimas pagal veidą, skirtas darbo profiliui"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>

@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ነባሪ የዲጂታል ረዳት መተግበሪያ"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"የዲጂታል ረዳት መተግበሪያ"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"ረዳት መተግበሪያዎች በሚያዩት ማያ ገፅ ላይ ባለ መረጃ ላይ ተመስርቶ ሊያግዘዎት ይችላል። አንዳንድ መተግበሪያዎች የተዋሃደ እርዳታ ለእርስዎ ለመስጠት ሁለቱንም ማስጀመሪያ እና የድምፅ ግቤት አገልግሎቶችን ይደግፋሉ።"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"በ<xliff:g id="OEM_NAME">%s</xliff:g> የሚመከር"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ነባሪ አሳሽ መተግበሪያ"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"የአሳሽ መተግበሪያ"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"ወደ በየነ መረብ ለእርስዎ መዳረሻ የሚሰጥዎትን እና እርስዎ መታ የሚያደርጓቸውን አገናኞች የሚያሳዩ መተግበሪያዎች"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"አገናኞችን በመክፈት ላይ"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"ለሥራ ነባሪ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ለግል ቦታ ነባሪ"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ለመሣሪያ የተባ"</string>
     <string name="default_app_others" msgid="7793029848126079876">"ሌሎች"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ምንም"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(የሥርዓት ነባሪ)"</string>

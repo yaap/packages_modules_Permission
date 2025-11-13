@@ -348,7 +348,7 @@
     <string name="no_apps_allowed" msgid="7718822655254468631">"Hiçbir uygulamaya izin verilmedi"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Tüm dosyalar için hiçbir uygulamaya izin verilmedi"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Sadece medya için hiçbir uygulamaya izin verilmedi"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"Hiçbir uygulama reddedilmedi"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"İzin verilmeyen uygulamak yok"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Seçili"</string>
     <string name="settings" msgid="5409109923158713323">"Ayarlar"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"<xliff:g id="SERVICE_NAME">%s</xliff:g> hizmetinin cihazınıza tam erişimi var"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Varsayılan dijital asistan uygulaması"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Dijital asistan uygulaması"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Asistan uygulamaları görüntülemekte olduğunuz ekrandaki bilgilere dayalı olarak size yardım edebilir. Bazı uygulamalar entegre yardım sağlamak için hem başlatıcıyı hem de ses girişi hizmetlerini destekler."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> tarafından öneriliyor"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Varsayılan tarayıcı"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Tarayıcı uygulaması"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"İnternete erişmenizi sağlayan ve dokunduğunuz bağlantıları görüntüleyen uygulamalar"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Bağlantıları açma"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"İş için varsayılan"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Özel alan için varsayılan"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Cihaz için optimize edilenler"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Diğer"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Yok"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sistem varsayılanı)"</string>
@@ -633,7 +633,7 @@
     <string name="mic_toggle_title" msgid="2649991093496110162">"Mikrofon erişimi"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"Uygulamalar ve hizmetler için"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"Uygulamalar ve hizmetler için. Bu ayar kapalıyken bir acil durum numarasını aradığınızda mikrofon verileri paylaşılmaya devam edilebilir."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"Konum erişimi olan uygulama ve hizmetlere göz atın."</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"Konum erişimi olan uygulama ve hizmetlere göz atın"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Panoya erişimi göster"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Uygulamalar kopyaladığınız metne, resimlere veya diğer içeriklere eriştiğinde mesaj gösterilsin"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Şifreleri göster"</string>

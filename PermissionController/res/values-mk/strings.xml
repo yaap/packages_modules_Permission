@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Стандарден дигитален помошник"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Апл. за дигитален помошник"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Апликациите за помош може да ви помогнат според информациите од прикажаниот екран. Некои апликации поддржуваат услуги и со стартер и со гласовен запис за да ви обезбедат интегрирана помош."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Препорачано од <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Стандардна апл. за прелист."</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Апликација за прелистување"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Апликации што ви даваат пристап до интернет и ги прикажуваат линковите што ги допирате"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"За отворање линкови"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Стандардно за работа"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Стандардно за „Приватен простор“"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Оптимизирано за уредот"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Други"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Нема"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Стандардно за системот)"</string>
@@ -679,7 +679,7 @@
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Ограничена поставка"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"За ваша безбедност, поставкава е недостапна во моментов."</string>
     <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Дејството не може да се заврши во тек на повик"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g> Поставкава е блокирана за да ги заштити вашиот уред и податоци."</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"Поставкава е блокирана за да ги заштити вашиот уред и податоци.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Измамниците може да се обидат да инсталираат штетни апликации барајќи од вас да инсталирате непознати апликации од нов извор."</string>

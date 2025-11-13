@@ -19,7 +19,11 @@ package com.android.permissioncontroller.permission.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 
+import com.android.permissioncontroller.Constants;
+import com.android.permissioncontroller.appfunctions.AppFunctionsUtil;
 import com.android.permissioncontroller.permission.service.PermissionSearchIndexablesProvider;
 
 /**
@@ -32,7 +36,8 @@ public class ManagePermissionsActivityTrampoline extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        if (!PermissionSearchIndexablesProvider.isIntentValid(intent, this)) {
+        if (!PermissionSearchIndexablesProvider.isIntentValid(intent, this)
+                && !AppFunctionsUtil.isIntentValid(intent, this)) {
             finish();
             return;
         }
@@ -45,14 +50,44 @@ public class ManagePermissionsActivityTrampoline extends Activity {
 
         Intent newIntent = new Intent(this, ManagePermissionsActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        if (action.equals(PermissionSearchIndexablesProvider.ACTION_MANAGE_PERMISSION_APPS)) {
-            newIntent
-                    .setAction(Intent.ACTION_MANAGE_PERMISSION_APPS)
-                    .putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME,
-                            PermissionSearchIndexablesProvider.getOriginalKey(intent));
-        } else {
-            finish();
-            return;
+
+        switch (action) {
+            case PermissionSearchIndexablesProvider.ACTION_MANAGE_PERMISSION_APPS:
+                newIntent.setAction(Intent.ACTION_MANAGE_PERMISSION_APPS).putExtra(
+                        Intent.EXTRA_PERMISSION_GROUP_NAME,
+                        PermissionSearchIndexablesProvider.getOriginalKey(intent));
+                break;
+            case AppFunctionsUtil.ACTION_MANAGE_PERMISSIONS:
+                newIntent.setAction(Intent.ACTION_MANAGE_PERMISSIONS);
+                break;
+            case AppFunctionsUtil.ACTION_MANAGE_PERMISSION_APPS:
+                newIntent.setAction(Intent.ACTION_MANAGE_PERMISSION_APPS).putExtra(
+                        Intent.EXTRA_PERMISSION_GROUP_NAME,
+                        intent.getStringExtra(Intent.EXTRA_PERMISSION_GROUP_NAME));
+                break;
+            case AppFunctionsUtil.ACTION_MANAGE_APP_PERMISSIONS:
+                newIntent.setAction(Settings.ACTION_APP_PERMISSIONS_SETTINGS).putExtra(
+                        Intent.EXTRA_PACKAGE_NAME,
+                        intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME));
+                break;
+            case AppFunctionsUtil.ACTION_MANAGE_APP_PERMISSION:
+                newIntent.setAction(Intent.ACTION_MANAGE_APP_PERMISSION).putExtra(
+                                Intent.EXTRA_PERMISSION_GROUP_NAME,
+                                intent.getStringExtra(Intent.EXTRA_PERMISSION_GROUP_NAME))
+                        .putExtra(Intent.EXTRA_PACKAGE_NAME,
+                                intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME))
+                        .putExtra(Intent.EXTRA_USER,
+                                intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle.class));
+                break;
+            case AppFunctionsUtil.ACTION_MANAGE_UNUSED_APPS:
+                newIntent.setAction(Intent.ACTION_MANAGE_UNUSED_APPS);
+                break;
+            case AppFunctionsUtil.ACTION_ADDITIONAL_PERMISSIONS:
+                newIntent.setAction(Constants.ACTION_ADDITIONAL_PERMISSIONS);
+                break;
+            default:
+                finish();
+                return;
         }
 
         startActivity(newIntent);

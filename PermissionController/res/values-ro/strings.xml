@@ -64,7 +64,7 @@
     <string name="unused_apps" msgid="2058057455175955094">"Aplicații nefolosite"</string>
     <string name="edit_photos_description" msgid="5540108003480078892">"Editează fotografiile selectate pentru această aplicație"</string>
     <string name="no_unused_apps" msgid="12809387670415295">"Nu există aplicații nefolosite"</string>
-    <string name="zero_unused_apps" msgid="9024448554157499748">"0 aplicații nefolosite"</string>
+    <string name="zero_unused_apps" msgid="9024448554157499748">"Nicio aplicație nefolosită"</string>
     <string name="review_permission_decisions" msgid="309559429150613632">"Decizii recente privind permisiunile"</string>
     <string name="review_permission_decisions_view_all" msgid="90391040431566130">"Vezi toate deciziile recente privind permisiunile"</string>
     <string name="review_permission_decisions_empty" msgid="8120775336417279806">"Nicio decizie recentă privind permisiunile"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Aplicația asistent digital prestabilită"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplicația asistent digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Aplicațiile asistent te pot ajuta pe baza informațiilor din ecranul afișat. Pentru a-ți oferi o asistență integrată, unele aplicații acceptă atât serviciile cu lansatoare, cât și pe cele de intrare vocală."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomandate de <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Aplicația browser prestabilită"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplicația browser"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplicații care îți oferă acces la internet și afișează linkurile pe care le atingi"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Deschiderea linkurilor"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Prestabilite pentru serviciu"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Prestabilit pentru spațiul privat"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizate pentru dispozitiv"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Altele"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Niciuna"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Prestabilită de sistem)"</string>

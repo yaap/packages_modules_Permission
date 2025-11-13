@@ -27,12 +27,15 @@ import com.android.permissioncontroller.R
 import com.android.permissioncontroller.hibernation.isHibernationEnabled
 import com.android.permissioncontroller.permission.ui.UnusedAppsFragment
 import com.android.permissioncontroller.permission.ui.UnusedAppsFragment.Companion.INFO_MSG_CATEGORY
+import com.android.settingslib.widget.SettingsThemeHelper
 
 /** Handheld wrapper, with customizations, around [UnusedAppsFragment]. */
 class HandheldUnusedAppsFragment :
     PermissionsFrameFragment(), UnusedAppsFragment.Parent<UnusedAppPreference> {
 
     companion object {
+        private const val ZERO_STATE_KEY = "zero_state_preference"
+
         /** Create a new instance of this fragment. */
         @JvmStatic
         fun newInstance(): HandheldUnusedAppsFragment {
@@ -97,7 +100,7 @@ class HandheldUnusedAppsFragment :
     override fun createUnusedAppPref(
         app: Application,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): UnusedAppPreference {
         return UnusedAppPreference(app, packageName, user, requireContext())
     }
@@ -110,5 +113,9 @@ class HandheldUnusedAppsFragment :
         val infoMsgCategory =
             preferenceScreen.findPreference<PreferenceCategory>(INFO_MSG_CATEGORY)!!
         infoMsgCategory.isVisible = !empty
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+            val zeroStatePref = preferenceScreen.findPreference<Preference>(ZERO_STATE_KEY)!!
+            zeroStatePref.isVisible = empty
+        }
     }
 }

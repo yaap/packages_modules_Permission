@@ -1116,8 +1116,8 @@ class GrantPermissionsViewModel(
         if (currCallback == null || requestCode != currCallback.requestCode) {
             return
         }
-        currCallback.consumer.accept(data)
         activityResultCallback = null
+        currCallback.consumer.accept(data)
     }
 
     fun handleHealthConnectPermissions(activity: Activity) {

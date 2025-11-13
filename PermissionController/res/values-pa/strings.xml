@@ -84,7 +84,7 @@
     <string name="storage_supergroup_warning_allow" msgid="103093462784523190">"ਇਹ ਐਪ Android ਦੇ ਕਿਸੇ ਪੁਰਾਣੇ ਵਰਜਨ ਲਈ ਬਣਾਈ ਗਈ ਸੀ। ਜੇ ਤੁਸੀਂ ਇਸਦੀ ਇਜਾਜ਼ਤ ਦੀ ਆਗਿਆ ਦਿੰਦੇ ਹੋ, ਤਾਂ ਸਾਰੀ ਸਟੋਰੇਜ (ਫ਼ੋਟੋਆਂ, ਵੀਡੀਓ, ਸੰਗੀਤ, ਆਡੀਓ ਅਤੇ ਹੋਰ ਫ਼ਾਈਲਾਂ ਸਮੇਤ) ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਹੋਵੇਗੀ।"</string>
     <string name="storage_supergroup_warning_deny" msgid="6420765672683284347">"ਇਹ ਐਪ Android ਦੇ ਕਿਸੇ ਪੁਰਾਣੇ ਵਰਜਨ ਲਈ ਬਣਾਈ ਗਈ ਸੀ। ਜੇ ਤੁਸੀਂ ਇਸ ਇਜਾਜ਼ਤ ਨੂੰ ਅਸਵੀਕਾਰ ਕਰਦੇ ਹੋ, ਤਾਂ ਸਾਰੀ ਸਟੋਰੇਜ (ਫ਼ੋਟੋਆਂ, ਵੀਡੀਓ, ਸੰਗੀਤ, ਆਡੀਓ ਅਤੇ ਹੋਰ ਫ਼ਾਈਲਾਂ ਸਮੇਤ) ਤੱਕ ਪਹੁੰਚ ਨੂੰ ਅਸਵੀਕਾਰ ਕੀਤਾ ਜਾਵੇਗਾ।"</string>
     <string name="default_permission_description" msgid="4624464917726285203">"ਕੋਈ ਅਗਿਆਤ ਕਾਰਵਾਈ ਕਰੋ"</string>
-    <string name="app_permissions_group_summary" msgid="8788419008958284002">"<xliff:g id="COUNT_1">%2$d</xliff:g> ਵਿੱਚੋਂ <xliff:g id="COUNT_0">%1$d</xliff:g> ਐਪਾਂ ਨੂੰ ਆਗਿਆ ਦਿੱਤੀ"</string>
+    <string name="app_permissions_group_summary" msgid="8788419008958284002">"<xliff:g id="COUNT_1">%2$d</xliff:g> ਵਿੱਚੋਂ <xliff:g id="COUNT_0">%1$d</xliff:g> ਐਪਾਂ ਨੂੰ ਆਗਿਆ ਹੈ"</string>
     <string name="app_permissions_group_summary2" msgid="4329922444840521150">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> ਐਪਾਂ ਨੂੰ ਇਜਾਜ਼ਤ ਦਿੱਤੀ"</string>
     <string name="menu_show_system" msgid="4254021607027872504">"ਸਿਸਟਮ ਦਿਖਾਓ"</string>
     <string name="menu_hide_system" msgid="3855390843744028465">"ਸਿਸਟਮ ਲੁਕਾਓ"</string>
@@ -196,7 +196,7 @@
     <string name="precise_image_description" msgid="6349638632303619872">"ਸਹੀ ਟਿਕਾਣਾ"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"ਅੰਦਾਜ਼ਨ ਟਿਕਾਣਾ"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"ਸਹੀ ਟਿਕਾਣਾ ਵਰਤੋ"</string>
-    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"ਜਦੋਂ ਸਹੀ ਟਿਕਾਣੇ ਦੀ ਜਾਣਕਾਰੀ ਬੰਦ ਹੋਵੇ, ਤਾਂ ਐਪਾਂ ਤੁਹਾਡੀ ਅੰਦਾਜ਼ਨ ਟਿਕਾਣੇ ਦੀ ਜਾਣਕਾਰੀ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੀਆਂ ਹਨ"</string>
+    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"ਸਹੀ ਟਿਕਾਣੇ ਦੀ ਜਾਣਕਾਰੀ ਬੰਦ ਹੋਣ \'ਤੇ, ਐਪਾਂ ਤੁਹਾਡੇ ਅੰਦਾਜ਼ਨ ਟਿਕਾਣੇ ਦੀ ਜਾਣਕਾਰੀ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੀਆਂ ਹਨ"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g> ਸੰਬੰਧੀ ਇਜਾਜ਼ਤ"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"ਇਸ ਐਪ ਲਈ <xliff:g id="PERM">%1$s</xliff:g> ਪਹੁੰਚ"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> \'ਤੇ ਇਸ ਐਪ ਲਈ <xliff:g id="PERM">%1$s</xliff:g> ਦੀ ਪਹੁੰਚ"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਡਿਜੀਟਲ ਸਹਾਇਕ ਐਪ"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ਡਿਜੀਟਲ ਸਹਾਇਕ ਐਪ"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"ਸਹਾਇਕ ਐਪਾਂ ਤੁਹਾਡੇ ਵੱਲੋਂ ਦੇਖੀ ਜਾਂਦੀ ਸਕ੍ਰੀਨ ਤੋਂ ਪ੍ਰਾਪਤ ਜਾਣਕਾਰੀ ਦੇ ਆਧਾਰ \'ਤੇ ਤੁਹਾਡੀ ਮਦਦ ਕਰ ਸਕਦੀਆਂ ਹਨ। ਕੁਝ ਐਪਾਂ ਤੁਹਾਨੂੰ ਏਕੀਕ੍ਰਿਤ ਸਹਾਇਤਾ ਦੇਣ ਲਈ ਲਾਂਚਰ ਅਤੇ ਵੌਇਸ ਇਨਪੁੱਟ ਸੇਵਾਵਾਂ ਦੋਵਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦੀਆਂ ਹਨ।"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> ਵੱਲੋਂ ਸਿਫ਼ਾਰਸ਼ੀ"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਬ੍ਰਾਊਜ਼ਰ ਐਪ"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ਬ੍ਰਾਊਜ਼ਰ ਐਪ"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"ਐਪਾਂ ਜੋ ਤੁਹਾਨੂੰ ਇੰਟਰਨੈੱਟ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦਿੰਦੀਆਂ ਹਨ ਅਤੇ ਤੁਹਾਡੇ ਵੱਲੋਂ ਟੈਪ ਕੀਤੇ ਲਿੰਕ ਦਿਖਾਉਂਦੀਆਂ ਹਨ"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"ਖੁੱਲ੍ਹਣ ਵਾਲੇ ਲਿੰਕ"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"ਕੰਮ ਲਈ ਪੂਰਵ-ਨਿਰਧਾਰਤ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"ਪ੍ਰਾਈਵੇਟ ਸਪੇਸ ਲਈ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ਡੀਵਾਈਸ ਲਈ ਸੁਯੋਗ ਬਣਾਈਆਂ"</string>
     <string name="default_app_others" msgid="7793029848126079876">"ਹੋਰ"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ਕੋਈ ਨਹੀਂ"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ਸਿਸਟਮ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ)"</string>
@@ -473,7 +473,7 @@
     <string name="assistant_record_audio_user_sensitive_summary" msgid="6482937591816401619">"ਜਦੋਂ ਅਵਾਜ਼ੀ ਸਹਾਇਕ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰਨ ਲਈ ਮਾਈਕ੍ਰੋਫ਼ੋਨ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ ਤਾਂ ਸਥਿਤੀ ਪੱਟੀ ਵਿੱਚ ਪ੍ਰਤੀਕ ਦਿਖਾਓ"</string>
     <string name="permgrouprequest_storage_isolated" msgid="4892154224026852295">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਤੁਹਾਡੇ ਡੀਵਾਈਸ \'ਤੇ ਫ਼ੋਟੋਆਂ ਅਤੇ ਮੀਡੀਆ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; \'ਤੇ ਫ਼ੋਟੋਆਂ ਅਤੇ ਮੀਡੀਆ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
-    <string name="permgrouprequest_contacts" msgid="8391550064551053695">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਤੁਹਾਡੇ ਸੰਪਰਕਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੇਣੀ ਹੈ?"</string>
+    <string name="permgrouprequest_contacts" msgid="8391550064551053695">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਤੁਹਾਡੇ ਸੰਪਰਕਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; \'ਤੇ ਆਪਣੇ ਸੰਪਰਕਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_location" msgid="6990232580121067883">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਇਸ ਡੀਵਾਈਸ ਦੇ ਟਿਕਾਣੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; ਦੇ ਟਿਕਾਣੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
@@ -527,9 +527,9 @@
     <string name="permgroupupgraderequest_camera" msgid="640758449200241582">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਲਈ ਕੈਮਰਾ ਪਹੁੰਚ ਨੂੰ ਬਦਲਣਾ ਹੈ?"</string>
     <string name="permgroupupgraderequest_device_aware_camera" msgid="3290160912843715236">"ਕੀ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; \'ਤੇ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਲਈ ਕੈਮਰਾ ਪਹੁੰਚ ਨੂੰ ਬਦਲਣਾ ਹੈ?"</string>
     <string name="permgroupupgraderequestdetail_camera" msgid="6642747548010962597">"ਇਹ ਐਪ ਹਰ ਵੇਲੇ ਤਸਵੀਰਾਂ ਖਿੱਚਣ ਅਤੇ ਵੀਡੀਓ ਰਿਕਾਰਡ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਮੰਗਦੀ ਹੈ, ਉਦੋਂ ਵੀ ਜਦੋਂ ਤੁਸੀਂ ਐਪ ਦੀ ਵਰਤੋਂ ਨਾ ਕਰ ਰਹੇ ਹੋਵੋ। "<annotation id="link">"ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਇਜਾਜ਼ਤ ਦਿਓ।"</annotation></string>
-    <string name="permgrouprequest_calllog" msgid="2065327180175371397">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ ਕਾਲ ਲੌਗਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੇਣੀ ਹੈ?"</string>
+    <string name="permgrouprequest_calllog" msgid="2065327180175371397">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ ਕਾਲ ਲੌਗਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; \'ਤੇ ਆਪਣੇ ਫ਼ੋਨ ਕਾਲ ਲੌਗਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
-    <string name="permgrouprequest_phone" msgid="1829234136997316752">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਫ਼ੋਨ ਕਾਲਾਂ ਕਰਨ ਅਤੇ ਉਨ੍ਹਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਦੇਣਾ ਹੈ?"</string>
+    <string name="permgrouprequest_phone" msgid="1829234136997316752">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਫ਼ੋਨ ਕਾਲਾਂ ਕਰਨ ਅਤੇ ਉਨ੍ਹਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_device_aware_phone" msgid="590399263670349955">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; \'ਤੇ ਫ਼ੋਨ ਕਾਲਾਂ ਕਰਨ ਅਤੇ ਉਨ੍ਹਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_sensors" msgid="4397358316850652235">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ ਤੁਹਾਡੇ ਸਰੀਰ ਦੇ ਅਹਿਮ ਲੱਛਣਾਂ ਸੰਬੰਧੀ ਸੈਂਸਰ ਡਾਟੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੇਣੀ ਹੈ?"</string>
     <string name="permgrouprequest_device_aware_sensors" msgid="3874451050573615157">"ਕੀ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ਨੂੰ &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; \'ਤੇ ਤੁਹਾਡੇ ਮਹੱਤਵਪੂਰਨ ਲੱਛਣਾਂ ਸੰਬੰਧੀ ਸੈਂਸਰ ਡਾਟਾ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦੇਣੀ ਹੈ?"</string>

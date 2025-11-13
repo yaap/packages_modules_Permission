@@ -61,7 +61,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permission.flags.Flags;
@@ -79,6 +80,7 @@ import com.android.permissioncontroller.permission.utils.StringUtils;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.permission.utils.v35.MultiDeviceUtils;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.text.Collator;
 import java.time.Instant;
@@ -454,7 +456,9 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
         autoRevokeCategory.setKey(AUTO_REVOKE_CATEGORY_KEY);
         screen.addPreference(autoRevokeCategory);
 
-        SwitchPreference autoRevokeSwitch = new PermissionSwitchPreference(context);
+        TwoStatePreference autoRevokeSwitch = SettingsThemeHelper.isExpressiveTheme(getContext())
+                ? new SwitchPreferenceCompat(context)
+                : new PermissionSwitchPreference(context);
         autoRevokeSwitch.setOnPreferenceClickListener((preference) -> {
             mViewModel.setAutoRevoke(autoRevokeSwitch.isChecked());
             return true;
@@ -503,7 +507,7 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
 
         PreferenceCategory autoRevokeCategory = getPreferenceScreen()
                 .findPreference(AUTO_REVOKE_CATEGORY_KEY);
-        SwitchPreference autoRevokeSwitch = autoRevokeCategory.findPreference(
+        TwoStatePreference autoRevokeSwitch = autoRevokeCategory.findPreference(
                 AUTO_REVOKE_SWITCH_KEY);
         Preference autoRevokeSummary = autoRevokeCategory.findPreference(
                 AUTO_REVOKE_SUMMARY_KEY);

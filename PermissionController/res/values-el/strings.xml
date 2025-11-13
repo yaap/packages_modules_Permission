@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Προεπ. εφαρμ. ψηφιακού βοηθού"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Εφαρμογή ψηφιακού βοηθού"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Οι εφαρμογές υποβοήθειας σάς προσφέρουν βοήθεια βάσει των πληροφοριών από την οθόνη που προβάλετε. Ορισμένες εφαρμογές υποστηρίζουν τόσο την εφαρμογή εκκίνησης όσο και τις υπηρεσίες εισόδου φωνής για να λαμβάνετε ολοκληρωμένη βοήθεια."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Προτείνεται από: <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Προεπιλ. πρόγρ. περιήγησης"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Πρόγραμμα περιήγησης"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Εφαρμογές που σας προσφέρουν πρόσβαση στο διαδίκτυο και εμφανίζουν τους συνδέσμους που πατάτε"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Άνοιγμα συνδέσμων"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Προεπιλογή για εργασία"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Προεπιλογή για ιδιωτικό χώρο"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Βελτιστοποιημένες για τη συσκευή"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Άλλες"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Καμία"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Προεπιλογή συστήματος)"</string>
@@ -478,7 +478,7 @@
     <string name="permgrouprequest_location" msgid="6990232580121067883">"Να επιτρέπεται στην εφαρμογή &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; η πρόσβαση στην τοποθεσία αυτής της συσκευής;"</string>
     <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"Να επιτρέπεται στην εφαρμογή &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; η πρόσβαση στην τοποθεσία της συσκευής &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>’s&lt;/b&gt;;"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"Η εφαρμογή θα έχει πρόσβαση στην τοποθεσία μόνο κατά τη διάρκεια χρήσης της εφαρμογής"</string>
-    <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"Να επιτρέπεται στο &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; να έχει πρόσβαση στην τοποθεσία αυτής της συσκευής;"</string>
+    <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"Να επιτρέπεται στην εφαρμογή &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; η πρόσβαση στην τοποθεσία αυτής της συσκευής;"</string>
     <string name="permgroupbackgroundrequest_device_aware_location" msgid="1264484517831380016">"Να επιτρέπεται στην εφαρμογή &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; η πρόσβαση στην τοποθεσία της συσκευής &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>’s&lt;/b&gt;;"</string>
     <string name="permgroupbackgroundrequestdetail_location" msgid="8021219324989662957">"Αυτή η εφαρμογή θέλει να έχει συνεχώς πρόσβαση στην τοποθεσία σας, ακόμη και όταν δεν χρησιμοποιείτε την εφαρμογή. "<annotation id="link">"Εγκρίνετε το αίτημα στις ρυθμίσεις."</annotation></string>
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"Αλλαγή πρόσβασης στην τοποθεσία για την εφαρμογή &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;;"</string>

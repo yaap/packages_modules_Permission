@@ -24,16 +24,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Switch;
+import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -42,12 +45,14 @@ import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.data.PackagePermissionsLiveData;
 import com.android.permissioncontroller.permission.model.AppPermissionGroup;
 import com.android.permissioncontroller.permission.model.Permission;
+import com.android.permissioncontroller.permission.ui.handheld.v36.MultiTargetSwitchPreferenceCompat;
 import com.android.permissioncontroller.permission.ui.model.AllAppPermissionsViewModel;
 import com.android.permissioncontroller.permission.ui.model.AllAppPermissionsViewModelFactory;
 import com.android.permissioncontroller.permission.utils.ArrayUtils;
 import com.android.permissioncontroller.permission.utils.KotlinUtils;
 import com.android.permissioncontroller.permission.utils.PermissionMapping;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.text.Collator;
 import java.util.List;
@@ -248,7 +253,12 @@ public final class AllAppPermissionsFragment extends SettingsWithLargeHeader {
         if (mutable) {
             AppPermissionGroup appPermGroup = AppPermissionGroup.create(
                     getActivity().getApplication(), mPackageName, groupName, mUser, false);
-            pref = new MyMultiTargetSwitchPreference(context, permName, appPermGroup);
+            boolean isChecked = appPermGroup.areRuntimePermissionsGranted(new String[]{permName});
+            MyMultiTargetSwitchOnClickListener listener =
+                    new MyMultiTargetSwitchOnClickListener(permName, appPermGroup);
+            pref = SettingsThemeHelper.isExpressiveTheme(context)
+                    ? new MyMultiTargetSwitchPreferenceCompat(context, isChecked, listener)
+                    : new MyMultiTargetSwitchPreference(context, isChecked, listener);
         } else {
             pref = new PermissionPreference(context);
         }
@@ -269,61 +279,84 @@ public final class AllAppPermissionsFragment extends SettingsWithLargeHeader {
         return pref;
     }
 
-    private static final class MyMultiTargetSwitchPreference extends MultiTargetSwitchPreference {
-        MyMultiTargetSwitchPreference(Context context, String permission,
+    private static final class MyMultiTargetSwitchOnClickListener implements View.OnClickListener {
+
+        private final String mPermission;
+        private final AppPermissionGroup mAppPermissionGroup;
+
+        MyMultiTargetSwitchOnClickListener(String permission,
                 AppPermissionGroup appPermissionGroup) {
-            super(context);
+            mPermission = permission;
+            mAppPermissionGroup = appPermissionGroup;
+        }
 
-            setChecked(appPermissionGroup.areRuntimePermissionsGranted(
-                    new String[]{permission}));
-
-            setSwitchOnClickListener(v -> {
-                Switch switchView = (Switch) v;
-                if (switchView.isChecked()) {
-                    appPermissionGroup.grantRuntimePermissions(true, false,
-                            new String[]{permission});
-                    // We are granting a permission from a group but since this is an
-                    // individual permission control other permissions in the group may
-                    // be revoked, hence we need to mark them user fixed to prevent the
-                    // app from requesting a non-granted permission and it being granted
-                    // because another permission in the group is granted. This applies
-                    // only to apps that support runtime permissions.
-                    if (appPermissionGroup.doesSupportRuntimePermissions()) {
-                        int grantedCount = 0;
-                        String[] revokedPermissionsToFix = null;
-                        final int permissionCount = appPermissionGroup.getPermissions().size();
-                        for (int i = 0; i < permissionCount; i++) {
-                            Permission current = appPermissionGroup.getPermissions().get(i);
-                            if (!current.isGrantedIncludingAppOp()) {
-                                if (!current.isUserFixed()) {
-                                    revokedPermissionsToFix = ArrayUtils.appendString(
-                                            revokedPermissionsToFix, current.getName());
-                                }
-                            } else {
-                                grantedCount++;
+        @Override
+        public void onClick(View v) {
+            CompoundButton switchView = (CompoundButton) v;
+            if (switchView.isChecked()) {
+                mAppPermissionGroup.grantRuntimePermissions(true, false,
+                        new String[]{mPermission});
+                // We are granting a permission from a group but since this is an
+                // individual permission control other permissions in the group may
+                // be revoked, hence we need to mark them user fixed to prevent the
+                // app from requesting a non-granted permission and it being granted
+                // because another permission in the group is granted. This applies
+                // only to apps that support runtime permissions.
+                if (mAppPermissionGroup.doesSupportRuntimePermissions()) {
+                    int grantedCount = 0;
+                    String[] revokedPermissionsToFix = null;
+                    final int permissionCount = mAppPermissionGroup.getPermissions().size();
+                    for (int i = 0; i < permissionCount; i++) {
+                        Permission current = mAppPermissionGroup.getPermissions().get(i);
+                        if (!current.isGrantedIncludingAppOp()) {
+                            if (!current.isUserFixed()) {
+                                revokedPermissionsToFix = ArrayUtils.appendString(
+                                        revokedPermissionsToFix, current.getName());
                             }
-                        }
-                        if (revokedPermissionsToFix != null) {
-                            // If some permissions were not granted then they should be fixed.
-                            appPermissionGroup.revokeRuntimePermissions(true,
-                                    revokedPermissionsToFix);
-                        } else if (appPermissionGroup.getPermissions().size() == grantedCount) {
-                            // If all permissions are granted then they should not be fixed.
-                            appPermissionGroup.grantRuntimePermissions(true, false);
+                        } else {
+                            grantedCount++;
                         }
                     }
-                } else {
-                    appPermissionGroup.revokeRuntimePermissions(true,
-                            new String[]{permission});
-                    // If we just revoked the last permission we need to clear
-                    // the user fixed state as now the app should be able to
-                    // request them at runtime if supported.
-                    if (appPermissionGroup.doesSupportRuntimePermissions()
-                            && !appPermissionGroup.areRuntimePermissionsGranted()) {
-                        appPermissionGroup.revokeRuntimePermissions(false);
+                    if (revokedPermissionsToFix != null) {
+                        // If some permissions were not granted then they should be fixed.
+                        mAppPermissionGroup.revokeRuntimePermissions(true,
+                                revokedPermissionsToFix);
+                    } else if (mAppPermissionGroup.getPermissions().size() == grantedCount) {
+                        // If all permissions are granted then they should not be fixed.
+                        mAppPermissionGroup.grantRuntimePermissions(true, false);
                     }
                 }
-            });
+            } else {
+                mAppPermissionGroup.revokeRuntimePermissions(true,
+                        new String[]{mPermission});
+                // If we just revoked the last permission we need to clear
+                // the user fixed state as now the app should be able to
+                // request them at runtime if supported.
+                if (mAppPermissionGroup.doesSupportRuntimePermissions()
+                        && !mAppPermissionGroup.areRuntimePermissionsGranted()) {
+                    mAppPermissionGroup.revokeRuntimePermissions(false);
+                }
+            }
+        }
+    }
+
+    private static final class MyMultiTargetSwitchPreference extends MultiTargetSwitchPreference {
+        MyMultiTargetSwitchPreference(Context context, Boolean isChecked,
+                View.OnClickListener listener) {
+            super(context);
+            setChecked(isChecked);
+            setSwitchOnClickListener(listener);
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.BAKLAVA)
+    private static final class MyMultiTargetSwitchPreferenceCompat
+            extends MultiTargetSwitchPreferenceCompat {
+        MyMultiTargetSwitchPreferenceCompat(Context context, Boolean isChecked,
+                View.OnClickListener listener) {
+            super(context);
+            setChecked(isChecked);
+            setSwitchOnClickListener(listener);
         }
     }
 }

@@ -23,18 +23,17 @@ import android.os.UserHandle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.permissioncontroller.role.ui.DefaultAppChildFragment;
 import com.android.permissioncontroller.role.ui.RoleApplicationPreference;
-import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 /**
  * Handheld preference fragment for a default app.
  * <p>
  * Must be added as a child fragment and its parent fragment must implement {@link Parent}.
  */
-public class HandheldDefaultAppPreferenceFragment extends PreferenceFragmentCompat
+public class HandheldDefaultAppPreferenceFragment extends SettingsBasePreferenceFragment
         implements DefaultAppChildFragment.Parent {
 
     @NonNull
@@ -101,8 +100,8 @@ public class HandheldDefaultAppPreferenceFragment extends PreferenceFragmentComp
 
     @NonNull
     @Override
-    public Preference createFooterPreference() {
-        return new FooterPreference(requireContext());
+    public Preference createDescriptionPreference(boolean isFooter) {
+        return new HandheldDescriptionPreference(requireContext(), isFooter);
     }
 
     @Override

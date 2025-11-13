@@ -113,6 +113,13 @@
                 title="@com.android.safetycenter.resources:string/health_connect_title"
                 searchTerms="@com.android.safetycenter.resources:string/health_connect_search_terms"/>
             <dynamic-safety-source
+                id="AndroidAppFunctionAccess"
+                packageName="com.android.permissioncontroller"
+                profile="primary_profile_only"
+                initialDisplayState="hidden"
+                refreshOnPageOpenAllowed="false"
+                title="@com.android.safetycenter.resources:string/app_function_access_settings_title"/>
+            <dynamic-safety-source
                 id="AndroidPrivacyAppDataSharingUpdates"
                 packageName="com.android.permissioncontroller"
                 profile="primary_profile_only"

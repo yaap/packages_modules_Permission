@@ -75,11 +75,11 @@ internal fun WearPermissionButtonStyle.material3ButtonColors(): ButtonColors {
 private fun ButtonDefaults.disabledLikeColors() =
     filledTonalButtonColors().run {
         ButtonColors(
-            containerPainter = disabledContainerPainter,
+            containerColor = disabledContainerColor,
             contentColor = disabledContentColor,
             secondaryContentColor = disabledSecondaryContentColor,
             iconColor = disabledIconColor,
-            disabledContainerPainter = disabledContainerPainter,
+            disabledContainerColor = disabledContainerColor,
             disabledContentColor = disabledContentColor,
             disabledSecondaryContentColor = disabledSecondaryContentColor,
             disabledIconColor = disabledIconColor,

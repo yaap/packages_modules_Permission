@@ -16,6 +16,9 @@
   -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_function_access_settings_title" description="The title of the entry for App Function Access Settings">Agent control of other apps</string>
+  <string name="app_function_access_settings_summary" description="The summary of the entry for App Function Access Settings, which describes the page contents">Perform actions on your device and in other apps</string>
+
   <string name="face_unlock_title" description="The default title of the setting for managing face unlock options on the device">Face</string>
   <string name="face_unlock_title_for_work" description="The default title of the setting for managing face unlock options for work on the device">Face for work</string>
   <string name="face_unlock_title_for_private_profile" description="The default title of the setting for managing face unlock options for private profile on the device"><!-- Empty placeholder--></string>

@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ഡിഫോൾട്ട് ഡിജിറ്റൽ അസിസ്‌റ്റന്റ് ആപ്പ്"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ഡിജിറ്റൽ അസിസ്‌റ്റന്റ് ആപ്പ്"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"നിങ്ങൾ കാണുന്ന സ്ക്രീനിൽ നിന്നുള്ള വിവരങ്ങളെ അടിസ്ഥാനമാക്കി സഹായിക്കാൻ സഹായ ആപ്പിന് കഴിയും. നിങ്ങൾക്ക് സമ്പൂർണ്ണമായ സഹായം നൽകാൻ ലോഞ്ചറിനെയും വോയ്‌സ് ഇൻപുട്ട് സേവനങ്ങളെയും ചില ആപ്പുകൾ പിന്തുണയ്‌ക്കുന്നു."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> നിർദ്ദേശിച്ചത്"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ഡിഫോൾട്ട് ബ്രൗസർ ആപ്പ്"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"ബ്രൗസർ ആപ്പ്"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"നിങ്ങൾ ടാപ്പ് ചെയ്യുന്ന ലിങ്കുകൾ പ്രദർശിപ്പിക്കുകയും ഇന്റർനെറ്റ് ആക്‌സസ് നൽകുകയും ചെയ്യുന്ന ആപ്പുകൾ"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"ലിങ്കുകൾ തുറക്കൽ"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"ജോലി ആവശ്യങ്ങൾക്ക് ഡിഫോൾട്ട്"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"സ്വകാര്യ സ്പേസിനായുള്ള ഡിഫോൾട്ട്"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"ഉപകരണത്തിനായി ഒപ്റ്റിമൈസ് ചെയ്‌തു"</string>
     <string name="default_app_others" msgid="7793029848126079876">"മറ്റുള്ളവ"</string>
     <string name="default_app_none" msgid="9084592086808194457">"ഒന്നുമില്ല"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(സിസ്‌റ്റം ഡിഫോൾട്ട്)"</string>

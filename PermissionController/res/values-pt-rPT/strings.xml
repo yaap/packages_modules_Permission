@@ -163,7 +163,7 @@
     <string name="permission_usage_bar_chart_title_last_15_minutes" msgid="2743143675412824819">"Utilização das autorizações nos últimos 15 minutos"</string>
     <string name="permission_usage_bar_chart_title_last_minute" msgid="820450867183487607">"Utilização das autorizações no último minuto"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Não usada há # dia}many{Não usada há # dias}other{Não usada há # dias}}"</string>
-    <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Não usada há # hora}many{Não usada há # horas}other{Não usada há # horas}}"</string>
+    <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Não usado há # hora}many{Não usado há # horas}other{Não usado há # horas}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Utilização: 1 app}many{Utilização: # apps}other{Utilização: # apps}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Ver tudo no painel de controlo"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Filtrado por: <xliff:g id="PERM">%1$s</xliff:g>"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"App de assistente digital predefinida"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App assistente digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"As apps de assistência podem ser-lhe úteis com base em informações do ecrã que está a ver. Algumas apps são compatíveis com serviços de iniciação e de entrada de texto por voz para oferecer assistência integrada."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomendações da <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"App navegador predefinida"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"App de navegador"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps que lhe dão acesso à Internet e apresentam links em que pode tocar."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Abertura de links"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predefinição para o trabalho"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Predefinição para espaço privado"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Otimizadas para o dispositivo"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Outras"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nenhuma"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Predefinição do sistema)"</string>
@@ -662,7 +662,7 @@
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Atualizações da partilha de dados para a localização"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Reveja apps que mudaram a forma de partilhar os seus dados de localização"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Estas apps mudaram a forma de partilhar os seus dados de localização. É possível que não os tenham partilhado antes ou que passem a partilhá-los agora para fins de publicidade ou marketing."</string>
-    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Os programadores destas apps deram informações sobre as respetivas práticas de partilha de dados a uma loja de apps. Podem atualizá-las ao longo do tempo.\n\nAs práticas de partilha de dados podem variar consoante a versão da app, a utilização, a região e a idade."</string>
+    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Os programadores destas apps cederam informações sobre as respetivas práticas de partilha de dados a uma loja de apps. Podem ir atualizando as mesmas.\n\nAs práticas de partilha de dados podem variar consoante a versão da app, a utilização, a região e a idade."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"Saiba mais sobre a partilha de dados"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"Os seus dados de localização são agora partilhados com terceiros"</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"Os seus dados de localização são agora partilhados com terceiros para fins de publicidade ou marketing"</string>

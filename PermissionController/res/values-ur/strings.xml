@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"ڈیفالٹ ڈیجیٹل اسسٹنٹ ایپ"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ڈیجیٹل اسسٹنٹ ایپ"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"آپ جو اسکرین دیکھ رہے ہیں اس کی معلومات کی بنیاد پر معاون ایپس آپ کی مدد کر سکتی ہیں۔ کچھ ایپس آپ کو مربوط مدد فراہم کرنے کے لیے لانچر اور صوتی ان پُٹ کی سروسز دونوں میں سپورٹ کرتی ہیں۔"</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"‫<xliff:g id="OEM_NAME">%s</xliff:g> کی جانب سے تجویز کردہ"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"ڈیفالٹ براؤزر ایپ"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"براؤزر ایپ"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"وہ ایپس جو آپ کو انٹرنیٹ تک رسائی فراہم کرتی ہیں اور ان لنکس کو ڈسپلے کرتی ہیں جن پر آپ تھپتھپاتے ہیں"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"شروعاتی لنکس"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"کام کیلئے ڈیفالٹ"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"پرائیویٹ اسپیس کے لیے ڈیفالٹ"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"آلہ کیلئے بہتر بنایا گیا"</string>
     <string name="default_app_others" msgid="7793029848126079876">"دیگر"</string>
     <string name="default_app_none" msgid="9084592086808194457">"کوئی نہیں"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(سسٹم ڈیفالٹ)"</string>

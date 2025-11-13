@@ -20,7 +20,7 @@
     <string name="role_sms_request_description" msgid="1506966389698625395">"‏האפליקציה הזו תקבל הרשאה לשלוח לך התראות, וגם תקבל גישה למצלמה, לאנשי הקשר, לקבצים, למיקרופון, לטלפון ול-SMS"</string>
     <string name="permission_description_summary_storage" msgid="1917071243213043858">"לאפליקציות עם ההרשאה הזו יש גישה לקבצים במכשיר"</string>
     <string name="work_policy_title" msgid="832967780713677409">"פרטי המדיניות של פרופיל העבודה"</string>
-    <string name="work_policy_summary" msgid="3886113358084963931">"‏ההגדרות שמנוהלות על ידי מנהל ה-IT"</string>
+    <string name="work_policy_summary" msgid="3886113358084963931">"‏ההגדרות מנוהלות על ידי אדמין ממחלקת IT"</string>
     <string name="safety_center_entry_group_expand_action" msgid="5358289574941779652">"הרחבה והצגה של הרשימה"</string>
     <string name="safety_center_entry_group_collapse_action" msgid="1525710152244405656">"כיווץ הרשימה והסתרת ההגדרות"</string>
     <string name="safety_center_entry_group_content_description" msgid="7048420958214443333">"רשימה. <xliff:g id="ENTRY_TITLE">%1$s</xliff:g>. <xliff:g id="ENTRY_SUMMARY">%2$s</xliff:g>"</string>

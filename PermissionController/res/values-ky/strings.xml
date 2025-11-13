@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Демейки санариптик жардамчы"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Санариптик жардамчы колдонмосу"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Көмөкчү колдонмолор экранда көргөн маалыматыңыздын негизинде сизге жардам бере алат. Айрым колдонмолор жүргүзгүчтү жана айтып киргизүү функциясын да колдоого алат."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> сунуштаган"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Демейки серепчи"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Серепчи колдонмосу"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Сайттарга кирип, шилтемелер боюнча өткөнгө мүмкүнчүлүк берген колдонмолор."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Шилтемелерди ачуу"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Жумуш үчүн демейки жөндөөлөр"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Жеке мейкиндик үчүн демейки колдонмолор"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Түзмөккө оптималдаштырылды"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Башкалар"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Жок"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Демейки тутум)"</string>

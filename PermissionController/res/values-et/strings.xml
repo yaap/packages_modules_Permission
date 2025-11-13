@@ -235,15 +235,15 @@
     <string name="special_file_access_dialog" msgid="583804114020740610">"Kas lubada sellel rakendusel selle seadme või ühendatud salvestusseadme ühises salvestusruumis juurde pääseda mis tahes failidele ning neid muuta ja kustutada? See rakendus võib failidele juurde pääseda teilt luba küsimata."</string>
     <string name="permission_description_summary_generic" msgid="5401399408814903391">"Selle loaga rakendused saavad teha järgmist: <xliff:g id="DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="permission_description_summary_activity_recognition" msgid="2652850576497070146">"Selle loaga rakendused pääsevad juurde teie füüsilise tegevuse andmetele (nt kõndimise, ratta- ja autosõidu andmed, sammuloendur ning muud)"</string>
-    <string name="permission_description_summary_calendar" msgid="103329982944411010">"Selle loaga rakendustel on juurdepääs teie kalendrile"</string>
+    <string name="permission_description_summary_calendar" msgid="103329982944411010">"Selle loaga rakendustel on juurdepääs teie kalendrile."</string>
     <string name="permission_description_summary_call_log" msgid="7321437186317577624">"Selle loaga rakendused saavad telefoni kõnelogi lugeda ja sellesse kirjutada"</string>
     <string name="permission_description_summary_camera" msgid="108004375101882069">"Selle loaga rakendused saavad jäädvustada pilte ja videoid"</string>
-    <string name="permission_description_summary_contacts" msgid="2337798886460408996">"Selle loaga rakendustel on juurdepääs teie kontaktidele"</string>
-    <string name="permission_description_summary_location" msgid="2817531799933480694">"Selle loaga rakendustel on juurdepääs seadme asukohateabele"</string>
+    <string name="permission_description_summary_contacts" msgid="2337798886460408996">"Selle loaga rakendustel on juurdepääs teie kontaktidele."</string>
+    <string name="permission_description_summary_location" msgid="2817531799933480694">"Selle loaga rakendustel on juurdepääs seadme asukohateabele."</string>
     <string name="permission_description_summary_nearby_devices" msgid="8269183818275073741">"Selle loaga rakendused saavad leida lähedalasuvaid seadmeid, luua nendega ühenduse ja määrata nende suhtelise asukoha"</string>
     <string name="permission_description_summary_microphone" msgid="630834800308329907">"Selle loaga rakendused võivad heli salvestada"</string>
     <string name="permission_description_summary_phone" msgid="4515277217435233619">"Selle loaga rakendused saavad telefonikõnesid teha ja hallata"</string>
-    <string name="permission_description_summary_sensors" msgid="1836045815643119949">"Selle loaga rakendustel on juurdepääs teie eluliste näitajate andurite andmetele"</string>
+    <string name="permission_description_summary_sensors" msgid="1836045815643119949">"Selle loaga rakendustel on juurdepääs teie eluliste näitajate andurite andmetele."</string>
     <string name="permission_description_summary_sms" msgid="725999468547768517">"Selle loaga rakendused saavad SMS-sõnumeid saata ja vaadata"</string>
     <string name="permission_description_summary_storage" msgid="6575759089065303346">"Selle loaga rakendused pääsevad teie seadmes juurde fotodele, meediale ja failidele"</string>
     <string name="permission_description_summary_read_media_aural" msgid="3354728149930482199">"Selle loaga rakendused pääsevad selles seadmes juurde muusikale ja muudele helifailidele"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Digitaalse assistendi vaikerakendus"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digitaalse assistendi rakendus"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Abirakendused saavad aidata teid kuvatud ekraaniteabe alusel. Mõned rakendused toetavad integreeritud abi pakkumisel nii käivitusprogrammi kui ka häälsisendi teenuseid."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> soovitab"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Brauseri vaikerakendus"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Brauserirakendus"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Rakendused, mis võimaldavad juurdepääsu internetile ja kuvavad puudutatavaid linke"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Linkide avamine"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Vaikerakendused töö jaoks"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Privaatse ruumi vaikerakendused"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Seadme jaoks optimeeritud"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Muud"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Puudub"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Süsteemi vaikeseade)"</string>
@@ -489,7 +489,7 @@
     <string name="permgroupupgraderequestdetail_nearby_devices" msgid="6877531270654738614">"Kas lubada rakendusel &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; leida lähedalasuvaid seadmeid, nendega ühendada ja nende suhteline asukoht määrata? "<annotation id="link">"Lubage menüüs Seaded."</annotation></string>
     <string name="permgrouprequest_fineupgrade" msgid="2334242928821697672">"Kas muuta rakenduse <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> asukohale juurdepääsemise tase ligikaudsest täpseks?"</string>
     <string name="permgrouprequest_device_aware_fineupgrade" msgid="4453775952305587571">"Kas muuta rakenduse <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> juurdepääs asukohateabele seadmes &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; ligikaudsest täpseks?"</string>
-    <string name="permgrouprequest_coarselocation" msgid="7244605063736425232">"Kas lubada rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; juurdepääs selle seadme ligikaudsele asukohale?"</string>
+    <string name="permgrouprequest_coarselocation" msgid="7244605063736425232">"Kas lubada rakendusel &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; pääseda juurde selle seadme ligikaudsele asukohale?"</string>
     <string name="permgrouprequest_device_aware_coarselocation" msgid="8367540370912066757">"Kas lubada rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; juurdepääs seadme &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; ligikaudsele asukohale?"</string>
     <string name="permgrouprequest_finelocation_imagetext" msgid="1313062433398914334">"Täpne"</string>
     <string name="permgrouprequest_coarselocation_imagetext" msgid="8650605041483025297">"Ligikaudne"</string>

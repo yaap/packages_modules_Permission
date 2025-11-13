@@ -188,7 +188,7 @@
     <string name="app_permission_button_allow_all_files" msgid="1792232272599018825">"Autoriser la gestion de tous les fichiers"</string>
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Autoriser l\'accès aux fichiers multimédias uniquement"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Toujours autoriser"</string>
-    <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Autoriser seulement si l\'appli est utilisée"</string>
+    <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Autoriser seulement lorsque l\'appli est utilisée"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Toujours autoriser"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Toujours demander"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Ne pas autoriser"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Appli d\'assistant numérique par défaut"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Appli d\'assistant numérique"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Les applis d\'assistance peuvent se servir des infos à l\'écran pour vous aider. Certaines sont compatibles à la fois avec le lanceur d\'applications et les services de saisie vocale pour vous fournir une assistance intégrée."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recommandées par <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Appli de navigateur par défaut"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Appli de navigateur"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Applications qui vous permettent d\'accéder à Internet et d\'afficher des liens sur lesquels appuyer"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Ouverture des liens"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Par défaut pour utilisation pro"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Paramètres par défaut d\'Espace privé"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimisées pour l\'appareil"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Autres"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Aucune"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Application système par défaut)"</string>

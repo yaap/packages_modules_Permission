@@ -332,6 +332,7 @@
                 <action android:name="android.intent.action.MANAGE_UNUSED_APPS" />
                 <action android:name="android.intent.action.REVIEW_APP_DATA_SHARING_UPDATES" />
                 <action android:name="android.permission.action.REVIEW_PERMISSION_DECISIONS"/>
+                <action android:name="com.android.permissioncontroller.action.ADDITIONAL_PERMISSIONS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -356,6 +357,12 @@
             <intent-filter android:priority="1">
                 <action android:name="com.android.permissioncontroller.settingssearch.action.MANAGE_PERMISSION_APPS" />
                 <action android:name="com.android.permissioncontroller.settingssearch.action.REVIEW_PERMISSION_USAGE" />
+                <action android:name="com.android.permissioncontroller.devicestate.action.MANAGE_PERMISSIONS" />
+                <action android:name="com.android.permissioncontroller.devicestate.action.MANAGE_PERMISSION_APPS" />
+                <action android:name="com.android.permissioncontroller.devicestate.action.MANAGE_APP_PERMISSIONS" />
+                <action android:name="com.android.permissioncontroller.devicestate.action.MANAGE_APP_PERMISSION" />
+                <action android:name="com.android.permissioncontroller.devicestate.action.MANAGE_UNUSED_APPS" />
+                <action android:name="com.android.permissioncontroller.devicestate.action.ADDITIONAL_PERMISSIONS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -641,6 +648,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.android.permissioncontroller.permission.service.DeviceStateAppFunctionService"
+            android:permission="android.permission.BIND_APP_FUNCTION_SERVICE"
+            android:exported="true"
+            android:featureFlag="com.android.permission.flags.app_function_service_enabled">
+            <property android:name="android.app.appfunctions" android:value="appfunctions.xml"/>
+            <intent-filter>
+                <action android:name="android.app.appfunctions.AppFunctionService"/>
+            </intent-filter>
+        </service>
 
     </application>
 

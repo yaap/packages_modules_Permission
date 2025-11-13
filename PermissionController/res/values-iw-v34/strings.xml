@@ -22,5 +22,5 @@
     <string name="health_connect_title" msgid="2132233890867430855">"Health Connect"</string>
     <string name="health_connect_summary" msgid="815473513776882296">"ניהול הגישה של האפליקציות לנתוני בריאות"</string>
     <string name="location_settings" msgid="8863940440881290182">"גישה למיקום"</string>
-    <string name="mic_toggle_description" msgid="1504101620086616040">"לאפליקציות ולשירותים. אם ההגדרה מושבתת, יכול להיות שנתוני המיקרופון ישותפו בכל זאת כשתתבצע שיחה למספר חירום"</string>
+    <string name="mic_toggle_description" msgid="1504101620086616040">"לאפליקציות ולשירותים. גם כשההגדרה מושבתת, הטלפון עשוי לשתף נתונים מהמיקרופון אם תתקשר למספרי חירום"</string>
 </resources>

@@ -68,6 +68,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -738,8 +739,8 @@ public class BackupHelper {
         @NonNull
         static BackupSigningInfoState parseFromXml(@NonNull XmlPullParser parser)
                 throws IOException, XmlPullParserException {
-            Set<byte[]> currentCertDigests = new HashSet<>();
-            Set<byte[]> pastCertDigests = new HashSet<>();
+            Set<byte[]> currentCertDigests = new LinkedHashSet<>();
+            Set<byte[]> pastCertDigests = new LinkedHashSet<>();
 
             while (true) {
                 switch (parser.next()) {
@@ -794,8 +795,8 @@ public class BackupHelper {
          */
         @NonNull
         static BackupSigningInfoState fromSigningInfo(@NonNull SigningInfo signingInfo) {
-            Set<byte[]> currentCertDigests = new HashSet<>();
-            Set<byte[]> pastCertDigests = new HashSet<>();
+            Set<byte[]> currentCertDigests = new LinkedHashSet<>();
+            Set<byte[]> pastCertDigests = new LinkedHashSet<>();
 
             Signature[] apkContentsSigners = signingInfo.getApkContentsSigners();
             for (int i = 0; i < apkContentsSigners.length; i++) {

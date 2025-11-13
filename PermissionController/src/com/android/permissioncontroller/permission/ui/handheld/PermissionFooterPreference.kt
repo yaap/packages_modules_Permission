@@ -22,6 +22,7 @@ import android.view.View
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.R
 import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.widget.SettingsThemeHelper
 
 class PermissionFooterPreference : FooterPreference {
     constructor(context: Context) : super(context)
@@ -30,7 +31,9 @@ class PermissionFooterPreference : FooterPreference {
 
     init {
         if (SdkLevel.isAtLeastV()) {
-            layoutResource = R.layout.permission_footer_preference
+            if (!SettingsThemeHelper.isExpressiveTheme(context)) {
+                layoutResource = R.layout.permission_footer_preference
+            }
             if (context.resources.getBoolean(R.bool.config_permissionFooterPreferenceIconVisible)) {
                 setIconVisibility(View.VISIBLE)
             } else {

@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Apl pembantu digital lalai"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Apl pembantu digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Apl bantu dapat membantu anda berdasarkan maklumat daripada skrin yang sedang dilihat. Sesetengah apl menyokong perkhidmatan pelancar dan input suara untuk memberi anda bantuan bersepadu."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Disyorkan oleh <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Apl penyemak imbas lalai"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Apl penyemak imbas"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apl yang memberi anda akses kepada Internet dan memaparkan pautan yang anda ketik"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Membuka pautan"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Lalai untuk kerja"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Lalai untuk ruang privasi"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Dioptimumkan untuk peranti"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Lain-lain"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Tiada"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Ciri lalai sistem)"</string>
@@ -576,7 +576,7 @@
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"Imbas peranti"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"Ketepikan"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"Ketepikan makluman ini?"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"Semak tetapan keselamatan dan privasi anda pada bila-bila masa untuk menambahkan lagi perlindungan"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"Semak tetapan keselamatan dan privasi anda pada bila-bila masa untuk meningkatkan perlindungan"</string>
     <string name="safety_center_issue_card_confirm_dismiss_button" msgid="5884137843083634556">"Ketepikan"</string>
     <string name="safety_center_issue_card_cancel_dismiss_button" msgid="2874578798877712346">"Batal"</string>
     <string name="safety_center_entries_category_title" msgid="34356964062813115">"Tetapan"</string>

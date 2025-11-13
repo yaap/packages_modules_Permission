@@ -102,7 +102,7 @@
     <string name="permission_summary_disabled_by_policy_background_only" msgid="221995005556362660">"A házirend letiltotta a háttérhozzáférést"</string>
     <string name="permission_summary_enabled_by_policy_background_only" msgid="8287675974767104279">"A házirend engedélyezte a háttérhozzáférést"</string>
     <string name="permission_summary_enabled_by_policy_foreground_only" msgid="3844582916889767831">"A házirend engedélyezte az előtérbeli hozzáférést"</string>
-    <string name="permission_summary_enforced_by_admin" msgid="822702574117248700">"Rendszergazda által irányítva"</string>
+    <string name="permission_summary_enforced_by_admin" msgid="822702574117248700">"A rendszergazda felügyeli"</string>
     <string name="permission_summary_disabled_by_admin_background_only" msgid="3127091456731845646">"A rendszergazda letiltotta a háttérhozzáférést"</string>
     <string name="permission_summary_enabled_by_admin_background_only" msgid="9132423838440275757">"A rendszergazda engedélyezte a háttérhozzáférést"</string>
     <string name="permission_summary_enabled_by_admin_foreground_only" msgid="1298432715610745358">"A rendszergazda engedélyezte az előtérbeli hozzáférést"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Alapértelmezett digitális asszisztens"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digitális asszisztens app"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"A segédalkalmazások az aktuális képernyőn lévő információk alapján segíthetnek. Egyes alkalmazások egyaránt támogatják az indítási és a hangbeviteli szolgáltatásokat annak érdekében, hogy integrált segítséget nyújthassanak Önnek."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Javasolta: <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Alapértelmezett böngésző"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Böngészőalkalmazás"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Alkalmazások, amelyek hozzáférést biztosítanak az internethez, valamint koppintható linkeket jelenítenek meg"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Linkek megnyitása"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Munkahelyi alapértelmezett"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Alapértelmezett a magánterületnél"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Az eszközre optimalizálva"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Egyéb"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nincs"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Alapértelmezett)"</string>

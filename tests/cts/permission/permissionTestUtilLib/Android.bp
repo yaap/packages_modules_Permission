@@ -31,6 +31,7 @@ java_library {
         "androidx.test.uiautomator_uiautomator",
         "compatibility-device-util-axt",
         "androidx.test.ext.junit-nodeps",
+        "notification_flags_lib",
     ],
 
     sdk_version: "test_current",

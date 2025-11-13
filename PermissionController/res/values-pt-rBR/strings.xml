@@ -24,7 +24,7 @@
     <string name="dialog_close" msgid="6840699812532384661">"Fechar"</string>
     <string name="available" msgid="6007778121920339498">"Disponível"</string>
     <string name="blocked" msgid="9195547604866033708">"Bloqueado"</string>
-    <string name="on" msgid="280241003226755921">"Ativado"</string>
+    <string name="on" msgid="280241003226755921">"Ativada"</string>
     <string name="off" msgid="1438489226422866263">"Desativar"</string>
     <string name="uninstall_or_disable" msgid="4496612999740858933">"Desinstalar ou desativar"</string>
     <string name="app_not_found_dlg_title" msgid="6029482906093859756">"App não encontrado"</string>
@@ -252,7 +252,7 @@
     <string name="app_permission_most_recent_denied_summary" msgid="7659497197737708112">"Negado atualmente/último acesso: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="app_permission_never_accessed_summary" msgid="401346181461975090">"Nunca acessou"</string>
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"Negado/nunca acessado"</string>
-    <string name="allowed_header" msgid="7769277978004790414">"Permitido"</string>
+    <string name="allowed_header" msgid="7769277978004790414">"Permitidas"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Permitidos sempre"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Permitidos durante o uso"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Com permissão para acessar apenas mídia"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"App assistente digital padrão"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App assistente digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Apps assistivos podem ajudar com base nas informações da tela que você vê no momento. Alguns apps são compatíveis com a tela de início e com serviços de entrada de texto por voz para oferecer assistência integrada."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomendados por <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"App de navegação padrão"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"App de navegação"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps que permitem acesso à Internet e links clicáveis."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Abrir links"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Padrão para trabalho"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Padrão para o espaço privado"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Otimizados para o dispositivo"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Outros"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Nenhum"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Padrão do sistema)"</string>

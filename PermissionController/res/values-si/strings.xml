@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"පෙරනිමි ඩිජිටල් සහායක යෙදුම"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"ඩිජිටල් සහායක යෙදුම"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"සහායක යෙදුම්වලට ඔබ බලන තිරයෙන් ලැබෙන තොරතුරුවලට අනුව ඔබට උදවු කළ හැක. සමහර යෙදුම් ඔබට ඒකාබද්ධ සහය ලබා දීමට දියක්කරණය සහ හඬ ආදාන සේවා යන දෙකටම සහය දක්වති."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> විසින් නිර්දේශ කර ඇත"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"පෙරනිමි බ්‍රවුසර යෙදුම"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"බ්‍රවුසර යෙදුම"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"අන්තර්ජාලය වෙත ඔබට ප්‍රවේශය දෙන යෙදුම් සහ ඔබ තට්ටු කරන සංදර්ශන සබැඳි"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"සබැඳි විවෘත කිරීම"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"වැඩ සඳහා පෙරනිමි"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"රහසිගත අවකාශය සඳහා පෙරනිමිය"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"උපාංගය සඳහා ප්‍රශස්ත කර ඇත"</string>
     <string name="default_app_others" msgid="7793029848126079876">"වෙනත්"</string>
     <string name="default_app_none" msgid="9084592086808194457">"කිසිවක් නැත"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(පද්ධතිය පෙරනිමි)"</string>

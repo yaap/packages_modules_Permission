@@ -345,10 +345,10 @@
     <string name="app_perms_content_provider_7d_all_files" msgid="7962416229708835558">"Käytetty 7 viime päivän aikana • Kaikki tiedostot"</string>
     <string name="no_permissions_allowed" msgid="6081976856354669209">"Käyttöoikeuksia ei ole myönnetty"</string>
     <string name="no_permissions_denied" msgid="8159923922804043282">"Ei myöntämättömiä lupia"</string>
-    <string name="no_apps_allowed" msgid="7718822655254468631">"Ei yksikään sovellus"</string>
+    <string name="no_apps_allowed" msgid="7718822655254468631">"Ei sovelluksia"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Ei sovelluksia, joilla on käyttöoikeudet kaikille tiedostoille"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Ei sovelluksia, joilla on käyttöoikeudet vain medialle"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"Ei estettyjä sovelluksia"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"Ei sovelluksia"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Valittu"</string>
     <string name="settings" msgid="5409109923158713323">"Asetukset"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"<xliff:g id="SERVICE_NAME">%s</xliff:g> on saanut laitteen täydet käyttöoikeudet"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Oletusdigiavustajasovellus"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Digiavustajasovellus"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Avustajasovellukset voivat auttaa sinua näytöllä näkyvien tietojen perusteella. Jotkin sovellukset tukevat myös käynnistysohjelma- ja äänisyötepalveluja, joten ne voivat tarjota sinulle integroitua apua."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"<xliff:g id="OEM_NAME">%s</xliff:g> suosittelee"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Oletusselainsovellus"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Selainsovellus"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Sovellukset, joiden avulla voit käyttää internetiä ja jotka näyttävät napauttamasi linkit"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Linkkien avaaminen"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Työkäytön oletus"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Oletus yksityiselle tilalle"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimoitu laitteelle"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Muut"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ei mitään"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Järjestelmän oletusarvo)"</string>

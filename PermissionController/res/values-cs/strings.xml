@@ -79,7 +79,7 @@
     <string name="no_permissions" msgid="3881676756371148563">"Žádná oprávnění"</string>
     <string name="additional_permissions" msgid="5801285469338873430">"Další oprávnění"</string>
     <string name="app_permissions_info_button_label" msgid="7633312050729974623">"Otevřít informace o aplikaci"</string>
-    <string name="additional_permissions_more" msgid="5681220714755304407">"{count,plural, =1{# dalších}few{# další}many{# dalšího}other{# dalších}}"</string>
+    <string name="additional_permissions_more" msgid="5681220714755304407">"{count,plural, =1{a ještě #}few{a ještě # }many{a ještě #}other{a ještě #}}"</string>
     <string name="old_sdk_deny_warning" msgid="2382236998845153919">"Tato aplikace byla vytvořena pro starší verzi platformy Android. Pokud oprávnění neudělíte, může přestat fungovat podle původního záměru."</string>
     <string name="storage_supergroup_warning_allow" msgid="103093462784523190">"Tato aplikace byla vytvořena pro starší verzi platformy Android. Pokud toto oprávnění povolíte, bude povolen přístup k celému úložišti (včetně fotek, videí, hudby, zvuků a dalších souborů)."</string>
     <string name="storage_supergroup_warning_deny" msgid="6420765672683284347">"Tato aplikace byla vytvořena pro starší verzi platformy Android. Pokud toto oprávnění odepřete, bude odepřen přístup k celému úložišti (včetně fotek, videí, hudby, zvuků a dalších souborů)."</string>
@@ -197,8 +197,8 @@
     <string name="approximate_image_description" msgid="938803699637069884">"Přibližná poloha"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Používat přesnou polohu"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Když je přesná poloha vypnutá, aplikace mají přístup k vaší přibližné poloze"</string>
-    <string name="app_permission_title" msgid="2090897901051370711">"Oprávnění: <xliff:g id="PERM">%1$s</xliff:g>"</string>
-    <string name="app_permission_header" msgid="2951363137032603806">"Přístup této aplikace k oprávnění: <xliff:g id="PERM">%1$s</xliff:g>"</string>
+    <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g>: oprávnění"</string>
+    <string name="app_permission_header" msgid="2951363137032603806">"<xliff:g id="PERM">%1$s</xliff:g>: přístup této aplikace"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Přístup k <xliff:g id="PERM">%1$s</xliff:g> pro tuto aplikaci v zařízení <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Zobrazit všechna oprávnění aplikace <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Zobrazit všechny aplikace s tímto oprávněním"</string>
@@ -252,13 +252,13 @@
     <string name="app_permission_most_recent_denied_summary" msgid="7659497197737708112">"Zakázáno / naposledy použito: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="app_permission_never_accessed_summary" msgid="401346181461975090">"Žádný přístup"</string>
     <string name="app_permission_never_accessed_denied_summary" msgid="6596000497490905146">"Zakázáno / žádný přístup"</string>
-    <string name="allowed_header" msgid="7769277978004790414">"Povoleno"</string>
+    <string name="allowed_header" msgid="7769277978004790414">"Přístup povolen"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Povoleno pořád"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Povoleno pouze při používání"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Povolen pouze přístup k médiím"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Povolena správa všech souborů"</string>
     <string name="ask_header" msgid="2633816846459944376">"Pokaždé se zeptat"</string>
-    <string name="denied_header" msgid="903209608358177654">"Nepovoleno"</string>
+    <string name="denied_header" msgid="903209608358177654">"Přístup zakázán"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> na <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Zobrazit další aplikace s přístupem ke všem souborům"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 den}few{# dny}many{# dne}other{# dní}}"</string>
@@ -345,10 +345,10 @@
     <string name="app_perms_content_provider_7d_all_files" msgid="7962416229708835558">"Použito během posledních 7 dní • Všechny soubory"</string>
     <string name="no_permissions_allowed" msgid="6081976856354669209">"Nejsou povolena žádná oprávnění"</string>
     <string name="no_permissions_denied" msgid="8159923922804043282">"Nejsou zakázána žádná oprávnění"</string>
-    <string name="no_apps_allowed" msgid="7718822655254468631">"Žádné povolené aplikace"</string>
+    <string name="no_apps_allowed" msgid="7718822655254468631">"Přístup není povolen žádným aplikacím"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Žádné aplikace nejsou povolené pro všechny soubory"</string>
     <string name="no_apps_allowed_scoped" msgid="4908850477787659501">"Žádné aplikace nejsou povolené pouze pro média"</string>
-    <string name="no_apps_denied" msgid="7663435886986784743">"Žádné zakázané aplikace"</string>
+    <string name="no_apps_denied" msgid="7663435886986784743">"Přístup není zakázán žádným aplikacím"</string>
     <string name="car_permission_selected" msgid="180837028920791596">"Vybráno"</string>
     <string name="settings" msgid="5409109923158713323">"Nastavení"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"Služba <xliff:g id="SERVICE_NAME">%s</xliff:g> má plný přístup k vašemu zařízení"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Výchozí digitální asistent"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplikace digitálního asistenta"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Asistenční aplikace pomáhají na základě informací na zobrazené obrazovce. Některé aplikace podporují spouštěče i hlasový vstup, a nabízejí tak integrovanou asistenci."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Doporučuje: <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Výchozí prohlížeč"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Prohlížeč"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplikace, které vám umožňují přístup k internetu a zobrazují odkazy, na které můžete klepnout."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Otevírání odkazů"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Výchozí pracovní"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Výchozí pro soukromý prostor"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimalizováno pro zařízení"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Jiné"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Žádná aplikace"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Výchozí nastavení systému)"</string>
@@ -583,7 +583,7 @@
     <string name="safety_status_preference_title_and_summary_content_description" msgid="3511373256505058464">"Stav ochrany soukromí a zabezpečení. <xliff:g id="OVERALL_SAFETY_STATUS">%1$s</xliff:g>. <xliff:g id="SUMMARY_OF_DEVICE_STATUS">%2$s</xliff:g>"</string>
     <string name="security_settings" msgid="3808106921175271317">"Nastavení zabezpečení"</string>
     <string name="sensor_permissions_qs" msgid="1022267900031317472">"Oprávnění"</string>
-    <string name="safety_privacy_qs_tile_title" msgid="727301867710374052">"Zabezpečení a ochrana soukromí"</string>
+    <string name="safety_privacy_qs_tile_title" msgid="727301867710374052">"Zabezpečení a soukromí"</string>
     <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"Zkontrolovat stav"</string>
     <string name="privacy_controls_qs" msgid="5780144882040591169">"Nastavení ochrany soukromí"</string>
     <string name="security_settings_button_label_qs" msgid="8280343822465962330">"Další nastavení"</string>

@@ -40,7 +40,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.R;
@@ -49,6 +48,7 @@ import com.android.permissioncontroller.permission.ui.model.v31.ReviewOngoingUsa
 import com.android.permissioncontroller.permission.ui.model.v31.ReviewOngoingUsageViewModelFactory;
 import com.android.permissioncontroller.permission.utils.KotlinUtils;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ import java.util.Set;
 /**
  * A dialog listing the currently uses of camera, microphone, and location.
  */
-public class ReviewOngoingUsageFragment extends PreferenceFragmentCompat {
+public class ReviewOngoingUsageFragment extends SettingsBasePreferenceFragment {
     private static final String LOG_TAG = ReviewOngoingUsageFragment.class.getSimpleName();
 
     // TODO: Replace with OPSTR... APIs

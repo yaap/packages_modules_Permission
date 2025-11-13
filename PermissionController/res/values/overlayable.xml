@@ -154,6 +154,44 @@
 
             <!-- END Used in V30 only -->
 
+            <!-- START EXPRESSIVE PERMISSION DIALOG -->
+
+            <item type="style" name="PermissionGrantTitleMessageExpressive" />
+            <item type="style" name="PermissionGrantDetailMessageExpressive" />
+            <item type="style" name="PermissionGrantButtonListExpressive" />
+            <item type="style" name="PermissionGrantButtonExpressive" />
+
+            <item type="style" name="PermissionGrantButtonAllowExpressive" />
+            <item type="style" name="PermissionGrantButtonAllowForegroundExpressive" />
+            <item type="style" name="PermissionGrantButtonAllowOneTimeExpressive" />
+            <item type="style" name="PermissionGrantButtonAllowSelectedExpressive" />
+            <item type="style" name="PermissionGrantButtonAllowAllExpressive" />
+            <item type="style" name="PermissionGrantButtonDenyExpressive" />
+            <item type="style" name="PermissionGrantButtonNoUpgradeExpressive" />
+            <item type="style" name="PermissionGrantButtonDontAllowMoreExpressive" />
+
+            <item type="style" name="PermissionRationaleContentExpressive" />
+            <item type="style" name="PermissionRationaleTitleContainerExpressive" />
+            <item type="style" name="PermissionRationaleTitleIconExpressive" />
+            <item type="style" name="PermissionRationaleTitleMessageExpressive" />
+            <item type="style" name="PermissionRationaleSectionOuterContainerExpressive" />
+            <item type="style" name="PermissionRationaleSectionIconExpressive" />
+            <item type="style" name="PermissionRationaleSectionInnerContainerExpressive" />
+            <item type="style" name="PermissionRationaleSectionTitleExpressive" />
+            <item type="style" name="PermissionRationaleSectionMessageExpressive" />
+            <item type="style" name="PermissionRationaleSectionPurposeListExpressive" />
+            <item type="style" name="PermissionRationaleButtonContainerExpressive" />
+            <item type="style" name="PermissionRationaleBackButtonExpressive" />
+
+            <item type="style" name="EnhancedConfirmationDialogExpressive" />
+            <item type="style" name="EnhancedConfirmationDialogHeaderExpressive" />
+            <item type="style" name="EnhancedConfirmationDialogIconExpressive" />
+            <item type="style" name="EnhancedConfirmationDialogTitleExpressive" />
+            <item type="style" name="EnhancedConfirmationDialogDescExpressive" />
+            <item type="style" name="Theme.EnhancedConfirmationDialogActivityExpressive" />
+
+            <!-- END EXPRESSIVE PERMISSION DIALOG -->
+
             <!-- END PERMISSION GRANT DIALOG -->
 
             <!-- START PERMISSION RATIONALE DIALOG -->
@@ -378,6 +416,8 @@
             <item type="bool" name="config_showBrowserRole" />
             <item type="bool" name="config_showDialerRole" />
             <item type="bool" name="config_showSmsRole" />
+            <item type="string" name="config_recommendedAssistantsBy" />
+            <item type="string" name="config_recommendedAssistantsDescription" />
             <item type="string" name="config_recommendedAssistants" />
             <!-- END ROLE CONFIGS -->
 
@@ -476,7 +516,7 @@
             <item type="style" name="EnhancedConfirmationDialogButton" />
             <!-- END ENHANCED CONFIRMATION DIALOG -->
 
-            <!-- START STETINGS LIB HEADER -->
+            <!-- START SETTINGS LIB HEADER -->
             <item type="style" name="SettingsLibEntityHeader" />
             <item type="style" name="SettingsLibEntityHeaderContent" />
             <item type="style" name="SettingsLibEntityHeaderIcon" />
@@ -485,7 +525,67 @@
             <item type="bool" name="config_useCollapsingToolbarInPermissionSettings"/>
             <!-- END SETTINGS LIB HEADER -->
 
-        </policy>
+            <!-- START EXPRESSIVE DESIGN CONFIGS -->
+            <item type="bool" name="config_enableExpressiveDesignInPermissionSettings"/>
+            <!-- config for opting out of expressive permission dialogs -->
+            <item type="bool" name="config_enableExpressiveDesignInRequestPermissionDialog"/>
+            <!-- config for opting out of expressive enhanced confirmation dialogs -->
+            <item type="bool" name="config_enableExpressiveDesignInEnhancedConfirmationDialog"/>
+            <!-- END EXPRESSIVE DESIGN CONFIGS -->
+
+            <!-- START EXPRESSIVE DESIGN ATTRIBUTES -->
+
+            <!-- Start: SwitchCompat -->
+            <!-- Tint to apply to the thumb drawable. -->
+            <item type="attr" name="thumbTint" />
+            <!-- Blending mode used to apply the thumb tint. -->
+            <item type="attr" name="thumbTintMode" />
+            <!-- Drawable to use as the "track" that the switch thumb slides within. -->
+            <item type="attr" name="track" />
+            <!-- Tint to apply to the track. -->
+            <item type="attr" name="trackTint" />
+            <!-- Blending mode used to apply the track tint. -->
+            <item type="attr" name="trackTintMode" />
+            <!-- Amount of padding on either side of text within the switch thumb. -->
+            <item type="attr" name="thumbTextPadding" />
+            <!-- TextAppearance style for text displayed on the switch thumb. -->
+            <item type="attr" name="switchTextAppearance" />
+            <!-- Minimum width for the switch component -->
+            <item type="attr" name="switchMinWidth" />
+            <!-- Minimum space between the switch and caption text -->
+            <item type="attr" name="switchPadding" />
+            <!-- Whether to split the track and leave a gap for the thumb drawable. -->
+            <item type="attr" name="splitTrack" />
+            <!-- Whether to draw on/off text. -->
+            <item type="attr" name="showText" />
+            <!-- END: SwitchCompat -->
+
+            <!-- Start: MaterialSwitch -->
+            <!-- MaterialSwitch-specific state to represent presence of a thumb icon. -->
+            <item type="attr"  name="state_with_icon" />
+            <!-- Drawable used for the thumb icon that will be drawn upon the thumb. -->
+            <item type="attr" name="thumbIcon" />
+            <!-- Tint that will be applied to the thumb icon drawable. -->
+            <item type="attr" name="thumbIconTint" />
+            <!-- The blending mode used to apply the tint specified by thumbIconTint
+            to thumbIcon. The default mode is SRC_IN if not specified. -->
+            <item type="attr" name="thumbIconTintMode" />
+            <!-- Size of the thumb icon. -->
+            <item type="attr" name="thumbIconSize" />
+            <!-- Drawable used for the track decoration that will be drawn upon the track.
+            By default it will draw an outline on the track in the unchecked state. -->
+            <item type="attr" name="trackDecoration" />
+            <!-- Tint that will be applied to the track decoration drawable.. -->
+            <item type="attr" name="trackDecorationTint" />
+            <!-- The blending mode used to apply the tint specified by trackDecorationTint
+            to trackDecoration. The default mode is SRC_IN if not specified. -->
+            <item type="attr" name="trackDecorationTintMode" />
+            <!-- END: MaterialSwitch -->
+
+            <!-- Expressive switch style attribute -->
+            <item type="attr" name="expressiveSwitchStyle" />
+            <!-- END EXPRESSIVE DESIGN ATTRIBUTES -->
+         </policy>
 
     </overlayable>
 
@@ -646,6 +746,8 @@
             <item type="style" name="TextAppearance.SafetyCenter.ActionButton" />
             <item type="style" name="TextAppearance.SafetyCenter.ActionButton.Secondary" />
             <item type="style" name="TextAppearance.SafetyCenter.BrandChip" />
+
+            <item type="bool" name="config_enableExpressiveDesignInSafetyCenter"/>
         </policy>
     </overlayable>
 

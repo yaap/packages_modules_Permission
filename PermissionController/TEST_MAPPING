@@ -224,7 +224,7 @@
             "name": "CtsPermissionUiTestCases[com.google.android.permission.apex]"
         }
     ],
-    "wear-presubmit": [
+    "wear-cts-presubmit": [
         {
             "name": "CtsPermissionUiTestCases",
             "options": [

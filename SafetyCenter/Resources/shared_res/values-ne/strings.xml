@@ -41,7 +41,7 @@
     <string name="redirecting_error" msgid="8146983632878233202">"पेज खोल्न सकिएन"</string>
     <string name="resolving_action_error" msgid="371968886143262375">"अलर्ट समाधान गर्न सकिएन"</string>
     <string name="refresh_error" msgid="656062128422446177">"{count,plural, =1{सेटिङ जाँच गर्न सकिएन}other{सेटिङहरू जाँच गर्न सकिएन}}"</string>
-    <string name="work_profile_paused" msgid="7037400224040869079">"कार्य प्रोफाइल पज गरिएको छ"</string>
+    <string name="work_profile_paused" msgid="7037400224040869079">"वर्क प्रोफाइल पज गरिएको छ"</string>
     <string name="group_unknown_summary" msgid="6951386960814105641">"कुनै जानकारी उपलब्ध छैन"</string>
     <string name="notification_channel_group_name" msgid="7155072032524876859">"सुरक्षा तथा गोपनीयता"</string>
     <string name="notification_channel_name_information" msgid="2966444432152990166">"सिफारिसहरू"</string>

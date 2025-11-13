@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Стандартны лічбавы памочнік"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Лічбавы памочнік"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Праграмы-памочнікі кіруюцца інфармацыяй на экране. Для вашай зручнасці некаторыя з іх падтрымліваюць працу з панэллю запуску і галасавы ўвод."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Рэкамендуе <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Стандартны браўзер"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Браўзер"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Праграмы, якія даюць доступ да інтэрнэту і паказваюць спасылкі, на якія вы націскаеце"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Адкрыццё спасылак"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Стандартныя для працы"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Стандартныя праграмы для прыватнай прасторы"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Аптымізаваныя для прылады"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Іншыя"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Няма"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Стандартная сістэмная)"</string>

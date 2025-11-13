@@ -158,7 +158,8 @@ object PermissionMapping {
                 Manifest.permission_group.XR_TRACKING
 
             PLATFORM_PERMISSIONS[Manifest.permission.EYE_TRACKING_FINE] =
-                Manifest.permission_group.XR_TRACKING_SENSITIVE
+                Manifest.permission_group.XR_EYE_SENSITIVE
+
             PLATFORM_PERMISSIONS[Manifest.permission.HEAD_TRACKING] =
                 Manifest.permission_group.XR_TRACKING_SENSITIVE
             PLATFORM_PERMISSIONS[Manifest.permission.SCENE_UNDERSTANDING_FINE] =

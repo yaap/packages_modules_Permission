@@ -28,6 +28,7 @@ import androidx.preference.PreferenceViewHolder
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.utils.ResourceUtils
 import com.android.settingslib.widget.SelectorWithWidgetPreference
+import com.android.settingslib.widget.SettingsThemeHelper
 
 /**
  * A `SelectorWithWidgetPreference` with additional features:
@@ -59,8 +60,10 @@ class PermissionSelectorWithWidgetPreference : SelectorWithWidgetPreference {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        layoutResource = R.layout.permission_preference_selector_with_widget
-        widgetLayoutResource = R.layout.permission_preference_widget_radiobutton
+        if (!SettingsThemeHelper.isExpressiveTheme(context)) {
+            layoutResource = R.layout.permission_preference_selector_with_widget
+            widgetLayoutResource = R.layout.permission_preference_widget_radiobutton
+        }
         extraWidgetIconRes =
             ResourceUtils.getResourceIdByAttr(context, attrs, R.attr.extraWidgetIcon)
         extraWidgetIdRes = ResourceUtils.getResourceIdByAttr(context, attrs, R.attr.extraWidgetId)

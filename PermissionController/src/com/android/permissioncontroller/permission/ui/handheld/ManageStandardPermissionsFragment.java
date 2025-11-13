@@ -19,6 +19,10 @@ import static androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory;
 
 import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_MANAGER_PAGE_INTERACTION;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__ADDITIONAL_PERMISSIONS_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__STANDARD_PERMISSION_GROUP_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__UNUSED_APPS_LEARN_MORE_CLICKED;
 import static com.android.permissioncontroller.permission.ui.handheld.UtilsKt.pressBack;
 
 import android.app.Application;
@@ -32,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permission.flags.Flags;
+import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesUiInfoLiveData;
 import com.android.permissioncontroller.permission.ui.UnusedAppsFragment;
@@ -47,6 +52,7 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
     private static final String AUTO_REVOKE_KEY = "auto_revoke_key";
     private static final String LOG_TAG = ManageStandardPermissionsFragment.class.getSimpleName();
     private ManageStandardPermissionsViewModel mViewModel;
+    private long mSessionId;
 
     /**
      * Create a bundle with the arguments needed by this fragment
@@ -71,7 +77,7 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        mSessionId = getArguments().getLong(EXTRA_SESSION_ID, INVALID_SESSION_ID);
         final Application application = getActivity().getApplication();
         mViewModel = new ViewModelProvider(this, AndroidViewModelFactory.getInstance(application))
                 .get(ManageStandardPermissionsViewModel.class);
@@ -157,6 +163,12 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
                         android.R.attr.colorControlNormal));
                 additionalPermissionsPreference.setTitle(R.string.additional_permissions);
                 additionalPermissionsPreference.setOnPreferenceClickListener(preference -> {
+                    PermissionControllerStatsLog.write(
+                            PERMISSION_MANAGER_PAGE_INTERACTION,
+                            mSessionId,
+                            PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__ADDITIONAL_PERMISSIONS_CLICKED,
+                            null
+                    );
                     mViewModel.showCustomPermissions(this,
                             ManageCustomPermissionsFragment.createArgs(
                                     getArguments().getLong(EXTRA_SESSION_ID)));
@@ -195,6 +207,12 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
                 new PermissionFooterPreference(getContext());
         autoRevokePreference.setSummary(R.string.auto_revoked_apps_page_summary);
         autoRevokePreference.setLearnMoreAction(view -> {
+            PermissionControllerStatsLog.write(
+                    PERMISSION_MANAGER_PAGE_INTERACTION,
+                    mSessionId,
+                    PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__UNUSED_APPS_LEARN_MORE_CLICKED,
+                    null
+            );
             mViewModel.showAutoRevoke(this, UnusedAppsFragment.createArgs(
                             getArguments().getLong(EXTRA_SESSION_ID, INVALID_SESSION_ID)));
             });
@@ -210,6 +228,12 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
         autoRevokePreference.setTitle(R.string.auto_revoke_permission_notification_title);
         autoRevokePreference.setSummary(R.string.auto_revoke_setting_subtitle);
         autoRevokePreference.setOnPreferenceClickListener(preference -> {
+            PermissionControllerStatsLog.write(
+                    PERMISSION_MANAGER_PAGE_INTERACTION,
+                    mSessionId,
+                    PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__UNUSED_APPS_LEARN_MORE_CLICKED,
+                    null
+            );
             mViewModel.showAutoRevoke(this, UnusedAppsFragment.createArgs(
                     getArguments().getLong(EXTRA_SESSION_ID, INVALID_SESSION_ID)));
             return true;
@@ -219,6 +243,12 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
 
     @Override
     public void showPermissionApps(String permissionGroupName) {
+        PermissionControllerStatsLog.write(
+                PERMISSION_MANAGER_PAGE_INTERACTION,
+                mSessionId,
+                PERMISSION_MANAGER_PAGE_INTERACTION__ACTION__STANDARD_PERMISSION_GROUP_CLICKED,
+                permissionGroupName
+        );
         // If we return to this page within a reasonable time, prioritize loading data from the
         // permission group whose page we are going to, as that is group most likely to have changed
         getPermGroupsLiveData().setFirstLoadGroup(permissionGroupName);

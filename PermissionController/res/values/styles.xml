@@ -1467,7 +1467,8 @@
         <item name="android:contentDescription">@null</item>
     </style>
 
-    <style name="EnhancedConfirmationDialogTitle" parent="@android:style/TextAppearance.Material.Headline">
+    <style name="EnhancedConfirmationDialogTitle"
+           parent="@android:style/TextAppearance.Material.Headline">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
@@ -1485,7 +1486,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
     </style>
-    <style name="EnhancedConfirmationDialogDesc" parent="@android:style/TextAppearance.Material.Body1">
+    <style name="EnhancedConfirmationDialogDesc"
+           parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">start</item>

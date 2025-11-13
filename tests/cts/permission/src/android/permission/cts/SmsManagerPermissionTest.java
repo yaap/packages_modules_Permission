@@ -57,8 +57,8 @@ public class SmsManagerPermissionTest {
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         int subId = SubscriptionManager.getDefaultSmsSubscriptionId();
         mHasTelephony = mContext.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_TELEPHONY);
-        assumeTrue(mHasTelephony); // Don't run these tests if FEATURE_TELEPHONY is not available.
+                PackageManager.FEATURE_TELEPHONY_MESSAGING);
+        assumeTrue(mHasTelephony); // Don't run these tests if messaging is not available.
 
         Log.d("SmsManagerPermissionTest", "mSubId=" + subId);
 

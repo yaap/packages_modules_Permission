@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Standardapp for digital assistent"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"App for digital assistent"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Assistanceapps kan hjælpe dig på baggrund af oplysningerne på den aktuelle skærm. Nogle apps understøtter både startertjenester og tjenester til indtaling for at give dig integreret assistance."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Anbefalet af <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Standardapp til browsing"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Browserapp"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Apps, der giver dig adgang til internettet og viser links, som du trykker på"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Åbning af links"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Standard til arbejde"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Standard for privat område"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimeret til enheden"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Andre"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ingen"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Systemstandard)"</string>
@@ -587,8 +587,8 @@
     <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"Tjek status"</string>
     <string name="privacy_controls_qs" msgid="5780144882040591169">"Dine privatlivsindstillinger"</string>
     <string name="security_settings_button_label_qs" msgid="8280343822465962330">"Flere indstillinger"</string>
-    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"Kameraadgang"</string>
-    <string name="microphone_toggle_label_qs" msgid="8132912469813396552">"Mikrofonadgang"</string>
+    <string name="camera_toggle_label_qs" msgid="3880261453066157285">"Kamera­adgang"</string>
+    <string name="microphone_toggle_label_qs" msgid="8132912469813396552">"Mikrofon­adgang"</string>
     <string name="permissions_removed_qs" msgid="8957319130625294572">"Tilladelsen blev fjernet"</string>
     <string name="camera_usage_qs" msgid="4394233566086665994">"Se seneste kamerabrug"</string>
     <string name="microphone_usage_qs" msgid="8527666682168170417">"Se seneste mikrofonbrug"</string>
@@ -629,8 +629,8 @@
     <string name="safety_center_background_location_access_revoked" msgid="6972274943343442213">"Adgangen er ændret"</string>
     <string name="safety_center_view_recent_location_access" msgid="3524391299490678243">"Se seneste brug af lokation"</string>
     <string name="privacy_controls_title" msgid="7605929972256835199">"Privatlivsindstillinger"</string>
-    <string name="camera_toggle_title" msgid="1251201397431837666">"Kameraadgang"</string>
-    <string name="mic_toggle_title" msgid="2649991093496110162">"Mikrofonadgang"</string>
+    <string name="camera_toggle_title" msgid="1251201397431837666">"Kamera­adgang"</string>
+    <string name="mic_toggle_title" msgid="2649991093496110162">"Mikrofon­adgang"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"For apps og tjenester"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"For apps og tjenester: Hvis denne indstilling er deaktiveret, deles mikrofondata muligvis stadig, når du ringer til et alarmnummer."</string>
     <string name="location_settings_subtitle" msgid="2328360561197430695">"Se de apps og tjenester, der har adgang til lokation"</string>

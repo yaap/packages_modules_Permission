@@ -26,10 +26,12 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.utils.Utils;
+import com.android.settingslib.widget.ExpressiveDesignEnabledProvider;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 /** Activity for the Safety Center Quick Settings Activity */
-public class SafetyCenterQsActivity extends FragmentActivity {
+public class SafetyCenterQsActivity extends FragmentActivity
+        implements ExpressiveDesignEnabledProvider {
 
     @Override
     @SuppressWarnings("NewApi")
@@ -70,5 +72,12 @@ public class SafetyCenterQsActivity extends FragmentActivity {
                                                 PermissionManager.EXTRA_PERMISSION_USAGES,
                                                 PermissionGroupUsage.class)))
                 .commit();
+    }
+
+    @Override
+    public boolean isExpressiveDesignEnabled() {
+        // Expressive design is pre-emptively disabled for Safety Center until implementation is
+        // complete.
+        return false;
     }
 }

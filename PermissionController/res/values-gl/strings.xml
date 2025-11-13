@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Aplicación de asistente dixital predeterminada"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Aplicación de asistente dixital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"As aplicacións de asistencia pódente axudar en función da información que apareza na pantalla en cada momento. Algunhas aplicacións son compatibles tanto cos servizos de entrada de voz como co launcher para proporcionarche unha asistencia integrada."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomendadas por <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Aplicación de navegador predeterminada"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Aplicación de navegador"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Aplicacións que che permiten acceder a Internet e abrir as ligazóns que tocas."</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Apertura de ligazóns"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Predeterminadas para o traballo"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Aplicacións predeterminadas do espazo privado"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Optimizadas para o dispositivo"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Outras"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Ningunha"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Opción predeterminada do sistema)"</string>

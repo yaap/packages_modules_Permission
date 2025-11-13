@@ -35,7 +35,7 @@
     <string name="grant_dialog_button_more_info" msgid="213350268561945193">"Още информация"</string>
     <string name="grant_dialog_button_allow_all" msgid="5939066403732409516">"Разрешаване на пълен достъп"</string>
     <string name="grant_dialog_button_always_allow_all" msgid="1719900027660252167">"Винаги да се разрешава пълен достъп"</string>
-    <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"Разрешаване на ограничения достъп"</string>
+    <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"Разрешаване на ограничен достъп"</string>
     <string name="grant_dialog_button_allow_selected_photos" msgid="5497042471576153842">"Избиране на снимки и видеоклипове"</string>
     <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"Избиране на още"</string>
     <string name="grant_dialog_button_dont_select_more" msgid="6643552729129461268">"Без избиране на още"</string>
@@ -192,7 +192,7 @@
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Винаги да се разрешава пълен достъп"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Извеждане на запитване всеки път"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Забраняване"</string>
-    <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Разрешаване на ограничения достъп"</string>
+    <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Разрешаване на ограничен достъп"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Точно местоположение"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"Приблизително местоположение"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Използване на точното местоположе­ние"</string>
@@ -358,6 +358,7 @@
     <string name="role_assistant_label" msgid="4727586018198208128">"Дигитален асист.: Станд. прил."</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Прилож. за дигитален асистент"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Помощните приложения могат да ви помагат въз основа на информацията от екрана, който преглеждате. Някои от тях предлагат поддръжка за стартовия панел и услугите за гласово въвеждане, за да ви предоставят интегрирана помощ."</string>
+    <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Препоръчани от <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Стандартно прилож. за браузър"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Приложение за браузър"</string>
     <string name="role_browser_description" msgid="3465253637499842671">"Приложения, които ви дават достъп до интернет и показват връзки, които можете да докоснете"</string>
@@ -440,7 +441,6 @@
     <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Отваряне на връзки"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"По подразбиране за работа"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Стандартни за частното пространство"</string>
-    <string name="default_app_recommended" msgid="5669584821778942909">"Оптимизирано за устройството"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Други"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Няма"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Стандартно за системата)"</string>

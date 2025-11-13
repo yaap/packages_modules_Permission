@@ -69,6 +69,7 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -84,6 +85,7 @@ class HibernationPolicyTest {
         private val application = Mockito.mock(PermissionControllerApplication::class.java)
         private const val USER_SETUP_INCOMPLETE = 0
         private const val USER_SETUP_COMPLETE = 1
+        private const val IS_DEMO_MODE = 1
         private const val TEST_PKG_NAME = "test.package"
     }
 
@@ -109,6 +111,7 @@ class HibernationPolicyTest {
                 .mockStatic(PermissionControllerApplication::class.java)
                 .mockStatic(DeviceConfig::class.java)
                 .mockStatic(Settings.Secure::class.java)
+                .mockStatic(Settings.Global::class.java)
                 .strictness(Strictness.LENIENT)
                 .startMocking()
         `when`(PermissionControllerApplication.get()).thenReturn(application)
@@ -211,6 +214,48 @@ class HibernationPolicyTest {
 
         receiver.onReceive(context, Intent(Intent.ACTION_TIMEZONE_CHANGED))
         assertAdjustedTime(systemTimeSnapshot, realtimeSnapshot)
+    }
+
+    @Test
+    fun onReceive_schedulesJob() {
+        receiver.onReceive(context, Intent(Intent.ACTION_BOOT_COMPLETED))
+
+        verify(jobScheduler).schedule(any())
+    }
+
+    @Test
+    fun onReceive_demoMode_doesNotScheduleJob() {
+        `when`(Settings.Global.getInt(any(), eq(Settings.Global.DEVICE_DEMO_MODE), anyInt()))
+            .thenReturn(IS_DEMO_MODE)
+
+        receiver.onReceive(context, Intent(Intent.ACTION_BOOT_COMPLETED))
+
+        verifyNoInteractions(jobScheduler)
+    }
+
+    @Test
+    fun onReceive_userSetupCompletesAndDemoMode_cancelsJob() {
+        `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
+            .thenReturn(USER_SETUP_INCOMPLETE)
+
+        receiver.onReceive(context, Intent(Intent.ACTION_BOOT_COMPLETED))
+
+        val contentObserverCaptor = ArgumentCaptor.forClass(ContentObserver::class.java)
+        val uri = Settings.Secure.getUriFor(Settings.Secure.USER_SETUP_COMPLETE)
+        verify(contentResolver).registerContentObserver(
+            eq(uri),
+            anyBoolean(),
+            contentObserverCaptor.capture())
+        val contentObserver = contentObserverCaptor.value
+        `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
+            .thenReturn(USER_SETUP_COMPLETE)
+
+        `when`(Settings.Global.getInt(any(), eq(Settings.Global.DEVICE_DEMO_MODE), anyInt()))
+            .thenReturn(IS_DEMO_MODE)
+
+        contentObserver.onChange(/* selfChange= */ false, uri)
+
+        verify(jobScheduler).cancel(Constants.HIBERNATION_JOB_ID)
     }
 
     @Test
