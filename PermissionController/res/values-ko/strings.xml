@@ -233,7 +233,7 @@
     <string name="last_opened_summary_short" msgid="1646067226191176825">"마지막 실행 날짜: <xliff:g id="DATE">%s</xliff:g>"</string>
     <string name="app_permission_footer_special_file_access" msgid="1884202176147657788">"모든 파일 관리를 허용하면 앱이 이 기기의 공통 저장용량 또는 연결된 저장장치에 있는 모든 파일에 액세스하거나 이러한 파일을 수정, 삭제할 수 있습니다. 앱이 사용자에게 요청하지 않고도 파일에 액세스할 수 있습니다."</string>
     <string name="special_file_access_dialog" msgid="583804114020740610">"앱이 이 기기 또는 연결된 저장장치에 있는 파일에 액세스하거나 이러한 파일을 수정, 삭제하도록 허용하시겠습니까? 앱이 사용자에게 요청하지 않고도 파일에 액세스할 수 있습니다."</string>
-    <string name="permission_description_summary_generic" msgid="5401399408814903391">"이 권한이 있는 앱은 다음 작업을 할 수 있습니다: <xliff:g id="DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="permission_description_summary_generic" msgid="5401399408814903391">"이 권한이 있는 앱은 다음 작업을 할 수 있습니다: <xliff:g id="DESCRIPTION">%1$s</xliff:g>."</string>
     <string name="permission_description_summary_activity_recognition" msgid="2652850576497070146">"이 권한이 있는 앱은 걷기, 자전거 타기, 운전, 걸음 수 등 내 신체 활동 정보에 액세스할 수 있습니다."</string>
     <string name="permission_description_summary_calendar" msgid="103329982944411010">"이 권한이 있는 앱은 내 캘린더에 액세스할 수 있습니다."</string>
     <string name="permission_description_summary_call_log" msgid="7321437186317577624">"이 권한이 있는 앱은 전화 통화 기록을 읽고 쓸 수 있습니다."</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> 앱을 기본 내비게이션 앱으로 설정하시겠습니까?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"권한 필요 없음"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 알림과 상호작용하고 전화, SMS, 연락처, 캘린더에 대한 권한을 갖게 됩니다."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 알림과 상호작용하고 앱의 콘텐츠를 연결된 기기로 스트리밍할 수 있게 됩니다."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"서비스는 휴대전화의 사진, 미디어, 알림을 다른 기기로 공유합니다."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"기본 메모 앱"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"메모 앱"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"이 기기에서 메모할 수 있게 해주는 앱"</string>
@@ -663,7 +661,7 @@
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"위치 데이터 공유 방법을 변경한 앱 검토"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"다음 앱에서 위치 데이터 공유 방법을 변경했습니다. 이전에 위치 데이터를 공유하지 않았던 앱이거나, 이제 광고 또는 마케팅 목적으로 데이터를 공유하는 앱일 수 있습니다."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"이 앱의 개발자가 앱 스토어에 데이터 공유 관행에 관한 정보를 제공했습니다. 추후 업데이트될 수 있습니다.\n\n데이터 공유 관행은 앱 버전, 데이터 사용 방식, 사용자의 지역과 연령에 따라 다를 수 있습니다."</string>
-    <string name="learn_about_data_sharing" msgid="4200480587079488045">"데이터 공유 자세히 알아보기"</string>
+    <string name="learn_about_data_sharing" msgid="4200480587079488045">"데이터 공유에 관해 알아보기"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"이제 위치 데이터가 서드 파티와 공유됩니다."</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"이제 위치 데이터가 광고 또는 마케팅을 위해 서드 파티와 공유됩니다."</string>
     <string name="updated_in_last_days" msgid="8371811947153042322">"{count,plural, =0{1일 이내에 업데이트됨}=1{1일 이내에 업데이트됨}other{#일 이내에 업데이트됨}}"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"휴대전화를 확인하세요"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"휴대전화에 연결할 수 없습니다"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"다시 시도하시겠습니까?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"에이전트"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"앱에서 정보에 액세스하거나 작업을 실행할 수 있는 에이전트"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"에이전트"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"이 기기의 에이전트 액세스 관리"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"사용 가능한 에이전트 앱이 없습니다"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"이 기능을 사용 설정하려면 기기에 에이전트 앱을 설치하세요"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"앱 액세스"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"이 에이전트가 정보를 확인하고 나를 대신하여 작업을 실행하기 위해 액세스할 수 있는 앱 및 설정"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g>에 액세스하는 데 사용할 수 있는 앱이 없습니다"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"시스템"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"앱"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"에이전트의 액세스 권한"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"이 앱에서 정보에 액세스하고 나를 대신하여 작업을 실행할 수 있는 에이전트"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"기기 설정"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> 앱이 <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> 앱의 에이전트가 되도록 허용하시겠습니까?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"이 에이전트가 <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>에 액세스하여 정보를 확인하고 작업을 실행할 수 있게 됩니다."</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"허용"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"허용 안 함"</string>
 </resources>

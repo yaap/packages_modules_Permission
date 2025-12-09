@@ -29,12 +29,14 @@ import static java.util.Locale.ROOT;
 import static java.util.Objects.requireNonNull;
 
 import android.annotation.StringRes;
+import android.content.Context;
 import android.content.res.Resources;
 import android.safetycenter.config.SafetyCenterConfig;
 import android.safetycenter.config.SafetySource;
 import android.safetycenter.config.SafetySourcesGroup;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.android.modules.utils.build.SdkLevel;
@@ -106,6 +108,28 @@ public final class SafetyCenterConfigParser {
      */
     public static SafetyCenterConfig parseXmlResource(InputStream in, Resources resources)
             throws ParseException {
+        return parseXmlResource(in, resources, null);
+    }
+
+    /**
+     * Parses and validates the given XML resource into a {@link SafetyCenterConfig} object.
+     *
+     * <p>It throws a {@link ParseException} if the given XML resource does not comply with the
+     * safety_center_config.xsd schema.
+     *
+     * <p>This method is for testing purposes only.
+     *
+     * @param in the raw XML resource representing the Safety Center configuration
+     * @param context the {@link Context} of the test that contains the Safety Center configuration
+     */
+    public static SafetyCenterConfig parseXmlResourceForTest(InputStream in, Context context)
+            throws ParseException {
+        return parseXmlResource(in, context.getResources(), context.getPackageName());
+    }
+
+    private static SafetyCenterConfig parseXmlResource(
+            InputStream in, Resources resources, @Nullable String packageNameOverride)
+            throws ParseException {
         requireNonNull(in);
         requireNonNull(resources);
         try {
@@ -117,7 +141,8 @@ public final class SafetyCenterConfigParser {
             }
             parser.nextTag();
             validateElementStart(parser, TAG_SAFETY_CENTER_CONFIG);
-            SafetyCenterConfig safetyCenterConfig = parseSafetyCenterConfig(parser, resources);
+            SafetyCenterConfig safetyCenterConfig =
+                    parseSafetyCenterConfig(parser, resources, packageNameOverride);
             if (parser.getEventType() == TEXT && parser.isWhitespace()) {
                 parser.next();
             }
@@ -131,7 +156,7 @@ public final class SafetyCenterConfigParser {
     }
 
     private static SafetyCenterConfig parseSafetyCenterConfig(
-            XmlPullParser parser, Resources resources)
+            XmlPullParser parser, Resources resources, @Nullable String packageNameOverride)
             throws XmlPullParserException, IOException, ParseException {
         validateElementHasNoAttribute(parser, TAG_SAFETY_CENTER_CONFIG);
         parser.nextTag();
@@ -141,7 +166,8 @@ public final class SafetyCenterConfigParser {
         parser.nextTag();
         while (parser.getEventType() == START_TAG
                 && parser.getName().equals(TAG_SAFETY_SOURCES_GROUP)) {
-            builder.addSafetySourcesGroup(parseSafetySourcesGroup(parser, resources));
+            builder.addSafetySourcesGroup(
+                    parseSafetySourcesGroup(parser, resources, packageNameOverride));
         }
         validateElementEnd(parser, TAG_SAFETY_SOURCES_CONFIG);
         parser.nextTag();
@@ -155,7 +181,7 @@ public final class SafetyCenterConfigParser {
     }
 
     private static SafetySourcesGroup parseSafetySourcesGroup(
-            XmlPullParser parser, Resources resources)
+            XmlPullParser parser, Resources resources, @Nullable String packageNameOverride)
             throws XmlPullParserException, IOException, ParseException {
         String name = TAG_SAFETY_SOURCES_GROUP;
         SafetySourcesGroup.Builder builder = new SafetySourcesGroup.Builder();
@@ -167,7 +193,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCES_GROUP_TITLE:
                     builder.setTitleResId(
@@ -175,7 +202,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCES_GROUP_SUMMARY:
                     builder.setSummaryResId(
@@ -183,7 +211,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCES_GROUP_STATELESS_ICON_TYPE:
                     builder.setStatelessIconType(
@@ -191,7 +220,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCES_GROUP_TYPE:
                     if (SdkLevel.isAtLeastU()) {
@@ -200,7 +230,8 @@ public final class SafetyCenterConfigParser {
                                         parser.getAttributeValue(i),
                                         name,
                                         parser.getAttributeName(i),
-                                        resources));
+                                        resources,
+                                        packageNameOverride));
                     } else {
                         throw attributeUnexpected(name, parser.getAttributeName(i));
                     }
@@ -226,7 +257,9 @@ public final class SafetyCenterConfigParser {
                 default:
                     break loop;
             }
-            builder.addSafetySource(parseSafetySource(parser, resources, type, parser.getName()));
+            builder.addSafetySource(
+                    parseSafetySource(
+                            parser, resources, type, parser.getName(), packageNameOverride));
         }
         validateElementEnd(parser, name);
         parser.nextTag();
@@ -238,7 +271,11 @@ public final class SafetyCenterConfigParser {
     }
 
     private static SafetySource parseSafetySource(
-            XmlPullParser parser, Resources resources, int safetySourceType, String name)
+            XmlPullParser parser,
+            Resources resources,
+            int safetySourceType,
+            String name,
+            @Nullable String packageNameOverride)
             throws XmlPullParserException, IOException, ParseException {
         SafetySource.Builder builder = new SafetySource.Builder(safetySourceType);
         for (int i = 0; i < parser.getAttributeCount(); i++) {
@@ -249,7 +286,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_PACKAGE_NAME:
                     builder.setPackageName(
@@ -257,7 +295,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_TITLE:
                     builder.setTitleResId(
@@ -265,7 +304,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_TITLE_FOR_WORK:
                     builder.setTitleForWorkResId(
@@ -273,7 +313,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_TITLE_FOR_PRIVATE_PROFILE:
                     if (SdkLevel.isAtLeastV()) {
@@ -283,7 +324,8 @@ public final class SafetyCenterConfigParser {
                                             parser.getAttributeValue(i),
                                             name,
                                             parser.getAttributeName(i),
-                                            resources));
+                                            resources,
+                                            packageNameOverride));
                         } else {
                             Log.i(
                                     TAG,
@@ -301,7 +343,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_INTENT_ACTION:
                     builder.setIntentAction(
@@ -309,7 +352,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_PROFILE:
                     builder.setProfile(
@@ -317,7 +361,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_INITIAL_DISPLAY_STATE:
                     builder.setInitialDisplayState(
@@ -325,7 +370,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_MAX_SEVERITY_LEVEL:
                     builder.setMaxSeverityLevel(
@@ -333,7 +379,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_SEARCH_TERMS:
                     builder.setSearchTermsResId(
@@ -341,7 +388,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_LOGGING_ALLOWED:
                     builder.setLoggingAllowed(
@@ -349,7 +397,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_REFRESH_ON_PAGE_OPEN_ALLOWED:
                     builder.setRefreshOnPageOpenAllowed(
@@ -357,7 +406,8 @@ public final class SafetyCenterConfigParser {
                                     parser.getAttributeValue(i),
                                     name,
                                     parser.getAttributeName(i),
-                                    resources));
+                                    resources,
+                                    packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_NOTIFICATIONS_ALLOWED:
                     if (SdkLevel.isAtLeastU()) {
@@ -366,7 +416,8 @@ public final class SafetyCenterConfigParser {
                                         parser.getAttributeValue(i),
                                         name,
                                         parser.getAttributeName(i),
-                                        resources));
+                                        resources,
+                                        packageNameOverride));
                     } else {
                         throw attributeUnexpected(name, parser.getAttributeName(i));
                     }
@@ -378,7 +429,8 @@ public final class SafetyCenterConfigParser {
                                         parser.getAttributeValue(i),
                                         name,
                                         parser.getAttributeName(i),
-                                        resources));
+                                        resources,
+                                        packageNameOverride));
                     } else {
                         throw attributeUnexpected(name, parser.getAttributeName(i));
                     }
@@ -390,7 +442,8 @@ public final class SafetyCenterConfigParser {
                                         parser.getAttributeValue(i),
                                         name,
                                         parser.getAttributeName(i),
-                                        resources);
+                                        resources,
+                                        packageNameOverride);
                         String[] splits = commaSeparatedHashes.split(",");
                         for (int j = 0; j < splits.length; j++) {
                             builder.addPackageCertificateHash(splits[j]);
@@ -468,9 +521,14 @@ public final class SafetyCenterConfigParser {
     }
 
     private static int parseInteger(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
-        String valueToParse = getValueToParse(valueString, parent, name, resources);
+        String valueToParse =
+                getValueToParse(valueString, parent, name, resources, packageNameOverride);
         try {
             return Integer.parseInt(valueToParse);
         } catch (NumberFormatException e) {
@@ -479,10 +537,15 @@ public final class SafetyCenterConfigParser {
     }
 
     private static boolean parseBoolean(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
         String valueToParse =
-                getValueToParse(valueString, parent, name, resources).toLowerCase(ROOT);
+                getValueToParse(valueString, parent, name, resources, packageNameOverride)
+                        .toLowerCase(ROOT);
         if (valueToParse.equals("true")) {
             return true;
         } else if (!valueToParse.equals("false")) {
@@ -493,7 +556,11 @@ public final class SafetyCenterConfigParser {
 
     @StringRes
     private static int parseStringResourceName(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
         if (valueString.isEmpty()) {
             throw new ParseException(
@@ -512,7 +579,7 @@ public final class SafetyCenterConfigParser {
                             "Resource name \"%s\" in %s.%s does not specify a package",
                             valueString, parent, name));
         }
-        String packageName = colonSplit[0];
+        String packageName = packageNameOverride == null ? colonSplit[0] : packageNameOverride;
         String[] slashSplit = colonSplit[1].split("/", 2);
         if (slashSplit.length != 2 || slashSplit[0].isEmpty()) {
             throw new ParseException(
@@ -539,14 +606,23 @@ public final class SafetyCenterConfigParser {
     }
 
     private static String parseStringResourceValue(
-            String valueString, String parent, String name, Resources resources) {
-        return getValueToParse(valueString, parent, name, resources);
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride) {
+        return getValueToParse(valueString, parent, name, resources, packageNameOverride);
     }
 
     private static int parseStatelessIconType(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
-        String valueToParse = getValueToParse(valueString, parent, name, resources);
+        String valueToParse =
+                getValueToParse(valueString, parent, name, resources, packageNameOverride);
         switch (valueToParse) {
             case ENUM_STATELESS_ICON_TYPE_NONE:
                 return SafetySourcesGroup.STATELESS_ICON_TYPE_NONE;
@@ -558,9 +634,14 @@ public final class SafetyCenterConfigParser {
     }
 
     private static int parseGroupType(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
-        String valueToParse = getValueToParse(valueString, parent, name, resources);
+        String valueToParse =
+                getValueToParse(valueString, parent, name, resources, packageNameOverride);
         switch (valueToParse) {
             case ENUM_GROUP_TYPE_STATEFUL:
                 return SafetySourcesGroup.SAFETY_SOURCES_GROUP_TYPE_STATEFUL;
@@ -574,9 +655,14 @@ public final class SafetyCenterConfigParser {
     }
 
     private static int parseProfile(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
-        String valueToParse = getValueToParse(valueString, parent, name, resources);
+        String valueToParse =
+                getValueToParse(valueString, parent, name, resources, packageNameOverride);
         switch (valueToParse) {
             case ENUM_PROFILE_PRIMARY:
                 return SafetySource.PROFILE_PRIMARY;
@@ -588,9 +674,14 @@ public final class SafetyCenterConfigParser {
     }
 
     private static int parseInitialDisplayState(
-            String valueString, String parent, String name, Resources resources)
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
-        String valueToParse = getValueToParse(valueString, parent, name, resources);
+        String valueToParse =
+                getValueToParse(valueString, parent, name, resources, packageNameOverride);
         switch (valueToParse) {
             case ENUM_INITIAL_DISPLAY_STATE_ENABLED:
                 return SafetySource.INITIAL_DISPLAY_STATE_ENABLED;
@@ -604,9 +695,15 @@ public final class SafetyCenterConfigParser {
     }
 
     private static String getValueToParse(
-            String valueString, String parent, String name, Resources resources) {
+            String valueString,
+            String parent,
+            String name,
+            Resources resources,
+            @Nullable String packageNameOverride) {
         try {
-            int id = parseStringResourceName(valueString, parent, name, resources);
+            int id =
+                    parseStringResourceName(
+                            valueString, parent, name, resources, packageNameOverride);
             return resources.getString(id);
         } catch (ParseException e) {
             return valueString;

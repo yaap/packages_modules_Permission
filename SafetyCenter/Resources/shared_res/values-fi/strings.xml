@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="scanning_title" msgid="5424849039854311398">"Skannataan"</string>
+    <string name="scanning_title" msgid="5424849039854311398">"Tarkistetaan"</string>
     <string name="loading_summary" msgid="3740846439782713910">"Tarkistetaan laiteasetuksia…"</string>
     <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"Hyvältä näyttää"</string>
     <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"Ongelmia ei havaittu"</string>

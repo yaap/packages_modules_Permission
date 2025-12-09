@@ -92,7 +92,8 @@ fun WearEnhancedConfirmationScreen(
             showTimeText = false,
             title = title,
             subtitle = message,
-            image = R.drawable.ic_android_security_privacy,
+            imageBuilder =
+                WearPermissionIconBuilder.builder(R.drawable.ic_android_security_privacy),
             content = {
                 item {
                     Chip(

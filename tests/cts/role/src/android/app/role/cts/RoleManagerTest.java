@@ -1625,6 +1625,39 @@ public class RoleManagerTest {
         });
     }
 
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_SUPERVISION_ROLE_ENABLED)
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    public void canGetRoleHoldersWithManageRoleHoldersPermission() throws Exception {
+        assumeTrue(sRoleManager.isRoleAvailable(ROLE_NAME));
+        addRoleHolder(ROLE_NAME, APP_PACKAGE_NAME);
+
+        assertThat(callWithShellPermissionIdentity(
+                () -> sRoleManager.getRoleHolders(ROLE_NAME),
+                       android.Manifest.permission.MANAGE_ROLE_HOLDERS))
+                .contains(APP_PACKAGE_NAME);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_SUPERVISION_ROLE_ENABLED)
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    public void canGetRoleHoldersWithGetRoleHoldersPermission() throws Exception {
+        assumeTrue(sRoleManager.isRoleAvailable(ROLE_NAME));
+        addRoleHolder(ROLE_NAME, APP_PACKAGE_NAME);
+
+        assertThat(callWithShellPermissionIdentity(
+                () -> sRoleManager.getRoleHolders(ROLE_NAME),
+                       android.Manifest.permission.GET_ROLE_HOLDERS))
+                .contains(APP_PACKAGE_NAME);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_SUPERVISION_ROLE_ENABLED)
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+    public void cannotGetRoleHoldersWithoutPermissions() {
+        assertThrows(SecurityException.class, () -> sRoleManager.getRoleHolders(ROLE_NAME));
+    }
+
     @NonNull
     private List<String> getRoleHolders(@NonNull String roleName) throws Exception {
         return callWithShellPermissionIdentity(() -> sRoleManager.getRoleHolders(roleName));

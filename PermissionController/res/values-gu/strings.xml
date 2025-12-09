@@ -404,15 +404,13 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"શું <xliff:g id="APP_NAME">%1$s</xliff:g>ને તમારી ડિફૉલ્ટ નૅવિગેશન ઍપ તરીકે સેટ કરીએ?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"કોઈ પરવાનગી જરૂરી નથી"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g>ને તમારા નોટિફિકેશન સાથે ક્રિયાપ્રતિક્રિયા કરવાની અને તમારા ફોન, SMS, સંપર્કો તેમજ Calendarની પરવાનગીઓ ઍક્સેસ કરવાની મંજૂરી મળશે."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g>ને તમારા નોટિફિકેશન સાથે ક્રિયાપ્રતિક્રિયા કરવાની અને કનેક્ટ કરેલા ડિવાઇસ સાથે તમારી ઍપનું કન્ટેન્ટ સ્ટ્રીમ કરવાની મંજૂરી આપવામાં આવશે."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"આ સેવા તમારા ફોનમાંથી તમારા ફોટા, મીડિયા અને નોટિફિકેશન અન્ય ડિવાઇસમાં શેર કરે છે."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"નોંધ માટેની ડિફૉલ્ટ ઍપ"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"નોંધ માટેની ઍપ"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"ઍપ કે જે તમને તમારા ડિવાઇસ પર નોંધ કરવાની મંજૂરી આપે છે"</string>
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"નોંધ"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"ડિફૉલ્ટ વૉલેટ ઍપ"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"Wallet ઍપ"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"વૉલેટ સંબંધી ઍપ તમારા ક્રેડિટ અને લૉયલ્ટિ કાર્ડ, કાર કી તેમજ વિવિધ વ્યવહારોમાં સહાય કરી શકતી અન્ય બાબતો સ્ટોર કરી શકે છે."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"વૉલેટ સંબંધી ઍપ તમારા ક્રેડિટ અને લૉયલ્ટિ કાર્ડ, કાર કી તેમજ વિવિધ વ્યવહારોમાં મદદ કરી શકતી અન્ય બાબતો સ્ટોર કરી શકે છે."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"શું <xliff:g id="APP_NAME">%1$s</xliff:g>ને તમારી ડિફૉલ્ટ વૉલેટ ઍપ તરીકે સેટ કરીએ?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"કોઈ પરવાનગી જરૂરી નથી"</string>
     <string name="request_role_current_default" msgid="738722892438247184">"હાલની ડિફૉલ્ટ"</string>
@@ -637,7 +635,7 @@
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"ક્લિપબોર્ડનો ઍક્સેસ બતાવો"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"જ્યારે ઍપ તમે કૉપિ કરેલી ટેક્સ્ટ, છબીઓ કે અન્ય કન્ટેન્ટનો ઍક્સેસ કરે, ત્યારે મેસેજ બતાવો"</string>
     <string name="show_password_title" msgid="2877269286984684659">"પાસવર્ડ બતાવો"</string>
-    <string name="show_password_summary" msgid="1110166488865981610">"તમે ટાઇપ કરો ત્યારે થોડા સમય માટે અક્ષરો બતાવો"</string>
+    <string name="show_password_summary" msgid="1110166488865981610">"તમે ટાઇપ કરો ત્યારે થોડા સમય માટે અક્ષરો ડિસ્પ્લે કરો"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"આ ઍપ દ્વારા જણાવવામાં આવ્યું છે કે તે ત્રીજા પક્ષો સાથે લોકેશન ડેટા શેર કરી શકે છે"</string>
     <string name="permission_rationale_location_title" msgid="2404797182678793506">"ડેટા શેરિંગ અને લોકેશન"</string>
     <string name="permission_rationale_data_sharing_source_title" msgid="6874604543125814316">"ડેટા શેરિંગ સંબંધિત માહિતી ક્યાંથી આવે છે"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"તમારો ફોન ચેક કરો"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"તમારા ફોન સુધી પહોંચી શકાયું નથી"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ફરી પ્રયાસ કરીએ?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"એજન્ટ"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"માહિતી ઍક્સેસ કરી શકે અથવા ઍપમાં પગલાં લઈ શકે તેવા એજન્ટ"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"એજન્ટ"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"આ ડિવાઇસ પર એજન્ટ માટેના ઍક્સેસ મેનેજ કરો"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"કોઈ એજન્ટ ઍપ ઉપલબ્ધ નથી"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"આ સુવિધા ચાલુ કરવા માટે, તમારા ડિવાઇસ પર એજન્ટ ઍપ ઇન્સ્ટૉલ કરો"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"ઍપનો ઍક્સેસ"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"માહિતી મેળવવા અને તમારા માટે પગલાં લેવા આ એજન્ટ ઍક્સેસ કરી શકે તેવી ઍપ અને સેટિંગ"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g>ના ઍક્સેસ માટે કોઈ ઍપ ઉપલબ્ધ નથી"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"સિસ્ટમ"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ઍપ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"એજન્ટ ઍક્સેસ"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"આ ઍપમાં માહિતીનો ઍક્સેસ કરી શકે અને તમારા માટે પગલાં લઈ શકે તેવા એજન્ટ"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"ડિવાઇસના સેટિંગ"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>ને <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> માટેના એજન્ટ બનવાની મંજૂરી આપીએ?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"માહિતી મેળવવા અને તમારા માટે પગલાં લેવા માટે આ એજન્ટ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ઍક્સેસ કરી શકશે"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"મંજૂરી આપો"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"મંજૂરી આપશો નહીં"</string>
 </resources>

@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"გსურთ <xliff:g id="APP_NAME">%1$s</xliff:g> დააყენოთ, როგორც ნაგულისხმევი ნავიგაციის აპი?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"ნებართვები არ არის საჭირო"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> შეძლებს თქვენს შეტყობინებებთან ინტერაქციას და თქვენი ტელეფონის, SMS-ების, კონტაქტებისა და კალენდრის ნებართვებზე წვდომას."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> შეძლებს თქვენს შეტყობინებებთან ინტერაქციას და თქვენი აპების სტრიმინგს დაკავშირებულ მოწყობილობაზე."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"ეს სერვისი თქვენს ფოტოებს, მედიას და შეტყობინებებს თქვენი ტელეფონიდან სხვა მოწყობილობებს გაუზიარებს."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"ჩანიშვნების ნაგულისხმევი აპი"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"ჩანიშვნების აპი"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"აპები, რომლებიც საშუალებას გაძლევთ, გააკეთოთ ჩანიშვნები თქვენს მოწყობილობაზე"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"შეამოწმეთ თქვენი ტელეფონი"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"თქვენს ტელეფონთან დაკავშირება ვერ მოხერხდა"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"გსურთ ხელახლა ცდა?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"აგენტები"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"აგენტები, რომლებსაც შეუძლიათ ინფორმაციაზე წვდომა ან მოქმედება აპებში"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"აგენტები"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"აგენტების წვდომის მართვა ამ მოწყობილობაზე"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"აგენტის აპები არ არის ხელმისაწვდომი"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"ამ ფუნქციის ჩასართავად დააინსტალირეთ აგენტის აპი თქვენს მოწყობილობაზე"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"აპზე წვდომა"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"აპები და პარამეტრები, რომლებზე წვდომაც შეუძლია ამ აგენტს ინფორმაციის მისაღებად ან თქვენ ნაცვლად მოქმედებისთვის"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"ხელმისაწვდომი აპები არ არის <xliff:g id="APP_NAME">%1$s</xliff:g>-ის წვდომისთვის"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"სისტემა"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"აპები"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"აგენტის წვდომა"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"აგენტები, რომლებსაც შეუძლიათ თქვენს ინფორმაციაზე წვდომა და თქვენ ნაცვლად მოქმედება ამ აპში"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"მოწყობილობის პარამეტრები"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"გსურთ უფლება მისცეთ <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>-ს, იყოს <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>-ის აგენტი?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"აგენტს შეეძლება <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>-ზე წვდომა ინფორმაციის მისაღებად და თქვენი სახელით მოქმედებების შესასრულებლად"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"დაშვება"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"არ დაიშვას"</string>
 </resources>

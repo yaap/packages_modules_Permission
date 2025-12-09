@@ -37,7 +37,7 @@
     <string name="grant_dialog_button_always_allow_all" msgid="1719900027660252167">"Eman guztirako baimena beti"</string>
     <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"Eman sarbide mugatua"</string>
     <string name="grant_dialog_button_allow_selected_photos" msgid="5497042471576153842">"Hautatu argazkiak eta bideoak"</string>
-    <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"Hautatu beste batzuk"</string>
+    <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"Hautatu gehiago"</string>
     <string name="grant_dialog_button_dont_select_more" msgid="6643552729129461268">"Ez hautatu gehiago"</string>
     <string name="grant_dialog_button_deny_anyway" msgid="7225905870668915151">"Ez eman baimenik halere"</string>
     <string name="grant_dialog_button_dismiss" msgid="1930399742250226393">"Baztertu"</string>
@@ -132,7 +132,7 @@
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g> eta beste <xliff:g id="NUM">%3$s</xliff:g>"</string>
     <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"Azken 24 orduetan aplikazioek <xliff:g id="PERMGROUP">%1$s</xliff:g> noiz erabili duten adierazten duen kronologia"</string>
-    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"Azken zazpi egunetan aplikazioek <xliff:g id="PERMGROUP">%1$s</xliff:g> noiz erabili duten adierazten duen kronologia"</string>
+    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"Azken 7 egunetan aplikazioek <xliff:g id="PERMGROUP">%1$s</xliff:g> noiz erabili duten adierazten duen kronologia"</string>
     <string name="permission_usage_access_dialog_subtitle" msgid="4171772805196955753">"Aplikazioak noiz erabili duen <xliff:g id="PERMGROUP">%1$s</xliff:g> erabiltzeko baimena"</string>
     <string name="permission_usage_access_dialog_learn_more" msgid="7121468469493184613">"Lortu informazio gehiago"</string>
     <string name="learn_more_content_description" msgid="8673699744544502539">"Lortu <xliff:g id="PERMGROUP">%1$s</xliff:g> baimenari buruzko informazio gehiago"</string>
@@ -365,13 +365,13 @@
     <string name="role_browser_request_title" msgid="2895200507835937192">"<xliff:g id="APP_NAME">%1$s</xliff:g> ezarri nahi duzu arakatzaile lehenetsi gisa?"</string>
     <string name="role_browser_request_description" msgid="5888803407905985941">"Ez du behar baimenik"</string>
     <string name="role_dialer_label" msgid="1100224146343237968">"Telefono lehenetsia"</string>
-    <string name="role_dialer_short_label" msgid="7186888549465352489">"Telefonoa aplikazioa"</string>
+    <string name="role_dialer_short_label" msgid="7186888549465352489">"Telefonoaren aplikazioa"</string>
     <string name="role_dialer_description" msgid="8768708633696539612">"Gailuaren bidez telefono-deiak egitea eta jasotzea ahalbidetzen duten aplikazioak"</string>
     <string name="role_dialer_request_title" msgid="5959618560705912058">"<xliff:g id="APP_NAME">%1$s</xliff:g> ezarri nahi duzu telefono-aplikazio lehenetsi gisa?"</string>
     <string name="role_dialer_request_description" msgid="6288839625724909320">"Zure kamera, kontaktuak, mikrofonoa, telefonoa eta SMSak erabiltzeko baimena emango zaio aplikazioari"</string>
     <string name="role_dialer_search_keywords" msgid="3324448983559188087">"markagailua"</string>
     <string name="role_sms_label" msgid="8456999857547686640">"SMSetarako aplikazio lehenetsia"</string>
-    <string name="role_sms_short_label" msgid="4371444488034692243">"SMSetarako aplikazio"</string>
+    <string name="role_sms_short_label" msgid="4371444488034692243">"SMSetarako aplikazioa"</string>
     <string name="role_sms_description" msgid="3424020199148153513">"Telefono-zenbakiaren bidez testu-mezu laburrak, argazkiak, bideoak eta beste zenbait gauza bidaltzea eta jasotzea ahalbidetzen dizuten aplikazioak"</string>
     <string name="role_sms_request_title" msgid="7953552109601185602">"<xliff:g id="APP_NAME">%1$s</xliff:g> ezarri nahi duzu SMSetarako aplikazio lehenetsi gisa?"</string>
     <string name="role_sms_request_description" msgid="2691004766132144886">"Zure kamera, kontaktuak, fitxategiak eta multimedia-edukia, mikrofonoa, telefonoa eta SMSak erabiltzeko baimena emango zaio aplikazioari"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> ezarri nahi duzu nabigatzeko aplikazio lehenetsi gisa?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Ez du behar baimenik"</string>
     <string name="role_watch_description" msgid="267003778693177779">"Honako hauek erabiltzeko baimena izango du <xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioak: jakinarazpenak, Telefonoa aplikazioa, SMSak, kontaktuak eta egutegia."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"Jakinarazpenekin interakzioan aritzeko eta aplikazioak konektatutako gailura igortzeko baimena izango du <xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioak."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Zerbitzu honek zure telefonoko argazkiak, multimedia-edukia eta jakinarazpenak partekatzen ditu beste gailuekin."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Oharren aplikazio lehenetsia"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Oharren aplikazioa"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Gailuan oharrak idazteko aukera ematen dizuten aplikazioak"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Begiratu telefonoan"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Ezin izan da konektatu telefonora"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Berriro saiatu nahi duzu?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agenteak"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Informazioa atzi dezaketen edo aplikazioetan ekintzak egin ditzaketen agenteak"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agenteak"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Kudeatu gailu honetako agenteen sarbidea"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Ez dago aplikazio agenterik erabilgarri"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Eginbide hori gaitzeko, instalatu aplikazio agente bat gailuan"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Aplikazioen sarbidea"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Agente honek atzi ditzakeen aplikazioak eta ezarpenak zuretzat informazioa lortzeko eta ekintzak egiteko"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Ez dago aplikaziorik erabilgarri <xliff:g id="APP_NAME">%1$s</xliff:g> atzitzeko"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistema"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Aplikazioak"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Agenteen sarbidea"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Informazioa atzi dezaketen eta aplikazio honetan zure ordez ekintzak egin ditzaketen agenteak"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Gailuaren ezarpenak"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> aplikaziorako agente izateko baimena eman nahi diozu <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> aplikazioari?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Agente honek <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> atzitu ahalko du informazioa lortzeko eta zure izenean neurriak hartzeko"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Eman baimena"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Ez eman baimenik"</string>
 </resources>

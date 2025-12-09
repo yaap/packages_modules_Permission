@@ -18,15 +18,15 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="scanning_title" msgid="5424849039854311398">"స్కానింగ్"</string>
-    <string name="loading_summary" msgid="3740846439782713910">"పరికర సెట్టింగ్‌లను చెక్ చేస్తోంది…"</string>
+    <string name="loading_summary" msgid="3740846439782713910">"డివైజ్ సెట్టింగ్‌లను చెక్ చేస్తోంది…"</string>
     <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"అంతా బాగానే ఉంది"</string>
     <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"ఎటువంటి సమస్యలూ కనుగొనబడలేదు"</string>
     <string name="overall_severity_level_tip_summary" msgid="1935765582243024999">"{count,plural, =1{సిఫార్సును చూడండి}other{సిఫార్సులను చూడండి}}"</string>
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{చర్య తీసుకోబడింది}other{చర్యలు తీసుకొనబడ్డాయి}}"</string>
     <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"సెట్టింగ్‌లను రివ్యూ చేయండి"</string>
     <string name="overall_severity_level_ok_review_summary" msgid="7743619617413076275">"సెట్టింగ్‌ల లిస్ట్‌ను చెక్ చేయండి"</string>
-    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"పరికరం ప్రమాదంలో ఉండవచ్చు"</string>
-    <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"పరికరం ప్రమాదంలో ఉంది"</string>
+    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"ఈ డివైజ్ రిస్క్‌లో ఉండే అవకాశం ఉంది"</string>
+    <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"డివైజ్ ప్రమాదంలో ఉంది"</string>
     <string name="overall_severity_level_data_recommendation_title" msgid="1424269714861655302">"మీ డేటా ప్రమాదంలో ఉండవచ్చు"</string>
     <string name="overall_severity_level_critical_data_warning_title" msgid="1012704126634698604">"మీ డేటా ప్రమాదంలో ఉంది"</string>
     <string name="overall_severity_level_passwords_recommendation_title" msgid="8625105570296877719">"(పాత) సురక్షితం కాని పాస్‌వర్డ్స్"</string>

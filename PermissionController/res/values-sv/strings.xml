@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Vill du ställa in <xliff:g id="APP_NAME">%1$s</xliff:g> som standardapp för navigering?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Inga behörigheter krävs"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> får behörighet att interagera med dina aviseringar och komma åt behörigheterna för Telefon, Sms, Kontakter och Kalender."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> får behörighet att interagera med dina aviseringar och streama dina appar till den anslutna enheten."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Den här tjänsten delar dina foton, videor och aviseringar på telefonen med andra enheter."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Standardapp för anteckningar"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Anteckningsapp"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Appar som låter dig göra anteckningar på enheten"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Kontrollera telefonen"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Det gick inte att nå telefonen"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Vill du försöka igen?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agenter"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Agenter som kan komma åt information eller vidta åtgärder i appar"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agenter"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Hantera åtkomst för agenter på den här enheten"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Det finns inga tillgängliga agentappar"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Installera en agentapp på enheten om du vill aktivera den här funktionen"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Appåtkomst"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Appar och inställningar som denna agent kan komma åt för att få information och vidta åtgärder åt dig"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Inga appar är tillgängliga för <xliff:g id="APP_NAME">%1$s</xliff:g>-åtkomst"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"System"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Appar"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Agentåtkomst"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agenter som kan komma åt information och vidta åtgärder åt dig i den här appen"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Enhetsinställningar"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Vill du att <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ska vara agent för <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Agenten kommer åt <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> för att få information och vidta åtgärder åt dig"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Tillåt"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Tillåt inte"</string>
 </resources>

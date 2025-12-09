@@ -133,4 +133,12 @@ public interface GrantPermissionsViewHandler {
      * the ui when blur is enabled/disabled.
      */
     default void onBlurEnabledChanged(Window window, boolean enabled) {}
+
+    /**
+     * Returns true if user has clicked on location accuracy button. This is used for logging
+     * purposes to understand if user is interacting with location accuracy buttons at all.
+     */
+    default boolean hasLocationAccuracyButtonBeenClicked() {
+        return false;
+    }
 }

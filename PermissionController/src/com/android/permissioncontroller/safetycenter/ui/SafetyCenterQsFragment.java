@@ -67,6 +67,7 @@ import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterQsView
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterViewModel;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -128,7 +129,9 @@ public class SafetyCenterQsFragment extends Fragment {
             mPermGroupUsages = new ArrayList<>();
         }
 
-        getActivity().setTheme(R.style.Theme_SafetyCenterQs);
+        if (!SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+            getActivity().setTheme(R.style.Theme_SafetyCenterQs);
+        }
 
         SafetyCenterQsViewModelFactory factory =
                 new SafetyCenterQsViewModelFactory(
@@ -152,11 +155,12 @@ public class SafetyCenterQsFragment extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.safety_center_qs, container, false);
         root.setVisibility(View.GONE);
         root.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        root.setOnApplyWindowInsetsListener((v, w) -> {
-            final Insets insets = w.getInsets(WindowInsets.Type.systemBars());
-            v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
-            return WindowInsets.CONSUMED;
-        });
+        root.setOnApplyWindowInsetsListener(
+                (v, w) -> {
+                    final Insets insets = w.getInsets(WindowInsets.Type.systemBars());
+                    v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                    return WindowInsets.CONSUMED;
+                });
 
         View closeButton = root.findViewById(R.id.close_button);
         closeButton.setOnClickListener((v) -> requireActivity().finish());
@@ -570,6 +574,10 @@ public class SafetyCenterQsFragment extends Fragment {
         }
 
         LinearLayout toggleContainer = rootView.findViewById(R.id.toggle_container);
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+            toggleContainer.setBackgroundResource(
+                    R.drawable.sc_qs_toggle_container_background_expressive);
+        }
 
         LinearLayout row = addRow(toggleContainer);
 
@@ -694,7 +702,10 @@ public class SafetyCenterQsFragment extends Fragment {
             if (useEnabledBackground) {
                 toggle.setBackgroundResource(R.drawable.safety_center_sensor_toggle_enabled);
             } else {
-                toggle.setBackgroundResource(R.drawable.safety_center_sensor_toggle_disabled);
+                toggle.setBackgroundResource(
+                        SettingsThemeHelper.isExpressiveTheme(requireContext())
+                                ? R.drawable.safety_center_sensor_toggle_disabled_expressive
+                                : R.drawable.safety_center_sensor_toggle_disabled);
             }
             if (sensorEnabled) {
                 icon = KotlinUtils.INSTANCE.getPermGroupIcon(mContext, groupName, colorPrimary);

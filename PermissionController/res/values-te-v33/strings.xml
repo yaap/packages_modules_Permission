@@ -18,9 +18,9 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="role_dialer_request_description" msgid="6188305064871543419">"మీకు నోటిఫికేషన్‌లను పంపడానికి ఈ యాప్ అనుమతించబడుతుంది, అలాగే ఈ యాప్‌నకు మీ కెమెరా, కాంటాక్ట్‌లు, మైక్రోఫోన్, ఫోన్, SMSకు యాక్సెస్ ఇవ్వబడుతుంది"</string>
     <string name="role_sms_request_description" msgid="1506966389698625395">"మీకు నోటిఫికేషన్‌లను పంపడానికి ఈ యాప్ అనుమతించబడుతుంది, అలాగే ఈ యాప్‌నకు మీ కెమెరా, కాంటాక్ట్‌లు, Files, మైక్రోఫోన్, ఫోన్, SMSకు యాక్సెస్ ఇవ్వబడుతుంది"</string>
-    <string name="permission_description_summary_storage" msgid="1917071243213043858">"ఈ అనుమతి ఉన్న యాప్‌లు ఈ పరికరంలో ఫైల్స్ అన్నింటిని యాక్సెస్ చేయగలవు"</string>
+    <string name="permission_description_summary_storage" msgid="1917071243213043858">"ఈ అనుమతి ఉన్న యాప్‌లు ఈ డివైజ్‌లో ఫైల్స్ అన్నింటిని యాక్సెస్ చేయగలవు"</string>
     <string name="work_policy_title" msgid="832967780713677409">"మీ ఆఫీస్ పాలసీ సమాచారం"</string>
-    <string name="work_policy_summary" msgid="3886113358084963931">"మీ IT అడ్మిన్ ద్వారా సెట్టింగ్‌లు నిర్వహించబడతాయి"</string>
+    <string name="work_policy_summary" msgid="3886113358084963931">"సెట్టింగ్స్‌ను మీ IT అడ్మిన్ మేనేజ్ చేస్తున్నారు"</string>
     <string name="safety_center_entry_group_expand_action" msgid="5358289574941779652">"విస్తరించి, లిస్ట్‌ను చూపండి"</string>
     <string name="safety_center_entry_group_collapse_action" msgid="1525710152244405656">"లిస్ట్‌ను కుదించి, సెట్టింగ్‌లను దాచండి"</string>
     <string name="safety_center_entry_group_content_description" msgid="7048420958214443333">"లిస్ట్. <xliff:g id="ENTRY_TITLE">%1$s</xliff:g>. <xliff:g id="ENTRY_SUMMARY">%2$s</xliff:g>"</string>
@@ -29,6 +29,7 @@
     <string name="safety_center_entry_content_description" msgid="3639565652938224321">"<xliff:g id="ENTRY_ITEM_TITLE">%1$s</xliff:g>. <xliff:g id="ENTRY_ITEM_SUMMARY">%2$s</xliff:g>"</string>
     <string name="safety_center_more_issues_card_title" msgid="7425844746197493312">"మరిన్ని అలర్ట్‌లు"</string>
     <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"విస్మరించబడిన అలర్ట్‌లు"</string>
+    <string name="safety_center_expressive_more_issues_collapse_title" msgid="4022284109267834224">"మూసివేయండి"</string>
     <string name="safety_center_more_issues_card_expand_action" msgid="7109451851052272946">"{count,plural, =1{విస్తరించి, మరొక అలర్ట్‌ను చూడండి}other{విస్తరించి, మరో # అలర్ట్‌లను చూడండి}}"</string>
     <string name="safety_center_more_issues_card_collapse_action" msgid="7485597582198474637">"కుదించండి"</string>
     <string name="safety_center_issue_card_prefix_content_description" msgid="1447445289637043544">"అలర్ట్. <xliff:g id="ISSUE_CARD_TITLE">%1$s</xliff:g>"</string>

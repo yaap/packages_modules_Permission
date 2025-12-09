@@ -146,6 +146,12 @@ object PermissionMapping {
             PLATFORM_PERMISSIONS[Manifest.permission.RANGING] =
                 Manifest.permission_group.NEARBY_DEVICES
         }
+        // Local network permission will be supported from Android C+, update this when
+        // isAtLeastC() is available.
+        if (SdkLevel.isAtLeastB() && Flags.accessLocalNetworkPermissionEnabled()) {
+            PLATFORM_PERMISSIONS[Manifest.permission.ACCESS_LOCAL_NETWORK] =
+                Manifest.permission_group.NEARBY_DEVICES
+        }
         // Android XR permissions
         if (android.xr.Flags.xrManifestEntries()) {
             PLATFORM_PERMISSIONS[Manifest.permission.EYE_TRACKING_COARSE] =
@@ -206,7 +212,7 @@ object PermissionMapping {
                 Manifest.permission_group.NOTIFICATIONS
         }
 
-        if (!Flags.replaceBodySensorPermissionEnabled()) {
+        if (!SdkLevel.isAtLeastB()) {
             PLATFORM_PERMISSIONS[Manifest.permission.BODY_SENSORS] =
                 Manifest.permission_group.SENSORS
             if (SdkLevel.isAtLeastT()) {
@@ -352,7 +358,7 @@ object PermissionMapping {
             PLATFORM_PERMISSIONS[permission] = HEALTH_PERMISSION_GROUP
             PLATFORM_PERMISSION_GROUPS[HEALTH_PERMISSION_GROUP]?.add(permission)
             HEALTH_PERMISSIONS_SET.add(permission)
-            if (Flags.replaceBodySensorPermissionEnabled()) {
+            if (SdkLevel.isAtLeastB()) {
                 AdminRestrictedPermissionsUtils.addAdminRestrictedPermission(permission)
             }
         }

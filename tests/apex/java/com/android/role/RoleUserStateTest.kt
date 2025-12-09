@@ -16,6 +16,7 @@
 
 package com.android.role
 
+import android.os.Handler
 import android.os.UserHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.server.role.RoleServicePlatformHelper
@@ -23,19 +24,33 @@ import com.google.common.truth.Truth.assertWithMessage
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyLong
+import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class RoleUserStateTest {
     private var roleServicePlatformHelper = mock(RoleServicePlatformHelper::class.java)
     private var roleUserStateCallback = mock(RoleUserState.Callback::class.java)
+    private var writeHandler = mock(Handler::class.java)
 
     private val userId = UserHandle.myUserId()
-    private val roleUserState =
-        RoleUserState(userId, roleServicePlatformHelper, roleUserStateCallback, false)
+
+    private lateinit var roleUserState: RoleUserState
 
     @Before
     fun setUp() {
+        // Setup the role user state with a mock write handler so postDelay writes are no-ops
+        roleUserState = RoleUserState(
+            userId,
+            roleServicePlatformHelper,
+            roleUserStateCallback,
+            false,
+            writeHandler,
+        )
+
         setUpRole(ROLE_NAME_1, true)
         setUpRole(ROLE_NAME_2, false)
     }

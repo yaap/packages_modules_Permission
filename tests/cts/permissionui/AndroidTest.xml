@@ -48,6 +48,8 @@
     <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
         <option name="push" value="CtsAccessMicrophoneAppLocationProvider.apk->/data/local/tmp/cts-permissionui/CtsAccessMicrophoneAppLocationProvider.apk" />
         <option name="push" value="CtsPermissionPolicyApp25.apk->/data/local/tmp/cts-permissionui/CtsPermissionPolicyApp25.apk" />
+        <option name="push" value="CtsAgentApp.apk->/data/local/tmp/cts-permissionui/CtsAgentApp.apk" />
+        <option name="push" value="CtsTargetApp.apk->/data/local/tmp/cts-permissionui/CtsTargetApp.apk" />
         <option name="push" value="CtsUsePermissionApp22.apk->/data/local/tmp/cts-permissionui/CtsUsePermissionApp22.apk" />
         <option name="push" value="CtsUsePermissionApp22CalendarOnly.apk->/data/local/tmp/cts-permissionui/CtsUsePermissionApp22CalendarOnly.apk" />
         <option name="push" value="CtsUsePermissionApp22None.apk->/data/local/tmp/cts-permissionui/CtsUsePermissionApp22None.apk" />

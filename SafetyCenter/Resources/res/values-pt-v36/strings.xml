@@ -17,9 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_function_access_settings_title" msgid="3894819108224606683">"Outros apps são controlados por um agente"</string>
-    <string name="app_function_access_settings_summary" msgid="2719347800336419237">"Realizar ações no dispositivo e em outros apps"</string>
-    <string name="face_unlock_title" msgid="3991635517593572926">"Rosto"</string>
+    <string name="face_unlock_title" msgid="3991635517593572926">"Reconhecimento facial"</string>
     <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Reconhecimento facial para o trabalho"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>
     <string name="face_unlock_search_terms" msgid="2708195853333028283">"Desbloqueio facial, Rosto"</string>
@@ -30,5 +28,5 @@
     <string name="wear_unlock_title" msgid="1613730442896319515">"Relógio"</string>
     <string name="wear_unlock_title_for_work" msgid="3103157953371670280">"Relógio para o trabalho"</string>
     <string name="wear_unlock_title_for_private_profile" msgid="927318621331822758"></string>
-    <string name="wear_unlock_search_terms" msgid="3769797118448924263">"Relógio, Desbloqueio do relógio"</string>
+    <string name="wear_unlock_search_terms" msgid="3769797118448924263">"Relógio, desbloqueio do relógio"</string>
 </resources>

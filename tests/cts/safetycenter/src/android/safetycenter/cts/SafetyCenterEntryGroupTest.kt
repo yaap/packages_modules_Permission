@@ -19,12 +19,14 @@ package android.safetycenter.cts
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.UserHandle
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterEntryGroup
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.os.ParcelableSubject.assertThat
 import com.android.safetycenter.testing.EqualsHashCodeToStringTester
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterEntryBuilder
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Test
@@ -39,12 +41,22 @@ class SafetyCenterEntryGroupTest {
         PendingIntent.getActivity(context, 0, Intent("Fake Data"), PendingIntent.FLAG_IMMUTABLE)
 
     private val entry1 =
-        SafetyCenterEntry.Builder("eNtRy_iD_OnE", "An entry title")
+        createSafetyCenterEntryBuilder(
+                "eNtRy_iD_OnE",
+                "An entry title",
+                UserHandle.of(1),
+                "source_id",
+            )
             .setPendingIntent(pendingIntent)
             .setSeverityLevel(SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK)
             .build()
     private val entry2 =
-        SafetyCenterEntry.Builder("eNtRy_iD_TwO", "Another entry title")
+        createSafetyCenterEntryBuilder(
+                "eNtRy_iD_TwO",
+                "Another entry title",
+                UserHandle.of(1),
+                "source_id",
+            )
             .setPendingIntent(pendingIntent)
             .setSeverityLevel(SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION)
             .build()

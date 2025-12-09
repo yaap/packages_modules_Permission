@@ -40,6 +40,8 @@ internal class MoreIssuesCardPreference(
 
     init {
         layoutResource = R.layout.preference_more_issues_card
+        // The root view of this preference is not selectable, while child views are.
+        isSelectable = false
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

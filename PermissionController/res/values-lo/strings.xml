@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"ຕັ້ງ <xliff:g id="APP_NAME">%1$s</xliff:g> ເປັນແອັບການນຳທາງເລີ່ມຕົ້ນຂອງທ່ານບໍ?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"ບໍ່ຈຳເປັນຕ້ອງມີການອະນຸຍາດ"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຈະໄດ້ຮັບອະນຸຍາດໃຫ້ໂຕ້ຕອບກັບການແຈ້ງເຕືອນຂອງທ່ານ ແລະ ເຂົ້າເຖິງການອະນຸຍາດໂທລະສັບ, SMS, ລາຍຊື່ຜູ້ຕິດຕໍ່ ແລະ ປະຕິທິນຂອງທ່ານໄດ້."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຈະໄດ້ຮັບອະນຸຍາດໃຫ້ໂຕ້ຕອບກັບການແຈ້ງເຕືອນຂອງທ່ານ ແລະ ສະຕຣີມແອັບຂອງທ່ານຫາອຸປະກອນທີ່ເຊື່ອມແລ້ວໄດ້."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"ບໍລິການນີ້ຈະແບ່ງປັນຮູບພາບ, ມີເດຍ ແລະ ການແຈ້ງເຕືອນຂອງທ່ານຈາກໂທລະສັບທ່ານໄປຫາອຸປະກອນອື່ນ."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"ແອັບຈົດບັນທຶກເລີ່ມຕົ້ນ"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"ແອັບຂຽນບັນທຶກ"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"ແອັບທີ່ອະນຸຍາດໃຫ້ທ່ານຈົດບັນທຶກຢູ່ອຸປະກອນຂອງທ່ານ"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"ກວດເບິ່ງໂທລະສັບຂອງທ່ານ"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"ບໍ່ສາມາດເຂົ້າເຖິງໂທລະສັບຂອງທ່ານໄດ້"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ລອງໃໝ່ບໍ?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"ຕົວແທນ"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"ຕົວແທນທີ່ສາມາດເຂົ້າເຖິງຂໍ້ມູນ ຫຼື ດຳເນີນການໃນແອັບໄດ້"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"ຕົວແທນ"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"ຈັດການສິດເຂົ້າເຖິງສຳລັບຕົວແທນໃນອຸປະກອນເຄື່ອງນີ້"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"ບໍ່ມີແອັບຕົວແທນທີ່ພ້ອມໃຫ້ນຳໃຊ້"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"ຕິດຕັ້ງແອັບຕົວແທນໃນອຸປະກອນຂອງທ່ານເພື່ອເປີດການນຳໃຊ້ຄຸນສົມບັດນີ້"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"ສິດເຂົ້າເຖິງຂອງແອັບ"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"ແອັບ ແລະ ການຕັ້ງຄ່າທີ່ຕົວແທນນີ້ສາມາດເຂົ້າເຖິງເພື່ອເບິ່ງຂໍ້ມູນ ແລະ ດຳເນີນການໃຫ້ທ່ານໄດ້"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"ບໍ່ມີແອັບທີ່ພ້ອມນຳໃຊ້ສຳລັບການເຂົ້າເຖິງ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"ລະບົບ"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ແອັບ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"ສິດເຂົ້າເຖິງຂອງຕົວແທນ"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"ຕົວແທນທີ່ສາມາດເຂົ້າເຖິງຂໍ້ມູນ ແລະ ດຳເນີນການແທນທ່ານໃນແອັບນີ້ໄດ້"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"ການຕັ້ງຄ່າອຸປະກອນ"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"ອະນຸຍາດໃຫ້ <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ເປັນຕົວແທນຂອງ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ບໍ?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"ຕົວແທນນີ້ຈະສາມາດເຂົ້າເຖິງ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ເພື່ອເບິ່ງຂໍ້ມູນ ແລະ ດຳເນີນການໃຫ້ທ່ານໄດ້"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"ອະນຸຍາດ"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"ບໍ່ອະນຸຍາດ"</string>
 </resources>

@@ -21,9 +21,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.wear.compose.material3.Dialog
+import androidx.wear.compose.material3.LocalContentColor
 import com.android.permissioncontroller.permission.ui.wear.model.LocationProviderInterceptDialogArgs
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButton
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButtonStyle
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionScaffold
 
 @Composable
@@ -33,10 +35,11 @@ fun LocationProviderDialogScreen(
     args: LocationProviderInterceptDialogArgs?,
 ) {
     Dialog(visible = showDialog, onDismissRequest = onDismissRequest) {
+        val tintColor = LocalContentColor.current
         args?.run {
             WearPermissionScaffold(
                 showTimeText = false,
-                image = iconId,
+                imageBuilder = WearPermissionIconBuilder.builder(iconId).tint(tintColor),
                 title = stringResource(titleId),
                 subtitle = message,
                 isLoading = false,

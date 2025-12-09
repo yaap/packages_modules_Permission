@@ -134,8 +134,10 @@ class EnhancedConfirmationServiceTest {
         `when`(mockContext.getResources()).thenReturn(mockResources)
         `when`(mockResources.getIdentifier(Mockito.eq(name), Mockito.any(), Mockito.any()))
             .thenReturn(if (newValue == null) 0 else EXEMPT_SETTINGS_RESOURCE)
-        `when`(mockResources.getStringArray(Mockito.eq(EXEMPT_SETTINGS_RESOURCE)))
-            .thenReturn(newValue)
+        if (newValue != null) {
+            `when`(mockResources.getStringArray(Mockito.eq(EXEMPT_SETTINGS_RESOURCE)))
+                .thenReturn(newValue)
+        }
     }
 
     companion object {

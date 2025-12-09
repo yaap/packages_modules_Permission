@@ -15,7 +15,37 @@
 -->
 <resources>
     <overlayable name="WearPermissionControllerStyles">
-        <policy type="product|system|vendor|odm|oem">
+        <policy type="public|product|system|vendor|odm|oem">
+            <!--START WEAR SPECIFIC MATERIAL3 COLOR TOKENS-->
+            <item type="color" name="wear_compose_material3_primary_fixed" />
+            <item type="color" name="wear_compose_material3_primary_fixed_dim" />
+            <item type="color" name="wear_compose_material3_primary_container_dark" />
+            <item type="color" name="wear_compose_material3_on_primary_fixed" />
+            <item type="color" name="wear_compose_material3_on_primary_container_dark" />
+            <item type="color" name="wear_compose_material3_secondary_fixed" />
+            <item type="color" name="wear_compose_material3_secondary_fixed_dim" />
+            <item type="color" name="wear_compose_material3_secondary_container_dark" />
+            <item type="color" name="wear_compose_material3_on_secondary_fixed" />
+            <item type="color" name="wear_compose_material3_on_secondary_container_dark" />
+            <item type="color" name="wear_compose_material3_tertiary_fixed" />
+            <item type="color" name="wear_compose_material3_tertiary_fixed_dim" />
+            <item type="color" name="wear_compose_material3_tertiary_container_dark" />
+            <item type="color" name="wear_compose_material3_on_tertiary_fixed" />
+            <item type="color" name="wear_compose_material3_on_tertiary_container_dark" />
+            <item type="color" name="wear_compose_material3_surface_container_low_dark" />
+            <item type="color" name="wear_compose_material3_surface_container_dark" />
+            <item type="color" name="wear_compose_material3_surface_container_high_dark" />
+            <item type="color" name="wear_compose_material3_on_surface_dark" />
+            <item type="color" name="wear_compose_material3_on_surface_variant_dark" />
+            <item type="color" name="wear_compose_material3_outline_dark" />
+            <item type="color" name="wear_compose_material3_outline_variant_dark" />
+            <item type="color" name="wear_compose_material3_background_dark" />
+            <item type="color" name="wear_compose_material3_on_background_dark" />
+            <item type="color" name="wear_compose_material3_error_dark" />
+            <item type="color" name="wear_compose_material3_on_error_dark" />
+            <item type="color" name="wear_compose_material3_error_container_dark" />
+            <item type="color" name="wear_compose_material3_on_error_container_dark" />
+            <!--END WEAR SPECIFIC MATERIAL3 COLOR TOKENS-->
             <!--START WEAR SPECIFIC MATERIAL3 FONT FACE TOKENS-->
             <item type="string" name="wear_compose_material3_arc_small_font_family" />
             <item type="string" name="wear_compose_material3_arc_medium_font_family" />

@@ -19,7 +19,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="scanning_title" msgid="5424849039854311398">"ਸਕੈਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"</string>
     <string name="loading_summary" msgid="3740846439782713910">"ਡੀਵਾਈਸ ਸੈਟਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…"</string>
-    <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"ਸਭ ਕੁਝ ਠੀਕ ਲੱਗ ਰਿਹਾ ਹੈ"</string>
+    <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"ਸਭ ਠੀਕ ਲੱਗ ਰਿਹਾ ਹੈ"</string>
     <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"ਕੋਈ ਸਮੱਸਿਆ ਨਹੀਂ ਮਿਲੀ"</string>
     <string name="overall_severity_level_tip_summary" msgid="1935765582243024999">"{count,plural, =1{ਸਿਫ਼ਾਰਸ਼ ਦੇਖੋ}one{ਸਿਫ਼ਾਰਸ਼ ਦੇਖੋ}other{ਸਿਫ਼ਾਰਸ਼ਾਂ ਦੇਖੋ}}"</string>
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{ਕੀਤੀ ਗਈ ਕਾਰਵਾਈ}one{ਕੀਤੀ ਗਈ ਕਾਰਵਾਈ}other{ਕੀਤੀਆਂ ਗਈਆਂ ਕਾਰਵਾਈਆਂ}}"</string>

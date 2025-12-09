@@ -346,8 +346,17 @@ public final class SafetyCenterResourcesApk {
     }
 
     private int getResId(String name, String type) {
+        return getResId(getContext(), name, type);
+    }
+
+    /**
+     * Returns the resource ID for the given resource name and type.
+     *
+     * <p>See {@link Resources#getIdentifier(String, String, String)}.
+     */
+    public static int getResId(Context context, String name, String type) {
         // TODO(b/227738283): profile the performance of this operation and consider adding caching
         //  or finding some alternative solution.
-        return getResources().getIdentifier(name, type, getContext().getPackageName());
+        return context.getResources().getIdentifier(name, type, context.getPackageName());
     }
 }

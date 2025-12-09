@@ -43,10 +43,12 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiScrollable;
 import androidx.test.uiautomator.UiSelector;
 
+import com.android.compatibility.common.util.DisableAnimationRule;
 import com.android.compatibility.common.util.SystemUtil;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -61,6 +63,9 @@ public class PermissionGroupChange {
     private Context mContext;
     private UiDevice mUiDevice;
     private String mAllowButtonText = null;
+
+    @Rule
+    public DisableAnimationRule mDisableAnimationRule = new DisableAnimationRule();
 
     @Before
     public void setContextAndUiDevice() {

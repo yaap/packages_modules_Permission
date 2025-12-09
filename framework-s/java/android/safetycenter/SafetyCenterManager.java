@@ -26,6 +26,7 @@ import static android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 import static java.util.Objects.requireNonNull;
 
 import android.annotation.CallbackExecutor;
+import android.annotation.FlaggedApi;
 import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
@@ -34,10 +35,12 @@ import android.annotation.SdkConstant;
 import android.annotation.SystemApi;
 import android.annotation.SystemService;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.RemoteException;
+import android.permission.flags.Flags;
 import android.safetycenter.config.SafetyCenterConfig;
 import android.util.ArrayMap;
 
@@ -573,6 +576,38 @@ public final class SafetyCenterManager {
         try {
             mService.dismissSafetyCenterIssue(
                     safetyCenterIssueId, mContext.getUser().getIdentifier());
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
+    /**
+     * Executes the specified Safety Center issue action on the specified Safety Center issue.
+     *
+     * <p>Specifying a task id ({@link Activity#getTaskId()}) will execute the issue action within
+     * the task that was provided. This means, for example, if the action opens up a new activity,
+     * that activity will be placed in the given task.
+     *
+     * @param safetyCenterIssueId the target issue ID returned by {@link SafetyCenterIssue#getId()}
+     * @param safetyCenterIssueActionId the target action ID returned by {@link
+     *     SafetyCenterIssue.Action#getId()}
+     * @param taskId a task ID to launch the issue action in
+     */
+    @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @RequiresPermission(MANAGE_SAFETY_CENTER)
+    public void executeSafetyCenterIssueAction(
+            @NonNull String safetyCenterIssueId,
+            @NonNull String safetyCenterIssueActionId,
+            int taskId) {
+        requireNonNull(safetyCenterIssueId, "safetyCenterIssueId cannot be null");
+        requireNonNull(safetyCenterIssueActionId, "safetyCenterIssueActionId cannot be null");
+
+        try {
+            mService.executeSafetyCenterIssueActionWithTaskId(
+                    safetyCenterIssueId,
+                    safetyCenterIssueActionId,
+                    taskId,
+                    mContext.getUser().getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

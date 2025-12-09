@@ -1145,38 +1145,44 @@ public class RoleParser {
         if (value == null) {
             return null;
         }
-        int lastDotIndex = value.lastIndexOf('.');
+        boolean negated = value.startsWith("!");
+        String methodValue = negated ? value.substring(1) : value;
+        if (negated && !Objects.equals(primitiveToWrapperClass(returnType), Boolean.class)) {
+            throwOrLogMessage("Unexpected negation on method \"" + methodValue + "\" for \"" + name
+                    + "\" on <" + tagName + ">");
+        }
+        int lastDotIndex = methodValue.lastIndexOf('.');
         if (lastDotIndex == -1) {
-            throwOrLogMessage("Invalid method \"" + value + "\" for \"" + name + "\" on <" + tagName
-                    + ">");
+            throwOrLogMessage("Invalid method \"" + methodValue + "\" for \"" + name + "\" on <"
+                    + tagName + ">");
             return fallbackValue;
         }
-        String className = applyJarjarTransform(value.substring(0, lastDotIndex));
-        String methodName = value.substring(lastDotIndex + 1);
+        String className = applyJarjarTransform(methodValue.substring(0, lastDotIndex));
+        String methodName = methodValue.substring(lastDotIndex + 1);
         Method method;
         try {
             Class<?> clazz = Class.forName(className);
             method = clazz.getMethod(methodName);
         } catch (Exception e) {
-            throwOrLogMessage("Cannot find method \"" + value + "\" for \"" + name + "\" on <"
-                    + tagName + ">", e);
+            throwOrLogMessage("Cannot find method \"" + methodValue + "\" for \"" + name
+                    + "\" on <" + tagName + ">", e);
             return fallbackValue;
         }
         int methodModifiers = method.getModifiers();
         if ((methodModifiers & Modifier.PUBLIC) != Modifier.PUBLIC) {
-            throwOrLogMessage("Non-public method \"" + value + "\" for \"" + name + "\" on <"
+            throwOrLogMessage("Non-public method \"" + methodValue + "\" for \"" + name + "\" on <"
                     + tagName + ">");
             return fallbackValue;
         }
         if ((methodModifiers & Modifier.STATIC) != Modifier.STATIC) {
-            throwOrLogMessage("Non-static method \"" + value + "\" for \"" + name + "\" on <"
+            throwOrLogMessage("Non-static method \"" + methodValue + "\" for \"" + name + "\" on <"
                     + tagName + ">");
             return fallbackValue;
         }
         Class<?> methodReturnType = method.getReturnType();
         if (!primitiveToWrapperClass(returnType).isAssignableFrom(
                 primitiveToWrapperClass(methodReturnType))) {
-            throwOrLogMessage("Unexpected return type for method \"" + value + "\" for \""
+            throwOrLogMessage("Unexpected return type for method \"" + methodValue + "\" for \""
                     + name + "\" on <" + tagName + ">, expected:" + returnType.getName()
                     + ", found: " + methodReturnType.getName());
             return fallbackValue;
@@ -1186,16 +1192,18 @@ public class RoleParser {
             public T get() {
                 try {
                     //noinspection unchecked
-                    return (T) method.invoke(null);
+                    T returnValue = (T) method.invoke(null);
+                    //noinspection unchecked
+                    return negated ? (T) (Boolean) !((boolean) returnValue) : returnValue;
                 } catch (Exception e) {
-                    throwOrLogMessage("Failed to invoke method \"" + value + "\" for \"" + name
-                            + "\" on <" + tagName + ">", e);
+                    throwOrLogMessage("Failed to invoke method \"" + methodValue + "\" for \""
+                            + name + "\" on <" + tagName + ">", e);
                     return fallbackValue.get();
                 }
             }
             @Override
             public String toString() {
-                return "Method{name=" + value + "}";
+                return "Method{value=" + value + "}";
             }
         };
     }

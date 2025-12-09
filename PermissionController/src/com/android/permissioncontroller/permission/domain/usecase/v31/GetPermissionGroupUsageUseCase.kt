@@ -16,7 +16,6 @@
 
 package com.android.permissioncontroller.permission.domain.usecase.v31
 
-import android.Manifest
 import android.app.Application
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
@@ -167,7 +166,7 @@ class GetPermissionGroupUsageUseCase(
         permissionGroup: String,
         userId: Int
     ): Boolean {
-        if (isTelecomPackage(packageName, permissionGroup)) {
+        if (isTelecomPackageAndCameraOrMicGroup(packageName, permissionGroup)) {
             return false
         }
         val userHandle = UserHandle.of(userId)
@@ -193,12 +192,6 @@ class GetPermissionGroupUsageUseCase(
         return false
     }
 
-    private fun isTelecomPackage(packageName: String, permissionGroup: String): Boolean {
-        return packageName == TELECOM_PACKAGE &&
-            (permissionGroup == Manifest.permission_group.CAMERA ||
-                permissionGroup == Manifest.permission_group.MICROPHONE)
-    }
-
     private fun isPermissionUserSensitive(
         isPermissionGranted: Boolean,
         permissionFlags: Int
@@ -212,7 +205,6 @@ class GetPermissionGroupUsageUseCase(
 
     companion object {
         private val LOG_TAG = GetPermissionGroupUsageUseCase::class.java.simpleName
-        private const val TELECOM_PACKAGE = "com.android.server.telecom"
 
         fun create(app: Application): GetPermissionGroupUsageUseCase {
             val permissionRepository = PermissionRepository.getInstance(app)

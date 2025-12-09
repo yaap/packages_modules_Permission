@@ -649,6 +649,9 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
+        <!-- Workaround for b/427305183 to restore the non-clipping behavior on V. -->
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <style name="AppPermissionLocationAccuracyText">

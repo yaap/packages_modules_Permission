@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.android.permission.flags.Flags
 import com.android.permissioncontroller.R
+import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.hibernation.isHibernationEnabled
 import com.android.permissioncontroller.permission.model.AppPermissionGroup
 import com.android.permissioncontroller.permission.model.AppPermissions
@@ -322,9 +323,7 @@ class WearAppPermissionGroupsHelper(
             // Redirect to location controller extra package settings.
             LocationUtils.startLocationControllerExtraPackageSettings(context, user)
         } else if (
-            permGroupName.equals(HEALTH_PERMISSION_GROUP) &&
-                android.permission.flags.Flags.replaceBodySensorPermissionEnabled()
-        ) {
+            permGroupName.equals(HEALTH_PERMISSION_GROUP) && SdkLevel.isAtLeastB()) {
             // Redirect to Health&Fitness UI
             Utils.navigateToAppHealthConnectSettings(fragment.requireContext(), packageName, user)
         } else {

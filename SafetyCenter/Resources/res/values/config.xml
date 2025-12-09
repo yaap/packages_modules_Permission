@@ -24,4 +24,6 @@
     <string name="config_useSettingsHomepageIntentExtra" translatable="false">AndroidAdvancedPrivacy,AndroidAdvancedSecurity,TestSource</string>
     <!-- Comma separated list of safety source IDs that should be refreshed on page open by default. -->
     <string name="config_defaultRefreshOnPageOpenSources" translatable="false"></string>
+    <!-- Comma separated list of safety sources group IDs for which we programmatically generate the default summary based on available entries. -->
+    <string name="config_generateSummarySafetySourceGroupIds" translatable="false">AndroidLockScreenSources</string>
 </resources>

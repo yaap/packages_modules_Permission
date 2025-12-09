@@ -17,8 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_function_access_settings_title" msgid="3894819108224606683">"অন্য এপ্‌সমূহৰ এজেণ্ট নিয়ন্ত্ৰণ"</string>
-    <string name="app_function_access_settings_summary" msgid="2719347800336419237">"আপোনাৰ ডিভাইচত আৰু অন্য এপত কাৰ্য সম্পাদন কৰক"</string>
     <string name="face_unlock_title" msgid="3991635517593572926">"মুখাৱয়ব"</string>
     <string name="face_unlock_title_for_work" msgid="1451170625947022012">"কৰ্মস্থানৰ বাবে মুখাৱয়ব"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>

@@ -24,6 +24,7 @@ import static android.view.WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import static com.android.permissioncontroller.Constants.EXTRA_IS_ECM_IN_APP;
+import static com.android.permissioncontroller.flags.Flags.grantActivityPauseHandover;
 import static com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.CANCELED;
 import static com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.DENIED;
 import static com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.DENIED_DO_NOT_ASK_AGAIN;
@@ -63,6 +64,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.Window;
@@ -78,6 +80,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.core.util.Preconditions;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.DeviceUtils;
@@ -230,8 +233,13 @@ public class GrantPermissionsActivity extends SettingsActivity
     private View mRootView;
     private int mStoragePermGroupIcon = R.drawable.ic_empty_icon;
 
+    // Used in logging to determine if user has changed coarse/precise location animation
+    private Prompt mInitialPrompt;
+
     /** Which device the permission will affect. Default is the primary device. */
     private int mTargetDeviceId = ContextCompat.DEVICE_ID_DEFAULT;
+
+    private boolean mEnterAnimationCompleted;
 
     private PackageManager mPackageManager;
 
@@ -257,6 +265,9 @@ public class GrantPermissionsActivity extends SettingsActivity
             mSessionId = new Random().nextLong();
         } else {
             mSessionId = icicle.getLong(KEY_SESSION_ID);
+            // When activity is re-created, there is no transition animation,
+            // onEnterAnimationComplete() is not called. So we need to set it manually.
+            mEnterAnimationCompleted = true;
         }
 
         getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
@@ -371,13 +382,13 @@ public class GrantPermissionsActivity extends SettingsActivity
                 finishSystemStartedDialogsOnOtherTasksLocked();
             } else if (mIsSystemTriggered) {
                 // The system triggered dialog doesn't require results. Delegate, and finish.
-                current.onNewFollowerActivity(null, mRequestedPermissions, false);
+                current.onNewFollowerActivityLocked(null, mRequestedPermissions, false);
                 finishAfterTransition();
                 return;
             } else if (current.mIsSystemTriggered) {
                 // merge into the system triggered dialog, which has task overlay set
                 mDelegated = true;
-                current.onNewFollowerActivity(this, mRequestedPermissions, false);
+                current.onNewFollowerActivityLocked(this, mRequestedPermissions, false);
             } else {
                 // this + current + current.mFollowerActivities
                 if ((current.mFollowerActivities.size() + 2) > MAX_DIALOGS_PER_PKG_TASK) {
@@ -388,10 +399,10 @@ public class GrantPermissionsActivity extends SettingsActivity
                 if (icicle != null) {
                     // This dialog is being recreated, so it should be considered a follower
                     mDelegated = true;
-                    current.onNewFollowerActivity(this, mRequestedPermissions, true);
+                    current.onNewFollowerActivityLocked(this, mRequestedPermissions, true);
                 } else {
                     // Merge the old dialogs into the new
-                    onNewFollowerActivity(current, current.mRequestedPermissions, true);
+                    onNewFollowerActivityLocked(current, current.mRequestedPermissions, true);
                     sCurrentGrantRequests.put(mKey, this);
                 }
             }
@@ -584,7 +595,8 @@ public class GrantPermissionsActivity extends SettingsActivity
      *                 activity finishing
      * @param newPermissions The new permissions requested in the activity
      */
-    private void onNewFollowerActivity(@Nullable GrantPermissionsActivity follower,
+    @GuardedBy("sCurrentGrantRequests")
+    private void onNewFollowerActivityLocked(@Nullable GrantPermissionsActivity follower,
             @NonNull List<String> newPermissions, boolean followerIsOlder) {
         if (follower != null) {
             // Ensure the list of follower activities is a stack
@@ -615,9 +627,14 @@ public class GrantPermissionsActivity extends SettingsActivity
             olderActivity.mRootView.setVisibility(View.GONE);
         }
         if (follower != null && followerIsOlder) {
-            follower.mFollowerActivities.forEach((oldFollower) ->
-                    onNewFollowerActivity(oldFollower, new ArrayList<>(), true));
+            List<GrantPermissionsActivity> descendantFollowers = new ArrayList<>(
+                    follower.mFollowerActivities);
             follower.mFollowerActivities.clear();
+            for (GrantPermissionsActivity oldFollower: descendantFollowers) {
+                if (oldFollower != this) {
+                    onNewFollowerActivityLocked(oldFollower, new ArrayList<>(), true);
+                }
+            }
         }
 
         if (mRequestedPermissions.containsAll(newPermissions)) {
@@ -648,6 +665,32 @@ public class GrantPermissionsActivity extends SettingsActivity
         mViewModel.getRequestInfosLiveData().observe(this, this::onRequestInfoLoad);
         if (follower != null) {
             follower.mViewModel = mViewModel;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!grantActivityPauseHandover()) {
+            return;
+        }
+
+        synchronized (sCurrentGrantRequests) {
+            for (GrantPermissionsActivity follower: mFollowerActivities) {
+                if (follower.getLifecycle().getCurrentState() == Lifecycle.State.RESUMED) {
+                    // Well this is awkward. This activity is paused, and one of its "follower"
+                    // activities is resumed. That means that activity needs to be made the leader
+                    follower.mDelegated = false;
+                    follower.onNewFollowerActivityLocked(this, mRequestedPermissions, true);
+                    mViewModel.getRequestInfosLiveData()
+                            .observe(follower, follower::onRequestInfoLoad);
+                    if (!mViewModel.getRequestInfosLiveData().isStale()) {
+                        // Immediately load the requestInfos
+                        follower.onRequestInfoLoad(mRequestInfos);
+                    }
+                    return;
+                }
+            }
         }
     }
 
@@ -787,6 +830,7 @@ public class GrantPermissionsActivity extends SettingsActivity
 
         mButtonVisibilities = getButtonsForPrompt(info.getPrompt(), info.getDeny(),
                 info.getShowRationale());
+        mInitialPrompt = info.getPrompt();
 
         CharSequence permissionRationaleMessage = null;
         if (isPermissionRationaleVisible()) {
@@ -835,6 +879,7 @@ public class GrantPermissionsActivity extends SettingsActivity
 
     private int getDetailMessageId(String permGroupName, Prompt prompt) {
         return switch (prompt) {
+            case BASIC -> Utils.getRequestDetail(permGroupName);
             case UPGRADE_SETTINGS_LINK, OT_UPGRADE_SETTINGS_LINK ->
                     Utils.getUpgradeRequestDetail(permGroupName);
             case SETTINGS_LINK_FOR_BG, SETTINGS_LINK_WITH_OT ->
@@ -1056,6 +1101,21 @@ public class GrantPermissionsActivity extends SettingsActivity
                 R.bool.config_enableExpressiveDesignInRequestPermissionDialog);
     }
 
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        mEnterAnimationCompleted = true;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // Block touches while the enter animation is still running to prevent tap jacking.
+        if (!mEnterAnimationCompleted) {
+            return true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
     /**
      * Remove this activity from the map of activities
      */
@@ -1217,17 +1277,44 @@ public class GrantPermissionsActivity extends SettingsActivity
                 break;
         }
 
-        int selectedPrecision = 0;
+        int initialLocationPrecision = 0;
+        int selectedLocationPrecision = 0;
+        boolean locationAccuracyButtonClicked = false;
+
+        if (android.Manifest.permission_group.LOCATION.equals(permissionGroupName)) {
+            initialLocationPrecision =
+                    calculateLocationPrecisionBitmask(getPermissionsForPrompt(mInitialPrompt));
+            selectedLocationPrecision =
+                    calculateLocationPrecisionBitmask(affectedForegroundPermissions);
+            locationAccuracyButtonClicked = mViewHandler.hasLocationAccuracyButtonBeenClicked();
+        }
+
+        mViewModel.logClickedButtons(permissionGroupName, clickedButton, presentedButtons,
+                isPermissionRationaleVisible(), mInitialPrompt, initialLocationPrecision,
+                selectedLocationPrecision, locationAccuracyButtonClicked);
+    }
+
+    private List<String> getPermissionsForPrompt(Prompt prompt) {
+        return switch (prompt) {
+            case LOCATION_COARSE_ONLY, LOCATION_TWO_BUTTON_COARSE_HIGHLIGHT -> List.of(
+                    ACCESS_COARSE_LOCATION);
+            case LOCATION_FINE_UPGRADE -> List.of(ACCESS_FINE_LOCATION);
+            case LOCATION_TWO_BUTTON_FINE_HIGHLIGHT -> List.of(ACCESS_COARSE_LOCATION,
+                    ACCESS_FINE_LOCATION);
+            default -> List.of();
+        };
+    }
+
+    private int calculateLocationPrecisionBitmask(List<String> affectedForegroundPermissions) {
+        int locationPrecision = 0;
         if (affectedForegroundPermissions != null) {
             for (Map.Entry<String, Integer> entry : PERMISSION_TO_BIT_SHIFT.entrySet()) {
                 if (affectedForegroundPermissions.contains(entry.getKey())) {
-                    selectedPrecision |= 1 << entry.getValue();
+                    locationPrecision |= 1 << entry.getValue();
                 }
             }
         }
-
-        mViewModel.logClickedButtons(permissionGroupName, selectedPrecision, clickedButton,
-                presentedButtons, isPermissionRationaleVisible());
+        return locationPrecision;
     }
 
     private int getButtonState() {

@@ -29,6 +29,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
+import android.location.flags.Flags;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -100,16 +101,23 @@ public class LocationUtils {
     /** Return the automotive location bypass allowlist. */
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     public static Collection<String> getAutomotiveLocationBypassAllowlist(Context context) {
-        // TODO(b/335763768): Remove reflection once getAdasAllowlist() is a System API
-        try {
+        // TODO: This check (Flags.changeGetAdasAllowlistFromHiddenToSystem()) is temporary. When
+        // the flag is removed, replace this with a check for the SDK level where
+        // Flags.changeGetAdasAllowlistFromHiddenToSystem() was fully enabled.
+        if (Flags.changeGetAdasAllowlistFromHiddenToSystem()) {
+            LocationManager locationManager = context.getSystemService(LocationManager.class);
+            return locationManager.getAdasAllowlist().getPackages();
+        } else {
+            try {
             LocationManager locationManager = context.getSystemService(LocationManager.class);
             Object packageTagsList =
                     LocationManager.class.getMethod("getAdasAllowlist").invoke(locationManager);
-            return (Collection<String>) packageTagsList.getClass().getMethod("getPackages")
-                    .invoke(packageTagsList);
-        } catch (Exception e) {
-            Log.e(TAG, "Cannot get location bypass allowlist: " + e);
-            return new ArrayList<String>();
+                return (Collection<String>)
+                        packageTagsList.getClass().getMethod("getPackages").invoke(packageTagsList);
+            } catch (Exception e) {
+                Log.e(TAG, "Cannot get location bypass allowlist: " + e);
+                return new ArrayList<String>();
+            }
         }
     }
 

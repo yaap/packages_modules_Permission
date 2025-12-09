@@ -19,6 +19,7 @@ package com.android.permissioncontroller.tests.mocking.safetycenter.ui.model
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import android.os.Bundle
 import android.os.UserHandle
+import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterEntryGroup
 import android.safetycenter.SafetyCenterEntryOrGroup
@@ -29,6 +30,7 @@ import android.safetycenter.SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATIO
 import android.safetycenter.SafetyCenterStatus
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
+import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.safetycenter.ui.model.ActionId
 import com.android.permissioncontroller.safetycenter.ui.model.IssueId
 import com.android.permissioncontroller.safetycenter.ui.model.IssueUiData
@@ -37,6 +39,7 @@ import com.android.safetycenter.internaldata.SafetyCenterBundles.ISSUES_TO_GROUP
 import com.android.safetycenter.internaldata.SafetyCenterIds
 import com.android.safetycenter.internaldata.SafetyCenterIssueId
 import com.android.safetycenter.internaldata.SafetyCenterIssueKey
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterIssueBuilder
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -341,7 +344,13 @@ class SafetyCenterUiDataTest {
             groupId: String,
             severityLevel: Int = ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
         ) =
-            SafetyCenterIssue.Builder(encodedIssueId, "issue title", "issue summary")
+            createSafetyCenterIssueBuilder(
+                    encodedIssueId,
+                    "issue title",
+                    "issue summary",
+                    UserHandle.of(UserHandle.myUserId()),
+                    setOf("defaultSourceId"),
+                    "defaultIssueTypeId")
                 .setSeverityLevel(severityLevel)
                 .setGroupId(groupId)
                 .build()

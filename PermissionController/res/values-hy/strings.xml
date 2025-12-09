@@ -196,7 +196,7 @@
     <string name="precise_image_description" msgid="6349638632303619872">"Ճշգրիտ տեղադրություն"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"Մոտավոր տեղադրություն"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Օգտագործել ճշգրիտ տեղադրությունը"</string>
-    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Եթե ճշգրիտ տեղադրությունն անջատված է, հավելվածին հասանելի է ձեր մոտավոր գտնվելու վայրը"</string>
+    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Եթե ճշգրիտ տեղադրությունն անջատված է, հավելվածին հասանելի է ձեր մոտավոր տեղադրությունը"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"«<xliff:g id="PERM">%1$s</xliff:g>» թույլտվություն"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"<xliff:g id="PERM">%1$s</xliff:g>ն օգտագործելու թույլտվություն այս հավելվածի համար"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="PERM">%1$s</xliff:g>ն օգտագործելու թույլտվություն այս հավելվածի համար <xliff:g id="DEVICE_NAME">%2$s</xliff:g> սարքում"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Նշե՞լ <xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածը որպես նավիգացիայի կանխադրված հավելված"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Թույլտվություններ հարկավոր չեն"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածը կկարողանա փոխազդել ձեր ծանուցումների հետ և կստանա «Հեռախոս», «SMS», «Կոնտակտներ» և «Օրացույց» ծառայությունների թույլտվությունները։"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածը կկարողանա փոխազդել ձեր ծանուցումների հետ և հեռարձակել ձեր հավելվածները միացված սարքին։"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Այս ծառայությունը ձեր հեռախոսից այլ սարքեր է փոխանցում ձեր լուսանկարները, մեդիա բովանդակությունը և ծանուցումները։"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Նշումների կանխադրված հավելված"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Նշումների հավելված"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Հավելվածներ, որոնք թույլ են տալիս նշումներ ստեղծել ձեր սարքում"</string>
@@ -679,7 +677,7 @@
     <string name="enhanced_confirmation_dialog_title" msgid="7562437438040966351">"Սահմանափակումներով կարգավորում"</string>
     <string name="enhanced_confirmation_dialog_desc" msgid="5921240234843839219">"Անվտանգության նկատառումներից ելնելով՝ այս կարգավորումը ներկայումս անհասանելի է։"</string>
     <string name="enhanced_confirmation_phone_state_dialog_title" msgid="5054064107559019689">"Զանգի ընթացքում հնարավոր չէ կատարել գործողությունը"</string>
-    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>. այս կարգավորումն արգելափակված է՝ ձեր սարքի և տվյալների անվտանգության նկատառումներից դուրս գալով։"</string>
+    <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g> Այս կարգավորումն արգելափակված է՝ ձեր սարքի և տվյալների անվտանգության նկատառումներից ելնելով։"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Խաբեբաները կարող են փորձել վտանգավոր հավելվածներ տեղադրել ձեր սարքում՝ ձեզ խնդրելով, որ նոր աղբյուրից անհայտ հավելվածներ տեղադրեք։"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Ստուգեք հեռախոսը"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Չհաջողվեց միանալ հեռախոսին"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Փորձե՞լ նորից։"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Գործակալներ"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Գործակալներ, որոնց հասանելի են տեղեկություններ, կամ որոնք կարող են գործողություններ անել հավելվածներում"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Գործակալներ"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Կառավարեք այս սարքում գործակալների թույլտվությունները"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Գործակալ հավելվածներ չկան"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Այս գործառույթն օգտագործելու համար տեղադրեք գործակալ հավելված"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Հավելվածների թույլտվություններ"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Հավելվածներն ու կարգավորումները, որոնք այս գործակալը կարող է օգտագործել՝ տեղեկություններ ստանալու և ձեզ համար գործողություններ անելու համար"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Չկան հավելվածներ, որոնց հասանելի է <xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածը"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Համակարգ"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Հավելվածներ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Գործակալի հասանելիություն"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Գործակալներ, որոնք կարող են տեղեկությունների հասանելիություն ստանալ և այս հավելվածում ձեր անունից գործողություններ կատարել"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Սարքի կարգավորումներ"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Թույլատրե՞լ <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> հավելվածին լինել <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> հավելվածի գործակալը"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Այս գործակալին հասանելի կդառնա <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> հավելվածը՝ տեղեկություններ ստանալու և ձեր փոխարեն գործողություններ ձեռնարկելու համար"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Թույլատրել"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Չթույլատրել"</string>
 </resources>

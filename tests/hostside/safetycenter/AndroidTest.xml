@@ -42,6 +42,10 @@
 
     <target_preparer class="com.android.compatibility.common.tradefed.targetprep.StayAwakePreparer" />
 
+    <target_preparer class="com.android.tradefed.targetprep.RebootTargetPreparer">
+        <option name="post-reboot" value="true" />
+    </target_preparer>
+
     <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
         <option name="jar" value="SafetyCenterHostSideTestCases.jar" />
     </test>

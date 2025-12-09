@@ -34,6 +34,7 @@ import static java.util.Objects.requireNonNull;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.safetycenter.SafetyCenterManager;
@@ -98,12 +99,6 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
             return;
         }
 
-        if (SettingsThemeHelper.isExpressiveTheme(this)) {
-            // Setting a theme programmatically causes standard preferences to display weirdly.
-            // See b/377519324.
-            setTheme(R.style.Theme_SafetyCenterExpressive);
-        }
-
         Fragment frag;
         Intent intent = getIntent();
         final boolean maybeOpenSubpage =
@@ -161,6 +156,20 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
                                         });
                             }
                         });
+    }
+
+    @Override
+    public Resources.Theme getTheme() {
+        Resources.Theme theme = super.getTheme();
+        theme.applyStyle(R.style.ThemeOverlay_SafetyCenterColors_DayNight, /* force= */ true);
+
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            theme.applyStyle(R.style.ThemeOverlay_SafetyCenter_Expressive, /* force= */ true);
+            theme.applyStyle(
+                    R.style.ThemeOverlay_SafetyCenter_ExpressiveButtons, /* force= */ true);
+            theme.applyStyle(R.style.ThemeOverlay_SafetyCenter_ExpressiveColors, /* force= */ true);
+        }
+        return theme;
     }
 
     @Override
@@ -367,8 +376,7 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
 
     @Override
     public boolean isExpressiveDesignEnabled() {
-        // Expressive design is pre-emptively disabled for Safety Center until implementation is
-        // complete.
-        return false;
+        return SettingsThemeHelper.isExpressiveDesignEnabled()
+                && getResources().getBoolean(R.bool.config_enableExpressiveDesignInSafetyCenter);
     }
 }

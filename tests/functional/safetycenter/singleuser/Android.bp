@@ -29,6 +29,7 @@ android_test {
         "src/**/*.kt",
     ],
     static_libs: [
+        "android.permission.flags-aconfig-java-export",
         "androidx.test.rules",
         "androidx.test.ext.junit",
         "androidx.test.monitor",

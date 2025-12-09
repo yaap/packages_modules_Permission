@@ -65,9 +65,9 @@ within a profile group (e.g. full user and work profile)
 - `fallBackToDefaultHolder`: Whether the role should fall back to the default holder. This attribute
 is optional and defaults to `false`.
 - `featureFlag`: Optional feature flag for the role be available, as the fully qualified name of
-the Java method on the `Flags` class which will be invoked via reflection. Note that any new
-aconfig library dependency will need corresponding jarjar rules for PermissionController and the
-system service JAR.
+the Java method on the `Flags` class which will be invoked via reflection. The feature flag may be
+preceded by a `!` character for negation. Note that any new aconfig library dependency will need
+corresponding jarjar rules for PermissionController and the system service JAR.
 - `ignoreDisabledSystemPackageWhenGranting`: Whether the role should ignore the requested
 permissions of the disabled system package (if any) when granting permissions. If `false`, the
 permission will need to be requested by the disabled system package as well, if there is one. This

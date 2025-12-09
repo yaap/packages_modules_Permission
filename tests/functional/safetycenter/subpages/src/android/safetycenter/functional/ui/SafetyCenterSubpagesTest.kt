@@ -17,6 +17,7 @@
 package android.safetycenter.functional.ui
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID
 import android.safetycenter.SafetySourceData
@@ -71,7 +72,9 @@ import com.android.safetycenter.testing.UiTestHelper.waitPageTitleDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitPageTitleNotDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceIssueDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceIssueNotDisplayed
+import com.android.settingslib.widget.SettingsThemeHelper
 import org.junit.After
+import org.junit.Assume.assumeFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -874,6 +877,7 @@ class SafetyCenterSubpagesTest {
 
     @Test
     fun brandChip_openSubpageFromHomepage_homepageReopensOnClick() {
+        assumeFalse(isSafetyCenterExpressiveDesignEnabled())
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, safetySourceTestData.information)
         val sourcesGroup = safetyCenterTestConfigs.singleSourceConfig.safetySourcesGroups.first()
@@ -892,6 +896,7 @@ class SafetyCenterSubpagesTest {
 
     @Test
     fun brandChip_openSubpageFromIntent_homepageOpensOnClick() {
+        assumeFalse(isSafetyCenterExpressiveDesignEnabled())
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
         safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, safetySourceTestData.information)
         val sourcesGroup = safetyCenterTestConfigs.singleSourceConfig.safetySourcesGroups.first()
@@ -988,6 +993,27 @@ class SafetyCenterSubpagesTest {
                 block()
             }
         }
+    }
+
+    fun isSafetyCenterExpressiveDesignEnabled(): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.BAKLAVA) return false
+
+        if (!SettingsThemeHelper.isExpressiveDesignEnabled()) return false
+
+        val permissionControllerResources =
+            context
+                .createPackageContext(context.packageManager.permissionControllerPackageName, 0)
+                .resources
+        val configEnabled =
+            permissionControllerResources.getBoolean(
+                permissionControllerResources.getIdentifier(
+                    "config_enableExpressiveDesignInSafetyCenter",
+                    "bool",
+                    "com.android.permissioncontroller",
+                )
+            )
+
+        return configEnabled
     }
 
     companion object {

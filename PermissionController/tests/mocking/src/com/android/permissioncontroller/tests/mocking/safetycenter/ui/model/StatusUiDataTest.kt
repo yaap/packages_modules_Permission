@@ -18,6 +18,8 @@ package com.android.permissioncontroller.tests.mocking.safetycenter.ui.model
 
 import android.content.Context
 import android.os.Build
+import android.os.UserHandle
+import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterStatus
@@ -29,8 +31,10 @@ import android.safetycenter.SafetyCenterStatus.REFRESH_STATUS_DATA_FETCH_IN_PROG
 import android.safetycenter.SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS
 import android.safetycenter.SafetyCenterStatus.REFRESH_STATUS_NONE
 import androidx.test.filters.SdkSuppress
+import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.safetycenter.ui.model.StatusUiData
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterIssueBuilder
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -268,7 +272,14 @@ class StatusUiDataTest {
                 .setRefreshStatus(REFRESH_STATUS_DATA_FETCH_IN_PROGRESS)
                 .build()
 
-        val ISSUE = SafetyCenterIssue.Builder("iSsUe_Id", "issue title", "issue summary").build()
+        val ISSUE = createSafetyCenterIssueBuilder(
+                "iSsUe_Id",
+                "issue title",
+                "issue summary",
+                UserHandle.of(UserHandle.myUserId()),
+                setOf("safety_source_id"),
+                "default_issue_type_id")
+            .build()
 
         val DATA_WITH_ISSUES = SafetyCenterData(STATUS, listOf(ISSUE), listOf(), listOf())
         val DATA_WITHOUT_ISSUES = SafetyCenterData(STATUS, listOf(), listOf(), listOf())

@@ -127,7 +127,7 @@
     <string name="app_name_unknown" msgid="1319665005754048952">"Inconnu"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Tableau de bord Confidentialité"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Voir les applis qui ont récemment utilisé des autorisations"</string>
-    <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g> : utilisation"</string>
+    <string name="permission_group_usage_title" msgid="2595013198075285173">"Utilisation <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Voir les autres autorisations"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g> et <xliff:g id="NUM">%3$s</xliff:g> autres"</string>
@@ -197,8 +197,8 @@
     <string name="approximate_image_description" msgid="938803699637069884">"Position approximative"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Position exacte"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Si la position exacte est désactivée, les applis ont accès à votre position approximative"</string>
-    <string name="app_permission_title" msgid="2090897901051370711">"Autorisation d\'accès à \"<xliff:g id="PERM">%1$s</xliff:g>\""</string>
-    <string name="app_permission_header" msgid="2951363137032603806">"Accès à \"<xliff:g id="PERM">%1$s</xliff:g>\" pour cette appli"</string>
+    <string name="app_permission_title" msgid="2090897901051370711">"Autorisation accès <xliff:g id="PERM">%1$s</xliff:g>"</string>
+    <string name="app_permission_header" msgid="2951363137032603806">"Accès à <xliff:g id="PERM">%1$s</xliff:g> pour cette appli"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Accès à <xliff:g id="PERM">%1$s</xliff:g> pour cette application sur <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Voir toutes les autorisations pour <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Voir toutes les applis ayant cette autorisation"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Définir <xliff:g id="APP_NAME">%1$s</xliff:g> comme appli de navigation par défaut ?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Aucune autorisation nécessaire"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> aura l\'autorisation d\'interagir avec vos notifications et d\'accéder au téléphone, aux SMS, aux contacts et à l\'agenda."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> aura l\'autorisation d\'interagir avec vos notifications et de lire vos applis en streaming sur l\'appareil connecté."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Ce service partage vos photos, contenus multimédias et notifications avec d\'autres appareils depuis votre téléphone."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Appli de notes par défaut"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Appli de notes"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Applis vous permettant de prendre des notes sur votre appareil"</string>
@@ -561,7 +559,7 @@
     <string name="exempt_info_label" msgid="6286190981253476699">"L\'application <xliff:g id="APP_NAME">%1$s</xliff:g> est protégée par Android. Comme vos données sont traitées sur cet appareil, l\'utilisation des autorisations de cette appli n\'est pas affichée sur votre tableau de bord Confidentialité."</string>
     <string name="blocked_camera_title" msgid="1128510551791284384">"La caméra de l\'appareil est bloquée"</string>
     <string name="blocked_microphone_title" msgid="1631517143648232585">"Le micro de l\'appareil est bloqué"</string>
-    <string name="blocked_location_title" msgid="2005608279812892383">"La localisation de l\'appareil est désactivée"</string>
+    <string name="blocked_location_title" msgid="2005608279812892383">"La position de l\'appareil est désactivée"</string>
     <string name="blocked_sensor_summary" msgid="4443707628305027375">"Pour les applis et services"</string>
     <string name="blocked_mic_summary" msgid="8960466941528458347">"Il est cependant possible que les données du micro soient partagées lorsque vous appelez un numéro d\'urgence."</string>
     <string name="blocked_sensor_button_label" msgid="6742092634984289658">"Modifier"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Vérifier votre téléphone"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Impossible de se connecter à votre téléphone"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Réessayer ?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agents"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Agents pouvant accéder aux informations ou effectuer des actions dans les applis"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agents"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Gérez l\'accès des agents sur cet appareil"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Aucune appli d\'agent disponible"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Installez une appli d\'agent sur votre appareil pour activer cette fonctionnalité"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Accès à l\'application"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Applis et paramètres auxquels cet agent peut accéder pour obtenir des informations et effectuer des actions pour vous"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Aucune application n\'est disponible pour l\'accès à <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Système"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Applis"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Accès des agents"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agents pouvant accéder aux informations et effectuer des actions pour vous dans cette appli"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Paramètres de l\'appareil"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Autoriser <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> à être agent pour <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Cet agent pourra accéder à <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> pour obtenir des informations et effectuer des actions pour vous"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Autoriser"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Ne pas autoriser"</string>
 </resources>

@@ -239,7 +239,7 @@
     <string name="permission_description_summary_call_log" msgid="7321437186317577624">"Приложения с этим разрешением могут читать список вызовов и создавать записи в нем."</string>
     <string name="permission_description_summary_camera" msgid="108004375101882069">"Приложения с этим разрешением могут снимать фото и видео."</string>
     <string name="permission_description_summary_contacts" msgid="2337798886460408996">"Приложения с этим разрешением могут получать доступ к контактам."</string>
-    <string name="permission_description_summary_location" msgid="2817531799933480694">"Приложения с этим разрешением могут получать доступ к местоположению устройства."</string>
+    <string name="permission_description_summary_location" msgid="2817531799933480694">"Приложения с этим разрешением могут получать информацию о местоположении устройства."</string>
     <string name="permission_description_summary_nearby_devices" msgid="8269183818275073741">"Приложения с этим разрешением могут находить устройства поблизости, подключаться к ним и определять их относительное местоположение."</string>
     <string name="permission_description_summary_microphone" msgid="630834800308329907">"Приложения с этим разрешением могут записывать аудио."</string>
     <string name="permission_description_summary_phone" msgid="4515277217435233619">"Приложения с этим разрешением могут совершать звонки и управлять ими."</string>
@@ -326,23 +326,23 @@
     <string name="app_perms_24h_access" msgid="99069906850627181">"Последний доступ: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="app_perms_24h_access_yest" msgid="5411926024794555022">"Последний доступ: вчера в <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
     <string name="app_perms_7d_access" msgid="4945055548894683751">"Последний доступ: <xliff:g id="TIME_DATE_0">%1$s</xliff:g> в <xliff:g id="TIME_DATE_1">%2$s</xliff:g>"</string>
-    <string name="app_perms_content_provider_24h" msgid="1055526027667508972">"Использовалось в последние 24 часа"</string>
-    <string name="app_perms_content_provider_7d" msgid="3215454898257814868">"Использовалось в последние 7 дней"</string>
+    <string name="app_perms_content_provider_24h" msgid="1055526027667508972">"Разрешение использовалось в последние 24 часа"</string>
+    <string name="app_perms_content_provider_7d" msgid="3215454898257814868">"Разрешение использовалось в последние 7 дней"</string>
     <string name="app_perms_24h_access_background" msgid="3413674718969576843">"Последний доступ: <xliff:g id="TIME_DATE">%1$s</xliff:g> • Разрешено всегда"</string>
     <string name="app_perms_24h_access_yest_background" msgid="9174750810998076725">"Последний доступ: вчера в <xliff:g id="TIME_DATE">%1$s</xliff:g> • Разрешено всегда"</string>
     <string name="app_perms_7d_access_background" msgid="408099213372185627">"Последний доступ: <xliff:g id="TIME_DATE_0">%1$s</xliff:g> в <xliff:g id="TIME_DATE_1">%2$s</xliff:g> • Разрешено всегда"</string>
-    <string name="app_perms_content_provider_24h_background" msgid="3825902995186961496">"Использовалось в последние 24 часа • Разрешено всегда"</string>
-    <string name="app_perms_content_provider_7d_background" msgid="4818839672116463542">"Использовалось в последние 7 дней • Разрешено всегда"</string>
+    <string name="app_perms_content_provider_24h_background" msgid="3825902995186961496">"Разрешение использовалось в последние 24 часа • Разрешено всегда"</string>
+    <string name="app_perms_content_provider_7d_background" msgid="4818839672116463542">"Разрешение использовалось в последние 7 дней • Разрешено всегда"</string>
     <string name="app_perms_24h_access_media_only" msgid="6651699644199132054">"Последний доступ: <xliff:g id="TIME_DATE">%1$s</xliff:g> • Медиафайлы"</string>
     <string name="app_perms_24h_access_yest_media_only" msgid="7213187706424998792">"Последний доступ: вчера в <xliff:g id="TIME_DATE">%1$s</xliff:g> • Медиафайлы"</string>
     <string name="app_perms_7d_access_media_only" msgid="1031096653668235200">"Последний доступ: <xliff:g id="TIME_DATE_0">%1$s</xliff:g> в <xliff:g id="TIME_DATE_1">%2$s</xliff:g> • Медиафайлы"</string>
-    <string name="app_perms_content_provider_24h_media_only" msgid="7797963000596179491">"Использовалось в последние 24 часа • Медиафайлы"</string>
-    <string name="app_perms_content_provider_7d_media_only" msgid="8446239884570262243">"Использовалось в последние 7 дней • Медиафайлы"</string>
+    <string name="app_perms_content_provider_24h_media_only" msgid="7797963000596179491">"Разрешение использовалось в последние 24 часа • Медиафайлы"</string>
+    <string name="app_perms_content_provider_7d_media_only" msgid="8446239884570262243">"Разрешение использовалось в последние 7 дней • Медиафайлы"</string>
     <string name="app_perms_24h_access_all_files" msgid="8902360456978159091">"Последний доступ: <xliff:g id="TIME_DATE">%1$s</xliff:g> • Все файлы"</string>
     <string name="app_perms_24h_access_yest_all_files" msgid="5708424073126844909">"Последний доступ: вчера в <xliff:g id="TIME_DATE">%1$s</xliff:g> • Все файлы"</string>
     <string name="app_perms_7d_access_all_files" msgid="8246193786397635824">"Последний доступ: <xliff:g id="TIME_DATE_0">%1$s</xliff:g> в <xliff:g id="TIME_DATE_1">%2$s</xliff:g> • Все файлы"</string>
-    <string name="app_perms_content_provider_24h_all_files" msgid="573104317727770850">"Использовалось в последние 24 часа • Все файлы"</string>
-    <string name="app_perms_content_provider_7d_all_files" msgid="7962416229708835558">"Использовалось в последние 7 дней • Все файлы"</string>
+    <string name="app_perms_content_provider_24h_all_files" msgid="573104317727770850">"Разрешение использовалось в последние 24 часа • Все файлы"</string>
+    <string name="app_perms_content_provider_7d_all_files" msgid="7962416229708835558">"Разрешение использовалось в последние 7 дней • Все файлы"</string>
     <string name="no_permissions_allowed" msgid="6081976856354669209">"Разрешения не предоставлены"</string>
     <string name="no_permissions_denied" msgid="8159923922804043282">"Предоставлены все разрешения"</string>
     <string name="no_apps_allowed" msgid="7718822655254468631">"Не разрешено ни одному приложению"</string>
@@ -357,7 +357,7 @@
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Эти приложения могут получить доступ к изображению на экране, вашим действиям и вводимому тексту. Кроме того, они могут сами выполнять действия и управлять экраном."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"Цифровой помощник по умолчанию"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"Цифровой помощник"</string>
-    <string name="role_assistant_description" msgid="6622458130459922952">"Приложения-помощники могут использовать информацию на экране. Для большего удобства некоторые из них поддерживают запуск других приложений и голосовой ввод."</string>
+    <string name="role_assistant_description" msgid="6622458130459922952">"Приложения-помощники могут оказывать вам содействие, учитывая информацию на экране, который вы просматриваете. Чтобы вам было ещё удобнее, некоторые из них поддерживают запуск других приложений и голосовой ввод."</string>
     <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Рекомендовано компанией \"<xliff:g id="OEM_NAME">%s</xliff:g>\""</string>
     <string name="role_browser_label" msgid="2877796144554070207">"Браузер по умолчанию"</string>
     <string name="role_browser_short_label" msgid="6745009127123292296">"Браузер"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Сделать приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" навигатором по умолчанию?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Разрешения не требуются."</string>
     <string name="role_watch_description" msgid="267003778693177779">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" будет предоставлен доступ к уведомлениям, а также следующие разрешения: телефон, SMS, контакты и календарь."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" сможет взаимодействовать с уведомлениями и транслировать приложения на подключенное устройство."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Этот сервис открывает другим устройствам доступ к фотографиям, медиафайлам и уведомлениям на вашем телефоне."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Для заметок по умолчанию"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Приложение для заметок"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Приложения для написания заметок на вашем устройстве"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Проверьте телефон"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Нет связи с телефоном."</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Повторить попытку?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Агенты"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Агенты, которые могут получать доступ к данным или выполнять действия в приложениях"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Агенты"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Управление доступом для агентов на этом устройстве"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Нет доступных приложений-агентов"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Чтобы использовать эту функцию, установите приложение-агент"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Доступ к приложениям"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Приложения и настройки, к которым у этого агента есть доступ для получения данных и выполнения действий от вашего имени"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Нет приложений, которые могут получить доступ к приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Системные"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Приложения"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Доступ агента"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенты, которые могут получать доступ к информации и выполнять действия в этом приложении от вашего лица"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Настройки устройства"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> станет агентом прил-я \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\"?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Агент сможет искать сведения и выполнять действия в приложении \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\"."</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Разрешить"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Запретить"</string>
 </resources>

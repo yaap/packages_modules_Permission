@@ -49,6 +49,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
+import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.SystemUtil
 import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.CompletableFuture
@@ -78,6 +79,8 @@ open class DeviceAwarePermissionGrantTest {
     @get:Rule
     var virtualDeviceRule: VirtualDeviceRule =
         VirtualDeviceRule.withAdditionalPermissions(Manifest.permission.GRANT_RUNTIME_PERMISSIONS)
+
+    @get:Rule val disableAnimationRule = DisableAnimationRule()
 
     @Before
     fun setup() {

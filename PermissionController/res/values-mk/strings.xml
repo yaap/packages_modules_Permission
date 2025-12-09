@@ -73,7 +73,7 @@
     <string name="denied_permission_decision" msgid="5308961501779563781">"Не одобривте пристап за <xliff:g id="APP_NAME">%1$s</xliff:g> до <xliff:g id="PERMISSION_NAME">%2$s</xliff:g>"</string>
     <string name="days_ago" msgid="6650359081551335629">"{count,plural, =0{Денес}=1{Пред 1 ден}one{Пред # ден}other{Пред # дена}}"</string>
     <string name="app_disable_dlg_positive" msgid="7418444149981904940">"Оневозможи ја апликацијата"</string>
-    <string name="app_disable_dlg_text" msgid="3126943217146120240">"Ако ја оневозможите оваа апликација, Android и другите апликации можеби веќе нема да функционираат како што треба. Имајте предвид, не може да ја избришете апликацијава бидејќи е однапред инсталирана на уредот. Ако ја оневозможите, ќе ја исклучите и ќе ја сокриете на уредот."</string>
+    <string name="app_disable_dlg_text" msgid="3126943217146120240">"Ако ја оневозможите оваа апликација, Android и другите апликации можеби веќе нема да функционираат како што треба. Имајте предвид, не може да ја избришете апликацијава бидејќи е однапред инсталирана на уредот. Ако ја оневозможите, ќе ја исклучите и ќе ја скриете на уредот."</string>
     <string name="app_permission_manager" msgid="3903811137630909550">"Управувач со дозволи"</string>
     <string name="never_ask_again" msgid="4728762438198560329">"Не прашувај повторно"</string>
     <string name="no_permissions" msgid="3881676756371148563">"Нема дозволи"</string>
@@ -198,9 +198,9 @@
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Користи прецизна локација"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Кога прецизната локација е исклучена, апликациите може да пристапуваат до приближната локација"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"Дозвола за <xliff:g id="PERM">%1$s</xliff:g>"</string>
-    <string name="app_permission_header" msgid="2951363137032603806">"Пристап до <xliff:g id="PERM">%1$s</xliff:g> за апликацијава"</string>
+    <string name="app_permission_header" msgid="2951363137032603806">"Пристап до „<xliff:g id="PERM">%1$s</xliff:g>“ за апликацијава"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"Пристап до <xliff:g id="PERM">%1$s</xliff:g> за апликацијава на <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Прикажи ги сите дозволи за <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"Прикажи ги сите дозволи за „<xliff:g id="APP">%1$s</xliff:g>“"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"Прикажи ги сите апликации со оваа дозвола"</string>
     <string name="app_permission_info_button" msgid="8973692370208562556">"Информации"</string>
     <string name="app_permission_settings_button" msgid="4582916817451973752">"Поставки"</string>
@@ -275,7 +275,7 @@
     <string name="unused_apps_notification_content" msgid="9195026773244581246">"Дозволите и привремените датотеки се отстранети, а известувањата се сопрени. Допрете за да прегледате."</string>
     <string name="unused_apps_safety_center_card_title" msgid="5638409355530099149">"Прегледајте ги апликациите со отстранети дозволи"</string>
     <string name="unused_apps_safety_center_card_content" msgid="1088557243627427820">"За апликации што не сте ги користеле некое време, дозволите и привремените датотеки беа отстранети и известувањата беа запрени."</string>
-    <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"Прегледување апликации"</string>
+    <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"Прегледајте ги апликациите"</string>
     <string name="post_drive_permission_decision_reminder_title" msgid="1290697371418139976">"Погледнете ги неодамнешните дозволи"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_1_permission" msgid="670521503734140711">"Додека возевте, дадовте пристап на <xliff:g id="APP">%1$s</xliff:g> за <xliff:g id="PERMISSION">%2$s</xliff:g>"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_2_permissions" msgid="671791184670801301">"Додека возевте, дадовте пристап на <xliff:g id="APP">%1$s</xliff:g> за <xliff:g id="PERMISSION_1">%2$s</xliff:g> и <xliff:g id="PERMISSION_2">%3$s</xliff:g>"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Да се постави <xliff:g id="APP_NAME">%1$s</xliff:g> како ваша стандардна апликација за навигација?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Не се потребни дозволи"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> ќе може да остварува интеракција со известувањата и да пристапува до дозволите за телефонот, SMS, контактите и календарот."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> ќе може да остварува интеракција со известувањата и да пренесува од вашите апликации на поврзаниот уред."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Услугава споделува ваши фотографии, содржини и известувања од телефонот на други уреди."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Стандардна апликација за белешки"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Апликација за белешки"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Апликации што ви овозможуваат да запишувате белешки на вашиот уред"</string>
@@ -564,7 +562,7 @@
     <string name="blocked_location_title" msgid="2005608279812892383">"Локацијата на уредот е исклучена"</string>
     <string name="blocked_sensor_summary" msgid="4443707628305027375">"За апликации и услуги"</string>
     <string name="blocked_mic_summary" msgid="8960466941528458347">"Податоците за микрофонот може сепак да се споделат кога се јавувате на бројот за итни случаи."</string>
-    <string name="blocked_sensor_button_label" msgid="6742092634984289658">"Измени"</string>
+    <string name="blocked_sensor_button_label" msgid="6742092634984289658">"Изменете"</string>
     <string name="automotive_blocked_camera_title" msgid="6142362431548829416">"Пристапот до камерата е исклучен"</string>
     <string name="automotive_blocked_microphone_title" msgid="3956311098238620220">"Пристапот до микрофонот е исклучен"</string>
     <string name="automotive_blocked_location_title" msgid="6047574747593264689">"Пристапот до локацијата е исклучен"</string>
@@ -635,7 +633,7 @@
     <string name="mic_toggle_description" msgid="9163104307990677157">"За апликации и услуги. Ако поставкава е исклучена, податоците од микрофонот може сепак да се споделат кога ќе се јавите на број за итни случаи."</string>
     <string name="location_settings_subtitle" msgid="2328360561197430695">"Погледнете кои апликации и услуги имаат пристап до локацијата"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Известувај за пристап до привремената меморија"</string>
-    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Нека се прикажува известување кога апликациите пристапуваат до текст, слики или други содржини што сте ги копирале"</string>
+    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Прикажува известување кога апликациите пристапуваат до текст, слики или други содржини што сте ги копирале"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Прикажувај ги лозинките"</string>
     <string name="show_password_summary" msgid="1110166488865981610">"Прикажувај ги знаците накратко додека пишувам"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"Апликацијава изјави дека можеби ќе споделува податоци за локацијата со трети страни"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Проверете го телефонот"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Не можеше да се контактира со телефонот"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Ќе се обидете повторно?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Агенти"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Агенти што може да пристапуваат до податоци или да преземаат дејства во апликации"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Агенти"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Управувајте со пристапот за агенти на уредов"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Не се достапни апликации за агент"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Инсталирајте апликација за агент на вашиот уред за да ја овозможите функцијава"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Пристап до апликации"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Апликации и поставки до кои може да пристапува агентов за да добива податоци и да презема дејства за вас"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Не се достапни апликации за пристап до <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Систем"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Апликации"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Пристап на агентите"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенти коишто може да пристапуваат до податоците и да преземаат дејства за вас во апликацијава"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Поставки за уредот"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Да се дозволи <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> да биде агент за <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Агентов ќе може да пристапува до <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> за да добива податоци и да презема дејства за вас"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Дозволи"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Не дозволувај"</string>
 </resources>

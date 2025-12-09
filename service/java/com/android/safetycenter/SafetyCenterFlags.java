@@ -141,6 +141,9 @@ public final class SafetyCenterFlags {
 
     private static volatile String sActionsToOverrideWithDefaultIntentDefault = "";
 
+    private static volatile ArraySet<String> sGenerateSummarySafetySourcesGroupsIds =
+            new ArraySet<String>(new String[] {"AndroidLockScreenSources"});
+
     static void init(SafetyCenterResourcesApk safetyCenterResourcesApk) {
         String untrackedSourcesDefault =
                 safetyCenterResourcesApk.getOptionalStringByName("config_defaultUntrackedSources");
@@ -170,6 +173,13 @@ public final class SafetyCenterFlags {
                         "config_defaultActionsToOverrideWithDefaultIntent");
         if (actionsToOverrideWithDefaultIntentDefault != null) {
             sActionsToOverrideWithDefaultIntentDefault = actionsToOverrideWithDefaultIntentDefault;
+        }
+        String generateSummarySafetySourcesGroupsIds =
+                safetyCenterResourcesApk.getOptionalStringByName(
+                        "config_generateSummarySafetySourceGroupIds");
+        if (generateSummarySafetySourcesGroupsIds != null) {
+            sGenerateSummarySafetySourcesGroupsIds =
+                    new ArraySet<>(generateSummarySafetySourcesGroupsIds.split(","));
         }
     }
 
@@ -493,6 +503,14 @@ public final class SafetyCenterFlags {
     /** Returns whether we allow statsd logging. */
     public static boolean getAllowStatsdLogging() {
         return getBoolean(PROPERTY_ALLOW_STATSD_LOGGING, true);
+    }
+
+    /**
+     * Returns a list of safety sources groups IDs for which the summary should be generated
+     * programmatically, instead of relying only on the config.
+     */
+    public static ArraySet<String> getGenerateSummarySafetySourcesGroupIds() {
+        return sGenerateSummarySafetySourcesGroupsIds;
     }
 
     /**

@@ -20,11 +20,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.android.permissioncontroller.safetycenter.ui.SafetyBrandChipPreference
         android:key="subpage_brand_chip"
-        app:selectable="false"/>
+        app:selectable="false" />
 
     <com.android.permissioncontroller.safetycenter.ui.SafetyIllustrationPreference
         android:key="subpage_illustration"
-        app:selectable="false"/>
+        app:selectable="false" />
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="subpage_expressive_illustration"
+        app:selectable="false" />
 
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="subpage_issue_group"

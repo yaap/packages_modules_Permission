@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Використовувати <xliff:g id="APP_NAME">%1$s</xliff:g> як навігаційний додаток за умовчанням?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Дозволи не потрібні"</string>
     <string name="role_watch_description" msgid="267003778693177779">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> зможе взаємодіяти з вашими сповіщеннями та отримає дозволи \"Телефон\", \"SMS\", \"Контакти\" й \"Календар\"."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> зможе взаємодіяти з вашими сповіщеннями та транслювати ваші додатки на підключений пристрій."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Цей сервіс передає ваші фотографії, медіафайли та сповіщення з вашого телефона на інші пристрої."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Стандартний додаток-нотатник"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Додаток для нотаток"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Додатки, у яких можна робити нотатки на вашому пристрої"</string>
@@ -484,7 +482,7 @@
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"Змінити доступ до геоданих для додатка &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequest_device_aware_location" msgid="1812338666887726191">"Змінити налаштування доступу до геоданих для додатка &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; на пристрої &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_location" msgid="1550899076845189165">"Додаток хоче завжди отримувати доступ до ваших геоданих, навіть коли ви не використовуєте його. Дозвіл можна надати в "<annotation id="link">"налаштуваннях"</annotation>"."</string>
-    <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"Дозволити додатку <xliff:g id="APP_NAME">%1$s</xliff:g> знаходити пристрої поблизу, підключатися до них і визначати їх відносне розташування?"</string>
+    <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"Дозволити додатку &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; знаходити пристрої поблизу, підключатися до них і визначати їх відносне розташування?"</string>
     <string name="permgrouprequest_device_aware_nearby_devices" msgid="5293478278408567442">"Дозволити додатку &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; знаходити пристрої поблизу, підключатися до них і визначати їх відносне розташування на пристрої &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_nearby_devices" msgid="6877531270654738614">"Дозволити додатку <xliff:g id="APP_NAME">%1$s</xliff:g> знаходити пристрої поблизу, підключатися до них і визначати їх відносне розташування? "<annotation id="link">"Дозвольте в налаштуваннях."</annotation></string>
     <string name="permgrouprequest_fineupgrade" msgid="2334242928821697672">"Змінити доступ до місцезнаходження для додатка <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> з приблизного на точне?"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Перевірте телефон"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Не вдалося підключитися до телефона"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Повторити?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Агенти"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Агенти, які можуть отримувати доступ до інформації або виконувати дії в додатках"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Агенти"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Керування доступом для агентів на цьому пристрої"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Немає додатків-агентів"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Щоб увімкнути цю функцію, установіть на пристрої додаток-агент"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Доступ до додатків"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Додатки й налаштування, до яких цей агент може мати доступ, щоб отримувати інформацію і виконувати потрібні вам дії"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Немає додатків, до яких може отримувати доступ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Система"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Додатки"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Доступ агентів"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенти, які можуть отримувати доступ до інформації і виконувати потрібні вам дії в цьому додатку"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Налаштування пристрою"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Дозволити додатку <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> бути агентом для додатка <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Цей агент зможе отримувати інформацію і виконувати потрібні вам дії в додатку <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Дозволити"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Не дозволяти"</string>
 </resources>

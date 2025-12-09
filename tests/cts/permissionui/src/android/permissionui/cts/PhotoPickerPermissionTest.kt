@@ -28,75 +28,30 @@ import android.content.pm.PackageManager.FLAG_PERMISSION_ONE_TIME
 import android.content.pm.PackageManager.FLAG_PERMISSION_REVOKED_COMPAT
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_FIXED
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SET
-import android.net.Uri
+import android.cts.photopicker.lib.MediaType
+import android.cts.photopicker.lib.PhotoPickerTestRule
+import android.cts.photopicker.lib.TestMedia
+import android.cts.photopicker.lib.WithTestMedia
 import android.os.Build
-import android.provider.DeviceConfig
-import android.provider.DeviceConfig.NAMESPACE_PRIVACY
 import androidx.test.filters.FlakyTest
 import androidx.test.filters.SdkSuppress
 import androidx.test.uiautomator.By
 import com.android.compatibility.common.util.SystemUtil.eventually
 import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity
 import com.android.compatibility.common.util.UiAutomatorUtils2
-import org.junit.AfterClass
-import org.junit.Assert
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Before
-import org.junit.BeforeClass
-import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE, codeName = "UpsideDownCake")
 @FlakyTest
-@Ignore("b/393428835")
 class PhotoPickerPermissionTest : BaseUsePermissionTest() {
 
-    companion object {
-        private var photoUri: Uri? = null
-        private var videoUri: Uri? = null
-        private var oldEnableState: Boolean = true
-
-        @BeforeClass
-        @JvmStatic
-        fun enablePickerAndAddMedia() {
-            // Initialize media provider package name
-            PhotoPickerUtils.getMediaProviderPkgName(context)
-            oldEnableState = isPhotoPickerPermissionPromptEnabled()
-            runWithShellPermissionIdentity {
-                if (!oldEnableState) {
-                    DeviceConfig.setProperty(
-                        NAMESPACE_PRIVACY,
-                        PICKER_ENABLED_SETTING,
-                        true.toString(),
-                        false,
-                    )
-                }
-                photoUri = PhotoPickerUtils.createImage(context)
-                videoUri = PhotoPickerUtils.createVideo(context)
-            }
-        }
-
-        @AfterClass
-        @JvmStatic
-        fun resetPickerAndRemoveMedia() {
-            if (!oldEnableState) {
-                runWithShellPermissionIdentity {
-                    DeviceConfig.setProperty(
-                        NAMESPACE_PRIVACY,
-                        PICKER_ENABLED_SETTING,
-                        false.toString(),
-                        false,
-                    )
-                }
-            }
-
-            PhotoPickerUtils.deleteMedia(context, photoUri)
-            PhotoPickerUtils.deleteMedia(context, videoUri)
-        }
-    }
+    @get:Rule val photoPickerRule = PhotoPickerTestRule(context)
 
     @Before
     fun assumeEnabled() {
@@ -143,6 +98,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testNoPhotoSelectionTreatedAsCancel() {
         installPackage(APP_APK_PATH_IMPLICIT_USER_SELECT_STORAGE)
         requestAppPermissionsAndAssertResult(
@@ -151,7 +107,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             waitForWindowTransition = false,
         ) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            findImageOrVideo(expected = true)
+            photoPickerRule.waitForItem()
             uiDevice.pressBack()
         }
         assertPermissionFlags(READ_MEDIA_IMAGES, FLAG_PERMISSION_USER_SET to false)
@@ -159,6 +115,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testImplicitUserSelectHasOneTimeGrantsWithoutAppOp() {
         installPackage(APP_APK_PATH_IMPLICIT_USER_SELECT_STORAGE)
         requestAppPermissionsAndAssertResult(
@@ -167,8 +124,8 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             waitForWindowTransition = false,
         ) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            clickAllow()
+            photoPickerRule.selectItem(0)
+            photoPickerRule.confirmSelection()
         }
         eventually {
             // USER_SELECTED should be granted, but not returned in the result
@@ -207,6 +164,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testNonImplicitDoesntGrantOtherPermsWhenUserSelected() {
         installPackage(APP_APK_PATH_LATEST)
         requestAppPermissionsAndAssertResult(
@@ -215,8 +173,8 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             waitForWindowTransition = false,
         ) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            clickAllow()
+            photoPickerRule.selectItem(0)
+            photoPickerRule.confirmSelection()
         }
 
         assertPermissionFlags(READ_MEDIA_IMAGES, FLAG_PERMISSION_USER_SET to true)
@@ -224,41 +182,25 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testNonImplicitAutomaticallyShowsPickerWhenUserFixed() {
         installPackage(APP_APK_PATH_LATEST)
         requestAppPermissions(READ_MEDIA_IMAGES, waitForWindowTransition = false) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            doAndWaitForWindowTransition { clickAllow() }
+            photoPickerRule.selectItem(0)
+            doAndWaitForWindowTransition { photoPickerRule.confirmSelection() }
         }
 
         requestAppPermissions(READ_MEDIA_IMAGES, waitForWindowTransition = false) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            doAndWaitForWindowTransition { clickAllow() }
+            photoPickerRule.selectItem(0)
+            doAndWaitForWindowTransition { photoPickerRule.confirmSelection() }
         }
 
         assertPermissionFlags(READ_MEDIA_VISUAL_USER_SELECTED, FLAG_PERMISSION_USER_FIXED to true)
 
         requestAppPermissions(READ_MEDIA_IMAGES, waitForWindowTransition = false) {
-            findImageOrVideo(expected = true)
-            uiDevice.pressBack()
-        }
-    }
-
-    @Test
-    fun testRequestedPermsFilterMediaType() {
-        installPackage(APP_APK_PATH_LATEST)
-        requestAppPermissions(READ_MEDIA_IMAGES, waitForWindowTransition = false) {
-            doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            findImageOrVideo(expected = true)
-            findVideo(expected = false)
-            uiDevice.pressBack()
-        }
-
-        requestAppPermissions(READ_MEDIA_VIDEO, waitForWindowTransition = false) {
-            doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            findVideo(expected = true)
+            photoPickerRule.waitForItem()
             uiDevice.pressBack()
         }
     }
@@ -407,6 +349,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testExplicitAppCannotExpandAccessMediaLocation() {
         installPackage(APP_APK_PATH_LATEST)
         requestAppPermissionsAndAssertResult(
@@ -416,8 +359,8 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             waitForWindowTransition = false,
         ) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            clickAllow()
+            photoPickerRule.selectItem(0)
+            photoPickerRule.confirmSelection()
         }
         requestAppPermissions(READ_MEDIA_IMAGES, READ_MEDIA_VIDEO) {
             click(By.res(ALLOW_ALL_BUTTON))
@@ -437,6 +380,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testMorePhotosDialogShowsAfterClickingSelect() {
         installPackage(APP_APK_PATH_LATEST)
         requestAppPermissionsAndAssertResult(
@@ -446,8 +390,8 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             waitForWindowTransition = false,
         ) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            doAndWaitForWindowTransition { clickAllow() }
+            photoPickerRule.selectItem(0)
+            doAndWaitForWindowTransition { photoPickerRule.confirmSelection() }
         }
 
         requestAppPermissions(READ_MEDIA_IMAGES, READ_MEDIA_VIDEO) {
@@ -457,6 +401,7 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testAMLNotGrantedIfNotRequested() {
         installPackage(APP_APK_PATH_LATEST)
         requestAppPermissionsAndAssertResult(
@@ -465,13 +410,14 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             waitForWindowTransition = false,
         ) {
             doAndWaitForWindowTransition { click(By.res(SELECT_BUTTON)) }
-            clickImageOrVideo()
-            doAndWaitForWindowTransition { clickAllow() }
+            photoPickerRule.selectItem(0)
+            doAndWaitForWindowTransition { photoPickerRule.confirmSelection() }
         }
         assertAppHasPermission(ACCESS_MEDIA_LOCATION, false)
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testDismissAfterActivityRecreatedWithPickerOpen() {
         installPackage(APP_APK_PATH_LATEST)
         requestAppPermissionsAndAssertResult(
@@ -483,8 +429,8 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
             try {
                 doAndWaitForWindowTransition { uiAutomation.setRotation(ROTATION_FREEZE_270) }
                 doAndWaitForWindowTransition { uiAutomation.setRotation(ROTATION_FREEZE_0) }
-                clickImageOrVideo()
-                doAndWaitForWindowTransition { clickAllow() }
+                photoPickerRule.selectItem(0)
+                doAndWaitForWindowTransition { photoPickerRule.confirmSelection() }
             } finally {
                 uiAutomation.setRotation(ROTATION_UNFREEZE)
             }
@@ -492,13 +438,14 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
     }
 
     @Test
+    @WithTestMedia(media = [TestMedia(type = MediaType.IMAGE)])
     fun testCanSelectPhotosInSettings() {
         installPackage(APP_APK_PATH_LATEST)
         navigateToIndividualPermissionSetting(READ_MEDIA_IMAGES)
         click(By.res(SELECT_RADIO_BUTTON))
         doAndWaitForWindowTransition { click(By.res(EDIT_PHOTOS_BUTTON)) }
-        clickImageOrVideo()
-        clickAllow()
+        photoPickerRule.selectItem(0)
+        photoPickerRule.confirmSelection()
     }
 
     @Test
@@ -506,35 +453,5 @@ class PhotoPickerPermissionTest : BaseUsePermissionTest() {
         installPackage(APP_APK_PATH_LATEST)
         navigateToIndividualPermissionSetting(READ_MEDIA_IMAGES)
         UiAutomatorUtils2.waitUntilObjectGone(By.res(EDIT_PHOTOS_BUTTON))
-    }
-
-    private fun clickImageOrVideo() {
-        PhotoPickerUtils.clickAndWait(uiDevice, PhotoPickerUtils.getMediaItem(uiDevice))
-    }
-
-    private fun clickAllow() {
-        PhotoPickerUtils.clickAndWait(uiDevice, PhotoPickerUtils.findAddOrDoneButton())
-    }
-
-    private fun findImageOrVideo(expected: Boolean) {
-        eventually {
-            val item = PhotoPickerUtils.getMediaItem(uiDevice)
-            if (!expected && item.exists()) {
-                Assert.fail("Found image or video, when not expecting it")
-            } else if (expected && !item.exists()) {
-                Assert.fail("Failed to find image or video")
-            }
-        }
-    }
-
-    private fun findVideo(expected: Boolean) {
-        eventually {
-            val item = PhotoPickerUtils.getVideoItem(uiDevice)
-            if (!expected && item.exists()) {
-                Assert.fail("Found video, when not expecting it")
-            } else if (expected && !item.exists()) {
-                Assert.fail("Failed to find video")
-            }
-        }
     }
 }

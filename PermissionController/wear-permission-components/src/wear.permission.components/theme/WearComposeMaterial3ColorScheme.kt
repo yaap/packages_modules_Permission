@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.Color
 import androidx.wear.compose.material.Colors
 import androidx.wear.compose.material3.ColorScheme
+import com.android.permissioncontroller.wear.permission.components.R
 
 /**
  * Creates a dynamic color maps that can be overlaid. In wear we only support dark theme for the
@@ -89,139 +90,139 @@ internal object WearComposeMaterial3ColorScheme {
             primary =
                 defaultColorScheme.primary.updatedColor(
                     context,
-                    android.R.color.system_primary_fixed,
+                    R.color.wear_compose_material3_primary_fixed,
                 ),
             primaryDim =
                 defaultColorScheme.primaryDim.updatedColor(
                     context,
-                    android.R.color.system_primary_fixed_dim,
+                    R.color.wear_compose_material3_primary_fixed_dim,
                 ),
             primaryContainer =
                 defaultColorScheme.primaryContainer.updatedColor(
                     context,
-                    android.R.color.system_primary_container_dark,
+                    R.color.wear_compose_material3_primary_container_dark,
                 ),
             onPrimary =
                 defaultColorScheme.onPrimary.updatedColor(
                     context,
-                    android.R.color.system_on_primary_fixed,
+                    R.color.wear_compose_material3_on_primary_fixed,
                 ),
             onPrimaryContainer =
                 defaultColorScheme.onPrimaryContainer.updatedColor(
                     context,
-                    android.R.color.system_on_primary_container_dark,
+                    R.color.wear_compose_material3_on_primary_container_dark,
                 ),
             secondary =
                 defaultColorScheme.secondary.updatedColor(
                     context,
-                    android.R.color.system_secondary_fixed,
+                    R.color.wear_compose_material3_secondary_fixed,
                 ),
             secondaryDim =
                 defaultColorScheme.secondaryDim.updatedColor(
                     context,
-                    android.R.color.system_secondary_fixed_dim,
+                    R.color.wear_compose_material3_secondary_fixed_dim,
                 ),
             secondaryContainer =
                 defaultColorScheme.secondaryContainer.updatedColor(
                     context,
-                    android.R.color.system_secondary_container_dark,
+                    R.color.wear_compose_material3_secondary_container_dark,
                 ),
             onSecondary =
                 defaultColorScheme.onSecondary.updatedColor(
                     context,
-                    android.R.color.system_on_secondary_fixed,
+                    R.color.wear_compose_material3_on_secondary_fixed,
                 ),
             onSecondaryContainer =
                 defaultColorScheme.onSecondaryContainer.updatedColor(
                     context,
-                    android.R.color.system_on_secondary_container_dark,
+                    R.color.wear_compose_material3_on_secondary_container_dark,
                 ),
             tertiary =
                 defaultColorScheme.tertiary.updatedColor(
                     context,
-                    android.R.color.system_tertiary_fixed,
+                    R.color.wear_compose_material3_tertiary_fixed,
                 ),
             tertiaryDim =
                 defaultColorScheme.tertiaryDim.updatedColor(
                     context,
-                    android.R.color.system_tertiary_fixed_dim,
+                    R.color.wear_compose_material3_tertiary_fixed_dim,
                 ),
             tertiaryContainer =
                 defaultColorScheme.tertiaryContainer.updatedColor(
                     context,
-                    android.R.color.system_tertiary_container_dark,
+                    R.color.wear_compose_material3_tertiary_container_dark,
                 ),
             onTertiary =
                 defaultColorScheme.onTertiary.updatedColor(
                     context,
-                    android.R.color.system_on_tertiary_fixed,
+                    R.color.wear_compose_material3_on_tertiary_fixed,
                 ),
             onTertiaryContainer =
                 defaultColorScheme.onTertiaryContainer.updatedColor(
                     context,
-                    android.R.color.system_on_tertiary_container_dark,
+                    R.color.wear_compose_material3_on_tertiary_container_dark,
                 ),
             surfaceContainerLow =
                 defaultColorScheme.surfaceContainerLow.updatedColor(
                     context,
-                    android.R.color.system_surface_container_low_dark,
+                    R.color.wear_compose_material3_surface_container_low_dark,
                 ),
             surfaceContainer =
                 defaultColorScheme.surfaceContainer.updatedColor(
                     context,
-                    android.R.color.system_surface_container_dark,
+                    R.color.wear_compose_material3_surface_container_dark,
                 ),
             surfaceContainerHigh =
                 defaultColorScheme.surfaceContainerHigh.updatedColor(
                     context,
-                    android.R.color.system_surface_container_high_dark,
+                    R.color.wear_compose_material3_surface_container_high_dark,
                 ),
             onSurface =
                 defaultColorScheme.onSurface.updatedColor(
                     context,
-                    android.R.color.system_on_surface_dark,
+                    R.color.wear_compose_material3_on_surface_dark,
                 ),
             onSurfaceVariant =
                 defaultColorScheme.onSurfaceVariant.updatedColor(
                     context,
-                    android.R.color.system_on_surface_variant_dark,
+                    R.color.wear_compose_material3_on_surface_variant_dark,
                 ),
             outline =
                 defaultColorScheme.outline.updatedColor(
                     context,
-                    android.R.color.system_outline_dark,
+                    R.color.wear_compose_material3_outline_dark,
                 ),
             outlineVariant =
                 defaultColorScheme.outlineVariant.updatedColor(
                     context,
-                    android.R.color.system_outline_variant_dark,
+                    R.color.wear_compose_material3_outline_variant_dark,
                 ),
             background =
                 defaultColorScheme.background.updatedColor(
                     context,
-                    android.R.color.system_background_dark,
+                    R.color.wear_compose_material3_background_dark,
                 ),
             onBackground =
                 defaultColorScheme.onBackground.updatedColor(
                     context,
-                    android.R.color.system_on_background_dark,
+                    R.color.wear_compose_material3_on_background_dark,
                 ),
             error =
-                defaultColorScheme.error.updatedColor(context, android.R.color.system_error_dark),
+                defaultColorScheme.error.updatedColor(context, R.color.wear_compose_material3_error_dark),
             onError =
                 defaultColorScheme.onError.updatedColor(
                     context,
-                    android.R.color.system_on_error_dark,
+                    R.color.wear_compose_material3_on_error_dark,
                 ),
             errorContainer =
                 defaultColorScheme.errorContainer.updatedColor(
                     context,
-                    android.R.color.system_error_container_dark,
+                    R.color.wear_compose_material3_error_container_dark,
                 ),
             onErrorContainer =
                 defaultColorScheme.onErrorContainer.updatedColor(
                     context,
-                    android.R.color.system_on_error_container_dark,
+                    R.color.wear_compose_material3_on_error_container_dark,
                 ),
         )
     }

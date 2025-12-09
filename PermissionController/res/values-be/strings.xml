@@ -37,7 +37,7 @@
     <string name="grant_dialog_button_always_allow_all" msgid="1719900027660252167">"Заўсёды дазваляць усе"</string>
     <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"Дазволіць абмежаваны доступ"</string>
     <string name="grant_dialog_button_allow_selected_photos" msgid="5497042471576153842">"Выбраць фота і відэа"</string>
-    <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"Яшчэ"</string>
+    <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"Выбраць больш"</string>
     <string name="grant_dialog_button_dont_select_more" msgid="6643552729129461268">"Больш не выбіраць"</string>
     <string name="grant_dialog_button_deny_anyway" msgid="7225905870668915151">"Усё роўна не дазваляць"</string>
     <string name="grant_dialog_button_dismiss" msgid="1930399742250226393">"Адхіліць"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Прызначыць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" стандартнай праграмай навігацыі?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Дазволы не патрэбныя"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> зможа ўзаемадзейнічаць з вашымі апавяшчэннямі і атрымае доступ да тэлефона, SMS, кантактаў і календара."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> зможа ўзаемадзейнічаць з вашымі апавяшчэннямі і перадаваць праграмы плынню на падключаную прыладу."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Гэты сэрвіс абагульвае з іншымі прыладамі фота, мультымедыя і апавяшчэнні, якія захоўваюцца на вашым тэлефоне."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Стандартная праграма для нататак"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Праграма для нататак"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Праграмы, якія дазваляюць рабіць нататкі на прыладзе"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Працягніце на тэлефоне"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Не ўдалося падключыцца да тэлефона"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Паўтарыць спробу?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Агенты"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Агенты, якія маюць доступ да інфармацыі або могуць выконваць дзеянні ў праграмах"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Агенты"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Кіраванне доступам для агентаў на гэтай прыладзе"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Няма даступных праграм-агентаў"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Каб уключыць гэту функцыю, усталюйце праграму-агент на прыладзе"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Доступ да праграм"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Праграмы і налады, да якіх гэты агент мае доступ, каб атрымліваць інфармацыю і выконваць дзеянні ад вашага імені"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Няма праграм, якія могуць выкарыстоўвацца для доступу да праграмы \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Сістэма"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Праграмы"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Доступ для агента"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенты, якія маюць доступ да інфармацыі і могуць выконваць дзеянні ад вашага імені ў гэтай праграме"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Налады прылады"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"\"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>\" будзе агентам \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\""</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Доступ агента да \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\""</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Дазволіць"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Не дазваляць"</string>
 </resources>

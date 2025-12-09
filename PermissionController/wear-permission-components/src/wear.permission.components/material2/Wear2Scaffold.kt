@@ -15,8 +15,6 @@
  */
 package com.android.permissioncontroller.wear.permission.components.material2
 
-import android.graphics.drawable.Drawable
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,11 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -54,7 +49,7 @@ import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.scrollAway
 import com.android.permissioncontroller.wear.permission.components.AnnotatedText
-import com.android.permissioncontroller.wear.permission.components.rememberDrawablePainter
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionTheme
 
 /**
@@ -66,7 +61,7 @@ fun Wear2Scaffold(
     showTimeText: Boolean,
     title: String?,
     subtitle: CharSequence?,
-    image: Any?,
+    imageBuilder: WearPermissionIconBuilder?,
     isLoading: Boolean,
     content: ScalingLazyListScope.() -> Unit,
     titleTestTag: String? = null,
@@ -141,7 +136,6 @@ fun Wear2Scaffold(
                 if (isLoading) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 } else {
-                    val iconColor = chipDefaultColors().iconColor(true).value
                     ScalingLazyColumn(
                         modifier = Modifier.fillMaxWidth(),
                         state = listState,
@@ -157,31 +151,8 @@ fun Wear2Scaffold(
                             ),
                     ) {
                         staticItem()
-                        image?.let {
-                            val imageModifier = Modifier.size(24.dp)
-                            when (image) {
-                                is Int ->
-                                    item {
-                                        Image(
-                                            painter = painterResource(id = image),
-                                            contentDescription = null,
-                                            contentScale = ContentScale.Crop,
-                                            modifier = imageModifier,
-                                            colorFilter = ColorFilter.tint(iconColor),
-                                        )
-                                    }
-                                is Drawable ->
-                                    item {
-                                        Image(
-                                            painter = rememberDrawablePainter(image),
-                                            contentDescription = null,
-                                            contentScale = ContentScale.Crop,
-                                            modifier = imageModifier,
-                                            colorFilter = ColorFilter.tint(iconColor),
-                                        )
-                                    }
-                                else -> {}
-                            }
+                        imageBuilder?.modifier(Modifier.size(24.dp))?.let {
+                            item { it.buildAsImage() }
                         }
                         if (title != null) {
                             item {

@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Tetapkan <xliff:g id="APP_NAME">%1$s</xliff:g> sebagai apl navigasi lalai anda?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Kebenaran tidak diperlukan"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> akan dibenarkan berinteraksi dengan pemberitahuan anda dan mengakses kebenaran Telefon, SMS, Kenalan dan Kalendar anda."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> akan dibenarkan untuk berinteraksi dengan pemberitahuan anda dan menstrim apl anda pada peranti tersambung."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Perkhidmatan ini berkongsi foto, media dan pemberitahuan anda daripada telefon anda ke peranti lain."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Apl nota lalai"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Apl nota"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Apl yang membolehkan anda mengambil nota pada peranti anda"</string>
@@ -484,7 +482,7 @@
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"Tukar akses lokasi untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequest_device_aware_location" msgid="1812338666887726191">"Tukar akses lokasi untuk &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; pada &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_location" msgid="1550899076845189165">"Apl ini mahu mengakses lokasi anda pada sepanjang masa, meskipun apabila anda tidak menggunakan apl itu. "<annotation id="link">"Benarkan dalam tetapan."</annotation></string>
-    <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"Benarkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; untuk mencari, menyambung kepada dan menentukan penempatan relatif peranti berdekatan?"</string>
+    <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"Benarkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; untuk mencari, menyambung kepada dan menentukan kedudukan relatif peranti berdekatan?"</string>
     <string name="permgrouprequest_device_aware_nearby_devices" msgid="5293478278408567442">"Benarkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; menemukan, menyambung kepada &amp; menentukan penempatan relatif peranti berdekatan pada &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_nearby_devices" msgid="6877531270654738614">"Benarkan &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; untuk mencari, menyambung kepada dan menentukan penempatan relatif peranti berdekatan? "<annotation id="link">"Benarkan dalam tetapan."</annotation></string>
     <string name="permgrouprequest_fineupgrade" msgid="2334242928821697672">"Tukar akses lokasi <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> daripada anggaran kepada tepat?"</string>
@@ -661,9 +659,9 @@
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Apl ini menyatakan bahawa data lokasi anda mungkin dikongsi dengan pihak ketiga"</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Kemaskinian perkongsian data untuk lokasi"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Semak apl yang mengubah cara apl itu boleh berkongsi data lokasi anda"</string>
-    <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Apl ini telah mengubah cara apl boleh berkongsi data lokasi anda. Apl mungkin tidak berkongsi data lokasi sebelum ini atau mungkin berkongsi data lokasi sekarang untuk tujuan pengiklanan atau pemasaran."</string>
+    <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Apl ini telah mengubah cara berkongsi data lokasi anda. Sebelum ini apl mungkin tidak berkongsi data lokasi, tetapi sekarang apl mungkin berkongsi data lokasi untuk tujuan pengiklanan atau pemasaran."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Pembangun apl ini memberikan maklumat tentang amalan perkongsian data mereka kepada gedung apl. Mereka mungkin mengemaskinikan maklumat tersebut dari semasa ke semasa.\n\nAmalan perkongsian data mungkin berbeza-beza berdasarkan versi apl, penggunaan, wilayah dan umur anda."</string>
-    <string name="learn_about_data_sharing" msgid="4200480587079488045">"Ketahui tentang perkongsian data"</string>
+    <string name="learn_about_data_sharing" msgid="4200480587079488045">"Ketahui perkongsian data"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"Data lokasi anda kini dikongsi dengan pihak ketiga"</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"Data lokasi anda kini dikongsi dengan pihak ketiga untuk pengiklanan atau pemasaran"</string>
     <string name="updated_in_last_days" msgid="8371811947153042322">"{count,plural, =0{Dikemaskinikan pada hari terakhir}=1{Dikemaskinikan pada hari terakhir}other{Dikemaskinikan dalam masa # hari}}"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Semak telefon anda"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Tidak dapat menyambung kepada telefon anda"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Cuba semula?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Ejen"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Ejen yang boleh mengakses maklumat atau mengambil tindakan pada apl"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Ejen"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Urus akses untuk ejen pada peranti ini"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Tiada apl ejen tersedia"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Pasang apl ejen pada peranti anda untuk mendayakan ciri ini"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Akses apl"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Apl dan tetapan yang boleh diakses oleh ejen ini untuk mendapatkan maklumat dan mengambil tindakan untuk anda"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Tiada apl tersedia untuk akses <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistem"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Apl"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Akses ejen"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Ejen yang boleh mengakses maklumat dan mengambil tindakan untuk anda dalam apl ini"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Tetapan Peranti"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Benarkan <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> untuk menjadi ejen bagi <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Ejen ini akan dapat mengakses <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> untuk mendapatkan maklumat dan mengambil tindakan untuk anda"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Benarkan"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Jangan benarkan"</string>
 </resources>

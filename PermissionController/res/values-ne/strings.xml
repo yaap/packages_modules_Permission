@@ -47,8 +47,8 @@
     <string name="allow_permission_foreground_only" msgid="116465816039675404">"एप प्रयोग गर्दा मात्र"</string>
     <string name="allow_permission_always" msgid="5194342531206054051">"सधैँ"</string>
     <string name="deny_permission_deny_and_dont_ask_again" msgid="6106035221490102341">"अनुमति नदिनुहोस् र फेरि नसोध्नुहोस्"</string>
-    <string name="permission_revoked_count" msgid="4785082705441547086">"<xliff:g id="COUNT">%1$d</xliff:g> अनुमति असक्षम पारिएको छ"</string>
-    <string name="permission_revoked_all" msgid="3397649017727222283">"सबै अनुमति असक्षम पारिएको छ"</string>
+    <string name="permission_revoked_count" msgid="4785082705441547086">"<xliff:g id="COUNT">%1$d</xliff:g> अनुमति अफ गरिएको छ"</string>
+    <string name="permission_revoked_all" msgid="3397649017727222283">"सबै अनुमति अफ गरिएको छ"</string>
     <string name="permission_revoked_none" msgid="9213345075484381180">"कुनै पनि असक्षम पारिएको छैन"</string>
     <string name="grant_dialog_button_allow" msgid="5314677880021102550">"अनुमति दिनुहोस्"</string>
     <string name="grant_dialog_button_allow_always" msgid="4485552579273565981">"सधैँ अनुमति दिनुहोस्"</string>
@@ -198,7 +198,7 @@
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"सटीक लोकेसन प्रयोग गर्नुहोस्"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"सटीक लोकेसन अफ हुँदा एपहरूलाई मेरो अनुमानित लोकेसन प्रयोग गर्न दिनुहोस्"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g>सम्बन्धी अनुमति"</string>
-    <string name="app_permission_header" msgid="2951363137032603806">"यो एप <xliff:g id="PERM">%1$s</xliff:g> प्रयोग गर्ने अनुमति दिने वा नदिने"</string>
+    <string name="app_permission_header" msgid="2951363137032603806">"यो एपलाई <xliff:g id="PERM">%1$s</xliff:g> प्रयोग गर्ने अनुमति दिने वा नदिने"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"यो एपलाई <xliff:g id="DEVICE_NAME">%2$s</xliff:g> को <xliff:g id="PERM">%1$s</xliff:g> प्रयोग गर्ने अनुमति"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g> सँग भएका सबै अनुमति हेर्नुहोस्"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"यो अनुमति पाएका सबै एपहरू हेर्नुहोस्"</string>
@@ -210,8 +210,8 @@
     <string name="unused_apps_label" msgid="2595428768404901064">"अनुमतिहरू हटाई ठाउँ खाली गर्नुहोस्"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"एप प्रयोग नगरिएको अवस्थामा उक्त एपमा गरिएको गतिविधि रेकर्ड नगर्नुहोस्"</string>
     <string name="unused_apps_label_v3" msgid="693340578642156657">"एप प्रयोग गरिएको छैन भने व्यवस्थापन गर्नुहोस्"</string>
-    <string name="unused_apps_summary" msgid="8839466950318403115">"अनुमतिहरू रद्द गर्नुहोस्, अस्थायी फाइलहरू मेटाउनुहोस् र एपसम्बन्धी सूचना नपठाउनुहोस्"</string>
-    <string name="unused_apps_summary_v2" msgid="5011313200815115802">"अनुमति रद्द गर्नुहोस्, अस्थायी फाइलहरू मेटाउनुहोस्, सूचना नपठाउनुहोस् र एप अभिलेखमा राख्नुहोस्"</string>
+    <string name="unused_apps_summary" msgid="8839466950318403115">"अनुमतिहरू रद्द गर्नुहोस्, अस्थायी फाइलहरू मेटाउनुहोस् र एपसम्बन्धी नोटिफिकेसन नपठाउनुहोस्"</string>
+    <string name="unused_apps_summary_v2" msgid="5011313200815115802">"अनुमति रद्द गर्नुहोस्, अस्थायी फाइलहरू मेटाउनुहोस्, नोटिफिकेसन नपठाउनुहोस् र एप अर्काइभमा राख्नुहोस्"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"तपाईंका डेटाको सुरक्षार्थ यो एप केही महिनासम्म प्रयोग नगरिएका खण्डमा यसलाई दिइएका अनुमति रद्द गरिने छन्।"</string>
     <string name="auto_revoke_summary_with_permissions" msgid="389712086597285013">"तपाईंका डेटाको सुरक्षार्थ यो एप केही महिनासम्म प्रयोग नगरिएका खण्डमा निम्न अनुमति रद्द गरिने छन्: <xliff:g id="PERMS">%1$s</xliff:g>"</string>
     <string name="auto_revoked_apps_page_summary" msgid="6594753657893756536">"तपाईंका डेटाको सुरक्षार्थ तपाईंले केही महिनादेखि प्रयोग नगरेका एपलाई दिइएका अनुमति रद्द गरिएका छन्।"</string>
@@ -274,7 +274,7 @@
     <string name="unused_apps_notification_title" msgid="4314832015894238019">"{count,plural, =1{प्रयोग नगरिएको # वटा एप}other{प्रयोग नगरिएका # वटा एप}}"</string>
     <string name="unused_apps_notification_content" msgid="9195026773244581246">"एपलाई दिइएका अनुमति तथा अस्थायी फाइलहरू हटाइएका छन् र सूचनाहरू बन्द गरिएका छन्। समीक्षा गर्न ट्याप गर्नुहोस्।"</string>
     <string name="unused_apps_safety_center_card_title" msgid="5638409355530099149">"अनुमति हटाइएका एपहरूको समीक्षा गर्नुहोस्"</string>
-    <string name="unused_apps_safety_center_card_content" msgid="1088557243627427820">"तपाईंले केही समयसम्म नचलाएका एपहरूका हकमा अनुमति र अस्थायी फाइलहरू हटाइने छन् र सूचना पठाउन छाडिने छ।"</string>
+    <string name="unused_apps_safety_center_card_content" msgid="1088557243627427820">"तपाईंले केही समयसम्म नचलाएका एपहरूका हकमा अनुमति र अस्थायी फाइलहरू हटाइने छन् र नोटिफिकेसन पठाउन छाडिने छ।"</string>
     <string name="unused_apps_safety_center_action_title" msgid="8865914432518993194">"एपहरूको समीक्षा गर्नुहोस्"</string>
     <string name="post_drive_permission_decision_reminder_title" msgid="1290697371418139976">"हालसालै अनुमतिका सम्बन्धमा गरिएका निर्णय जाँच्नुहोस्"</string>
     <string name="post_drive_permission_decision_reminder_summary_1_app_1_permission" msgid="670521503734140711">"सवारी साधन चलाइरहेको बेला तपाईंले <xliff:g id="APP">%1$s</xliff:g> लाई <xliff:g id="PERMISSION">%2$s</xliff:g> प्रयोग गर्ने अनुमति दिनुभयो"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> लाई आफ्नो डिफल्ट नेभिगेसन एप बनाउने हो?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"कुनै पनि अनुमति चाहिन्न"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> लाई तपाईंका सूचना जाँच गर्ने र फोन, SMS, सम्पर्क ठेगाना तथा पात्रोका अनुमति हेर्ने तथा प्रयोग गर्ने अनुमति दिइने छ।"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> लाई तपाईंका सूचना हेर्ने र कनेक्ट भएको डिभाइसमा तपाईंका एपहरू स्ट्रिम गर्ने अनुमति दिइने छ।"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"तपाईं यो सेवाका सहायताले अन्य डिभाइससँग आफ्नो फोनमा भएका फोटो, मिडिया र सूचनाहरू सेयर गर्न सक्नुहुन्छ।"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"डिफल्ट नोट एप"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"नोट एप"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"तपाईंलाई आफ्नो डिभाइसमा नोट बनाउन दिने एपहरू"</string>
@@ -634,7 +632,7 @@
     <string name="perm_toggle_description" msgid="7801326363741451379">"एप तथा सेवाहरूका हकमा"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"एप तथा सेवाहरूका हकमा। यो सेटिङ अफ गरिएको अवस्थामा तपाईंले आपत्‍कालीन नम्बरमा कल गर्नुभयो भने माइक्रोफोनसम्बन्धी डेटा अझै पनि सेयर गरिन सक्छ।"</string>
     <string name="location_settings_subtitle" msgid="2328360561197430695">"लोकेसन प्रयोग गर्ने अनुमति दिइएका एप तथा सेवाहरू हेर्नुहोस्"</string>
-    <string name="show_clip_access_notification_title" msgid="5168467637351109096">"क्लिपबोर्डका सामग्री प्रयोग गरिँदा सूचना देखाउनुहोस्"</string>
+    <string name="show_clip_access_notification_title" msgid="5168467637351109096">"क्लिपबोर्डका सामग्री प्रयोग गरिँदा नोटिफिकेसन देखाउनुहोस्"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"मैले कपी गरेका टेक्स्ट, फोटो वा अन्य सामग्री एपहरूले प्रयोग गर्दा म्यासेज देखाउनुहोस्"</string>
     <string name="show_password_title" msgid="2877269286984684659">"पासवर्डहरू देखाउनुहोस्"</string>
     <string name="show_password_summary" msgid="1110166488865981610">"टाइप गर्दै गर्दा वर्णहरू झलक्क देखाउनुहोस्"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"आफ्नो फोनमा हेर्नुहोस्"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"तपाईंको फोनमा कनेक्ट गर्न सकिएन"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"पुनः प्रयास गर्ने हो?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"एजेन्टहरू"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"एपमा भएको जानकारी एक्सेस गर्न वा कारबाहीहरू गर्न सक्ने एजेन्टहरू"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"एजेन्टहरू"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"यो डिभाइसमा एजेन्टहरूको एक्सेस व्यवस्थापन गर्नुहोस्"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"कुनै पनि एजेन्ट एप उपलब्ध छैन"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"यो सुविधा अन गर्न आफ्नो डिभाइसमा कुनै एजेन्ट एप इन्स्टल गर्नुहोस्"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"एपको एक्सेस"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"तपाईंका लागि जानकारी प्राप्त गर्न र कारबाहीहरू गर्न यो एजेन्टले एक्सेस गर्न सक्ने एप तथा सेटिङ"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> एक्सेस गर्न प्रयोग गर्न सकिने कुनै पनि एप उपलब्ध छैन"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"सिस्टम"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"एपहरू"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"एजेन्ट एक्सेस"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"तपाईंका लागि यो एपमा जानकारी एक्सेस गर्न र कारबाहीहरू गर्न सक्ने एजेन्टहरू"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"डिभाइसका सेटिङ"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> लाई <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> को एजेन्ट बन्ने अनुमति दिने हो?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"यो एजेन्टले जानकारी प्राप्त गर्न र तपाईंका तर्फबाट कारबाहीहरू गरिदिनका निम्ति <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> एक्सेस गर्न सक्ने छ"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"अनुमति दिनुहोस्"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"अनुमति नदिनुहोस्"</string>
 </resources>

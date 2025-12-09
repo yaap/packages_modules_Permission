@@ -131,8 +131,8 @@
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Andere Berechtigungen ansehen"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g> und <xliff:g id="NUM">%3$s</xliff:g> weitere"</string>
-    <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"Zeitachse, wann Apps in den letzten 24 Stunden die Berechtigungsgruppe „<xliff:g id="PERMGROUP">%1$s</xliff:g>“ verwendet haben"</string>
-    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"Zeitachse, wann Apps in den letzten 7 Tagen die Berechtigungsgruppe „<xliff:g id="PERMGROUP">%1$s</xliff:g>“ verwendet haben"</string>
+    <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"Zeitachse, wann Apps in den letzten 24 Stunden die Berechtigung „<xliff:g id="PERMGROUP">%1$s</xliff:g>“ verwendet haben"</string>
+    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"Zeitachse, wann Apps in den letzten 7 Tagen die Berechtigung „<xliff:g id="PERMGROUP">%1$s</xliff:g>“ verwendet haben"</string>
     <string name="permission_usage_access_dialog_subtitle" msgid="4171772805196955753">"Als diese App deine <xliff:g id="PERMGROUP">%1$s</xliff:g>-Berechtigung verwendet hat"</string>
     <string name="permission_usage_access_dialog_learn_more" msgid="7121468469493184613">"Weitere Informationen"</string>
     <string name="learn_more_content_description" msgid="8673699744544502539">"Weitere Informationen zur Berechtigungsgruppe „<xliff:g id="PERMGROUP">%1$s</xliff:g>“"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> als standardmäßige Navigations-App festlegen?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Keine Berechtigungen erforderlich"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> darf mit deinen Benachrichtigungen interagieren und auf die Berechtigungen „Telefon“, „SMS“, „Kontakte“ und „Kalender“ zugreifen."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> darf mit deinen Benachrichtigungen interagieren und Apps auf deinen verbundenen Geräten streamen."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Dieser Dienst teilt die Fotos, Medien und Benachrichtigungen von deinem Smartphone mit anderen Geräten."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Standard-Notizen-App"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Notizen-App"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Apps zum Erstellen von Notizen auf deinem Gerät"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Smartphone prüfen"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Verbindung mit dem Smartphone nicht möglich"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Noch einmal versuchen?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"KI-Agenten"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"KI-Agenten, die in Apps auf Informationen zugreifen oder Aktionen ausführen können"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"KI-Agenten"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Zugriff von KI-Agenten auf diesem Gerät verwalten"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Keine Agenten-Apps verfügbar"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Agenten-App auf deinem Gerät installieren, um diese Funktion zu aktivieren"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"App-Zugriff"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Apps und Einstellungen, auf die dieser KI-Agent zugreifen kann, um für dich Informationen abzurufen und Aktionen auszuführen"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Keine Apps für den <xliff:g id="APP_NAME">%1$s</xliff:g>-Zugriff verfügbar"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"System"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Apps"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Agenten-Zugriff"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agenten, die in dieser App auf Informationen zugreifen und Aktionen für dich ausführen können"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Geräteeinstellungen"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> als KI-Agenten für <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> zulassen?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Dieser KI-Agent kann auf <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> zugreifen, um für dich Informationen abzurufen und Aktionen auszuführen"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Zulassen"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Nicht zulassen"</string>
 </resources>

@@ -21,8 +21,10 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
+import android.provider.Settings
 import android.util.Log
 import com.android.modules.utils.build.SdkLevel
+import com.android.permissioncontroller.permission.utils.KotlinUtils
 import com.android.permissioncontroller.permission.utils.Utils
 import com.android.permissioncontroller.pm.data.model.v31.PackageAttributionModel
 import com.android.permissioncontroller.pm.data.model.v31.PackageInfoModel
@@ -55,7 +57,7 @@ interface PackageRepository {
     suspend fun getPackageInfo(
         packageName: String,
         user: UserHandle,
-        flags: Int = PackageManager.GET_PERMISSIONS
+        flags: Int = PackageManager.GET_PERMISSIONS,
     ): PackageInfoModel?
 
     /**
@@ -66,6 +68,9 @@ interface PackageRepository {
         packageName: String,
         user: UserHandle,
     ): PackageAttributionModel?
+
+    /** Returns the package name for the Settings app of the given [user], null otherwise. */
+    fun getSettingsPackageName(user: UserHandle): String?
 
     companion object {
         @Volatile private var instance: PackageRepository? = null
@@ -102,7 +107,7 @@ class PackageRepositoryImpl(
     override suspend fun getPackageInfo(
         packageName: String,
         user: UserHandle,
-        flags: Int
+        flags: Int,
     ): PackageInfoModel? =
         withContext(dispatcher) {
             try {
@@ -150,7 +155,7 @@ class PackageRepositoryImpl(
                         packageName,
                         true,
                         attributionTagToLabelRes,
-                        labelResToLabelStringMap
+                        labelResToLabelStringMap,
                     )
                 } else {
                     PackageAttributionModel(packageName)
@@ -159,6 +164,17 @@ class PackageRepositoryImpl(
                 Log.w(LOG_TAG, "package $packageName not found for user ${user.identifier}")
                 null
             }
+        }
+
+    override fun getSettingsPackageName(user: UserHandle): String? =
+        try {
+            val userContext = Utils.getUserContext(app, user)
+            KotlinUtils.getPackageNameForIntent(
+                userContext.packageManager,
+                Settings.ACTION_SETTINGS,
+            )
+        } catch (e: PackageManager.NameNotFoundException) {
+            null
         }
 
     companion object {

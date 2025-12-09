@@ -35,6 +35,7 @@ import static com.android.safetycenter.internaldata.SafetyCenterIds.toUserFriend
 
 import static java.util.Objects.requireNonNull;
 
+import android.annotation.FlaggedApi;
 import android.annotation.UserIdInt;
 import android.app.ActivityManager;
 import android.app.PendingIntent;
@@ -581,6 +582,29 @@ public final class SafetyCenterService extends SystemService {
         @Override
         public void executeSafetyCenterIssueAction(
                 String issueId, String issueActionId, @UserIdInt int userId) {
+            executeSafetyCenterIssueActionWithOptionalTaskId(
+                    issueId,
+                    issueActionId,
+                    /* optionalTaskId= */ null,
+                    userId);
+        }
+
+        @FlaggedApi(android.permission.flags.Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+        @Override
+        public void executeSafetyCenterIssueActionWithTaskId(
+                String issueId, String issueActionId, int taskId, @UserIdInt int userId) {
+            executeSafetyCenterIssueActionWithOptionalTaskId(
+                    issueId,
+                    issueActionId,
+                    taskId,
+                    userId);
+        }
+
+        private void executeSafetyCenterIssueActionWithOptionalTaskId(
+                String issueId,
+                String issueActionId,
+                @Nullable Integer optionalTaskId,
+                @UserIdInt int userId) {
             requireNonNull(issueId);
             requireNonNull(issueActionId);
             getContext()
@@ -608,8 +632,13 @@ public final class SafetyCenterService extends SystemService {
                     "executeSafetyCenterIssueAction",
                     userProfileGroup,
                     safetyCenterIssueKey.getUserId());
-            Integer taskId =
-                    safetyCenterIssueId.hasTaskId() ? safetyCenterIssueId.getTaskId() : null;
+
+            Integer taskId = null;
+            if (optionalTaskId != null) {
+                taskId = optionalTaskId;
+            } else {
+                taskId = safetyCenterIssueId.hasTaskId() ? safetyCenterIssueId.getTaskId() : null;
+            }
             executeIssueActionInternal(safetyCenterIssueActionId, userProfileGroup, taskId);
         }
 

@@ -38,19 +38,30 @@ class WearDefaultAppHelper(
     fun getTitle() = context.getString(role.labelResource)
 
     fun getNonePreference(
-        applicationItems: List<RoleApplicationItem>
+        recommendedItems: List<RoleApplicationItem>,
+        otherItems: List<RoleApplicationItem>,
     ): WearRoleApplicationPreference? =
         if (role.shouldShowNone()) {
             WearRoleApplicationPreference(
                     context = context,
                     defaultLabel = context.getString(R.string.default_app_none),
-                    checked = !hasHolderApplication(applicationItems),
+                    checked =
+                        !(hasHolderApplication(recommendedItems) ||
+                            hasHolderApplication(otherItems)),
                     onDefaultCheckChanged = { _ -> viewModel.setNoneDefaultApp() },
                 )
                 .apply { icon = context.getDrawable(R.drawable.ic_remove_circle) }
         } else {
             null
         }
+
+    fun recommendedItemTitle(): String? =
+        RoleUiBehaviorUtils.getRecommendedApplicationsTitle(role, context)
+
+    fun recommendedItemDescription(): String? =
+        RoleUiBehaviorUtils.getRecommendedApplicationsDescription(role, context)
+
+    fun otherItemsTitle(): String? = context.resources.getString(R.string.default_app_others)
 
     fun getPreferences(
         applicationItems: List<RoleApplicationItem>

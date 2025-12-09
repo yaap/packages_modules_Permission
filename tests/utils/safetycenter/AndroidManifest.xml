@@ -38,6 +38,10 @@
                  android:foregroundServiceType="dataSync"
                  android:exported="false"/>
 
+        <activity android:name="com.android.safetycenter.testing.TestActivity2"
+                  android:taskAffinity=".unrelated"
+                  android:exported="false" />
+
         <activity android:name=".TestActivity"
                   android:exported="false">
             <intent-filter android:priority="-1">

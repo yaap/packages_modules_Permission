@@ -17,10 +17,15 @@
 package android.safetycenter.cts
 
 import android.content.Context
+import android.content.Intent
+import android.os.Build.VERSION_CODES.BAKLAVA
 import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import android.os.UserHandle.USER_NULL
 import android.os.UserManager
+import android.permission.flags.Flags
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterErrorDetails
 import android.safetycenter.SafetyCenterManager
@@ -39,6 +44,7 @@ import android.safetycenter.cts.testing.FakeExecutor
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
+import androidx.test.platform.app.InstrumentationRegistry
 import com.android.safetycenter.resources.SafetyCenterResourcesApk
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_LONG
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_SHORT
@@ -89,6 +95,8 @@ import com.android.safetycenter.testing.SafetySourceTestData.Companion.CRITICAL_
 import com.android.safetycenter.testing.SafetySourceTestData.Companion.EVENT_SOURCE_STATE_CHANGED
 import com.android.safetycenter.testing.SafetySourceTestData.Companion.RECOMMENDATION_ISSUE_ID
 import com.android.safetycenter.testing.SupportsSafetyCenterRule
+import com.android.safetycenter.testing.TestActivity
+import com.android.safetycenter.testing.TestActivity2
 import com.google.common.base.Preconditions.checkState
 import com.google.common.truth.Truth.assertThat
 import com.google.common.util.concurrent.MoreExecutors.directExecutor
@@ -111,8 +119,9 @@ class SafetyCenterManagerTest {
     private val safetyCenterTestConfigs = SafetyCenterTestConfigs(context)
     private val safetyCenterManager = context.getSystemService(SafetyCenterManager::class.java)!!
 
-    @get:Rule(order = 1) val supportsSafetyCenterRule = SupportsSafetyCenterRule(context)
-    @get:Rule(order = 2) val safetyCenterTestRule = SafetyCenterTestRule(safetyCenterTestHelper)
+    @get:Rule(order = 1) val flagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+    @get:Rule(order = 2) val supportsSafetyCenterRule = SupportsSafetyCenterRule(context)
+    @get:Rule(order = 3) val safetyCenterTestRule = SafetyCenterTestRule(safetyCenterTestHelper)
 
     @Test
     fun isSafetyCenterEnabled_withFlagEnabled_returnsTrue() {
@@ -2349,5 +2358,62 @@ class SafetyCenterManagerTest {
         assertFailsWith(SecurityException::class) {
             safetyCenterManager.clearSafetyCenterConfigForTests()
         }
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    fun executeSafetyCenterIssueAction_withTaskId_launchesInTask() {
+        // 1. Set up the config and data with a redirecting issue action.
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
+        // This data creates a PendingIntent that will launch TestActivity
+        val dataWithRedirect = safetySourceTestData.criticalWithRedirectingIssue
+        safetyCenterTestHelper.setData(SINGLE_SOURCE_ID, dataWithRedirect)
+
+        // 2. Start an unrelated, blank activity to create the target task.
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        val blankActivityMonitor =
+            instrumentation.addMonitor(TestActivity2::class.java.name, null, false)
+
+        val blankActivityIntent =
+            Intent(context, TestActivity2::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        context.startActivity(blankActivityIntent)
+
+        // Wait for the blank activity and get its task ID.
+        val blankActivity =
+            blankActivityMonitor.waitForActivityWithTimeout(TIMEOUT_LONG.toMillis())
+                as TestActivity2?
+        assertThat(blankActivity).isNotNull()
+        val expectedTaskId = blankActivity!!.taskId
+        instrumentation.removeMonitor(blankActivityMonitor)
+
+        // 3. Execute the action, which should launch TestActivity into the blank activity's task.
+        val issueId = SafetyCenterTestData.issueId(SINGLE_SOURCE_ID, CRITICAL_ISSUE_ID)
+        val actionId =
+            SafetyCenterTestData.issueActionId(
+                SINGLE_SOURCE_ID,
+                CRITICAL_ISSUE_ID,
+                CRITICAL_ISSUE_ACTION_ID,
+            )
+        val testActivityMonitor =
+            instrumentation.addMonitor(TestActivity::class.java.name, null, false)
+
+        safetyCenterManager.executeSafetyCenterIssueActionWithPermission(
+            issueId,
+            actionId,
+            expectedTaskId, // Explicitly target the task of BlankActivity.
+        )
+
+        // 4. Verify that TestActivity was launched into the same task.
+        val launchedTestActivity =
+            testActivityMonitor.waitForActivityWithTimeout(TIMEOUT_LONG.toMillis()) as TestActivity?
+        assertThat(launchedTestActivity).isNotNull()
+
+        assertThat(launchedTestActivity!!.taskId).isEqualTo(expectedTaskId)
+        instrumentation.removeMonitor(testActivityMonitor)
+
+        launchedTestActivity.finish()
+        blankActivity.finish()
     }
 }

@@ -318,9 +318,13 @@ public final class Utils {
                 R.string.permgrouprequest_device_aware_notifications);
 
         PERM_GROUP_REQUEST_DETAIL_RES = new ArrayMap<>();
-        PERM_GROUP_REQUEST_DETAIL_RES.put(LOCATION, R.string.permgrouprequestdetail_location);
-        PERM_GROUP_REQUEST_DETAIL_RES.put(MICROPHONE, R.string.permgrouprequestdetail_microphone);
-        PERM_GROUP_REQUEST_DETAIL_RES.put(CAMERA, R.string.permgrouprequestdetail_camera);
+        // This string resource is non-empty in resources directory v36.1+, which is the version we
+        // start to show details for this permission group. SDK_INT_FULL doesn't exist until B, so
+        // check isAtLeastB first
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA
+                && Build.VERSION.SDK_INT_FULL >= Build.VERSION_CODES_FULL.BAKLAVA_1) {
+            PERM_GROUP_REQUEST_DETAIL_RES.put(CONTACTS, R.string.permgrouprequestdetail_contacts);
+        }
 
         PERM_GROUP_BACKGROUND_REQUEST_RES = new ArrayMap<>();
         PERM_GROUP_BACKGROUND_REQUEST_RES
@@ -549,7 +553,7 @@ public final class Utils {
         if (group.equals(Manifest.permission_group.UNDEFINED)) {
             List<PermissionInfo> undefinedPerms = new ArrayList<>();
             for (PermissionInfo permissionInfo : installedRuntime) {
-                if (Flags.replaceBodySensorPermissionEnabled()
+                if (SdkLevel.isAtLeastB()
                     && (permissionInfo.name.equals(Manifest.permission.BODY_SENSORS) ||
                     permissionInfo.name.equals(Manifest.permission.BODY_SENSORS_BACKGROUND))) {
                     continue;
@@ -1109,7 +1113,7 @@ public final class Utils {
         }
 
         // Only show Fitness&Wellness chip on Wear if the app is requesting system permissions.
-        if (Flags.replaceBodySensorPermissionEnabled()
+        if (SdkLevel.isAtLeastB()
                 && pm.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
             Set<String> requestedPermissions = new HashSet<>(packageInfo.getRequestedPermissions());
             for (PermissionInfo permission : permissions) {
@@ -1163,10 +1167,10 @@ public final class Utils {
      * Returns true if the request is being made as the result of a split health permission from
      * BODY_SENSORS call.
      */
-    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.BAKLAVA)
     private static boolean isRequestFromSplitHealthPermission(LightPackageInfo packageInfo) {
         // Sdk check to make sure HealthConnectManager.isHealthPermission() is supported.
-        if (!SdkLevel.isAtLeastU() || !Flags.replaceBodySensorPermissionEnabled()) {
+        if (!SdkLevel.isAtLeastB()) {
             return false;
         }
 

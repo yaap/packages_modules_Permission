@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Set <xliff:g id="APP_NAME">%1$s</xliff:g> as your default navigation app?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"No permissions needed"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> will be allowed to interact with your notifications and access your Phone, SMS, Contacts and Calendar permissions."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> will be allowed to interact with your notifications and stream your apps to the connected device."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"This service shares your photos, media, and notifications from your phone to other devices."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Default notes app"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Notes app"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Apps that allow you to take notes on your device"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Check your phone"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Couldn\'t reach your phone"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Retry?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agents"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Agents that can access info or take actions in apps"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agents"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Manage access for agents on this device"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"No agent apps available"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Install an agent app on your device to enable this feature"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"App access"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Apps and settings this agent can access to get info and take actions for you"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"No apps are available for <xliff:g id="APP_NAME">%1$s</xliff:g> access"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"System"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Apps"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Agent access"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agents that can access info and take actions for you in this app"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Device Settings"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Allow <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> to be an agent for <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"This agent will be able to access <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> to get info and take actions for you"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Allow"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Don’t allow"</string>
 </resources>

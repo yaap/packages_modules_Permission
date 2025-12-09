@@ -19,7 +19,9 @@ package com.android.safetycenter.testing
 import android.Manifest.permission.MANAGE_SAFETY_CENTER
 import android.Manifest.permission.READ_SAFETY_CENTER_STATUS
 import android.Manifest.permission.SEND_SAFETY_CENTER_UPDATE
+import android.Manifest.permission.START_TASKS_FROM_RECENTS
 import android.os.Build.VERSION_CODES.TIRAMISU
+import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyCenterManager.OnSafetyCenterDataChangedListener
@@ -155,6 +157,25 @@ object SafetyCenterApisWithShellPermissions {
     ) {
         callWithShellPermissionIdentity(MANAGE_SAFETY_CENTER) {
             executeSafetyCenterIssueAction(safetyCenterIssueId, safetyCenterIssueActionId)
+        }
+    }
+
+    /**
+     * Calls [SafetyCenterManager.executeSafetyCenterIssueAction] adopting Shell's
+     * [MANAGE_SAFETY_CENTER] permission.
+     *
+     * Only can be used when [Flags#openSafetyCenterApis] is enabled.
+     */
+    fun SafetyCenterManager.executeSafetyCenterIssueActionWithPermission(
+        safetyCenterIssueId: String,
+        safetyCenterIssueActionId: String,
+        taskId: Int,
+    ) {
+        if (!Flags.openSafetyCenterApis()) {
+            throw UnsupportedOperationException("Requires open_safety_center_apis = true")
+        }
+        callWithShellPermissionIdentity(MANAGE_SAFETY_CENTER, START_TASKS_FROM_RECENTS) {
+            executeSafetyCenterIssueAction(safetyCenterIssueId, safetyCenterIssueActionId, taskId)
         }
     }
 

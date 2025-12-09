@@ -10,6 +10,10 @@ rule android.app.appfunctions.flags.*FeatureFlags* com.android.permission.jarjar
 rule android.app.appfunctions.flags.FeatureFlags* com.android.permission.jarjar.@0
 rule android.app.appfunctions.flags.FeatureFlags com.android.permission.jarjar.@0
 rule android.app.appfunctions.flags.Flags com.android.permission.jarjar.@0
+rule android.companion.*FeatureFlags* com.android.permission.jarjar.@0
+rule android.companion.FeatureFlags* com.android.permission.jarjar.@0
+rule android.companion.FeatureFlags com.android.permission.jarjar.@0
+rule android.companion.Flags com.android.permission.jarjar.@0
 rule android.companion.virtualdevice.flags.*FeatureFlags* com.android.permission.jarjar.@0
 rule android.companion.virtualdevice.flags.FeatureFlags* com.android.permission.jarjar.@0
 rule android.companion.virtualdevice.flags.FeatureFlags com.android.permission.jarjar.@0
@@ -48,4 +52,12 @@ rule com.android.window.flags.*FeatureFlags* com.android.permission.jarjar.@0
 rule com.android.window.flags.FeatureFlags* com.android.permission.jarjar.@0
 rule com.android.window.flags.FeatureFlags com.android.permission.jarjar.@0
 rule com.android.window.flags.Flags com.android.permission.jarjar.@0
+rule com.android.graphics.surfaceflinger.flags.*FeatureFlags* com.android.permission.jarjar.@0
+rule com.android.graphics.surfaceflinger.flags.FeatureFlags* com.android.permission.jarjar.@0
+rule com.android.graphics.surfaceflinger.flags.FeatureFlags com.android.permission.jarjar.@0
+rule com.android.graphics.surfaceflinger.flags.Flags com.android.permission.jarjar.@0
+rule com.android.server.telecom.flags.*FeatureFlags* com.android.permission.jarjar.@0
+rule com.android.server.telecom.flags.FeatureFlags* com.android.permission.jarjar.@0
+rule com.android.server.telecom.flags.FeatureFlags com.android.permission.jarjar.@0
+rule com.android.server.telecom.flags.Flags com.android.permission.jarjar.@0
 # LINT.ThenChange(PermissionController/role-controller/java/com/android/role/controller/model/RoleParser.java:applyJarjarTransform)

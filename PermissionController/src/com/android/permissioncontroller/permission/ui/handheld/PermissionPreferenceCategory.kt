@@ -24,6 +24,7 @@ import androidx.preference.PreferenceCategory
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.DeviceUtils
 import com.android.permissioncontroller.R
+import com.android.settingslib.widget.SettingsThemeHelper
 
 open class PermissionPreferenceCategory : PreferenceCategory {
     constructor(context: Context) : super(context)
@@ -44,7 +45,11 @@ open class PermissionPreferenceCategory : PreferenceCategory {
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     init {
-        if (SdkLevel.isAtLeastV() && DeviceUtils.isHandheld(context)) {
+        if (
+            SdkLevel.isAtLeastV() &&
+                DeviceUtils.isHandheld(context) &&
+                !SettingsThemeHelper.isExpressiveTheme(context)
+        ) {
             layoutResource = R.layout.permission_preference_category
         }
     }

@@ -37,6 +37,7 @@ import android.provider.ContactsContract.Data
 import android.provider.ContactsContract.RawContacts
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
+import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.SystemUtil.callWithShellPermissionIdentity
 import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity
 import org.junit.After
@@ -67,6 +68,8 @@ class EnhancedConfirmationInCallTest {
     @JvmField
     @Rule
     val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+
+    @get:Rule val disableAnimationRule = DisableAnimationRule()
 
     @Before
     fun assumeNotAutoTvOrHsum() {

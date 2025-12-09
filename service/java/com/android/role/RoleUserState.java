@@ -32,6 +32,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.android.internal.annotations.GuardedBy;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.modules.utils.BackgroundThread;
 import com.android.permission.util.CollectionUtils;
@@ -116,7 +117,7 @@ class RoleUserState {
     private boolean mDestroyed;
 
     @NonNull
-    private final Handler mWriteHandler = new Handler(BackgroundThread.get().getLooper());
+    private final Handler mWriteHandler;
 
     /**
      * Create a new user state, and read its state from disk if previously persisted.
@@ -128,9 +129,27 @@ class RoleUserState {
      */
     public RoleUserState(@UserIdInt int userId, @NonNull RoleServicePlatformHelper platformHelper,
             @NonNull Callback callback, boolean bypassingRoleQualification) {
+        this(userId, platformHelper, callback, bypassingRoleQualification,
+            new Handler(BackgroundThread.get().getLooper()));
+    }
+
+    /**
+     * Test only constructor that allows override of the write handler
+     *
+     * @param userId the user id for this user state
+     * @param platformHelper the platform helper
+     * @param callback the callback for this user state
+     * @param bypassingRoleQualification whether role qualification is being bypassed
+     * @param writeHandler the handler to use for writing the state to file
+     */
+    @VisibleForTesting
+    public RoleUserState(@UserIdInt int userId, @NonNull RoleServicePlatformHelper platformHelper,
+            @NonNull Callback callback, boolean bypassingRoleQualification,
+            @NonNull Handler writeHandler) {
         mUserId = userId;
         mPlatformHelper = platformHelper;
         mCallback = callback;
+        mWriteHandler = writeHandler;
 
         synchronized (mLock) {
             mBypassingRoleQualification = bypassingRoleQualification;
@@ -235,7 +254,7 @@ class RoleUserState {
         synchronized (mLock) {
             if (!mRoles.containsKey(roleName)) {
                 Log.e(LOG_TAG, "Cannot set fallback enabled for unknown role, role: " + roleName
-                        + ", fallbackEnabled: " + fallbackEnabled);
+                        + ", fallbackEnabled: " + fallbackEnabled + ", user: " + mUserId);
                 return;
             }
             if (mFallbackEnabledRoles.contains(roleName) == fallbackEnabled) {
@@ -262,7 +281,8 @@ class RoleUserState {
                     String roleName = legacyFallbackDisabledRoles.get(i);
                     mFallbackEnabledRoles.remove(roleName);
                 }
-                Log.v(LOG_TAG, "Migrated fallback enabled roles: " + mFallbackEnabledRoles);
+                Log.v(LOG_TAG, "Migrated fallback enabled roles: " + mFallbackEnabledRoles
+                        + ", user: " + mUserId);
                 mVersion = VERSION_FALLBACK_STATE_MIGRATED;
                 scheduleWriteFileLocked();
             }
@@ -312,7 +332,7 @@ class RoleUserState {
             if (!mRoles.containsKey(roleName)) {
                 mRoles.put(roleName, new ArraySet<>());
                 mFallbackEnabledRoles.add(roleName);
-                Log.i(LOG_TAG, "Added new role: " + roleName);
+                Log.i(LOG_TAG, "Added new role: " + roleName + ", user: " + mUserId);
                 scheduleWriteFileLocked();
                 return true;
             } else {
@@ -337,7 +357,8 @@ class RoleUserState {
                     ArraySet<String> packageNames = mRoles.valueAt(i);
                     if (!packageNames.isEmpty()) {
                         Log.e(LOG_TAG, "Holders of a removed role should have been cleaned up,"
-                                + " role: " + roleName + ", holders: " + packageNames);
+                                + " role: " + roleName + ", holders: " + packageNames + ", user: "
+                                + mUserId);
                     }
                     mRoles.removeAt(i);
                     mFallbackEnabledRoles.remove(roleName);
@@ -372,7 +393,7 @@ class RoleUserState {
             ArraySet<String> roleHolders = mRoles.get(roleName);
             if (roleHolders == null) {
                 Log.e(LOG_TAG, "Cannot add role holder for unknown role, role: " + roleName
-                        + ", package: " + packageName);
+                        + ", package: " + packageName + ", user: " + mUserId);
                 return false;
             }
             changed = roleHolders.add(packageName);
@@ -403,7 +424,7 @@ class RoleUserState {
             ArraySet<String> roleHolders = mRoles.get(roleName);
             if (roleHolders == null) {
                 Log.e(LOG_TAG, "Cannot remove role holder for unknown role, role: " + roleName
-                        + ", package: " + packageName);
+                        + ", package: " + packageName + ", user: " + mUserId);
                 return false;
             }
 

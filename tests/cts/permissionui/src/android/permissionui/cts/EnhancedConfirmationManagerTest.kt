@@ -22,6 +22,7 @@ import android.app.Instrumentation
 import android.app.ecm.EnhancedConfirmationManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.os.Build
 import android.os.Process
 import android.permission.flags.Flags
@@ -57,6 +58,8 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
     private val ecm by lazy { context.getSystemService(EnhancedConfirmationManager::class.java)!! }
     private val appOpsManager by lazy { context.getSystemService(AppOpsManager::class.java)!! }
     private val packageManager by lazy { context.packageManager }
+
+    private val exemptSettings by lazy { loadExemptSettings() }
 
     @Rule
     @JvmField
@@ -121,7 +124,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
             runWithShellPermissionIdentity {
                 assertEquals(
                     getAppEcmState(context, appOpsManager, APP_PACKAGE_NAME),
-                    AppOpsManager.MODE_DEFAULT
+                    AppOpsManager.MODE_DEFAULT,
                 )
             }
         }
@@ -180,6 +183,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
     @RequiresFlagsEnabled(Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED)
     @Test
     fun grantDialogBlocksRestrictedPermissionsOfSameGroupTogether() {
+        Assume.assumeFalse(restrictedPermissionsExempt())
         installPackageWithInstallSourceFromDownloadedFileAndAllowHardRestrictedPerms(
             APP_APK_NAME_LATEST
         )
@@ -187,7 +191,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
         val permissionAndExpectedGrantResults =
             arrayOf(
                 GROUP_2_PERMISSION_1_RESTRICTED to false,
-                GROUP_2_PERMISSION_2_RESTRICTED to false
+                GROUP_2_PERMISSION_2_RESTRICTED to false,
             )
 
         requestAppPermissionsAndAssertResult(*permissionAndExpectedGrantResults) {
@@ -197,7 +201,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
 
         requestAppPermissionsAndAssertResult(
             *permissionAndExpectedGrantResults,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             assertNoEcmDialogShown()
         }
@@ -208,6 +212,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
     @FlakyTest(bugId = 387927331)
     @Test
     fun grantDialogBlocksRestrictedGroupsThenRequestsUnrestrictedGroupsDespiteOutOfOrderRequest() {
+        Assume.assumeFalse(restrictedPermissionsExempt())
         installPackageWithInstallSourceFromDownloadedFileAndAllowHardRestrictedPerms(
             APP_APK_NAME_LATEST
         )
@@ -218,7 +223,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
             GROUP_2_PERMISSION_1_RESTRICTED to false,
             GROUP_3_PERMISSION_2_UNRESTRICTED to false,
             GROUP_2_PERMISSION_2_RESTRICTED to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             clickECMAlertDialogOKButton()
             // TODO: b/387927331 - On some targets, grant dialog hangs after this click
@@ -230,7 +235,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
         requestAppPermissionsAndAssertResult(
             GROUP_3_PERMISSION_1_UNRESTRICTED to true,
             GROUP_3_PERMISSION_2_UNRESTRICTED to true,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             clickPermissionRequestAllowForegroundButton()
         }
@@ -241,6 +246,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
     @FlakyTest(bugId = 387927331)
     @Test
     fun grantDialogBlocksRestrictedGroupsThenRequestsUnrestrictedHighPriorityGroups() {
+        Assume.assumeFalse(restrictedPermissionsExempt())
         installPackageWithInstallSourceFromDownloadedFileAndAllowHardRestrictedPerms(
             APP_APK_NAME_LATEST
         )
@@ -249,7 +255,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
         requestAppPermissionsAndAssertResult(
             GROUP_3_PERMISSION_1_UNRESTRICTED to true,
             GROUP_2_PERMISSION_1_RESTRICTED to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             clickECMAlertDialogOKButton()
             // TODO: b/387927331 - On some targets, grant dialog hangs after this click
@@ -263,6 +269,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
     @FlakyTest(bugId = 390440965)
     @Test
     fun grantDialogBlocksRestrictedGroupsThenRequestsUnrestrictedLowPriorityGroups() {
+        Assume.assumeFalse(restrictedPermissionsExempt())
         installPackageWithInstallSourceFromDownloadedFileAndAllowHardRestrictedPerms(
             APP_APK_NAME_LATEST
         )
@@ -271,7 +278,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
         requestAppPermissionsAndAssertResult(
             GROUP_4_PERMISSION_1_UNRESTRICTED to true,
             GROUP_2_PERMISSION_1_RESTRICTED to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {
             clickECMAlertDialogOKButton()
             // TODO: b/387927331 - On some targets, grant dialog hangs after this click
@@ -291,14 +298,14 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
             if (isWatch) {
                 waitFindObjectOrNull(
                     By.text(getPermissionControllerString(ECM_ALERT_DIALOG_OK_BUTTON_TEXT)),
-                    UNEXPECTED_TIMEOUT_MILLIS.toLong()
+                    UNEXPECTED_TIMEOUT_MILLIS.toLong(),
                 )
             } else {
                 waitFindObjectOrNull(
                     By.res(ALERT_DIALOG_OK_BUTTON),
-                    UNEXPECTED_TIMEOUT_MILLIS.toLong()
+                    UNEXPECTED_TIMEOUT_MILLIS.toLong(),
                 )
-            }
+            },
         )
     }
 
@@ -308,11 +315,29 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
                 assertEquals(
                     "Timed out waiting for package mode to change to MODE_DEFAULT",
                     getAppEcmState(context, appOpsManager, APP_PACKAGE_NAME),
-                    AppOpsManager.MODE_DEFAULT
+                    AppOpsManager.MODE_DEFAULT,
                 )
             }
         }
     }
+
+    private fun loadExemptSettings(): List<String> {
+        val resourceId =
+            context.getResources().getIdentifier(EXEMPT_SETTINGS_RESOURCE_NAME, "array", "android")
+        if (resourceId == 0) {
+            return emptyList()
+        }
+        return try {
+            context.getResources().getStringArray(resourceId).toList()
+        } catch (_: Resources.NotFoundException) {
+            emptyList()
+        }
+    }
+
+    private fun restrictedPermissionsExempt() =
+        exemptSettings.containsAll(
+            listOf(GROUP_2_PERMISSION_1_RESTRICTED, GROUP_2_PERMISSION_2_RESTRICTED)
+        )
 
     companion object {
         private const val GROUP_2_PERMISSION_1_RESTRICTED = Manifest.permission.SEND_SMS
@@ -326,32 +351,35 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
         private const val NON_PROTECTED_SETTING = "example_setting_which_is_not_protected"
         private const val PROTECTED_SETTING = "android:bind_accessibility_service"
 
+        private const val EXEMPT_SETTINGS_RESOURCE_NAME: String =
+            "config_enhancedConfirmationModeExemptSettings"
+
         @Throws(PackageManager.NameNotFoundException::class)
         private fun setAppEcmState(
             context: Context,
             appOpsManager: AppOpsManager,
             packageName: String,
-            mode: Int
+            mode: Int,
         ) =
             appOpsManager.setMode(
                 AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS,
                 getPackageUid(context, packageName),
                 packageName,
-                mode
+                mode,
             )
 
         @Throws(PackageManager.NameNotFoundException::class)
         private fun getAppEcmState(
             context: Context,
             appOpsManager: AppOpsManager,
-            packageName: String
+            packageName: String,
         ) =
             appOpsManager.noteOpNoThrow(
                 AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS,
                 getPackageUid(context, packageName),
                 packageName,
                 context.attributionTag,
-                /* message */ null
+                /* message */ null,
             )
 
         @Throws(PackageManager.NameNotFoundException::class)
@@ -363,7 +391,7 @@ class EnhancedConfirmationManagerTest : BaseUsePermissionTest() {
             packageManager.getApplicationInfoAsUser(
                 packageName,
                 /* flags */ 0,
-                Process.myUserHandle()
+                Process.myUserHandle(),
             )
     }
 }

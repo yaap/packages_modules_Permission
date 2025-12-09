@@ -182,7 +182,7 @@ flag {
     description: "Flag to expose SYSTEM_FINANCED_DEVICE_CONTROLLER as a SystemApi"
     bug: "402301589"
     is_fixed_read_only: true
- }
+}
 
 flag {
     name: "app_function_service_enabled"

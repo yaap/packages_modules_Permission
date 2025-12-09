@@ -43,7 +43,6 @@ class AdminRestrictedPermissionsUtilsTest {
     private val dpm: DevicePolicyManager = mock(DevicePolicyManager::class.java)
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsEnabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
     fun mayAdminGrantPermission_healthPermissions_restricted() {
         val permissions: Set<String> = HealthConnectManager.getHealthPermissions(context)

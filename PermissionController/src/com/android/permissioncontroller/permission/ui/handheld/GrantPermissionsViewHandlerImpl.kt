@@ -104,6 +104,7 @@ class GrantPermissionsViewHandlerImpl(
     private val buttonVisibilities = BooleanArray(NEXT_BUTTON) { false }
     private val locationVisibilities = BooleanArray(NEXT_LOCATION_DIALOG) { false }
     private var selectedPrecision: Int = 0
+    private var isLocationAccuracyButtonClicked: Boolean = false
     private var isLocationPermissionDialogActionClicked: Boolean = false
     private var coarseRadioButton: RadioButton? = null
     private var fineRadioButton: RadioButton? = null
@@ -349,18 +350,8 @@ class GrantPermissionsViewHandlerImpl(
                     View.GONE
                 }
             if (pos == ALLOW_FOREGROUND_BUTTON && buttonVisibilities[pos]) {
-                if (
-                    locationVisibilities[LOCATION_ACCURACY_LAYOUT] &&
-                        locationVisibilities[DIALOG_WITH_FINE_LOCATION_ONLY]
-                ) {
-                    buttons[pos]?.text =
-                        mActivity.resources.getString(
-                            R.string.grant_dialog_button_change_to_precise_location
-                        )
-                } else {
-                    buttons[pos]?.text =
-                        mActivity.resources.getString(R.string.grant_dialog_button_allow_foreground)
-                }
+                buttons[pos]?.text =
+                    mActivity.resources.getString(R.string.grant_dialog_button_allow_foreground)
             }
             if ((pos == DENY_BUTTON || pos == DENY_AND_DONT_ASK_AGAIN_BUTTON)) {
                 if (
@@ -379,6 +370,8 @@ class GrantPermissionsViewHandlerImpl(
             buttons[pos]?.requestLayout()
         }
     }
+
+    override fun hasLocationAccuracyButtonBeenClicked(): Boolean = isLocationAccuracyButtonClicked
 
     private fun updateLocationVisibilities() {
         if (locationVisibilities[LOCATION_ACCURACY_LAYOUT]) {
@@ -483,6 +476,7 @@ class GrantPermissionsViewHandlerImpl(
             if (selectedPrecision != FINE_RADIO_BUTTON) {
                 (locationViews[FINE_RADIO_BUTTON] as RadioButton).isChecked = true
                 selectedPrecision = FINE_RADIO_BUTTON
+                isLocationAccuracyButtonClicked = true
                 runLocationAccuracyAnimation(true)
             }
             return
@@ -492,6 +486,7 @@ class GrantPermissionsViewHandlerImpl(
             if (selectedPrecision != COARSE_RADIO_BUTTON) {
                 (locationViews[COARSE_RADIO_BUTTON] as RadioButton).isChecked = true
                 selectedPrecision = COARSE_RADIO_BUTTON
+                isLocationAccuracyButtonClicked = true
                 runLocationAccuracyAnimation(false)
             }
             return

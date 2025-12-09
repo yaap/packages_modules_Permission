@@ -78,9 +78,13 @@ final class SafetyCenterIssueDeduplicator {
         ArrayMap<DeduplicationKey, List<SafetySourceIssueInfo>> dedupBuckets =
                 createDedupBuckets(sortedIssues);
 
+        ArrayMap<SafetyCenterIssueKey, Set<String>> issueToSourceIdsMap =
+            createBasicIssueToSourceIdsMapping(sortedIssues);
+
         // There is no further work to do when there are no dedup buckets
         if (dedupBuckets.isEmpty()) {
-            return new DeduplicationInfo(new ArrayList<>(sortedIssues), emptyList(), emptyMap());
+            return new DeduplicationInfo(
+                new ArrayList<>(sortedIssues), emptyList(), emptyMap(), issueToSourceIdsMap);
         }
 
         alignAllDismissals(dedupBuckets);
@@ -90,12 +94,20 @@ final class SafetyCenterIssueDeduplicator {
 
         resurfaceHiddenIssuesIfNeeded(dedupBuckets);
 
+        updateIssueToSafetySourceIdsMapping(issueToSourceIdsMap, dedupBuckets);
+
         if (duplicatesToFilterOut.isEmpty()) {
-            return new DeduplicationInfo(new ArrayList<>(sortedIssues), emptyList(), emptyMap());
+            return new DeduplicationInfo(
+                    new ArrayList<>(sortedIssues),
+                    emptyList(),
+                    emptyMap(),
+                    issueToSourceIdsMap);
         }
 
         ArrayMap<SafetyCenterIssueKey, Set<String>> issueToGroupMap =
                 getTopIssueToGroupMapping(dedupBuckets);
+
+        removeDuplicatesFromIssueToSourceIdsMapping(issueToSourceIdsMap, duplicatesToFilterOut);
 
         List<SafetySourceIssueInfo> filteredOut = new ArrayList<>(duplicatesToFilterOut.size());
         List<SafetySourceIssueInfo> deduplicatedIssues = new ArrayList<>();
@@ -112,7 +124,8 @@ final class SafetyCenterIssueDeduplicator {
             }
         }
 
-        return new DeduplicationInfo(deduplicatedIssues, filteredOut, issueToGroupMap);
+        return new DeduplicationInfo(
+                deduplicatedIssues, filteredOut, issueToGroupMap, issueToSourceIdsMap);
     }
 
     private void resurfaceHiddenIssuesIfNeeded(
@@ -158,6 +171,49 @@ final class SafetyCenterIssueDeduplicator {
         }
 
         return issueToGroupMap;
+    }
+
+    /**
+     * Update the mapping from the top issue to all safety source IDs that sent it (or sent a
+     * duplicate of it).
+     */
+    private void updateIssueToSafetySourceIdsMapping(
+            ArrayMap<SafetyCenterIssueKey, Set<String>> issueToSourceIdsMap,
+            ArrayMap<DeduplicationKey, List<SafetySourceIssueInfo>> dedupBuckets) {
+        for (int i = 0; i < dedupBuckets.size(); i++) {
+            List<SafetySourceIssueInfo> duplicates = dedupBuckets.valueAt(i);
+
+            SafetyCenterIssueKey topIssueKey = duplicates.get(0).getSafetyCenterIssueKey();
+            Set<String> sourceIds = issueToSourceIdsMap.getOrDefault(topIssueKey, new ArraySet<>());
+            for (int j = 0; j < duplicates.size(); j++) {
+                sourceIds.add(duplicates.get(j).getSafetySource().getId());
+            }
+            issueToSourceIdsMap.put(topIssueKey, sourceIds);
+        }
+    }
+
+    /** Creates a simple mapping from each issue to the safety source IDs that sent it. */
+    private ArrayMap<SafetyCenterIssueKey, Set<String>> createBasicIssueToSourceIdsMapping(
+            List<SafetySourceIssueInfo> sortedIssues) {
+        ArrayMap<SafetyCenterIssueKey, Set<String>> issueToSourceIdsMap = new ArrayMap<>();
+        for (int i = 0; i < sortedIssues.size(); i++) {
+            SafetySourceIssueInfo issueInfo = sortedIssues.get(i);
+            SafetyCenterIssueKey issueKey = issueInfo.getSafetyCenterIssueKey();
+            Set<String> sourceIds = new ArraySet<>();
+            sourceIds.add(issueInfo.getSafetySource().getId());
+            issueToSourceIdsMap.put(issueKey, sourceIds);
+        }
+        return issueToSourceIdsMap;
+    }
+
+    /** Removes the duplicates from the issue to source IDs mapping. */
+    private void removeDuplicatesFromIssueToSourceIdsMapping(
+            ArrayMap<SafetyCenterIssueKey, Set<String>> issueToSourceIdsMap,
+            ArraySet<SafetyCenterIssueKey> duplicatesToFilterOut) {
+        for (int i = 0; i < duplicatesToFilterOut.size(); i++) {
+            SafetyCenterIssueKey issueKey = duplicatesToFilterOut.valueAt(i);
+            issueToSourceIdsMap.remove(issueKey);
+        }
     }
 
     /**
@@ -330,15 +386,18 @@ final class SafetyCenterIssueDeduplicator {
         private final List<SafetySourceIssueInfo> mDeduplicatedIssues;
         private final List<SafetySourceIssueInfo> mFilteredOutDuplicates;
         private final Map<SafetyCenterIssueKey, Set<String>> mIssueToGroup;
+        private final Map<SafetyCenterIssueKey, Set<String>> mIssueToSourceIds;
 
         /** Creates a new {@link DeduplicationInfo}. */
         DeduplicationInfo(
                 List<SafetySourceIssueInfo> deduplicatedIssues,
                 List<SafetySourceIssueInfo> filteredOutDuplicates,
-                Map<SafetyCenterIssueKey, Set<String>> issueToGroup) {
+                Map<SafetyCenterIssueKey, Set<String>> issueToGroup,
+                Map<SafetyCenterIssueKey, Set<String>> issueToSourceIds) {
             mDeduplicatedIssues = unmodifiableList(deduplicatedIssues);
             mFilteredOutDuplicates = unmodifiableList(filteredOutDuplicates);
             mIssueToGroup = unmodifiableMap(issueToGroup);
+            mIssueToSourceIds = unmodifiableMap(issueToSourceIds);
         }
 
         /**
@@ -370,6 +429,21 @@ final class SafetyCenterIssueDeduplicator {
             return mDeduplicatedIssues;
         }
 
+        /**
+         * Returns a mapping between a {@link SafetyCenterIssueKey} and safety source IDs, that was
+         * a result of the most recent {@link SafetyCenterIssueDeduplicator#deduplicateIssues} call.
+         *
+         * <p>If present, such an entry represents an issue mapping to all the safety source IDs of
+         * others issues which were filtered out as its duplicates. It also contains a mapping to
+         * its own safety source ID.
+         *
+         * <p>If an issue didn't have any duplicates, it will be mapped to a single safety source ID
+         * of the group that directly sent it.
+         */
+        Map<SafetyCenterIssueKey, Set<String>> getIssueToSafetySourceIdsMapping() {
+            return mIssueToSourceIds;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -377,12 +451,14 @@ final class SafetyCenterIssueDeduplicator {
             DeduplicationInfo that = (DeduplicationInfo) o;
             return mDeduplicatedIssues.equals(that.mDeduplicatedIssues)
                     && mFilteredOutDuplicates.equals(that.mFilteredOutDuplicates)
-                    && mIssueToGroup.equals(that.mIssueToGroup);
+                    && mIssueToGroup.equals(that.mIssueToGroup)
+                    && mIssueToSourceIds.equals(that.mIssueToSourceIds);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(mDeduplicatedIssues, mFilteredOutDuplicates, mIssueToGroup);
+            return Objects.hash(
+                    mDeduplicatedIssues, mFilteredOutDuplicates, mIssueToGroup, mIssueToSourceIds);
         }
 
         @Override
@@ -406,6 +482,17 @@ final class SafetyCenterIssueDeduplicator {
                         .append(" maps to groups: ");
                 for (String group : entry.getValue()) {
                     sb.append(group).append(",");
+                }
+            }
+
+            sb.append("\n\tIssueToSourceIdsMapping");
+            for (Map.Entry<SafetyCenterIssueKey, Set<String>> entry :
+                     mIssueToSourceIds.entrySet()) {
+                sb.append("\n\t\tSafetyCenterIssueKey=")
+                        .append(toUserFriendlyString(entry.getKey()))
+                        .append(" maps to safety source IDs: ");
+                for (String sourceId : entry.getValue()) {
+                    sb.append(sourceId).append(",");
                 }
             }
 

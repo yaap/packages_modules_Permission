@@ -84,6 +84,56 @@
 
             <!-- END PREFERENCE STYLES -->
 
+            <!-- START EXPRESSIVE PREFERENCE STYLES -->
+
+            <item type="attr" name="expressivePreferenceTheme" />
+            <item type="attr" name="expressivePreferenceRootLayoutStyle" />
+            <item type="attr" name="expressivePreferenceWidgetFrameStyle" />
+
+            <item type="attr" name="expressivePreferenceIconFrameStyle" />
+            <item type="attr" name="expressivePreferenceIconStyle" />
+
+            <item type="attr" name="expressivePreferenceTextFrameStyle" />
+            <item type="attr" name="expressivePreferenceTextFrameTitleStyle" />
+            <item type="attr" name="expressivePreferenceTextFrameSummaryStyle" />
+
+            <item type="attr" name="expressiveTwoTargetPreferenceTheme" />
+            <item type="attr" name="expressiveTwoTargetPreferenceRootStyle" />
+            <item type="attr" name="expressiveTwoTargetPreferenceWidgetFrameStyle" />
+
+            <item type="attr" name="expressiveTwoTargetDividerStyle" />
+            <item type="attr" name="expressiveTwoTargetDividerImageViewStyle" />
+            <item type="attr" name="expressiveTwoTargetDividerViewStyle" />
+
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceTheme" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceRootLayoutStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceWidgetFrameStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceIconStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceTextContainerStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceTitleStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceSummaryContainerStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceSummaryStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceAppendixStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceExtraWidgetContainerStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceExtraWidgetDividerStyle" />
+            <item type="attr" name="expressiveSelectorWithWidgetPreferenceExtraWidgetImageStyle" />
+
+            <item type="attr" name="expressiveFooterPreferenceTheme" />
+            <item type="attr" name="expressiveFooterPreferenceRootLayoutStyle" />
+            <item type="attr" name="expressiveFooterPreferenceIconFrameStyle" />
+            <item type="attr" name="expressiveFooterPreferenceIconStyle" />
+            <item type="attr" name="expressiveFooterPreferenceLinearLayoutStyle" />
+            <item type="attr" name="expressiveFooterPreferenceTitleStyle" />
+            <item type="attr" name="expressiveFooterPreferenceLearnMoreStyle" />
+
+            <item type="attr" name="expressivePreferenceCategoryTheme" />
+            <item type="attr" name="expressivePreferenceCategoryRootLayoutStyle" />
+            <item type="attr" name="expressivePreferenceCategoryRelativeLayoutStyle" />
+            <item type="attr" name="expressivePreferenceCategoryTitleStyle" />
+            <item type="attr" name="expressivePreferenceCategorySummaryStyle" />
+
+            <!-- END EXPRESSIVE PREFERENCE STYLES -->
+
             <!-- START AUTO PERMISSION GRANT DIALOG -->
 
             <item type="style" name="AutoPermissionLocationAccuracyRadioFine" />

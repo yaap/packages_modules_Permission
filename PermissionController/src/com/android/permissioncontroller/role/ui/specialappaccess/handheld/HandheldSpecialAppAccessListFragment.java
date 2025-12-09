@@ -21,7 +21,7 @@ import androidx.annotation.StringRes;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.permissioncontroller.R;
-import com.android.permissioncontroller.role.ui.handheld.SettingsFragment;
+import com.android.permissioncontroller.common.ui.handheld.SettingsFragment;
 
 /**
  * Handheld fragment for the list of special app accesses.

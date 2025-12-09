@@ -32,7 +32,7 @@ package android.app.role {
     field @Deprecated public static final String SERVICE_INTERFACE = "android.app.role.RoleControllerService";
   }
 
-  public final class RoleManager {
+  @RestrictedForEnvironment(environments=android.annotation.RestrictedForEnvironment.ENVIRONMENT_SDK_RUNTIME, from=android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) public final class RoleManager {
     method @RequiresPermission(android.Manifest.permission.OBSERVE_ROLE_HOLDERS) public void addOnRoleHoldersChangedListenerAsUser(@NonNull java.util.concurrent.Executor, @NonNull android.app.role.OnRoleHoldersChangedListener, @NonNull android.os.UserHandle);
     method @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public void addRoleHolderAsUser(@NonNull String, @NonNull String, int, @NonNull android.os.UserHandle, @NonNull java.util.concurrent.Executor, @NonNull java.util.function.Consumer<java.lang.Boolean>);
     method @Deprecated @RequiresPermission("com.android.permissioncontroller.permission.MANAGE_ROLES_FROM_CONTROLLER") public boolean addRoleHolderFromController(@NonNull String, @NonNull String);
@@ -41,8 +41,8 @@ package android.app.role {
     method @Nullable @RequiresPermission(android.Manifest.permission.MANAGE_DEFAULT_APPLICATIONS) public String getDefaultApplication(@NonNull String);
     method @FlaggedApi("com.android.permission.flags.cross_user_role_enabled") @NonNull @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public java.util.List<java.lang.String> getDefaultHoldersForTest(@NonNull String);
     method @Deprecated @NonNull @RequiresPermission("com.android.permissioncontroller.permission.MANAGE_ROLES_FROM_CONTROLLER") public java.util.List<java.lang.String> getHeldRolesFromController(@NonNull String);
-    method @NonNull @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public java.util.List<java.lang.String> getRoleHolders(@NonNull String);
-    method @NonNull @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public java.util.List<java.lang.String> getRoleHoldersAsUser(@NonNull String, @NonNull android.os.UserHandle);
+    method @NonNull @RequiresPermission(anyOf={android.Manifest.permission.MANAGE_ROLE_HOLDERS, android.Manifest.permission.GET_ROLE_HOLDERS}) public java.util.List<java.lang.String> getRoleHolders(@NonNull String);
+    method @NonNull @RequiresPermission(anyOf={android.Manifest.permission.MANAGE_ROLE_HOLDERS, android.Manifest.permission.GET_ROLE_HOLDERS}) public java.util.List<java.lang.String> getRoleHoldersAsUser(@NonNull String, @NonNull android.os.UserHandle);
     method @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public void isApplicationVisibleForRole(@NonNull String, @NonNull String, @NonNull java.util.concurrent.Executor, @NonNull java.util.function.Consumer<java.lang.Boolean>);
     method @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public boolean isBypassingRoleQualification();
     method @FlaggedApi("android.permission.flags.system_server_role_controller_enabled") @RequiresPermission(android.Manifest.permission.MANAGE_ROLE_HOLDERS) public boolean isRoleFallbackEnabled(@NonNull String);
@@ -109,10 +109,13 @@ package android.safetycenter {
     method @Nullable public android.safetycenter.SafetyCenterEntry.IconAction getIconAction();
     method @NonNull public String getId();
     method @Nullable public android.app.PendingIntent getPendingIntent();
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @Nullable public String getSafetySourceId();
     method public int getSeverityLevel();
     method public int getSeverityUnspecifiedIconType();
     method @Nullable public CharSequence getSummary();
     method @NonNull public CharSequence getTitle();
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @Nullable public android.os.UserHandle getUser();
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") public boolean hasError();
     method public boolean isEnabled();
     method public void writeToParcel(@NonNull android.os.Parcel, int);
     field @NonNull public static final android.os.Parcelable.Creator<android.safetycenter.SafetyCenterEntry> CREATOR;
@@ -127,18 +130,22 @@ package android.safetycenter {
   }
 
   public static final class SafetyCenterEntry.Builder {
-    ctor public SafetyCenterEntry.Builder(@NonNull String, @NonNull CharSequence);
+    ctor @Deprecated @FlaggedApi("android.permission.flags.open_safety_center_apis") public SafetyCenterEntry.Builder(@NonNull String, @NonNull CharSequence);
+    ctor @FlaggedApi("android.permission.flags.open_safety_center_apis") public SafetyCenterEntry.Builder(@NonNull String, @NonNull CharSequence, @NonNull android.os.UserHandle, @NonNull String);
     ctor public SafetyCenterEntry.Builder(@NonNull android.safetycenter.SafetyCenterEntry);
     method @NonNull public android.safetycenter.SafetyCenterEntry build();
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setEnabled(boolean);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public android.safetycenter.SafetyCenterEntry.Builder setHasError(boolean);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setIconAction(@Nullable android.safetycenter.SafetyCenterEntry.IconAction);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setIconAction(int, @NonNull android.app.PendingIntent);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setId(@NonNull String);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setPendingIntent(@Nullable android.app.PendingIntent);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public android.safetycenter.SafetyCenterEntry.Builder setSafetySourceId(@NonNull String);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setSeverityLevel(int);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setSeverityUnspecifiedIconType(int);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setSummary(@Nullable CharSequence);
     method @NonNull public android.safetycenter.SafetyCenterEntry.Builder setTitle(@NonNull CharSequence);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public android.safetycenter.SafetyCenterEntry.Builder setUser(@NonNull android.os.UserHandle);
   }
 
   public static final class SafetyCenterEntry.IconAction implements android.os.Parcelable {
@@ -200,10 +207,13 @@ package android.safetycenter {
     method @Nullable public CharSequence getAttributionTitle();
     method @Nullable public String getGroupId();
     method @NonNull public String getId();
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @Nullable public String getIssueTypeId();
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public java.util.Set<java.lang.String> getSafetySourceIds();
     method public int getSeverityLevel();
     method @Nullable public CharSequence getSubtitle();
     method @NonNull public CharSequence getSummary();
     method @NonNull public CharSequence getTitle();
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @Nullable public android.os.UserHandle getUser();
     method public boolean isDismissible();
     method public boolean shouldConfirmDismissal();
     method public void writeToParcel(@NonNull android.os.Parcel, int);
@@ -251,7 +261,8 @@ package android.safetycenter {
   }
 
   public static final class SafetyCenterIssue.Builder {
-    ctor public SafetyCenterIssue.Builder(@NonNull String, @NonNull CharSequence, @NonNull CharSequence);
+    ctor @Deprecated @FlaggedApi("android.permission.flags.open_safety_center_apis") public SafetyCenterIssue.Builder(@NonNull String, @NonNull CharSequence, @NonNull CharSequence);
+    ctor @FlaggedApi("android.permission.flags.open_safety_center_apis") public SafetyCenterIssue.Builder(@NonNull String, @NonNull CharSequence, @NonNull CharSequence, @NonNull android.os.UserHandle, @NonNull java.util.Set<java.lang.String>, @NonNull String);
     ctor public SafetyCenterIssue.Builder(@NonNull android.safetycenter.SafetyCenterIssue);
     method @NonNull public android.safetycenter.SafetyCenterIssue build();
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setActions(@NonNull java.util.List<android.safetycenter.SafetyCenterIssue.Action>);
@@ -259,11 +270,14 @@ package android.safetycenter {
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setDismissible(boolean);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setGroupId(@Nullable String);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setId(@NonNull String);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public android.safetycenter.SafetyCenterIssue.Builder setIssueTypeId(@NonNull String);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public android.safetycenter.SafetyCenterIssue.Builder setSafetySourceIds(@NonNull java.util.Set<java.lang.String>);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setSeverityLevel(int);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setShouldConfirmDismissal(boolean);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setSubtitle(@Nullable CharSequence);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setSummary(@NonNull CharSequence);
     method @NonNull public android.safetycenter.SafetyCenterIssue.Builder setTitle(@NonNull CharSequence);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @NonNull public android.safetycenter.SafetyCenterIssue.Builder setUser(@NonNull android.os.UserHandle);
   }
 
   public final class SafetyCenterManager {
@@ -271,6 +285,7 @@ package android.safetycenter {
     method @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public void clearAllSafetySourceDataForTests();
     method @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public void clearSafetyCenterConfigForTests();
     method @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public void dismissSafetyCenterIssue(@NonNull String);
+    method @FlaggedApi("android.permission.flags.open_safety_center_apis") @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public void executeSafetyCenterIssueAction(@NonNull String, @NonNull String, int);
     method @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public void executeSafetyCenterIssueAction(@NonNull String, @NonNull String);
     method @Nullable @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public android.safetycenter.config.SafetyCenterConfig getSafetyCenterConfig();
     method @NonNull @RequiresPermission(android.Manifest.permission.MANAGE_SAFETY_CENTER) public android.safetycenter.SafetyCenterData getSafetyCenterData();

@@ -17,6 +17,7 @@
 
 <resources>
     <attr name="colorSurface" format="color" />
+    <attr name="colorSurfaceContainerHigh" format="color" />
     <attr name="colorSurfaceVariant" format="color" />
     <attr name="colorAccentPrimary" format="color" />
     <attr name="colorScStatusInfo" format="color" />
@@ -26,11 +27,15 @@
     <attr name="colorScStatusBackgroundRecommend" format="color" />
     <attr name="colorScStatusBackgroundWarn" format="color" />
     <attr name="textColorScActionButton" format="color" />
+    <attr name="textColorScActionButtonRecommend" format="color" />
     <attr name="textColorScSecondaryActionButton" format="color" />
     <attr name="colorScIconInfo" format="color" />
     <attr name="colorScIconRecommend" format="color" />
     <attr name="colorScIconWarn" format="color" />
     <attr name="colorScIconNull" format="color" />
+    <attr name="colorScButtonInfoBase" format="color" />
+    <attr name="colorScButtonRecommendBase" format="color" />
+    <attr name="colorScButtonWarnBase" format="color" />
     <attr name="colorScOutlineButtonInfoBase" format="color" />
     <attr name="colorScOutlineButtonRecommendBase" format="color" />
     <attr name="colorScOutlineButtonWarnBase" format="color" />
@@ -39,9 +44,21 @@
     <attr name="scStatusButtonStyle" format="reference" />
     <attr name="scActionButtonListLayout" format="reference" />
     <attr name="scActionButtonTheme" format="reference" />
+    <attr name="scActionButtonCornerRadius" format="dimension" />
     <attr name="scActionButtonStyle" format="reference" />
     <attr name="scSecondaryActionButtonStyle" format="reference" />
+
     <attr name="scCardSideMargin" format="dimension" />
+    <attr name="scIssueAttributionTitleMarginBottom" format="dimension" />
+    <attr name="scIssueSummaryMarginTop" format="dimension" />
+    <attr name="scIssueActionButtonListMarginTop" format="dimension" />
+
+    <attr name="scStatusTitleTextAppearance" format="reference" />
+    <attr name="scIssueTitleTextAppearance" format="reference" />
+    <attr name="scIssueSubtitleTextAppearance" format="reference" />
+    <attr name="scIssueAttributionTitleTextAppearance" format="reference" />
+    <attr name="scMoreIssuesTitleTextAppearance" format="reference" />
+    <attr name="scQsToggleTitleTextAppearance" format="reference" />
 
     <attr name="colorScShieldAccent" format="color" />
 </resources>

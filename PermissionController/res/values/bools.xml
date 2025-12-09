@@ -20,6 +20,8 @@
     <bool name="is_at_least_t">false</bool>
     <bool name="is_at_least_u">false</bool>
     <bool name="is_at_least_v">false</bool>
+    <bool name="is_at_least_v36r1">false</bool>
+    <bool name="is_at_least_v37">false</bool>
     <bool name="config_usePreferenceForAppPermissionSettings">false</bool>
     <bool name="config_appPermissionFooterLinkPreferenceSummaryUnderlined">false</bool>
     <bool name="config_enableExpressiveDesignInPermissionSettings">true</bool>

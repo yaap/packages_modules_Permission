@@ -85,7 +85,6 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
-    @Ignore("b/405152547")
     fun usedHealthConnectPermissionsAreListed_handHeldDevices_healthFitnessBrand() {
         assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
         installTestAppThatUsesHealthConnectPermission()
@@ -133,7 +132,6 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
-    @Ignore("b/405152547")
     fun startManageAppPermissionsActivity_handHeldDevices_requestLegacyBodySensorsUngranted_healthConnectShowsUp() {
         assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
         installTestAppThatUsesLegacyBodySensorsPermissions()
@@ -146,7 +144,6 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
-    @Ignore("b/405152547")
     fun startManageAppPermissionsActivity_handHeldDevices_requestLegacyBodySensorsTargetSdk22Ungranted_healthConnectShowsUp() {
         assumeFalse(context.packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH))
         installTestAppThatUsesLegacyBodySensorsPermissionsTargetSdk22()

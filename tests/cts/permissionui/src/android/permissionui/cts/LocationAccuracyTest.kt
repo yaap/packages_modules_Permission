@@ -22,6 +22,7 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import androidx.test.filters.FlakyTest
 import androidx.test.uiautomator.By
 import com.android.modules.utils.build.SdkLevel
+import com.google.common.truth.Truth.assertThat
 import org.junit.Assume.assumeFalse
 import org.junit.Assume.assumeTrue
 import org.junit.Before
@@ -62,7 +63,7 @@ class LocationAccuracyTest : BaseUsePermissionTest() {
 
         requestAppPermissionsAndAssertResult(
             ACCESS_FINE_LOCATION to false,
-            ACCESS_COARSE_LOCATION to true
+            ACCESS_COARSE_LOCATION to true,
         ) {
             clickCoarseLocationRadioButton()
             clickPreciseLocationRadioButton()
@@ -80,12 +81,12 @@ class LocationAccuracyTest : BaseUsePermissionTest() {
         assertAppHasPermission(ACCESS_FINE_LOCATION, false)
         assertAppHasPermission(ACCESS_COARSE_LOCATION, false)
         assertAppHasPermission(ACCESS_BACKGROUND_LOCATION, false)
-        val waitForWindowTransition = SdkLevel.isAtLeastB();
+        val waitForWindowTransition = SdkLevel.isAtLeastB()
 
         requestAppPermissionsAndAssertResult(
             ACCESS_FINE_LOCATION to true,
             ACCESS_COARSE_LOCATION to true,
-            waitForWindowTransition = waitForWindowTransition
+            waitForWindowTransition = waitForWindowTransition,
         ) {
             clickPreciseLocationRadioButton()
             clickCoarseLocationRadioButton()
@@ -104,7 +105,7 @@ class LocationAccuracyTest : BaseUsePermissionTest() {
 
         requestAppPermissionsAndAssertResult(
             ACCESS_FINE_LOCATION to false,
-            ACCESS_COARSE_LOCATION to true
+            ACCESS_COARSE_LOCATION to true,
         ) {
             clickCoarseLocationRadioButton()
             clickPreciseLocationRadioButton()
@@ -115,9 +116,11 @@ class LocationAccuracyTest : BaseUsePermissionTest() {
         // now request again to change to precise location
         requestAppPermissionsAndAssertResult(
             ACCESS_FINE_LOCATION to true,
-            ACCESS_COARSE_LOCATION to true
+            ACCESS_COARSE_LOCATION to true,
         ) {
             clickPreciseLocationOnlyView()
+            assertThat(uiDevice.findObject(By.res(ALLOW_FOREGROUND_BUTTON)).text.uppercase())
+                .isEqualTo("WHILE USING THE APP")
             clickPermissionRequestAllowForegroundButton()
         }
     }
@@ -149,7 +152,7 @@ class LocationAccuracyTest : BaseUsePermissionTest() {
         assertAppHasPermission(ACCESS_FINE_LOCATION, false)
         requestAppPermissionsAndAssertResult(
             ACCESS_FINE_LOCATION to true,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 

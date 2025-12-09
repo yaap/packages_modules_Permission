@@ -438,9 +438,7 @@ public class LocationAccessCheck {
                 Log.e(LOG_TAG, "Could not check for location access", e);
                 service.jobFinished(params, true);
             } finally {
-                synchronized (sLock) {
-                    service.mAddLocationNotificationIfNeededTask = null;
-                }
+                service.mAddLocationNotificationIfNeededTask = null;
             }
         }
     }
@@ -1155,18 +1153,16 @@ public class LocationAccessCheck {
         /**
          * If we currently check if we should show a notification, the task executing the check
          */
-        // @GuardedBy("sLock")
-        private @Nullable AddLocationNotificationIfNeededTask mAddLocationNotificationIfNeededTask;
+        @Nullable
+        private volatile AddLocationNotificationIfNeededTask mAddLocationNotificationIfNeededTask;
 
         @Override
         public void onCreate() {
             super.onCreate();
             mLocationAccessCheck = new LocationAccessCheck(this, () -> {
-                synchronized (sLock) {
-                    AddLocationNotificationIfNeededTask task = mAddLocationNotificationIfNeededTask;
-
-                    return task != null && task.isCancelled();
-                }
+                final AddLocationNotificationIfNeededTask task =
+                        mAddLocationNotificationIfNeededTask;
+                return task != null && task.isCancelled();
             });
         }
 
@@ -1178,18 +1174,16 @@ public class LocationAccessCheck {
          */
         @Override
         public boolean onStartJob(JobParameters params) {
-            synchronized (LocationAccessCheck.sLock) {
-                if (mAddLocationNotificationIfNeededTask != null) {
-                    Log.i(LOG_TAG, "LocationAccessCheck old job not completed yet.");
-                    return false;
-                }
-
-                mAddLocationNotificationIfNeededTask =
-                        new AddLocationNotificationIfNeededTask();
-
-                mAddLocationNotificationIfNeededTask.execute(params, this);
+            AddLocationNotificationIfNeededTask task = mAddLocationNotificationIfNeededTask;
+            if (task != null) {
+                Log.i(LOG_TAG, "LocationAccessCheck old job not completed yet.");
+                return false;
             }
-
+            // Removing sLock to avoid deadlock. Also, onStartJob is executed on main thread, so
+            // locking isn't necessary.
+            task = new AddLocationNotificationIfNeededTask();
+            mAddLocationNotificationIfNeededTask = task;
+            task.execute(params, this);
             return true;
         }
 
@@ -1201,24 +1195,12 @@ public class LocationAccessCheck {
          */
         @Override
         public boolean onStopJob(JobParameters params) {
-            AddLocationNotificationIfNeededTask task;
-            synchronized (sLock) {
-                if (mAddLocationNotificationIfNeededTask == null) {
-                    return false;
-                } else {
-                    task = mAddLocationNotificationIfNeededTask;
+            AddLocationNotificationIfNeededTask task = mAddLocationNotificationIfNeededTask;
+            if (task != null) {
+                if (!task.cancel(false)) {
+                    Log.w(LOG_TAG, "The task could not be cancelled.");
                 }
             }
-
-            task.cancel(false);
-
-            try {
-                // Wait for task to finish
-                task.get();
-            } catch (Exception e) {
-                Log.e(LOG_TAG, "While waiting for " + task + " to finish", e);
-            }
-
             return false;
         }
 

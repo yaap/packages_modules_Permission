@@ -20,7 +20,7 @@
     <string name="security_privacy_brand_name" msgid="7303621734258440812">"Seguridad y privacidad"</string>
     <string name="privacy_subpage_controls_header" msgid="4152396976713749322">"Controles"</string>
     <string name="health_connect_title" msgid="2132233890867430855">"Salud conectada"</string>
-    <string name="health_connect_summary" msgid="815473513776882296">"Gestiona el acceso de las aplicaciones a tus datos de salud"</string>
+    <string name="health_connect_summary" msgid="815473513776882296">"Gestiona el acceso de las apps a tus datos de salud"</string>
     <string name="location_settings" msgid="8863940440881290182">"Acceso a la ubicación"</string>
-    <string name="mic_toggle_description" msgid="1504101620086616040">"Para aplicaciones y servicios (aunque el ajuste esté desactivado, puede que los datos del micrófono se compartan cuando llames a un número de emergencia)"</string>
+    <string name="mic_toggle_description" msgid="1504101620086616040">"Para apps y servicios (aunque el ajuste esté desactivado, puede que los datos del micrófono se compartan cuando llames a un número de emergencia)"</string>
 </resources>

@@ -399,12 +399,24 @@ public final class SafetyCenterDataManager {
 
     /**
      * Returns a set of {@link SafetySourcesGroup} IDs that the given {@link SafetyCenterIssueKey}
-     * is mapped to, or an empty list of no such mapping is configured.
+     * is mapped to, or an empty list if no such mapping is configured.
      *
      * <p>Issue being mapped to a group means that this issue is relevant to that group.
      */
     public Set<String> getGroupMappingFor(SafetyCenterIssueKey issueKey) {
         return mSafetyCenterIssueRepository.getGroupMappingFor(issueKey);
+    }
+
+    /**
+     * Returns a set of safety source IDs that the given {@link SafetyCenterIssueKey} is mapped to,
+     * or an empty list if no such mapping is configured. This mapping is only configured on Android
+     * U+.
+     *
+     * <p>Issue being mapped to a safety source means that this issue is relevant to that safety
+     * source.
+     */
+    public Set<String> getSafetySourceIdsForIssue(SafetyCenterIssueKey issueKey) {
+        return mSafetyCenterIssueRepository.getSafetySourceIdsForIssue(issueKey);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////

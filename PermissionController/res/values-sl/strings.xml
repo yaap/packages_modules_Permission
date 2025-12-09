@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Želite nastaviti aplikacijo <xliff:g id="APP_NAME">%1$s</xliff:g> kot privzeto aplikacijo za navigacijo?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Nobeno dovoljenje ni potrebno"</string>
     <string name="role_watch_description" msgid="267003778693177779">"Aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> bosta omogočena interakcija z obvestili in dostop do dovoljenj za telefon, sporočila SMS, stike in koledar."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"Aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> bosta omogočena interakcija z obvestili in pretočno izvajanje aplikacij v povezano napravo."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Ta storitev deli vaše fotografije, predstavnost in obvestila iz vašega telefona z drugimi napravami."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Privzeta aplikacija za zapiske"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Aplikacija za zapiske"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Aplikacije, ki vam omogočajo ustvarjanje zapiskov v napravi."</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Preverite telefon"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Telefona ni bilo mogoče doseči"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Ali želite poskusiti znova?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agenti"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Agenti, ki lahko dostopajo do informacij ali izvajajo dejanja v aplikacijah"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agenti"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Upravljanje dostopa za agente v tej napravi"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Nobena agentska aplikacija ni na voljo"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Če želite omogočiti to funkcijo, v napravi namestite agentsko aplikacijo"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Dostop do aplikacij"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Aplikacije in nastavitve, do katerih lahko dostopa ta agent, da pridobi informacije in izvede dejanja za vas"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Za dostop do aplikacije <xliff:g id="APP_NAME">%1$s</xliff:g> ni na voljo nobena aplikacija"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistem"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Aplikacije"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Dostop agenta"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agenti, ki lahko dostopajo do informacij in izvajajo dejanja za vas v tej aplikaciji"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Nastavitve naprave"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Ali dovolite, da agent <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> zastopa aplikacijo <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Ta agent bo lahko dostopal do aplikacije <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>, da bo pridobival informacije in izvajal dejanja za vas"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Dovoli"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Ne dovoli"</string>
 </resources>

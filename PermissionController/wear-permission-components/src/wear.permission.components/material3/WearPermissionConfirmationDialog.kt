@@ -26,6 +26,7 @@ import androidx.wear.compose.material3.AlertDialog as Material3AlertDialog
 import androidx.wear.compose.material3.AlertDialogDefaults
 import androidx.wear.compose.material3.Text
 import com.android.permissioncontroller.wear.permission.components.material2.AlertDialog
+import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 
 data class DialogButtonContent(
@@ -35,8 +36,7 @@ data class DialogButtonContent(
 
 @Composable
 fun WearPermissionConfirmationDialog(
-    materialUIVersion: WearPermissionMaterialUIVersion =
-        WearPermissionMaterialUIVersion.MATERIAL2_5,
+    materialUIVersion: WearPermissionMaterialUIVersion = ResourceHelper.materialUIVersionInSettings,
     show: Boolean,
     iconRes: WearPermissionIconBuilder? = null,
     title: String? = null,

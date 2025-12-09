@@ -34,6 +34,7 @@ import android.icu.text.ListFormatter;
 import android.icu.text.MessageFormat;
 import android.icu.util.ULocale;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.safetycenter.SafetyCenterData;
 import android.safetycenter.SafetyCenterEntry;
 import android.safetycenter.SafetyCenterEntryGroup;
@@ -324,10 +325,14 @@ public final class SafetyCenterDataFactory {
         int safetyCenterIssueSeverityLevel =
                 toSafetyCenterIssueSeverityLevel(safetySourceIssue.getSeverityLevel());
         SafetyCenterIssue.Builder safetyCenterIssueBuilder =
-                new SafetyCenterIssue.Builder(
+                createSafetyCenterIssueBuilder(
                                 SafetyCenterIds.encodeToString(safetyCenterIssueId),
                                 safetySourceIssue.getTitle(),
-                                safetySourceIssue.getSummary())
+                                safetySourceIssue.getSummary(),
+                                UserHandle.of(safetyCenterIssueKey.getUserId()),
+                                mSafetyCenterDataManager.getSafetySourceIdsForIssue(
+                                        safetyCenterIssueKey),
+                                safetySourceIssue.getIssueTypeId())
                         .setSeverityLevel(safetyCenterIssueSeverityLevel)
                         .setShouldConfirmDismissal(
                                 safetyCenterIssueSeverityLevel
@@ -542,7 +547,8 @@ public final class SafetyCenterDataFactory {
         CharSequence groupSummary =
                 mSafetyCenterResourcesApk.getOptionalString(safetySourcesGroup.getSummaryResId());
 
-        if (safetySourcesGroup.getId().equals(ANDROID_LOCK_SCREEN_SOURCES_GROUP_ID)
+        if (SafetyCenterFlags.getGenerateSummarySafetySourcesGroupIds()
+                        .contains(safetySourcesGroup.getId())
                 && TextUtils.isEmpty(groupSummary)) {
             List<CharSequence> titles = new ArrayList<>();
             for (int i = 0; i < entries.size(); i++) {
@@ -709,9 +715,11 @@ public final class SafetyCenterDataFactory {
                                         safetySourceStatus.getSeverityLevel())
                                 : SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED;
                 SafetyCenterEntry.Builder builder =
-                        new SafetyCenterEntry.Builder(
+                        createSafetyCenterEntryBuilder(
                                         SafetyCenterIds.encodeToString(safetyCenterEntryId),
-                                        safetySourceStatus.getTitle())
+                                        safetySourceStatus.getTitle(),
+                                        UserHandle.of(userId),
+                                        safetySource.getId())
                                 .setSeverityLevel(severityLevel)
                                 .setSummary(
                                         inQuietMode
@@ -721,6 +729,9 @@ public final class SafetyCenterDataFactory {
                                 .setEnabled(enabled)
                                 .setSeverityUnspecifiedIconType(severityUnspecifiedIconType)
                                 .setPendingIntent(entryPendingIntent);
+                if (android.permission.flags.Flags.openSafetyCenterApis()) {
+                    builder.setHasError(mSafetyCenterDataManager.sourceHasError(key));
+                }
                 SafetySourceStatus.IconAction iconAction = safetySourceStatus.getIconAction();
                 if (iconAction == null) {
                     return builder.build();
@@ -775,9 +786,11 @@ public final class SafetyCenterDataFactory {
         boolean enabled =
                 pendingIntent != null && !SafetySources.isDefaultEntryDisabled(safetySource);
         CharSequence title = getTitleForProfileType(profileType, safetySource);
-        CharSequence summary =
+        boolean hasError =
                 mSafetyCenterDataManager.sourceHasError(
-                                SafetySourceKey.of(safetySource.getId(), userId))
+                        SafetySourceKey.of(safetySource.getId(), userId));
+        CharSequence summary =
+                hasError
                         ? getRefreshErrorString()
                         : mSafetyCenterResourcesApk.getOptionalString(
                                 safetySource.getSummaryResId());
@@ -785,14 +798,21 @@ public final class SafetyCenterDataFactory {
             enabled = false;
             summary = DevicePolicyResources.getWorkProfilePausedString(mSafetyCenterResourcesApk);
         }
-        return new SafetyCenterEntry.Builder(
-                        SafetyCenterIds.encodeToString(safetyCenterEntryId), title)
-                .setSeverityLevel(entrySeverityLevel)
-                .setSummary(summary)
-                .setEnabled(enabled)
-                .setPendingIntent(pendingIntent)
-                .setSeverityUnspecifiedIconType(severityUnspecifiedIconType)
-                .build();
+        SafetyCenterEntry.Builder builder =
+                createSafetyCenterEntryBuilder(
+                                SafetyCenterIds.encodeToString(safetyCenterEntryId),
+                                title,
+                                UserHandle.of(userId),
+                                safetySource.getId())
+                        .setSeverityLevel(entrySeverityLevel)
+                        .setSummary(summary)
+                        .setEnabled(enabled)
+                        .setPendingIntent(pendingIntent)
+                        .setSeverityUnspecifiedIconType(severityUnspecifiedIconType);
+        if (android.permission.flags.Flags.openSafetyCenterApis()) {
+            builder.setHasError(hasError);
+        }
+        return builder.build();
     }
 
     private void addSafetyCenterStaticEntryGroup(
@@ -1316,9 +1336,31 @@ public final class SafetyCenterDataFactory {
         }
     }
 
+    private static SafetyCenterEntry.Builder createSafetyCenterEntryBuilder(
+            String id, CharSequence title, UserHandle user, String safetySourceId) {
+        SafetyCenterEntry.Builder builder;
+        if (android.permission.flags.Flags.openSafetyCenterApis()) {
+            builder = new SafetyCenterEntry.Builder(id, title, user, safetySourceId);
+        } else {
+            builder = new SafetyCenterEntry.Builder(id, title);
+        }
+        return builder;
+    }
+
     private static SafetySourceKey toSafetySourceKey(String safetyCenterEntryIdString) {
         SafetyCenterEntryId id = SafetyCenterIds.entryIdFromString(safetyCenterEntryIdString);
         return SafetySourceKey.of(id.getSafetySourceId(), id.getUserId());
+    }
+
+    private static SafetyCenterIssue.Builder createSafetyCenterIssueBuilder(
+            String id, CharSequence title, CharSequence summary, UserHandle user, Set<String> safetySourceIds, String issueTypeId) {
+        SafetyCenterIssue.Builder builder;
+        if (android.permission.flags.Flags.openSafetyCenterApis()) {
+            builder = new SafetyCenterIssue.Builder(id, title, summary, user, safetySourceIds, issueTypeId);
+        } else {
+            builder = new SafetyCenterIssue.Builder(id, title, summary);
+        }
+        return builder;
     }
 
     /**

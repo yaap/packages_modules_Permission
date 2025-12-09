@@ -60,7 +60,7 @@ final class SafetyCenterIssueRepository {
                     new SafetySourceIssuesInfoBySeverityDescending();
 
     private static final DeduplicationInfo EMPTY_DEDUP_INFO =
-            new DeduplicationInfo(emptyList(), emptyList(), emptyMap());
+            new DeduplicationInfo(emptyList(), emptyList(), emptyMap(), emptyMap());
 
     private final Context mContext;
     private final SafetySourceDataRepository mSafetySourceDataRepository;
@@ -104,7 +104,7 @@ final class SafetyCenterIssueRepository {
         if (SdkLevel.isAtLeastU()) {
             return mSafetyCenterIssueDeduplicator.deduplicateIssues(issues);
         }
-        return new DeduplicationInfo(issues, emptyList(), emptyMap());
+        return new DeduplicationInfo(issues, emptyList(), emptyMap(), emptyMap());
     }
 
     /**
@@ -168,6 +168,13 @@ final class SafetyCenterIssueRepository {
      */
     List<SafetySourceIssueInfo> getLatestDuplicates(@UserIdInt int userId) {
         return mUserIdToDedupInfo.get(userId, EMPTY_DEDUP_INFO).getFilteredOutDuplicateIssues();
+    }
+
+    Set<String> getSafetySourceIdsForIssue(SafetyCenterIssueKey issueKey) {
+        return mUserIdToDedupInfo
+                .get(issueKey.getUserId(), EMPTY_DEDUP_INFO)
+                .getIssueToSafetySourceIdsMapping()
+                .getOrDefault(issueKey, emptySet());
     }
 
     private List<SafetySourceIssueInfo> filterOutHiddenIssues(List<SafetySourceIssueInfo> issues) {

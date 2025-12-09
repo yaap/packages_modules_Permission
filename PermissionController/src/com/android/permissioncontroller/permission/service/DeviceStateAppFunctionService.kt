@@ -19,9 +19,10 @@ package com.android.permissioncontroller.permission.service
 import android.Manifest
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.app.KeyguardManager
 import android.app.appfunctions.AppFunctionException
+import android.app.appfunctions.AppFunctionException.ERROR_DENIED
 import android.app.appfunctions.AppFunctionException.ERROR_FUNCTION_NOT_FOUND
-import android.app.appfunctions.AppFunctionService
 import android.app.appfunctions.ExecuteAppFunctionRequest
 import android.app.appfunctions.ExecuteAppFunctionResponse
 import android.app.appsearch.GenericDocument
@@ -33,10 +34,18 @@ import android.os.Build
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
 import android.os.UserHandle
+import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
 import com.android.permissioncontroller.appfunctions.AdditionalPermissionsScreen
-import com.android.permissioncontroller.appfunctions.AppPermissionScreen
+import com.android.permissioncontroller.appfunctions.AppPermissionGrantStateScreen
+import com.android.permissioncontroller.appfunctions.AppPermissionSettingScreen
 import com.android.permissioncontroller.appfunctions.AppPermissionsScreen
+import com.android.permissioncontroller.appfunctions.DefaultAppListScreen
+import com.android.permissioncontroller.appfunctions.DefaultAppScreen
 import com.android.permissioncontroller.appfunctions.GenericDocumentToPlatformConverter
 import com.android.permissioncontroller.appfunctions.PermissionAppsScreen
 import com.android.permissioncontroller.appfunctions.PermissionManagerScreen
@@ -52,6 +61,10 @@ import com.android.permissioncontroller.permission.model.livedatatypes.LightPack
 import com.android.permissioncontroller.permission.model.v31.AppPermissionUsage
 import com.android.permissioncontroller.permission.model.v31.PermissionUsages
 import com.android.permissioncontroller.permission.model.v31.PermissionUsages.PermissionsUsagesChangeCallback
+import com.android.permissioncontroller.permission.utils.getInitializedValue
+import com.android.permissioncontroller.role.ui.DefaultAppListViewModel
+import com.android.permissioncontroller.role.ui.DefaultAppViewModel
+import com.android.permissioncontroller.role.ui.RoleItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import java.time.Instant
@@ -59,9 +72,6 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 import kotlin.time.Duration.Companion.days
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -69,21 +79,18 @@ import kotlinx.coroutines.launch
 
 // TODO b/411150350: Add CTS test for this service
 @RequiresApi(Build.VERSION_CODES.BAKLAVA)
-class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesChangeCallback {
+class DeviceStateAppFunctionService :
+    LifecycleAppFunctionService(), ViewModelStoreOwner, PermissionsUsagesChangeCallback {
+
     private lateinit var englishContext: Context
     private lateinit var permissionUsages: PermissionUsages
-    private val serviceJob = SupervisorJob()
-    private val serviceScope: CoroutineScope = CoroutineScope(serviceJob + Dispatchers.Main)
+
+    override val viewModelStore by lazy { ViewModelStore() }
 
     override fun onCreate() {
         super.onCreate()
         englishContext = createEnglishContext()
-        permissionUsages = PermissionUsages(applicationContext)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        serviceJob.cancel()
+        permissionUsages = PermissionUsages(this)
     }
 
     override fun onExecuteFunction(
@@ -93,6 +100,14 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
         cancellationSignal: CancellationSignal,
         callback: OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>,
     ) {
+        super.onExecuteFunction(
+            request,
+            callingPackage,
+            callingPackageSigningInfo,
+            cancellationSignal,
+            callback,
+        )
+
         if (request.functionIdentifier != APP_FUNCTION_IDENTIFIER) {
             callback.onError(
                 AppFunctionException(
@@ -103,7 +118,20 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
             return
         }
 
-        serviceScope.launch {
+        if (
+            shouldCheckForDeviceLock(request.parameters) &&
+                applicationContext.getSystemService(KeyguardManager::class.java).isDeviceLocked
+        ) {
+            callback.onError(
+                AppFunctionException(
+                    ERROR_DENIED,
+                    "Attempting to execute a device state app function while " +
+                        "the device is locked.",
+                )
+            )
+        }
+
+        lifecycleScope.launch {
             val jetpackDocument =
                 androidx.appsearch.app.GenericDocument.fromDocumentClass(buildDeviceStateResponse())
 
@@ -123,15 +151,30 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
     }
 
     private fun createEnglishContext(): Context {
-        val configuration = Configuration(applicationContext.resources.configuration)
+        val configuration = Configuration(resources.configuration)
         configuration.setLocale(Locale.US)
-        return applicationContext.createConfigurationContext(configuration)
+        return createConfigurationContext(configuration)
+    }
+
+    private fun shouldCheckForDeviceLock(params: GenericDocument): Boolean {
+        return params
+            .getPropertyDocument(APP_FUNCTION_PARAMS_KEY)
+            ?.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED_KEY) != true
     }
 
     private suspend fun buildDeviceStateResponse(): DeviceStateResponse {
-        val perScreenDeviceStatesList = deviceStateScreenKeys.map { buildPerScreenDeviceStates(it) }
-        val locale = applicationContext.resources.configuration.locales[0]
+        val startTime = System.currentTimeMillis()
+        val perScreenDeviceStatesList = coroutineScope {
+            deviceStateScreenKeys.map { async { buildPerScreenDeviceStates(it) } }.awaitAll()
+        }
+        val locale = resources.configuration.locales[0]
 
+        if (DEBUG) {
+            Log.i(
+                TAG,
+                "Total time spent to fetch data = ${System.currentTimeMillis() - startTime} ms",
+            )
+        }
         return DeviceStateResponse(
             perScreenDeviceStates = perScreenDeviceStatesList.flatten(),
             deviceLocale = locale.toString(),
@@ -139,15 +182,17 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
     }
 
     private suspend fun buildPerScreenDeviceStates(screenKey: String): List<PerScreenDeviceStates> {
+        val startTime = System.currentTimeMillis()
+
         when (screenKey) {
             PermissionManagerScreen.KEY -> {
-                return listOf(PermissionManagerScreen(applicationContext).toPerScreenDeviceStates())
+                return listOf(PermissionManagerScreen(this).toPerScreenDeviceStates())
             }
             PermissionAppsScreen.KEY -> {
                 return coroutineScope {
                     SUPPORTED_PERMISSION_GROUPS.map {
                             async {
-                                PermissionAppsScreen(applicationContext, it)
+                                PermissionAppsScreen(this@DeviceStateAppFunctionService, it)
                                     .toPerScreenDeviceStates()
                             }
                         }
@@ -155,23 +200,21 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
                 }
             }
             AppPermissionsScreen.KEY -> {
-                val allPackages =
-                    applicationContext.packageManager
-                        .getInstalledPackagesAsUser(0, UserHandle.myUserId())
-                        .map { packageInfo -> packageInfo.packageName }
-                        .toList()
-
-                return coroutineScope {
-                        allPackages.map {
-                            async {
-                                AppPermissionsScreen(applicationContext, it)
-                                    .toPerScreenDeviceStates()
-                            }
-                        }
-                    }
-                    .awaitAll()
+                return listOf(AppPermissionsScreen(this).toPerScreenDeviceStates())
             }
-            AppPermissionScreen.KEY -> {
+            AppPermissionSettingScreen.KEY -> {
+                val result =
+                    SUPPORTED_PERMISSION_GROUPS.map { permissionGroup ->
+                        AppPermissionSettingScreen(
+                                this@DeviceStateAppFunctionService,
+                                permissionGroup,
+                            )
+                            .toPerScreenDeviceStates()
+                    }
+
+                return result
+            }
+            AppPermissionGrantStateScreen.KEY -> {
                 val filterBeginTimeMillis =
                     System.currentTimeMillis() -
                         TimeUnit.DAYS.toMillis(PERMISSION_USAGE_START_DAY_FROM_NOW)
@@ -190,8 +233,14 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
                 )
 
                 val appPermissionUsages = permissionUsages.usages
+                if (DEBUG) {
+                    Log.i(
+                        TAG,
+                        "Time spent on fetching permission usages = ${System.currentTimeMillis() - startTime} ms",
+                    )
+                }
 
-                return coroutineScope {
+                val result = coroutineScope {
                     SUPPORTED_PERMISSION_GROUPS.map { permissionGroup ->
                             async {
                                 val packagePermissionInfoMap =
@@ -201,8 +250,8 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
                                 val deviceStateScreens = mutableListOf<PerScreenDeviceStates>()
                                 packagePermissionInfoMap.forEach { (packageInfo, permissionInfo) ->
                                     deviceStateScreens.add(
-                                        AppPermissionScreen(
-                                                context = applicationContext,
+                                        AppPermissionGrantStateScreen(
+                                                context = this@DeviceStateAppFunctionService,
                                                 permissionGroup = permissionGroup,
                                                 packageName = packageInfo.first,
                                                 userHandle = packageInfo.second,
@@ -231,9 +280,17 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
                         .awaitAll()
                         .flatten()
                 }
+                if (DEBUG) {
+                    Log.i(
+                        TAG,
+                        "Time spent on ${AppPermissionGrantStateScreen.KEY} = ${System.currentTimeMillis() - startTime} ms",
+                    )
+                }
+
+                return result
             }
             UnusedAppsScreen.KEY -> {
-                return listOf(UnusedAppsScreen(applicationContext).toPerScreenDeviceStates())
+                return listOf(UnusedAppsScreen(this).toPerScreenDeviceStates())
             }
             UnusedAppLastUsageScreen.KEY -> {
                 val unusedApps = getUnusedPackages().getInitializedValue()!!
@@ -260,7 +317,7 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
 
                     deviceStateScreens.add(
                         UnusedAppLastUsageScreen(
-                                context = applicationContext,
+                                context = this,
                                 packageName = packageName,
                                 lastUsageTime = lastUsageTime,
                             )
@@ -268,18 +325,86 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
                     )
                 }
 
+                if (DEBUG) {
+                    Log.i(
+                        TAG,
+                        "Time spent on ${UnusedAppLastUsageScreen.KEY} = ${System.currentTimeMillis() - startTime} ms",
+                    )
+                }
+
                 return deviceStateScreens
             }
             AdditionalPermissionsScreen.KEY -> {
-                return listOf(
-                    AdditionalPermissionsScreen(applicationContext).toPerScreenDeviceStates()
-                )
+                return listOf(AdditionalPermissionsScreen(this).toPerScreenDeviceStates())
+            }
+            DefaultAppListScreen.KEY -> {
+                return listOf(DefaultAppListScreen(this).toPerScreenDeviceStates())
+            }
+            DefaultAppScreen.KEY -> {
+                val viewModelFactory: ViewModelProvider.Factory =
+                    ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+                val viewModel =
+                    ViewModelProvider(this, viewModelFactory)[DefaultAppListViewModel::class.java]
+                val deviceStateScreens = mutableListOf<PerScreenDeviceStates>()
+
+                coroutineScope {
+                    val roleItems = viewModel.liveData.getInitializedValue()
+                    val user = viewModel.user
+                    roleItems
+                        ?.map { roleItem ->
+                            async { getDefaultAppDeviceStateScreen(roleItem, false, user) }
+                        }
+                        ?.awaitAll()
+                        ?.filterNotNull()
+                        ?.also { deviceStateScreens.addAll(it) }
+
+                    if (viewModel.hasWorkProfile() && viewModel.workLiveData != null) {
+                        val workProfileRoleItems = viewModel.workLiveData!!.getInitializedValue()
+                        val workProfile = viewModel.workProfile!!
+                        workProfileRoleItems
+                            ?.map { roleItem ->
+                                async {
+                                    getDefaultAppDeviceStateScreen(roleItem, true, workProfile)
+                                }
+                            }
+                            ?.awaitAll()
+                            ?.filterNotNull()
+                            ?.also { deviceStateScreens.addAll(it) }
+                    }
+                }
+
+                if (DEBUG) {
+                    Log.i(
+                        TAG,
+                        "Time spent on ${DefaultAppScreen.KEY} = ${System.currentTimeMillis() - startTime} ms",
+                    )
+                }
+
+                return deviceStateScreens
             }
         }
         throw Exception("$screenKey is not supported")
     }
 
     override fun onPermissionUsagesChanged() {}
+
+    private suspend fun getDefaultAppDeviceStateScreen(
+        roleItem: RoleItem,
+        isWorkProfile: Boolean,
+        user: UserHandle,
+    ): PerScreenDeviceStates? {
+        //  Create a unique key for this specific ViewModel instance.
+        //  This ensures we get a different ViewModel for each role and user combination.
+        val viewModelKey = "DefaultAppViewModel_${roleItem.role.name}_${user.identifier}"
+        val provider =
+            ViewModelProvider(this, DefaultAppViewModel.Factory(roleItem.role, user, application))
+        val defaultAppViewModel = provider[viewModelKey, DefaultAppViewModel::class.java]
+
+        return defaultAppViewModel.liveData.getInitializedValue()?.let { items ->
+            DefaultAppScreen(this, roleItem.role, items, isWorkProfile, user)
+                .toPerScreenDeviceStates()
+        }
+    }
 
     /**
      * Extract PackageLastUsageTime for unused apps from userPackages map. This method may be used
@@ -391,10 +516,13 @@ class DeviceStateAppFunctionService : AppFunctionService(), PermissionsUsagesCha
     private data class PackageLastUsageTime(val packageName: String, val usageTime: Long)
 
     companion object {
-        private const val TAG = "DeviceStateAppFunctionService"
+        private const val TAG = "DeviceStateService"
         private const val APP_FUNCTION_IDENTIFIER = "getPermissionsDeviceState"
+        private const val APP_FUNCTION_PARAMS_KEY = "getPermissionsDeviceStateParams"
+        private const val REQUEST_INITIATED_WHILE_UNLOCKED_KEY = "requestInitiatedWhileUnlocked"
+        private const val DEBUG = false
         private val SUPPORTED_PERMISSION_GROUPS =
-            listOf(
+            setOf(
                 Manifest.permission_group.LOCATION,
                 Manifest.permission_group.CONTACTS,
                 Manifest.permission_group.CALL_LOG,

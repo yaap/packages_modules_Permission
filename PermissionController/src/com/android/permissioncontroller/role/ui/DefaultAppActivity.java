@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.permissioncontroller.DeviceUtils;
+import com.android.permissioncontroller.common.ui.SettingsActivity;
 import com.android.permissioncontroller.role.ui.auto.AutoDefaultAppFragment;
 import com.android.permissioncontroller.role.ui.handheld.HandheldDefaultAppFragment;
 import com.android.permissioncontroller.role.ui.wear.WearDefaultAppFragment;

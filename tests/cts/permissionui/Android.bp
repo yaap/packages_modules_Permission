@@ -45,9 +45,12 @@ android_test {
         "android.content.pm.flags-aconfig-java-export",
         "android.permission.flags-aconfig-java-export",
         "com.android.permission.flags-aconfig-java-export",
+        "CtsPhotoPickerTestLib",
     ],
     data: [
         ":CtsPermissionPolicyApp25",
+        ":CtsAgentApp",
+        ":CtsTargetApp",
         ":CtsUsePermissionApp22",
         ":CtsUsePermissionApp22CalendarOnly",
         ":CtsUsePermissionApp22None",

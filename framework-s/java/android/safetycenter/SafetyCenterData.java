@@ -165,7 +165,12 @@ public final class SafetyCenterData implements Parcelable {
         return mEntriesOrGroups;
     }
 
-    /** Returns the list of {@link SafetyCenterStaticEntryGroup} objects in the Safety Center. */
+    /**
+     * Returns the list of {@link SafetyCenterStaticEntryGroup} objects in the Safety Center.
+     *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
+     */
     @NonNull
     public List<SafetyCenterStaticEntryGroup> getStaticEntryGroups() {
         return mStaticEntryGroups;

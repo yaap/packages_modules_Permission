@@ -36,5 +36,8 @@
         <permission name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
         <permission name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
         <permission name="android.permission.WATCH_APPOPS" />
+        <permission name="android.permission.OBSERVE_ROLE_HOLDERS"/>
+        <permission name="android.permission.READ_LOCATION_BYPASS_ALLOWLIST" />
+        <permission name="android.permission.MANAGE_SAFETY_CENTER" />
     </privapp-permissions>
 </permissions>

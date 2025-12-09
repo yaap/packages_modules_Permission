@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Queres definir <xliff:g id="APP_NAME">%1$s</xliff:g> como a túa aplicación predeterminada de navegación?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Non se necesita ningún permiso"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> poderá interactuar coas túas notificacións e acceder aos permisos do teu teléfono, das mensaxes, dos contactos e do calendario."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"Permitirase que <xliff:g id="APP_NAME">%1$s</xliff:g> interactúe coas túas notificacións e emita as túas aplicacións ao dispositivo conectado."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Este servizo comparte con outros dispositivos as fotos, o contido multimedia e as notificacións desde o teu teléfono."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"App de notas predeterminada"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Aplicación de notas"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Aplicacións que che permiten tomar notas no dispositivo"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Consulta o teléfono"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Non se puido establecer conexión co teléfono"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Queres tentalo de novo?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Axentes"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Axentes que poden acceder á información ou realizar accións nas aplicacións"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Axentes"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Xestiona o acceso dos axentes neste dispositivo"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Non hai ningunha aplicación de axente dispoñible"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Instala unha aplicación de axente no teu dispositivo para activar esta función"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Acceso da aplicación"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Aplicacións e opcións de configuración ás que pode acceder este axente para obter información e realizar accións por ti"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Non hai ningunha aplicación dispoñible para o acceso a <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistema"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Aplicacións"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Acceso de axentes"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Os axentes poden acceder á información e actuar no teu nome nesta aplicación"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Configuración do dispositivo"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Queres permitir que <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> sexa un axente para <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Este axente poderá acceder a <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> para obter información e realizar accións por ti"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Permitir"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Non permitir"</string>
 </resources>

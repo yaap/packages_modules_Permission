@@ -45,6 +45,8 @@
     <string name="safety_center_more_issues_card_title">More alerts</string>
     <!-- Title for the "Dismissed alerts" card in Safety Center [CHAR LIMIT=NONE]-->
     <string name="safety_center_dismissed_issues_card_title">Dismissed alerts</string>
+    <!-- Title for a button that collapses the alerts shown by the more alerts card. -->
+    <string name="safety_center_expressive_more_issues_collapse_title">Close</string>
     <!-- Label for expanding the "See all alerts"/"More issues" card in Safety Center [CHAR LIMIT=NONE] -->
     <string name="safety_center_more_issues_card_expand_action">
         {count, plural,

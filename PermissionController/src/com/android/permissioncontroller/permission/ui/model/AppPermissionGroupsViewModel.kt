@@ -447,28 +447,19 @@ class AppPermissionGroupsViewModel(
         val numApps: Int = appPermissionUsages.size
         for (appIndex in 0 until numApps) {
             val appUsage: AppPermissionUsage = appPermissionUsages[appIndex]
-            if (appUsage.packageName != packageName) {
+            if (appUsage.packageName != packageName
+                || UserHandle.getUserHandleForUid(appUsage.uid) != user) {
                 continue
             }
             val appGroups = appUsage.groupUsages
             val numGroups = appGroups.size
             for (groupIndex in 0 until numGroups) {
                 val groupUsage = appGroups[groupIndex]
-                var lastAccessTime = groupUsage.lastAccessTime
-                val groupName = groupUsage.group.name
+                val lastAccessTime = groupUsage.lastAccessTime
                 if (lastAccessTime == 0L || lastAccessTime < filterTimeBeginMillis) {
                     continue
                 }
-
-                // We might have another AppPermissionUsage entry that's of the same packageName
-                // but with a different uid. In that case, we want to grab the max lastAccessTime
-                // as the last usage to show.
-                lastAccessTime =
-                    Math.max(
-                        accessTime.getOrDefault(groupName, Instant.EPOCH.toEpochMilli()),
-                        lastAccessTime
-                    )
-                accessTime[groupName] = lastAccessTime
+                accessTime[groupUsage.group.name] = lastAccessTime
             }
         }
     }

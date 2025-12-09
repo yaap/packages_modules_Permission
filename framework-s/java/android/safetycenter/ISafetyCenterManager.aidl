@@ -107,6 +107,13 @@ interface ISafetyCenterManager {
             String safetyCenterIssueActionId,
             int userId);
 
+    /** Executes the specified Safety Center issue action on the specified Safety Center issue. */
+    void executeSafetyCenterIssueActionWithTaskId(
+            String safetyCenterIssueId,
+            String safetyCenterIssueActionId,
+            int taskId,
+            int userId);
+
     /**
      * Clears all SafetySourceData (set by safety sources using setSafetySourceData) for testing.
      *

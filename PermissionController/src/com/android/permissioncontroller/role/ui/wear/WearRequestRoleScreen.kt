@@ -112,7 +112,7 @@ internal fun WearRequestRoleContent(
 ) {
     ScrollableScreen(
         materialUIVersion = materialUIVersion,
-        image = helper.getIcon(),
+        imageBuilder = WearPermissionIconBuilder.builder(helper.getIcon()),
         title = helper.getTitle(),
         showTimeText = false,
         isLoading = isLoading,

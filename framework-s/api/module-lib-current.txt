@@ -13,7 +13,7 @@ package android.app.role {
     method public static void registerServiceWrappers();
   }
 
-  public final class RoleManager {
+  @RestrictedForEnvironment(environments=android.annotation.RestrictedForEnvironment.ENVIRONMENT_SDK_RUNTIME, from=android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) public final class RoleManager {
     method @Nullable public String getBrowserRoleHolder(int);
     method @FlaggedApi("android.permission.flags.get_emergency_role_holder_api_enabled") @Nullable @RequiresPermission(android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE) public String getEmergencyRoleHolder(int);
     method @Nullable public String getSmsRoleHolder(int);

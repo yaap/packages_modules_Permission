@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> демейки навигация колдонмоңуз катары коюлсунбу?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Уруксаттардын кереги жок"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> билдирмелериңизди көрүп, телефонуңуздун, SMS билдирүүлөрүңүздүн, байланыштырыңыздын жана жылнаамаңыздын уруксаттарын пайдалана алат."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> билдирмелериңизди көрүп, колдонмолоруңузду туташкан түзмөктө иштете алат."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Бул кызмат телефонуңуздагы сүрөттөрдү, медиа файлдарды жана билдирмелерди башка түзмөктөр менен бөлүшөт."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Демейки кыска жазуу колдонмосу"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Кыска жазуулар колдонмосу"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Түзмөгүңүздө кыска жазууларды терүү мүмкүнчүлүгүн берген колдонмолор"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Телефонуңузду текшериңиз"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Телефонго туташкан жок"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Дагы аракет кыласызбы?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Агенттер"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Маалыматтарга кирип же колдонмолордо чара көрө алган агенттер"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Агенттер"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Бул түзмөктө агенттердин кирүү мүмкүнчүлүгүн тескөө"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Агент колдонмолор жеткиликтүү эмес"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Бул функцияны күйгүзүү үчүн түзмөгүңүздө агент колдонмосун орнотуңуз"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Колдонмого кирүү"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Бул агент сиз үчүн маалымат алуу жана чара көрүү үчүн кире алган колдонмолор жана параметрлер"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> колдонмосуна кире алган колдонмолор жок"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Тутум"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Колдонмолор"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Агенттин кирүү мүмкүнчүлүгү"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Бул колдонмодо маалымат көрүп жана аракет аткара алган агенттер"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Түзмөктүн параметрлери"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> үчүн агент болуп дайындалсынбы?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Маалыматты алып жана сиздин атыңыздан аракеттерди аткаруу үчүн бул агент <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> иштете алат"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Ооба"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Тыюу салуу"</string>
 </resources>

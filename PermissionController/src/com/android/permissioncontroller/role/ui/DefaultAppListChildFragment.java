@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyResources.Strings.DefaultAppSettings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.permission.flags.Flags;
@@ -37,7 +38,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.role.UserPackage;
@@ -148,7 +148,7 @@ public class DefaultAppListChildFragment<PF extends PreferenceFragmentCompat
         addManageDomainUrlsPreference(preferenceScreen, oldPreferences, context);
         if (hasWorkProfile && !workRoleItems.isEmpty()) {
             String defaultWorkTitle;
-            if (SdkLevel.isAtLeastV() && Flags.useProfileLabelsForDefaultAppSectionTitles()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
                 defaultWorkTitle = Utils.getProfileLabel(mViewModel.getWorkProfile(), context);
             } else {
                 defaultWorkTitle = context.getString(R.string.default_apps_for_work);
@@ -161,7 +161,7 @@ public class DefaultAppListChildFragment<PF extends PreferenceFragmentCompat
         }
         if (hasPrivateProfile && !privateRoleItems.isEmpty()) {
             String privateTitle;
-            if (SdkLevel.isAtLeastV() && Flags.useProfileLabelsForDefaultAppSectionTitles()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
                 privateTitle = Utils.getProfileLabel(mViewModel.getPrivateProfile(), context);
             } else {
                 privateTitle = context.getString(R.string.default_apps_for_private_profile);

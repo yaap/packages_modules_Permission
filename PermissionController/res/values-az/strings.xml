@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> defolt naviqasiya tətbiqi olaraq ayarlansın?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"İcazəyə ehtiyac yoxdur"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> bildirişlərinizə, Telefon, SMS, Kontaktlar və Təqvimə giriş əldə edəcək."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> bildirişlərinizə giriş əldə edəcək və tətbiqlərinizi qoşulmuş cihazda yayımlaya biləcək"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Bu xidmət telefonunuzdakı foto, media və bildirişləri digər cihazlarla paylaşır."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Defolt qeyd tətbiqi"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Qeyd tətbiqi"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Cihazınızda qeydlər aparmağa imkan verən tətbiqlər"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Telefonu yoxlayın"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Telefona qoşulmaq olmur"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Təkrar cəhd edilsin?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agentlər"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Tətbiqlərdə məlumatlara daxil ola bilən və ya tədbir görə bilən agentlər"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agentlər"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Bu cihazda agentlər üçün girişi idarə edin"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Heç bir agent tətbiqi əlçatan deyil"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Bu funksiyanı aktivləşdirmək üçün cihazınızda agent tətbiqi quraşdırın"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Tətbiq girişi"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Bu agentin sizin üçün məlumat əldə etmək və tədbir görmək üçün daxil ola biləcəyi tətbiqlər və ayarlar"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> girişi üçün heç bir tətbiq əlçatan deyil"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistem"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Tətbiqlər"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Agent girişi"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Bu tətbiqdə məlumatlara daxil ola bilən və sizin üçün tədbir görə bilən agentlər"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Cihaz ayarları"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> tətbiqinə <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> üçün agent olmağa icazə verilsin?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Bu agent sizin adınıza məlumat əldə etmək və tədbir görmək üçün <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> tətbiqinə daxil ola biləcək"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"İcazə verilsin"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"İcazə verməyin"</string>
 </resources>

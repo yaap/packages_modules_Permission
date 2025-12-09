@@ -90,7 +90,7 @@ public class RoleControllerServiceImpl extends RoleControllerService {
     @WorkerThread
     public boolean onGrantDefaultRoles() {
         if (DEBUG) {
-            Log.i(LOG_TAG, "Granting default roles, user: " + mUser.myUserId());
+            Log.i(LOG_TAG, "Granting default roles, user: " + mUser.getIdentifier());
         }
 
         // Gather the available roles for current user.
@@ -164,7 +164,8 @@ public class RoleControllerServiceImpl extends RoleControllerService {
                     }
                 } else {
                     Log.i(LOG_TAG, "Removing package that no longer qualifies for the role,"
-                            + " package: " + packageName + ", role: " + roleName);
+                            + " package: " + packageName + ", role: " + roleName + ", user: "
+                            + mUser.getIdentifier());
                     removeRoleHolderInternal(role, packageName, false);
                 }
             }
@@ -196,11 +197,13 @@ public class RoleControllerServiceImpl extends RoleControllerService {
                     }
                     if (!role.isPackageQualifiedAsUser(packageName, mUser, mContext)) {
                         Log.e(LOG_TAG, "Default/fallback role holder package doesn't qualify for"
-                                + " the role, package: " + packageName + ", role: " + roleName);
+                                + " the role, package: " + packageName + ", role: " + roleName
+                                + ", user: " + mUser.getIdentifier());
                         continue;
                     }
                     Log.i(LOG_TAG, "Adding package as default/fallback role holder, package: "
-                            + packageName + ", role: " + roleName);
+                            + packageName + ", role: " + roleName + ", user: "
+                            + mUser.getIdentifier());
                     // TODO: If we don't override user here, user might end up missing incoming
                     // phone calls or SMS, so we just keep the old behavior. But overriding user
                     // choice about permission without explicit user action is bad, so maybe we
@@ -214,7 +217,7 @@ public class RoleControllerServiceImpl extends RoleControllerService {
             currentPackageNamesSize = currentPackageNames.size();
             if (role.isExclusive() && currentPackageNamesSize > 1) {
                 Log.w(LOG_TAG, "Multiple packages holding an exclusive role, role: "
-                        + roleName);
+                        + roleName + ", user: " + mUser.getIdentifier());
                 // No good way to determine who should be the only one, just keep the first one.
                 for (int currentPackageNamesIndex = 1;
                         currentPackageNamesIndex < currentPackageNamesSize;
@@ -222,7 +225,8 @@ public class RoleControllerServiceImpl extends RoleControllerService {
                     String packageName = currentPackageNames.get(currentPackageNamesIndex);
 
                     Log.i(LOG_TAG, "Removing extraneous package for an exclusive role, package: "
-                            + packageName + ", role: " + roleName);
+                            + packageName + ", role: " + roleName + ", user: "
+                            + mUser.getIdentifier());
                     removeRoleHolderInternal(role, packageName, false);
                 }
             }
@@ -241,17 +245,17 @@ public class RoleControllerServiceImpl extends RoleControllerService {
 
         Role role = Roles.get(mContext).get(roleName);
         if (role == null) {
-            Log.e(LOG_TAG, "Unknown role: " + roleName);
+            Log.e(LOG_TAG, "Unknown role: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
         if (!role.isAvailableAsUser(mUser, mContext)) {
-            Log.e(LOG_TAG, "Role is unavailable: " + roleName);
+            Log.e(LOG_TAG, "Role is unavailable: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
 
         if (!role.isPackageQualifiedAsUser(packageName, mUser, mContext)) {
             Log.e(LOG_TAG, "Package does not qualify for the role, package: " + packageName
-                    + ", role: " + roleName);
+                    + ", role: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
 
@@ -269,7 +273,7 @@ public class RoleControllerServiceImpl extends RoleControllerService {
 
                 if (Objects.equals(currentPackageName, packageName)) {
                     Log.i(LOG_TAG, "Package is already a role holder, package: " + packageName
-                            + ", role: " + roleName);
+                            + ", role: " + roleName + ", user: " + mUser.getIdentifier());
                     added = true;
                     continue;
                 }
@@ -305,11 +309,11 @@ public class RoleControllerServiceImpl extends RoleControllerService {
 
         Role role = Roles.get(mContext).get(roleName);
         if (role == null) {
-            Log.e(LOG_TAG, "Unknown role: " + roleName);
+            Log.e(LOG_TAG, "Unknown role: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
         if (!role.isAvailableAsUser(mUser, mContext)) {
-            Log.e(LOG_TAG, "Role is unavailable: " + roleName);
+            Log.e(LOG_TAG, "Role is unavailable: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
 
@@ -339,11 +343,11 @@ public class RoleControllerServiceImpl extends RoleControllerService {
 
         Role role = Roles.get(mContext).get(roleName);
         if (role == null) {
-            Log.e(LOG_TAG, "Unknown role: " + roleName);
+            Log.e(LOG_TAG, "Unknown role: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
         if (!role.isAvailableAsUser(mUser, mContext)) {
-            Log.e(LOG_TAG, "Role is unavailable: " + roleName);
+            Log.e(LOG_TAG, "Role is unavailable: " + roleName + ", user: " + mUser.getIdentifier());
             return false;
         }
 
@@ -381,7 +385,7 @@ public class RoleControllerServiceImpl extends RoleControllerService {
         }
         if (!added) {
             Log.e(LOG_TAG, "Failed to add role holder in RoleManager, package: " + packageName
-                    + ", role: " + roleName);
+                    + ", role: " + roleName + ", user: " + mUser.getIdentifier());
         }
         return added;
     }
@@ -392,7 +396,8 @@ public class RoleControllerServiceImpl extends RoleControllerService {
         ApplicationInfo applicationInfo = PackageUtils.getApplicationInfoAsUser(packageName,
                 mUser, mContext);
         if (applicationInfo == null) {
-            Log.w(LOG_TAG, "Cannot get ApplicationInfo for package: " + packageName);
+            Log.w(LOG_TAG, "Cannot get ApplicationInfo for package: " + packageName + ", user: "
+                    + mUser.getIdentifier());
         }
 
         if (applicationInfo != null) {
@@ -403,7 +408,7 @@ public class RoleControllerServiceImpl extends RoleControllerService {
         boolean removed = mUserRoleManager.removeRoleHolderFromController(roleName, packageName);
         if (!removed) {
             Log.e(LOG_TAG, "Failed to remove role holder in RoleManager," + " package: "
-                    + packageName + ", role: " + roleName);
+                    + packageName + ", role: " + roleName + ", user: " + mUser.getIdentifier());
         }
         return removed;
     }
@@ -424,7 +429,8 @@ public class RoleControllerServiceImpl extends RoleControllerService {
         }
 
         if (!cleared) {
-            Log.e(LOG_TAG, "Failed to clear role holders, role: " + roleName);
+            Log.e(LOG_TAG, "Failed to clear role holders, role: " + roleName + ", user: "
+                    + mUser.getIdentifier());
         }
         return cleared;
     }
@@ -444,12 +450,13 @@ public class RoleControllerServiceImpl extends RoleControllerService {
 
         if (!role.isPackageQualifiedAsUser(fallbackPackageName, mUser, mContext)) {
             Log.e(LOG_TAG, "Fallback role holder package doesn't qualify for the role, package: "
-                    + fallbackPackageName + ", role: " + roleName);
+                    + fallbackPackageName + ", role: " + roleName + ", user: "
+                    + mUser.getIdentifier());
             return false;
         }
 
         Log.i(LOG_TAG, "Adding package as fallback role holder, package: " + fallbackPackageName
-                + ", role: " + roleName);
+                + ", role: " + roleName + ", user: " + mUser.getIdentifier());
         // TODO: If we don't override user here, user might end up missing incoming
         // phone calls or SMS, so we just keep the old behavior. But overriding user
         // choice about permission without explicit user action is bad, so maybe we

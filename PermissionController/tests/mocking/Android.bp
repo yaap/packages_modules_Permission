@@ -72,6 +72,7 @@ android_test {
         "androidx.test.ext.junit",
         "kotlinx_coroutines_test",
         "mockito-target-extended-minus-junit4",
+        "safety-center-test-util-lib",
     ],
 
     jni_libs: [

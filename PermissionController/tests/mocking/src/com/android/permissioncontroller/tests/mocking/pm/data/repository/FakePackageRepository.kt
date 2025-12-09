@@ -26,27 +26,25 @@ class FakePackageRepository(
     private val packages: Map<String, PackageInfoModel> = emptyMap(),
     private val packageAttributions: Map<String, PackageAttributionModel> = emptyMap(),
     private val packagesAndLabels: Map<String, String> = emptyMap(),
+    private val packageIcons: Map<String, Drawable> = emptyMap(),
+    private val settingsPackageName: String? = null,
 ) : PackageRepository {
-    override fun getPackageLabel(packageName: String, user: UserHandle): String {
-        return packagesAndLabels[packageName] ?: packageName
-    }
+    override fun getPackageLabel(packageName: String, user: UserHandle): String =
+        packagesAndLabels[packageName] ?: packageName
 
-    override fun getBadgedPackageIcon(packageName: String, user: UserHandle): Drawable? {
-        return null
-    }
+    override fun getBadgedPackageIcon(packageName: String, user: UserHandle): Drawable? =
+        packageIcons[packageName]
 
     override suspend fun getPackageInfo(
         packageName: String,
         user: UserHandle,
-        flags: Int
-    ): PackageInfoModel? {
-        return packages[packageName]
-    }
+        flags: Int,
+    ): PackageInfoModel? = packages[packageName]
 
     override suspend fun getPackageAttributionInfo(
         packageName: String,
-        user: UserHandle
-    ): PackageAttributionModel? {
-        return packageAttributions[packageName]
-    }
+        user: UserHandle,
+    ): PackageAttributionModel? = packageAttributions[packageName]
+
+    override fun getSettingsPackageName(user: UserHandle): String? = settingsPackageName
 }

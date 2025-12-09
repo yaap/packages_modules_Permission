@@ -1157,10 +1157,17 @@ class RoleManagerMultiUserTest {
                 getUiDevice().waitForIdle()
                 waitFindObject(
                         By.clickable(true)
+                            .hasDescendant(By.checkable(true).checked(true))
+                            .hasDescendant(By.text(targetAppLabel))
+                    )
+                getUiDevice().waitForIdle()
+                waitFindObject(
+                        By.clickable(true)
                             .hasDescendant(By.checkable(true))
                             .hasDescendant(By.text(NONE_LABEL))
                     )
                     .click()
+                getUiDevice().waitForIdle()
                 waitFindObject(
                     By.clickable(true)
                         .hasDescendant(By.checkable(true).checked(true))

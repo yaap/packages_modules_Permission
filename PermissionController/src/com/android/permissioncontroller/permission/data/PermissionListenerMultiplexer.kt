@@ -25,10 +25,10 @@ object PermissionListenerMultiplexer : PackageManager.OnPermissionsChangedListen
 
     private val app: Application = PermissionControllerApplication.get()
     /**
-     * Map<UID, list of PermissionChangeCallbacks that wish to be informed when permissions are
+     * Map<UID, set of PermissionChangeCallbacks that wish to be informed when permissions are
      * updated for that UID>
      */
-    private val callbacks = mutableMapOf<Int, MutableList<PermissionChangeCallback>>()
+    private val callbacks = mutableMapOf<Int, MutableSet<PermissionChangeCallback>>()
     private val pm = app.applicationContext.packageManager
 
     override fun onPermissionsChanged(uid: Int) {
@@ -45,7 +45,7 @@ object PermissionListenerMultiplexer : PackageManager.OnPermissionsChangedListen
     fun addCallback(uid: Int, callback: PermissionChangeCallback) {
         val wasEmpty = callbacks.isEmpty()
 
-        callbacks.getOrPut(uid, { mutableListOf() }).add(callback)
+        callbacks.getOrPut(uid, { mutableSetOf() }).add(callback)
 
         if (wasEmpty) {
             pm.addOnPermissionsChangeListener(this)

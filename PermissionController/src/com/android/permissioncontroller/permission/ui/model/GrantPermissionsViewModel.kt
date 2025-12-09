@@ -70,6 +70,10 @@ import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_IN_SETTINGS
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_ONE_TIME
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_IGNORED
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__BOTH_PRECISIONS
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__FINE_ONLY
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__COARSE_ONLY
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__UNKNOWN
 import com.android.permissioncontroller.auto.DrivingDecisionReminderService
 import com.android.permissioncontroller.ecm.EnhancedConfirmationStatsLogUtils
 import com.android.permissioncontroller.permission.data.LightAppPermGroupLiveData
@@ -1364,10 +1368,13 @@ class GrantPermissionsViewModel(
      */
     fun logClickedButtons(
         groupName: String?,
-        selectedPrecision: Int,
         clickedButton: Int,
         presentedButtons: Int,
-        isPermissionRationaleShown: Boolean
+        isPermissionRationaleShown: Boolean,
+        prompt: Prompt,
+        initialLocationPrecision: Int = 0,
+        selectedLocationPrecision: Int = 0,
+        locationAccuracyButtonClicked: Boolean = false
     ) {
         if (groupName == null) {
             return
@@ -1395,18 +1402,34 @@ class GrantPermissionsViewModel(
             clickedButton,
             sessionId,
             packageInfo.targetSdkVersion,
-            selectedPrecision,
-            isPermissionRationaleShown
+            selectedLocationPrecision,
+            isPermissionRationaleShown,
+            initialLocationPrecision,
+            getLocationPromptType(prompt),
+            locationAccuracyButtonClicked
         )
         Log.i(
             LOG_TAG,
             "Logged buttons presented and clicked permissionGroupName=" +
-                "$groupName uid=${packageInfo.uid} selectedPrecision=$selectedPrecision " +
+                "$groupName uid=${packageInfo.uid} " +
                 "package=$packageName presentedButtons=$presentedButtons " +
                 "clickedButton=$clickedButton isPermissionRationaleShown=" +
                 "$isPermissionRationaleShown sessionId=$sessionId " +
-                "targetSdk=${packageInfo.targetSdkVersion}"
+                "targetSdk=${packageInfo.targetSdkVersion} " +
+                "prompt=$prompt initialLocationPrecision=$initialLocationPrecision " +
+                "selectedLocationPrecision=$selectedLocationPrecision " +
+                "locationAccuracyButtonClicked= $locationAccuracyButtonClicked"
         )
+    }
+
+    private fun getLocationPromptType(prompt: Prompt): Int {
+        return when (prompt) {
+            Prompt.LOCATION_TWO_BUTTON_COARSE_HIGHLIGHT,
+            Prompt.LOCATION_TWO_BUTTON_FINE_HIGHLIGHT -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__BOTH_PRECISIONS
+            Prompt.LOCATION_COARSE_ONLY -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__COARSE_ONLY
+            Prompt.LOCATION_FINE_UPGRADE -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__FINE_ONLY
+            else -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__UNKNOWN
+        }
     }
 
     /** Use the autoGrantNotifier to notify of auto-granted permissions. */

@@ -40,8 +40,10 @@ import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -53,6 +55,7 @@ import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterViewModel;
 import com.android.settingslib.widget.GroupSectionDividerMixin;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.shape.AbsoluteCornerSize;
@@ -89,6 +92,8 @@ public class IssueCardPreference extends Preference
             PositionInCardList positionInCardList) {
         super(context);
         setLayoutResource(R.layout.preference_issue_card);
+        // The root view of this preference is not selectable, while child views are.
+        setSelectable(false);
 
         mSafetyCenterViewModel = requireNonNull(safetyCenterViewModel);
         mIssue = requireNonNull(issue);
@@ -195,10 +200,20 @@ public class IssueCardPreference extends Preference
             case LIST_START_END:
             case LIST_START_CARD_END:
                 return context.getResources()
-                        .getDimensionPixelSize(
-                                mIsDismissed ? R.dimen.sc_card_margin : R.dimen.sc_spacing_large);
+                        .getDimensionPixelSize(getListStartMarginTopResId(context));
             default:
                 return position.getTopMargin(context);
+        }
+    }
+
+    @DimenRes
+    private int getListStartMarginTopResId(Context context) {
+        if (mIsDismissed) {
+            return R.dimen.sc_card_margin;
+        } else if (SettingsThemeHelper.isExpressiveTheme(context)) {
+            return R.dimen.sc_spacing_xxsmall;
+        } else {
+            return R.dimen.sc_spacing_large;
         }
     }
 
@@ -470,7 +485,9 @@ public class IssueCardPreference extends Preference
 
         public void buildAndAddToView(LinearLayout buttonList) {
             MaterialButton button = new MaterialButton(mContextThemeWrapper, null, getStyle());
-            if (SdkLevel.isAtLeastU() && !mIsLargeScreen) {
+            if (SdkLevel.isAtLeastU()
+                    && !mIsLargeScreen
+                    && !SettingsThemeHelper.isExpressiveTheme(mContext)) {
                 configureGroupStyleCorners(button);
             }
             setButtonColors(button);
@@ -548,14 +565,21 @@ public class IssueCardPreference extends Preference
                 return;
             }
 
-            int marginRes =
-                    mIsLargeScreen
-                            ? R.dimen.sc_action_button_list_margin_large_screen
-                            : R.dimen.sc_action_button_list_margin;
-            int margin = mContext.getResources().getDimensionPixelSize(marginRes);
+            int margin = mContext.getResources().getDimensionPixelSize(getButtonSpaceMarginRes());
             Space space = new Space(mContext);
             space.setLayoutParams(new ViewGroup.LayoutParams(margin, margin));
             buttonList.addView(space);
+        }
+
+        @DimenRes
+        private int getButtonSpaceMarginRes() {
+            if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+                return R.dimen.sc_spacing_xsmall;
+            }
+
+            return mIsLargeScreen
+                    ? R.dimen.sc_action_button_list_margin_large_screen
+                    : R.dimen.sc_action_button_list_margin;
         }
 
         private int getStyle() {
@@ -568,6 +592,21 @@ public class IssueCardPreference extends Preference
                         ContextCompat.getColorStateList(
                                 mContext,
                                 getPrimaryButtonColorFromSeverity(mIssue.getSeverityLevel())));
+                if (SettingsThemeHelper.isExpressiveTheme(mContext)
+                        && mIssue.getSeverityLevel()
+                                == SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION) {
+                    // Resolve theme attribute for Recommend text color. This differs from
+                    // the standard textColorScActionButton in light theme so must be configured
+                    // manually here.
+                    TypedValue typedValue = new TypedValue();
+                    mContext.getTheme()
+                            .resolveAttribute(
+                                    R.attr.textColorScActionButtonRecommend,
+                                    typedValue,
+                                    /* resolveRefs= */ true);
+                    button.setTextColor(
+                            AppCompatResources.getColorStateList(mContext, typedValue.resourceId));
+                }
             } else {
                 button.setStrokeColor(
                         ContextCompat.getColorStateList(

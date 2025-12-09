@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> ඔබගේ පෙරනිමි සංචාලන යෙදුම ලෙස සකසන්නද?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"අවසර අවශ්‍ය නැත"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> ඔබගේ දැනුම්දීම් සමඟ අන්තර්ක්‍රියා කිරීමට සහ ඔබගේ දුරකථනය, කෙටි පණිවුඩ, සම්බන්ධතා සහ දින දර්ශන අවසර වෙත ප්‍රවේශ වීමට ඉඩ දෙනු ඇත."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> හට ඔබගේ දැනුම්දීම් සමඟ අන්තර්ක්‍රියා කිරීමට සහ ඔබගේ යෙදුම් සම්බන්ධිත උපාංගයට ප්‍රවාහ කිරීමට ඉඩ දෙනු ඇත."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"මෙම සේවාව ඔබගේ ඡායාරූප, මාධ්‍ය සහ දැනුම්දීම් ඔබගේ දුරකථනයෙන් වෙනත් උපාංග වෙත බෙදා ගනී."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"පෙරනිමි සටහන් යෙදුම"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"සටහන් යෙදුම"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"ඔබේ උපාංගයෙහි සටහන් ගැනීමට ඔබට ඉඩ දෙන යෙදුම්"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"ඔබේ දුරකථනය පරීක්ෂා කරන්න"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"ඔබේ දුරකථනය වෙත ළඟා විය නොහැකි විය"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"යළි උත්සාහ කරන්න ද?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"නියෝජිතයින්"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"යෙදුම්වල තතු වෙත ප්‍රවේශ විය හැකි හෝ ක්‍රියාමාර්ග ගත හැකි නියෝජිතයන්"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"නියෝජිතයින්"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"මෙම උපාංගයෙහි නියෝජිතයින් සඳහා ප්‍රවේශය කළමනාකරණය කරන්න"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"නියෝජිත යෙදුම් නොමැත"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"මෙම විශේෂාංගය සබල කිරීමට ඔබේ උපාංගයේ නියෝජිත යෙදුමක් ස්ථාපනය කරන්න"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"යෙදුම් ප්‍රවේශය"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"ඔබ වෙනුවෙන් තොරතුරු ලබා ගැනීමට සහ ක්‍රියාමාර්ග ගැනීමට මෙම නියෝජිතයාට ප්‍රවේශ විය හැකි යෙදුම් සහ සැකසීම්"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> ප්‍රවේශය සඳහා යෙදුම් නොමැත"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"පද්ධතිය"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"යෙදුම්"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"නියෝජිත ප්‍රවේශය"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"මෙම යෙදුම තුළ තතු වෙත ප්‍රවේශ විය හැකි සහ ඔබ වෙනුවෙන් ක්‍රියාමාර්ග ගත හැකි නියෝජිතයන්"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"උපාංග සැකසීම්"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> හට <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> සඳහා නියෝජිතයෙකු වීමට ඉඩ දෙන්න ද?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"මෙම නියෝජිතයාට තතු ලබා ගැනීමට සහ ඔබ වෙනුවෙන් ක්‍රියාමාර්ග ගැනීමට <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> වෙත ප්‍රවේශ විය හැක"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"ඉඩ දෙන්න"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"ඉඩ නොදෙන්න"</string>
 </resources>

@@ -131,8 +131,8 @@
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"अन्य अनुमतियां देखें"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>, और अन्य <xliff:g id="NUM">%3$s</xliff:g> अनुमतियां"</string>
-    <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"पिछले 24 घंटे में, ऐप्लिकेशन ने आपकी <xliff:g id="PERMGROUP">%1$s</xliff:g> का इस्तेमाल कब किया, इसकी टाइमलाइन"</string>
-    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"पिछले सात दिनों में, ऐप्लिकेशन ने आपकी <xliff:g id="PERMGROUP">%1$s</xliff:g> का इस्तेमाल कब किया, इसकी टाइमलाइन"</string>
+    <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"पिछले 24 घंटे में, ऐप्लिकेशन ने <xliff:g id="PERMGROUP">%1$s</xliff:g> का इस्तेमाल कब-कब किया, इसकी टाइमलाइन"</string>
+    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"किन ऐप्लिकेशन ने पिछले सात दिनों में कब-कब <xliff:g id="PERMGROUP">%1$s</xliff:g> का इस्तेमाल किया, इसकी टाइमलाइन"</string>
     <string name="permission_usage_access_dialog_subtitle" msgid="4171772805196955753">"जब इस ऐप्लिकेशन ने आपकी <xliff:g id="PERMGROUP">%1$s</xliff:g> अनुमति का इस्तेमाल किया"</string>
     <string name="permission_usage_access_dialog_learn_more" msgid="7121468469493184613">"ज़्यादा जानें"</string>
     <string name="learn_more_content_description" msgid="8673699744544502539">"<xliff:g id="PERMGROUP">%1$s</xliff:g> के बारे में ज़्यादा जानें"</string>
@@ -196,20 +196,20 @@
     <string name="precise_image_description" msgid="6349638632303619872">"सटीक जगह"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"अनुमानित जगह"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"जगह की सटीक जानकारी का इस्तेमाल करें"</string>
-    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"जगह की सटीक जानकारी देने की सुविधा बंद होने पर, ऐप्लिकेशन आपकी जगह की अनुमानित जानकारी को ऐक्सेस कर सकते हैं"</string>
-    <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g> की अनुमति"</string>
-    <string name="app_permission_header" msgid="2951363137032603806">"इस ऐप्लिकेशन को <xliff:g id="PERM">%1$s</xliff:g> ऐक्सेस करने की अनुमति दें"</string>
+    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"सटीक जानकारी की सुविधा बंद होने पर, ऐप्लिकेशन आपकी जगह की अनुमानित जानकारी को ऐक्सेस कर सकते हैं"</string>
+    <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g> ऐक्सेस करने की अनुमति"</string>
+    <string name="app_permission_header" msgid="2951363137032603806">"इस ऐप्लिकेशन को <xliff:g id="PERM">%1$s</xliff:g> ऐक्सेस करने की अनुमति दें:"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> पर इस ऐप्लिकेशन के लिए <xliff:g id="PERM">%1$s</xliff:g> का ऐक्सेस"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"<xliff:g id="APP">%1$s</xliff:g> को मिली सभी अनुमतियां देखें"</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"इस अनुमति वाले सभी ऐप्लिकेशन देखें"</string>
     <string name="app_permission_info_button" msgid="8973692370208562556">"जानकारी"</string>
     <string name="app_permission_settings_button" msgid="4582916817451973752">"सेटिंग"</string>
     <string name="assistant_mic_label" msgid="1011432357152323896">"असिस्टेंट माइक्रोफ़ोन के इस्तेमाल से जुड़ा डेटा दिखाएं"</string>
-    <string name="unused_apps_category_title" msgid="2988455616845243901">"इस्तेमाल न हो रहे ऐप के लिए सेटिंग"</string>
+    <string name="unused_apps_category_title" msgid="2988455616845243901">"इस्तेमाल नहीं हो रहे ऐप के लिए सेटिंग"</string>
     <string name="auto_revoke_label" msgid="5068393642936571656">"ऐप्लिकेशन का इस्तेमाल न होने पर अनुमतियां हटाएं"</string>
     <string name="unused_apps_label" msgid="2595428768404901064">"अनुमतियां हटाएं और जगह खाली करें"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"इस्तेमाल न होने पर ऐप गतिविधि रोकें"</string>
-    <string name="unused_apps_label_v3" msgid="693340578642156657">"इस्तेमाल नहीं हो रहा ऐप्लिकेशन मैनेज करें"</string>
+    <string name="unused_apps_label_v3" msgid="693340578642156657">"इस्तेमाल नहीं हो रहा ऐप मैनेज करें"</string>
     <string name="unused_apps_summary" msgid="8839466950318403115">"ऐप्लिकेशन की अनुमतियां हटाएं, डिवाइस में कुछ समय के लिए रहने वाली फ़ाइलें मिटाएं, और सूचनाएं रोकें"</string>
     <string name="unused_apps_summary_v2" msgid="5011313200815115802">"ऐप्लिकेशन की अनुमतियां हटाएं, डिवाइस में कुछ समय के लिए रहने वाली फ़ाइलें मिटाएं, सूचनाएं रोकें, और ऐप्लिकेशन संग्रहित करें"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"अगर इस ऐप्लिकेशन का इस्तेमाल कुछ महीनों तक नहीं किया गया, तो इसे दी गई अनुमतियां हटा दी जाएंगी. ऐसा आपके डेटा को सुरक्षित रखने के लिए किया जाएगा."</string>
@@ -404,15 +404,13 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> को डिफ़ॉल्ट नेविगेशन ऐप्लिकेशन के तौर पर सेट करें?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"अनुमति की ज़रूरत नहीं है"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> आपकी सूचनाओं को पढ़ सकेगा और उन पर कार्रवाई कर पाएगा. साथ ही, यह आपके फ़ोन, एसएमएस, संपर्कों, और कैलेंडर की अनुमतियों को भी ऐक्सेस कर पाएगा."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> आपकी सूचनाओं पर कार्रवाई कर पाएगा. साथ ही, यह आपके कनेक्ट किए गए डिवाइस पर, आपके ऐप्लिकेशन का कॉन्टेंट चला पाएगा."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"यह सेवा आपके फ़ोन की फ़ोटो, मीडिया, और सूचनाओं को दूसरे डिवाइसों पर शेयर करती है."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"नोट लिखने का डिफ़ॉल्ट ऐप्लिकेशन"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"नोट लिखने के लिए ऐप्लिकेशन"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"आपके डिवाइस पर नोट लिखने की सुविधा देने वाले ऐप्लिकेशन"</string>
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"नोट"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"डिफ़ॉल्ट वॉलेट ऐप्लिकेशन"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"वॉलेट ऐप्लिकेशन"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"वॉलेट ऐप्लिकेशन में, अलग-अलग तरह के लेन-देन में इस्तेमाल होने वाली चीज़ों को स्टोर किया जा सकता है. जैसे, क्रेडिट कार्ड, लॉयल्टी कार्ड, कार की डिजिटल कुंजी वगैरह."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"वॉलेट ऐप्लिकेशन में, ऐक्सेस और लेन-देन के लिए इस्तेमाल होने वाले आइटम स्टोर किए जा सकते हैं. जैसे, क्रेडिट कार्ड, लॉयल्टी कार्ड, फ़ोन से कार खोलने या चालू करने की कुंजी वगैरह."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"क्या <xliff:g id="APP_NAME">%1$s</xliff:g> को अपने डिफ़ॉल्ट वॉलेट ऐप्लिकेशन के तौर पर सेट करना है?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"अनुमति लेना ज़रूरी नहीं है"</string>
     <string name="request_role_current_default" msgid="738722892438247184">"मौजूदा डिफ़ॉल्ट"</string>
@@ -484,7 +482,7 @@
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; के लिए जगह की जानकारी का ऐक्सेस बदलना चाहते हैं?"</string>
     <string name="permgroupupgraderequest_device_aware_location" msgid="1812338666887726191">"क्या &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; के लिए, &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; की जगह की जानकारी का ऐक्सेस बदलना है?"</string>
     <string name="permgroupupgraderequestdetail_location" msgid="1550899076845189165">"यह ऐप्लिकेशन आपके डिवाइस की जगह की जानकारी हर समय ऐक्सेस करना चाहता है. उस समय भी जब आप इसका इस्तेमाल न कर रहे हों. "<annotation id="link">"सेटिंग में इसकी अनुमति दें."</annotation></string>
-    <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"क्या आपको &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; को आस-पास मौजूद डिवाइसों को खोजने, उनसे कनेक्ट करने, और उनकी जगह की जानकारी का पता लगाने की अनुमति देनी है?"</string>
+    <string name="permgrouprequest_nearby_devices" msgid="2272829282660436700">"क्या &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; को आस-पास मौजूद डिवाइस खोजने, उनसे कनेक्ट होने, और उनकी दूरी का पता लगाने की अनुमति देनी है?"</string>
     <string name="permgrouprequest_device_aware_nearby_devices" msgid="5293478278408567442">"क्या &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; को &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; के आस-पास मौजूद डिवाइसों को खोजने, उनसे कनेक्ट करने, और उनकी जगह की जानकारी का पता लगाने की अनुमति देनी है?"</string>
     <string name="permgroupupgraderequestdetail_nearby_devices" msgid="6877531270654738614">"क्या आप &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; को आस-पास मौजूद डिवाइसों को खोजने, उनसे कनेक्ट करने, और उनकी जगह की जानकारी का पता लगाने की अनुमति देना चाहते हैं? "<annotation id="link">"सेटिंग में जाकर अनुमति दें."</annotation></string>
     <string name="permgrouprequest_fineupgrade" msgid="2334242928821697672">"क्या <xliff:g id="APP_NAME">&lt;b&gt;%1$s&lt;/b&gt;</xliff:g> आपकी जगह की अनुमानित जानकारी के बजाय सटीक जानकारी ऐक्सेस करे?"</string>
@@ -682,7 +680,7 @@
     <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"आपके डिवाइस और डेटा को सुरक्षित रखने के लिए, यह सेटिंग ब्लॉक की गई है. <xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>धोखाधड़ी करने वाले लोग, आपको किसी नए सोर्स से अनजान ऐप्लिकेशन इंस्टॉल करने के लिए कहकर आपके डिवाइस पर नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल कराने की कोशिश कर सकते हैं."</string>
+</xliff:g>धोखाधड़ी करने वाले लोग, आपके डिवाइस को नुकसान पहुंचाने वाले अनजान ऐप्लिकेशन, किसी नए सोर्स से इंस्टॉल कराने की कोशिश कर सकते हैं."</string>
     <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>धोखाधड़ी करने वाले लोग, आपके डिवाइस में मौजूद किसी ऐप्लिकेशन को ऐक्सेस करने की अनुमति लेकर, आपके डिवाइस को कंट्रोल करने की कोशिश कर सकते हैं."</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"अपना फ़ोन देखें"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"आपके फ़ोन से कनेक्ट नहीं किया जा सका"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"फिर से कोशिश करें?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"एजेंट"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"ऐसे एजेंट जो ऐप्लिकेशन में जानकारी ऐक्सेस कर सकते हैं या कार्रवाइयां कर सकते हैं"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"एजेंट"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"इस डिवाइस पर एजेंट का ऐक्सेस मैनेज करें"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"कोई एजेंट ऐप्लिकेशन उपलब्ध नहीं है"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"इस सुविधा को चालू करने के लिए, अपने डिवाइस पर एजेंट ऐप्लिकेशन इंस्टॉल करें"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"ऐप्लिकेशन का ऐक्सेस"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"वे ऐप्लिकेशन और सेटिंग जिन्हें यह एजेंट ऐक्सेस कर सकता है, ताकि यह आपके लिए जानकारी हासिल कर सके और कार्रवाइयां कर सके"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> को ऐक्सेस करने के लिए, कोई ऐप्लिकेशन उपलब्ध नहीं है"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"सिस्टम"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ऐप्लिकेशन"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"एजेंट को मिलने वाला ऐक्सेस"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"वे एजेंट जो इस ऐप्लिकेशन में आपकी जानकारी ऐक्सेस कर सकते हैं और आपकी ओर से कार्रवाइयां कर सकते हैं"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"डिवाइस की सेटिंग"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"क्या <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> को <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> के लिए एजेंट के तौर पर काम करने की अनुमति देनी है?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"यह एजेंट, <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> को ऐक्सेस करेगा, ताकि यह आपको जानकारी दे सके और आपके लिए कार्रवाइयां कर सके"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"अनुमति दें"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"अनुमति न दें"</string>
 </resources>

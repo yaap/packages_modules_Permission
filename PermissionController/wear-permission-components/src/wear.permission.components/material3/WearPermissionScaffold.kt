@@ -15,7 +15,6 @@
  */
 package com.android.permissioncontroller.wear.permission.components.material3
 
-import android.graphics.drawable.Drawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.layout.Box
@@ -29,10 +28,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -51,7 +48,6 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberTransformingLazyColumnState
 import androidx.wear.compose.material3.AppScaffold
 import androidx.wear.compose.material3.CircularProgressIndicator
-import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.IconButtonDefaults
 import androidx.wear.compose.material3.ListHeader
 import androidx.wear.compose.material3.MaterialTheme
@@ -62,7 +58,6 @@ import androidx.wear.compose.material3.TimeText
 import com.android.permissioncontroller.wear.permission.components.AnnotatedText
 import com.android.permissioncontroller.wear.permission.components.ListScopeWrapper
 import com.android.permissioncontroller.wear.permission.components.material2.Wear2Scaffold
-import com.android.permissioncontroller.wear.permission.components.rememberDrawablePainter
 import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion.MATERIAL2_5
@@ -145,19 +140,18 @@ fun WearPermissionScaffold(
     showTimeText: Boolean,
     title: String?,
     subtitle: CharSequence?,
-    image: Any?,
+    imageBuilder: WearPermissionIconBuilder?,
     isLoading: Boolean,
     content: ListScopeWrapper.() -> Unit,
     titleTestTag: String? = null,
     subtitleTestTag: String? = null,
 ) {
-
     if (materialUIVersion == MATERIAL2_5) {
         Wear2Scaffold(
             showTimeText,
             title,
             subtitle,
-            image,
+            imageBuilder,
             isLoading,
             { content.invoke(ScalingScopeConverter(this)) },
             titleTestTag,
@@ -169,7 +163,7 @@ fun WearPermissionScaffold(
             showTimeText = showTimeText,
             title = title,
             subtitle = subtitle,
-            image = image,
+            imageBuilder = imageBuilder,
             isLoading = isLoading,
             content = content,
             titleTestTag = titleTestTag,
@@ -184,7 +178,7 @@ private fun WearPermissionScaffoldInternal(
     showTimeText: Boolean,
     title: String?,
     subtitle: CharSequence?,
-    image: Any?,
+    imageBuilder: WearPermissionIconBuilder?,
     isLoading: Boolean,
     content: ListScopeWrapper.() -> Unit,
     titleTestTag: String? = null,
@@ -222,7 +216,7 @@ private fun WearPermissionScaffoldInternal(
                             listState = listState,
                             title = title,
                             subtitle = subtitle,
-                            image = image,
+                            imageBuilder = imageBuilder,
                             content = content,
                             titleTestTag = titleTestTag,
                             subtitleTestTag = subtitleTestTag,
@@ -241,7 +235,7 @@ private fun BoxScope.LazyColumnView(
     listState: ScrollableState,
     title: String?,
     subtitle: CharSequence?,
-    image: Any?,
+    imageBuilder: WearPermissionIconBuilder?,
     content: ListScopeWrapper.() -> Unit,
     titleTestTag: String? = null,
     subtitleTestTag: String? = null,
@@ -253,19 +247,18 @@ private fun BoxScope.LazyColumnView(
             screenWidth = screenWidth,
             screenHeight = screenHeight,
         )
-    val painterImage = image?.let { painterFromImage(image = image) }
     val scrollContentPadding =
         if (showTimeText) {
             paddingDefaults.scrollContentPadding
         } else {
-            paddingDefaults.scrollContentPaddingForDialogs(painterImage == null)
+            paddingDefaults.scrollContentPaddingForDialogs(imageBuilder == null)
         }
 
     fun BoxScope.scrollingViewContent(scopeWrapper: ListScopeWrapper) {
         with(scopeWrapper) {
             iconItem(
-                painter = painterImage,
-                modifier = Modifier.size(IconButtonDefaults.LargeIconSize),
+                imageBuilder =
+                    imageBuilder?.modifier(Modifier.size(IconButtonDefaults.LargeIconSize))
             )
             titleItem(
                 text = title,
@@ -331,15 +324,6 @@ private fun wearPermissionScrollIndicator(
     }
 }
 
-@Composable
-private fun painterFromImage(image: Any?): Painter? {
-    return when (image) {
-        is Int -> painterResource(id = image)
-        is Drawable -> rememberDrawablePainter(image)
-        else -> null
-    }
-}
-
 private fun Modifier.optionalTestTag(tag: String?): Modifier {
     if (tag == null) {
         return this
@@ -347,13 +331,8 @@ private fun Modifier.optionalTestTag(tag: String?): Modifier {
     return this then testTag(tag)
 }
 
-private fun ListScopeWrapper.iconItem(painter: Painter?, modifier: Modifier = Modifier) =
-    painter?.let {
-        item {
-            val iconColor = WearPermissionButtonStyle.Secondary.material3ButtonColors().iconColor
-            Icon(painter = it, contentDescription = null, modifier = modifier, tint = iconColor)
-        }
-    }
+private fun ListScopeWrapper.iconItem(imageBuilder: WearPermissionIconBuilder?) =
+    imageBuilder?.let { item { imageBuilder.buildAsImage() } }
 
 private fun ListScopeWrapper.titleItem(
     text: String?,
@@ -378,6 +357,7 @@ private fun ListScopeWrapper.titleItem(
                     text = it,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.optionalTestTag(testTag),
+                    maxLines = Int.MAX_VALUE,
                     style = style.copy(hyphens = Hyphens.Auto, lineHeight = 1.1.em),
                 )
             }

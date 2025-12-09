@@ -1227,12 +1227,6 @@
     <!-- Description for the watch profile role. [CHAR LIMIT=NONE] -->
     <string name="role_watch_description"><xliff:g id="app_name" example="Wear">%1$s</xliff:g> will be allowed to interact with your notifications and access your Phone, SMS, Contacts and Calendar permissions.</string>
 
-    <!-- Description for the app streaming profile role. [CHAR LIMIT=NONE] -->
-    <string name="role_app_streaming_description"><xliff:g id="app_name" example="Cross-Device Communciation">%1$s</xliff:g> will be allowed to interact with your notifications and stream your apps to the connected device.</string>
-
-    <!-- Description for the companion device computer profile role. [CHAR LIMIT=NONE] -->
-    <string name="role_companion_device_computer_description">This service shares your photos, media, and notifications from your phone to other devices.</string>
-
     <!-- Label for the NOTES role. [CHAR LIMIT=30] -->
     <string name="role_notes_label">Default notes app</string>
     <!-- Short label for the NOTES role. [CHAR LIMIT=30] -->
@@ -2082,4 +2076,57 @@
 
     <!-- Text asking the user if they want to retry connecting to the paired phone -->
     <string name="wear_phone_connection_should_retry">Retry?</string>
+
+    <!-- START APP FUNCTION SETTINGS-->
+
+    <!-- Title for App Function Access Settings page entry point from Safety Center. Clicking on the
+     entry will navigate to App Function Access Settings page, which displays apps which implement
+     App Function agents. [CHAR LIMIT=70] -->
+    <string name="app_function_access_settings_title" description="The title of the entry for App Function Access Settings">Agents</string>
+    <!-- Summary for App Function Access Settings page entry point in Safety Center. Clicking on the
+     entry will navigate to App Function Access Settings page, which displays apps which implement
+     App Function agents. [CHAR LIMIT=130] -->
+    <string name="app_function_access_settings_summary" description="The summary of the entry for App Function Access Settings, which describes the page contents">Agents that can access info or take actions in apps</string>
+
+    <!-- Title for App Function Agent List Settings page. [CHAR LIMIT=70] -->
+    <string name="app_function_agent_list_title" description="Title for App Function Agent List Settings page">Agents</string>
+    <!-- Summary for App Function Agent List Settings page. [CHAR LIMIT=130] -->
+    <string name="app_function_agent_list_summary" description="The summary of the App Function Agent list Settings, which describes the page contents">Manage access for agents on this device</string>
+    <!-- Title when there are no agent apps available for app function agent list [CHAR LIMIT=50] -->
+    <string name="app_function_agent_list_empty_title" description="Title when there are no agent apps available for app function agent list">No agent apps available</string>
+    <!-- Summary when there are no agent apps available for app function agent list [CHAR LIMIT=130] -->
+    <string name="app_function_agent_list_empty_summary" description="Title when there are no agent apps available for app function agent list">Install an agent app on your device to enable this feature</string>
+
+    <!-- Title for App Function Agent Access Settings page. [CHAR LIMIT=70] -->
+    <string name="app_function_agent_access_title" description="Title for App Function Agent List Settings page">App access</string>
+    <!-- Summary for App Function Agent Access Settings page. [CHAR LIMIT=130] -->
+    <string name="app_function_agent_access_summary" description="The summary of the App Function Agent Access Settings, which describes the page contents">Apps and settings this agent can access to get info and take actions for you</string>
+    <!-- Label when there are no apps available for app function target list [CHAR LIMIT=30] -->
+    <string name="app_function_agent_access_app_targets_empty_title" description="Label when there are no target apps available for app function agent access">No apps are available for <xliff:g id="app_name" example="Example Agent App">%1$s</xliff:g> access</string>
+    <!-- Category title for system apps list section of Agent Access Settings page [CHAR LIMIT=30] -->
+    <string name="app_function_agent_access_system_targets_category_title" description="Category title for system apps list section of Agent Access Settings page">System</string>
+    <!-- Category title for target apps list section of Agent Access Settings page [CHAR LIMIT=30] -->
+    <string name="app_function_agent_access_app_targets_category_title" description="Category title for target apps list section of Agent Access Settings page">Apps</string>
+
+    <!-- Title for App Function Target Access Settings page. [CHAR LIMIT=70] -->
+    <string name="app_function_target_access_title">Agent access</string>
+    <!-- Summary for App Function Target Access Settings page. [CHAR LIMIT=130] -->
+    <string name="app_function_target_access_summary" description="The summary of the App Function Target Access Settings, which describes the page contents">Agents that can access info and take actions for you in this app</string>
+
+    <!-- Device settings target title [CHAR LIMIT=30] -->
+    <string name="app_function_device_settings_target_title" description="Target app title used for Device Settings">Device Settings</string>
+    <!-- END APP FUNCTION SETTINGS -->
+
+    <!-- START REQUEST APP FUNCTION DIALOG -->
+
+    <!-- Label for the title of request app function access dialog [CHAR LIMIT=20]-->
+    <string name="request_app_function_access_dialog_title">Allow <xliff:g id="agent_app_name" example="Example Agent App">%1$s</xliff:g> to be an agent for <xliff:g id="target_app_name" example="Example Target App">%2$s</xliff:g>?</string>
+    <!-- Label for the description of request app function access dialog [CHAR LIMIT=20]-->
+    <string name="request_app_function_access_dialog_description">This agent will be able to access <xliff:g id="target_app_name" example="Example Target App">%2$s</xliff:g> to get info and take actions for you</string>
+    <!-- Label for the allow button for request app function dialog. [CHAR LIMIT=15]  -->
+    <string name="request_app_function_dialog_button_allow">Allow</string>
+    <!-- Label for the deny button for request app function dialog. [CHAR LIMIT=15]  -->
+    <string name="request_app_function_dialog_button_dont_allow">Don\u2019t allow</string>
+
+    <!-- END REQUEST APP FUNCTION DIALOG -->
 </resources>

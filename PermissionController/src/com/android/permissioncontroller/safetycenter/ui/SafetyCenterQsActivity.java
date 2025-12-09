@@ -17,6 +17,7 @@
 package com.android.permissioncontroller.safetycenter.ui;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.permission.PermissionGroupUsage;
 import android.permission.PermissionManager;
@@ -44,8 +45,6 @@ public class SafetyCenterQsActivity extends FragmentActivity
         }
 
         if (SettingsThemeHelper.isExpressiveTheme(this)) {
-            // Safe to set expressive theme here since QS doesn't display vanilla preferences.
-            // See b/377519324.
             setTheme(R.style.Theme_SafetyCenterQsExpressive);
         }
 
@@ -75,9 +74,24 @@ public class SafetyCenterQsActivity extends FragmentActivity
     }
 
     @Override
+    public Resources.Theme getTheme() {
+        Resources.Theme theme = super.getTheme();
+        if (SettingsThemeHelper.isExpressiveTheme(this)) {
+            theme.applyStyle(R.style.ThemeOverlay_SafetyCenterColors_DayNight, /* force= */ true);
+            theme.applyStyle(R.style.ThemeOverlay_SafetyCenter_Expressive, /* force= */ true);
+            theme.applyStyle(
+                    R.style.ThemeOverlay_SafetyCenter_ExpressiveButtons_QuickSettings,
+                    /* force= */ true);
+            theme.applyStyle(R.style.ThemeOverlay_SafetyCenter_ExpressiveColors, /* force= */ true);
+        } else {
+            theme.applyStyle(R.style.ThemeOverlay_SafetyCenterColors_Dark, /* force= */ true);
+        }
+        return theme;
+    }
+
+    @Override
     public boolean isExpressiveDesignEnabled() {
-        // Expressive design is pre-emptively disabled for Safety Center until implementation is
-        // complete.
-        return false;
+        return SettingsThemeHelper.isExpressiveDesignEnabled()
+                && getResources().getBoolean(R.bool.config_enableExpressiveDesignInSafetyCenter);
     }
 }

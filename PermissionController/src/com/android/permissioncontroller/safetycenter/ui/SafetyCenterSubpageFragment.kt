@@ -28,6 +28,7 @@ import com.android.permissioncontroller.safetycenter.ui.SafetyBrandChipPreferenc
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterUiData
 import com.android.safetycenter.resources.SafetyCenterResourcesApk
 import com.android.settingslib.widget.FooterPreference
+import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper
 
 /** A fragment that represents a generic subpage in Safety Center. */
@@ -35,24 +36,40 @@ import com.android.settingslib.widget.SettingsThemeHelper
 class SafetyCenterSubpageFragment : SafetyCenterFragment() {
 
     private lateinit var sourceGroupId: String
-    private lateinit var subpageBrandChip: SafetyBrandChipPreference
-    private lateinit var subpageIllustration: SafetyIllustrationPreference
     private lateinit var subpageIssueGroup: PreferenceGroup
     private lateinit var subpageEntryGroup: PreferenceGroup
     private lateinit var subpageFooter: FooterPreference
+
+    private var subpageIllustration: SafetyIllustrationPreference? = null
+    private var expressiveIllustration: IllustrationPreference? = null
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         super.onCreatePreferences(savedInstanceState, rootKey)
         setPreferencesFromResource(R.xml.safety_center_subpage, rootKey)
         sourceGroupId = requireArguments().getString(SOURCE_GROUP_ID_KEY)!!
 
-        subpageBrandChip = preferenceScreen.findPreference(BRAND_CHIP_KEY)!!
+        val subpageBrandChip =
+            preferenceScreen.findPreference<SafetyBrandChipPreference>(BRAND_CHIP_KEY)!!
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+            preferenceScreen.removePreference(subpageBrandChip)
+        } else {
+            subpageBrandChip.setupListener(requireActivity(), safetyCenterSessionId)
+        }
+
         subpageIllustration = preferenceScreen.findPreference(ILLUSTRATION_KEY)!!
+        expressiveIllustration = preferenceScreen.findPreference(EXPRESSIVE_ILLUSTRATION_KEY)!!
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+            subpageIllustration?.let { preferenceScreen.removePreference(it) }
+            subpageIllustration = null
+        } else {
+            expressiveIllustration?.let { preferenceScreen.removePreference(it) }
+            expressiveIllustration = null
+        }
+
         subpageIssueGroup = preferenceScreen.findPreference(ISSUE_GROUP_KEY)!!
         subpageEntryGroup = preferenceScreen.findPreference(ENTRY_GROUP_KEY)!!
         subpageFooter = preferenceScreen.findPreference(FOOTER_KEY)!!
 
-        subpageBrandChip.setupListener(requireActivity(), safetyCenterSessionId)
         setupIllustration()
         setupFooter()
         maybeRemoveSpacer()
@@ -88,15 +105,23 @@ class SafetyCenterSubpageFragment : SafetyCenterFragment() {
     }
 
     private fun setupIllustration() {
-        val resName = "illustration_${SnakeCaseConverter.fromCamelCase(sourceGroupId)}"
+        val resPrefix =
+            if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+                "illustration_expressive"
+            } else {
+                "illustration"
+            }
+        val resName = "${resPrefix}_${SnakeCaseConverter.fromCamelCase(sourceGroupId)}"
         val context = requireContext()
         val drawable = SafetyCenterResourcesApk(context).getDrawableByName(resName, context.theme)
         if (drawable == null) {
             Log.w(TAG, "$sourceGroupId doesn't have any matching illustration")
-            subpageIllustration.isVisible = false
+            expressiveIllustration?.isVisible = false
+            subpageIllustration?.isVisible = false
         }
 
-        subpageIllustration.illustrationDrawable = drawable
+        expressiveIllustration?.imageDrawable = drawable
+        subpageIllustration?.illustrationDrawable = drawable
     }
 
     private fun setupFooter() {
@@ -124,8 +149,10 @@ class SafetyCenterSubpageFragment : SafetyCenterFragment() {
         val subpageIssues = uiData?.getMatchingIssues(sourceGroupId)
         val subpageDismissedIssues = uiData?.getMatchingDismissedIssues(sourceGroupId)
 
-        subpageIllustration.isVisible =
-            subpageIssues.isNullOrEmpty() && subpageIllustration.illustrationDrawable != null
+        subpageIllustration?.isVisible =
+            subpageIssues.isNullOrEmpty() && subpageIllustration?.illustrationDrawable != null
+        expressiveIllustration?.isVisible =
+            subpageIssues.isNullOrEmpty() && expressiveIllustration?.imageDrawable != null
 
         if (subpageIssues.isNullOrEmpty() && subpageDismissedIssues.isNullOrEmpty()) {
             Log.w(TAG, "$sourceGroupId doesn't have any matching SafetyCenterIssues")
@@ -167,6 +194,7 @@ class SafetyCenterSubpageFragment : SafetyCenterFragment() {
         private val TAG = SafetyCenterSubpageFragment::class.java.simpleName
         private const val BRAND_CHIP_KEY = "subpage_brand_chip"
         private const val ILLUSTRATION_KEY = "subpage_illustration"
+        private const val EXPRESSIVE_ILLUSTRATION_KEY = "subpage_expressive_illustration"
         private const val ISSUE_GROUP_KEY = "subpage_issue_group"
         private const val ENTRY_GROUP_KEY = "subpage_entry_group"
         private const val FOOTER_KEY = "subpage_footer"

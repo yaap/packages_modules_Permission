@@ -17,8 +17,6 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_function_access_settings_title" msgid="3894819108224606683">"অন্যান্য অ্যাপের এজেন্ট কন্ট্রোল"</string>
-    <string name="app_function_access_settings_summary" msgid="2719347800336419237">"আপনার ডিভাইস ও অন্যান্য অ্যাপে অ্যাকশন পারফর্ম করুন"</string>
     <string name="face_unlock_title" msgid="3991635517593572926">"ফেস"</string>
     <string name="face_unlock_title_for_work" msgid="1451170625947022012">"ডিভাইসে কাজ করার জন্য ফেস আনলক"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>

@@ -21,6 +21,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import android.os.Bundle
+import android.os.UserHandle
+import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterEntryGroup
@@ -34,12 +36,15 @@ import androidx.test.core.os.Parcelables.forceParcel
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.os.ParcelableSubject.assertThat
 import androidx.test.filters.SdkSuppress
+import com.android.modules.utils.build.SdkLevel
 import com.android.safetycenter.internaldata.SafetyCenterBundles
 import com.android.safetycenter.internaldata.SafetyCenterBundles.ISSUES_TO_GROUPS_BUNDLE_KEY
 import com.android.safetycenter.internaldata.SafetyCenterBundles.STATIC_ENTRIES_TO_IDS_BUNDLE_KEY
 import com.android.safetycenter.testing.EqualsHashCodeToStringTester
 import com.android.safetycenter.testing.SafetyCenterTestData.Companion.withDismissedIssuesIfAtLeastU
 import com.android.safetycenter.testing.SafetyCenterTestData.Companion.withExtrasIfAtLeastU
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterEntryBuilder
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterIssueBuilder
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Test
@@ -63,21 +68,43 @@ class SafetyCenterDataTest {
             .build()
 
     private val issue1 =
-        SafetyCenterIssue.Builder("iSsUe_iD_oNe", "An issue title", "An issue summary")
+        createSafetyCenterIssueBuilder(
+                "iSsUe_iD_oNe",
+                "An issue title",
+                "An issue summary",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
             .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
             .build()
     private val issue2 =
-        SafetyCenterIssue.Builder("iSsUe_iD_tWo", "Another issue title", "Another issue summary")
+        createSafetyCenterIssueBuilder(
+                "iSsUe_iD_tWo",
+                "Another issue title",
+                "Another issue summary",
+                UserHandle.of(1),
+                setOf("safety_source_id_2"),
+                "issue_type_id_2")
             .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION)
             .build()
 
     private val entry1 =
-        SafetyCenterEntry.Builder("eNtRy_iD_OnE", "An entry title")
+        createSafetyCenterEntryBuilder(
+                "eNtRy_iD_OnE",
+                "An entry title",
+                UserHandle.of(1),
+                "source_id",
+            )
             .setPendingIntent(pendingIntent)
             .setSeverityLevel(SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK)
             .build()
     private val entry2 =
-        SafetyCenterEntry.Builder("eNtRy_iD_TwO", "Another entry title")
+        createSafetyCenterEntryBuilder(
+                "eNtRy_iD_TwO",
+                "Another entry title",
+                UserHandle.of(1),
+                "source_id",
+            )
             .setPendingIntent(pendingIntent)
             .setSeverityLevel(SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION)
             .build()

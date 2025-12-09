@@ -75,7 +75,6 @@ class HealthConnectAllAppPermissionFragmentTest : BasePermissionUiTest() {
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
-    @Ignore("b/405152547")
     fun usedHealthConnectPermissionsAreListed_healthFitnessBrand() {
         installTestAppThatUsesHealthConnectPermission()
 
@@ -117,7 +116,6 @@ class HealthConnectAllAppPermissionFragmentTest : BasePermissionUiTest() {
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @Test
-    @Ignore("b/405152547")
     fun invalidUngrantedUsedHealthConnectPermissionsAreNotListed_healthFitnessBrand() {
         installInvalidTestAppThatUsesHealthConnectPermission()
 

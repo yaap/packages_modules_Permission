@@ -15,7 +15,7 @@
 -->
 <configuration description="Config for CTS Telephony Permission test cases">
     <option name="test-suite-tag" value="cts" />
-    <option name="config-descriptor:metadata" key="component" value="framework" />
+    <option name="config-descriptor:metadata" key="component" value="permissions" />
 
     <!-- Telephony permission tests do not use any permission not available to instant apps. -->
     <option name="config-descriptor:metadata" key="parameter" value="instant_app" />

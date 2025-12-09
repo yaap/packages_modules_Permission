@@ -196,7 +196,7 @@
     <string name="precise_image_description" msgid="6349638632303619872">"正確な現在地"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"おおよその現在地"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"正確な位置情報を使用"</string>
-    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"正確な位置情報がオフの場合、アプリはおおよその位置情報にアクセスできます"</string>
+    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"正確な位置情報が OFF の場合、アプリはおおよその位置情報にアクセスできます"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g>の権限"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"このアプリによる<xliff:g id="PERM">%1$s</xliff:g>へのアクセス"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> でこのアプリに <xliff:g id="PERM">%1$s</xliff:g> へのアクセス権が付与されています"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> をデフォルトのナビゲーション アプリとして設定しますか？"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"必要な権限がありません"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> は通知を使用でき、スマートフォン、SMS、連絡先、カレンダーの権限にもアクセスできるようになります。"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> は通知を使用して、接続済みのデバイスにアプリをストリーミングできるようになります。"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"このサービスは、スマートフォンから他のデバイスに写真、メディア、通知を共有します。"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"デフォルトのメモアプリ"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"メモアプリ"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"デバイスでメモの作成に使うアプリ"</string>
@@ -682,10 +680,10 @@
     <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"デバイスとデータを保護するため、この設定はブロックされています。<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>詐欺師が新しいソースから不明なアプリをインストールするようユーザーに持ちかけ、有害なアプリをインストールしようとする可能性があります。"</string>
+</xliff:g>この機能を騙されて使うと、有害なアプリをインストールしてしまう危険性があります。"</string>
     <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>詐欺師が、ユーザー補助機能へのアクセスをアプリに許可するようユーザーに依頼して、デバイスを操作しようとする可能性があります。"</string>
+</xliff:g>騙されてユーザー補助機能へのアクセスを許可すると、デバイスが操作されてしまう危険性があります。"</string>
     <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"アプリは<xliff:g id="PERMISSION_NAME">%1$s</xliff:g>へのアクセスを拒否されました"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"機密情報に関わる権限へのアクセスをアプリがリクエストしました。この権限へのアクセスは、あなたの個人情報や財務情報を危険にさらす恐れがあります。<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>この制限付きの権限がないとアプリは正しく動作しない可能性があります。&lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;アクセスを許可する方法の詳細&lt;/a&gt;"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"スマートフォンを確認してください"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"スマートフォンに接続できません"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"再試行しますか？"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"エージェント"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"アプリで情報にアクセスし、操作できるエージェント"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"エージェント"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"このデバイスのエージェントのアクセスを管理"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"利用可能なエージェント アプリはありません"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"この機能を有効にするには、デバイスにエージェント アプリをインストールしてください"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"アプリのアクセス"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"このエージェントが情報にアクセスし、ユーザーに代わって操作できるアプリや設定"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> へのアクセスに使用できるアプリはありません"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"システム"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"アプリ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"エージェント アクセス"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"このアプリで情報にアクセスし、ユーザーに代わって操作できるエージェント"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"デバイスの設定"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> のエージェントになることを <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> に許可しますか？"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"このエージェントは <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> にアクセスして、情報の取得と各種の操作が可能になります"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"許可"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"許可しない"</string>
 </resources>

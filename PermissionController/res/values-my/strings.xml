@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> ကို မူရင်းလမ်းညွှန်အက်ပ်အဖြစ် သတ်မှတ်မလား။"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"ခွင့်ပြုချက် မလိုပါ"</string>
     <string name="role_watch_description" msgid="267003778693177779">"သင်၏ ‘ဖုန်း’၊ ‘SMS စာတိုစနစ်’၊ ‘အဆက်အသွယ်များ’ နှင့် ‘ပြက္ခဒိန်’ ခွင့်ပြုချက်များကို သုံးရန်နှင့် အကြောင်းကြားချက်များကို ပြန်လှန်တုံ့ပြန်ရန် <xliff:g id="APP_NAME">%1$s</xliff:g> ကို ခွင့်ပြုပါမည်။"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"သင့်အကြောင်းကြားချက်များကို ပြန်လှန်တုံ့ပြန်ရန်နှင့် သင့်အက်ပ်များကို ချိတ်ဆက်ထားသောစက်သို့ တိုက်ရိုက်လွှင့်ရန် <xliff:g id="APP_NAME">%1$s</xliff:g> ကို ခွင့်ပြုပါမည်။"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"ဤဝန်ဆောင်မှုသည် သင်၏ဖုန်းမှ ဓာတ်ပုံ၊ မီဒီယာနှင့် အကြောင်းကြားချက်များကို အခြားစက်ပစ္စည်းများသို့ မျှဝေသည်။"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"မူရင်း မှတ်စုအက်ပ်"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"မှတ်စုရေးသောအက်ပ်"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"စက်ပစ္စည်းတွင် မှတ်စုရေးခွင့်ပြုသော အက်ပ်များ"</string>
@@ -507,7 +505,7 @@
     <string name="permgrouprequest_device_aware_read_media_visual" msgid="3122576538319059333">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; အား &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; ရှိ ဓာတ်ပုံ၊ ဗီဒီယိုများကို သုံးခွင့်ပြုမလား။"</string>
     <string name="permgrouprequest_more_photos" msgid="128933814654231321">"ဤစက်ရှိ နောက်ထပ်ဓာတ်ပုံနှင့် ဗီဒီယိုများကို &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; အား သုံးခွင့်ပေးမလား။"</string>
     <string name="permgrouprequest_device_aware_more_photos" msgid="1703469013613723053">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ကို &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; တွင် နောက်ထပ် ဓာတ်ပုံ၊ ဗီဒီယိုများ သုံးခွင့်ပြုမလား။"</string>
-    <string name="permgrouprequest_microphone" msgid="2825208549114811299">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ကို အသံဖမ်းယူခွင့် ပေးလိုပါသလား။"</string>
+    <string name="permgrouprequest_microphone" msgid="2825208549114811299">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ကို အသံဖမ်းခွင့် ပေးမလား။"</string>
     <string name="permgrouprequest_device_aware_microphone" msgid="8821701550505437951">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ကို &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; တွင် အသံသွင်းခွင့်ပြုမလား။"</string>
     <string name="permgrouprequestdetail_microphone" msgid="8510456971528228861">"ဤအက်ပ်ကို အသုံးပြုနေသည့် အချိန်တွင်သာ ၎င်းက အသံဖမ်းနိုင်သည်။"</string>
     <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ကို အသံဖမ်းခွင့် ပေးမလား။"</string>
@@ -690,7 +688,7 @@
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"အက်ပ်ကို <xliff:g id="PERMISSION_NAME">%1$s</xliff:g> သုံးခွင့် ငြင်းပယ်ထားသည်"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"အက်ပ်သည် သင်၏ ပုဂ္ဂိုလ်ရေးနှင့် ငွေကြေးဆိုင်ရာ အချက်အလက်များကို အန္တရာယ်ဖြစ်စေနိုင်သော သတိထားရမည့် ခွင့်ပြုချက်သုံးရန် တောင်းဆိုထားသည်။<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>အက်ပ်သည် ဤကန့်သတ်ထားသော ခွင့်ပြုချက်မရှိပါက ကောင်းစွာမလုပ်ဆောင်ခြင်း ဖြစ်နိုင်သည်။ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;သုံးခွင့်ပြုနည်းကို လေ့လာရန်&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"အက်ပ်အား မူရင်း <xliff:g id="ROLE_NAME">%1$s</xliff:g> အဖြစ် လုပ်ဆောင်ခွင့် ငြင်းပယ်ထားသည်"</string>
-    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"အက်ပ်သည် သင်၏ ပုဂ္ဂိုလ်ရေးနှင့် ငွေကြေးဆိုင်ရာ အချက်အလက်များကို အန္တရာယ်ဖြစ်စေနိုင်သော သတိထားရမည့် ခွင့်ပြုချက်များသုံးရန် တောင်းဆိုထားသည်။<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>အက်ပ်သည် ဤကန့်သတ်ထားသော ခွင့်ပြုချက်များမရှိပါက ကောင်းစွာမလုပ်ဆောင်ခြင်း ဖြစ်နိုင်သည်။ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;သုံးခွင့်ပြုနည်းကို လေ့လာရန်&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"သင်၏ ပုဂ္ဂိုလ်ရေးနှင့် ငွေကြေးဆိုင်ရာ အချက်အလက်များကို အန္တရာယ်ဖြစ်စေနိုင်သော သတိထားရမည့် ခွင့်ပြုချက်များသုံးရန် ဤအက်ပ်က တောင်းဆိုထားသည်။<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>ဤကန့်သတ်ထားသော ခွင့်ပြုချက်များမရှိပါက ဤအက်ပ်သည် ကောင်းစွာမလုပ်ဆောင်ခြင်း ဖြစ်နိုင်သည်။ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;သုံးခွင့်ပြုနည်းကို လေ့လာရန်&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"အက်ပ်ကို သုံးခွင့် ငြင်းပယ်ထားသည်"</string>
     <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"ဤခွင့်ပြုချက်သုံးခြင်းသည် သင်၏ ပုဂ္ဂိုလ်ရေးနှင့် ငွေကြေးဆိုင်ရာ အချက်အလက်များကို အန္တရာယ်ဖြစ်စေနိုင်သည်။<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>အက်ပ်သည် ဤကန့်သတ်ထားသော ခွင့်ပြုချက်မရှိပါက ကောင်းစွာမလုပ်ဆောင်ခြင်း ဖြစ်နိုင်သည်။ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;သုံးခွင့်ပြုနည်းကို လေ့လာရန်&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"ပိုလေ့လာရန်"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"သင့်ဖုန်းကို စစ်ဆေးပါ"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"သင့်ဖုန်းကို ချိတ်ဆက်၍မရပါ"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ထပ်စမ်းကြည့်မလား။"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"ကိုယ်စားလှယ်များ"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"အက်ပ်များတွင် အချက်အလက်သုံးနိုင်ပြီး လုပ်ဆောင်နိုင်သော ကိုယ်စားလှယ်များ"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"ကိုယ်စားလှယ်များ"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"ဤစက်ပစ္စည်းတွင် ကိုယ်စားလှယ်များအတွက် သုံးခွင့်စီမံနိုင်သည်"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"အေးဂျင့်အက်ပ်များကို မရနိုင်ပါ"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"ဤတူးလ်ကိုဖွင့်ရန် သင့်စက်တွင် အေးဂျင့်အက်ပ်ကို ထည့်သွင်းပါ"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"အက်ပ်သုံးခွင့်"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"အချက်အလက်ရယူရန်နှင့် သင့်အတွက် လုပ်ဆောင်ရန် ဤကိုယ်စားလှယ်က ဝင်ကြည့်နိုင်သော အက်ပ်နှင့် ဆက်တင်များ"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> သုံးခွင့်အတွက် အက်ပ်များကို မရနိုင်ပါ"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"စနစ်"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"အက်ပ်များ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"ကိုယ်စားလှယ်သုံးခွင့်"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"ဤအက်ပ်တွင် အချက်အလက်သုံးနိုင်ပြီး သင့်အတွက် လုပ်ဆောင်နိုင်သော ကိုယ်စားလှယ်များ"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"စက်ဆက်တင်များ"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ကို <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> အတွက် အေးဂျင့်ဖြစ်ခွင့်ပြုမလား"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"ဤအေးဂျင့်သည် အချက်အလက်ရယူရန်နှင့် သင့်အတွက် လုပ်ဆောင်ရန် <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ကို သုံးနိုင်မည်"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"ခွင့်ပြုရန်"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"ခွင့်မပြုပါနှင့်"</string>
 </resources>

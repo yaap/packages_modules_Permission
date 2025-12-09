@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.handheld.v31.PermissionUsageControlPreference
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsageViewModel
@@ -72,7 +73,7 @@ fun WearPermissionUsageScreen(sessionId: Long, viewModel: PermissionUsageViewMod
         permissionGroupWithUsageCountsEntries
             // Removing Health Connect from the list of permissions to fix b/331260850
             .let {
-                if (Flags.replaceBodySensorPermissionEnabled()) {
+                if (SdkLevel.isAtLeastB()) {
                     it
                 } else {
                     it.filterNot { Utils.isHealthPermissionGroup(it.key) }

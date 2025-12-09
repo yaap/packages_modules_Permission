@@ -41,11 +41,6 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager.NameNotFoundException
 import android.content.res.Resources
 import android.os.Build
-import android.permission.flags.Flags
-import android.platform.test.annotations.RequiresFlagsDisabled
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.CheckFlagsRule
-import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
@@ -62,8 +57,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class UtilsTest {
-
-    @JvmField @Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     private val context = InstrumentationRegistry.getInstrumentation().targetContext as Context
 
@@ -314,9 +307,8 @@ class UtilsTest {
     }
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsEnabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
-    fun getInstalledRuntimePermissionInfosForGroup_bodySensorFlagEnabled_bodySensorPermissionsNotIncluded() {
+    fun getInstalledRuntimePermissionInfosForGroup_postBaklava_bodySensorPermissionsNotIncluded() {
         val permissionNamesInUndefinedGroup =
             Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, UNDEFINED)
                 .map { it.name }
@@ -330,29 +322,12 @@ class UtilsTest {
         assertFalse(permissionNamesInSensorsGroup.contains(BODY_SENSORS_BACKGROUND))
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsDisabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
-    @Test
-    fun getInstalledRuntimePermissionInfosForGroup_bodySensorFlagDisabled_bodySensorPermissionsIncluded() {
-        val permissionNamesInUndefinedGroup =
-            Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, UNDEFINED)
-                .map { it.name }
-        val permissionNamesInSensorsGroup =
-            Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, SENSORS)
-                .map { it.name }
-
-        assertFalse(permissionNamesInUndefinedGroup.contains(BODY_SENSORS))
-        assertFalse(permissionNamesInUndefinedGroup.contains(BODY_SENSORS_BACKGROUND))
-        assertTrue(permissionNamesInSensorsGroup.contains(BODY_SENSORS))
-        assertTrue(permissionNamesInSensorsGroup.contains(BODY_SENSORS_BACKGROUND))
-    }
-
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
-        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
     )
     @Test
-    fun getInstalledRuntimePermissionInfosForGroup_preV_bodySensorPermissionsIncluded() {
+    fun getInstalledRuntimePermissionInfosForGroup_preBaklava_bodySensorPermissionsIncluded() {
         val permissionNamesInUndefinedGroup =
             Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, UNDEFINED)
                 .map { it.name }

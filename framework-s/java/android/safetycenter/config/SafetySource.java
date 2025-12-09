@@ -477,6 +477,9 @@ public final class SafetySource implements Parcelable {
      * that is accessible from the same resource context that was used to load the Safety Center
      * configuration. The id is {@link Resources#ID_NULL} when search terms are not provided.
      *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
+     *
      * @throws UnsupportedOperationException if the source is of type {@link
      *     SafetySource#SAFETY_SOURCE_TYPE_ISSUE_ONLY}
      */

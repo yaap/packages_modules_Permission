@@ -19,8 +19,13 @@ package android.safetycenter.cts
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build.VERSION_CODES.BAKLAVA
 import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
+import android.os.UserHandle
+import android.permission.flags.Flags
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails
 import androidx.annotation.RequiresApi
@@ -28,16 +33,22 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.os.ParcelableSubject.assertThat
 import androidx.test.filters.SdkSuppress
+import com.android.modules.utils.build.SdkLevel
 import com.android.safetycenter.testing.EqualsHashCodeToStringTester
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterIssueBuilder
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFails
 import kotlin.test.assertFailsWith
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /** CTS tests for [SafetyCenterIssue]. */
 @RunWith(AndroidJUnit4::class)
 class SafetyCenterIssueTest {
+
+    @get:Rule val flagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     private val pendingIntent1 =
@@ -63,7 +74,13 @@ class SafetyCenterIssueTest {
             .build()
 
     private val issue1 =
-        SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
+        createSafetyCenterIssueBuilder(
+                "issue_id",
+                "Everything's good",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
             .setSubtitle("In the neighborhood")
             .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
             .setDismissible(true)
@@ -72,7 +89,13 @@ class SafetyCenterIssueTest {
             .build()
 
     private val issueWithRequiredFieldsOnly =
-        SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
+        createSafetyCenterIssueBuilder(
+                "issue_id",
+                "Everything's good",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
             .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
             .build()
 
@@ -132,8 +155,14 @@ class SafetyCenterIssueTest {
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
     fun getAttributionTitle_withNullAttributionTitle_returnsNull() {
         val safetyCenterIssue =
-            SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
-                .build()
+        createSafetyCenterIssueBuilder(
+                "issue_id",
+                "Everything's good",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
+            .build()
 
         assertThat(safetyCenterIssue.attributionTitle).isNull()
     }
@@ -238,7 +267,13 @@ class SafetyCenterIssueTest {
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
     fun getGroupId_withNullValue_returnsNull() {
         val issue =
-            SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
+            createSafetyCenterIssueBuilder(
+                    "issue_id",
+                    "Everything's good",
+                    "Please acknowledge this",
+                    UserHandle.of(1),
+                    setOf("safety_source_id_1"),
+                    "issue_type_id_1")
                 .build()
 
         assertThat(issue.groupId).isNull()
@@ -248,8 +283,14 @@ class SafetyCenterIssueTest {
     @SdkSuppress(maxSdkVersion = TIRAMISU)
     fun getGroupId_withVersionLessThanU_throws() {
         val issue =
-            SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
-                .build()
+            createSafetyCenterIssueBuilder(
+                "issue_id",
+                "Everything's good",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
+            .build()
 
         assertFails { issue.groupId }
     }
@@ -268,6 +309,45 @@ class SafetyCenterIssueTest {
         assertFails { SafetyCenterIssue.Builder(issue1).setGroupId("group_id").build() }
     }
 
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @Test
+    fun getUser_returnsUser() {
+        assertThat(issue1.user).isEqualTo(UserHandle.of(1))
+        assertThat(
+                SafetyCenterIssue.Builder(issue1).setUser(UserHandle.of(123)).build().user
+            )
+            .isEqualTo(UserHandle.of(123))
+    }
+
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @Test
+    fun getSafetySourceIds_returnsSafetySourceIds() {
+        assertThat(issue1.safetySourceIds).containsExactly("safety_source_id_1")
+        assertThat(
+                SafetyCenterIssue.Builder(issue1)
+                    .setSafetySourceIds(setOf("safety_source_id_1", "safety_source_id_2"))
+                    .build()
+                    .safetySourceIds
+            )
+            .containsExactly("safety_source_id_1", "safety_source_id_2")
+    }
+
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @Test
+    fun getIssueTypeId_returnsIssueTypeId() {
+        assertThat(issue1.issueTypeId).isEqualTo("issue_type_id_1")
+        assertThat(
+                SafetyCenterIssue.Builder(issue1)
+                    .setIssueTypeId("issue_type_id_2")
+                    .build()
+                    .issueTypeId
+            )
+            .isEqualTo("issue_type_id_2")
+    }
+
     @Test
     fun describeContents_returns0() {
         assertThat(issue1.describeContents()).isEqualTo(0)
@@ -284,7 +364,7 @@ class SafetyCenterIssueTest {
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
     fun parcelRoundTrip_recreatesEqual_atLeastAndroidU() {
         val safetyCenterIssue =
-            SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
+           createSafetyCenterIssueBuilder("issue_id", "Everything's good", "Please acknowledge this", UserHandle.of(1), setOf("safety_source_id_1"), "issue_type_id_1")
                 .setSubtitle("In the neighborhood")
                 .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                 .setDismissible(true)
@@ -314,6 +394,13 @@ class SafetyCenterIssueTest {
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
     fun equalsHashCodeToString_usingEqualsHashCodeToStringTester_atLeastAndroidU() {
         newUpsideDownCakeEqualsHashCodeToStringTester().test()
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun equalsHashCodeToString_usingEqualsHashCodeToStringTester_atLeastAndroidB() {
+        newBaklavaEqualsHashCodeToStringTester().test()
     }
 
     @Test
@@ -517,7 +604,13 @@ class SafetyCenterIssueTest {
     private fun newUpsideDownCakeEqualsHashCodeToStringTester():
         EqualsHashCodeToStringTester<SafetyCenterIssue> {
         val issueWithTiramisuFields =
-            SafetyCenterIssue.Builder("issue_id", "Everything's good", "Please acknowledge this")
+        createSafetyCenterIssueBuilder(
+                "issue_id",
+                "Everything's good",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
                 .setSubtitle("In the neighborhood")
                 .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                 .setDismissible(true)
@@ -566,6 +659,65 @@ class SafetyCenterIssueTest {
                         )
                     )
                     .build()
+            )
+    }
+
+    /**
+     * Creates a new [EqualsHashCodeToStringTester] instance with all the equality groups in the
+     * [newUpsideDownCakeEqualsHashCodeToStringTester] plus new equality groups covering all the new
+     * fields added in Baklava.
+     */
+    @RequiresApi(BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    private fun newBaklavaEqualsHashCodeToStringTester():
+        EqualsHashCodeToStringTester<SafetyCenterIssue> {
+        val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
+        val issueWithUpsideDownCakeFields =
+            createSafetyCenterIssueBuilder(
+                "issue_id",
+                "Everything's good",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
+                .setSubtitle("In the neighborhood")
+                .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
+                .setDismissible(true)
+                .setShouldConfirmDismissal(true)
+                .setActions(
+                        listOf(
+                            SafetyCenterIssue.Action.Builder(action1)
+                                .setConfirmationDialogDetails(confirmationDialogDetails)
+                                .build()
+                        )
+                    )
+                .setAttributionTitle("Attribution title")
+                .setGroupId("group_id")
+                .build()
+        return newUpsideDownCakeEqualsHashCodeToStringTester()
+            .addEqualityGroup(
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setUser(UserHandle.of(123))
+                    .build(),
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setUser(UserHandle.of(123))
+                    .build(),
+            )
+            .addEqualityGroup(
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setSafetySourceIds(setOf("safety_source_id_5", "safety_source_id_1"))
+                    .build(),
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setSafetySourceIds(setOf("safety_source_id_1", "safety_source_id_5"))
+                    .build(),
+            )
+            .addEqualityGroup(
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setIssueTypeId("issue_type_id_2")
+                    .build(),
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setIssueTypeId("issue_type_id_2")
+                    .build(),
             )
     }
 
@@ -648,12 +800,25 @@ class SafetyCenterIssueTest {
             .addEqualityGroup(issue1, SafetyCenterIssue.Builder(issue1).build())
             .addEqualityGroup(issueWithRequiredFieldsOnly)
             .addEqualityGroup(
-                SafetyCenterIssue.Builder("an id", "a title", "Please acknowledge this")
+                createSafetyCenterIssueBuilder(
+                "an id",
+                "a title",
+                "Please acknowledge this",
+                UserHandle.of(1),
+                setOf("safety_source_id_1"),
+                "issue_type_id_1")
                     .setSubtitle("In the neighborhood")
                     .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                     .setActions(listOf(action1))
                     .build(),
-                SafetyCenterIssue.Builder("an id", "a title", "Please acknowledge this")
+                createSafetyCenterIssueBuilder(
+                        "an id",
+                        "a title",
+                        "Please acknowledge this",
+                        UserHandle.of(1),
+                        setOf("safety_source_id_1"),
+                        "issue_type_id_1",
+                    )
                     .setSubtitle("In the neighborhood")
                     .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                     .setActions(listOf(action1))

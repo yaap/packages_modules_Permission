@@ -56,7 +56,7 @@ suspend fun isPermissionGroupUserSensitive(
     permissionRepository: PermissionRepository,
     packageRepository: PackageRepository,
 ): Boolean {
-    if (isTelecomPackage(packageName, permissionGroup)) {
+    if (isTelecomPackageAndCameraOrMicGroup(packageName, permissionGroup)) {
         return false
     }
     val userHandle = UserHandle.of(userId)
@@ -92,7 +92,7 @@ private fun isPermissionUserSensitive(isPermissionGranted: Boolean, permissionFl
 
 @VisibleForTesting const val TELECOM_PACKAGE = "com.android.server.telecom"
 
-private fun isTelecomPackage(packageName: String, permissionGroup: String): Boolean {
+fun isTelecomPackageAndCameraOrMicGroup(packageName: String, permissionGroup: String): Boolean {
     return packageName == TELECOM_PACKAGE &&
         (permissionGroup == Manifest.permission_group.CAMERA ||
             permissionGroup == Manifest.permission_group.MICROPHONE)

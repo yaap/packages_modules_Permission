@@ -34,12 +34,12 @@ import com.android.permissioncontroller.safetycenter.ui.model.PrivacyControlsVie
 import com.android.permissioncontroller.safetycenter.ui.model.PrivacyControlsViewModelFactory
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterUiData
 import com.android.safetycenter.internaldata.SafetyCenterIds
+import com.android.settingslib.widget.SettingsThemeHelper
 
 /** A fragment that represents the privacy subpage in Safety Center. */
 @RequiresApi(UPSIDE_DOWN_CAKE)
 class PrivacySubpageFragment : SafetyCenterFragment() {
 
-    private lateinit var subpageBrandChip: SafetyBrandChipPreference
     private lateinit var subpageIssueGroup: PreferenceGroup
     private lateinit var subpageGenericEntryGroup: PreferenceGroup
     private lateinit var subpageControlsExtraEntryGroup: PreferenceGroup
@@ -49,16 +49,22 @@ class PrivacySubpageFragment : SafetyCenterFragment() {
         super.onCreatePreferences(savedInstanceState, rootKey)
         setPreferencesFromResource(R.xml.privacy_subpage, rootKey)
 
-        subpageBrandChip = getPreferenceScreen().findPreference(BRAND_CHIP_KEY)!!
-        subpageIssueGroup = getPreferenceScreen().findPreference(ISSUE_GROUP_KEY)!!
-        subpageGenericEntryGroup = getPreferenceScreen().findPreference(GENERIC_ENTRY_GROUP_KEY)!!
+        val subpageBrandChip =
+            preferenceScreen.findPreference<SafetyBrandChipPreference>(BRAND_CHIP_KEY)!!
+        if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
+            preferenceScreen.removePreference(subpageBrandChip)
+        } else {
+            subpageBrandChip.setupListener(requireActivity(), safetyCenterSessionId)
+        }
+
+        subpageIssueGroup = preferenceScreen.findPreference(ISSUE_GROUP_KEY)!!
+        subpageGenericEntryGroup = preferenceScreen.findPreference(GENERIC_ENTRY_GROUP_KEY)!!
         subpageControlsExtraEntryGroup =
             getPreferenceScreen().findPreference(CONTROLS_EXTRA_ENTRY_GROUP_KEY)!!
-        subpageBrandChip.setupListener(requireActivity(), safetyCenterSessionId)
 
-        val factory = PrivacyControlsViewModelFactory(requireActivity().getApplication())
+        val factory = PrivacyControlsViewModelFactory(requireActivity().application)
         privacyControlsViewModel =
-            ViewModelProvider(this, factory).get(PrivacyControlsViewModel::class.java)
+            ViewModelProvider(this, factory)[PrivacyControlsViewModel::class.java]
         privacyControlsViewModel.controlStateLiveData.observe(this) {
             prefStates: Map<Pref, PrefState> ->
             renderPrivacyControls(prefStates)
@@ -86,7 +92,7 @@ class PrivacySubpageFragment : SafetyCenterFragment() {
         if (entryGroup == null) {
             Log.w(
                 TAG,
-                "$PRIVACY_SOURCES_GROUP_ID doesn't match any of the existing SafetySourcesGroup IDs"
+                "$PRIVACY_SOURCES_GROUP_ID doesn't match any of the existing SafetySourcesGroup IDs",
             )
             closeSubpage(requireActivity(), requireContext(), safetyCenterSessionId)
             return
@@ -114,7 +120,7 @@ class PrivacySubpageFragment : SafetyCenterFragment() {
             subpageIssues,
             subpageDismissedIssues,
             uiData.resolvedIssues,
-            requireActivity().getTaskId()
+            requireActivity().getTaskId(),
         )
     }
 
@@ -133,10 +139,10 @@ class PrivacySubpageFragment : SafetyCenterFragment() {
                     PendingIntentSender.getTaskIdForEntry(
                         entryId,
                         sameTaskSourceIds,
-                        requireActivity()
+                        requireActivity(),
                     ),
                     entry,
-                    safetyCenterViewModel
+                    safetyCenterViewModel,
                 )
 
             if (sourceId == "AndroidPrivacyControls") {
@@ -157,7 +163,7 @@ class PrivacySubpageFragment : SafetyCenterFragment() {
                 prefStates[prefType],
                 prefType,
                 privacyControlsViewModel,
-                this
+                this,
             )
         }
 
@@ -180,6 +186,7 @@ class PrivacySubpageFragment : SafetyCenterFragment() {
         private const val GENERIC_ENTRY_GROUP_KEY: String = "subpage_generic_entry_group"
         private const val CONTROLS_EXTRA_ENTRY_GROUP_KEY: String =
             "subpage_controls_extra_entry_group"
+
         /** Creates an instance of PrivacySubpageFragment with the arguments set */
         @JvmStatic
         fun newInstance(sessionId: Long): PrivacySubpageFragment {

@@ -159,6 +159,9 @@
         <app-op-permissions>
             <app-op-permission name="android.permission.SYSTEM_ALERT_WINDOW" />
         </app-op-permissions>
+        <app-ops>
+            <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+        </app-ops>
     </role>
 
     <!---
@@ -270,6 +273,7 @@
               -->
             <app-op name="android:run_in_background" maxTargetSdkVersion="25" mode="allowed" />
             <app-op name="android:run_any_in_background" mode="allowed" />
+            <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
         </app-ops>
         <preferred-activities>
             <preferred-activity>
@@ -361,6 +365,7 @@
             <app-op name="android:run_in_background" maxTargetSdkVersion="25" mode="allowed" />
             <app-op name="android:run_any_in_background" mode="allowed" />
             <app-op name="android:read_device_identifiers" mode="allowed" />
+            <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
         </app-ops>
         <preferred-activities>
             <preferred-activity>
@@ -526,6 +531,7 @@
 
     <role
         name="android.app.role.SYSTEM_GALLERY"
+        behavior="SystemGalleryRoleBehavior"
         defaultHolders="config_systemGallery"
         exclusive="true"
         exclusivity="user"
@@ -533,8 +539,10 @@
         systemOnly="true"
         visible="false">
         <permissions>
-            <permission-set name="storage" />
-            <permission name="android.permission.ACCESS_MEDIA_LOCATION" />
+            <!-- The photo/video permissions and ACCESS_MEDIA_LOCATION are granted by the
+                 SystemGalleryRoleBehavior, to override the user choice (as the write_media app ops
+                 override the user's choice anyway). -->
+            <permission name="android.permission.READ_MEDIA_AUDIO" minSdkVersion="33" />
             <permission name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND" minSdkVersion="31" />
         </permissions>
         <app-ops>
@@ -655,13 +663,14 @@
             <permission name="android.permission.REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION"
                 minSdkVersion="33" />
             <permission name="android.permission.MANAGE_SAFETY_CENTER"
+                featureFlag="!android.permission.flags.Flags.openSafetyCenterApis"
                 minSdkVersion="33" />
             <permission name="android.permission.ASSOCIATE_COMPANION_DEVICES" minSdkVersion="36" />
             <permission name="android.permission.CREATE_VIRTUAL_DEVICE" minSdkVersion="33" />
             <permission name="android.permission.ADD_TRUSTED_DISPLAY" minSdkVersion="33" />
             <permission name="android.permission.ADD_ALWAYS_UNLOCKED_DISPLAY" minSdkVersion="33" />
             <permission name="android.permission.ADD_MIRROR_DISPLAY"
-                featureFlag="android.companion.virtualdevice.flags.Flags.enableLimitedVdmRole" />
+                featureFlag="android.companion.virtualdevice.flags.Flags.vdmMirrorDisplayPermission" />
             <permission name="android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE"
                 minSdkVersion="33" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT"
@@ -905,6 +914,9 @@
             <permission name="android.permission.READ_BLOCKED_NUMBERS"
                 featureFlag="android.permission.flags.Flags.grantReadBlockedNumbersToSystemUiIntelligence" />
         </permissions>
+        <app-ops>
+            <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+        </app-ops>
     </role>
 
     <!---
@@ -1236,7 +1248,6 @@
     <role
         name="android.app.role.COMPANION_DEVICE_APP_STREAMING"
         behavior="v33.CompanionDeviceAppStreamingRoleBehavior"
-        description="@string/role_app_streaming_description"
         exclusive="false"
         exclusivity="none"
         minSdkVersion="33"
@@ -1249,7 +1260,7 @@
             <permission name="android.permission.RECORD_AUDIO" />
             <permission
                 name="android.permission.ADD_MIRROR_DISPLAY"
-                featureFlag="android.companion.virtualdevice.flags.Flags.enableLimitedVdmRole" />
+                featureFlag="android.companion.virtualdevice.flags.Flags.vdmMirrorDisplayPermission" />
             <!--TODO(b/201605314) For calling Telecom framework API for audio streaming-->
             <!--<permission name="android.permission.PROVIDE_CALL_ENDPOINTS" />-->
        </permissions>
@@ -1263,7 +1274,6 @@
         name="android.app.role.COMPANION_DEVICE_COMPUTER"
         allowBypassingQualification="true"
         behavior="v33.CompanionDeviceComputerRoleBehavior"
-        description="@string/role_companion_device_computer_description"
         exclusive="false"
         exclusivity="none"
         minSdkVersion="33"
@@ -1340,6 +1350,8 @@
             <permission name="android.permission.MANAGE_DEFAULT_APPLICATIONS" minSdkVersion="34"/>
             <permission name="android.permission.SUSPEND_APPS"/>
             <permission name="android.permission.SYSTEM_APPLICATION_OVERLAY"/>
+            <permission name="android.permission.MANAGE_APP_OPS_MODES"
+                featureFlag="android.permission.flags.Flags.supervisionRoleEnabled"/>
             <permission name="android.permission.MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT"
                 featureFlag="android.permission.flags.Flags.supervisionRolePermissionUpdateEnabled"/>
             <permission name="android.permission.MANAGE_DEVICE_POLICY_APP_RESTRICTIONS"
@@ -1404,6 +1416,15 @@
             </service>
         </required-components>
         <permissions>
+            <permission name="android.permission.MANAGE_DEFAULT_APPLICATIONS" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_BLUETOOTH" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_MODIFY_USERS" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_PACKAGE_STATE" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_SCREEN_CONTENT" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS" />
+            <permission name="android.permission.SUSPEND_APPS" />
         </permissions>
     </role>
 
@@ -1756,12 +1777,8 @@
             <permission-set name="location" />
             <permission name="android.permission.ACCESS_BACKGROUND_LOCATION" />
             <permission name="android.permission.ACTIVITY_RECOGNITION" />
-            <permission
-                name="android.permission.health.READ_HEART_RATE"
-                featureFlag="android.permission.flags.Flags.replaceBodySensorPermissionEnabled" />
-            <permission
-                name="android.permission.health.READ_HEALTH_DATA_IN_BACKGROUND"
-                featureFlag="android.permission.flags.Flags.replaceBodySensorPermissionEnabled"  />
+            <permission name="android.permission.health.READ_HEART_RATE" minSdkVersion="36"/>
+            <permission name="android.permission.health.READ_HEALTH_DATA_IN_BACKGROUND" minSdkVersion="36"/>
         </permissions>
     </role>
 
@@ -1960,6 +1977,9 @@
             <permission name="android.permission.ACCESS_FINE_LOCATION" />
             <permission name="android.permission.READ_MEDIA_IMAGES" />
             <permission name="android.permission.READ_MEDIA_VIDEO" />
+            <permission
+                name="android.permission.READ_FRAME_BUFFER"
+                featureFlag="com.android.graphics.surfaceflinger.flags.Flags.readbackScreenshot" />
         </permissions>
     </role>
 
@@ -1976,6 +1996,58 @@
             <permission-set name="notifications" />
             <permission name="android.permission.CREATE_VIRTUAL_DEVICE"/>
         </permissions>
+        <app-ops>
+            <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+        </app-ops>
     </role>
 
+    <role
+        name="android.app.role.COMPANION_DEVICE_MEDICAL"
+        behavior="v37.CompanionDeviceMedicalRoleBehavior"
+        featureFlag="android.companion.Flags.enableMedicalProfile"
+        exclusive="false"
+        exclusivity="none"
+        systemOnly="false"
+        visible="false">
+        <permissions>
+            <permission-set name="notifications" />
+            <permission-set name="nearby_devices" />
+        </permissions>
+        <app-op-permissions>
+            <app-op-permission name="android.permission.SCHEDULE_EXACT_ALARM" />
+        </app-op-permissions>
+    </role>
+
+    <!--
+        A role for the active watch face on Wear devices.
+
+        Wear specific non-AOSP permissions are granted in the behavior class through
+        android.R.array.config_watchFacePermissions.
+    -->
+    <role
+        name="android.app.role.WATCH_FACE"
+        behavior="v37.WatchFaceRoleBehavior"
+        featureFlag="android.permission.flags.Flags.watchFaceRoleEnabled"
+        exclusive="true"
+        exclusivity="user"
+        visible="false">
+        <permissions>
+            <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
+        </permissions>
+    </role>
+
+    <role
+        name="android.app.role.CONTENT_RESTRICTION"
+        featureFlag="android.permission.flags.Flags.contentRestrictionRoleEnabled"
+        exclusive="false"
+        exclusivity="none"
+        visible="false">
+        <required-components>
+            <service permission="android.permission.BIND_CONTENT_RESTRICTION_SERVICE">
+                <intent-filter>
+                    <action name="android.app.action.CONTENT_RESTRICTION_SERVICE" />
+                </intent-filter>
+            </service>
+        </required-components>
+    </role>
 </roles>

@@ -16,6 +16,7 @@
 package com.android.permissioncontroller.wear.permission.components.material3
 
 import android.graphics.drawable.Drawable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -23,6 +24,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -79,6 +81,50 @@ class WearPermissionIconBuilder private constructor() {
         return this
     }
 
+    // To be used for non tintable images.
+    // MultiColored assets such as Badged app icons are not tintable. They are not rendered properly
+    // as Icon composable.
+    @Composable
+    fun buildAsImage() {
+        val colorFilter = if (tint == Color.Unspecified) null else ColorFilter.tint(tint)
+        when (iconResource) {
+            is ImageVector ->
+                Image(
+                    imageVector = iconResource as ImageVector,
+                    contentDescription,
+                    modifier,
+                    colorFilter = colorFilter,
+                )
+            is Int ->
+                Image(
+                    painterResource(id = iconResource as Int),
+                    contentDescription,
+                    modifier,
+                    colorFilter = colorFilter,
+                )
+
+            is Drawable ->
+                Image(
+                    rememberDrawablePainter(iconResource as Drawable),
+                    contentDescription,
+                    modifier,
+                    colorFilter = colorFilter,
+                )
+
+            is ImageBitmap ->
+                Image(
+                    iconResource as ImageBitmap,
+                    contentDescription,
+                    modifier,
+                    colorFilter = colorFilter,
+                )
+            else -> throw IllegalArgumentException("Type not supported.")
+        }
+    }
+
+    // We can use Icon composable when we don't have to deal multicolored non tintable assets.
+    // Icon composable is concise and comes with convenient defaults from material libraries that
+    // work well with local color scheme when attributes are not explicit.
     @Composable
     fun build() {
         when (iconResource) {

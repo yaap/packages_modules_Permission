@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"আপনার ডিফল্ট নেভিগেশন অ্যাপ হিসেবে <xliff:g id="APP_NAME">%1$s</xliff:g> সেট করতে চান?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"কোনও অনুমতির প্রয়োজন নেই"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> আপনার বিজ্ঞপ্তির সাথে ইন্টার‌্যাক্ট করতে পারবে, তার সাথে আপনার ফোন, এমএসএস, পরিচিতি এবং ক্যালেন্ডারের অনুমতিও অ্যাক্সেস করতে পারবে।"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g>-কে আপনার বিজ্ঞপ্তির সাথে কথোপকথন এবং কানেক্ট করা ডিভাইসের অ্যাপ স্ট্রিম করতে অনুমতি দেওয়া হবে।"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"এই পরিষেবাটি আপনার ফোনের ফটো, মিডিয়া ও বিজ্ঞপ্তি অন্যান্য ডিভাইসে শেয়ার করে।"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"নোট নেওয়ার ডিফল্ট অ্যাপ"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"নোট অ্যাপ"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"অ্যাপ, যা আপনার ডিভাইসে নোট নেওয়ার অনুমতি দেয়"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"আপনার ফোন চেক করুন"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"আপনার ফোনে কানেক্ট করা যায়নি"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"আবার চেষ্টা করতে চান?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"এজেন্ট"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"যেসব এজেন্ট, অ্যাপে তথ্য অ্যাক্সেস করতে বা অ্যাকশন নিতে পারে"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"এজেন্ট"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"এই ডিভাইসে এজেন্টদের অ্যাক্সেস ম্যানেজ করুন"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"কোনও এজেন্ট অ্যাপ উপলভ্য নেই"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"এই ফিচার চালু করতে, আপনার ডিভাইসে কোনও এজেন্ট অ্যাপ ইনস্টল করুন"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"অ্যাপ অ্যাক্সেস"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"এমন অ্যাপ ও সেটিংস যা অ্যাক্সেস করে এই এজেন্ট আপনার হয়ে তথ্য পেতে ও অ্যাকশন নিতে পারবে"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাক্সেস করার জন্য কোনও অ্যাপ উপলভ্য নেই"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"সিস্টেম"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"অ্যাপ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"এজেন্টের অ্যাক্সেস"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"এই অ্যাপে আপনার জন্য তথ্য অ্যাক্সেস করতে ও অ্যাকশন নিতে পারে এমন এজেন্ট"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"ডিভাইস সেটিংস"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>-কে <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>-এর এজেন্ট হওয়ার অনুমতি দেবেন?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"এই এজেন্ট আপনার হয়ে তথ্য পেতে ও অ্যাকশন নিতে <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> অ্যাক্সেস করতে পারবে"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"অনুমতি দিন"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"অনুমতি দেবেন না"</string>
 </resources>

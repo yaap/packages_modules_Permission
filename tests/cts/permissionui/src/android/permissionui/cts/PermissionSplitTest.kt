@@ -19,7 +19,6 @@ package android.permissionui.cts
 import android.content.pm.PackageManager
 import android.health.connect.HealthPermissions
 import android.os.Build
-import android.permission.flags.Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
@@ -72,63 +71,29 @@ class PermissionSplitTest : BaseUsePermissionTest() {
         testLocationPermissionSplit(false)
     }
 
-    // TODO: b/388596433 - Update maxSdkVersion to VANILLA_ICE_CREAM after SDK bumps.
-    // TODO: b/383440585 - Remove this test when flag annotation issue is fixed.
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
-        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
     )
     @Test
-    fun testBodySensorSplitOnTToU() {
+    fun testBodySensorSplitOnTToV() {
         installPackage(APP_APK_PATH_31)
         testBodySensorPermissionSplitToBodySensorsBackground(true)
     }
 
-    // Before SDK_INT bumps to 36, the in-development B images are using SDK_INT=35(V). This will
-    // cause test failures on main builds where replaceBodySensor flag is enabled to remove Sensor
-    // group UI. As a workaround, we move SDK_INT=35 tests out and requires replaceBodySensor flag
-    // disabled when running on these images.
-    // TODO: b/388596433 - Update minSdkVersion to BAKLAVA after SDK bumps.
-    // TODO: b/383440585 - Update minSdkVersion to TIRAMISU when flag annotation issue is fixed.
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
-    @RequiresFlagsDisabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
-    @Test
-    fun testBodySensorSplitPostV_replaceBodySensorFlagDisabled() {
-        installPackage(APP_APK_PATH_31)
-        testBodySensorPermissionSplitToBodySensorsBackground(true)
-    }
-
-    // TODO: b/388596433 - Update maxSdkVersion to VANILLA_ICE_CREAM after SDK bumps.
-    // TODO: b/383440585 - Remove this test when flag annotation issue is fixed.
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
-        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
     )
     @Test
-    fun testBodySensorSplit32OnTToU() {
+    fun testBodySensorSplit32OnTToV() {
         installPackage(APP_APK_PATH_32)
         testBodySensorPermissionSplitToBodySensorsBackground(true)
     }
 
-    // Before SDK_INT bumps to 36, the in-development B images are using SDK_INT=35(V). This will
-    // cause test failures on main builds where replaceBodySensor flag is enabled to remove Sensor
-    // group UI. As a workaround, we move SDK_INT=35 tests out and requires replaceBodySensor flag
-    // disabled when running on these images.
-    // TODO: b/388596433 - Update minSdkVersion to BAKLAVA after SDK bumps.
-    // TODO: b/383440585 - Update minSdkVersion to TIRAMISU when flag annotation issue is fixed.
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
-    @RequiresFlagsDisabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
-    @Test
-    fun testBodySensorSplit32PostV_replaceBodySensorFlagDisabled() {
-        installPackage(APP_APK_PATH_32)
-        testBodySensorPermissionSplitToBodySensorsBackground(true)
-    }
-
-    // TODO: b/388596433 - Update maxSdkVersion to VANILLA_ICE_CREAM after SDK bumps.
-    // TODO: b/383440585 - Remove this test when flag annotation issue is fixed.
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
-        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
     )
     @Test
     fun testBodySensorNonSplitOnTToU() {
@@ -136,22 +101,7 @@ class PermissionSplitTest : BaseUsePermissionTest() {
         testBodySensorPermissionSplitToBodySensorsBackground(false)
     }
 
-    // Before SDK_INT bumps to 36, the in-development B images are using SDK_INT=35(V). This will
-    // cause test failures on main builds where replaceBodySensor flag is enabled to remove Sensor
-    // group UI. As a workaround, we move SDK_INT=35 tests out and requires replaceBodySensor flag
-    // disabled when running on these images.
-    // TODO: b/388596433 - Update minSdkVersion to BAKLAVA after SDK bumps.
-    // TODO: b/383440585 - Update minSdkVersion to TIRAMISU when flag annotation issue is fixed.
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
-    @RequiresFlagsDisabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
-    @Test
-    fun testBodySensorNonSplitPostV_replaceBodySensorFlagDisabled() {
-        installPackage(APP_APK_PATH_LATEST)
-        testBodySensorPermissionSplitToBodySensorsBackground(false)
-    }
-
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
     fun testBodySensorSplitOnBaklava_splitToReadHeartRate() {
         assumeTrue(supportHeartrate)

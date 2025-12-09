@@ -122,7 +122,8 @@ interface GetPermissionsDeviceState {
      * @param appFunctionContext The AppFunction execution context.
      */
     suspend fun getPermissionsDeviceState(
-        appFunctionContext: AppFunctionContext
+        appFunctionContext: AppFunctionContext,
+        getPermissionsDeviceStateParams: GetPermissionsDeviceStateParams,
     ): DeviceStateResponse
 }
 
@@ -139,6 +140,30 @@ interface GetWellbeingDeviceState {
      * @param appFunctionContext The AppFunction execution context.
      */
     suspend fun getWellbeingDeviceState(appFunctionContext: AppFunctionContext): DeviceStateResponse
+}
+
+/** Represents the request that is passed in to get a certain device state. */
+@Document(
+    name =
+        "com.google.android.appfunctions.schema.common.v1.devicestate.GetPermissionsDeviceStateParams"
+)
+class GetPermissionsDeviceStateParams(
+    @Document.Namespace val namespace: String = "", // unused
+    @Document.Id val id: String = "", // unused
+    /**
+     * Indicates that the request was initiated by the user while the device was unlocked and so the
+     * app function should skip the device lock state check before executing the. This should only
+     * be used by the calling agent for scheduled requests and for handling ongoing requests that
+     * were started before the device was locked. Defaults to checking for the lock state if not
+     * provided.
+     */
+    @Document.BooleanProperty val requestInitiatedWhileUnlocked: Boolean? = null,
+) {
+    override fun equals(other: Any?) =
+        other is GetPermissionsDeviceStateParams &&
+            requestInitiatedWhileUnlocked == other.requestInitiatedWhileUnlocked
+
+    override fun hashCode() = Objects.hash(requestInitiatedWhileUnlocked)
 }
 
 /**

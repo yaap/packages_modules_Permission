@@ -197,7 +197,7 @@
     <string name="approximate_image_description" msgid="938803699637069884">"தோராயமான இருப்பிடம்"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"துல்லியமான இருப்பிடத்தைப் பயன்படுத்து"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"துல்லியமான இருப்பிடம் ஆஃப் செய்யப்பட்டிருக்கும்போது உங்கள் தோராயமான இருப்பிடத்தை ஆப்ஸ் அணுகலாம்"</string>
-    <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g> என்பதற்கான அனுமதி"</string>
+    <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g> அனுமதி"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"இந்த ஆப்ஸிற்கு <xliff:g id="PERM">%1$s</xliff:g> அணுகல்"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> சாதனத்தில் இந்த ஆப்ஸுக்கான <xliff:g id="PERM">%1$s</xliff:g> அணுகல்"</string>
     <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"அனைத்து <xliff:g id="APP">%1$s</xliff:g> அனுமதிகளையும் காட்டு"</string>
@@ -209,7 +209,7 @@
     <string name="auto_revoke_label" msgid="5068393642936571656">"இந்த ஆப்ஸ் பயன்படுத்தப்படவில்லை என்றால் அனுமதிகளை அகற்றவும்"</string>
     <string name="unused_apps_label" msgid="2595428768404901064">"அனுமதிகளை அகற்றி இடத்தைக் காலியாக்கு"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"செயலில் இல்லாதபோது ஆப்ஸை இடைநிறுத்துதல்"</string>
-    <string name="unused_apps_label_v3" msgid="693340578642156657">"ஆப்ஸைப் பயன்படுத்தாதபோது நிர்வகித்தல்"</string>
+    <string name="unused_apps_label_v3" msgid="693340578642156657">"ஆப்ஸைப் பயன்படுத்தாதபோது நிர்வகி"</string>
     <string name="unused_apps_summary" msgid="8839466950318403115">"அனுமதிகளை அகற்றும், தற்காலிக ஃபைல்களை நீக்கும், அறிவிப்புகளை நிறுத்தும்"</string>
     <string name="unused_apps_summary_v2" msgid="5011313200815115802">"அனுமதிகளை அகற்றும், தற்காலிக ஃபைல்களை நீக்கும், அறிவிப்புகளை நிறுத்தும், ஆப்ஸைக் காப்பிடும்"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"இந்த ஆப்ஸைச் சில மாதங்கள் பயன்படுத்தவில்லை என்றால் உங்கள் தரவைப் பாதுகாப்பதற்காக இதற்கான அனுமதிகள் அகற்றப்படும்."</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸை உங்கள் வழிகாட்டும் இயல்புநிலை ஆப்ஸாக அமைக்கவா?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"அனுமதிகள் தேவையில்லை"</string>
     <string name="role_watch_description" msgid="267003778693177779">"உங்கள் அறிவிப்புகளைப் பயன்படுத்துவதற்கான அனுமதியையும் மொபைல், மெசேஜ், தொடர்புகள், கேலெண்டர் ஆகியவற்றின் அனுமதிகளுக்கான அணுகலையும் <xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸ் பெறும்."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"உங்கள் அறிவிப்புகளைப் பயன்படுத்துவதற்கான அனுமதியையும் இணைக்கப்பட்டுள்ள சாதனத்தில் உங்கள் ஆப்ஸை ஸ்ட்ரீம் செய்யவும் <xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸ் அனுமதிக்கப்படும்."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"இந்தச் சேவை உங்கள் படங்கள், மீடியா, அறிவிப்புகள் ஆகியவற்றை மொபைலிலிருந்து பிற சாதனங்களுக்குப் பகிரும்."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"குறிப்பெடுக்க இயல்புநிலை ஆப்ஸ்"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"குறிப்பு எடுப்பதற்கான ஆப்ஸ்"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"உங்கள் சாதனத்தில் குறிப்புகள் எடுக்க அனுமதிக்கும் ஆப்ஸ்"</string>
@@ -633,7 +631,7 @@
     <string name="mic_toggle_title" msgid="2649991093496110162">"மைக்ரோஃபோன் அணுகல்"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"ஆப்ஸ் &amp; சேவைகளுக்கு"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"ஆப்ஸ் &amp; சேவைகளுக்கு. இந்த அமைப்பு முடக்கப்பட்டிருந்தாலும் அவசர உதவி எண்ணை நீங்கள் அழைக்கும்போது மைக்ரோஃபோன் தரவு பகிரப்படலாம்."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"இருப்பிடத்திற்கான அணுகலைக் கொண்ட ஆப்ஸையும் சேவைகளையும் பாருங்கள்"</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"இருப்பிடத்திற்கான அணுகலைக் கொண்ட ஆப்ஸையும் சேவைகளையும் பார்க்கலாம்"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"கிளிப்போர்டுக்கான அணுகலைக் காட்டுதல்"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"நீங்கள் நகலெடுத்த வார்த்தைகளையோ படங்களையோ பிறவற்றையோ ஆப்ஸ் அணுகும்போது ஓர் அறிவிப்பைக் காட்டும்"</string>
     <string name="show_password_title" msgid="2877269286984684659">"கடவுச்சொற்களைக் காட்டுதல்"</string>
@@ -660,7 +658,7 @@
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"இருப்பிடத் தரவு பகிரப்படலாம்"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"இந்த ஆப்ஸில் குறிப்பிட்டுள்ளபடி மூன்றாம் தரப்பினருடன் இருப்பிடத் தரவை இது பகிரலாம்"</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"இருப்பிடத்திற்கான தரவுப் பகிர்வு குறித்த அறிவிப்புகள்"</string>
-    <string name="data_sharing_updates_summary" msgid="764113985772233889">"உங்கள் இருப்பிடத் தரவைப் பகிரும் விதத்தை மாற்றிய ஆப்ஸ் எவை எனப் பாருங்கள்"</string>
+    <string name="data_sharing_updates_summary" msgid="764113985772233889">"உங்கள் இருப்பிடத் தரவைப் பகிரும் விதத்தை மாற்றிய ஆப்ஸ் எவை எனப் பார்க்கலாம்"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"உங்கள் இருப்பிடத் தரவைப் பகிரும் விதத்தை இந்த ஆப்ஸ் மாற்றியுள்ளன. இதற்குமுன் அவற்றைப் பகிராமல் இருந்திருக்கலாம் அல்லது விளம்பரப்படுத்தல், மார்கெட்டிங் போன்ற நோக்கங்களுக்காக இப்போது பகிரக்கூடும்."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"இந்த ஆப்ஸின் டெவெலப்பர்கள் தங்கள் தரவுப் பகிர்வு நடைமுறைகள் குறித்த தகவல்களை ஆப்ஸ்டோருக்கு வழங்கியுள்ளனர். காலப்போக்கில் அவற்றை அவர்கள் மாற்றக்கூடும்.\n\nஆப்ஸ் பதிப்பு, உபயோகம், பிராந்தியம், வயது ஆகியவற்றின் அடிப்படையில் தரவுப் பகிர்வு நடைமுறைகள் மாறுபடக்கூடும்."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"தரவுப் பகிர்வு குறித்துத் தெரிந்துகொள்ளுங்கள்"</string>
@@ -682,7 +680,7 @@
     <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"உங்கள் சாதனத்தையும் தரவையும் பாதுகாப்பதற்காக இந்த அமைப்பு தடுக்கப்பட்டுள்ளது.<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>புதிய மூலத்தில் இருந்து அறியப்படாத ஆப்ஸை நிறுவுமாறு கேட்பதன் மூலம் மோசடி செய்பவர்கள் தீங்கு விளைவிக்கும் ஆப்ஸை நிறுவ முயலலாம்."</string>
+</xliff:g>ஒரு புதிய சோர்ஸிலிருந்து தெரியாத ஆப்ஸை நிறுவுமாறு கேட்பதன் மூலம் மோசடி செய்பவர்கள் தீங்கு விளைவிக்கும் ஆப்ஸை நிறுவ முயலலாம்."</string>
     <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>ஆப்ஸுக்கான அணுகல்தன்மை அம்சங்களை அனுமதிக்குமாறு கேட்பதன் மூலம் மோசடி செய்பவர்கள் உங்கள் சாதனத்தைக் கட்டுப்படுத்த முயலலாம்."</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"மொபைலைப் பாருங்கள்"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"உங்கள் மொபைலுடன் இணைக்க முடியவில்லை"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"மீண்டும் முயலவா?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"ஏஜெண்ட்டுகள்"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"ஆப்ஸில் தகவல்களை அணுகக்கூடிய அல்லது நடவடிக்கைகளை எடுக்கக்கூடிய ஏஜெண்ட்டுகள்"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"ஏஜெண்ட்டுகள்"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"இந்தச் சாதனத்திலுள்ள ஏஜெண்ட்டுகளுக்கான அணுகலை நிர்வகிக்கலாம்"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"ஏஜெண்ட் ஆப்ஸ் எதுவுமில்லை"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"இந்த அம்சத்தை இயக்க உங்கள் சாதனத்தில் ஓர் ஏஜெண்ட் ஆப்ஸை நிறுவுங்கள்"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"ஆப்ஸ் அணுகல்"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"உங்களுக்காக தகவல்களைப் பெறுவதற்கும் நடவடிக்கைகளை எடுப்பதற்கும் இந்த ஏஜெண்ட் அணுகக்கூடிய ஆப்ஸும் அமைப்புகளும்"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> அணுகலுக்கு எந்த ஆப்ஸும் இல்லை"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"சிஸ்டம்"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ஆப்ஸ்"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"ஏஜெண்ட் அணுகல்"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"இந்த ஆப்ஸில் தகவல்களை அணுகி உங்களுக்காகச் செயல்களைச் செய்யக்கூடிய ஏஜெண்ட்டுகள்"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"சாதன அமைப்புகள்"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ஆப்ஸுக்கு ஏஜெண்ட்டாக இருக்க <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ஆப்ஸை அனுமதிக்கவா?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"உங்களுக்காகத் தகவல்களைப் பெற்று நடவடிக்கைகள் எடுக்க இந்த ஏஜெண்ட்டால் <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ஆப்ஸை அணுக முடியும்"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"அனுமதி"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"அனுமதிக்காதே"</string>
 </resources>

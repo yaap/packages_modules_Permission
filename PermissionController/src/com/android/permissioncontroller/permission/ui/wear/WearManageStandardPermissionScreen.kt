@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.model.livedatatypes.PermGroupPackagesUiInfo
 import com.android.permissioncontroller.permission.ui.model.ManageStandardPermissionsViewModel
@@ -80,7 +81,7 @@ internal fun getPermGroupChipParams(
     return permissionGroups
         // Removing Health Connect from the list of permissions to fix b/331260850
         .let {
-            if (Flags.replaceBodySensorPermissionEnabled()) {
+            if (SdkLevel.isAtLeastB()) {
                 it
             } else {
                 it.filterNot { Utils.isHealthPermissionGroup(it.key) }

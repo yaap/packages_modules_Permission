@@ -26,6 +26,7 @@ android_library {
         "java/**/*.kt",
     ],
     static_libs: [
+        "android.permission.flags-aconfig-java-export",
         "androidx.test.core",
         "compatibility-device-util-axt",
         // NOTE: when importing this library in a test you may have to add the following option to

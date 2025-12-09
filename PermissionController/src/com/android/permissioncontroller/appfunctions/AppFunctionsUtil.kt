@@ -16,8 +16,11 @@
 
 package com.android.permissioncontroller.appfunctions
 
+import android.app.appfunctions.AppFunctionManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.permission.flags.Flags
 import android.util.Log
 import com.android.permissioncontroller.permission.utils.Utils
 import java.util.UUID
@@ -40,6 +43,9 @@ object AppFunctionsUtil {
 
     const val ACTION_ADDITIONAL_PERMISSIONS =
         "com.android.permissioncontroller.devicestate.action.ADDITIONAL_PERMISSIONS"
+
+    const val ACTION_MANAGE_DEFAULT_APP =
+        "com.android.permissioncontroller.devicestate.action.MANAGE_DEFAULT_APP"
 
     const val LOG_TAG = "AppFunctionsUtil"
     const val EXTRA_DEVICE_STATE_KEY = "com.android.permissioncontroller.devicestate.key"
@@ -67,5 +73,24 @@ object AppFunctionsUtil {
             }
             return password
         }
+    }
+
+    @JvmStatic
+    fun isValidAgent(packageName: String, context: Context): Boolean =
+        Flags.appFunctionAccessApiEnabled() &&
+            packageName in context.getSystemService(AppFunctionManager::class.java).validAgents
+
+    @JvmStatic
+    fun isValidTarget(packageName: String, context: Context): Boolean =
+        Flags.appFunctionAccessApiEnabled() &&
+            packageName in context.getSystemService(AppFunctionManager::class.java).validTargets
+
+    @JvmStatic
+    fun isAppFunctionUiEnabled(context: Context): Boolean {
+        val packageManager = context.packageManager
+        return Flags.appFunctionAccessUiEnabled() &&
+            !packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK) &&
+            !packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) &&
+            !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)
     }
 }

@@ -219,6 +219,78 @@
 
     <!-- END EXPRESSIVE ENHANCED CONFIRMATION DIALOG -->
 
+    <!-- START EXPRESSIVE APP DATA SHARING SCREEN -->
+
+    <style name="AppDataSharingDetailsContainerExpressive">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/settingslib_expressive_space_small4</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:layoutDirection">locale</item>
+    </style>
+
+    <style name="AppDataSharingDetailsMessageExpressive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:layout_marginEnd">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:textAppearance">@style/AppDataSharingDetailsTextAppearance</item>
+    </style>
+
+    <style name="AppDataSharingNoUpdatesMessageExpressive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">28dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textAppearance">@style/AppDataSharingNoUpdatesTextAppearance</item>
+    </style>
+
+    <style name="AppDataSharingUpdatesFooterContainerExpressive">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/settingslib_expressive_space_small4</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:layoutDirection">locale</item>
+    </style>
+
+    <style name="AppDataSharingUpdatesFooterIconFrameExpressive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/settingslib_expressive_space_small4</item>
+        <item name="android:layout_marginStart">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:layout_marginEnd">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppDataSharingUpdatesFooterMessageExpressive">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/settingslib_expressive_space_small1</item>
+        <item name="android:layout_marginBottom">@dimen/settingslib_expressive_space_extrasmall4</item>
+        <item name="android:layout_marginStart">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:layout_marginEnd">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:textAppearance">@style/AppDataSharingUpdatesFooterTextAppearance</item>
+    </style>
+
+    <style name="AppDataSharingUpdatesFooterLinkExpressive"
+           parent="@android:style/TextAppearance.DeviceDefault">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:layout_marginEnd">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">20sp</item>
+        <item name="android:textColorLink">@color/permission_rationale_accent_primary_variant</item>
+    </style>
+
+    <!-- END EXPRESSIVE APP DATA SHARING SCREEN -->
+
     <style name="PermissionGrantButtonAllowExpressive"
            parent="@style/PermissionGrantButtonExpressive"></style>
     <style name="PermissionGrantButtonAllowForegroundExpressive"
@@ -235,4 +307,33 @@
            parent="@style/PermissionGrantButtonExpressive"></style>
     <style name="PermissionGrantButtonDontAllowMoreExpressive"
            parent="@style/PermissionGrantButtonExpressive"></style>
+
+    <style name="ExpressiveStatusButton"
+        parent="@style/SettingsLibButtonStyle.Expressive.Filled.Extra">
+        <item name="materialSizeOverlay">@style/SizeOverlay.Material3Expressive.Button.Small</item>
+        <item name="backgroundTint">@color/safety_center_button_info</item>
+        <item name="android:textColor">?attr/textColorScActionButton</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/sc_spacing_xxxlarge</item>
+        <item name="layout_constraintTop_toBottomOf">@id/status_title_and_summary</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+    <style name="ExpressiveStatusButton.Fixed" />
+    <style name="ExpressiveStatusButton.Responsive" />
+
+    <style name="ExpressiveActionButton"
+        parent="@style/Banner.PositiveButton.SettingsLib.Expressive">
+        <item name="android:textColor">?attr/textColorScActionButton</item>
+    </style>
+    <style name="ExpressiveActionButton.Fixed" />
+    <style name="ExpressiveActionButton.Responsive" />
+
+    <style name="ExpressiveOutlineActionButton"
+        parent="@style/Banner.NegativeButton.SettingsLib.Expressive">
+        <item name="android:textColor">?attr/textColorScSecondaryActionButton</item>
+    </style>
+    <style name="ExpressiveOutlineActionButton.Fixed" />
+    <style name="ExpressiveOutlineActionButton.Responsive" />
 </resources>

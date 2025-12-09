@@ -91,8 +91,12 @@ public class AppOpPermissions {
             return false;
         }
         String appOp = AppOpsManager.permissionToOp(appOpPermission);
-        int defaultMode = Permissions.getDefaultAppOpMode(appOp);
-        boolean changed = setAppOpModeAsUser(packageName, appOp, defaultMode, user, context);
+        Integer currentMode = Permissions.getAppOpModeAsUser(packageName, appOp, user, context);
+        boolean changed = false;
+        if (currentMode != null && currentMode == AppOpsManager.MODE_ALLOWED) {
+            int defaultMode = Permissions.getDefaultAppOpMode(appOp);
+            changed = setAppOpModeAsUser(packageName, appOp, defaultMode, user, context);
+        }
         Permissions.setPermissionGrantedByRoleAsUser(packageName, appOpPermission, false,
                 user, context);
         return changed;

@@ -116,7 +116,6 @@ public final class AppPermissionGroup implements Comparable<AppPermissionGroup> 
     private final CharSequence mLabel;
     private final CharSequence mFullLabel;
     private final @StringRes int mRequest;
-    private final @StringRes int mRequestDetail;
     private final @StringRes int mBackgroundRequest;
     private final @StringRes int mBackgroundRequestDetail;
     private final @StringRes int mUpgradeRequest;
@@ -298,10 +297,9 @@ public final class AppPermissionGroup implements Comparable<AppPermissionGroup> 
         AppPermissionGroup group = new AppPermissionGroup(context, packageInfo, groupInfo.name,
                 groupInfo.packageName, groupLabel, fullGroupLabel,
                 loadGroupDescription(context, groupInfo, packageManager), getRequest(groupInfo),
-                getRequestDetail(groupInfo), getBackgroundRequest(groupInfo),
-                getBackgroundRequestDetail(groupInfo), getUpgradeRequest(groupInfo),
-                getUpgradeRequestDetail(groupInfo), groupInfo.packageName, groupInfo.icon,
-                userHandle, delayChanges, appOpsManager);
+                getBackgroundRequest(groupInfo), getBackgroundRequestDetail(groupInfo),
+                getUpgradeRequest(groupInfo), getUpgradeRequestDetail(groupInfo),
+                groupInfo.packageName, groupInfo.icon, userHandle, delayChanges, appOpsManager);
 
         final Set<String> exemptedRestrictedPermissions = context.getPackageManager()
                 .getWhitelistedRestrictedPermissions(packageInfo.packageName,
@@ -419,11 +417,10 @@ public final class AppPermissionGroup implements Comparable<AppPermissionGroup> 
                         group.mBackgroundPermissions = new AppPermissionGroup(group.mContext,
                                 group.getApp(), group.getName(), group.getDeclaringPackage(),
                                 group.getLabel(), group.getFullLabel(), group.getDescription(),
-                                group.getRequest(), group.getRequestDetail(),
-                                group.getBackgroundRequest(), group.getBackgroundRequestDetail(),
-                                group.getUpgradeRequest(), group.getUpgradeRequestDetail(),
-                                group.getIconPkg(), group.getIconResId(), group.getUser(),
-                                delayChanges, appOpsManager);
+                                group.getRequest(), group.getBackgroundRequest(),
+                                group.getBackgroundRequestDetail(), group.getUpgradeRequest(),
+                                group.getUpgradeRequestDetail(), group.getIconPkg(),
+                                group.getIconResId(), group.getUser(), delayChanges, appOpsManager);
                     }
 
                     group.getBackgroundPermissions().addPermission(permission);
@@ -462,11 +459,10 @@ public final class AppPermissionGroup implements Comparable<AppPermissionGroup> 
 
     private AppPermissionGroup(Context context, PackageInfo packageInfo, String name,
             String declaringPackage, CharSequence label, CharSequence fullLabel,
-            CharSequence description, @StringRes int request, @StringRes int requestDetail,
-            @StringRes int backgroundRequest, @StringRes int backgroundRequestDetail,
-            @StringRes int upgradeRequest, @StringRes int upgradeRequestDetail,
-            String iconPkg, int iconResId, UserHandle userHandle, boolean delayChanges,
-            @NonNull AppOpsManager appOpsManager) {
+            CharSequence description, @StringRes int request, @StringRes int backgroundRequest,
+            @StringRes int backgroundRequestDetail, @StringRes int upgradeRequest,
+            @StringRes int upgradeRequestDetail, String iconPkg, int iconResId,
+            UserHandle userHandle, boolean delayChanges, @NonNull AppOpsManager appOpsManager) {
         int targetSDK = packageInfo.applicationInfo.targetSdkVersion;
 
         mContext = context;
@@ -485,7 +481,6 @@ public final class AppPermissionGroup implements Comparable<AppPermissionGroup> 
         mCollator = Collator.getInstance(
                 context.getResources().getConfiguration().getLocales().get(0));
         mRequest = request;
-        mRequestDetail = requestDetail;
         mBackgroundRequest = backgroundRequest;
         mBackgroundRequestDetail = backgroundRequestDetail;
         mUpgradeRequest = upgradeRequest;
@@ -608,28 +603,6 @@ public final class AppPermissionGroup implements Comparable<AppPermissionGroup> 
      */
     public @StringRes int getRequest() {
         return mRequest;
-    }
-
-    /**
-     * Extract the (subtitle) message explaining to the user that the permission is only granted to
-     * the apps running in the foreground.
-     *
-     * @param info The package item info to extract the message from
-     *
-     * @return the message or 0 if unset
-     */
-    private static @StringRes int getRequestDetail(PackageItemInfo info) {
-        return Utils.getRequestDetail(info.name);
-    }
-
-    /**
-     * Get the (subtitle) message explaining to the user that the permission is only granted to
-     * the apps running in the foreground.
-     *
-     * @return the message or 0 if unset
-     */
-    public @StringRes int getRequestDetail() {
-        return mRequestDetail;
     }
 
     /**

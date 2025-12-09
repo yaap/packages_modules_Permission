@@ -470,6 +470,17 @@ object KotlinUtils {
     }
 
     /**
+     * Returns the package name for the Settings app.
+     *
+     * @param pm The PackageManager
+     * @return The package name for the Settings app, or a fallback if not found.
+     */
+    fun getSettingsPackageName(pm: PackageManager): String {
+       return getPackageNameForIntent(pm, Settings.ACTION_SETTINGS)
+            ?: Constants.SETTINGS_PACKAGE_NAME_FALLBACK
+    }
+
+    /**
      * Get the settings icon
      *
      * @param app The current application
@@ -478,9 +489,7 @@ object KotlinUtils {
      * @return Bitmap of the setting's icon, or null
      */
     fun getSettingsIcon(app: Application, user: UserHandle, pm: PackageManager): Bitmap? {
-        val settingsPackageName =
-            getPackageNameForIntent(pm, Settings.ACTION_SETTINGS)
-                ?: Constants.SETTINGS_PACKAGE_NAME_FALLBACK
+        val settingsPackageName = getSettingsPackageName(pm)
         return getBadgedPackageIconBitmap(app, user, settingsPackageName)
     }
 

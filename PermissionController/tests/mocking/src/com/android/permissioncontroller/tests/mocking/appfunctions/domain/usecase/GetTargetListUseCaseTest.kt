@@ -1,0 +1,64 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.permissioncontroller.tests.mocking.appfunctions.domain.usecase
+
+import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SdkSuppress
+import com.android.permissioncontroller.appfunctions.domain.model.AppFunctionPackageInfo
+import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCase
+import com.android.permissioncontroller.appfunctions.domain.usecase.GetTargetListUseCase
+import com.android.permissioncontroller.tests.mocking.appfunctions.data.repository.FakeAppFunctionRepository
+import com.android.permissioncontroller.tests.mocking.pm.data.repository.FakePackageRepository
+import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.test.runTest
+import org.junit.Test
+import org.junit.runner.RunWith
+
+// TODO(b/424004217): Update this to the correct version code
+/** Unit tests for [GetTargetListUseCase]. */
+@RunWith(AndroidJUnit4::class)
+@SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
+class GetTargetListUseCaseTest {
+    @Test
+    fun getTargetList_returnsTargetList() = runTest {
+        val expectedTargets =
+            targetPackagesAndLabels.map { AppFunctionPackageInfo(it.key, it.value, null) }
+        val useCase =
+            GetTargetListUseCase(
+                FakeAppFunctionRepository(targets = targetPackageNames),
+                GetAppFunctionPackageInfoUseCase(
+                    FakePackageRepository(packagesAndLabels = targetPackagesAndLabels)
+                ),
+            )
+        val actualTargets = useCase()
+        assertThat(actualTargets).containsExactlyElementsIn(expectedTargets)
+    }
+
+    companion object {
+        private const val TEST_TARGET_PACKAGE_NAME = "test.target.package"
+        private const val TEST_TARGET_PACKAGE_NAME2 = "test.target.package2"
+        private const val TEST_TARGET_LABEL = "Test Target"
+        private const val TEST_TARGET_LABEL2 = "Test Target 2"
+        private val targetPackageNames = listOf(TEST_TARGET_PACKAGE_NAME, TEST_TARGET_PACKAGE_NAME2)
+        private val targetPackagesAndLabels =
+            mapOf(
+                TEST_TARGET_PACKAGE_NAME to TEST_TARGET_LABEL,
+                TEST_TARGET_PACKAGE_NAME2 to TEST_TARGET_LABEL2,
+            )
+    }
+}

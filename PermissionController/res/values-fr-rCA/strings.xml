@@ -24,7 +24,7 @@
     <string name="dialog_close" msgid="6840699812532384661">"Fermer"</string>
     <string name="available" msgid="6007778121920339498">"Accessible"</string>
     <string name="blocked" msgid="9195547604866033708">"Bloqué"</string>
-    <string name="on" msgid="280241003226755921">"Activé"</string>
+    <string name="on" msgid="280241003226755921">"Activée"</string>
     <string name="off" msgid="1438489226422866263">"Désactivé"</string>
     <string name="uninstall_or_disable" msgid="4496612999740858933">"Désinstaller ou désactiver"</string>
     <string name="app_not_found_dlg_title" msgid="6029482906093859756">"Appli non trouvée"</string>
@@ -73,7 +73,7 @@
     <string name="denied_permission_decision" msgid="5308961501779563781">"Vous avez refusé l\'accès de <xliff:g id="APP_NAME">%1$s</xliff:g> aux <xliff:g id="PERMISSION_NAME">%2$s</xliff:g>"</string>
     <string name="days_ago" msgid="6650359081551335629">"{count,plural, =0{Aujourd’hui}=1{Il y a 1 jour}one{Il y a # jour}many{Il y a # jours}other{Il y a # jours}}"</string>
     <string name="app_disable_dlg_positive" msgid="7418444149981904940">"Désactiver l\'appli"</string>
-    <string name="app_disable_dlg_text" msgid="3126943217146120240">"Si vous désactivez cette appli, Android et d\'autres applis risquent de ne plus fonctionner correctement. Gardez à l\'esprit que vous ne pouvez pas supprimer cette appli, étant donné qu\'elle était préinstallée sur votre appareil. En la désactivant, elle ne sera plus active et elle sera masquée sur votre appareil."</string>
+    <string name="app_disable_dlg_text" msgid="3126943217146120240">"Si vous désactivez cette appli, Android et d\'autres applis risquent de ne plus fonctionner correctement. Gardez à l\'esprit que vous ne pouvez pas supprimer cette appli, étant donné qu\'elle était préinstallée sur votre appareil. Si vous la désactivez, elle ne sera plus active et elle sera masquée sur votre appareil."</string>
     <string name="app_permission_manager" msgid="3903811137630909550">"Gestionnaire des autorisations"</string>
     <string name="never_ask_again" msgid="4728762438198560329">"Ne plus demander"</string>
     <string name="no_permissions" msgid="3881676756371148563">"Aucune autorisation"</string>
@@ -179,7 +179,7 @@
     <string name="item_separator" msgid="4030255389809224513">", "</string>
     <string name="permission_usage_refresh" msgid="2264056346561305420">"Actualiser"</string>
     <string name="permission_history_title" msgid="8340081285133025225">"Historique des autorisations"</string>
-    <string name="permission_history_category_today" msgid="7496389369158806620">"Aujourd’hui"</string>
+    <string name="permission_history_category_today" msgid="7496389369158806620">"Aujourd\'hui"</string>
     <string name="permission_history_category_yesterday" msgid="7242517121222012521">"Hier"</string>
     <string name="app_permission_usage_title" msgid="6676802437831981822">"Util. des autoris. de l\'appli"</string>
     <string name="app_permission_usage_summary" msgid="390383661936709672">"Accès : <xliff:g id="NUM">%1$s</xliff:g> fois. Durée totale : <xliff:g id="DURATION">%2$s</xliff:g>. Dernière utilisation : il y a <xliff:g id="TIME">%3$s</xliff:g>."</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Définir l\'appli <xliff:g id="APP_NAME">%1$s</xliff:g> en tant qu\'appli de navigation par défaut?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Aucune autorisation nécessaire"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> aura l\'autorisation d\'interagir avec vos notifications et d\'accéder aux autorisations pour votre téléphone, vos messages texte, vos contacts et votre agenda."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> aura l\'autorisation d\'interagir avec vos notifications et de diffuser vos applis à l\'appareil connecté."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Ce service partage vos photos, vos contenus multimédias et vos notifications de votre téléphone vers d\'autres appareils."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Appli prise de notes par défaut"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Appli de prise de notes"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Applis qui vous permettent de prendre des notes sur votre appareil"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Vérifiez votre téléphone"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Impossible de joindre votre téléphone"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Réessayer?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agents"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Les agents qui peuvent accéder à des informations ou effectuer des actions dans les applis"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agents"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Gérez l\'accès des agents sur cet appareil"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Aucune appli d\'agent accessible"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Installer une appli d\'agent sur votre appareil pour activer cette fonctionnalité"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Accès des applis"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Les applis et les paramètres auxquels cet agent peut accéder pour obtenir des informations et effectuer des actions pour vous"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Aucune appli n\'est accessible pour <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Système"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Applis"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Accès de l\'agent"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Les agents qui peuvent accéder à des informations et effectuer des actions pour vous dans cette appli"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Paramètres de l\'appareil"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Autor. <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> comme agent pour <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Cet agent pourra acc. à <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> pour obtenir des infos et exécuter des actions"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Autoriser"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Interdire"</string>
 </resources>

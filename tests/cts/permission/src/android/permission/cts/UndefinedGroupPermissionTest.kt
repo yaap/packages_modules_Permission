@@ -30,6 +30,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.UiObjectNotFoundException
+import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.FeatureUtil
 import com.android.compatibility.common.util.SystemUtil
 import com.android.compatibility.common.util.SystemUtil.eventually
@@ -38,6 +39,7 @@ import java.util.regex.Pattern
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 /**
@@ -52,6 +54,8 @@ class UndefinedGroupPermissionTest {
     private var mPm: PackageManager? = null
     private var mAllowButtonText: Pattern? = null
     private var mDenyButtonText: Pattern? = null
+
+    @get:Rule val disableAnimationRule = DisableAnimationRule()
 
     @Before
     fun install() {
@@ -79,12 +83,12 @@ class UndefinedGroupPermissionTest {
                             permissionControllerResources.getIdentifier(
                                 "grant_dialog_button_allow",
                                 "string",
-                                "com.android.permissioncontroller"
+                                "com.android.permissioncontroller",
                             )
                         )
                     )
                 ),
-                Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE
+                Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE,
             )
         mDenyButtonText =
             Pattern.compile(
@@ -94,12 +98,12 @@ class UndefinedGroupPermissionTest {
                             permissionControllerResources.getIdentifier(
                                 "grant_dialog_button_deny",
                                 "string",
-                                "com.android.permissioncontroller"
+                                "com.android.permissioncontroller",
                             )
                         )
                     )
                 ),
-                Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE
+                Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE,
             )
     }
 
@@ -129,15 +133,15 @@ class UndefinedGroupPermissionTest {
     fun testCustomPermissionGrantedAlone() {
         Assert.assertEquals(
             PackageManager.PERMISSION_DENIED,
-            mPm!!.checkPermission(CAMERA, APP_PKG_NAME)
+            mPm!!.checkPermission(CAMERA, APP_PKG_NAME),
         )
         Assert.assertEquals(
             PackageManager.PERMISSION_DENIED,
-            mPm!!.checkPermission(RECORD_AUDIO, APP_PKG_NAME)
+            mPm!!.checkPermission(RECORD_AUDIO, APP_PKG_NAME),
         )
         Assert.assertEquals(
             PackageManager.PERMISSION_DENIED,
-            mPm!!.checkPermission(TEST, APP_PKG_NAME)
+            mPm!!.checkPermission(TEST, APP_PKG_NAME),
         )
         eventually {
             startRequestActivity(arrayOf(TEST))
@@ -148,15 +152,15 @@ class UndefinedGroupPermissionTest {
         eventually {
             Assert.assertEquals(
                 PackageManager.PERMISSION_DENIED,
-                mPm!!.checkPermission(CAMERA, APP_PKG_NAME)
+                mPm!!.checkPermission(CAMERA, APP_PKG_NAME),
             )
             Assert.assertEquals(
                 PackageManager.PERMISSION_DENIED,
-                mPm!!.checkPermission(RECORD_AUDIO, APP_PKG_NAME)
+                mPm!!.checkPermission(RECORD_AUDIO, APP_PKG_NAME),
             )
             Assert.assertEquals(
                 PackageManager.PERMISSION_GRANTED,
-                mPm!!.checkPermission(TEST, APP_PKG_NAME)
+                mPm!!.checkPermission(TEST, APP_PKG_NAME),
             )
         }
     }
@@ -167,12 +171,12 @@ class UndefinedGroupPermissionTest {
     }
 
     fun findAllowButton(): UiObject2 {
-         return if (FeatureUtil.isAutomotive() || FeatureUtil.isWatch()) {
+        return if (FeatureUtil.isAutomotive() || FeatureUtil.isWatch()) {
             waitFindObject(By.text(mAllowButtonText!!))
         } else {
             waitFindObject(
                 By.res("com.android.permissioncontroller:id/permission_allow_button"),
-                2000
+                2000,
             )
         }
     }
@@ -188,7 +192,7 @@ class UndefinedGroupPermissionTest {
         Assert.assertEquals(
             "$grantedPerm not granted.",
             PackageManager.PERMISSION_GRANTED,
-            mPm!!.checkPermission(grantedPerm, APP_PKG_NAME)
+            mPm!!.checkPermission(grantedPerm, APP_PKG_NAME),
         )
 
         // If the dialog shows, success. If not then either the UI is broken or the permission was
@@ -210,13 +214,13 @@ class UndefinedGroupPermissionTest {
                 Assert.assertEquals(
                     "grant dialog never showed.",
                     PackageManager.PERMISSION_GRANTED,
-                    mPm!!.checkPermission(targetPermission, APP_PKG_NAME)
+                    mPm!!.checkPermission(targetPermission, APP_PKG_NAME),
                 )
             }
         }
         Assert.assertEquals(
             PackageManager.PERMISSION_DENIED,
-            mPm!!.checkPermission(targetPermission, APP_PKG_NAME)
+            mPm!!.checkPermission(targetPermission, APP_PKG_NAME),
         )
     }
 

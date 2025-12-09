@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="cellular_network_security_title" msgid="2986431282931510973">"Zabezpečenie mobilnej siete"</string>
-    <string name="cellular_network_security_summary" msgid="7319307247487475572">"Ovládanie typu siete, šifrovania a upozornení"</string>
+    <string name="cellular_network_security_summary" msgid="7319307247487475572">"Typ siete, šifrovanie a ovládanie upozornení"</string>
     <string name="biometrics_title_for_private_profile" msgid="542819107383037820"></string>
     <string name="privacy_title" msgid="7047524783080782769">"Ochrana súkromia"</string>
     <string name="privacy_sources_title" msgid="309304028326660956">"Nastavenia ochrany súkromia"</string>

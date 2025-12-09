@@ -73,7 +73,7 @@
     <string name="denied_permission_decision" msgid="5308961501779563781">"您拒绝为“<xliff:g id="APP_NAME">%1$s</xliff:g>”授予<xliff:g id="PERMISSION_NAME">%2$s</xliff:g>访问权限"</string>
     <string name="days_ago" msgid="6650359081551335629">"{count,plural, =0{今天}=1{1 天前}other{# 天前}}"</string>
     <string name="app_disable_dlg_positive" msgid="7418444149981904940">"停用应用"</string>
-    <string name="app_disable_dlg_text" msgid="3126943217146120240">"如果您停用此应用，Android 及其他应用可能会无法再正常运行。请注意，您无法删除此应用，因为它是设备预装应用。停用后，系统将关闭此应用并在设备上将其隐藏。"</string>
+    <string name="app_disable_dlg_text" msgid="3126943217146120240">"如果停用此应用，Android 及其他应用可能会无法再正常运行。请注意，您无法删除此应用，因为它是设备预装应用。停用后，系统将关闭此应用并在设备上将其隐藏。"</string>
     <string name="app_permission_manager" msgid="3903811137630909550">"权限管理器"</string>
     <string name="never_ask_again" msgid="4728762438198560329">"不再询问"</string>
     <string name="no_permissions" msgid="3881676756371148563">"没有权限"</string>
@@ -106,7 +106,7 @@
     <string name="permission_summary_disabled_by_admin_background_only" msgid="3127091456731845646">"管理员已停用后台使用权"</string>
     <string name="permission_summary_enabled_by_admin_background_only" msgid="9132423838440275757">"管理员已启用后台使用权"</string>
     <string name="permission_summary_enabled_by_admin_foreground_only" msgid="1298432715610745358">"管理员已启用前台使用权"</string>
-    <string name="permission_summary_enabled_system_fixed" msgid="2438344700184127274">"设备需要具有此权限才能运行"</string>
+    <string name="permission_summary_enabled_system_fixed" msgid="2438344700184127274">"设备需要此权限才能运行"</string>
     <!-- no translation found for background_access_chooser_dialog_choices:0 (1351721623256561996) -->
     <!-- no translation found for background_access_chooser_dialog_choices:1 (9127301153688725448) -->
     <!-- no translation found for background_access_chooser_dialog_choices:2 (4305536986042401191) -->
@@ -196,7 +196,7 @@
     <string name="precise_image_description" msgid="6349638632303619872">"确切位置"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"大致位置"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"使用精确位置"</string>
-    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"精确位置关闭时，应用可以获取您的大致位置"</string>
+    <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"精确位置处于关闭状态时，应用可获取您的大致位置"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"<xliff:g id="PERM">%1$s</xliff:g>权限"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"是否允许此应用获得“<xliff:g id="PERM">%1$s</xliff:g>”权限"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"此应用在<xliff:g id="DEVICE_NAME">%2$s</xliff:g>上的<xliff:g id="PERM">%1$s</xliff:g>访问权限"</string>
@@ -210,8 +210,8 @@
     <string name="unused_apps_label" msgid="2595428768404901064">"撤消权限并释放空间"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"暂停闲置应用的活动"</string>
     <string name="unused_apps_label_v3" msgid="693340578642156657">"管理闲置应用"</string>
-    <string name="unused_apps_summary" msgid="8839466950318403115">"撤消权限、删除临时文件并停收通知"</string>
-    <string name="unused_apps_summary_v2" msgid="5011313200815115802">"撤消权限、删除临时文件、停收通知并归档应用"</string>
+    <string name="unused_apps_summary" msgid="8839466950318403115">"撤销权限、删除临时文件并停收通知"</string>
+    <string name="unused_apps_summary_v2" msgid="5011313200815115802">"撤销权限、删除临时文件、停收通知并归档应用"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"为了保护您的数据，如果您连续几个月未使用此应用，系统会移除其权限。"</string>
     <string name="auto_revoke_summary_with_permissions" msgid="389712086597285013">"为了保护您的数据，如果您连续几个月未使用此应用，系统会移除其以下权限：<xliff:g id="PERMS">%1$s</xliff:g>"</string>
     <string name="auto_revoked_apps_page_summary" msgid="6594753657893756536">"为了保护您的数据，对于您连续几个月未使用过的应用，系统已将其权限移除。"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"要将“<xliff:g id="APP_NAME">%1$s</xliff:g>”设为默认导航应用吗？"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"无需任何权限"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g>将能与通知互动，并可访问电话、短信、通讯录和日历。"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”将能够与通知互动，并可将应用流式传输到已连接的设备。"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"此服务会将您手机中的照片、媒体内容和通知分享给其他设备。"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"默认记事应用"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"记事应用"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"允许您在设备上记事的应用"</string>
@@ -510,7 +508,7 @@
     <string name="permgrouprequest_microphone" msgid="2825208549114811299">"要允许 &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; 录音吗？"</string>
     <string name="permgrouprequest_device_aware_microphone" msgid="8821701550505437951">"要允许&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;在&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;上录音吗？"</string>
     <string name="permgrouprequestdetail_microphone" msgid="8510456971528228861">"此应用将只能在您使用它时录音"</string>
-    <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"要允许 &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; 录音吗？"</string>
+    <string name="permgroupbackgroundrequest_microphone" msgid="8874462606796368183">"要允许“&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;”录音吗？"</string>
     <string name="permgroupbackgroundrequest_device_aware_microphone" msgid="3321823187623762958">"要允许&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;在&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;上录音吗？"</string>
     <string name="permgroupbackgroundrequestdetail_microphone" msgid="553702902263681838">"此应用可能想要随时录音，即使在您未使用它的时候。"<annotation id="link">"您可以在“设置”中授权"</annotation>"。"</string>
     <string name="permgroupupgraderequest_microphone" msgid="1362781696161233341">"要更改&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;的麦克风使用权限吗？"</string>
@@ -518,7 +516,7 @@
     <string name="permgroupupgraderequestdetail_microphone" msgid="2870497719571464239">"此应用想要随时录音，即使在您未使用它的时候。"<annotation id="link">"您可以在“设置”中授权"</annotation>"。"</string>
     <string name="permgrouprequest_activityRecognition" msgid="5415121592794230330">"要允许“&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;”获取您的身体活动数据吗？"</string>
     <string name="permgrouprequest_device_aware_activityRecognition" msgid="1243869530588745374">"要允许&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;在&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;上访问您的身体活动记录吗？"</string>
-    <string name="permgrouprequest_camera" msgid="5123097035410002594">"要允许 &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; 拍摄照片和录制视频吗？"</string>
+    <string name="permgrouprequest_camera" msgid="5123097035410002594">"要允许“&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;”拍摄照片和录制视频吗？"</string>
     <string name="permgrouprequest_device_aware_camera" msgid="5340173564041615494">"要允许&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;在&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;上拍照片和录视频吗？"</string>
     <string name="permgrouprequestdetail_camera" msgid="9085323239764667883">"此应用将只能在您使用它时拍摄照片和录制视频"</string>
     <string name="permgroupbackgroundrequest_camera" msgid="1274286575704213875">"要允许 &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; 拍摄照片和录制视频吗？"</string>
@@ -661,8 +659,8 @@
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"此应用已声明它可能会与第三方分享您的位置数据"</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"位置数据共享方面的更新"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"查看改变了位置数据共享方式的应用"</string>
-    <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"这些应用改变了它们在分享您位置数据上的做法。它们之前可能未分享过位置数据，也可能现在是为了广告或营销目的而分享此类数据。"</string>
-    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"这些应用的开发者已将其数据分享做法的相关信息提供给应用商店，并且可能会随时间更新此类信息。\n\n数据分享做法可能会因应用版本、使用情况、地区和年龄而异。"</string>
+    <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"这些应用更改了分享位置数据的做法。它们之前可能未分享过位置数据，也可能现在是为了广告或营销目的而分享位置数据。"</string>
+    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"这些应用的开发者已将其数据分享做法的相关信息提供给应用商店，并且可能会随时间推移而更新此类信息。\n\n数据分享做法可能会因应用版本、使用情况、地区和年龄而异。"</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"了解数据分享"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"现在会将您的位置数据分享给第三方"</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"现在会将您的位置数据分享给第三方，用于广告或营销目的"</string>
@@ -682,7 +680,7 @@
     <string name="enhanced_confirmation_phone_state_dialog_desc" msgid="3803423079498712549">"为保护您的设备和数据，系统已屏蔽此设置。<xliff:g id="SCAM_USE_SETTING_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="enhanced_confirmation_phone_state_dialog_install_desc" msgid="6400007048943674066">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>诈骗者可能会要求您从新的来源安装未知应用，从而试图安装有害应用。"</string>
+</xliff:g>诈骗者可能会要求您通过陌生的方式安装未知的应用，这往往是有害应用。"</string>
     <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
 
 </xliff:g>诈骗者可能会要求您允许某个应用使用无障碍功能，从而试图控制您的设备。"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"请查看您的手机"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"无法连接到您的手机"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"要重试吗？"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"智能体"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"可在应用中访问信息或执行操作的智能体"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"智能体"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"管理此设备上智能体的访问权限"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"暂无可用的代理应用"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"在您的设备上安装代理应用以启用此功能"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"应用访问权限"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"为了帮您获取信息和执行操作，此智能体可访问的应用和设置"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"暂无可供“<xliff:g id="APP_NAME">%1$s</xliff:g>”访问的应用"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"系统"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"应用"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"智能体访问权限"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"可在此应用中访问信息并为您执行操作的智能体"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"设备设置"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"要允许“<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>”作为智能体访问“<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>”吗？"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"此智能体将能够访问“<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>”，帮助您获取信息和执行操作"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"允许"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"不允许"</string>
 </resources>

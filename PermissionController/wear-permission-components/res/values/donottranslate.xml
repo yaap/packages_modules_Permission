@@ -79,4 +79,33 @@
     <dimen name="wear_compose_material3_shape_corner_large_size">26dp</dimen>
     <dimen name="wear_compose_material3_shape_corner_extra_large_size">36dp</dimen>
 
+    <color name="wear_compose_material3_primary_fixed">@android:color/system_primary_fixed</color>
+    <color name="wear_compose_material3_primary_fixed_dim">@android:color/system_primary_fixed_dim</color>
+    <color name="wear_compose_material3_primary_container_dark">@android:color/system_primary_container_dark</color>
+    <color name="wear_compose_material3_on_primary_fixed">@android:color/system_on_primary_fixed</color>
+    <color name="wear_compose_material3_on_primary_container_dark">@android:color/system_on_primary_container_dark</color>
+    <color name="wear_compose_material3_secondary_fixed">@android:color/system_secondary_fixed</color>
+    <color name="wear_compose_material3_secondary_fixed_dim">@android:color/system_secondary_fixed_dim</color>
+    <color name="wear_compose_material3_secondary_container_dark">@android:color/system_secondary_container_dark</color>
+    <color name="wear_compose_material3_on_secondary_fixed">@android:color/system_on_secondary_fixed</color>
+    <color name="wear_compose_material3_on_secondary_container_dark">@android:color/system_on_secondary_container_dark</color>
+    <color name="wear_compose_material3_tertiary_fixed">@android:color/system_tertiary_fixed</color>
+    <color name="wear_compose_material3_tertiary_fixed_dim">@android:color/system_tertiary_fixed_dim</color>
+    <color name="wear_compose_material3_tertiary_container_dark">@android:color/system_tertiary_container_dark</color>
+    <color name="wear_compose_material3_on_tertiary_fixed">@android:color/system_on_tertiary_fixed</color>
+    <color name="wear_compose_material3_on_tertiary_container_dark">@android:color/system_on_tertiary_container_dark</color>
+    <color name="wear_compose_material3_surface_container_low_dark">@android:color/system_surface_container_low_dark</color>
+    <color name="wear_compose_material3_surface_container_dark">@android:color/system_surface_container_dark</color>
+    <color name="wear_compose_material3_surface_container_high_dark">@android:color/system_surface_container_high_dark</color>
+    <color name="wear_compose_material3_on_surface_dark">@android:color/system_on_surface_dark</color>
+    <color name="wear_compose_material3_on_surface_variant_dark">@android:color/system_on_surface_variant_dark</color>
+    <color name="wear_compose_material3_outline_dark">@android:color/system_outline_dark</color>
+    <color name="wear_compose_material3_outline_variant_dark">@android:color/system_outline_variant_dark</color>
+    <color name="wear_compose_material3_background_dark">@android:color/system_background_dark</color>
+    <color name="wear_compose_material3_on_background_dark">@android:color/system_on_background_dark</color>
+    <color name="wear_compose_material3_error_dark">@android:color/system_error_dark</color>
+    <color name="wear_compose_material3_on_error_dark">@android:color/system_on_error_dark</color>
+    <color name="wear_compose_material3_error_container_dark">@android:color/system_error_container_dark</color>
+    <color name="wear_compose_material3_on_error_container_dark">@android:color/system_on_error_container_dark</color>
+
 </resources>

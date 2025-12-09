@@ -51,8 +51,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
-import com.android.permissioncontroller.safetycenter.ui.expressive.SafetyBannerMessagePreference;
-import com.android.permissioncontroller.safetycenter.ui.model.IssueUiData;
 import com.android.permissioncontroller.safetycenter.ui.model.SafetyCenterUiData;
 import com.android.permissioncontroller.safetycenter.ui.model.StatusUiData;
 import com.android.safetycenter.internaldata.SafetyCenterBundles;
@@ -72,6 +70,7 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
 
     private static final String SAFETY_STATUS_KEY = "safety_status";
     private static final String ISSUES_GROUP_KEY = "issues_group";
+    private static final String ENTRIES_TOP_PADDING_KEY = "entries_top_padding";
     private static final String ENTRIES_GROUP_KEY = "entries_group";
     private static final String STATIC_ENTRIES_GROUP_KEY = "static_entries_group";
     private static final String SPACER_KEY = "spacer";
@@ -126,6 +125,7 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
         Preference spacerPreference = getPreferenceScreen().findPreference(SPACER_KEY);
         if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
             getPreferenceScreen().removePreference(spacerPreference);
+            getPreferenceScreen().removePreferenceRecursively(ENTRIES_TOP_PADDING_KEY);
         }
 
         if (mIsQuickSettingsFragment) {
@@ -225,26 +225,18 @@ public final class SafetyCenterDashboardFragment extends SafetyCenterFragment {
 
     private void updateIssues(Context context, SafetyCenterUiData uiData) {
         mIssuesGroup.removeAll();
+        getCollapsableIssuesCardHelper()
+                .addIssues(
+                        context,
+                        getSafetyCenterViewModel(),
+                        getChildFragmentManager(),
+                        mIssuesGroup,
+                        uiData.getSafetyCenterData().getIssues(),
+                        emptyList(),
+                        uiData.getResolvedIssues(),
+                        requireActivity().getTaskId());
         if (SettingsThemeHelper.isExpressiveTheme(context)) {
-            for (IssueUiData issueUiData : uiData.getIssueUiDatas()) {
-                mIssuesGroup.addPreference(
-                        new SafetyBannerMessagePreference(
-                                context,
-                                issueUiData,
-                                getSafetyCenterViewModel(),
-                                getChildFragmentManager()));
-            }
-        } else {
-            getCollapsableIssuesCardHelper()
-                    .addIssues(
-                            context,
-                            getSafetyCenterViewModel(),
-                            getChildFragmentManager(),
-                            mIssuesGroup,
-                            uiData.getSafetyCenterData().getIssues(),
-                            emptyList(),
-                            uiData.getResolvedIssues(),
-                            requireActivity().getTaskId());
+            mIssuesGroup.setVisible(mIssuesGroup.getPreferenceCount() != 0);
         }
     }
 

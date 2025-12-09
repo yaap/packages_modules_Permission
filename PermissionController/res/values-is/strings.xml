@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Stilla <xliff:g id="APP_NAME">%1$s</xliff:g> sem sjálfgefið leiðsagnarforrit?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Engra heimilda krafist"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> fær aðgang að tilkynningum og heimildum síma, SMS, tengiliða og dagatals."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> getur brugðist við tilkynningunum þínum og streymt forritunum þínum í tengda tækinu."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Þessi þjónusta deilir myndum, efni og tilkynningum frá þér úr símanum þínum til annarra tækja."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Sjálfgefið glósuforrit"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Glósuforrit"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Forrit sem gera þér kleift að taka glósur í tækinu þínu"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Athugaðu símann"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Ekki náðist samband við símann þinn"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Reyna aftur?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Fulltrúar"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Fulltrúar sem eru með aðgang að upplýsingum og geta gripið til aðgerða í forritum"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Fulltrúar"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Stjórna aðgangi fulltrúa í þessu tæki"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Engin fulltrúaforrit í boði"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Settu upp fulltrúaforrit í tækinu þínu til að kveikja á eiginleikanum"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Aðgangur forrita"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Forrit og stillingar þar sem þessi fulltrúi getur nálgast upplýsingar og gripið til aðgerða fyrir þína hönd"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> hefur ekki aðgang að neinum forritum"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Kerfi"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Forrit"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Aðgangur fulltrúa"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Fulltrúar sem eru með aðgang að upplýsingum og geta gripið til aðgerða fyrir þína hönd í þessu forriti"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Stillingar tækis"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Leyfa <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> að gerast fulltrúi <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Þessi fulltrúi fær aðgang að <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> til að sjá upplýsingar og framkvæma aðgerðir fyrir þína hönd"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Leyfa"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Ekki leyfa"</string>
 </resources>

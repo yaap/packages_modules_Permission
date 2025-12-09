@@ -63,7 +63,7 @@
     <string name="app_permissions" msgid="3369917736607944781">"Izin aplikasi"</string>
     <string name="unused_apps" msgid="2058057455175955094">"Aplikasi tidak digunakan"</string>
     <string name="edit_photos_description" msgid="5540108003480078892">"Edit foto yang dipilih untuk aplikasi ini"</string>
-    <string name="no_unused_apps" msgid="12809387670415295">"Tak ada aplikasi tidak dipakai"</string>
+    <string name="no_unused_apps" msgid="12809387670415295">"Tidak ada aplikasi"</string>
     <string name="zero_unused_apps" msgid="9024448554157499748">"0 aplikasi tidak digunakan"</string>
     <string name="review_permission_decisions" msgid="309559429150613632">"Keputusan izin terbaru"</string>
     <string name="review_permission_decisions_view_all" msgid="90391040431566130">"Lihat semua keputusan izin terbaru"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Setel <xliff:g id="APP_NAME">%1$s</xliff:g> sebagai aplikasi navigasi default?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Tidak ada izin yang diperlukan"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> akan diizinkan berinteraksi dengan notifikasi dan mengakses izin Telepon, SMS, Kontak, dan Kalender."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> akan diizinkan berinteraksi dengan notifikasi dan men-streaming aplikasi ke perangkat terhubung."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Layanan ini membagikan foto, media, dan notifikasi dari ponsel ke perangkat lain."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Aplikasi catatan default"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Aplikasi catatan"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Aplikasi untuk membuat catatan di perangkat"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Periksa ponsel Anda"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Tidak dapat terhubung ke ponsel"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Coba lagi?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agen"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Agen yang dapat mengakses info atau mengambil tindakan di aplikasi"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agen"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Kelola akses untuk agen di perangkat ini"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Tidak ada aplikasi agen yang tersedia"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Instal aplikasi agen di perangkat Anda untuk mengaktifkan fitur ini"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Akses aplikasi"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Aplikasi dan setelan yang dapat diakses agen ini untuk mendapatkan info dan mengambil tindakan untuk Anda"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Tidak ada aplikasi yang tersedia untuk akses <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistem"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Aplikasi"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Akses agen"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agen yang dapat mengakses info dan melakukan tindakan untuk Anda di aplikasi ini"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Setelan Perangkat"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Izinkan <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> menjadi agen untuk <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Agen ini akan dapat mengakses <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> untuk mendapatkan info dan mengambil tindakan untuk Anda"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Izinkan"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Jangan izinkan"</string>
 </resources>

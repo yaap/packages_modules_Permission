@@ -180,7 +180,12 @@ public final class SafetySourcesGroup implements Parcelable {
         mSafetySources = safetySources;
     }
 
-    /** Returns the type of this safety sources group. */
+    /**
+     * Returns the type of this safety sources group.
+     *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
+     */
     @SafetySourceGroupType
     public int getType() {
         return mType;
@@ -190,6 +195,9 @@ public final class SafetySourcesGroup implements Parcelable {
      * Returns the id of this safety sources group.
      *
      * <p>The id is unique among safety sources groups in a Safety Center configuration.
+     *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
      */
     @NonNull
     public String getId() {
@@ -202,6 +210,9 @@ public final class SafetySourcesGroup implements Parcelable {
      * <p>The id refers to a string resource that is either accessible from any resource context or
      * that is accessible from the same resource context that was used to load the Safety Center
      * configuration. The id is {@link Resources#ID_NULL} when a title is not provided.
+     *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
      */
     @StringRes
     public int getTitleResId() {
@@ -214,6 +225,9 @@ public final class SafetySourcesGroup implements Parcelable {
      * <p>The id refers to a string resource that is either accessible from any resource context or
      * that is accessible from the same resource context that was used to load the Safety Center
      * configuration. The id is {@link Resources#ID_NULL} when a summary is not provided.
+     *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
      */
     @StringRes
     public int getSummaryResId() {
@@ -226,6 +240,9 @@ public final class SafetySourcesGroup implements Parcelable {
      * <p>If set to a value other than {@link SafetySourcesGroup#STATELESS_ICON_TYPE_NONE}, the icon
      * specified will be displayed for collapsible groups when all the sources contained in the
      * group are stateless.
+     *
+     * <p>Note: When Safety Center UI is fully migrated to the Settings app, the UI won't rely on
+     * this data anymore.
      */
     @StatelessIconType
     public int getStatelessIconType() {

@@ -84,7 +84,7 @@
     <string name="storage_supergroup_warning_allow" msgid="103093462784523190">"ଏହି ଆପକୁ Androidର ଏକ ପୁରୁଣା ସଂସ୍କରଣ ପାଇଁ ଡିଜାଇନ କରାଯାଇଛି। ଯଦି ଆପଣ ଏହି ଅନୁମତି ଦିଅନ୍ତି, ତେବେ ସମସ୍ତ ଷ୍ଟୋରେଜକୁ (ଫଟୋ, ଭିଡିଓ, ମ୍ୟୁଜିକ, ଅଡିଓ ଏବଂ ଅନ୍ୟ ଫାଇଲଗୁଡ଼ିକୁ ଅନ୍ତର୍ଭୁକ୍ତ କରି) ଆକ୍ସେସ ପାଇଁ ଅନୁମତି ଦିଆଯିବ।"</string>
     <string name="storage_supergroup_warning_deny" msgid="6420765672683284347">"ଏହି ଆପକୁ Androidର ଏକ ପୁରୁଣା ସଂସ୍କରଣ ପାଇଁ ଡିଜାଇନ କରାଯାଇଛି। ଯଦି ଆପଣ ଏହି ଅନୁମତିକୁ ଅଗ୍ରାହ୍ୟ କରନ୍ତି, ତେବେ ସମସ୍ତ ଷ୍ଟୋରେଜକୁ (ଫଟୋ, ଭିଡିଓ, ମ୍ୟୁଜିକ, ଅଡିଓ ଏବଂ ଅନ୍ୟ ଫାଇଲଗୁଡ଼ିକୁ ଅନ୍ତର୍ଭୁକ୍ତ କରି) ଆକ୍ସେସ ଅଗ୍ରାହ୍ୟ କରାଯିବ।"</string>
     <string name="default_permission_description" msgid="4624464917726285203">"ଏହା ଏକ ଅଜଣା କାର୍ଯ୍ୟ ସମ୍ପାଦନ କରିଥାଏ"</string>
-    <string name="app_permissions_group_summary" msgid="8788419008958284002">"<xliff:g id="COUNT_1">%2$d</xliff:g>ଆପ୍ସରୁ <xliff:g id="COUNT_0">%1$d</xliff:g>କୁ ଅନୁମତି ଦିଆଯାଇଛି"</string>
+    <string name="app_permissions_group_summary" msgid="8788419008958284002">"<xliff:g id="COUNT_1">%2$d</xliff:g> ଆପ୍ସରୁ <xliff:g id="COUNT_0">%1$d</xliff:g>କୁ ଅନୁମତି ଦିଆଯାଇଛି"</string>
     <string name="app_permissions_group_summary2" msgid="4329922444840521150">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>ଟି ଆପକୁ ଅନୁମତି ଦିଆଯାଇଛି"</string>
     <string name="menu_show_system" msgid="4254021607027872504">"ସିଷ୍ଟମ୍‌ ଦେଖାନ୍ତୁ"</string>
     <string name="menu_hide_system" msgid="3855390843744028465">"ସିଷ୍ଟମ୍‌କୁ ଲୁଚାନ୍ତୁ"</string>
@@ -131,8 +131,8 @@
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"ଅନ୍ୟ ଅନୁମତିଗୁଡ଼ିକୁ ଦେଖନ୍ତୁ"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g> ଏବଂ ଅଧିକ <xliff:g id="NUM">%3$s</xliff:g>ଟି"</string>
-    <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"ଗତ 24 ଘଣ୍ଟାରେ ଯେତେବେଳେ ଆପଗୁଡ଼ିକ ଆପଣଙ୍କ <xliff:g id="PERMGROUP">%1$s</xliff:g> ବ୍ୟବହାର କରିଥାଏ ତାହାର ଟାଇମଲାଇନ"</string>
-    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"ଗତ 7 ଦିନରେ ଯେତେବେଳେ ଆପଗୁଡ଼ିକ ଆପଣଙ୍କ <xliff:g id="PERMGROUP">%1$s</xliff:g> ବ୍ୟବହାର କରିଥାଏ ତାହାର ଟାଇମଲାଇନ"</string>
+    <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"ଗତ 24 ଘଣ୍ଟାରେ ଆପଗୁଡ଼ିକ ଆପଣଙ୍କ <xliff:g id="PERMGROUP">%1$s</xliff:g> ବ୍ୟବହାର କରିଥିବାର ଟାଇମଲାଇନ"</string>
+    <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"ଗତ 7 ଦିନରେ ଆପଗୁଡ଼ିକ ଆପଣଙ୍କ <xliff:g id="PERMGROUP">%1$s</xliff:g> ବ୍ୟବହାର କରିଥିବାର ଟାଇମଲାଇନ"</string>
     <string name="permission_usage_access_dialog_subtitle" msgid="4171772805196955753">"ଏହି ଆପ୍ କେତେବେଳେ ଆପଣଙ୍କ <xliff:g id="PERMGROUP">%1$s</xliff:g> ଅନୁମତି ବ୍ୟବହାର କରିଛି"</string>
     <string name="permission_usage_access_dialog_learn_more" msgid="7121468469493184613">"ଅଧିକ ଜାଣନ୍ତୁ"</string>
     <string name="learn_more_content_description" msgid="8673699744544502539">"<xliff:g id="PERMGROUP">%1$s</xliff:g> ବିଷୟରେ ଅଧିକ ଜାଣନ୍ତୁ"</string>
@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"<xliff:g id="APP_NAME">%1$s</xliff:g>କୁ ଆପଣଙ୍କ ଡିଫଲ୍ଟ ନାଭିଗେସନ ଆପ ଭାବେ ସେଟ କରିବେ?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"କୌଣସି ଅନୁମତି ଆବଶ୍ୟକ ନାହିଁ"</string>
     <string name="role_watch_description" msgid="267003778693177779">"ଆପଣଙ୍କ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିବା ଏବଂ ଆପଣଙ୍କ ଫୋନ୍, SMS, ଯୋଗାଯୋଗ ଓ କ୍ୟାଲେଣ୍ଡର ଅନୁମତିଗୁଡ଼ିକୁ ଆକ୍ସେସ୍ କରିବା ପାଇଁ <xliff:g id="APP_NAME">%1$s</xliff:g>କୁ ଅନୁମତି ଦିଆଯିବ।"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"ଆପଣଙ୍କ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିବା ଏବଂ ସଂଯୋଗ କରାଯାଇଥିବା ଡିଭାଇସଗୁଡ଼ିକରେ ଆପଣଙ୍କର ଆପଗୁଡ଼ିକ ଷ୍ଟ୍ରିମ କରିବା ପାଇଁ <xliff:g id="APP_NAME">%1$s</xliff:g>କୁ ଅନୁମତି ଦିଆଯିବ।"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"ଏହି ସେବା ଆପଣଙ୍କ ଫୋନରୁ ଆପଣଙ୍କ ଫଟୋ, ମିଡିଆ ଏବଂ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ଅନ୍ୟ ଡିଭାଇସଗୁଡ଼ିକ ସହ ସେୟାର କରେ।"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"ଡିଫଲ୍ଟ ନୋଟ୍ସ ଆପ"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"ନୋଟ୍ସ ଆପ"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"ଆପଣଙ୍କ ଡିଭାଇସରେ ଆପଣଙ୍କୁ ନୋଟ ନେବା ପାଇଁ ଅନୁମତି ଦେଉଥିବା ଆପ୍ସ"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"ଆପଣଙ୍କ ଫୋନ ଯାଞ୍ଚ କରନ୍ତୁ"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"ଆପଣଙ୍କ ଫୋନ ସହ କନେକ୍ଟ କରାଯାଇପାରିଲା ନାହିଁ"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ପୁଣି ଚେଷ୍ଟା କରିବେ?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"ଏଜେଣ୍ଟ"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"ଆପ୍ସରେ ସୂଚନାକୁ ଆକ୍ସେସ କରିପାରୁଥିବା କିମ୍ବା ପଦକ୍ଷେପ ନେଇପାରୁଥିବା ଏଜେଣ୍ଟ"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"ଏଜେଣ୍ଟ"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"ଏହି ଡିଭାଇସରେ ଏଜେଣ୍ଟଗୁଡ଼ିକ ପାଇଁ ଆକ୍ସେସ ପରିଚାଳନା କରନ୍ତୁ"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"କୌଣସି ଏଜେଣ୍ଟ ଆପ୍ସ ଉପଲବ୍ଧ ନାହିଁ"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"ଏହି ଫିଚରକୁ ସକ୍ଷମ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡିଭାଇସରେ ଏକ ଏଜେଣ୍ଟ ଆପ ଇନଷ୍ଟଲ କରନ୍ତୁ"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"ଆପ ଆକ୍ସେସ"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"ଆପଣଙ୍କ ପାଇଁ ସୂଚନା ପାଇବା ଏବଂ ପଦକ୍ଷେପ ନେବାକୁ ଏହି ଏଜେଣ୍ଟ ଆକ୍ସେସ କରିପାରୁଥିବା ଆପ୍ସ ଏବଂ ସେଟିଂସ"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"<xliff:g id="APP_NAME">%1$s</xliff:g> ଆକ୍ସେସ ପାଇଁ କୌଣସି ଆପ୍ସ ଉପଲବ୍ଧ ନାହିଁ"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"ସିଷ୍ଟମ"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ଆପ୍ସ"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"ଏଜେଣ୍ଟ ଆକ୍ସେସ"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"ଏହି ଆପରେ ସୂଚନା ଆକ୍ସେସ କରିପାରୁଥିବା ଏବଂ ଆପଣଙ୍କ ପାଇଁ ପଦକ୍ଷେପ ନେଇପାରୁଥିବା ଏଜେଣ୍ଟ"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"ଡିଭାଇସ ସେଟିଂସ"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>କୁ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ପାଇଁ ଏଜେଣ୍ଟ ହେବାକୁ ଅନୁମତି ଦେବେ?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"ଏହି ଏଜେଣ୍ଟ ଆପଣଙ୍କ ପାଇଁ ସୂଚନା ପାଇବା ଓ ପଦକ୍ଷେପ ନେବାକୁ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>କୁ ଆକ୍ସେସ କରିପାରିବେ"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"ଅନୁମତି ଦିଅନ୍ତୁ"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"ଅନୁମତି ଦିଅନାହିଁ"</string>
 </resources>

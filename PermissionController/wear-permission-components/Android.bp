@@ -52,6 +52,7 @@ android_library {
     kotlin_lang_version: "1.9",
     kotlincflags: [
         "-Werror",
+        "-Xsuppress-version-warnings",
         "-opt-in=kotlinx.coroutines.DelicateCoroutinesApi",
         "-Xjvm-default=all",
     ],

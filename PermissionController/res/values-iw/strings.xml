@@ -190,7 +190,7 @@
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"כן, כל הזמן"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"רק כשהאפליקציה בשימוש"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"אישור של הכול תמיד"</string>
-    <string name="app_permission_button_ask" msgid="3342950658789427">"יש לשאול בכל פעם"</string>
+    <string name="app_permission_button_ask" msgid="3342950658789427">"צריך לשאול אותי בכל פעם"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"אין אישור"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"הרשאה לגישה מוגבלת"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"מיקום מדויק"</string>
@@ -200,7 +200,7 @@
     <string name="app_permission_title" msgid="2090897901051370711">"הרשאה: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"לאפליקציה תהיה גישה ל<xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_header_with_device_name" msgid="7193042925656173271">"גישה ל<xliff:g id="PERM">%1$s</xliff:g> לאפליקציה הזו ב<xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"הצגת כל ההרשאות של \'<xliff:g id="APP">%1$s</xliff:g>\'"</string>
+    <string name="app_permission_footer_app_permissions_link" msgid="4926890342636587393">"כל ההרשאות של \"<xliff:g id="APP">%1$s</xliff:g>\""</string>
     <string name="app_permission_footer_permission_apps_link" msgid="3941988129992794327">"אני רוצה לראות את כל האפליקציות עם ההרשאה הזו"</string>
     <string name="app_permission_info_button" msgid="8973692370208562556">"מידע"</string>
     <string name="app_permission_settings_button" msgid="4582916817451973752">"הגדרות"</string>
@@ -257,7 +257,7 @@
     <string name="allowed_foreground_header" msgid="6845655788447833353">"מורשות רק בזמן השימוש"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"הרשאת גישה למדיה בלבד"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"הרשאה לניהול כל הקבצים"</string>
-    <string name="ask_header" msgid="2633816846459944376">"יש לשאול בכל פעם"</string>
+    <string name="ask_header" msgid="2633816846459944376">"אני רוצה לבחור בכל פעם"</string>
     <string name="denied_header" msgid="903209608358177654">"אין הרשאה"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"‫<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> ב-<xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"לצפייה באפליקציות נוספות שיכולות לגשת לכל הקבצים"</string>
@@ -355,7 +355,7 @@
     <string name="accessibility_service_dialog_title_multiple" msgid="5527879210683548175">"ל-<xliff:g id="NUM_SERVICES">%s</xliff:g> אפליקציות נגישות יש גישה מלאה אל המכשיר שלך"</string>
     <string name="accessibility_service_dialog_bottom_text_single" msgid="1128666197822205958">"השירות <xliff:g id="SERVICE_NAME">%s</xliff:g> יכול להציג את המסך, הפעולות ופריטי הפלט שלך, וכן לבצע פעולות ולשלוט בתצוגה."</string>
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"האפליקציות האלה יכולות להציג את המסך, הפעולות והקלט שלך, וכן לבצע פעולות ולשלוט בתצוגה."</string>
-    <string name="role_assistant_label" msgid="4727586018198208128">"עוזר דיגיטלי כברירת המחדל"</string>
+    <string name="role_assistant_label" msgid="4727586018198208128">"עוזר אישי כברירת המחדל"</string>
     <string name="role_assistant_short_label" msgid="3369003713187703399">"אפליקציית עוזר דיגיטלי"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"אפליקציות של עוזרים אישיים יכולות לסייע לפי המידע שמופיע על במסך. יש אפליקציות שתומכות גם בשירותי מרכז אפליקציות וגם בקלט קולי כדי לספק סיוע משולב."</string>
     <string name="role_assistant_recommended_title" msgid="2093873159106905257">"בהמלצת <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
@@ -404,15 +404,13 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"להגדיר את <xliff:g id="APP_NAME">%1$s</xliff:g> כאפליקציית ברירת המחדל לניווט?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"אין צורך בהרשאות"</string>
     <string name="role_watch_description" msgid="267003778693177779">"‏האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> תוכל לבצע פעולות בהתראות ותקבל הרשאות גישה לטלפון, ל-SMS לאנשי הקשר וליומן."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"לאפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> יהיו הרשאות לביצוע פעולות בהתראות שלך ולביצוע סטרימינג של האפליקציות למכשיר המחובר."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"התמונות, המדיה וההתראות מהטלפון שלך ישותפו למכשירים אחרים על ידי השירות הזה."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"אפליקציית ברירת המחדל לפתקים"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"אפליקציית פתקים"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"אפליקציות שמאפשרות לך לרשום הערות במכשיר"</string>
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"הערות"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"ברירת המחדל של אפליקציית הארנק"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"אפליקציית ארנק"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"אפליקציות ארנק מאחסנות את כרטיסי האשראי ואת כרטיסי מועדון הלקוחות שלך, את מפתחות הרכב ועוד כדי לעזור בסוגים שונים של עסקאות."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"אפליקציות ארנק הן פתרון מעולה ונוח לאחסון דיגיטלי של כרטיסי אשראי, מועדוני לקוחות, מפתחות רכב ועוד."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"להגדיר את <xliff:g id="APP_NAME">%1$s</xliff:g> כברירת המחדל של אפליקציית הארנק?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"אין צורך בהרשאות"</string>
     <string name="request_role_current_default" msgid="738722892438247184">"ברירת המחדל הנוכחית"</string>
@@ -473,12 +471,12 @@
     <string name="assistant_record_audio_user_sensitive_summary" msgid="6482937591816401619">"הצגת הסמל בשורת הסטטוס כשהמיקרופון בשימוש, לצורך הפעלת האסיסטנט"</string>
     <string name="permgrouprequest_storage_isolated" msgid="4892154224026852295">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; גישה לתמונות ולמדיה במכשיר שלך?"</string>
     <string name="permgrouprequest_device_aware_storage_isolated" msgid="6463062962458809752">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה לתמונות ולמדיה במכשיר &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_contacts" msgid="8391550064551053695">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה לאנשי הקשר שלך?"</string>
+    <string name="permgrouprequest_contacts" msgid="8391550064551053695">"‏לאשר לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; לגשת לאנשי הקשר שלך?"</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="731025863972535928">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה לאנשי הקשר במכשיר &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_location" msgid="6990232580121067883">"‏לתת לאפליקציה \"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;\" הרשאת גישה למיקום המכשיר?"</string>
+    <string name="permgrouprequest_location" msgid="6990232580121067883">"‏לאשר לאפליקציה \"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;\" לגשת למיקום המכשיר?"</string>
     <string name="permgrouprequest_device_aware_location" msgid="6075412127429878638">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה למיקום של &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_location" msgid="2635935335778429894">"לאפליקציה תהיה גישה אל נתוני המיקום רק בזמן השימוש בה"</string>
-    <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה למיקום המכשיר?"</string>
+    <string name="permgroupbackgroundrequest_location" msgid="1085680897265734809">"‏לאשר לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; לגשת למיקום המכשיר?"</string>
     <string name="permgroupbackgroundrequest_device_aware_location" msgid="1264484517831380016">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה למיקום של &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_location" msgid="8021219324989662957">"ייתכן שהאפליקציה הזו תרצה לקבל גישה לנתוני המיקום שלך כל הזמן, גם כשהיא לא בשימוש. "<annotation id="link">"ניתן לאשר זאת בהגדרות."</annotation></string>
     <string name="permgroupupgraderequest_location" msgid="8328408946822691636">"‏לשנות את הרשאת הגישה למיקום של &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
@@ -528,7 +526,7 @@
     <string name="permgroupupgraderequest_device_aware_camera" msgid="3290160912843715236">"‏לשנות את הרשאת הגישה של האפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; למצלמה במכשיר &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupupgraderequestdetail_camera" msgid="6642747548010962597">"האפליקציה זו רוצה לצלם תמונות ולהקליט סרטונים כל הזמן, גם כשהיא לא בשימוש. "<annotation id="link">"ניתן לאשר זאת בהגדרות."</annotation></string>
     <string name="permgrouprequest_calllog" msgid="2065327180175371397">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה ליומני השיחות של הטלפון?"</string>
-    <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה ליומני השיחות במכשיר &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"‏לאשר לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; לגשת ליומני השיחות במכשיר &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_phone" msgid="1829234136997316752">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאה לבצע ולנהל שיחות טלפון?"</string>
     <string name="permgrouprequest_device_aware_phone" msgid="590399263670349955">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאה לבצע שיחות טלפון ולנהל אותן במכשיר &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_sensors" msgid="4397358316850652235">"‏לתת לאפליקציה &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; הרשאת גישה לנתוני חיישנים העוקבים אחר הסימנים החיוניים שלך?"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"צריך לבדוק בטלפון"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"אי אפשר להתחבר לטלפון"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"לנסות שוב?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"סוכנים"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"סוכנים שיכולים לגשת למידע או לבצע פעולות באפליקציות"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"סוכנים"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"ניהול הגישה של סוכנים במכשיר הזה"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"אין אפליקציות זמינות של סוכנים"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"כדי להפעיל את התכונה הזו, צריך להתקין אפליקציה של סוכן במכשיר"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"גישה לאפליקציות"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"אפליקציות והגדרות שהסוכן הזה יכול לגשת אליהן כדי לקבל מידע ולבצע פעולות בשבילך"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"אין אפליקציות שהסוכן של <xliff:g id="APP_NAME">%1$s</xliff:g> יכול לגשת אליהן"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"מערכת"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"אפליקציות"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"גישת סוכן"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"סוכנים שיכולים לגשת למידע ולבצע פעולות בשמך באפליקציה הזו"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"הגדרות המכשיר"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"לאפשר לאפליקציה <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> לפעול כסוכנת ב-<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"הסוכן הזה יוכל להיכנס אל <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> כדי לקבל מידע ולבצע פעולות בשבילך"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"אישור"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"אין אישור"</string>
 </resources>

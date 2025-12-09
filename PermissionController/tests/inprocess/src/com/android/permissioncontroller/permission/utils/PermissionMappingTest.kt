@@ -20,11 +20,6 @@ import android.Manifest
 import android.app.AppOpsManager
 import android.health.connect.HealthPermissions
 import android.os.Build
-import android.permission.flags.Flags
-import android.platform.test.annotations.RequiresFlagsDisabled
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.CheckFlagsRule
-import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
@@ -40,7 +35,6 @@ import org.junit.runner.RunWith
 class PermissionMappingTest {
 
     @JvmField @Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
-    @JvmField @Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Test
     fun testGetPlatformPermissionGroupForOp_healthPermissionGroup() {
@@ -96,40 +90,47 @@ class PermissionMappingTest {
     fun testHealthPermissionIsRuntime_healthPermissionUiEnabled_isRuntime() {
         assumeTrue(Utils.isHealthPermissionUiEnabled())
 
-        assertThat(PermissionMapping.isRuntimePlatformPermission(
-            HealthPermissions.READ_HEART_RATE)).isTrue()
+        assertThat(PermissionMapping.isRuntimePlatformPermission(HealthPermissions.READ_HEART_RATE))
+            .isTrue()
     }
 
     @Test
     fun testHealthPermissionGroupIsPlatform_healthPermissionUiEnabled_isPlatform() {
         assumeTrue(Utils.isHealthPermissionUiEnabled())
 
-        assertThat(PermissionMapping.isPlatformPermissionGroup(
-            HealthPermissions.HEALTH_PERMISSION_GROUP)).isTrue()
+        assertThat(
+                PermissionMapping.isPlatformPermissionGroup(
+                    HealthPermissions.HEALTH_PERMISSION_GROUP
+                )
+            )
+            .isTrue()
     }
 
     @Test
     fun testGetGroupForHealthPermission_healthPermissionUiEnabled_isHealthPermissionGroup() {
         assumeTrue(Utils.isHealthPermissionUiEnabled())
 
-        assertThat(PermissionMapping.getGroupOfPlatformPermission(
-            HealthPermissions.READ_HEART_RATE)).isEqualTo(
-                HealthPermissions.HEALTH_PERMISSION_GROUP)
+        assertThat(
+                PermissionMapping.getGroupOfPlatformPermission(HealthPermissions.READ_HEART_RATE)
+            )
+            .isEqualTo(HealthPermissions.HEALTH_PERMISSION_GROUP)
     }
 
     @Test
     fun testGetPermNameForHealthPermissionGroup_healthPermissionUiEnabled_isHealthPermission() {
         assumeTrue(Utils.isHealthPermissionUiEnabled())
 
-        assertThat(PermissionMapping.getPlatformPermissionNamesOfGroup(
-            HealthPermissions.HEALTH_PERMISSION_GROUP)).contains(
-                HealthPermissions.READ_HEART_RATE)
+        assertThat(
+                PermissionMapping.getPlatformPermissionNamesOfGroup(
+                    HealthPermissions.HEALTH_PERMISSION_GROUP
+                )
+            )
+            .contains(HealthPermissions.READ_HEART_RATE)
     }
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsEnabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
-    fun getGroupOfPlatformPermission_replaceBodySensorFlagEnabled_notHaveSensorsGroup() {
+    fun getGroupOfPlatformPermission_postBaklava_notHaveSensorsGroup() {
         assertNull(PermissionMapping.getGroupOfPlatformPermission(Manifest.permission.BODY_SENSORS))
         assertNull(
             PermissionMapping.getGroupOfPlatformPermission(
@@ -138,27 +139,12 @@ class PermissionMappingTest {
         )
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsDisabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
-    @Test
-    fun getGroupOfPlatformPermission_replaceBodySensorFlagDisabled_haveSensorsGroup() {
-        assertNotNull(
-            PermissionMapping.getGroupOfPlatformPermission(Manifest.permission.BODY_SENSORS)
-        )
-        assertNotNull(
-            PermissionMapping.getGroupOfPlatformPermission(
-                Manifest.permission.BODY_SENSORS_BACKGROUND
-            )
-        )
-    }
-
-
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
-        maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
+        maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM,
     )
     @Test
-    fun getGroupOfPlatformPermission_preV_haveSensorsGroup() {
+    fun getGroupOfPlatformPermission_preBaklava_haveSensorsGroup() {
         assertNotNull(
             PermissionMapping.getGroupOfPlatformPermission(Manifest.permission.BODY_SENSORS)
         )

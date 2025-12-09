@@ -404,15 +404,13 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"Setezi <xliff:g id="APP_NAME">%1$s</xliff:g> ca aplicație de navigare prestabilită?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"Nu este nevoie de permisiuni"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> va putea să interacționeze cu notificările și să-ți acceseze permisiunile pentru Telefon, SMS-uri, Agendă și Calendar."</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> va putea să interacționeze cu notificările și să redea în stream conținutul din aplicații pe dispozitivul conectat."</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"Acest serviciu trimite fotografiile, conținutul media și notificările de pe telefon pe alte dispozitive."</string>
     <string name="role_notes_label" msgid="7451627001058089536">"Aplicația prestabilită pentru note"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"Aplicația pentru note"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"Aplicații cu ajutorul cărora poți să iei notițe pe dispozitiv"</string>
     <string name="role_notes_search_keywords" msgid="7710756695666744631">"notițe"</string>
     <string name="role_wallet_label" msgid="3719419175656204207">"Aplicația portofel prestabilită"</string>
     <string name="role_wallet_short_label" msgid="6521288403762457452">"Aplicație portofel"</string>
-    <string name="role_wallet_description" msgid="3726535836165949838">"Aplicațiile portofel pot să stocheze credit și carduri de fidelitate, chei de mașină și alte date, pentru a simplifica diferite tipuri de tranzacții."</string>
+    <string name="role_wallet_description" msgid="3726535836165949838">"Aplicațiile portofel pot să stocheze carduri de credit și de fidelitate, chei de mașină și alte date, pentru a simplifica diferite tipuri de tranzacții."</string>
     <string name="role_wallet_request_title" msgid="4770217108262737093">"Setezi <xliff:g id="APP_NAME">%1$s</xliff:g> ca aplicație portofel prestabilită?"</string>
     <string name="role_wallet_request_description" msgid="6305487425777483053">"Nu sunt necesare permisiuni"</string>
     <string name="request_role_current_default" msgid="738722892438247184">"Aplicația prestabilită actuală"</string>
@@ -529,7 +527,7 @@
     <string name="permgroupupgraderequestdetail_camera" msgid="6642747548010962597">"Aplicația dorește să fotografieze și să înregistreze videoclipuri permanent, chiar și când nu o folosești. "<annotation id="link">"Acordă această permisiune din setări."</annotation></string>
     <string name="permgrouprequest_calllog" msgid="2065327180175371397">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să-ți acceseze jurnalele de apeluri?"</string>
     <string name="permgrouprequest_device_aware_calllog" msgid="8220927190376843309">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să-ți acceseze jurnalele de apeluri telefonice de pe &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_phone" msgid="1829234136997316752">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să  și să gestioneze apeluri telefonice?"</string>
+    <string name="permgrouprequest_phone" msgid="1829234136997316752">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să inițieze și să gestioneze apeluri telefonice?"</string>
     <string name="permgrouprequest_device_aware_phone" msgid="590399263670349955">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să inițieze și să gestioneze apeluri telefonice pe &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequest_sensors" msgid="4397358316850652235">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să acceseze datele de la senzori despre semnele vitale?"</string>
     <string name="permgrouprequest_device_aware_sensors" msgid="3874451050573615157">"Permiți ca &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; să acceseze datele de la senzori despre semnele tale vitale de pe &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
@@ -635,7 +633,7 @@
     <string name="mic_toggle_description" msgid="9163104307990677157">"Pentru aplicații și servicii. Chiar dacă setarea e dezactivată, datele de la microfon pot fi trimise când suni la un număr de urgență."</string>
     <string name="location_settings_subtitle" msgid="2328360561197430695">"Vezi aplicațiile și serviciile care au acces la locație"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Afișează accesările clipboardului"</string>
-    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Afișează un mesaj când aplicațiile accesează text, imagini sau alte tipuri de conținut pe care le-ai copiat"</string>
+    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Afișează un mesaj când aplicațiile accesează text, imagini sau alte tipuri de conținut pe care l-ai copiat"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Afișează parolele"</string>
     <string name="show_password_summary" msgid="1110166488865981610">"Caracterele se afișează pentru scurt timp, pe măsură ce tastezi"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"Aplicația afirmă că poate trimite terților date privind locațiile"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"Verifică-ți telefonul"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"Nu s-a putut accesa telefonul"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"Încerci din nou?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"Agenți"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"Agenți care pot să acceseze informații sau să facă acțiuni în aplicații"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"Agenți"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"Gestionează accesul agenților pe acest dispozitiv"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"Nu sunt disponibile aplicații agent"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"Instalează o aplicație agent pe dispozitiv pentru a activa această funcție"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"Accesul la aplicații"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"Aplicațiile și setările pe care le poate accesa acest agent pentru a obține informații și a face acțiuni pentru tine"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"Nu sunt disponibile aplicații pentru accesul <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"Sistem"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Aplicații"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"Acces pentru agenți"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agenți care pot să acceseze informații și să acționeze pentru tine în această aplicație"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Setările dispozitivului"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Permiți ca <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> să fie agent pentru <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Acest agent va putea să acceseze <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> pentru a obține informații și a acționa pentru tine"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Permite"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Nu permite"</string>
 </resources>

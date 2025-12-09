@@ -19,6 +19,7 @@ package com.android.permissioncontroller.permission.ui;
 import static android.health.connect.HealthPermissions.HEALTH_PERMISSION_GROUP;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
+import com.android.modules.utils.build.SdkLevel;
 import static com.android.permissioncontroller.Constants.ACTION_MANAGE_AUTO_REVOKE;
 import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
@@ -467,7 +468,7 @@ public final class ManagePermissionsActivity extends SettingsActivity {
                     // On Wear, PrivacyDashboard and PermissionManager have different UI,
                     // PermissionController needs to add an extra in the intent to instruct
                     // HealthConnect how to differentiate.
-                    if (DeviceUtils.isWear(this) && Flags.replaceBodySensorPermissionEnabled()) {
+                    if (DeviceUtils.isWear(this) && SdkLevel.isAtLeastB()) {
                         Utils.navigateToWearHealthConnectSettingsPrivacyDashboard(this);
                     } else {
                         Utils.navigateToHealthConnectSettings(this);

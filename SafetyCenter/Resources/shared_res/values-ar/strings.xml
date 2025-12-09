@@ -25,7 +25,7 @@
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{الإجراء الذي تم اتخاذه}zero{الإجراءات التي تم اتخاذها}two{الإجراءان اللذان تم اتخاذهما}few{الإجراءات التي تم اتخاذها}many{الإجراءات التي تم اتخاذها}other{الإجراءات التي تم اتخاذها}}"</string>
     <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"مراجعة الإعدادات"</string>
     <string name="overall_severity_level_ok_review_summary" msgid="7743619617413076275">"الاطّلاع على قائمة الإعدادات"</string>
-    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"الجهاز قد يكون معرّضًا للخطر"</string>
+    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"قد يكون الجهاز معرّضًا للخطر"</string>
     <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"الجهاز معرّض للخطر"</string>
     <string name="overall_severity_level_data_recommendation_title" msgid="1424269714861655302">"قد تكون بياناتك معرّضة للخطر"</string>
     <string name="overall_severity_level_critical_data_warning_title" msgid="1012704126634698604">"بياناتك معرّضة للخطر"</string>

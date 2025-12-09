@@ -45,8 +45,8 @@ import com.android.permissioncontroller.PermissionControllerApplication
 import com.android.permissioncontroller.permission.utils.Utils
 import com.android.permissioncontroller.privacysources.SafetyCenterReceiver.RefreshEvent.EVENT_DEVICE_REBOOTED
 import com.android.permissioncontroller.privacysources.SafetyCenterReceiver.RefreshEvent.EVENT_REFRESH_REQUESTED
-import com.android.permissioncontroller.privacysources.v36r1.AppFunctionAccessPrivacySource
-import com.android.permissioncontroller.privacysources.v36r1.AppFunctionAccessPrivacySource.Companion.APP_FUNCTION_ACCESS_SOURCE_ID
+import com.android.permissioncontroller.privacysources.v37.AppFunctionAccessPrivacySource
+import com.android.permissioncontroller.privacysources.v37.AppFunctionAccessPrivacySource.Companion.APP_FUNCTION_ACCESS_SOURCE_ID
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -241,9 +241,9 @@ class AppFunctionAccessPrivacySourceTest {
 
         // Real context, used in order to avoid mocking resources.
         var context: Context = ApplicationProvider.getApplicationContext()
-        const val APP_FUNCTION_ACCESS_TITLE: String = "Agent control of other apps"
+        const val APP_FUNCTION_ACCESS_TITLE: String = "Agents"
         const val APP_FUNCTION_ACCESS_SUMMARY: String =
-            "Perform actions on your device and in other apps"
+            "Agents that can access info or take actions in apps"
         const val REFRESH_ID: String = "refresh_id"
     }
 }

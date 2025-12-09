@@ -404,8 +404,6 @@
     <string name="role_automotive_navigation_request_title" msgid="7525693151489384300">"កំណត់ <xliff:g id="APP_NAME">%1$s</xliff:g> ជាកម្មវិធីរុករក​លំនាំដើមរបស់អ្នក​ឬ?"</string>
     <string name="role_automotive_navigation_request_description" msgid="7073023813249245540">"មិនត្រូវការ​ការអនុញ្ញាត​ទេ"</string>
     <string name="role_watch_description" msgid="267003778693177779">"<xliff:g id="APP_NAME">%1$s</xliff:g> នឹងត្រូវបានអនុញ្ញាតឱ្យ​ធ្វើអន្តរកម្មជាមួយ​ការជូនដំណឹងរបស់អ្នក និងចូលប្រើទូរសព្ទ, SMS, ទំនាក់ទំនង និងការអនុញ្ញាត​ប្រតិទិនរបស់អ្នក។"</string>
-    <string name="role_app_streaming_description" msgid="7341638576226183992">"<xliff:g id="APP_NAME">%1$s</xliff:g> នឹងត្រូវបាន​អនុញ្ញាតឱ្យ​ធ្វើអន្តរកម្មជាមួយ​ការជូនដំណឹងរបស់អ្នក និងចាក់កម្មវិធី​របស់អ្នកទៅឧបករណ៍​ដែលបានភ្ជាប់។"</string>
-    <string name="role_companion_device_computer_description" msgid="416099879217066377">"សេវាកម្មនេះចែករំលែករូបថត មេឌៀ និងការជូនដំណឹងរបស់អ្នក ពីទូរសព្ទរបស់អ្នកទៅឧបករណ៍ផ្សេងទៀត។"</string>
     <string name="role_notes_label" msgid="7451627001058089536">"កម្មវិធីកំណត់ចំណាំលំនាំដើម"</string>
     <string name="role_notes_short_label" msgid="8796604147546125285">"កម្មវិធី​កំណត់ចំណាំ"</string>
     <string name="role_notes_description" msgid="8496852798616883551">"កម្មវិធីដែលអនុញ្ញាតឱ្យអ្នក​កត់ចំណាំនៅលើឧបករណ៍របស់អ្នក"</string>
@@ -703,4 +701,22 @@
     <string name="wear_check_your_phone_title" msgid="7957291983474981420">"ពិនិត្យមើល​ទូរសព្ទ​របស់អ្នក"</string>
     <string name="wear_phone_connection_error" msgid="8934350845737930783">"មិនអាច​ភ្ជាប់ជាមួយ​ទូរសព្ទ​របស់អ្នក​បានទេ"</string>
     <string name="wear_phone_connection_should_retry" msgid="2835355845567088003">"ព្យាយាម​ម្ដង​ទៀតឬ?"</string>
+    <string name="app_function_access_settings_title" msgid="8891907044622237648">"ភ្នាក់ងារ"</string>
+    <string name="app_function_access_settings_summary" msgid="8574075661031712914">"ភ្នាក់ងារដែលអាចចូលប្រើព័ត៌មាន ឬធ្វើសកម្មភាពនៅក្នុងកម្មវិធីបាន"</string>
+    <string name="app_function_agent_list_title" msgid="5292351554854465261">"ភ្នាក់ងារ"</string>
+    <string name="app_function_agent_list_summary" msgid="5591295514604863634">"គ្រប់គ្រងសិទ្ធិចូលប្រើសម្រាប់ភ្នាក់ងារនៅលើឧបករណ៍នេះ"</string>
+    <string name="app_function_agent_list_empty_title" msgid="397515613920663055">"មិនមានកម្មវិធីភ្នាក់ងារទេ"</string>
+    <string name="app_function_agent_list_empty_summary" msgid="610653760323174019">"ដំឡើងកម្មវិធីភ្នាក់ងារនៅលើឧបករណ៍របស់អ្នក ដើម្បីបើកមុខងារនេះ"</string>
+    <string name="app_function_agent_access_title" msgid="2066670300909436012">"សិទ្ធិចូលប្រើកម្មវិធី"</string>
+    <string name="app_function_agent_access_summary" msgid="6732843077882189740">"កម្មវិធី និងការកំណត់ដែលភ្នាក់ងារនេះអាចចូលប្រើ ដើម្បីទទួលបានព័ត៌មាន និងធ្វើសកម្មភាពសម្រាប់អ្នក"</string>
+    <string name="app_function_agent_access_app_targets_empty_title" msgid="774337187158063143">"មិនមានកម្មវិធីណាអាចចូលប្រើ <xliff:g id="APP_NAME">%1$s</xliff:g> បានទេ"</string>
+    <string name="app_function_agent_access_system_targets_category_title" msgid="7563475048220758703">"ប្រព័ន្ធ"</string>
+    <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"កម្មវិធី"</string>
+    <string name="app_function_target_access_title" msgid="7415628605578155761">"សិទ្ធិចូលប្រើរបស់ភ្នាក់ងារ"</string>
+    <string name="app_function_target_access_summary" msgid="6099120829640806490">"ភ្នាក់ងារដែលអាចចូលប្រើព័ត៌មាន និងធ្វើសកម្មភាពសម្រាប់អ្នកនៅក្នុងកម្មវិធីនេះ"</string>
+    <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"ការកំណត់​ឧបករណ៍"</string>
+    <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"អនុញ្ញាតឱ្យ <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ធ្វើជាភ្នាក់ងារសម្រាប់ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ឬ?"</string>
+    <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"ភ្នាក់ងារនេះនឹងអាចចូលប្រើ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ដើម្បីទទួលបានព័ត៌មាន និងធ្វើសកម្មភាពជំនួសអ្នក"</string>
+    <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"អនុញ្ញាត"</string>
+    <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"មិនអនុញ្ញាត"</string>
 </resources>

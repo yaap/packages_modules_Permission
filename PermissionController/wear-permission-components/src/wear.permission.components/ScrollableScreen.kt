@@ -31,6 +31,7 @@ import androidx.wear.compose.foundation.ExpandableState
 import androidx.wear.compose.foundation.SwipeToDismissValue
 import androidx.wear.compose.foundation.rememberSwipeToDismissBoxState
 import androidx.wear.compose.material.SwipeToDismissBox
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionScaffold
 import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
@@ -48,7 +49,7 @@ fun ScrollableScreen(
     showTimeText: Boolean = true,
     title: String? = null,
     subtitle: CharSequence? = null,
-    image: Any? = null,
+    imageBuilder: WearPermissionIconBuilder? = null,
     isLoading: Boolean = false,
     titleTestTag: String? = null,
     subtitleTestTag: String? = null,
@@ -80,7 +81,7 @@ fun ScrollableScreen(
                 showTimeText,
                 title,
                 subtitle,
-                image,
+                imageBuilder,
                 isLoading = isLoading || isBackground || dismissed,
                 content,
                 titleTestTag,
@@ -94,7 +95,7 @@ fun ScrollableScreen(
             showTimeText,
             title,
             subtitle,
-            image,
+            imageBuilder,
             isLoading,
             content,
             titleTestTag,

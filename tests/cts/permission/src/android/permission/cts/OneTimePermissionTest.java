@@ -46,6 +46,7 @@ import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject2;
 
+import com.android.compatibility.common.util.DisableAnimationRule;
 import com.android.compatibility.common.util.FeatureUtil;
 import com.android.compatibility.common.util.SystemUtil;
 import com.android.compatibility.common.util.UiAutomatorUtils2;
@@ -91,6 +92,7 @@ public class OneTimePermissionTest {
             mContext.getSystemService(ActivityManager.class);
     private String mOldOneTimePermissionTimeoutValue;
     private String mOldOneTimePermissionKilledDelayValue;
+    private String mOldEnableExtraDelaySvcRestartMemPressureValue;
 
     @Rule
     public final ScreenRecordRule sScreenRecordRule = new ScreenRecordRule(false, false);
@@ -98,6 +100,9 @@ public class OneTimePermissionTest {
     @Rule
     public IgnoreAllTestsRule mIgnoreAutomotive = new IgnoreAllTestsRule(
             mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE));
+
+    @Rule
+    public DisableAnimationRule mDisableAnimationRule = new DisableAnimationRule();
 
     @Before
     public void wakeUpScreen() {
@@ -119,11 +124,18 @@ public class OneTimePermissionTest {
                     "one_time_permissions_timeout_millis");
             mOldOneTimePermissionKilledDelayValue = DeviceConfig.getProperty("permissions",
                     "one_time_permissions_killed_delay_millis");
+            mOldEnableExtraDelaySvcRestartMemPressureValue = DeviceConfig.getProperty(
+                    "activity_manager", "enable_extra_delay_svc_restart_mem_pressure");
             DeviceConfig.setProperty("permissions", "one_time_permissions_timeout_millis",
                     Long.toString(ONE_TIME_TIMEOUT_MILLIS), false);
             DeviceConfig.setProperty("permissions",
                     "one_time_permissions_killed_delay_millis",
                     Long.toString(ONE_TIME_KILLED_DELAY_MILLIS), false);
+            // Prevents ActivityManager from delaying app restart by up to 40 seconds
+            // depending on the device's memory pressure
+            DeviceConfig.setProperty("activity_manager",
+                    "enable_extra_delay_svc_restart_mem_pressure",
+                    Boolean.toString(false), false);
         });
     }
 
@@ -142,6 +154,9 @@ public class OneTimePermissionTest {
                     DeviceConfig.setProperty("permissions",
                             "one_time_permissions_killed_delay_millis",
                             mOldOneTimePermissionKilledDelayValue, false);
+                    DeviceConfig.setProperty("activity_manager",
+                            "enable_extra_delay_svc_restart_mem_pressure",
+                            mOldEnableExtraDelaySvcRestartMemPressureValue, false);
                 });
     }
 

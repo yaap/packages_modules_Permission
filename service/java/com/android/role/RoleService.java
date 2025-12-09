@@ -654,8 +654,17 @@ public class RoleService extends SystemService implements RoleUserState.Callback
                 return Collections.emptyList();
             }
 
-            getContext().enforceCallingOrSelfPermission(Manifest.permission.MANAGE_ROLE_HOLDERS,
-                    "getRoleHoldersAsUser");
+            // TODO: Add a check for SDK level >= 36.1 (25Q4) when removing this
+            // flag. We must keep the else branch for olders versions.
+            if (Flags.supervisionRoleEnabled()) {
+                enforceCallingOrSelfAnyPermissions(new String[] {
+                        Manifest.permission.MANAGE_ROLE_HOLDERS,
+                        Manifest.permission.GET_ROLE_HOLDERS
+                }, "getRoleHoldersAsUser");
+            } else {
+                getContext().enforceCallingOrSelfPermission(Manifest.permission.MANAGE_ROLE_HOLDERS,
+                        "getRoleHoldersAsUser");
+            }
 
             Preconditions.checkStringNotEmpty(roleName, "roleName cannot be null or empty");
 
