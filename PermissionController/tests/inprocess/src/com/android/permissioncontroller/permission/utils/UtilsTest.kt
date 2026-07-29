@@ -125,7 +125,7 @@ class UtilsTest {
                 Utils.getEnterpriseString(
                     context,
                     WorkPolicyInfo.WORK_POLICY_TITLE,
-                    R.string.work_policy_title
+                    R.string.work_policy_title,
                 )
             )
             .isInstanceOf(String::class.java)
@@ -180,7 +180,7 @@ class UtilsTest {
                 READ_MEDIA_VISUAL,
                 SENSORS,
                 SMS,
-                STORAGE
+                STORAGE,
             )
         for (permissionGroupName in permissionGroupNames) {
             assertThat(Utils.getPermissionGroupDescriptionString(context, permissionGroupName, ""))
@@ -202,7 +202,7 @@ class UtilsTest {
             Utils.getPermissionLastAccessSummaryTimestamp(
                 System.currentTimeMillis(),
                 context,
-                LOCATION
+                LOCATION,
             )
         assertThat(result.first).isNotEmpty()
         assertThat(result.second).isEqualTo(Utils.LAST_24H_SENSOR_TODAY)
@@ -215,7 +215,7 @@ class UtilsTest {
             Utils.getPermissionLastAccessSummaryTimestamp(
                 System.currentTimeMillis() - 24 * 60 * 60 * 1000,
                 context,
-                LOCATION
+                LOCATION,
             )
         assertThat(result.first).isNotEmpty()
         assertThat(result.second).isEqualTo(Utils.LAST_24H_SENSOR_YESTERDAY)
@@ -228,7 +228,7 @@ class UtilsTest {
             Utils.getPermissionLastAccessSummaryTimestamp(
                 System.currentTimeMillis() - 5 * 24 * 60 * 60 * 1000,
                 context,
-                LOCATION
+                LOCATION,
             )
         assertThat(result.first).isNotEmpty()
         assertThat(result.second).isEqualTo(Utils.LAST_7D_SENSOR)
@@ -241,7 +241,7 @@ class UtilsTest {
             Utils.getPermissionLastAccessSummaryTimestamp(
                 System.currentTimeMillis(),
                 context,
-                STORAGE
+                STORAGE,
             )
         assertThat(result.first).isNotEmpty()
         assertThat(result.second).isEqualTo(Utils.LAST_24H_CONTENT_PROVIDER)
@@ -254,7 +254,7 @@ class UtilsTest {
             Utils.getPermissionLastAccessSummaryTimestamp(
                 System.currentTimeMillis() - 5 * 60 * 60 * 24 * 1000,
                 context,
-                STORAGE
+                STORAGE,
             )
         assertThat(result.first).isNotEmpty()
         assertThat(result.second).isEqualTo(Utils.LAST_7D_CONTENT_PROVIDER)
@@ -313,8 +313,9 @@ class UtilsTest {
             Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, UNDEFINED)
                 .map { it.name }
         val permissionNamesInSensorsGroup =
-            Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, SENSORS)
-                .map { it.name }
+            Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, SENSORS).map {
+                it.name
+            }
 
         assertFalse(permissionNamesInUndefinedGroup.contains(BODY_SENSORS))
         assertFalse(permissionNamesInUndefinedGroup.contains(BODY_SENSORS_BACKGROUND))
@@ -332,8 +333,9 @@ class UtilsTest {
             Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, UNDEFINED)
                 .map { it.name }
         val permissionNamesInSensorsGroup =
-            Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, SENSORS)
-                .map { it.name }
+            Utils.getInstalledRuntimePermissionInfosForGroup(context.packageManager, SENSORS).map {
+                it.name
+            }
 
         assertFalse(permissionNamesInUndefinedGroup.contains(BODY_SENSORS))
         assertFalse(permissionNamesInUndefinedGroup.contains(BODY_SENSORS_BACKGROUND))

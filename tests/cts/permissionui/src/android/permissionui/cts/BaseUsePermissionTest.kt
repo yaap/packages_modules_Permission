@@ -34,6 +34,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Process
+import android.permission.flags.Flags
 import android.provider.DeviceConfig
 import android.provider.Settings
 import android.server.wm.WindowManagerStateHelper
@@ -107,6 +108,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         const val OTHER_APP_PACKAGE_NAME = "android.permissionui.cts.usepermissionother"
         const val TEST_INSTALLER_PACKAGE_NAME = "android.permissionui.cts"
 
+        const val LOCATION_BUTTON_ALLOW_BUTTON = "com.android.permissioncontroller:id/allow"
         const val ALLOW_ALL_BUTTON =
             "com.android.permissioncontroller:id/permission_allow_all_button"
         const val SELECT_BUTTON =
@@ -200,9 +202,22 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         const val PROPERTY_MAX_SAFETY_LABELS_PERSISTED_PER_APP =
             "max_safety_labels_persisted_per_app"
 
+        const val HEADER_ALLOWED_ID = "allowed_header"
+        const val HEADER_ALLOWED_FOR_COMPATIBILITY_ID = "allowed_for_compatibility_header"
+        const val HEADER_DENIED_ID = "denied_header"
+
+        const val ALLOWED_FOR_COMPATIBILITY_NEARBY_DEVICES_FOOTER_ID =
+            "allowed_for_compatibility_nearby_devices_footer"
+
         // The highest SDK for which the system will show a "low SDK" warning when launching the app
         const val MAX_SDK_FOR_SDK_WARNING = 27
         const val MIN_SDK_FOR_RUNTIME_PERMS = 23
+
+        // The timeout for the "Deny in Settings" button to appear in the permission dialog.
+        // This is longer than the default because the "Deny in Settings" button is the last option
+        // in the dialog, and it can take a few seconds to scroll to it, especially on low-end
+        // devices or if permission rationale view is present.
+        private const val DENY_IN_SETTINGS_TIMEOUT_MILLIS = 30_000L
 
         val TEST_INSTALLER_ACTIVITY_COMPONENT_NAME =
             ComponentName(context, TestInstallerActivity::class.java)
@@ -254,65 +269,81 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
     private val platformResources = context.createPackageContext("android", 0).resources
     private val permissionToLabelResNameMap =
         mapOf(
-            // Contacts
-            android.Manifest.permission.READ_CONTACTS to "@android:string/permgrouplab_contacts",
-            android.Manifest.permission.WRITE_CONTACTS to "@android:string/permgrouplab_contacts",
-            // Calendar
-            android.Manifest.permission.READ_CALENDAR to "@android:string/permgrouplab_calendar",
-            android.Manifest.permission.WRITE_CALENDAR to "@android:string/permgrouplab_calendar",
-            // SMS
-            android.Manifest.permission_group.SMS to "@android:string/permgrouplab_sms",
-            android.Manifest.permission.SEND_SMS to "@android:string/permgrouplab_sms",
-            android.Manifest.permission.RECEIVE_SMS to "@android:string/permgrouplab_sms",
-            android.Manifest.permission.READ_SMS to "@android:string/permgrouplab_sms",
-            android.Manifest.permission.RECEIVE_WAP_PUSH to "@android:string/permgrouplab_sms",
-            android.Manifest.permission.RECEIVE_MMS to "@android:string/permgrouplab_sms",
-            "android.permission.READ_CELL_BROADCASTS" to "@android:string/permgrouplab_sms",
-            // Storage
-            android.Manifest.permission.READ_EXTERNAL_STORAGE to
-                "@android:string/permgrouplab_storage",
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE to
-                "@android:string/permgrouplab_storage",
-            // Location
-            android.Manifest.permission.ACCESS_FINE_LOCATION to
-                "@android:string/permgrouplab_location",
-            android.Manifest.permission.ACCESS_COARSE_LOCATION to
-                "@android:string/permgrouplab_location",
-            android.Manifest.permission.ACCESS_BACKGROUND_LOCATION to
-                "@android:string/permgrouplab_location",
-            // Phone
-            android.Manifest.permission_group.PHONE to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.READ_PHONE_STATE to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.CALL_PHONE to "@android:string/permgrouplab_phone",
-            "android.permission.ACCESS_IMS_CALL_SERVICE" to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.READ_CALL_LOG to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.WRITE_CALL_LOG to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.ADD_VOICEMAIL to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.USE_SIP to "@android:string/permgrouplab_phone",
-            android.Manifest.permission.PROCESS_OUTGOING_CALLS to
-                "@android:string/permgrouplab_phone",
-            // Microphone
-            android.Manifest.permission.RECORD_AUDIO to "@android:string/permgrouplab_microphone",
-            // Camera
-            android.Manifest.permission.CAMERA to "@android:string/permgrouplab_camera",
-            // Body sensors
-            android.Manifest.permission.BODY_SENSORS to "@android:string/permgrouplab_sensors",
-            android.Manifest.permission.BODY_SENSORS_BACKGROUND to
-                "@android:string/permgrouplab_sensors",
-            // Bluetooth
-            android.Manifest.permission.BLUETOOTH_CONNECT to
-                "@android:string/permgrouplab_nearby_devices",
-            android.Manifest.permission.BLUETOOTH_SCAN to
-                "@android:string/permgrouplab_nearby_devices",
-            // Aural
-            android.Manifest.permission.READ_MEDIA_AUDIO to
-                "@android:string/permgrouplab_readMediaAural",
-            // Visual
-            android.Manifest.permission.READ_MEDIA_IMAGES to
-                "@android:string/permgrouplab_readMediaVisual",
-            android.Manifest.permission.READ_MEDIA_VIDEO to
-                "@android:string/permgrouplab_readMediaVisual",
-        )
+                // Contacts
+                android.Manifest.permission.READ_CONTACTS to
+                    "@android:string/permgrouplab_contacts",
+                android.Manifest.permission.WRITE_CONTACTS to
+                    "@android:string/permgrouplab_contacts",
+                // Calendar
+                android.Manifest.permission.READ_CALENDAR to
+                    "@android:string/permgrouplab_calendar",
+                android.Manifest.permission.WRITE_CALENDAR to
+                    "@android:string/permgrouplab_calendar",
+                // SMS
+                android.Manifest.permission_group.SMS to "@android:string/permgrouplab_sms",
+                android.Manifest.permission.SEND_SMS to "@android:string/permgrouplab_sms",
+                android.Manifest.permission.RECEIVE_SMS to "@android:string/permgrouplab_sms",
+                android.Manifest.permission.READ_SMS to "@android:string/permgrouplab_sms",
+                android.Manifest.permission.RECEIVE_WAP_PUSH to "@android:string/permgrouplab_sms",
+                android.Manifest.permission.RECEIVE_MMS to "@android:string/permgrouplab_sms",
+                "android.permission.READ_CELL_BROADCASTS" to "@android:string/permgrouplab_sms",
+                // Storage
+                android.Manifest.permission.READ_EXTERNAL_STORAGE to
+                    "@android:string/permgrouplab_storage",
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE to
+                    "@android:string/permgrouplab_storage",
+                // Location
+                android.Manifest.permission.ACCESS_FINE_LOCATION to
+                    "@android:string/permgrouplab_location",
+                android.Manifest.permission.ACCESS_COARSE_LOCATION to
+                    "@android:string/permgrouplab_location",
+                android.Manifest.permission.ACCESS_BACKGROUND_LOCATION to
+                    "@android:string/permgrouplab_location",
+                // Phone
+                android.Manifest.permission_group.PHONE to "@android:string/permgrouplab_phone",
+                android.Manifest.permission.READ_PHONE_STATE to
+                    "@android:string/permgrouplab_phone",
+                android.Manifest.permission.CALL_PHONE to "@android:string/permgrouplab_phone",
+                "android.permission.ACCESS_IMS_CALL_SERVICE" to
+                    "@android:string/permgrouplab_phone",
+                android.Manifest.permission.READ_CALL_LOG to "@android:string/permgrouplab_phone",
+                android.Manifest.permission.WRITE_CALL_LOG to "@android:string/permgrouplab_phone",
+                android.Manifest.permission.ADD_VOICEMAIL to "@android:string/permgrouplab_phone",
+                android.Manifest.permission.USE_SIP to "@android:string/permgrouplab_phone",
+                android.Manifest.permission.PROCESS_OUTGOING_CALLS to
+                    "@android:string/permgrouplab_phone",
+                // Microphone
+                android.Manifest.permission.RECORD_AUDIO to
+                    "@android:string/permgrouplab_microphone",
+                // Camera
+                android.Manifest.permission.CAMERA to "@android:string/permgrouplab_camera",
+                // Body sensors
+                android.Manifest.permission.BODY_SENSORS to "@android:string/permgrouplab_sensors",
+                android.Manifest.permission.BODY_SENSORS_BACKGROUND to
+                    "@android:string/permgrouplab_sensors",
+                // Bluetooth
+                android.Manifest.permission.BLUETOOTH_CONNECT to
+                    "@android:string/permgrouplab_nearby_devices",
+                android.Manifest.permission.BLUETOOTH_SCAN to
+                    "@android:string/permgrouplab_nearby_devices",
+                // Aural
+                android.Manifest.permission.READ_MEDIA_AUDIO to
+                    "@android:string/permgrouplab_readMediaAural",
+                // Visual
+                android.Manifest.permission.READ_MEDIA_IMAGES to
+                    "@android:string/permgrouplab_readMediaVisual",
+                android.Manifest.permission.READ_MEDIA_VIDEO to
+                    "@android:string/permgrouplab_readMediaVisual",
+            )
+            .let { map ->
+                if (SdkLevel.isAtLeastV() && Flags.accessLocalNetworkPermissionEnabled()) {
+                    map +
+                        (android.Manifest.permission.ACCESS_LOCAL_NETWORK to
+                            "@android:string/permgrouplab_nearby_devices")
+                } else {
+                    map
+                }
+            }
 
     @Before
     @After
@@ -682,13 +713,15 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         vararg permissions: String?,
         askTwice: Boolean = false,
         waitForWindowTransition: Boolean = !isWatch,
+        inNewTask: Boolean = false,
         crossinline block: () -> Unit,
     ): Instrumentation.ActivityResult {
         // Request the permissions
         lateinit var future: CompletableFuture<Instrumentation.ActivityResult>
         // The WindowManagerStateHelper#waitForValidState only supports S+
         if (SdkLevel.isAtLeastS()) {
-            future = startActivityForFuture(*permissions, askTwice = askTwice)
+            future =
+                startActivityForFuture(*permissions, askTwice = askTwice, inNewTask = inNewTask)
             waitForPermissionRequestActivity()
         } else {
             doAndWaitForWindowTransition {
@@ -717,12 +750,14 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
     fun startActivityForFuture(
         vararg permissions: String?,
         askTwice: Boolean,
+        inNewTask: Boolean = false,
     ): CompletableFuture<Instrumentation.ActivityResult> =
         startActivityForFuture(
             Intent().apply {
                 component =
                     ComponentName(APP_PACKAGE_NAME, "$APP_PACKAGE_NAME.RequestPermissionsActivity")
                 putExtra("$APP_PACKAGE_NAME.PERMISSIONS", permissions)
+                putExtra("$APP_PACKAGE_NAME.IS_NEW_TASK", inNewTask)
                 putExtra("$APP_PACKAGE_NAME.ASK_TWICE", askTwice)
             }
         )
@@ -750,6 +785,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         permissions: Array<out String?>,
         permissionAndExpectedGrantResults: Array<out Pair<String?, Boolean>>,
         askTwice: Boolean = false,
+        inNewTask: Boolean = false,
         waitForWindowTransition: Boolean = !isWatch,
         crossinline block: () -> Unit,
     ) {
@@ -772,6 +808,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
             requestAppPermissions(
                 *permissions,
                 askTwice = askTwice,
+                inNewTask = inNewTask,
                 waitForWindowTransition = shouldWaitForWindowTransition,
                 block = block,
             )
@@ -816,6 +853,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
     protected inline fun requestAppPermissionsAndAssertResult(
         vararg permissionAndExpectedGrantResults: Pair<String?, Boolean>,
         askTwice: Boolean = false,
+        inNewTask: Boolean = false,
         waitForWindowTransition: Boolean = !isWatch,
         crossinline block: () -> Unit,
     ) {
@@ -823,6 +861,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
             permissionAndExpectedGrantResults.map { it.first }.toTypedArray(),
             permissionAndExpectedGrantResults,
             askTwice,
+            inNewTask,
             waitForWindowTransition,
             block,
         )
@@ -873,6 +912,10 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
 
     protected fun clickPermissionRequestAllowAllButton(timeoutMillis: Long = 20000) {
         click(By.res(ALLOW_ALL_BUTTON).displayId(displayId), timeoutMillis)
+    }
+
+    protected fun clickPermissionRequestAllowLocationButtonButton(timeoutMillis: Long = 20000) {
+        click(By.res(LOCATION_BUTTON_ALLOW_BUTTON).displayId(displayId), timeoutMillis)
     }
 
     /**
@@ -929,11 +972,14 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         if (isAutomotive || isWatch) {
             click(
                 By.text(getPermissionControllerString("app_permission_button_deny"))
-                    .displayId(displayId)
+                    .displayId(displayId),
+                DENY_IN_SETTINGS_TIMEOUT_MILLIS,
             )
         } else {
             click(
-                By.res("com.android.permissioncontroller:id/deny_radio_button").displayId(displayId)
+                By.res("com.android.permissioncontroller:id/deny_radio_button")
+                    .displayId(displayId),
+                DENY_IN_SETTINGS_TIMEOUT_MILLIS,
             )
         }
     }
@@ -1119,7 +1165,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
 
     protected fun clickPermissionRationaleViewInGrantDialog() {
         assertPermissionRationaleContainerOnGrantDialogIsVisible(true)
-        clickAndWaitForWindowTransition(
+        waitForFocusThenClickAndWaitForWindowTransition(
             By.res(GRANT_DIALOG_PERMISSION_RATIONALE_CONTAINER_VIEW).displayId(displayId)
         )
     }
@@ -1146,7 +1192,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
     }
 
     private fun navigateToAppPermissionSettings() {
-        if (isTv) {
+        if (isTv || isAutomotive) {
             clearTargetSdkWarning(1000L)
             pressHome()
         } else {
@@ -1237,18 +1283,52 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         }
     }
 
+    protected fun startManageAppPermissionsActivity() =
+        startManageAppPermissionsActivity(APP_PACKAGE_NAME)
+
     @Suppress("DEPRECATION")
-    protected fun startManageAppPermissionsActivity() {
-        doAndWaitForWindowTransition {
+    protected fun startManageAppPermissionsActivity(
+        packageName: String,
+        waitForWindowTransition: Boolean = !isWatch,
+    ) {
+        val action = {
             runWithShellPermissionIdentity {
                 context.startActivity(
                     Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS).apply {
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        putExtra(Intent.EXTRA_PACKAGE_NAME, APP_PACKAGE_NAME)
+                        putExtra(Intent.EXTRA_PACKAGE_NAME, packageName)
                     }
                 )
             }
+        }
+        if (waitForWindowTransition) {
+            doAndWaitForWindowTransition { action() }
+        } else {
+            action()
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    protected fun startManagePermissionAppsActivity(
+        groupName: String,
+        waitForWindowTransition: Boolean = !isWatch,
+    ) {
+        val action = {
+            runWithShellPermissionIdentity {
+                context.startActivity(
+                    Intent(Intent.ACTION_MANAGE_PERMISSION_APPS).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, groupName)
+                    }
+                )
+            }
+        }
+        if (waitForWindowTransition) {
+            doAndWaitForWindowTransition { action() }
+        } else {
+            action()
         }
     }
 
@@ -1429,6 +1509,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
                     permission in MEDIA_PERMISSIONS
             if (shouldShowStorageWarning) {
                 if (isWatch) {
+                    scrollToBottom()
                     click(
                         By.desc(
                                 getPermissionControllerString(
@@ -1480,7 +1561,7 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
         pressBack()
     }
 
-    private fun getPermissionLabel(permission: String): String {
+    protected fun getPermissionLabel(permission: String): String {
         val labelResName = permissionToLabelResNameMap[permission]
         assertNotNull("Unknown permission $permission", labelResName)
         val labelRes = platformResources.getIdentifier(labelResName, null, null)
@@ -1563,8 +1644,12 @@ abstract class BaseUsePermissionTest : BasePermissionTest() {
     private fun byTextStartsWithCaseInsensitive(prefix: String): BySelector =
         By.text(Pattern.compile("(?i)^${Pattern.quote(prefix)}.*$")).displayId(displayId)
 
-    protected fun assertAppHasPermission(permissionName: String, expectPermission: Boolean) {
-        val checkPermissionResult = packageManager.checkPermission(permissionName, APP_PACKAGE_NAME)
+    protected fun assertAppHasPermission(
+        permissionName: String,
+        expectPermission: Boolean,
+        packageName: String = APP_PACKAGE_NAME,
+    ) {
+        val checkPermissionResult = packageManager.checkPermission(permissionName, packageName)
         assertTrue(
             "Invalid permission check result: $checkPermissionResult",
             checkPermissionResult == PackageManager.PERMISSION_GRANTED ||

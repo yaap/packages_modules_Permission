@@ -85,10 +85,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
 
     @Test
     fun read_afterDeleted_returnsNull() {
-        val appsSafetyLabelHistory =
-            AppsSafetyLabelHistory(
-                listOf(),
-            )
+        val appsSafetyLabelHistory = AppsSafetyLabelHistory(listOf())
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
         AppsSafetyLabelHistoryPersistence.clear(dataFile)
 
@@ -98,10 +95,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
 
     @Test
     fun read_afterWrite_noHistory_returnsIdenticalAppsSafetyLabelHistory() {
-        val appsSafetyLabelHistory =
-            AppsSafetyLabelHistory(
-                listOf(),
-            )
+        val appsSafetyLabelHistory = AppsSafetyLabelHistory(listOf())
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
 
         assertThat(AppsSafetyLabelHistoryPersistence.read(dataFile).appsSafetyLabelHistory)
@@ -130,8 +124,8 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     AppSafetyLabelHistory(AppInfo(PACKAGE_NAME_1), listOf(SAFETY_LABEL_PKG_1_V1)),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -168,7 +162,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
             )
         AppsSafetyLabelHistoryPersistence.write(
             dataFile,
-            AppsSafetyLabelHistoryFileContent(appsSafetyLabelHistory, 5)
+            AppsSafetyLabelHistoryFileContent(appsSafetyLabelHistory, 5),
         )
 
         assertThat(AppsSafetyLabelHistoryPersistence.read(dataFile).version).isEqualTo(5)
@@ -186,7 +180,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V1)
+                            listOf(SAFETY_LABEL_PKG_1_V1),
                         )
                     )
                 )
@@ -211,12 +205,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V1)
+                            listOf(SAFETY_LABEL_PKG_1_V1),
                         ),
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_2),
-                            listOf(SAFETY_LABEL_PKG_2_V1)
-                        )
+                            listOf(SAFETY_LABEL_PKG_2_V1),
+                        ),
                     )
                 )
             )
@@ -230,8 +224,8 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     AppSafetyLabelHistory(AppInfo(PACKAGE_NAME_1), listOf(SAFETY_LABEL_PKG_1_V1)),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -244,16 +238,16 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V1)
+                            listOf(SAFETY_LABEL_PKG_1_V1),
                         ),
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_2),
                             listOf(
                                 SAFETY_LABEL_PKG_2_V1,
                                 SAFETY_LABEL_PKG_2_V2,
-                                SAFETY_LABEL_PKG_2_V3
-                            )
-                        )
+                                SAFETY_LABEL_PKG_2_V3,
+                            ),
+                        ),
                     )
                 )
             )
@@ -273,7 +267,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_2),
-                            listOf(SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3)
+                            listOf(SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3),
                         )
                     )
                 )
@@ -288,8 +282,8 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     AppSafetyLabelHistory(AppInfo(PACKAGE_NAME_1), listOf(SAFETY_LABEL_PKG_1_V2)),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -306,7 +300,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
             AppsSafetyLabelHistory(
                 listOf(
                     AppSafetyLabelHistory(AppInfo(PACKAGE_NAME_1), listOf(SAFETY_LABEL_PKG_1_V1)),
-                    AppSafetyLabelHistory(AppInfo(PACKAGE_NAME_2), listOf(SAFETY_LABEL_PKG_2_V1))
+                    AppSafetyLabelHistory(AppInfo(PACKAGE_NAME_2), listOf(SAFETY_LABEL_PKG_2_V1)),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -316,9 +310,9 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 SAFETY_LABEL_PKG_1_V2,
                 SAFETY_LABEL_PKG_2_V2,
                 SAFETY_LABEL_PKG_2_V3,
-                SAFETY_LABEL_PKG_3_V1
+                SAFETY_LABEL_PKG_3_V1,
             ),
-            dataFile
+            dataFile,
         )
 
         assertThat(AppsSafetyLabelHistoryPersistence.read(dataFile).appsSafetyLabelHistory)
@@ -327,19 +321,19 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2)
+                            listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
                         ),
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_2),
                             listOf(
                                 SAFETY_LABEL_PKG_2_V1,
                                 SAFETY_LABEL_PKG_2_V2,
-                                SAFETY_LABEL_PKG_2_V3
-                            )
+                                SAFETY_LABEL_PKG_2_V3,
+                            ),
                         ),
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_3),
-                            listOf(SAFETY_LABEL_PKG_3_V1)
+                            listOf(SAFETY_LABEL_PKG_3_V1),
                         ),
                     )
                 )
@@ -379,7 +373,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_1),
-                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2)
+                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
                     )
                 )
             )
@@ -398,7 +392,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3)
+                        listOf(SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3),
                     )
                 )
             )
@@ -418,12 +412,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_1),
-                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2)
+                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
                     ),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -435,7 +429,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
             .isEqualTo(
                 listOf(
                     AppSafetyLabelDiff(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
-                    AppSafetyLabelDiff(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V3)
+                    AppSafetyLabelDiff(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V3),
                 )
             )
     }
@@ -455,12 +449,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_1),
-                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2)
+                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
                     ),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2, SAFETY_LABEL_PKG_2_V3),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -472,7 +466,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
             .isEqualTo(
                 mapOf(
                     AppInfo(PACKAGE_NAME_1) to DATE_2022_10_14,
-                    AppInfo(PACKAGE_NAME_2) to DATE_2022_12_30
+                    AppInfo(PACKAGE_NAME_2) to DATE_2022_12_30,
                 )
             )
     }
@@ -484,19 +478,19 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_1),
-                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2)
+                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
                     ),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
 
         AppsSafetyLabelHistoryPersistence.deleteSafetyLabelsForApps(
             setOf(AppInfo(PACKAGE_NAME_2)),
-            dataFile
+            dataFile,
         )
 
         assertThat(AppsSafetyLabelHistoryPersistence.read(dataFile).appsSafetyLabelHistory)
@@ -505,7 +499,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2)
+                            listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2),
                         )
                     )
                 )
@@ -519,12 +513,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_1),
-                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2, SAFETY_LABEL_PKG_1_V3)
+                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2, SAFETY_LABEL_PKG_1_V3),
                     ),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -537,12 +531,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V3)
+                            listOf(SAFETY_LABEL_PKG_1_V3),
                         ),
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_2),
-                            listOf(SAFETY_LABEL_PKG_2_V2)
-                        )
+                            listOf(SAFETY_LABEL_PKG_2_V2),
+                        ),
                     )
                 )
             )
@@ -555,12 +549,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                 listOf(
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_1),
-                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2, SAFETY_LABEL_PKG_1_V3)
+                        listOf(SAFETY_LABEL_PKG_1_V1, SAFETY_LABEL_PKG_1_V2, SAFETY_LABEL_PKG_1_V3),
                     ),
                     AppSafetyLabelHistory(
                         AppInfo(PACKAGE_NAME_2),
-                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                    )
+                        listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                    ),
                 )
             )
         AppsSafetyLabelHistoryPersistence.write(dataFile, appsSafetyLabelHistory)
@@ -573,12 +567,12 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     listOf(
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_1),
-                            listOf(SAFETY_LABEL_PKG_1_V2, SAFETY_LABEL_PKG_1_V3)
+                            listOf(SAFETY_LABEL_PKG_1_V2, SAFETY_LABEL_PKG_1_V3),
                         ),
                         AppSafetyLabelHistory(
                             AppInfo(PACKAGE_NAME_2),
-                            listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2)
-                        )
+                            listOf(SAFETY_LABEL_PKG_2_V1, SAFETY_LABEL_PKG_2_V2),
+                        ),
                     )
                 )
             )
@@ -630,7 +624,7 @@ class AppsSafetyLabelHistoryPersistenceTest {
                     DeviceConfig.getInt(
                         eq(NAMESPACE_PRIVACY),
                         eq(PROPERTY_MAX_SAFETY_LABELS_PERSISTED_PER_APP),
-                        anyInt()
+                        anyInt(),
                     )
                 )
                 .thenReturn(max)

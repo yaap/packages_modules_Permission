@@ -61,7 +61,7 @@ class WearPermissionAppsFragment : Fragment(), PermissionsUsagesChangeCallback {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val permGroupName =
             arguments?.getString(Intent.EXTRA_PERMISSION_GROUP_NAME)
@@ -83,7 +83,7 @@ class WearPermissionAppsFragment : Fragment(), PermissionsUsagesChangeCallback {
         val locationProviderDialogViewModel =
             ViewModelProvider(
                 owner = this,
-                factory = WearLocationProviderInterceptDialogViewModelFactory()
+                factory = WearLocationProviderInterceptDialogViewModelFactory(),
             )[WearLocationProviderInterceptDialogViewModel::class.java]
 
         val onAppClick: (String, UserHandle, String) -> Unit = { packageName, user, category ->
@@ -99,8 +99,8 @@ class WearPermissionAppsFragment : Fragment(), PermissionsUsagesChangeCallback {
                         user,
                         this::class.java.name,
                         sessionId,
-                        category
-                    )
+                        category,
+                    ),
                 )
             }
         }
@@ -123,7 +123,7 @@ class WearPermissionAppsFragment : Fragment(), PermissionsUsagesChangeCallback {
                         sessionId,
                         activity.application,
                         permGroupName,
-                        LOG_TAG
+                        LOG_TAG,
                     )
                 }
             }
@@ -144,7 +144,7 @@ class WearPermissionAppsFragment : Fragment(), PermissionsUsagesChangeCallback {
                 false,
                 false,
                 this,
-                false
+                false,
             )
         }
 
@@ -161,7 +161,7 @@ class WearPermissionAppsFragment : Fragment(), PermissionsUsagesChangeCallback {
                         isStorageAndLessThanT,
                         onAppClick,
                         onShowSystemClick,
-                        logPermissionAppsFragmentCreated
+                        logPermissionAppsFragmentCreated,
                     )
                 )
             }

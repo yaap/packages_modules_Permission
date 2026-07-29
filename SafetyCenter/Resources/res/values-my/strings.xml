@@ -20,7 +20,7 @@
     <string name="safetyCenterResourcesAppLabel" msgid="4043334186295695930">"လုံခြုံရေးစင်တာ ရင်းမြစ်များ"</string>
     <string name="lock_screen_sources_title" msgid="3317906280484627707">"စက်ပစ္စည်းလော့ခ်ချခြင်း"</string>
     <string name="lock_screen_sources_summary" msgid="7220439741282516496"></string>
-    <string name="lock_screen_title" msgid="4069104894527169877">"ဖန်သားပြင်လော့ခ်"</string>
+    <string name="lock_screen_title" msgid="4069104894527169877">"စခရင်လော့ခ်"</string>
     <string name="lock_screen_summary_disabled" msgid="354071230916616692">"အချက်အလက် မရှိသေးပါ"</string>
     <string name="lock_screen_search_terms" msgid="2678486357779794826">"စက်လော့ခ်ချခြင်း၊ ဖန်သားပြင်လော့ခ်၊ လော့ခ် မျက်နှာပြင်၊ လော့ခ်မျက်နှာပြင်၊ စကားဝှက်၊ ပင်၊ ပုံစံ"</string>
     <string name="biometrics_title" msgid="5859504610285212938">"ဇီဝမက်ထရစ် အချက်အလက်များ"</string>

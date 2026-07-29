@@ -59,14 +59,14 @@ internal class PreferenceHighlightManager(private val fragment: PreferenceFragme
 
     /** Creates a new [HighlightablePreferenceGroupAdapter] instance */
     fun createAdapter(
-        preferenceScreen: PreferenceScreen,
+        preferenceScreen: PreferenceScreen
     ): RecyclerView.Adapter<RecyclerView.ViewHolder> {
         val intent = fragment.getActivity()?.getIntent()
         preferenceGroupAdapter =
             HighlightablePreferenceGroupAdapter(
                 preferenceScreen,
                 intent?.getStringExtra(EXTRA_SETTINGS_FRAGMENT_ARGS_KEY),
-                preferenceHighlighted
+                preferenceHighlighted,
             )
         @Suppress("UNCHECKED_CAST")
         return preferenceGroupAdapter!! as RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -101,7 +101,7 @@ internal class PreferenceHighlightManager(private val fragment: PreferenceFragme
         preferenceGroupAdapter?.requestHighlight(
             fragment.getView(),
             fragment.getListView(),
-            collapsingActivity?.appBarLayout
+            collapsingActivity?.appBarLayout,
         )
     }
 

@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"এজেণ্টসকল"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"এপ্‌সমূহত তথ্য এক্সেছ কৰিব আৰু কাৰ্যব্যৱস্থা গ্ৰহণ কৰিব পৰা এজেণ্টসকল"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"এপ্‌ আৰু AI সহায়কৰ কাৰ্যকলাপ"</string>
 </resources>

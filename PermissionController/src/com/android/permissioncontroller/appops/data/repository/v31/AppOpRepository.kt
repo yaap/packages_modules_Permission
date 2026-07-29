@@ -37,6 +37,7 @@ import com.android.permissioncontroller.appops.data.model.v31.PackageAppOpUsageM
 import com.android.permissioncontroller.data.repository.v31.AppOpChangeListener
 import com.android.permissioncontroller.data.repository.v31.PackageChangeListener
 import com.android.permissioncontroller.data.repository.v31.PermissionChangeListener
+import com.android.permissioncontroller.permission.compat.AppOpsManagerCompat
 import com.android.permissioncontroller.permission.data.repository.v31.PermissionRepository
 import com.android.permissioncontroller.permission.utils.PermissionMapping
 import java.util.concurrent.TimeUnit
@@ -75,6 +76,42 @@ interface AppOpRepository {
         opNames: List<String>,
         coroutineScope: CoroutineScope,
     ): Flow<List<DiscretePackageOpsModel>>
+
+    /**
+     * Check whether an application can perform an operation.
+     *
+     * @see AppOpsManager.checkOpNoThrow
+     */
+    fun checkOpNoThrow(op: String, uid: Int, packageName: String): Int
+
+    /**
+     * Sets given app op in the specified mode for app ops in the UID.
+     *
+     * @see AppOpsManager.setUidMode
+     */
+    fun setUidMode(op: String, uid: Int, mode: Int)
+
+    /**
+     * Monitor for changes to the operating mode for the given op in the given app package.
+     *
+     * @param op The operation to monitor, one of OPSTR_*.
+     * @param packageName The name of the application to monitor.
+     * @param callback Where to report changes.
+     * @see AppOpsManager.startWatchingMode
+     */
+    fun startWatchingMode(
+        op: String,
+        packageName: String,
+        callback: AppOpsManager.OnOpChangedListener,
+    )
+
+    /**
+     * Stop monitoring that was previously started with {@link #startWatchingMode}. All monitoring
+     * associated with this callback will be removed.
+     *
+     * @see AppOpsManager.stopWatchingMode
+     */
+    fun stopWatchingMode(callback: AppOpsManager.OnOpChangedListener)
 
     companion object {
         @Volatile private var instance: AppOpRepository? = null
@@ -233,6 +270,22 @@ class AppOpRepositoryImpl(
                 )
             }
     }
+
+    override fun checkOpNoThrow(op: String, uid: Int, packageName: String): Int =
+        AppOpsManagerCompat.checkOpNoThrow(appOpsManager, op, uid, packageName)
+
+    @Suppress("MissingPermission")
+    override fun setUidMode(op: String, uid: Int, mode: Int) =
+        appOpsManager.setUidMode(op, uid, mode)
+
+    override fun startWatchingMode(
+        op: String,
+        packageName: String,
+        callback: AppOpsManager.OnOpChangedListener,
+    ) = appOpsManager.startWatchingMode(op, packageName, callback)
+
+    override fun stopWatchingMode(callback: AppOpsManager.OnOpChangedListener) =
+        appOpsManager.stopWatchingMode(callback)
 
     private fun getPrivacyDashboardAppOpNames(): Set<String> {
         val permissionGroups = permissionRepository.getPermissionGroupsForPrivacyDashboard()

@@ -31,6 +31,7 @@ import static com.android.compatibility.common.util.SystemUtil.runWithShellPermi
 import static org.junit.Assume.assumeFalse;
 
 import android.app.ActivityManager;
+import android.app.ActivityOptions;
 import android.app.DreamManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -107,8 +108,9 @@ public class OneTimePermissionTest {
     @Before
     public void wakeUpScreen() {
         SystemUtil.runShellCommand("input keyevent KEYCODE_WAKEUP");
-
-        SystemUtil.runShellCommand("input keyevent 82");
+        SystemUtil.runShellCommand("input keyevent KEYCODE_MENU");
+        SystemUtil.runShellCommand("input keyevent KEYCODE_ESCAPE");
+        mUiDevice.waitForIdle();
     }
 
     @Before
@@ -339,7 +341,9 @@ public class OneTimePermissionTest {
         startApp.setComponent(componentName);
         startApp.setFlags(FLAG_ACTIVITY_NEW_TASK);
 
-        mContext.startActivity(startApp);
+        ActivityOptions options = ActivityOptions.makeBasic();
+        options.setLaunchWindowingMode(1); // Fullscreen
+        mContext.startActivity(startApp, options.toBundle());
     }
 
     /**

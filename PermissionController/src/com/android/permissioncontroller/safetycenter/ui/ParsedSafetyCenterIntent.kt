@@ -30,7 +30,7 @@ import com.android.safetycenter.internaldata.SafetyCenterIssueKey
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 data class ParsedSafetyCenterIntent(
     val safetyCenterIssueKey: SafetyCenterIssueKey? = null,
-    val shouldExpandIssuesGroup: Boolean
+    val shouldExpandIssuesGroup: Boolean,
 ) {
     companion object {
         @JvmStatic
@@ -43,7 +43,7 @@ data class ParsedSafetyCenterIntent(
                 createSafetyCenterIssueKey(
                     safetySourceId,
                     safetySourceIssueId,
-                    safetySourceUserHandle
+                    safetySourceUserHandle,
                 )
 
             // Check if we've navigated from QS or if focusing on single issue and issues should be
@@ -65,7 +65,7 @@ data class ParsedSafetyCenterIntent(
         private fun createSafetyCenterIssueKey(
             safetySourceId: String?,
             safetySourceIssueId: String?,
-            safetySourceUserHandle: UserHandle?
+            safetySourceUserHandle: UserHandle?,
         ): SafetyCenterIssueKey? {
             if (safetySourceId == null || safetySourceIssueId == null) {
                 return null

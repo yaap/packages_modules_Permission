@@ -46,7 +46,7 @@ import org.xmlpull.v1.XmlPullParserException
  */
 class PermissionChangeStorageImpl(
     context: Context,
-    jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)!!
+    jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)!!,
 ) : BasePermissionEventStorage<PermissionChange>(context, jobScheduler) {
 
     // We don't use namespaces
@@ -142,7 +142,7 @@ class PermissionChangeStorageImpl(
     private fun readPermissionChange(
         parser: XmlPullParser,
         format: SimpleDateFormat,
-        truncateToDay: Boolean
+        truncateToDay: Boolean,
     ): PermissionChange? {
         var change: PermissionChange? = null
         parser.require(XmlPullParser.START_TAG, ns, TAG_PERMISSION_CHANGE)
@@ -201,7 +201,7 @@ class PermissionChangeStorageImpl(
         return DeviceConfig.getBoolean(
             DeviceConfig.NAMESPACE_PERMISSIONS,
             Utils.PROPERTY_PERMISSION_CHANGES_STORE_EXACT_TIME,
-            /* defaultValue= */ false
+            /* defaultValue= */ false,
         )
     }
 }

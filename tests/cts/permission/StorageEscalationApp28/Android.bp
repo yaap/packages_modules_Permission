@@ -21,11 +21,5 @@ package {
 android_test_helper_app {
     name: "CtsStorageEscalationApp28",
     certificate: ":cts-testkey2",
-    test_suites: [
-        "cts",
-        "general-tests",
-        "mts-permission",
-        "sts",
-    ],
     sdk_version: "test_current",
 }

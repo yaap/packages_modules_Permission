@@ -20,7 +20,7 @@
     <string name="scanning_title" msgid="5424849039854311398">"Skannimine"</string>
     <string name="loading_summary" msgid="3740846439782713910">"Seadme seadete kontrollimine …"</string>
     <string name="overall_severity_level_ok_title" msgid="2041250138727564565">"Korras"</string>
-    <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"Ühtegi probleemi ei leitud"</string>
+    <string name="overall_severity_level_ok_summary" msgid="383626536912856690">"Ühtegi probleemi ei leitud."</string>
     <string name="overall_severity_level_tip_summary" msgid="1935765582243024999">"{count,plural, =1{Vaadake soovitust}other{Vaadake soovitusi}}"</string>
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{Tehti toiming}other{Tehti toimingud}}"</string>
     <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"Vaadake seaded üle"</string>

@@ -150,7 +150,8 @@ class UnusedAppsViewModel(private val app: Application, private val sessionId: L
                     // instead.
                     var lastUsageTime =
                         lastUsedDataUnusedApps[userPackage]
-                            ?: firstInstallDataUnusedApps[userPackage] ?: 0L
+                            ?: firstInstallDataUnusedApps[userPackage]
+                            ?: 0L
 
                     val period = UnusedPeriod.findLongestValidPeriod(now - lastUsageTime)
                     categorizedApps[period]!!.add(
@@ -158,7 +159,7 @@ class UnusedAppsViewModel(private val app: Application, private val sessionId: L
                             packageName,
                             user,
                             systemApps.contains(userPackage),
-                            unusedApps[userPackage]!!
+                            unusedApps[userPackage]!!,
                         )
                     )
                 }
@@ -224,7 +225,7 @@ class UnusedAppsViewModel(private val app: Application, private val sessionId: L
         userContext.packageManager.setApplicationEnabledSetting(
             packageName,
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER,
-            0
+            0,
         )
     }
 
@@ -243,7 +244,7 @@ class UnusedAppsViewModel(private val app: Application, private val sessionId: L
                     sessionId,
                     uid,
                     packageName,
-                    action
+                    action,
                 )
             }
         }
@@ -270,7 +271,7 @@ class UnusedAppsViewModel(private val app: Application, private val sessionId: L
                     uid,
                     packageName,
                     groupName,
-                    bucket
+                    bucket,
                 )
             }
         }
@@ -279,12 +280,11 @@ class UnusedAppsViewModel(private val app: Application, private val sessionId: L
 
 typealias UserPackage = Pair<String, UserHandle>
 
-class UnusedAppsViewModelFactory(
-    private val app: Application,
-    private val sessionId: Long,
-) : ViewModelProvider.Factory {
+class UnusedAppsViewModelFactory(private val app: Application, private val sessionId: Long) :
+    ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return UnusedAppsViewModel(app, sessionId) as T
+        @Suppress("UNCHECKED_CAST")
+        return UnusedAppsViewModel(app, sessionId) as T
     }
 }

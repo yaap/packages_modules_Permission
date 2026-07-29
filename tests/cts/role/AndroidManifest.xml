@@ -30,7 +30,7 @@
 
         <activity
             android:name=".WaitForResultActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"/>
+            android:configChanges="resourcesUnused"/>
     </application>
 
     <instrumentation

@@ -53,7 +53,7 @@ object LauncherPackagesLiveData :
                 .packageManager
                 .queryIntentActivities(
                     intent,
-                    MATCH_DIRECT_BOOT_AWARE or MATCH_DIRECT_BOOT_UNAWARE
+                    MATCH_DIRECT_BOOT_AWARE or MATCH_DIRECT_BOOT_UNAWARE,
                 )) {
             launcherPkgs.add(info.activityInfo.packageName)
         }

@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"ຕົວແທນ"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"ຕົວແທນທີ່ສາມາດເຂົ້າເຖິງຂໍ້ມູນ ຫຼື ດຳເນີນການໃນແອັບໄດ້"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"ການເຄື່ອນໄຫວຂອງແອັບ ແລະ ຜູ້ຊ່ວຍ AI"</string>
 </resources>

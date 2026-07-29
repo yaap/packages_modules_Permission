@@ -35,6 +35,7 @@ import com.android.permissioncontroller.wear.permission.components.material3.Wea
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionListFooter
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionListSubHeader
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionTextProvider
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControl
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlStyle
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlType
@@ -91,7 +92,7 @@ private fun WearDefaultAppContent(
                 item { RoleApplicationEntryToggle(pref) }
             }
             helper.recommendedItemDescription()?.let {
-                item { WearPermissionListFooter(label = it) }
+                item { WearPermissionListFooter(label = WearPermissionTextProvider.Plain(it)) }
             }
             // Add other items title if other items is not empty.
             if (nonePref != null || otherItems.isNotEmpty()) {
@@ -106,7 +107,11 @@ private fun WearDefaultAppContent(
         for (pref in helper.getPreferences(otherItems)) {
             item { RoleApplicationEntryToggle(pref) }
         }
-        item { WearPermissionListFooter(label = helper.getDescription()) }
+        item {
+            WearPermissionListFooter(
+                label = WearPermissionTextProvider.Plain(helper.getDescription())
+            )
+        }
     }
 }
 
@@ -150,7 +155,8 @@ private fun ConfirmDialog(
         WearPermissionConfirmationDialog(
             materialUIVersion = materialUIVersion,
             show = showDialog,
-            message = message,
+            title = info.title?.toString(),
+            message = info.message.toString(),
             positiveButtonContent = DialogButtonContent(onClick = onOkButtonClick),
             negativeButtonContent = DialogButtonContent(onClick = onCancelButtonClick),
         )

@@ -16,21 +16,28 @@
 
 package com.android.permissioncontroller.role.ui.behavior;
 
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.Html;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.permission.flags.Flags;
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.role.ui.RoleApplicationItem;
+import com.android.permissioncontroller.role.utils.PackageUtils;
 import com.android.role.controller.model.Role;
 import com.android.role.controller.util.SignedPackage;
 import com.android.role.controller.util.SignedPackageUtils;
+import com.android.role.controller.util.UserUtils;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -44,9 +51,14 @@ public class AssistantRoleUiBehavior implements RoleUiBehavior {
     @Override
     public Intent getManageIntentAsUser(@NonNull Role role, @NonNull UserHandle user,
             @NonNull Context context) {
-        boolean isAutomotive =
-                context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE);
+        PackageManager packageManager = context.getPackageManager();
+        boolean isAutomotive = packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE);
         if (isAutomotive) {
+            return null;
+        }
+        if (android.permission.flags.Flags.assistSettingsPrivacyImprovementsEnabled()
+                && !packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
+                && !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
             return null;
         }
         return new Intent(Settings.ACTION_VOICE_INPUT_SETTINGS);
@@ -95,8 +107,50 @@ public class AssistantRoleUiBehavior implements RoleUiBehavior {
 
     @Nullable
     @Override
-    public CharSequence getConfirmationMessage(@NonNull Role role, @NonNull String packageName,
-            @NonNull Context context) {
-        return context.getString(R.string.assistant_confirmation_message);
+    public ConfirmationDialogInfo getConfirmationDialogInfo(@NonNull Role role,
+            @NonNull String packageName, @NonNull UserHandle user, @NonNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA
+                && android.permission.flags.Flags.newDefaultAppConfirmationDialogEnabled()
+                && android.permission.flags.Flags.assistSettingsPrivacyImprovementsEnabled()) {
+            ApplicationInfo applicationInfo =
+                    PackageUtils.getApplicationInfoAsUser(packageName, user, context);
+            String appLabel = applicationInfo != null ? Utils.getFullAppLabel(applicationInfo,
+                    context) : packageName;
+            String escapedAppLabel = Html.escapeHtml(appLabel);
+            CharSequence message;
+            if (isReadScreenContextAllowed(packageName, user, context)) {
+                message = Html.fromHtml(context.getString(
+                        R.string.assistant_confirmation_message_access_restored_v37,
+                        escapedAppLabel));
+            } else {
+                message = context.getString(R.string.assistant_confirmation_message_v37);
+            }
+            return new ConfirmationDialogInfo(true,
+                    Html.fromHtml(context.getString(R.string.assistant_confirmation_title_v37,
+                            escapedAppLabel)),
+                    message,
+                    context.getString(R.string.default_app_confirmation_positive_button),
+                    context.getString(R.string.default_app_confirmation_negative_button), true);
+        } else {
+            return new ConfirmationDialogInfo(null,
+                    context.getString(R.string.assistant_confirmation_message),
+                    context.getString(android.R.string.ok),
+                    context.getString(android.R.string.cancel), true);
+        }
+    }
+
+    private static boolean isReadScreenContextAllowed(@NonNull String packageName,
+            @NonNull UserHandle user, @NonNull Context context) {
+        Context userContext = UserUtils.getUserContext(context, user);
+        PackageManager userPackageManager = userContext.getPackageManager();
+        int uid;
+        try {
+            uid = userPackageManager.getPackageUid(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+        AppOpsManager appOpsManager = userContext.getSystemService(AppOpsManager.class);
+        return appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_READ_SCREEN_CONTEXT, uid,
+                packageName) == AppOpsManager.MODE_ALLOWED;
     }
 }

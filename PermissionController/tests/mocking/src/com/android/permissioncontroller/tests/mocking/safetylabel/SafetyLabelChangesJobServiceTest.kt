@@ -155,7 +155,7 @@ class SafetyLabelChangesJobServiceTest {
                 DeviceConfig.getBoolean(
                     eq(DeviceConfig.NAMESPACE_PRIVACY),
                     eq(SafetyLabelConstants.SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED),
-                    anyBoolean()
+                    anyBoolean(),
                 )
             )
             .thenReturn(flagValue)

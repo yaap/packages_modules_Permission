@@ -20,12 +20,16 @@ import static android.os.Build.VERSION_CODES.TIRAMISU;
 
 import static java.util.Objects.requireNonNull;
 
+import android.annotation.FlaggedApi;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.SystemApi;
 import android.app.PendingIntent;
+import android.app.compat.CompatChanges;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.UserHandle;
+import android.permission.flags.Flags;
 import android.text.TextUtils;
 
 import androidx.annotation.RequiresApi;
@@ -49,9 +53,24 @@ public final class SafetyCenterStaticEntry implements Parcelable {
             new Creator<SafetyCenterStaticEntry>() {
                 @Override
                 public SafetyCenterStaticEntry createFromParcel(Parcel in) {
+                    SafetyCenterStaticEntry.Builder builder;
                     CharSequence title = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
-                    return new SafetyCenterStaticEntry.Builder(title)
-                            .setSummary(TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in))
+                    if (Flags.openSafetyCenterApis()) {
+                        String safetySourceId = in.readString();
+                        UserHandle user = in.readTypedObject(UserHandle.CREATOR);
+                        if (safetySourceId == null || user == null) {
+                            builder =
+                                    new SafetyCenterStaticEntry.Builder(
+                                            title, /* checkTargetSdk= */ false);
+                        } else {
+                            builder =
+                                    new SafetyCenterStaticEntry.Builder(
+                                            title, user, safetySourceId);
+                        }
+                    } else {
+                        builder = new SafetyCenterStaticEntry.Builder(title);
+                    }
+                    return builder.setSummary(TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in))
                             .setPendingIntent(in.readTypedObject(PendingIntent.CREATOR))
                             .build();
                 }
@@ -65,14 +84,20 @@ public final class SafetyCenterStaticEntry implements Parcelable {
     @NonNull private final CharSequence mTitle;
     @Nullable private final CharSequence mSummary;
     @Nullable private final PendingIntent mPendingIntent;
+    @Nullable private final String mSafetySourceId;
+    @Nullable private final UserHandle mUser;
 
     private SafetyCenterStaticEntry(
             @NonNull CharSequence title,
             @Nullable CharSequence summary,
-            @Nullable PendingIntent pendingIntent) {
+            @Nullable PendingIntent pendingIntent,
+            @Nullable String safetySourceId,
+            @Nullable UserHandle user) {
         mTitle = title;
         mSummary = summary;
         mPendingIntent = pendingIntent;
+        mSafetySourceId = safetySourceId;
+        mUser = user;
     }
 
     /** Returns the title that describes this entry. */
@@ -99,6 +124,30 @@ public final class SafetyCenterStaticEntry implements Parcelable {
         return mPendingIntent;
     }
 
+    /**
+     * Returns the safety source ID related to this entry.
+     *
+     * <p>The field is only nullable for legacy reasons, it should always be present, and if it's
+     * not present it's expected that the UI can't display the information related to this entry.
+     */
+    @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @Nullable
+    public String getSafetySourceId() {
+        return mSafetySourceId;
+    }
+
+    /**
+     * Returns the user handle related to this entry.
+     *
+     * <p>The field is only nullable for legacy reasons, it should always be present, and if it's
+     * not present it's expected that the UI can't display the information related to this entry.
+     */
+    @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @Nullable
+    public UserHandle getUser() {
+        return mUser;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,12 +155,14 @@ public final class SafetyCenterStaticEntry implements Parcelable {
         SafetyCenterStaticEntry that = (SafetyCenterStaticEntry) o;
         return TextUtils.equals(mTitle, that.mTitle)
                 && TextUtils.equals(mSummary, that.mSummary)
-                && Objects.equals(mPendingIntent, that.mPendingIntent);
+                && Objects.equals(mPendingIntent, that.mPendingIntent)
+                && Objects.equals(mSafetySourceId, that.mSafetySourceId)
+                && Objects.equals(mUser, that.mUser);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mTitle, mSummary, mPendingIntent);
+        return Objects.hash(mTitle, mSummary, mPendingIntent, mSafetySourceId, mUser);
     }
 
     @Override
@@ -123,6 +174,8 @@ public final class SafetyCenterStaticEntry implements Parcelable {
                 + mSummary
                 + ", mPendingIntent="
                 + mPendingIntent
+                + (Flags.openSafetyCenterApis() ? ", mSafetySourceId=" + mSafetySourceId : "")
+                + (Flags.openSafetyCenterApis() ? ", mUser=" + mUser : "")
                 + '}';
     }
 
@@ -134,6 +187,10 @@ public final class SafetyCenterStaticEntry implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         TextUtils.writeToParcel(mTitle, dest, flags);
+        if (Flags.openSafetyCenterApis()) {
+            dest.writeString(mSafetySourceId);
+            dest.writeTypedObject(mUser, flags);
+        }
         TextUtils.writeToParcel(mSummary, dest, flags);
         dest.writeTypedObject(mPendingIntent, flags);
     }
@@ -144,14 +201,57 @@ public final class SafetyCenterStaticEntry implements Parcelable {
         @NonNull private CharSequence mTitle;
         @Nullable private CharSequence mSummary;
         @Nullable private PendingIntent mPendingIntent;
+        @Nullable private String mSafetySourceId;
+        @Nullable private UserHandle mUser;
 
         /**
-         * Creates a {@link Builder} for a {@link SafetyCenterEntry}.
+         * Creates a {@link Builder} for a {@link SafetyCenterStaticEntry}.
          *
          * @param title a title that describes this static entry
+         * @throws UnsupportedOperationException If the target SDK version of the app is above or
+         *     equal to Android C
+         * @deprecated Use the builder with the {@code safetySourceId} and {@code user} fields
+         *     instead.
          */
+        @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+        @Deprecated
         public Builder(@NonNull CharSequence title) {
+            this(title, /* checkTargetSdk= */ true);
+        }
+
+        /**
+         * Creates a {@link Builder} for a {@link SafetyCenterStaticEntry}.
+         *
+         * @param checkTargetSdk whether to check for the target SDK level
+         * @throws UnsupportedOperationException If the target SDK version of the app is above or
+         *     equal to Android C, when the {@code checkTargetSdk} argument is true
+         */
+        private Builder(@NonNull CharSequence title, boolean checkTargetSdk) {
+            if (checkTargetSdk
+                    && Flags.openSafetyCenterApis()
+                    && CompatChanges.isChangeEnabled(
+                            SafetyCenterManager.RESTRICT_DEPRECATED_DATA_BUILDER_CONSTRUCTORS)) {
+                throw new UnsupportedOperationException(
+                        "Deprecated constructor no longer accessible.");
+            }
             mTitle = requireNonNull(title);
+        }
+
+        /**
+         * Creates a {@link Builder} for a {@link SafetyCenterStaticEntry}.
+         *
+         * @param title a title that describes this static entry
+         * @param user the user handle for this entry
+         * @param safetySourceId the safety source ID for this entry
+         */
+        @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+        public Builder(
+                @NonNull CharSequence title,
+                @NonNull UserHandle user,
+                @NonNull String safetySourceId) {
+            mTitle = requireNonNull(title);
+            mUser = requireNonNull(user);
+            mSafetySourceId = requireNonNull(safetySourceId);
         }
 
         /**
@@ -161,6 +261,10 @@ public final class SafetyCenterStaticEntry implements Parcelable {
             mTitle = safetyCenterStaticEntry.mTitle;
             mSummary = safetyCenterStaticEntry.mSummary;
             mPendingIntent = safetyCenterStaticEntry.mPendingIntent;
+            if (Flags.openSafetyCenterApis()) {
+                mSafetySourceId = safetyCenterStaticEntry.mSafetySourceId;
+                mUser = safetyCenterStaticEntry.mUser;
+            }
         }
 
         /** Sets the title for this entry. */
@@ -184,10 +288,35 @@ public final class SafetyCenterStaticEntry implements Parcelable {
             return this;
         }
 
+        /**
+         * Sets the safety source ID for this entry.
+         *
+         * @param safetySourceId the safety source ID for this entry
+         */
+        @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+        @NonNull
+        public Builder setSafetySourceId(@NonNull String safetySourceId) {
+            mSafetySourceId = requireNonNull(safetySourceId);
+            return this;
+        }
+
+        /**
+         * Sets the user handle for this entry.
+         *
+         * @param user the user handle for this entry
+         */
+        @FlaggedApi(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+        @NonNull
+        public Builder setUser(@NonNull UserHandle user) {
+            mUser = requireNonNull(user);
+            return this;
+        }
+
         /** Creates the {@link SafetyCenterStaticEntry} defined by this {@link Builder}. */
         @NonNull
         public SafetyCenterStaticEntry build() {
-            return new SafetyCenterStaticEntry(mTitle, mSummary, mPendingIntent);
+            return new SafetyCenterStaticEntry(
+                    mTitle, mSummary, mPendingIntent, mSafetySourceId, mUser);
         }
     }
 }

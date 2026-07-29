@@ -19,7 +19,6 @@ package com.android.permissioncontroller.permission.ui;
 import static android.health.connect.HealthPermissions.HEALTH_PERMISSION_GROUP;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
-import com.android.modules.utils.build.SdkLevel;
 import static com.android.permissioncontroller.Constants.ACTION_MANAGE_AUTO_REVOKE;
 import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
@@ -45,7 +44,6 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.permission.PermissionManager;
-import android.permission.flags.Flags;
 import android.provider.Settings;
 import android.safetycenter.SafetyCenterManager;
 import android.safetycenter.SafetyEvent;

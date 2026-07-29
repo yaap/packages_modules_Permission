@@ -39,14 +39,14 @@ class DrawableStateLinearLayout : LinearLayout {
     constructor(
         context: Context,
         attrs: AttributeSet?,
-        @AttrRes defStyleAttr: Int
+        @AttrRes defStyleAttr: Int,
     ) : super(context, attrs, defStyleAttr)
 
     constructor(
         context: Context,
         attrs: AttributeSet?,
         @AttrRes defStyleAttr: Int,
-        @StyleRes defStyleRes: Int
+        @StyleRes defStyleRes: Int,
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     override fun onCreateDrawableState(extraSpace: Int): IntArray {
@@ -54,7 +54,7 @@ class DrawableStateLinearLayout : LinearLayout {
             extraDrawableState ?: return super.onCreateDrawableState(extraSpace)
         return mergeDrawableStates(
             super.onCreateDrawableState(extraSpace + extraDrawableState.size),
-            extraDrawableState
+            extraDrawableState,
         )
     }
 }

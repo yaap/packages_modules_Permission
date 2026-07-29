@@ -20,8 +20,13 @@ import android.app.appfunctions.AppFunctionManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.permission.flags.Flags
 import android.util.Log
+import androidx.annotation.ChecksSdkIntAtLeast
+import com.android.modules.utils.build.SdkLevel
+import com.android.permissioncontroller.flags.Flags.automotivePrivacyDashboardAgentActivityEnabled
+import com.android.permissioncontroller.flags.Flags.privacyDashboardAgentActivityEnabled
 import com.android.permissioncontroller.permission.utils.Utils
 import java.util.UUID
 
@@ -91,6 +96,19 @@ object AppFunctionsUtil {
         return Flags.appFunctionAccessUiEnabled() &&
             !packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK) &&
             !packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) &&
+            !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)
+    }
+
+    @JvmStatic
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.CINNAMON_BUN)
+    fun isPrivacyDashboardAgentActivityEnabled(context: Context): Boolean {
+        val packageManager = context.packageManager
+        return SdkLevel.isAtLeastB() &&
+            android.app.appfunctions.flags.Flags.enableAppInteractionApi() &&
+            privacyDashboardAgentActivityEnabled() &&
+            (!packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) ||
+                automotivePrivacyDashboardAgentActivityEnabled()) &&
+            !packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK) &&
             !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH)
     }
 }

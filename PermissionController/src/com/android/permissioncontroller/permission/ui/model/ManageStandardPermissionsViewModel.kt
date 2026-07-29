@@ -24,10 +24,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
-import com.android.permission.flags.Flags
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesLiveData
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesUiInfoLiveData
@@ -49,18 +47,12 @@ class ManageStandardPermissionsViewModel(private val app: Application) : Android
 
     val uiDataLiveData = PermGroupsPackagesUiInfoLiveData(app, StandardPermGroupNamesLiveData)
     val usedStandardPermGroupsUiInfo =
-        PermGroupsPackagesUiInfoLiveData(
-            app,
-            if (Flags.declutteredPermissionManagerEnabled()) UsedStandardPermGroupNamesLiveData(app)
-            else MutableLiveData<List<String>>(),
-        )
+        PermGroupsPackagesUiInfoLiveData(app, UsedStandardPermGroupNamesLiveData(app))
     val numCustomPermGroups = NumCustomPermGroupsWithPackagesLiveData()
     val numUnusedStandardPermGroups =
         MediatorLiveData<Int>().apply {
-            if (Flags.declutteredPermissionManagerEnabled()) {
-                addSource(UnusedStandardPermGroupNamesLiveData(app)) { groupNames ->
-                    value = groupNames.size
-                }
+            addSource(UnusedStandardPermGroupNamesLiveData(app)) { groupNames ->
+                value = groupNames.size
             }
         }
     val numAutoRevoked = unusedAutoRevokePackagesLiveData.map { it?.size ?: 0 }

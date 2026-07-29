@@ -17,6 +17,7 @@ package com.android.permissioncontroller.safetycenter.ui;
 
 import static android.content.Intent.ACTION_SAFETY_CENTER;
 import static android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.os.Build.VERSION_CODES.TIRAMISU;
 import static android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE;
 import static android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID;
@@ -32,9 +33,13 @@ import static com.android.permissioncontroller.safetycenter.SafetyCenterConstant
 import static java.util.Objects.requireNonNull;
 
 import android.app.ActionBar;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.safetycenter.SafetyCenterManager;
@@ -59,6 +64,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.permissioncontroller.Constants;
 import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.flags.Flags;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.safetycenter.ui.model.PrivacyControlsViewModel.Pref;
 import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
@@ -84,6 +90,10 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
     private static final String EXTRA_PREVENT_TRAMPOLINE_TO_SETTINGS =
             "com.android.permissioncontroller.safetycenter.extra.PREVENT_TRAMPOLINE_TO_SETTINGS";
 
+    /** The intent action that is triggered when quick settings tile is long-pressed. */
+    public static final String ACTION_QS_TILE_PREFERENCES =
+            "android.service.quicksettings.action.QS_TILE_PREFERENCES";
+
     @Nullable private SafetyCenterManager mSafetyCenterManager;
 
     @Override
@@ -92,6 +102,10 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
         mSafetyCenterManager = getSystemService(SafetyCenterManager.class);
 
         if (maybeRedirectIfDisabled()) {
+            return;
+        }
+
+        if (isSettingsUiRedirectionSupported() && maybeRedirectToSettingsUi()) {
             return;
         }
 
@@ -228,6 +242,77 @@ public final class SafetyCenterActivity extends CollapsingToolbarBaseActivity
             return Settings.ACTION_PRIVACY_SETTINGS;
         }
         return Settings.ACTION_SETTINGS;
+    }
+
+    private boolean maybeRedirectToSettingsUi() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+
+        if (action == null) {
+            return false;
+        }
+
+        switch (action) {
+            case ACTION_SAFETY_CENTER:
+            case PRIVACY_CONTROLS_ACTION:
+                if (!isHandledByThisActivity(action)) {
+                    Log.i(
+                            TAG,
+                            "Redirecting away from SafetyCenterActivity in PermissionController"
+                                    + " for: "
+                                    + action);
+                    startActivity(makeIntentImplicitWithResultForwarding(intent));
+                    finishAndRemoveTask();
+                    return true;
+                }
+                break;
+
+            case ACTION_QS_TILE_PREFERENCES:
+                if (!isHandledByThisActivity(ACTION_SAFETY_CENTER)) {
+                    Log.i(
+                            TAG,
+                            "Redirecting away from SafetyCenterActivity in PermissionController"
+                                    + " for: "
+                                    + action);
+                    startActivity(
+                            new Intent(ACTION_SAFETY_CENTER).addFlags(FLAG_ACTIVITY_NEW_TASK));
+                    finishAndRemoveTask();
+                    return true;
+                }
+                break;
+
+            default:
+                return false;
+        }
+
+        return false;
+    }
+
+    private static Intent makeIntentImplicitWithResultForwarding(Intent intent) {
+        Intent newIntent = new Intent(intent);
+
+        newIntent.setComponent(null);
+        newIntent.setPackage(null);
+        newIntent.addFlags(FLAG_ACTIVITY_FORWARD_RESULT);
+        newIntent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+
+        return newIntent;
+    }
+
+    private boolean isHandledByThisActivity(String action) {
+        PackageManager pm = getPackageManager();
+        ComponentName pcScActivity = getComponentName();
+        Intent queryIntent = new Intent(action);
+
+        ComponentName resolvedComponent = queryIntent.resolveActivity(pm);
+        return pcScActivity.equals(resolvedComponent);
+    }
+
+    /** Whether to redirect to the new Safety Center UI in Settings. */
+    private boolean isSettingsUiRedirectionSupported() {
+        // This is a mainline flag which effect we want to limit to new SDKs.
+        return Flags.supportNewSafetyCenterUiInSettings()
+                && VERSION.SDK_INT > VERSION_CODES.BAKLAVA;
     }
 
     private boolean maybeRedirectIntoTwoPaneSettings() {

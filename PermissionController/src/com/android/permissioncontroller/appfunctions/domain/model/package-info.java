@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-// TODO(b/424004217): Update this to the correct version code
 @androidx.annotation.RequiresApi(android.os.Build.VERSION_CODES.BAKLAVA)
 package com.android.permissioncontroller.appfunctions.domain.model;

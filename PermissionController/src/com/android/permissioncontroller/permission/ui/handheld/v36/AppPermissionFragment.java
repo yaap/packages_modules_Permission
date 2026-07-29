@@ -56,6 +56,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.text.BidiFormatter;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -99,6 +101,8 @@ import com.android.settingslib.widget.SettingsThemeHelper;
 
 import kotlin.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -116,6 +120,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
     private static final String LOG_TAG = "AppPermissionFragment";
     private static final long POST_DELAY_MS = 20;
     private static final long EDIT_PHOTOS_BUTTON_ANIMATION_LENGTH_MS = 200L;
+    private static final String FOOTER_TEXT_DELIMITER = "\n\n";
 
     private @NonNull AppPermissionViewModel mViewModel;
 
@@ -125,6 +130,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
     private @NonNull PermissionSelectorWithWidgetPreference mAllowButton;
     private @NonNull SelectorWithWidgetPreference mAllowAlwaysButton;
     private @NonNull SelectorWithWidgetPreference mAllowForegroundButton;
+    private @NonNull SelectorWithWidgetPreference mAllowForCompatibilityButton;
     private @NonNull PermissionSelectorWithWidgetPreference mSelectButton;
     private @NonNull SelectorWithWidgetPreference mAskOneTimeButton;
     private @NonNull SelectorWithWidgetPreference mAskButton;
@@ -134,8 +140,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
     private @NonNull PermissionTwoTargetPreference mDetails;
     private @NonNull AppPermissionFooterLinkPreference mFooterLink1;
     private @NonNull AppPermissionFooterLinkPreference mFooterLink2;
-    private @NonNull PermissionFooterPreference mFooterStorageSpecialAppAccess;
-    private @NonNull PermissionFooterPreference mAdditionalInfo;
+    private @NonNull PermissionFooterPreference mFooterPreference;
 
     private @NonNull String mPackageName;
     private @NonNull String mPermGroupName;
@@ -151,6 +156,12 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
     private @NonNull String mPermGroupLabel;
     private Drawable mPackageIcon;
     private @NonNull RoleManager mRoleManager;
+    private boolean mShowSpecialFileAccessFooter;
+    private boolean mShowAdditionalInfoFooter;
+    private boolean mShowAllowForCompatibilityFooter;
+    private CharSequence mSpecialFileAccessFooterText;
+    private CharSequence mAdditionalInfoFooterText;
+    private CharSequence mAllowForCompatibilityFooterText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -203,6 +214,14 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
                 this::showPermissionRationaleDialog);
 
         mRoleManager = Utils.getSystemServiceSafe(getContext(), RoleManager.class);
+
+        mSpecialFileAccessFooterText = getString(
+                R.string.app_permission_footer_special_file_access);
+        int additional_info_label = Utils.isStatusBarIndicatorPermission(mPermGroupName)
+                ? R.string.exempt_mic_camera_info_label : R.string.exempt_info_label;
+        mAdditionalInfoFooterText = getString(additional_info_label, mPackageLabel);
+        mAllowForCompatibilityFooterText = Html.fromHtml(getString(
+                R.string.allow_for_compatibility_nearby_devices_footer), 0);
     }
 
     @Override
@@ -217,6 +236,8 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         mAllowAlwaysButton = requirePreference("app_permission_allow_always_radio_button");
         mAllowForegroundButton =
                 requirePreference("app_permission_allow_foreground_only_radio_button");
+        mAllowForCompatibilityButton =
+                requirePreference("app_permission_allow_for_compatibility_radio_button");
         mSelectButton = requirePreference("app_permission_select_photos_radio_button");
         mAskOneTimeButton = requirePreference("app_permission_ask_one_time_radio_button");
         mAskButton = requirePreference("app_permission_ask_radio_button");
@@ -231,9 +252,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         mDetails = requirePreference("app_permission_details");
         mFooterLink1 = requirePreference("app_permission_footer_link_1");
         mFooterLink2 = requirePreference("app_permission_footer_link_2");
-        mFooterStorageSpecialAppAccess =
-                requirePreference("app_permission_footer_storage_special_app_access");
-        mAdditionalInfo = requirePreference("app_permission_additional_info");
+        mFooterPreference = requirePreference("app_permission_footer");
     }
 
     @SuppressWarnings("TypeParameterUnusedInFormals")
@@ -270,12 +289,11 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
 
         Set<String> exemptedPackages = Utils.getExemptedPackages(mRoleManager);
         if (exemptedPackages.contains(mPackageName)) {
-            int additional_info_label = Utils.isStatusBarIndicatorPermission(mPermGroupName)
-                    ? R.string.exempt_mic_camera_info_label : R.string.exempt_info_label;
-            mAdditionalInfo.setTitle(context.getString(additional_info_label, mPackageLabel));
-            mAdditionalInfo.setVisible(true);
+            mShowAdditionalInfoFooter = true;
+            updateFooter();
         } else {
-            mAdditionalInfo.setVisible(false);
+            mShowAdditionalInfoFooter = false;
+            updateFooter();
         }
 
         if (mViewModel.getButtonStateLiveData().getValue() != null) {
@@ -284,6 +302,7 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
             mAllowButton.setVisible(false);
             mAllowAlwaysButton.setVisible(false);
             mAllowForegroundButton.setVisible(false);
+            mAllowForCompatibilityButton.setVisible(false);
             mAskOneTimeButton.setVisible(false);
             mAskButton.setVisible(false);
             mDenyButton.setVisible(false);
@@ -296,7 +315,8 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         if (mViewModel.getFullStorageStateLiveData().isInitialized() && mIsStorageGroup) {
             setSpecialStorageState(mViewModel.getFullStorageStateLiveData().getValue());
         } else {
-            mFooterStorageSpecialAppAccess.setVisible(false);
+            mShowSpecialFileAccessFooter = false;
+            updateFooter();
         }
 
         // Avoid an animation by showing this Preference immediately
@@ -405,6 +425,12 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
                 setResult(GRANTED_FOREGROUND_ONLY);
             }
         });
+
+        if (mViewModel.shouldShowAskOrWhenYouShareLabel()) {
+            mAskOneTimeButton.setTitle(R.string.app_permission_button_ask_or_when_you_share);
+            mAskButton.setTitle(R.string.app_permission_button_ask_or_when_you_share);
+        }
+
         mAskOneTimeButton.setOnClickListener((v) -> {
             // mAskOneTimeButton only shows if checked hence should do nothing
             markSingleButtonAsChecked(ButtonType.ASK_ONCE);
@@ -474,6 +500,8 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         setButtonState(mAllowButton, states.get(ButtonType.ALLOW));
         setButtonState(mAllowAlwaysButton, states.get(ButtonType.ALLOW_ALWAYS));
         setButtonState(mAllowForegroundButton, states.get(ButtonType.ALLOW_FOREGROUND));
+        setButtonState(mAllowForCompatibilityButton,
+                states.get(ButtonType.ALLOW_FOR_COMPATIBILITY));
         setButtonState(mAskOneTimeButton, states.get(ButtonType.ASK_ONCE));
         setButtonState(mAskButton, states.get(ButtonType.ASK));
         setButtonState(mDenyButton, states.get(ButtonType.DENY));
@@ -492,6 +520,38 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         if (mViewModel.getFullStorageStateLiveData().isInitialized()) {
             setSpecialStorageState(mViewModel.getFullStorageStateLiveData().getValue());
         }
+
+        AppPermissionViewModel.ButtonState allowForCompatibilityButtonState =
+                states.get(ButtonType.ALLOW_FOR_COMPATIBILITY);
+        mShowAllowForCompatibilityFooter = allowForCompatibilityButtonState.isShown();
+        updateFooter();
+    }
+
+    private void updateFooter() {
+        boolean shouldShowFooter = mShowSpecialFileAccessFooter || mShowAdditionalInfoFooter
+                || mShowAllowForCompatibilityFooter;
+        if (!shouldShowFooter) {
+            mFooterPreference.setVisible(false);
+            return;
+        }
+
+        List<CharSequence> footerTexts = new ArrayList<>();
+        if (mShowSpecialFileAccessFooter) {
+            footerTexts.add(mSpecialFileAccessFooterText);
+        }
+        if (mShowAdditionalInfoFooter) {
+            footerTexts.add(mAdditionalInfoFooterText);
+        }
+        if (mShowAllowForCompatibilityFooter) {
+            footerTexts.add(mAllowForCompatibilityFooterText);
+        }
+
+        mFooterPreference.setVisible(true);
+        CharSequence footerText = footerTexts.get(0);
+        for (int i = 1; i < footerTexts.size(); i++) {
+            footerText = TextUtils.concat(footerText, FOOTER_TEXT_DELIMITER, footerTexts.get(i));
+        }
+        mFooterPreference.setTitle(footerText);
     }
 
     private void allowButtonFrameClickListener() {
@@ -518,7 +578,8 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
 
     private void setSpecialStorageState(FullStoragePackageState storageState) {
         if (!mAllowButton.isVisible() || !mIsStorageGroup) {
-            mFooterStorageSpecialAppAccess.setVisible(false);
+            mShowSpecialFileAccessFooter = false;
+            updateFooter();
             return;
         }
 
@@ -526,17 +587,20 @@ public class AppPermissionFragment extends SettingsWithLargeHeader
         mAllowForegroundButton.setTitle(R.string.app_permission_button_allow_media_only);
 
         if (storageState == null) {
-            mFooterStorageSpecialAppAccess.setVisible(false);
+            mShowSpecialFileAccessFooter = false;
+            updateFooter();
             return;
         }
 
         if (storageState.isLegacy()) {
             mAllowButton.setTitle(R.string.app_permission_button_allow_all_files);
-            mFooterStorageSpecialAppAccess.setVisible(false);
+            mShowSpecialFileAccessFooter = false;
+            updateFooter();
             return;
         }
 
-        mFooterStorageSpecialAppAccess.setVisible(true);
+        mShowSpecialFileAccessFooter = true;
+        updateFooter();
     }
 
     private void setResult(@GrantPermissionsViewHandler.Result int result) {

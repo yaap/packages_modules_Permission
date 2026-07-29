@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"एजेन्टहरू"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"एपमा भएको जानकारी एक्सेस गर्न वा कारबाहीहरू गर्न सक्ने एजेन्टहरू"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"एप तथा AI एसिस्टेन्टसम्बन्धी गतिविधि"</string>
 </resources>

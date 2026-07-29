@@ -32,10 +32,8 @@ android_test {
         "androidx.test.rules",
         "compatibility-device-util-axt",
         "ctstestrunner-axt",
-        "Harrier",
-        "bedstead-multiuser",
+        "bedstead-enterprise",
         "modules-utils-build_system",
-        "Nene",
     ],
     data: [
         ":CtsRequestLocationApp",

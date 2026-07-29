@@ -32,6 +32,7 @@ import androidx.annotation.RequiresApi;
 import com.android.modules.utils.build.SdkLevel;
 import com.android.role.controller.model.AppOpPermissions;
 import com.android.role.controller.model.Permissions;
+import com.android.role.controller.model.RequiredActivity;
 import com.android.role.controller.model.Role;
 import com.android.role.controller.model.RoleBehavior;
 import com.android.role.controller.model.VisibilityMixin;
@@ -82,7 +83,8 @@ public class HomeRoleBehavior implements RoleBehavior {
             @NonNull Context context) {
         Context userContext = UserUtils.getUserContext(context, user);
         PackageManager userPackageManager = userContext.getPackageManager();
-        Intent intent = role.getRequiredComponents().get(0).getIntentFilterData().createIntent();
+        RequiredActivity requiredActivity = (RequiredActivity) role.getRequirements().get(0);
+        Intent intent = requiredActivity.getIntentFilterData().createIntent();
         List<ResolveInfo> resolveInfos = userPackageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY | PackageManager.MATCH_DIRECT_BOOT_AWARE
                 | PackageManager.MATCH_DIRECT_BOOT_UNAWARE);
@@ -140,7 +142,7 @@ public class HomeRoleBehavior implements RoleBehavior {
     }
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)) {
             Permissions.grantAsUser(packageName, AUTOMOTIVE_PERMISSIONS,

@@ -17,7 +17,6 @@
 package com.android.permissioncontroller.permission.ui.wear
 
 import android.graphics.drawable.Drawable
-import android.permission.flags.Flags
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState

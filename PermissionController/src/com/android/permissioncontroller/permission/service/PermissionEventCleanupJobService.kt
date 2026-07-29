@@ -44,7 +44,7 @@ class PermissionEventCleanupJobService : JobService() {
                 val jobInfo =
                     JobInfo.Builder(
                             Constants.OLD_PERMISSION_EVENT_CLEANUP_JOB_ID,
-                            ComponentName(context, PermissionEventCleanupJobService::class.java)
+                            ComponentName(context, PermissionEventCleanupJobService::class.java),
                         )
                         .setPeriodic(getClearOldEventsCheckFrequencyMs())
                         // persist this job across boots
@@ -86,7 +86,7 @@ class PermissionEventCleanupJobService : JobService() {
             DeviceConfig.getLong(
                 DeviceConfig.NAMESPACE_PERMISSIONS,
                 Utils.PROPERTY_PERMISSION_EVENTS_CHECK_OLD_FREQUENCY_MILLIS,
-                DEFAULT_CLEAR_OLD_EVENTS_CHECK_FREQUENCY
+                DEFAULT_CLEAR_OLD_EVENTS_CHECK_FREQUENCY,
             )
     }
 

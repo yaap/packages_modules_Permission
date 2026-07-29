@@ -64,6 +64,7 @@ android_test {
         // class path will always override the static dependency.
         "android.car",
         "android.permission.flags-aconfig-java-export",
+        "android.app.appfunctions.exported-flags-aconfig-java",
         "com.android.permission.flags-aconfig-java-export",
         "platform-test-annotations",
         "flag-junit",
@@ -72,7 +73,6 @@ android_test {
         "androidx.test.ext.junit",
         "kotlinx_coroutines_test",
         "mockito-target-extended-minus-junit4",
-        "safety-center-test-util-lib",
     ],
 
     jni_libs: [

@@ -32,7 +32,7 @@ import kotlinx.coroutines.Job
  */
 class SelectedVoiceInteractionServiceLiveData(
     private val app: Application,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<String?>() {
 
     override suspend fun loadDataAndPostValue(job: Job) {
@@ -44,7 +44,7 @@ class SelectedVoiceInteractionServiceLiveData(
             Settings.Secure.getString(
                     Utils.getUserContext(app, user).contentResolver,
                     // Settings.Secure.VOICE_INTERACTION_SERVICE
-                    "voice_interaction_service"
+                    "voice_interaction_service",
                 )
                 ?.let(ComponentName::unflattenFromString)
                 ?.packageName
@@ -62,7 +62,7 @@ class SelectedVoiceInteractionServiceLiveData(
         override fun newValue(key: UserHandle): SelectedVoiceInteractionServiceLiveData {
             return SelectedVoiceInteractionServiceLiveData(
                 PermissionControllerApplication.get(),
-                key
+                key,
             )
         }
     }

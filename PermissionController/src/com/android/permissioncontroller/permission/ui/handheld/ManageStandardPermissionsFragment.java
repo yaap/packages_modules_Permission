@@ -35,7 +35,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.modules.utils.build.SdkLevel;
-import com.android.permission.flags.Flags;
 import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesUiInfoLiveData;
@@ -67,11 +66,7 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
     }
 
     private PermGroupsPackagesUiInfoLiveData getPermGroupsLiveData() {
-        if (Flags.declutteredPermissionManagerEnabled()) {
-            return mViewModel.getUsedStandardPermGroupsUiInfo();
-        } else {
-            return mViewModel.getUiDataLiveData();
-        }
+        return mViewModel.getUsedStandardPermGroupsUiInfo();
     }
 
     @Override
@@ -103,11 +98,7 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
 
         mViewModel.getNumCustomPermGroups().observe(this, permNames -> updatePermissionsUi());
         mViewModel.getNumAutoRevoked().observe(this, show -> updatePermissionsUi());
-        if (Flags.declutteredPermissionManagerEnabled()) {
-            mViewModel.getNumUnusedStandardPermGroups().observe(
-                    this, show -> updatePermissionsUi()
-            );
-        }
+        mViewModel.getNumUnusedStandardPermGroups().observe(this, show -> updatePermissionsUi());
     }
 
     @Override
@@ -139,13 +130,9 @@ public final class ManageStandardPermissionsFragment extends ManagePermissionsFr
         if (mViewModel.getNumCustomPermGroups().getValue() != null) {
             numExtraPermissions = mViewModel.getNumCustomPermGroups().getValue();
         }
-        if (Flags.declutteredPermissionManagerEnabled()) {
-            if (mViewModel.getNumUnusedStandardPermGroups().getValue() != null) {
-                // When decluttered permission manager is enabled, unused
-                // permission groups will also be displayed in the additional
-                // permissions screen.
-                numExtraPermissions += mViewModel.getNumUnusedStandardPermGroups().getValue();
-            }
+        if (mViewModel.getNumUnusedStandardPermGroups().getValue() != null) {
+            // Unused permission groups are displayed in the additional permissions screen.
+            numExtraPermissions += mViewModel.getNumUnusedStandardPermGroups().getValue();
         }
 
         Preference additionalPermissionsPreference = screen.findPreference(EXTRA_PREFS_KEY);

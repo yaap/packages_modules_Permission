@@ -17,18 +17,15 @@ package com.android.permissioncontroller.tests.mocking.appfunctions.ui.viewmodel
 
 import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_DENIED
 import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_GRANTED
-import android.icu.text.Collator
 import android.os.Build
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.permissioncontroller.PermissionControllerApplication
-import com.android.permissioncontroller.R
 import com.android.permissioncontroller.appfunctions.data.repository.AppFunctionRepository
-import com.android.permissioncontroller.appfunctions.domain.model.AppFunctionPackageInfo
 import com.android.permissioncontroller.appfunctions.domain.usecase.GetAccessRequestStateUseCase
-import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCase
-import com.android.permissioncontroller.appfunctions.domain.usecase.GetDeviceSettingsTargetIconUseCase
 import com.android.permissioncontroller.appfunctions.domain.usecase.UpdateAccessUseCase
 import com.android.permissioncontroller.appfunctions.ui.viewmodel.AgentAccessUiState
 import com.android.permissioncontroller.appfunctions.ui.viewmodel.AgentAccessViewModel
@@ -38,16 +35,19 @@ import com.android.permissioncontroller.tests.mocking.appfunctions.data.reposito
 import com.android.permissioncontroller.tests.mocking.coroutines.collectLastValue
 import com.android.permissioncontroller.tests.mocking.pm.data.repository.FakePackageRepository
 import com.google.common.truth.Truth.assertThat
+import java.util.concurrent.Executor
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -59,8 +59,14 @@ import org.mockito.quality.Strictness
  * [AgentAccessViewModel]
  */
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
+@RequiresFlagsEnabled(
+    AgentAccessViewModelTest.FLAG_APP_FUNCTION_ACCESS_API_ENABLED,
+    AgentAccessViewModelTest.FLAG_APP_FUNCTION_ACCESS_UI_ENABLED,
+)
 @RunWith(AndroidJUnit4::class)
 class AgentAccessViewModelTest {
+    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+
     @Mock private lateinit var application: PermissionControllerApplication
 
     private lateinit var appFunctionRepository: AppFunctionRepository
@@ -77,20 +83,18 @@ class AgentAccessViewModelTest {
                 .strictness(Strictness.LENIENT)
                 .startMocking()
         ExtendedMockito.doReturn(application).`when` { PermissionControllerApplication.get() }
-
         whenever(application.applicationContext).thenReturn(application)
+        whenever(application.mainExecutor).thenReturn(Mockito.mock(Executor::class.java))
         whenever(application.registerReceiverForAllUsers(any(), any(), any(), any()))
             .thenReturn(null)
-        whenever(application.getString(R.string.app_function_device_settings_target_title))
-            .thenReturn(TEST_DEVICE_SETTINGS_LABEL)
 
         appFunctionRepository =
             FakeAppFunctionRepository(
                 agents = agentPackageNames,
-                targets = systemTargetPackageNames + targetPackageNames,
+                targets = targetPackageNames,
                 accessFlags = accessFlags,
             )
-        packageRepository = FakePackageRepository(packagesAndLabels = packagesToLabelMap)
+        packageRepository = FakePackageRepository()
     }
 
     @After
@@ -99,33 +103,27 @@ class AgentAccessViewModelTest {
     }
 
     @Test
-    fun validAgentShown_emptySystemTargets_emptyAppTargets() = runTest {
+    fun validAgentShown_emptyTargets() = runTest {
         val testAgent = TEST_AGENT_PACKAGE_NAME
 
         // Set all appFunctionRepository with no accessFlags defined
         appFunctionRepository =
-            FakeAppFunctionRepository(
-                agents = agentPackageNames,
-                targets = systemTargetPackageNames + targetPackageNames,
-            )
+            FakeAppFunctionRepository(agents = agentPackageNames, targets = targetPackageNames)
 
         val viewModel = getViewModel(testAgent)
         val uiState = getAgentAccessUiState(viewModel)
 
         assertTrue(uiState is Stateful.Success)
-        // Correct Agent AppFunctionPackageInfo returned
-        assertThat(uiState.value!!.agent)
-            .isEqualTo(AppFunctionPackageInfo(testAgent, packagesToLabelMap[testAgent]!!, null))
-
-        // Correct Device Settings Target returned
-        assertThat(uiState.value!!.deviceSettings).isNull()
+        // Correct Agent returned
+        assertThat(uiState.value!!.agentPackageName).isEqualTo(testAgent)
 
         // Correct Targets returned
-        assertThat(uiState.value!!.targets).isEmpty()
+        assertThat(uiState.value!!.allowedTargetPackageNames).isEmpty()
+        assertThat(uiState.value!!.notAllowedTargetPackageNames).isEmpty()
     }
 
     @Test
-    fun validAgentShown_expectedSystemTargets_expectedAppTargets() = runTest {
+    fun validAgentShown_expectedTargets() = runTest {
         val testAgent = TEST_AGENT_PACKAGE_NAME
         val expectedAccessStates =
             accessFlags
@@ -134,64 +132,62 @@ class AgentAccessViewModelTest {
                     it.value == ACCESS_FLAG_USER_GRANTED || it.value == ACCESS_FLAG_USER_DENIED
                 }
                 .mapValues { it.value == ACCESS_FLAG_USER_GRANTED }
-        val expectedTargets =
+        val expectedAllowedTargets =
             targetPackageNames
                 .filter { expectedAccessStates.containsKey(testAgent to it) }
-                .map { AppFunctionPackageInfo(it, packagesToLabelMap[it]!!, null) }
+                .filter { expectedAccessStates[testAgent to it] == true }
+        val expectedDeniedTargets =
+            targetPackageNames
+                .filter { expectedAccessStates.containsKey(testAgent to it) }
+                .filter { expectedAccessStates[testAgent to it] == false }
 
         val viewModel = getViewModel(testAgent)
         val uiState = getAgentAccessUiState(viewModel)
 
         assertTrue(uiState is Stateful.Success)
-        // Correct Agent AppFunctionPackageInfo returned
-        assertThat(uiState.value!!.agent)
-            .isEqualTo(AppFunctionPackageInfo(testAgent, packagesToLabelMap[testAgent]!!, null))
-
-        // Correct Device Settings Target returned
-        assertThat(uiState.value!!.deviceSettings).isNotNull()
+        // Correct Agent returned
+        assertThat(uiState.value!!.agentPackageName).isEqualTo(testAgent)
 
         // Correct Targets returned
-        assertThat(uiState.value!!.targets.map { it.packageInfo })
-            .containsExactlyElementsIn(expectedTargets)
+        assertThat(uiState.value!!.allowedTargetPackageNames)
+            .containsExactlyElementsIn(expectedAllowedTargets)
+        assertThat(uiState.value!!.notAllowedTargetPackageNames)
+            .containsExactlyElementsIn(expectedDeniedTargets)
     }
 
     @Test
-    fun updateDeviceSettingsAccessState() = runTest {
-        val viewModel = getViewModel(TEST_AGENT_PACKAGE_NAME)
-
-        viewModel.updateDeviceSettingsAccessState(false)
-        assertThat(getAgentAccessUiState(viewModel).value!!.deviceSettings?.accessGranted ?: true)
-            .isFalse()
-
-        viewModel.updateDeviceSettingsAccessState(true)
-        assertThat(getAgentAccessUiState(viewModel).value!!.deviceSettings?.accessGranted ?: false)
-            .isTrue()
-    }
-
-    @Test
-    fun updateAccessState() = runTest {
+    fun onAccessStateUpdated() = runTest {
         val testTarget = TEST_TARGET_PACKAGE_NAME
         val viewModel = getViewModel(TEST_AGENT_PACKAGE_NAME)
+        val updateAccessUseCase = UpdateAccessUseCase(appFunctionRepository)
 
-        viewModel.updateAccessState(testTarget, false)
+        updateAccessUseCase(TEST_AGENT_PACKAGE_NAME, DEVICE_SETTINGS_TARGET_PACKAGE_NAME, false)
         assertThat(
-                getAgentAccessUiState(viewModel)
-                    .value!!
-                    .targets
-                    .find { it.packageInfo.packageName == testTarget }
-                    ?.accessGranted ?: true
+                getAgentAccessUiState(viewModel).value!!.allowedTargetPackageNames.filter {
+                    it == testTarget
+                }
             )
-            .isFalse()
+            .contains(testTarget)
+        assertThat(
+                getAgentAccessUiState(viewModel).value!!.notAllowedTargetPackageNames.filter {
+                    it == testTarget
+                }
+            )
+            .isEmpty()
 
-        viewModel.updateAccessState(testTarget, true)
+        updateAccessUseCase(TEST_AGENT_PACKAGE_NAME, DEVICE_SETTINGS_TARGET_PACKAGE_NAME, true)
         assertThat(
-                getAgentAccessUiState(viewModel)
-                    .value!!
-                    .targets
-                    .find { it.packageInfo.packageName == testTarget }
-                    ?.accessGranted ?: false
+                getAgentAccessUiState(viewModel).value!!.allowedTargetPackageNames.filter {
+                    it == testTarget
+                }
             )
-            .isTrue()
+            .contains(testTarget)
+        assertThat(
+                getAgentAccessUiState(viewModel).value!!.notAllowedTargetPackageNames.filter {
+                    it == testTarget
+                }
+            )
+            .isEmpty()
     }
 
     private fun TestScope.getViewModel(agentPackageName: String): AgentAccessViewModel {
@@ -199,13 +195,9 @@ class AgentAccessViewModelTest {
             application,
             agentPackageName,
             appFunctionRepository,
-            GetDeviceSettingsTargetIconUseCase(packageRepository),
-            GetAppFunctionPackageInfoUseCase(packageRepository),
             GetAccessRequestStateUseCase(appFunctionRepository),
-            UpdateAccessUseCase(appFunctionRepository),
             backgroundScope,
             StandardTestDispatcher(testScheduler),
-            Collator.getInstance(),
         )
     }
 
@@ -217,30 +209,26 @@ class AgentAccessViewModelTest {
     }
 
     companion object {
+        // Flag lib changes has caused issues with jarjar and now annotations require the jarjar
+        // package prepended to the flag string
+        const val FLAG_APP_FUNCTION_ACCESS_API_ENABLED =
+            "com.android.permissioncontroller.jarjar.android.permission.flags.app_function_access_api_enabled"
+        const val FLAG_APP_FUNCTION_ACCESS_UI_ENABLED =
+            "com.android.permissioncontroller.jarjar.android.permission.flags.app_function_access_ui_enabled"
+
         private const val TEST_AGENT_PACKAGE_NAME = "test.agent.package"
         private const val TEST_AGENT_PACKAGE_NAME2 = "test.agent.package2"
         private const val DEVICE_SETTINGS_TARGET_PACKAGE_NAME = "android"
         private const val TEST_TARGET_PACKAGE_NAME = "test.target.package"
         private const val TEST_TARGET_PACKAGE_NAME2 = "test.target.package2"
         private const val TEST_TARGET_PACKAGE_NAME3 = "test.target.package3"
-        private const val TEST_AGENT_LABEL = "Test Agent"
-        private const val TEST_AGENT_LABEL2 = "Test Agent 2"
-        private const val TEST_DEVICE_SETTINGS_LABEL = "Device Settings"
-        private const val TEST_TARGET_LABEL = "Test Target"
-        private const val TEST_TARGET_LABEL2 = "Test Target 2"
-        private const val TEST_TARGET_LABEL3 = "Test Target 3"
         private val agentPackageNames = listOf(TEST_AGENT_PACKAGE_NAME, TEST_AGENT_PACKAGE_NAME2)
-        private val systemTargetPackageNames = listOf(DEVICE_SETTINGS_TARGET_PACKAGE_NAME)
         private val targetPackageNames =
-            listOf(TEST_TARGET_PACKAGE_NAME, TEST_TARGET_PACKAGE_NAME2, TEST_TARGET_PACKAGE_NAME3)
-        private val packagesToLabelMap =
-            mapOf(
-                TEST_AGENT_PACKAGE_NAME to TEST_AGENT_LABEL,
-                TEST_AGENT_PACKAGE_NAME2 to TEST_AGENT_LABEL2,
-                DEVICE_SETTINGS_TARGET_PACKAGE_NAME to TEST_DEVICE_SETTINGS_LABEL,
-                TEST_TARGET_PACKAGE_NAME to TEST_TARGET_LABEL,
-                TEST_TARGET_PACKAGE_NAME2 to TEST_TARGET_LABEL2,
-                TEST_TARGET_PACKAGE_NAME3 to TEST_TARGET_LABEL3,
+            listOf(
+                DEVICE_SETTINGS_TARGET_PACKAGE_NAME,
+                TEST_TARGET_PACKAGE_NAME,
+                TEST_TARGET_PACKAGE_NAME2,
+                TEST_TARGET_PACKAGE_NAME3,
             )
         private val accessFlags =
             mapOf(

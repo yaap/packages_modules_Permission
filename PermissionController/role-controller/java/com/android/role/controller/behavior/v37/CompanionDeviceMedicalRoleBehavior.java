@@ -32,7 +32,7 @@ import com.android.role.controller.util.UserUtils;
 public class CompanionDeviceMedicalRoleBehavior implements RoleBehavior {
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         if (!UserUtils.isManagedProfile(user, context)) {
             NotificationManager nm = context.getSystemService(NotificationManager.class);

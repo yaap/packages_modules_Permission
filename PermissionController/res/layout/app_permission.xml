@@ -105,6 +105,11 @@
                     android:text="@string/app_permission_button_allow_foreground"
                     style="@style/AppPermissionRadioButton" />
 
+                <RadioButton
+                    android:id="@+id/allow_for_compatibility_radio_button"
+                    android:text="@string/app_permission_button_allow_for_compatibility"
+                    style="@style/AppPermissionRadioButton" />
+
                 <RelativeLayout
                     android:id="@+id/radio_select_layout"
                     android:orientation="horizontal"
@@ -237,6 +242,14 @@
 
                 <TextView
                     android:id="@+id/footer_storage_special_app_access"
+                    android:clickable="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_info_outline"
+                    style="@style/AppPermissionFooterTextWithIcon" />
+
+                <TextView
+                    android:id="@+id/footer_allow_for_compatibility"
                     android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

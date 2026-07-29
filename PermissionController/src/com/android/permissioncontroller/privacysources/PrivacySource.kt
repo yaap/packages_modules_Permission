@@ -49,6 +49,6 @@ interface PrivacySource {
     fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: SafetyCenterReceiver.RefreshEvent
+        refreshEvent: SafetyCenterReceiver.RefreshEvent,
     )
 }

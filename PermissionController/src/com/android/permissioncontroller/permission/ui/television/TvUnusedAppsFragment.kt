@@ -76,7 +76,7 @@ class TvUnusedAppsFragment :
     override fun createUnusedAppPref(
         app: Application,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): TvUnusedAppsPreference {
         return TvUnusedAppsPreference(app, packageName, user, requireContext())
     }

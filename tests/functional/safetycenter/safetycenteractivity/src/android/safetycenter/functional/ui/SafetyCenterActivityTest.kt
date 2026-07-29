@@ -16,11 +16,18 @@
 
 package android.safetycenter.functional.ui
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_SAFETY_CENTER
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Build
+import android.os.Build.VERSION_CODES.CINNAMON_BUN
 import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import android.os.Bundle
+import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.CheckFlagsRule
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterManager.EXTRA_SAFETY_SOURCE_ID
@@ -35,8 +42,11 @@ import androidx.test.uiautomator.By
 import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.FreezeRotationRule
 import com.android.compatibility.common.util.UiAutomatorUtils2.getUiDevice
+import com.android.permissioncontroller.flags.Flags
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_LONG
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_SHORT
+import com.android.safetycenter.testing.SafetyCenterActivityLauncher.executeBlockAndExit
+import com.android.safetycenter.testing.SafetyCenterActivityLauncher.handledByPermissionControllerSafetyCenter
 import com.android.safetycenter.testing.SafetyCenterActivityLauncher.launchSafetyCenterActivity
 import com.android.safetycenter.testing.SafetyCenterFlags
 import com.android.safetycenter.testing.SafetyCenterTestConfigs
@@ -72,6 +82,7 @@ import com.android.safetycenter.testing.UiTestHelper.waitButtonDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitCollapsedIssuesDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitExpandedIssuesDisplayed
+import com.android.safetycenter.testing.UiTestHelper.waitNotDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitPageTitleDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceDataDisplayed
 import com.android.safetycenter.testing.UiTestHelper.waitSourceIssueDisplayed
@@ -1546,6 +1557,93 @@ class SafetyCenterActivityTest {
         }
     }
 
+    @Test
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_SUPPORT_NEW_SAFETY_CENTER_UI_IN_SETTINGS)
+    fun launchActivity_actionSafetyCenter_isHandled_doesNotRedirect() {
+        assumeTrue(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleStaticSettingsSourceConfig)
+
+        launchPermissionControllerScActivity(intentAction = Intent.ACTION_SAFETY_CENTER) {
+            waitDisplayed(By.pkg(context.packageManager.permissionControllerPackageName))
+        }
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_SUPPORT_NEW_SAFETY_CENTER_UI_IN_SETTINGS)
+    fun launchActivity_actionPrivacyControls_isHandled_doesNotRedirect() {
+        assumeTrue(handledByPermissionControllerSafetyCenter(context, PRIVACY_CONTROLS_ACTION))
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleStaticSettingsSourceConfig)
+
+        launchPermissionControllerScActivity(intentAction = PRIVACY_CONTROLS_ACTION) {
+            waitDisplayed(By.pkg(context.packageManager.permissionControllerPackageName))
+        }
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_SUPPORT_NEW_SAFETY_CENTER_UI_IN_SETTINGS)
+    fun launchActivity_actionQsTilePreferences_isHandled_doesNotRedirect() {
+        assumeTrue(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleStaticSettingsSourceConfig)
+
+        launchPermissionControllerScActivity(intentAction = ACTION_QS_TILE_PREFERENCES) {
+            waitDisplayed(By.pkg(context.packageManager.permissionControllerPackageName))
+        }
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_SUPPORT_NEW_SAFETY_CENTER_UI_IN_SETTINGS)
+    fun launchActivity_actionSafetyCenter_notHandled_redirects() {
+        assumeFalse(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleStaticSettingsSourceConfig)
+
+        launchPermissionControllerScActivity(intentAction = Intent.ACTION_SAFETY_CENTER) {
+            waitNotDisplayed(By.pkg(context.packageManager.permissionControllerPackageName))
+        }
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_SUPPORT_NEW_SAFETY_CENTER_UI_IN_SETTINGS)
+    fun launchActivity_actionPrivacyControls_notHandled_redirects() {
+        assumeFalse(handledByPermissionControllerSafetyCenter(context, PRIVACY_CONTROLS_ACTION))
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleStaticSettingsSourceConfig)
+
+        launchPermissionControllerScActivity(intentAction = PRIVACY_CONTROLS_ACTION) {
+            waitNotDisplayed(By.pkg(context.packageManager.permissionControllerPackageName))
+        }
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_SUPPORT_NEW_SAFETY_CENTER_UI_IN_SETTINGS)
+    fun launchActivity_actionQsTilePreferences_notHandled_redirectsToSafetyCenter() {
+        assumeFalse(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleStaticSettingsSourceConfig)
+
+        launchPermissionControllerScActivity(intentAction = ACTION_QS_TILE_PREFERENCES) {
+            waitNotDisplayed(By.pkg(context.packageManager.permissionControllerPackageName))
+        }
+    }
+
+    private fun launchPermissionControllerScActivity(intentAction: String, block: () -> Unit) {
+        val launchIntent =
+            Intent(intentAction)
+                .addFlags(FLAG_ACTIVITY_NEW_TASK)
+                .addFlags(FLAG_ACTIVITY_CLEAR_TASK)
+                .setComponent(
+                    ComponentName(
+                        context.packageManager.permissionControllerPackageName,
+                        "com.android.permissioncontroller.safetycenter.ui.SafetyCenterActivity",
+                    )
+                )
+
+        executeBlockAndExit(block) { context.startActivity(launchIntent) }
+    }
+
     private companion object {
         const val EXPAND_ISSUE_GROUP_QS_FRAGMENT_KEY = "expand_issue_group_qs_fragment_key"
         const val SAFETY_SOURCE_1_TITLE = "Safety Source 1 Title"
@@ -1559,5 +1657,7 @@ class SafetyCenterActivityTest {
         const val SAFETY_SOURCE_5_TITLE = "Safety Source 5 Title"
         const val SAFETY_SOURCE_5_SUMMARY = "Safety Source 5 Summary"
         const val PRIVACY_CONTROLS_ACTION = "android.settings.PRIVACY_CONTROLS"
+        const val ACTION_QS_TILE_PREFERENCES =
+            "android.service.quicksettings.action.QS_TILE_PREFERENCES"
     }
 }

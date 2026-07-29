@@ -21,9 +21,6 @@ import android.content.Context
 import android.health.connect.HealthConnectManager
 import android.health.connect.HealthPermissions
 import android.os.Build
-import android.permission.flags.Flags
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.CheckFlagsRule
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -48,13 +45,13 @@ class AdminRestrictedPermissionsUtilsTest {
         val permissions: Set<String> = HealthConnectManager.getHealthPermissions(context)
         for (permission in permissions) {
             val canGrant =
-              AdminRestrictedPermissionsUtils.mayAdminGrantPermission(
-                  permission,
-                  HealthPermissions.HEALTH_PERMISSION_GROUP,
-                  /* canAdminGrantSensorsPermissions= */ false,
-                  /* isManagedProfile= */ false,
-                  dpm,
-              )
+                AdminRestrictedPermissionsUtils.mayAdminGrantPermission(
+                    permission,
+                    HealthPermissions.HEALTH_PERMISSION_GROUP,
+                    /* canAdminGrantSensorsPermissions= */ false,
+                    /* isManagedProfile= */ false,
+                    dpm,
+                )
             assertEquals(false, canGrant)
         }
     }

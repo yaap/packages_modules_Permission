@@ -17,6 +17,7 @@
 package android.safetycenter.hostside.rules
 
 import android.cts.statsdatom.lib.DeviceUtils
+import com.android.tradefed.result.TestRunResult
 import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -29,7 +30,7 @@ import org.junit.runners.model.Statement
 class HelperAppRule(
     private val hostTestClass: BaseHostJUnit4Test,
     private val apkName: String,
-    private val packageName: String
+    private val packageName: String,
 ) : TestRule {
 
     override fun apply(base: Statement, description: Description): Statement {
@@ -40,7 +41,7 @@ class HelperAppRule(
                         hostTestClass.device,
                         apkName,
                         packageName,
-                        hostTestClass.build
+                        hostTestClass.build,
                     )
                     base.evaluate()
                 } finally {
@@ -51,7 +52,12 @@ class HelperAppRule(
     }
 
     /** Runs the specified test in the helper app. */
-    fun runTest(testClassName: String, testMethodName: String) {
-        DeviceUtils.runDeviceTests(hostTestClass.device, packageName, testClassName, testMethodName)
+    fun runTest(testClassName: String, testMethodName: String): TestRunResult {
+        return DeviceUtils.runDeviceTests(
+            hostTestClass.device,
+            packageName,
+            testClassName,
+            testMethodName,
+        )
     }
 }

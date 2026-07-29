@@ -25,9 +25,10 @@ import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
 import android.os.UserHandle
 import android.os.UserManager
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
-import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterEntry
+import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
+import android.safetycenter.SafetyCenterStaticEntry
 import android.safetycenter.SafetyEvent
 import android.safetycenter.SafetySourceData
 import android.safetycenter.config.SafetyCenterConfig
@@ -230,10 +231,19 @@ class SafetyCenterTestHelper(val context: Context) {
             summary: CharSequence,
             user: UserHandle,
             safetySourceIds: Set<String>,
-            issueTypeId: String
+            issueTypeId: String,
+            safetySourceIssueId: String,
         ): SafetyCenterIssue.Builder =
             if (SdkLevel.isAtLeastB() && android.permission.flags.Flags.openSafetyCenterApis()) {
-                SafetyCenterIssue.Builder(id, title, summary, user, safetySourceIds, issueTypeId)
+                SafetyCenterIssue.Builder(
+                    id,
+                    title,
+                    summary,
+                    user,
+                    safetySourceIds,
+                    issueTypeId,
+                    safetySourceIssueId,
+                )
             } else {
                 SafetyCenterIssue.Builder(id, title, summary)
             }
@@ -261,6 +271,18 @@ class SafetyCenterTestHelper(val context: Context) {
                 SafetyCenterEntry.Builder(id, title, user, safetySourceId)
             } else {
                 SafetyCenterEntry.Builder(id, title)
+            }
+
+        /* Creates an appropriate [SafetyCenterStaticEntry.Builder]. */
+        fun createSafetyCenterStaticEntryBuilder(
+            title: CharSequence,
+            safetySourceId: String,
+            user: UserHandle,
+        ): SafetyCenterStaticEntry.Builder =
+            if (SdkLevel.isAtLeastB() && android.permission.flags.Flags.openSafetyCenterApis()) {
+                SafetyCenterStaticEntry.Builder(title, user, safetySourceId)
+            } else {
+                SafetyCenterStaticEntry.Builder(title)
             }
     }
 }

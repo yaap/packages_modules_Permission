@@ -20,6 +20,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -38,44 +40,44 @@ import com.android.permissioncontroller.wear.permission.components.material3.Wea
 /** Compose the screen associated to a [WearPermissionAppsFragment]. */
 @Composable
 fun WearPermissionAppsScreen(helper: WearPermissionAppsHelper) {
-    val categorizedApps = helper.categorizedAppsLiveData().observeAsState(emptyMap())
-    val hasSystemApps = helper.hasSystemAppsLiveData().observeAsState(false)
-    val showSystem = helper.shouldShowSystemLiveData().observeAsState(false)
-    val showLocationProviderDialog =
+    val categorizedApps by helper.categorizedAppsLiveData().observeAsState(emptyMap())
+    val hasSystemApps by helper.hasSystemAppsLiveData().observeAsState(false)
+    val showSystem by helper.shouldShowSystemLiveData().observeAsState(false)
+    val appPermissionUsages by helper.wearViewModel.appPermissionUsages.observeAsState(emptyList())
+    val showLocationProviderDialog by
         helper.locationProviderDialogViewModel.dialogVisibilityLiveData.observeAsState(false)
-    val appPermissionUsages = helper.wearViewModel.appPermissionUsages.observeAsState(emptyList())
-    var isLoading by remember { mutableStateOf(true) }
-    val dialogArgs =
+    val dialogArgs by
         helper.locationProviderDialogViewModel.locationProviderInterceptDialogArgs.observeAsState(
             null
         )
 
-    val title = helper.getTitle()
-    val subTitle = helper.getSubTitle()
-    val showAlways = helper.showAlways()
-    val chipsByCategory =
-        helper.getChipsByCategory(categorizedApps.value, appPermissionUsages.value)
+    var isLoading by remember { mutableStateOf(true) }
+    val chipsByCategory by
+        remember(categorizedApps, appPermissionUsages) {
+            derivedStateOf { helper.getChipsByCategory(categorizedApps, appPermissionUsages) }
+        }
+    LaunchedEffect(Unit) { helper.setCreationLogged(true) }
+
     Box(modifier = Modifier.fillMaxSize()) {
         WearPermissionAppsContent(
             chipsByCategory = chipsByCategory,
-            showSystem = showSystem.value,
-            hasSystemApps = hasSystemApps.value,
-            title = title,
-            subtitle = subTitle,
-            showAlways = showAlways,
+            showSystem = showSystem,
+            hasSystemApps = hasSystemApps,
+            title = helper.getTitle(),
+            subtitle = helper.getSubTitle(),
+            showAlways = helper.showAlways(),
             isLoading = isLoading,
             onShowSystemClick = helper.onShowSystemClick,
         )
         LocationProviderDialogScreen(
-            showDialog = showLocationProviderDialog.value,
+            showDialog = showLocationProviderDialog,
             onDismissRequest = { helper.locationProviderDialogViewModel.dismissDialog() },
-            args = dialogArgs.value,
+            args = dialogArgs,
         )
     }
-    if (isLoading && categorizedApps.value.isNotEmpty()) {
+    if (isLoading && categorizedApps.isNotEmpty()) {
         isLoading = false
     }
-    helper.setCreationLogged(true)
 }
 
 @Composable
@@ -90,28 +92,29 @@ internal fun WearPermissionAppsContent(
     onShowSystemClick: (showSystem: Boolean) -> Unit,
 ) {
     ScrollableScreen(title = title, subtitle = subtitle, isLoading = isLoading) {
-        val firstItemIndex = categoryOrder.indexOfFirst { !chipsByCategory[it].isNullOrEmpty() }
-        for ((index, category) in categoryOrder.withIndex()) {
-            val chips = chipsByCategory[category]
-            if (chips.isNullOrEmpty()) {
-                continue
-            }
-            item {
-                WearPermissionListSubHeader(isFirstItemInAList = index == firstItemIndex) {
-                    Text(text = stringResource(getCategoryString(category, showAlways)))
+        val firstVisibleCategory =
+            categoryOrder.firstOrNull { !chipsByCategory[it].isNullOrEmpty() }
+        categoryOrder.forEach { category ->
+            val chips = chipsByCategory[category] ?: emptyList()
+            if (chips.isNotEmpty()) {
+                item(key = "header_$category") {
+                    WearPermissionListSubHeader(
+                        isFirstItemInAList = category == firstVisibleCategory
+                    ) {
+                        Text(text = stringResource(getCategoryString(category, showAlways)))
+                    }
                 }
-            }
-            chips.forEach {
-                item {
+
+                items(chips.count()) { index ->
+                    val chip = chips[index]
                     WearPermissionButton(
-                        label = it.title,
+                        label = chip.title,
                         labelMaxLines = Int.MAX_VALUE,
-                        secondaryLabel = it.summary,
+                        secondaryLabel = chip.summary,
                         secondaryLabelMaxLines = Int.MAX_VALUE,
-                        iconBuilder =
-                            it.icon?.let { icon -> WearPermissionIconBuilder.builder(icon) },
-                        enabled = it.enabled,
-                        onClick = { it.onClick() },
+                        iconBuilder = chip.icon?.let { WearPermissionIconBuilder.builder(it) },
+                        enabled = chip.enabled,
+                        onClick = chip.onClick,
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
@@ -119,19 +122,21 @@ internal fun WearPermissionAppsContent(
         }
 
         if (hasSystemApps) {
-            item {
+            item(key = "system_toggle") {
                 WearPermissionButton(
                     label =
-                        if (showSystem) {
-                            stringResource(R.string.menu_hide_system)
-                        } else {
-                            stringResource(R.string.menu_show_system)
-                        },
-                    labelMaxLines = Int.MAX_VALUE,
+                        stringResource(
+                            if (showSystem) R.string.menu_hide_system else R.string.menu_show_system
+                        ),
                     onClick = { onShowSystemClick(!showSystem) },
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
+        }
+
+        val compatibilityItems = chipsByCategory[Category.ALLOWED_FOR_COMPATIBILITY.categoryName]
+        if (!compatibilityItems.isNullOrEmpty()) {
+            item(key = "compatibility_footer") { CompatibilityFooter() }
         }
     }
 }
@@ -147,6 +152,7 @@ internal fun getCategoryString(category: String, showAlways: Boolean) =
                 R.string.allowed_header
             }
 
+        Category.ALLOWED_FOR_COMPATIBILITY.categoryName -> R.string.allowed_for_compatibility_header
         Category.ALLOWED_FOREGROUND.categoryName -> R.string.allowed_foreground_header
         Category.ASK.categoryName -> R.string.ask_header
         Category.DENIED.categoryName -> R.string.denied_header
@@ -160,5 +166,6 @@ internal val categoryOrder =
         Category.ALLOWED.categoryName,
         Category.ALLOWED_FOREGROUND.categoryName,
         Category.ASK.categoryName,
+        Category.ALLOWED_FOR_COMPATIBILITY.categoryName,
         Category.DENIED.categoryName,
     )

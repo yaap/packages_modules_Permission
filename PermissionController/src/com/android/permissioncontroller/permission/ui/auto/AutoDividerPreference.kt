@@ -26,7 +26,7 @@ class AutoDividerPreference : Preference {
         context: Context?,
         attrs: AttributeSet?,
         defStyleAttr: Int,
-        defStyleRes: Int
+        defStyleRes: Int,
     ) : super(context!!, attrs, defStyleAttr, defStyleRes) {
         init()
     }
@@ -34,7 +34,7 @@ class AutoDividerPreference : Preference {
     constructor(
         context: Context?,
         attrs: AttributeSet?,
-        defStyleAttr: Int
+        defStyleAttr: Int,
     ) : super(context!!, attrs, defStyleAttr) {
         init()
     }

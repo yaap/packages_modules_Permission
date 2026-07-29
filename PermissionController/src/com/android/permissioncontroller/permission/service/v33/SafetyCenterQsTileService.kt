@@ -25,7 +25,6 @@ import android.content.pm.PackageManager
 import android.os.IBinder
 import android.provider.DeviceConfig
 import android.safetycenter.SafetyCenterManager
-import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.text.TextUtils
 import android.util.Log
@@ -44,19 +43,20 @@ class SafetyCenterQsTileService : TileService() {
             DeviceConfig.getInt(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 QS_TILE_COMPONENT_SETTING_FLAGS,
-                PackageManager.DONT_KILL_APP
+                PackageManager.DONT_KILL_APP,
             )
         if (!scManager.isSafetyCenterEnabled) {
             packageManager.setComponentEnabledSetting(
                 ComponentName(this, this::class.java),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                qsTileComponentSettingFlags
+                qsTileComponentSettingFlags,
             )
             disabled = true
         }
 
         return super.onBind(intent)
     }
+
     override fun onStartListening() {
         super.onStartListening()
         if (disabled) {

@@ -80,6 +80,14 @@ public interface RoleBehavior {
     }
 
     /**
+     * @see Role#isPackageQualifiedAsUser(String, UserHandle, Context)
+     */
+    default boolean isPackageAllowedToBypassQualificationAsUser(@NonNull String packageName,
+            @NonNull UserHandle user, @NonNull Context context) {
+        return true;
+    }
+
+    /**
      * @see Role#isPackageQualified(String, Context)
      */
     @Nullable
@@ -100,7 +108,7 @@ public interface RoleBehavior {
     /**
      * @see Role#grantAsUser(String, boolean, boolean, UserHandle, Context)
      */
-    default void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    default void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {}
 
     /**

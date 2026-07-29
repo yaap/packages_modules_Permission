@@ -31,7 +31,7 @@
     <string name="permission_usage_summary" msgid="5323079206029964468">"Vaadake, millised rakendused hiljuti lube kasutasid"</string>
     <string name="permission_usage_search_terms" msgid="3852343592870257104">"Privaatsus, privaatsuse juhtpaneel"</string>
     <string name="permission_manager_title" msgid="5277347862821255015">"Lubade haldur"</string>
-    <string name="permission_manager_summary" msgid="8099852107340970790">"Rakenduste puhul andmetele juurdepääsu haldamine"</string>
+    <string name="permission_manager_summary" msgid="8099852107340970790">"Hallake rakenduste juurdepääsu oma andmetele"</string>
     <string name="permission_manager_search_terms" msgid="2895147613099694722">"Load, lubade haldur, lubade haldamine"</string>
     <string name="privacy_controls_title" msgid="5322875777945432395">"Privaatsuse seaded"</string>
     <string name="privacy_controls_summary" msgid="2402066941190435424">"Seadme juurdepääsu haldamine mikrofonile, kaamerale ja muule"</string>

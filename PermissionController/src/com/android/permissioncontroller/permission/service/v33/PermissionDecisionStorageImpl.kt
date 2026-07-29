@@ -48,7 +48,7 @@ import org.xmlpull.v1.XmlPullParserException
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 class PermissionDecisionStorageImpl(
     context: Context,
-    jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)!!
+    jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)!!,
 ) : BasePermissionEventStorage<PermissionDecision>(context, jobScheduler) {
 
     // We don't use namespaces
@@ -88,7 +88,7 @@ class PermissionDecisionStorageImpl(
             context: Context,
             packageName: String,
             permGroupName: String,
-            isGranted: Boolean
+            isGranted: Boolean,
         ) {
             if (isRecordPermissionsSupported(context)) {
                 GlobalScope.launch(Dispatchers.IO) {
@@ -98,7 +98,7 @@ class PermissionDecisionStorageImpl(
                                 packageName,
                                 System.currentTimeMillis(),
                                 permGroupName,
-                                isGranted
+                                isGranted,
                             )
                         )
                 }
@@ -194,13 +194,13 @@ class PermissionDecisionStorageImpl(
         return DeviceConfig.getLong(
             DeviceConfig.NAMESPACE_PERMISSIONS,
             Utils.PROPERTY_PERMISSION_DECISIONS_MAX_DATA_AGE_MILLIS,
-            DEFAULT_MAX_DATA_AGE_MS
+            DEFAULT_MAX_DATA_AGE_MS,
         )
     }
 
     override fun hasTheSamePrimaryKey(
         first: PermissionDecision,
-        second: PermissionDecision
+        second: PermissionDecision,
     ): Boolean {
         return first.packageName == second.packageName &&
             first.permissionGroupName == second.permissionGroupName

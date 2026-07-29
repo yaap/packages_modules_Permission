@@ -89,7 +89,7 @@
     <string name="menu_show_system" msgid="4254021607027872504">"சிஸ்டம் ஆப்ஸைக் காட்டு"</string>
     <string name="menu_hide_system" msgid="3855390843744028465">"சிஸ்டம் ஆப்ஸை மறை"</string>
     <string name="menu_show_7_days_data" msgid="8979611198508523706">"7 நாட்களைக் காட்டு"</string>
-    <string name="menu_show_24_hours_data" msgid="8228054833323380780">"24 மணிநேரத்தில் காட்டு"</string>
+    <string name="menu_show_24_hours_data" msgid="8228054833323380780">"24 மணிநேரத்தைக் காட்டு"</string>
     <string name="manage_permission" msgid="2895385393037061964">"அனுமதியை நிர்வகி"</string>
     <string name="no_apps" msgid="2412612731628386816">"எந்த ஆப்ஸிற்கும் தேவையில்லை"</string>
     <string name="location_settings" msgid="3624412509133422562">"இருப்பிட அமைப்புகள்"</string>
@@ -126,9 +126,25 @@
     <string name="message_staging" msgid="9110563899955511866">"ஆப்ஸ் தயாராகிறது…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"தெரியாதது"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"தனியுரிமை டாஷ்போர்டு"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"ஆப்ஸ் அனுமதிகள்"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"AI அசிஸ்டண்ட் செயல்பாடு"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"AI அசிஸ்டண்ட்டுகள் நிறுவவில்லை"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"24 மணிநேரமாக அணுகல்கள் இல்லை"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"7 நாட்களாக அணுகல்கள் இல்லை"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"<xliff:g id="APP_NAME">%1$s</xliff:g> செயல்பாடு"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"கடந்த 24 மணிநேரத்தில்"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"கடந்த 7 நாட்களில்"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"இன்று"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"நேற்று"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"கடைசியாக அணுகியது: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"காட்டு"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"அணுகல்கள் இல்லை"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"உங்களுக்காகத் தகவல்களைப் பெறவோ செயல்களைச் செய்யவோ AI அசிஸ்டண்ட் இந்த ஆப்ஸை அணுகியுள்ளது. அணுகலை <xliff:g id="APP_NAME">%1$s</xliff:g> அமைப்புகளில் எப்போது வேண்டுமானாலும் மாற்றிக்கொள்ளலாம்."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"AI அசிஸ்டண்ட்டுகளுக்கான Android அம்சங்களைப் பயன்படுத்தி ஆப்ஸை அணுகும்போது மட்டுமே தனியுரிமை டாஷ்போர்டு காட்டப்படும்."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"சாதன உதவி"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"சமீபத்தில் அனுமதிகளைப் பயன்படுத்திய ஆப்ஸைக் காட்டும்"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g> உபயோகம்"</string>
-    <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"பிற அனுமதிகளைப் பார்த்தல்"</string>
+    <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"பிற அனுமதிகளைக் காட்டு"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>, மேலும் <xliff:g id="NUM">%3$s</xliff:g>"</string>
     <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"கடந்த 24 மணிநேரத்தில் <xliff:g id="PERMGROUP">%1$s</xliff:g> ஐ ஆப்ஸ் பயன்படுத்தியதற்கான காலப்பதிவு"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{கடந்த # நாளில் பயன்படுத்தப்படவில்லை}other{கடந்த # நாட்களில் பயன்படுத்தப்படவில்லை}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{கடந்த # மணிநேரத்தில் பயன்படுத்தப்படவில்லை}other{கடந்த # மணிநேரத்தில் பயன்படுத்தப்படவில்லை}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{1 ஆப்ஸால் பயன்படுத்தப்பட்டது}other{# ஆப்ஸால் பயன்படுத்தப்பட்டது}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{1 ஆப்ஸைப் பயன்படுத்தியுள்ளீர்கள்}other{# ஆப்ஸைப் பயன்படுத்தியுள்ளீர்கள்}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"டாஷ்போர்டில் அனைத்தையும் காட்டு"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"இதன்படி வடிகட்டப்பட்டது: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"வடிப்பானை அகற்று"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"மீடியா ஃபைல்களை மட்டும் அணுக அனுமதி"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"எப்போதும் அனுமதி"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"ஆப்ஸை உபயோகிக்கும்போது மட்டும் அனுமதி"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"ஆப்ஸ் தொடர்ந்து இயங்க அனுமதித்தல்"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"எப்போதும் அனைத்தையும் அனுமதி"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"ஒவ்வொரு முறையும் கேள்"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"ஒவ்வொரு முறையும் கேள் அல்லது பகிரும்போது அனுமதி"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"அனுமதிக்க வேண்டாம்"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"வரம்பிற்குட்பட்ட அணுகலை அனுமதித்தல்"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"துல்லியமான இருப்பிடம்"</string>
@@ -209,7 +228,7 @@
     <string name="auto_revoke_label" msgid="5068393642936571656">"இந்த ஆப்ஸ் பயன்படுத்தப்படவில்லை என்றால் அனுமதிகளை அகற்றவும்"</string>
     <string name="unused_apps_label" msgid="2595428768404901064">"அனுமதிகளை அகற்றி இடத்தைக் காலியாக்கு"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"செயலில் இல்லாதபோது ஆப்ஸை இடைநிறுத்துதல்"</string>
-    <string name="unused_apps_label_v3" msgid="693340578642156657">"ஆப்ஸைப் பயன்படுத்தாதபோது நிர்வகி"</string>
+    <string name="unused_apps_label_v3" msgid="693340578642156657">"ஆப்ஸைப் பயன்படுத்தாதபோது நிர்வகித்தல்"</string>
     <string name="unused_apps_summary" msgid="8839466950318403115">"அனுமதிகளை அகற்றும், தற்காலிக ஃபைல்களை நீக்கும், அறிவிப்புகளை நிறுத்தும்"</string>
     <string name="unused_apps_summary_v2" msgid="5011313200815115802">"அனுமதிகளை அகற்றும், தற்காலிக ஃபைல்களை நீக்கும், அறிவிப்புகளை நிறுத்தும், ஆப்ஸைக் காப்பிடும்"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"இந்த ஆப்ஸைச் சில மாதங்கள் பயன்படுத்தவில்லை என்றால் உங்கள் தரவைப் பாதுகாப்பதற்காக இதற்கான அனுமதிகள் அகற்றப்படும்."</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"அனுமதிக்கப்பட்டவை"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"எப்போதும் அனுமதிக்கப்படுபவை"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"உபயோகத்தில் மட்டுமே அனுமதிக்கப்படும்"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"ஆப்ஸ் தொடர்ந்து இயங்க அனுமதிக்கப்பட்டது"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"மீடியா ஃபைல்களுக்கு மட்டும் அணுகலுள்ளவை"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"எல்லா ஃபைல்களையும் நிர்வகிக்கும் அணுகலுள்ளவை"</string>
     <string name="ask_header" msgid="2633816846459944376">"ஒவ்வொரு முறையும் கேள்"</string>
     <string name="denied_header" msgid="903209608358177654">"அனுமதிக்கப்படாதவை"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> சாதனத்தில் <xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"அனைத்து ஃபைல்களையும் அணுகக்கூடிய கூடுதல் ஆப்ஸைப் பாருங்கள்"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;ஆப்ஸ் தொடர்ந்து இயங்க அனுமதித்தல்&lt;/b&gt;&lt;br&gt;&lt;br&gt;ஆப்ஸ் தொடர்ந்து இயங்க, உங்கள் லோக்கல் நெட்வொர்க்கை அணுகவும் இந்த நெட்வொர்க்கில் உள்ள சாதனங்களுடன் மட்டுமே இணைக்கவும் அதற்கு அனுமதி வழங்கப்படலாம்.&lt;br&gt;&lt;br&gt;அருகிலுள்ள அனைத்துச் சாதனங்களையும் கண்டறிந்து அவற்றுடன் இணைக்க நீங்கள் ஆப்ஸை அனுமதிக்காத வரை புளூடூத்தையும் பிற தொழில்நுட்பங்களையும் பயன்படுத்திச் சாதனங்களுடன் ஆப்ஸால் இணைக்க முடியாது."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;ஆப்ஸ் தொடர்ந்து இயங்க அனுமதிக்கப்பட்டது&lt;/b&gt;&lt;br&gt;&lt;br&gt;ஆப்ஸ் தொடர்ந்து இயங்க, உங்கள் லோக்கல் நெட்வொர்க்கை அணுகவும் இந்த நெட்வொர்க்கில் உள்ள சாதனங்களுடன் மட்டுமே இணைக்கவும் அதற்கு அனுமதி வழங்கப்படலாம்.&lt;br&gt;&lt;br&gt;அருகிலுள்ள அனைத்துச் சாதனங்களையும் கண்டறிந்து அவற்றுடன் இணைக்க நீங்கள் ஆப்ஸை அனுமதிக்காத வரை புளூடூத்தையும் பிற தொழில்நுட்பங்களையும் பயன்படுத்திச் சாதனங்களுடன் ஆப்ஸால் இணைக்க முடியாது."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 நாள்}other{# நாட்கள்}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# மணிநேரம்}other{# மணிநேரம்}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# நிமிடம்}other{# நிமிடங்கள்}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"ஏதுமில்லை"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(சிஸ்டத்தின் இயல்புநிலை)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ஆப்ஸ் இல்லை"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"மாற்று"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"தற்போதையது இருக்கட்டும்"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"பிற NFC சேவைகள்"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"தேர்ந்தெடுக்கப்பட்டது"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"<xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g> தேர்ந்தெடுக்கப்பட்டுள்ளது"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"ஆப்ஸிற்கு சிறப்பு அணுகல் இல்லை"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"ஆப்ஸ் இல்லை"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"பணிக் கணக்கிற்கான ஆதரவு இதில் இல்லை"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ஆப்ஸை உங்கள் இயல்பு முகப்பு ஆப்ஸாக மாற்றவா?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"இது உங்கள் முகப்புத் திரையை மாற்றும், உங்கள் சாதனத்தில் உள்ள அம்சங்களுக்கான அணுகலை மாற்றலாம்.&lt;br&gt;&lt;br&gt;இதை &lt;b&gt;இயல்பு முகப்பு ஆப்ஸ்&lt;/b&gt; அமைப்புகளில் எப்போது வேண்டுமானாலும் மாற்றிக்கொள்ளலாம்."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"கவனத்திற்கு: திரைப் பூட்டு அமைக்கப்பட்டிருக்கும் நிலையில் உங்கள் மொபைலை மீண்டும் தொடங்கினால் அன்லாக் செய்யப்படும்வரை இந்த ஆப்ஸ் இயங்காது."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"திரையில் தெரியும் தகவல் அல்லது ஆப்ஸிற்குள் அணுகக்கூடிய தகவல் உட்பட உங்கள் சிஸ்டத்தில் செயல்பாட்டிலுள்ள ஆப்ஸ் பற்றிய தகவல்களை அசிஸ்டண்ட்டால் படிக்க இயலும்."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ஆப்ஸை உங்கள் டிஜிட்டல் அசிஸ்டண்ட் ஆப்ஸாக மாற்றவா?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"உங்கள் மெசேஜ்கள் போன்ற தகவல்களையும் உங்கள் அசிஸ்டண்ட்டுடன் பகிர ஆப்ஸ் தேர்வுசெய்துள்ள தரவையும் இந்த அசிஸ்டண்ட்டால் அணுக முடியும்."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"உங்கள் மெசேஜ்கள் போன்ற தகவல்களையும் உங்கள் அசிஸ்டண்ட்டுடன் பகிர ஆப்ஸ் தேர்வுசெய்துள்ள தரவையும் இந்த அசிஸ்டண்ட்டால் அணுக முடியும்.&lt;br&gt;&lt;br&gt;முன்னதாக <xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸுக்கு நீங்கள் திரை மற்றும் ஆப்ஸ் தரவை ஆன் செய்துள்ளதால் உங்கள் திரையில் திறந்துள்ள ஆப்ஸின் உள்ளடக்கத்தை அணுகவும் அது அனுமதிக்கப்படும்."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"பிழைதிருத்தத் தரவைப் பகிர்தல்"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"விரிவான பிழைதிருத்தத் தகவலைப் பகிரவா?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"பிழைதிருத்தத் தகவலை <xliff:g id="APP_NAME">%1$s</xliff:g> பதிவேற்ற விரும்புகிறது."</string>
@@ -688,7 +717,7 @@
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"<xliff:g id="PERMISSION_NAME">%1$s</xliff:g>க்கான ஆப்ஸ் அணுகல் நிராகரிக்கப்பட்டது"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"பாதுகாக்க வேண்டிய தகவல்களுக்கான அனுமதியை வழங்க ஆப்ஸ் கேட்டுள்ளது, இது உங்கள் தனிப்பட்ட மற்றும் நிதித் தகவல்களை ஆபத்துக்குள்ளாக்கலாம்.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>இந்தக் கட்டுப்படுத்தப்பட்ட அனுமதி இல்லாமல் ஆப்ஸ் சரியாக வேலை செய்யாமல் போகக்கூடும். &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;எப்படி அணுகல் வழங்குவதென அறிக&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"இயல்புநிலை <xliff:g id="ROLE_NAME">%1$s</xliff:g>க்கான ஆப்ஸ் அணுகல் நிராகரிக்கப்பட்டது"</string>
-    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"பாதுகாக்க வேண்டிய தகவலை அணுவதற்கான அனுமதியை ஆப்ஸ் கேட்டுள்ளது, இது உங்கள் தனிப்பட்ட மற்றும் நிதித் தகவல்களை ஆபத்துக்குள்ளாக்கலாம்.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>இந்தக் கட்டுப்படுத்தப்பட்ட அனுமதிகள் இல்லாமல் ஆப்ஸ் சரியாக வேலை செய்யாமல் போகக்கூடும். &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;எப்படி அணுகல் வழங்குவதென அறிக&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"பாதுகாக்க வேண்டிய தகவலை அணுகுவதற்கான அனுமதியை ஆப்ஸ் கேட்டுள்ளது, இது உங்கள் தனிப்பட்ட மற்றும் நிதித் தகவல்களை ஆபத்துக்குள்ளாக்கலாம்.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>இந்தக் கட்டுப்படுத்தப்பட்ட அனுமதிகள் இல்லாமல் ஆப்ஸ் சரியாக வேலை செய்யாமல் போகக்கூடும். &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;எப்படி அணுகல் வழங்குவதென அறிக&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"ஆப்ஸ் அணுகல் நிராகரிக்கப்பட்டது"</string>
     <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"இதற்கு அனுமதி அளிப்பதனால் உங்கள் தனிப்பட்ட மற்றும் நிதித் தகவல்கள் ஆபத்துக்குள்ளாகலாம்.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>இந்தக் கட்டுப்படுத்தப்பட்ட அனுமதி இல்லாமல் ஆப்ஸ் சரியாக வேலை செய்யாமல் போகக்கூடும். &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;எப்படி அணுகல் வழங்குவதென அறிக&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"மேலும் அறிக"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ஆப்ஸ்"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"ஏஜெண்ட் அணுகல்"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"இந்த ஆப்ஸில் தகவல்களை அணுகி உங்களுக்காகச் செயல்களைச் செய்யக்கூடிய ஏஜெண்ட்டுகள்"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"அனுமதிக்கப்பட்டது"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"அனுமதிக்கப்படவில்லை"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"ஏஜெண்ட் அணுகல்கள் அனுமதிக்கப்படவில்லை"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"ஏஜெண்ட் அணுகல்கள் மறுக்கப்படவில்லை"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"ஆப்ஸ் அணுகல்கள் அனுமதிக்கப்படவில்லை"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"ஆப்ஸ் அணுகல்கள் மறுக்கப்படவில்லை"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"ஆப்ஸுக்கான அணுகல்"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"<xliff:g id="TARGET_APP_NAME">%1$s</xliff:g> ஆப்ஸுக்கான அணுகல்"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ஆப்ஸுக்கான <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> அணுகல்"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"அனுமதி"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"அனுமதிக்காதே"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"சாதன அமைப்புகள்"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ஆப்ஸுக்கு ஏஜெண்ட்டாக இருக்க <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ஆப்ஸை அனுமதிக்கவா?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"உங்களுக்காகத் தகவல்களைப் பெற்று நடவடிக்கைகள் எடுக்க இந்த ஏஜெண்ட்டால் <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ஆப்ஸை அணுக முடியும்"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"அனுமதி"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"அனுமதிக்காதே"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"திரையிலும் ஆப்ஸிலும் உள்ள தரவைப் பயன்படுத்த &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; ஆப்ஸை அனுமதிக்கவா?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"உங்கள் திரையில் திறந்துள்ள ஆப்ஸில் இருக்கும் தகவல்களையும் உள்ளடக்கத்தையும் இந்த அசிஸ்டண்ட்டால் அணுக முடியும்"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"அனுமதி"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"அனுமதிக்காதே"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"திரையிலும் ஆப்ஸிலும் உள்ள தரவைப் பயன்படுத்துதல்"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"உங்கள் திரையில் திறந்துள்ள ஆப்ஸில் இருக்கும் தகவல்களையும் உள்ளடக்கத்தையும் அணுக அசிஸ்டண்ட்டை அனுமதிக்கும்"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"உங்கள் திரையில் திறந்துள்ள ஆப்ஸில் இருக்கும் தகவல்களையும் உள்ளடக்கத்தையும் அணுக <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> ஆப்ஸை அனுமதிக்கும்"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"அனுமதி"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"அனுமதிக்காதே"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"துல்லியமான இருப்பிடத்தை நீங்கள் பகிரத் தேர்வுசெய்யும்போது, அதை அணுக &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ஆப்ஸை அனுமதிக்கவா?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"துல்லியமான இருப்பிடத்தைப் பகிரும்போது, அதற்கான அணுகல் இந்த ஆப்ஸை நீங்கள் மூடும்வரை ஆப்ஸுக்குக் கிடைக்கும்"</string>
 </resources>

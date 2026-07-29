@@ -16,8 +16,10 @@
 
 package com.android.permissioncontroller.safetycenter.service
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.database.Cursor
 import android.database.MatrixCursor
@@ -45,10 +47,12 @@ import android.safetycenter.config.SafetySourcesGroup.SAFETY_SOURCES_GROUP_TYPE_
 import androidx.annotation.RequiresApi
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.R
+import com.android.permissioncontroller.flags.Flags
 import com.android.permissioncontroller.permission.service.BaseSearchIndexablesProvider
 import com.android.permissioncontroller.safetycenter.SafetyCenterConstants.PERSONAL_PROFILE_SUFFIX
 import com.android.permissioncontroller.safetycenter.SafetyCenterConstants.PRIVATE_PROFILE_SUFFIX
 import com.android.permissioncontroller.safetycenter.SafetyCenterConstants.WORK_PROFILE_SUFFIX
+import com.android.permissioncontroller.safetycenter.ui.SafetyCenterActivity
 import com.android.permissioncontroller.safetycenter.ui.SafetyCenterUiFlags
 import com.android.permissioncontroller.safetycenter.ui.model.PrivacyControlsViewModel.Pref
 import com.android.safetycenter.internaldata.SafetyCenterBundles
@@ -63,6 +67,13 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
     override fun queryRawData(projection: Array<out String>?): Cursor {
         val cursor = MatrixCursor(INDEXABLES_RAW_COLUMNS)
         if (!SdkLevel.isAtLeastT()) {
+            return cursor
+        }
+
+        // Don't index Safety Center entries from here, if different UI is being used
+        if (
+            isSettingsUiRedirectionSupported() && !isSafetyCenterUiServedFromPermissionController()
+        ) {
             return cursor
         }
 
@@ -107,6 +118,13 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
     override fun queryNonIndexableKeys(projection: Array<out String>?): Cursor {
         val cursor = MatrixCursor(NON_INDEXABLES_KEYS_COLUMNS)
         if (!SdkLevel.isAtLeastT()) {
+            return cursor
+        }
+
+        // Don't index Safety Center entries from here, if different UI is being used
+        if (
+            isSettingsUiRedirectionSupported() && !isSafetyCenterUiServedFromPermissionController()
+        ) {
             return cursor
         }
 
@@ -332,6 +350,26 @@ class SafetyCenterSearchIndexablesProvider : BaseSearchIndexablesProvider() {
 
     private fun isPrivateProfileSupported(): Boolean {
         return SdkLevel.isAtLeastV() && com.android.permission.flags.Flags.privateProfileSupported()
+    }
+
+    /** Whether to adapt Safety Center features for the new Safety Center UI in Settings */
+    private fun isSettingsUiRedirectionSupported(): Boolean {
+        // This is a mainline flag which effect we want to limit to new SDKs.
+        return Flags.supportNewSafetyCenterUiInSettings() &&
+            Build.VERSION.SDK_INT > Build.VERSION_CODES.BAKLAVA
+    }
+
+    private fun isSafetyCenterUiServedFromPermissionController(): Boolean {
+        val pm: PackageManager = requireContext().getPackageManager()
+        val pcScActivity =
+            ComponentName(
+                pm.permissionControllerPackageName,
+                SafetyCenterActivity::class.qualifiedName!!,
+            )
+        val queryIntent = Intent(Intent.ACTION_SAFETY_CENTER)
+
+        val resolvedComponent = queryIntent.resolveActivity(pm)
+        return pcScActivity == resolvedComponent
     }
 
     companion object {

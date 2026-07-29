@@ -22,7 +22,7 @@ import com.android.permissioncontroller.user.data.repository.v31.UserRepository
 class FakeUserRepository(
     private val currentUserProfiles: List<Int> = listOf(Process.myUserHandle().identifier),
     private val quietUserProfiles: List<Int> = emptyList(),
-    private val showInQuiteModeProfiles: List<Int> = emptyList()
+    private val showInQuiteModeProfiles: List<Int> = emptyList(),
 ) : UserRepository {
     override suspend fun getUserProfilesIncludingCurrentUser(): List<Int> = currentUserProfiles
 

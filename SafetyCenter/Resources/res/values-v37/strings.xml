@@ -18,4 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_function_access_settings_title" description="The title of the entry for App Function Access Settings">Agents</string>
   <string name="app_function_access_settings_summary" description="The summary of the entry for App Function Access Settings, which describes the page contents">Agents that can access info or take actions in apps</string>
+  <!-- Permissions usage summary, which describes what the permissions usage does [CHAR LIMIT=NONE] [SCREENSHOT=screen/BUS9mrZTkkYyhmv] -->
+  <string name="permission_usage_summary" description="Permission usage summary, which describes what the permissions usage does">App &amp; AI assistant activity</string>
 </resources>

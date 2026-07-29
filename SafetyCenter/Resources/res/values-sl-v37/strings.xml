@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"Agenti"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"Agenti, ki lahko dostopajo do informacij ali izvajajo dejanja v aplikacijah"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"Dejavnost v aplikaciji in pomočniku z umetno inteligenco"</string>
 </resources>

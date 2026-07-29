@@ -26,15 +26,19 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.UserHandle;
+import android.permission.flags.Flags;
+import android.text.Html;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.permissioncontroller.R;
 import com.android.permissioncontroller.permission.utils.CollectionUtils;
 import com.android.permissioncontroller.permission.utils.Utils;
 import com.android.permissioncontroller.role.ui.TwoTargetPreference;
+import com.android.permissioncontroller.role.utils.PackageUtils;
 import com.android.permissioncontroller.role.utils.UserUtils;
 import com.android.role.controller.model.Role;
 
@@ -99,5 +103,27 @@ public class HomeRoleUiBehavior implements RoleUiBehavior {
         boolean isWorkProfileSupported = applicationInfo.targetSdkVersion
                 >= Build.VERSION_CODES.LOLLIPOP;
         return !isWorkProfileSupported;
+    }
+
+    @Nullable
+    @Override
+    public ConfirmationDialogInfo getConfirmationDialogInfo(@NonNull Role role,
+            @NonNull String packageName, @NonNull UserHandle user, @NonNull Context context) {
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA
+                        && Flags.newDefaultAppConfirmationDialogEnabled())
+                || context.getResources().getBoolean(R.bool.config_showHomeConfirmationDialog)) {
+            ApplicationInfo applicationInfo =
+                    PackageUtils.getApplicationInfoAsUser(packageName, user, context);
+            String appLabel = applicationInfo != null ? Utils.getFullAppLabel(applicationInfo,
+                    context) : packageName;
+            String escapedAppLabel = Html.escapeHtml(appLabel);
+            return new ConfirmationDialogInfo(true,
+                Html.fromHtml(context.getString(R.string.home_confirmation_title, escapedAppLabel)),
+                Html.fromHtml(context.getString(R.string.home_confirmation_message)),
+                context.getString(R.string.default_app_confirmation_positive_button),
+                context.getString(R.string.default_app_confirmation_negative_button), true);
+        } else {
+            return null;
+        }
     }
 }

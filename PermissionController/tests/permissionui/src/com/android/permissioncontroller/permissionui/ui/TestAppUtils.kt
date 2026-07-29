@@ -79,7 +79,8 @@ fun installTestAppThatUsesLegacyBodySensorsPermissions() = install(LEGACY_BODY_S
 
 fun installTestAppThatUsesReadHeartRatePermissions() = install(READ_HEART_RATE_APK)
 
-fun installTestAppThatUsesLegacyBodySensorsPermissionsTargetSdk22() = install(LEGACY_BODY_SENSORS_TARGET_SDK_22_APK)
+fun installTestAppThatUsesLegacyBodySensorsPermissionsTargetSdk22() =
+    install(LEGACY_BODY_SENSORS_TARGET_SDK_22_APK)
 
 fun uninstallTestApps() {
     uninstallApp(PERM_USER_PACKAGE)

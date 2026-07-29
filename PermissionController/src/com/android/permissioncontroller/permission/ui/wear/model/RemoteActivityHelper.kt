@@ -71,7 +71,7 @@ class RemoteActivityHelper(val context: Context) {
                     putExtra(EXTRA_INTENT, targetIntent)
                     putExtra(
                         EXTRA_RESULT_RECEIVER,
-                        getResultReceiverForSending(remoteResultReceiver)
+                        getResultReceiverForSending(remoteResultReceiver),
                     )
                 }
             context.sendBroadcast(remoteIntent)

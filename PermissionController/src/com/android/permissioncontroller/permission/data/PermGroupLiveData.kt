@@ -80,7 +80,7 @@ private constructor(private val app: Application, private val groupName: String)
                     permInfos.addAll(
                         Utils.getInstalledRuntimePermissionInfosForGroup(
                             context.packageManager,
-                            groupName
+                            groupName,
                         )
                     )
                 } catch (e: PackageManager.NameNotFoundException) {
@@ -101,7 +101,7 @@ private constructor(private val app: Application, private val groupName: String)
 
         val packageNames = permInfos.map { permInfo -> permInfo.packageName }.toMutableSet()
         packageNames.add(groupInfo.packageName)
-        // TODO ntmyren: What if the package isn't installed for the system user?
+        // TODO b/474360969: What if the package isn't installed for the system user?
         val getLiveData = { packageName: String ->
             LightPackageInfoLiveData[packageName, UserHandle.SYSTEM]
         }

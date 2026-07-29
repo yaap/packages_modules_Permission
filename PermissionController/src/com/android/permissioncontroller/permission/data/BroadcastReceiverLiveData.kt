@@ -40,7 +40,7 @@ class BroadcastReceiverLiveData(
     private val app: Application,
     override val intentAction: String,
     private val permission: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) :
     SmartAsyncMediatorLiveData<Set<String>>(),
     PackageBroadcastReceiver.PackageBroadcastListener,
@@ -76,7 +76,7 @@ class BroadcastReceiverLiveData(
                 .packageManager
                 .queryBroadcastReceivers(
                     Intent(intentAction),
-                    PackageManager.GET_RECEIVERS or PackageManager.GET_META_DATA
+                    PackageManager.GET_RECEIVERS or PackageManager.GET_META_DATA,
                 )
                 .mapNotNull { resolveInfo ->
                     if (resolveInfo?.activityInfo?.permission != permission) {
@@ -88,7 +88,7 @@ class BroadcastReceiverLiveData(
                             DumpableLog.i(
                                 LOG_TAG,
                                 "Not exempting $packageName - not an active $name " +
-                                    "for u${user.identifier}"
+                                    "for u${user.identifier}",
                             )
                         }
                         return@mapNotNull null
@@ -99,7 +99,7 @@ class BroadcastReceiverLiveData(
         if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
-                "Detected ${intentAction.substringAfterLast(".")}s: $packageNames"
+                "Detected ${intentAction.substringAfterLast(".")}s: $packageNames",
             )
         }
 
@@ -145,7 +145,7 @@ class BroadcastReceiverLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
                 key.second,
-                key.third
+                key.third,
             )
         }
     }

@@ -23,7 +23,6 @@ import android.app.Application
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.UserHandle
-import android.util.Log
 import com.android.permissioncontroller.PermissionControllerApplication
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -44,7 +43,7 @@ import kotlinx.coroutines.launch
 class OpUsageLiveData(
     private val app: Application,
     private val opNames: List<String>,
-    private val usageDurationMs: Long
+    private val usageDurationMs: Long,
 ) :
     SmartAsyncMediatorLiveData<@JvmSuppressWildcards Map<String, List<OpAccess>>>(),
     AppOpsManager.OnOpActiveChangedListener {
@@ -99,7 +98,7 @@ class OpUsageLiveData(
                                     proxy.packageName!!,
                                     proxy.attributionTag,
                                     UserHandle.getUserHandleForUid(proxy.uid),
-                                    accessTime
+                                    accessTime,
                                 )
                         }
                         accessList.add(
@@ -108,26 +107,8 @@ class OpUsageLiveData(
                                 attributionTag,
                                 user,
                                 accessTime,
-                                proxyAccess
+                                proxyAccess,
                             )
-                        )
-
-                        // TODO ntmyren: remove logs once b/160724034 is fixed
-                        Log.i(
-                            "OpUsageLiveData",
-                            "adding ${opEntry.opStr} for " +
-                                "${packageOp.packageName}/$attributionTag, access time of " +
-                                "$lastAccessTime, isRunning: ${attributedOpEntry.isRunning} " +
-                                "current time $now, duration $lastAccessDuration, proxy: " +
-                                "${proxy?.packageName}"
-                        )
-                    } else {
-                        Log.i(
-                            "OpUsageLiveData",
-                            "NOT adding ${opEntry.opStr} for " +
-                                "${packageOp.packageName}/$attributionTag, access time of " +
-                                "$lastAccessTime, isRunning: ${attributedOpEntry.isRunning} " +
-                                "current time $now, duration $lastAccessDuration"
                         )
                     }
                 }
@@ -181,7 +162,7 @@ data class OpAccess(
     val attributionTag: String?,
     val user: UserHandle,
     val lastAccessTime: Long,
-    val proxyAccess: OpAccess? = null
+    val proxyAccess: OpAccess? = null,
 ) : Parcelable {
     val isRunning = lastAccessTime == IS_RUNNING
 
@@ -219,7 +200,7 @@ data class OpAccess(
                                 proxyPackageName,
                                 parcel.readString(),
                                 parcel.readParcelable(UserHandle::class.java.classLoader)!!,
-                                lastAccessTime
+                                lastAccessTime,
                             )
                     }
                     return OpAccess(packageName, attributionTag, user, lastAccessTime, proxyAccess)

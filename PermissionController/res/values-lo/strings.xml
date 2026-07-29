@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"ກຳລັງຮຽງແອັບ…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"ບໍ່ຮູ້ຈັກ"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"ແຜງໜ້າປັດຄວາມເປັນສ່ວນຕົວ"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"ການອະນຸຍາດແອັບ"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"ການເຄື່ອນໄຫວຂອງຜູ້ຊ່ວຍ AI"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"ບໍ່ໄດ້ຕິດຕັ້ງຜູ້ຊ່ວຍ AI"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"ບໍ່ມີການເຂົ້າເຖິງໃນຊ່ວງ 24 ຊົ່ວໂມງທີ່ຜ່ານມາ"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"ບໍ່ມີການເຂົ້າເຖິງໃນຊ່ວງ 7 ມື້ທີ່ຜ່ານມາ"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"ການເຄື່ອນໄຫວ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"ໃນໄລຍະ 24 ຊົ່ວໂມງທີ່ຜ່ານມາ"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"ໃນຊ່ວງ 7 ມື້ທີ່ຜ່ານມາ"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"ມື້ນີ້"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"ມື້ວານ"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"ເຂົ້າເຖິງຫຼ້າສຸດ <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"ເບິ່ງ"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"ບໍ່ມີການເຂົ້າເຖິງ"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"ຜູ້ຊ່ວຍ AI ນີ້ເຂົ້າເຖິງແອັບເຫຼົ່ານີ້ເພື່ອຮັບຂໍ້ມູນ ຫຼື ດຳເນີນການໃຫ້ທ່ານ. ທ່ານສາມາດປ່ຽນແປງການເຂົ້າເຖິງນີ້ຕອນໃດກໍໄດ້ໃນການຕັ້ງຄ່າ <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"ແຜງໜ້າປັດຄວາມເປັນສ່ວນຕົວຈະສະແດງເມື່ອມີການເຂົ້າເຖິງແອັບໂດຍໃຊ້ຄຸນສົມບັດ Android ສຳລັບຜູ້ຊ່ວຍ AI ເທົ່ານັ້ນ."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"ຄວາມຊ່ວຍເຫຼືອກ່ຽວກັບອຸປະກອນ"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"ເບິ່ງວ່າແອັບໃດໃຊ້ການອະນຸຍາດຫຼ້າສຸດ"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"ການນໍາໃຊ້ <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"ເບິ່ງການອະນຸຍາດອື່ນໆ"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{ບໍ່ໄດ້ໃຊ້ໃນ # ມື້ທີ່ຜ່ານມາ}other{ບໍ່ໄດ້ໃຊ້ໃນ # ມື້ທີ່ຜ່ານມາ}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{ບໍ່ໄດ້ໃຊ້ໃນ # ຊົ່ວໂມງທີ່ຜ່ານມາ}other{ບໍ່ໄດ້ໃຊ້ໃນ # ຊົ່ວໂມງທີ່ຜ່ານມາ}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{ໃຊ້ໂດຍ 1 ແອັບ}other{ໃຊ້ໂດຍ # ແອັບ}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{ເຂົ້າເຖິງ 1 ແອັບແລ້ວ}other{ເຂົ້າເຖິງ # ແອັບແລ້ວ}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"ເບິ່ງທັງໝົດໃນແຜງໜ້າປັດ"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"ກັ່ນຕອງແລ້ວໂດຍ: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"ລຶບຕົວກັ່ນຕອງອອກ"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"ອະນຸຍາດການເຂົ້າເຖິງມີເດຍເທົ່ານັ້ນ"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"ອະນຸຍາດຕະຫຼອດເວລາ"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"ອະນຸຍາດໃນເວລາທີ່ກຳລັງໃຊ້ແອັບເທົ່ານັ້ນ"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"ອະນຸຍາດໃຫ້ແອັບເຮັດວຽກຕໍ່ໄປ"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"ອະນຸຍາດທັງໝົດຕະຫຼອດ"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"ຖາມທຸກເທື່ອ"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"ຖາມທຸກເທື່ອ ຫຼື ອະນຸຍາດເມື່ອທ່ານແບ່ງປັນ"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"ບໍ່ອະນຸຍາດ"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"ອະນຸຍາດສິດເຂົ້າເຖິງແບບຈຳກັດ"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"ສະຖານທີ່ແບບລະອຽດ"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"ອະນຸຍາດແລ້ວ"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"ອະນຸຍາດຕະຫຼອດເວລາ"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"ອະນຸຍາດສະເພາະໃນຕອນໃຊ້ຢູ່ເທົ່ານັ້ນ"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"ອະນຸຍາດໃຫ້ແອັບເຮັດວຽກຕໍ່ໄປ"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"ອະນຸຍາດໃຫ້ເຂົ້າເຖິງມີເດຍເທົ່ານັ້ນແລ້ວ"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"ອະນຸຍາດໃຫ້ຈັດການໄຟລ໌ທັງໝົດແລ້ວ"</string>
     <string name="ask_header" msgid="2633816846459944376">"ຖາມທຸກເທື່ອ"</string>
     <string name="denied_header" msgid="903209608358177654">"ບໍ່ອະນຸຍາດ"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> ໃນ <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"ເບິ່ງແອັບເພີ່ມເຕີມທີ່ສາມາດເຂົ້າເຖິງໄຟລ໌ທັງໝົດໄດ້"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;ອະນຸຍາດໃຫ້ແອັບເຮັດວຽກຕໍ່ໄປ&lt;/b&gt;&lt;br&gt;&lt;br&gt;ເພື່ອໃຫ້ແອັບເຮັດວຽກຕໍ່ໄປໄດ້, ອາດຕ້ອງອະນຸຍາດໃຫ້ແອັບເຂົ້າເຖິງເຄືອຂ່າຍທ້ອງຖິ່ນຂອງທ່ານ ແລະ ເຊື່ອມຕໍ່ກັບອຸປະກອນໃນເຄືອຂ່າຍນີ້ເທົ່ານັ້ນ.&lt;br&gt;&lt;br&gt;ແອັບບໍ່ສາມາດເຊື່ອມຕໍ່ກັບອຸປະກອນໂດຍໃຊ້ Bluetooth ແລະ ເທັກໂນໂລຢີອື່ນໆໄດ້ ເວັ້ນແຕ່ວ່າທ່ານຈະອະນຸຍາດໃຫ້ແອັບຊອກຫາ ແລະ ເຊື່ອມຕໍ່ກັບອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງທັງໝົດ."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;ອະນຸຍາດໃຫ້ແອັບເຮັດວຽກຕໍ່ໄປ&lt;/b&gt;&lt;br&gt;&lt;br&gt;ເພື່ອໃຫ້ແອັບເຮັດວຽກຕໍ່ໄປໄດ້, ອາດຕ້ອງອະນຸຍາດໃຫ້ແອັບເຂົ້າເຖິງເຄືອຂ່າຍທ້ອງຖິ່ນຂອງທ່ານ ແລະ ເຊື່ອມຕໍ່ກັບອຸປະກອນໃນເຄືອຂ່າຍນີ້ເທົ່ານັ້ນ.&lt;br&gt;&lt;br&gt;ແອັບບໍ່ສາມາດເຊື່ອມຕໍ່ກັບອຸປະກອນໂດຍໃຊ້ Bluetooth ແລະ ເທັກໂນໂລຢີອື່ນໆໄດ້ ເວັ້ນແຕ່ວ່າທ່ານຈະອະນຸຍາດໃຫ້ແອັບຊອກຫາ ແລະ ເຊື່ອມຕໍ່ກັບອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງທັງໝົດ."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 ມື້}other{# ມື້}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# ຊົ່ວໂມງ}other{# ຊົ່ວໂມງ}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# ນາທີ}other{# ນາທີ}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"ບໍ່ມີ"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(ຄ່າເລີ່ມຕົ້ນຂອງລະບົບ)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"ບໍ່ມີແອັບ"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"ປ່ຽນ"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"ໃຊ້ຜູ້ຊ່ວຍປັດຈຸບັນ"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"ບໍລິການ NFC ອື່ນໆ"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"ເລືອກແລ້ວ"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"ເລືອກແລ້ວ - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"ບໍ່ມີສິດການເຂົ້າເຖິງແອັບພິເສດ"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"ບໍ່ມີແອັບ"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"ບໍ່ຮອງຮັບໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"ປ່ຽນແອັບໜ້າຫຼັກເລີ່ມຕົ້ນຂອງທ່ານເປັນ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ບໍ?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"ການດຳເນີນການນີ້ຈະປ່ຽນແທນໂຮມສະກຣີນຂອງທ່ານ ແລະ ອາດສົ່ງຜົນຕໍ່ການເຂົ້າເຖິງຄຸນສົມບັດຕ່າງໆໃນອຸປະກອນຂອງທ່ານ.&lt;br&gt;&lt;br&gt;ທ່ານສາມາດປ່ຽນການເລືອກນີ້ໄດ້ທຸກເວລາໃນການຕັ້ງຄ່າ &lt;b&gt;ແອັບໜ້າຫຼັກເລີ່ມຕົ້ນ&lt;/b&gt;."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"ໝາຍເຫດ: ຫາກທ່ານຣີສະຕາດອຸປະກອນຂອງທ່ານ ແລະ ຕັ້ງການລັອກໜ້າຈໍໄວ້, ແອັບນີ້ຈະບໍ່ສາມາດໃຊ້ໄດ້ຈົນກວ່າທ່ານຈະປົດລັອກອຸປະກອນຂອງທ່ານ."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"ຜູ້ຊ່ວຍຈະສາມາດອ່ານຂໍ້ມູນກ່ຽວກັບແອັບທີ່ໃຊ້ໃນລະບົບຂອງທ່ານ ຮວມທັງຂໍ້ມູນທີ່ເບິ່ງເຫັນໄດ້ໃນໜ້າຈໍຂອງທ່ານ ຫຼື ເຂົ້າເຖິງໄດ້ພາຍໃນແອັບນັ້ນ."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"ປ່ຽນແອັບຜູ້ຊ່ວຍດິຈິຕອນຂອງທ່ານເປັນ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ບໍ?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"ຜູ້ຊ່ວຍນີ້ຈະສາມາດເຂົ້າເຖິງຂໍ້ມູນຕ່າງໆ ເຊັ່ນ: ຂໍ້ຄວາມຂອງທ່ານ, ຮວມທັງຂໍ້ມູນທີ່ແອັບເລືອກທີ່ຈະແບ່ງປັນກັບຜູ້ຊ່ວຍຂອງທ່ານໄດ້."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"ຜູ້ຊ່ວຍນີ້ຈະສາມາດເຂົ້າເຖິງຂໍ້ມູນຕ່າງໆ ເຊັ່ນ: ຂໍ້ຄວາມຂອງທ່ານ, ຮວມທັງຂໍ້ມູນທີ່ແອັບເລືອກທີ່ຈະແບ່ງປັນກັບຜູ້ຊ່ວຍຂອງທ່ານໄດ້.&lt;br&gt;&lt;br&gt;ເນື່ອງຈາກທ່ານເຄີຍເປີດໃຊ້ຂໍ້ມູນໜ້າຈໍ ແລະ ຂໍ້ມູນແອັບສຳລັບ <xliff:g id="APP_NAME">%1$s</xliff:g> ມາກ່ອນ, ຜູ້ຊ່ວຍຈຶ່ງຈະໄດ້ຮັບອະນຸຍາດໃຫ້ເຂົ້າເຖິງເນື້ອຫາຈາກແອັບທີ່ເປີດຢູ່ໜ້າຈໍຂອງທ່ານນຳ."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"ແບ່ງປັນຂໍ້ມູນການດີບັກ"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"ແບ່ງປັນຂໍ້ມູນການດີບັກແບບລະອຽດບໍ?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການອັບໂຫລດຂໍ້ມູນການດີບັກ."</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"ແອັບ"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"ສິດເຂົ້າເຖິງຂອງຕົວແທນ"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"ຕົວແທນທີ່ສາມາດເຂົ້າເຖິງຂໍ້ມູນ ແລະ ດຳເນີນການແທນທ່ານໃນແອັບນີ້ໄດ້"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"ອະນຸຍາດ"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"ບໍ່ອະນຸຍາດ"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"ອະນຸຍາດບໍ່ໃຫ້ຕົວແທນເຂົ້າເຖິງ"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"ປະຕິເສດບໍ່ໃຫ້ຕົວແທນເຂົ້າເຖິງ"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"ອະນຸຍາດບໍ່ໃຫ້ແອັບເຂົ້າເຖິງ"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"ປະຕິເສດບໍ່ໃຫ້ແອັບເຂົ້າເຖິງ"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"ເຂົ້າເຖິງແອັບ"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"ເຂົ້າເຖິງ <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ເຂົ້າເຖິງ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"ອະນຸຍາດ"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"ບໍ່ອະນຸຍາດ"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"ການຕັ້ງຄ່າອຸປະກອນ"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"ອະນຸຍາດໃຫ້ <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ເປັນຕົວແທນຂອງ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ບໍ?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"ຕົວແທນນີ້ຈະສາມາດເຂົ້າເຖິງ <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> ເພື່ອເບິ່ງຂໍ້ມູນ ແລະ ດຳເນີນການໃຫ້ທ່ານໄດ້"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"ອະນຸຍາດ"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"ບໍ່ອະນຸຍາດ"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"ອະນຸຍາດໃຫ້ &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; ໃຊ້ຂໍ້ມູນໜ້າຈໍ ແລະ ຂໍ້ມູນແອັບບໍ?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"ຜູ້ຊ່ວຍນີ້ຈະສາມາດເຂົ້າເຖິງຂໍ້ມູນ ແລະ ເນື້ອຫາຈາກແອັບທີ່ເປີດຢູ່ໜ້າຈໍຂອງທ່ານໄດ້"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"ອະນຸຍາດ"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"ບໍ່ອະນຸຍາດ"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"ໃຊ້ຂໍ້ມູນໜ້າຈໍ ແລະ ຂໍ້ມູນແອັບ"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"ອະນຸຍາດໃຫ້ຜູ້ຊ່ວຍເຂົ້າເຖິງຂໍ້ມູນ ແລະ ເນື້ອຫາຈາກແອັບທີ່ເປີດຢູ່ໜ້າຈໍຂອງທ່ານ"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"ອະນຸຍາດໃຫ້ <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> ເຂົ້າເຖິງຂໍ້ມູນ ແລະ ເນື້ອຫາຈາກແອັບທີ່ເປີດຢູ່ໜ້າຈໍຂອງທ່ານ"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"ອະນຸຍາດ"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"ບໍ່ອະນຸຍາດ"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"ອະນຸຍາດໃຫ້ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; ເຂົ້າເຖິງສະຖານທີ່ແບບລະອຽດເມື່ອທ່ານເລືອກທີ່ຈະແບ່ງປັນບໍ?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"ເມື່ອທ່ານແບ່ງປັນ, ແອັບນີ້ຈະມີສິດເຂົ້າເຖິງສະຖານທີ່ແບບລະອຽດຈົນກວ່າທ່ານຈະປິດແອັບ"</string>
 </resources>

@@ -18,7 +18,6 @@ package com.android.permissioncontroller.tests.mocking.permission.utils
 
 import android.app.admin.DevicePolicyManager
 import android.content.Context
-import android.health.connect.HealthPermissions
 import android.os.Build
 import android.permission.flags.Flags
 import android.platform.test.annotations.AsbSecurityTest

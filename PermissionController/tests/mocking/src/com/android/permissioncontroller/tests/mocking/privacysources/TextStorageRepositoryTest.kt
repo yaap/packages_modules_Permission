@@ -89,7 +89,7 @@ class TextStorageRepositoryTest {
             listOf(
                 TestPrivacySourceComponent("a", 100),
                 TestPrivacySourceComponent("b", 200),
-                TestPrivacySourceComponent("c", 300)
+                TestPrivacySourceComponent("c", 300),
             )
         storageRepository.persistData(components)
         val dataList = storageRepository.readData(creator)
@@ -103,7 +103,7 @@ class TextStorageRepositoryTest {
             listOf(
                 TestPrivacySourceComponent("a", 100),
                 TestPrivacySourceComponent("b", 200),
-                TestPrivacySourceComponent("c", 300)
+                TestPrivacySourceComponent("c", 300),
             )
         storageRepository.persistData(components)
         appendCorruptedData(dataFile, "not_enough_parts")

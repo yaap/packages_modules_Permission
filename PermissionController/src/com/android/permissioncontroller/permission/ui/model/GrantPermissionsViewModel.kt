@@ -32,7 +32,6 @@ import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.FLAG_PERMISSION_POLICY_FIXED
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_FIXED
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SET
 import android.health.connect.HealthConnectManager.ACTION_REQUEST_HEALTH_PERMISSIONS
@@ -54,6 +53,10 @@ import com.android.permissioncontroller.Constants
 import com.android.permissioncontroller.DeviceUtils
 import com.android.permissioncontroller.PermissionControllerStatsLog
 import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__BOTH_PRECISIONS
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__COARSE_ONLY
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__FINE_ONLY
+import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__UNKNOWN
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_DENIED
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_GRANTED
@@ -70,10 +73,6 @@ import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_IN_SETTINGS
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_ONE_TIME
 import com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_IGNORED
-import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__BOTH_PRECISIONS
-import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__FINE_ONLY
-import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__COARSE_ONLY
-import com.android.permissioncontroller.PermissionControllerStatsLog.GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__UNKNOWN
 import com.android.permissioncontroller.auto.DrivingDecisionReminderService
 import com.android.permissioncontroller.ecm.EnhancedConfirmationStatsLogUtils
 import com.android.permissioncontroller.permission.data.LightAppPermGroupLiveData
@@ -121,7 +120,6 @@ import com.android.permissioncontroller.permission.utils.PermissionMapping
 import com.android.permissioncontroller.permission.utils.PermissionMapping.getPartialStorageGrantPermissionsForGroup
 import com.android.permissioncontroller.permission.utils.SafetyNetLogger
 import com.android.permissioncontroller.permission.utils.Utils
-import com.android.permissioncontroller.permission.utils.v31.AdminRestrictedPermissionsUtils
 import com.android.permissioncontroller.permission.utils.v34.SafetyLabelUtils
 import com.android.permissioncontroller.permission.utils.v35.MultiDeviceUtils.isPermissionDeviceAware
 
@@ -145,7 +143,7 @@ class GrantPermissionsViewModel(
     private val requestedPermissions: List<String>,
     private val systemRequestedPermissions: List<String>,
     private val sessionId: Long,
-    private val storedState: Bundle?
+    private val storedState: Bundle?,
 ) : ViewModel() {
     private val LOG_TAG = GrantPermissionsViewModel::class.java.simpleName
     private val user = Process.myUserHandle()
@@ -165,19 +163,17 @@ class GrantPermissionsViewModel(
         if (SdkLevel.isAtLeastV() && Flags.allowHostPermissionDialogsOnVirtualDevices()) {
             requestedPermissions
                 .filter({ PermissionMapping.getGroupOfPlatformPermission(it) != null })
-                .associateBy({ PermissionMapping.getGroupOfPlatformPermission(it)!! }, {
-                    if (isPermissionDeviceAware(
-                            app.applicationContext,
-                            deviceId,
-                            it
-                        )
-                    ) deviceId else Context.DEVICE_ID_DEFAULT
-                })
+                .associateBy(
+                    { PermissionMapping.getGroupOfPlatformPermission(it)!! },
+                    {
+                        if (isPermissionDeviceAware(app.applicationContext, deviceId, it)) deviceId
+                        else Context.DEVICE_ID_DEFAULT
+                    },
+                )
         } else {
             ArrayMap()
         }
-    private val dpm = app.getSystemService(DevicePolicyManager::class.java)!!
-    private val permissionPolicy = dpm.getPermissionPolicy(null)
+
     private val groupStates = mutableMapOf<String, GroupState>()
 
     private var autoGrantNotifier: AutoGrantPermissionsNotifier? = null
@@ -252,7 +248,7 @@ class GrantPermissionsViewModel(
         val prompt: Prompt,
         val deny: DenyButton,
         val showRationale: Boolean,
-        val deviceId: Int = ContextCompat.DEVICE_ID_DEFAULT
+        val deviceId: Int = ContextCompat.DEVICE_ID_DEFAULT,
     ) {
         val groupName = groupInfo.name
     }
@@ -297,7 +293,7 @@ class GrantPermissionsViewModel(
                 ) {
                     Log.e(
                         LOG_TAG,
-                        "Package $packageName has no requested permissions, or " + "is a pre-M app"
+                        "Package $packageName has no requested permissions, or " + "is a pre-M app",
                     )
                     value = null
                     return
@@ -337,7 +333,10 @@ class GrantPermissionsViewModel(
                 }
 
                 val getLiveDataFun = { groupName: String ->
-                    LightAppPermGroupLiveData[packageName, groupName, user,
+                    LightAppPermGroupLiveData[
+                        packageName,
+                        groupName,
+                        user,
                         permissionGroupToDeviceIdMap.get(groupName) ?: deviceId]
                 }
                 setSourcesToDifference(requestedGroups.keys, appPermGroupLiveDatas, getLiveDataFun)
@@ -392,7 +391,7 @@ class GrantPermissionsViewModel(
                         behavior.getPrompt(
                             groupState.group,
                             groupState.affectedPermissions,
-                            isSystemTriggered
+                            isSystemTriggered,
                         )
                     if (prompt == Prompt.NO_UI_REJECT_ALL_GROUPS) {
                         value = null
@@ -401,7 +400,7 @@ class GrantPermissionsViewModel(
                     if (prompt == Prompt.NO_UI_REJECT_THIS_GROUP) {
                         reportRequestResult(
                             groupState.affectedPermissions,
-                            PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED
+                            PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED,
                         )
                         continue
                     }
@@ -410,7 +409,7 @@ class GrantPermissionsViewModel(
                         behavior.getDenyButton(
                             groupState.group,
                             groupState.affectedPermissions,
-                            prompt
+                            prompt,
                         )
                     val safetyLabel = safetyLabelInfoLiveData?.value?.safetyLabel
                     requestInfos.add(
@@ -420,10 +419,10 @@ class GrantPermissionsViewModel(
                             denyBehavior,
                             shouldShowPermissionRationale(
                                 safetyLabel,
-                                groupState.group.permGroupName
+                                groupState.group.permGroupName,
                             ),
                             permissionGroupToDeviceIdMap.get(groupState.group.permGroupName)
-                                ?: deviceId
+                                ?: deviceId,
                         )
                     )
                 }
@@ -437,7 +436,7 @@ class GrantPermissionsViewModel(
                         Log.e(
                             LOG_TAG,
                             "For R+ apps, background permissions must be requested " +
-                                "individually"
+                                "individually",
                         )
                         null
                     } else {
@@ -470,13 +469,13 @@ class GrantPermissionsViewModel(
                 Prompt.LOCATION_TWO_BUTTON_COARSE_HIGHLIGHT,
                 Prompt.LOCATION_TWO_BUTTON_FINE_HIGHLIGHT,
                 Prompt.LOCATION_COARSE_ONLY,
-                Prompt.LOCATION_FINE_UPGRADE
+                Prompt.LOCATION_FINE_UPGRADE,
             )
     }
 
     private fun shouldShowPermissionRationale(
         safetyLabel: SafetyLabel?,
-        permissionGroupName: String?
+        permissionGroupName: String?,
     ): Boolean {
         if (safetyLabel == null || permissionGroupName == null) {
             return false
@@ -539,9 +538,7 @@ class GrantPermissionsViewModel(
      * @param perm The requested permission
      * @return The requested permissions plus any needed split permissions
      */
-    private fun getAffectedSplitPermissions(
-        perm: String,
-    ): List<String> {
+    private fun getAffectedSplitPermissions(perm: String): List<String> {
         val requestingAppTargetSDK = packageInfo.targetSdkVersion
 
         // If a permission is split, all permissions the original permission is split into are
@@ -563,7 +560,7 @@ class GrantPermissionsViewModel(
         if (perm in group.packageInfo.requestedPermissions && perm !in group.permissions) {
             reportRequestResult(
                 perm,
-                PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED_RESTRICTED_PERMISSION
+                PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED_RESTRICTED_PERMISSION,
             )
             return false
         }
@@ -586,7 +583,7 @@ class GrantPermissionsViewModel(
         if (subGroup.isPolicyFixed && !subGroup.isGranted || lightPermission.isPolicyFixed) {
             reportRequestResult(
                 perm,
-                PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED_POLICY_FIXED
+                PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED_POLICY_FIXED,
             )
             return false
         }
@@ -595,7 +592,7 @@ class GrantPermissionsViewModel(
         if (behavior.isPermissionFixed(group, perm)) {
             reportRequestResult(
                 perm,
-                PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED_USER_FIXED
+                PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__IGNORED_USER_FIXED,
             )
             return false
         }
@@ -606,7 +603,7 @@ class GrantPermissionsViewModel(
     private fun getGroupState(
         perm: String,
         group: LightAppPermGroup,
-        groupRequestedPermissions: Set<String>
+        groupRequestedPermissions: Set<String>,
     ): Int {
         val policyState = getStateFromPolicy(perm, group)
         if (!isStateUnknown(policyState)) {
@@ -628,11 +625,11 @@ class GrantPermissionsViewModel(
                     group,
                     FLAG_PERMISSION_USER_SET to false,
                     FLAG_PERMISSION_USER_FIXED to false,
-                    filterPermissions = listOf(perm)
+                    filterPermissions = listOf(perm),
                 )
                 reportRequestResult(
                     perm,
-                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_GRANTED
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_GRANTED,
                 )
             }
             STATE_GRANTED
@@ -644,53 +641,22 @@ class GrantPermissionsViewModel(
     }
 
     private fun getStateFromPolicy(perm: String, group: LightAppPermGroup): Int {
-        val isBackground = perm in group.backgroundPermNames
+        val permissionPolicy = KotlinUtils.applyPermissionPolicy(app, perm, group)
         var state = STATE_UNKNOWN
         when (permissionPolicy) {
             DevicePolicyManager.PERMISSION_POLICY_AUTO_GRANT -> {
-                if (
-                    AdminRestrictedPermissionsUtils.mayAdminGrantPermission(
-                        app,
-                        perm,
-                        user.identifier
-                    )
-                ) {
-                    if (isBackground) {
-                        grantBackgroundRuntimePermissions(app, group, listOf(perm))
-                    } else {
-                        grantForegroundRuntimePermissions(app, group, listOf(perm))
-                    }
-                    KotlinUtils.setGroupFlags(
-                        app,
-                        group,
-                        FLAG_PERMISSION_POLICY_FIXED to true,
-                        FLAG_PERMISSION_USER_SET to false,
-                        FLAG_PERMISSION_USER_FIXED to false,
-                        filterPermissions = listOf(perm)
-                    )
-                    state = STATE_GRANTED
-                    getAutoGrantNotifier()?.onPermissionAutoGranted(perm)
-                    reportRequestResult(
-                        perm,
-                        PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_GRANTED
-                    )
-                }
+                state = STATE_GRANTED
+                getAutoGrantNotifier()?.onPermissionAutoGranted(perm)
+                reportRequestResult(
+                    perm,
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_GRANTED,
+                )
             }
             DevicePolicyManager.PERMISSION_POLICY_AUTO_DENY -> {
-                if (group.permissions[perm]?.isPolicyFixed == false) {
-                    KotlinUtils.setGroupFlags(
-                        app,
-                        group,
-                        FLAG_PERMISSION_POLICY_FIXED to true,
-                        FLAG_PERMISSION_USER_SET to false,
-                        FLAG_PERMISSION_USER_FIXED to false,
-                        filterPermissions = listOf(perm)
-                    )
-                }
                 state = STATE_DENIED
                 reportRequestResult(
                     perm,
-                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_DENIED
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__AUTO_DENIED,
                 )
             }
         }
@@ -707,7 +673,7 @@ class GrantPermissionsViewModel(
     fun onPermissionGrantResult(
         groupName: String?,
         affectedForegroundPermissions: List<String>?,
-        result: Int
+        result: Int,
     ) {
         onPermissionGrantResult(groupName, affectedForegroundPermissions, result, false)
     }
@@ -716,7 +682,7 @@ class GrantPermissionsViewModel(
         groupName: String?,
         affectedForegroundPermissions: List<String>?,
         result: Int,
-        alreadyRequestedStorageGroupsIfNeeded: Boolean
+        alreadyRequestedStorageGroupsIfNeeded: Boolean,
     ) {
         if (groupName == null) {
             return
@@ -741,7 +707,7 @@ class GrantPermissionsViewModel(
             CANCELED -> {
                 reportRequestResult(
                     groupState.affectedPermissions,
-                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_IGNORED
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_IGNORED,
                 )
                 groupState.state = STATE_SKIPPED
                 requestInfosLiveData.update()
@@ -754,7 +720,7 @@ class GrantPermissionsViewModel(
                     granted = true,
                     isOneTime = false,
                     foregroundOnly = false,
-                    doNotAskAgain = false
+                    doNotAskAgain = false,
                 )
             }
             GRANTED_FOREGROUND_ONLY -> {
@@ -764,7 +730,7 @@ class GrantPermissionsViewModel(
                     granted = true,
                     isOneTime = false,
                     foregroundOnly = true,
-                    doNotAskAgain = false
+                    doNotAskAgain = false,
                 )
             }
             GRANTED_ONE_TIME -> {
@@ -774,7 +740,7 @@ class GrantPermissionsViewModel(
                     granted = true,
                     isOneTime = true,
                     foregroundOnly = false,
-                    doNotAskAgain = false
+                    doNotAskAgain = false,
                 )
             }
             GRANTED_USER_SELECTED,
@@ -788,7 +754,7 @@ class GrantPermissionsViewModel(
                     granted = false,
                     isOneTime = false,
                     foregroundOnly = false,
-                    doNotAskAgain = false
+                    doNotAskAgain = false,
                 )
             }
             DENIED_DO_NOT_ASK_AGAIN -> {
@@ -798,7 +764,7 @@ class GrantPermissionsViewModel(
                     granted = false,
                     isOneTime = false,
                     foregroundOnly = false,
-                    doNotAskAgain = true
+                    doNotAskAgain = true,
                 )
             }
         }
@@ -815,7 +781,7 @@ class GrantPermissionsViewModel(
             grantForegroundRuntimePermissions(
                 app,
                 groupState.group,
-                listOf(READ_MEDIA_VISUAL_USER_SELECTED)
+                listOf(READ_MEDIA_VISUAL_USER_SELECTED),
             )
             grantForegroundRuntimePermissions(
                 app,
@@ -823,7 +789,7 @@ class GrantPermissionsViewModel(
                 nonSelectedPerms,
                 isOneTime = true,
                 userFixed = false,
-                withoutAppOps = true
+                withoutAppOps = true,
             )
             val appPermGroup =
                 AppPermissionGroup.create(
@@ -831,7 +797,7 @@ class GrantPermissionsViewModel(
                     packageName,
                     groupState.group.permGroupName,
                     groupState.group.userHandle,
-                    false
+                    false,
                 )
             appPermGroup.setSelfRevoked()
             appPermGroup.persistChanges(false, null, nonSelectedPerms.toSet())
@@ -846,14 +812,14 @@ class GrantPermissionsViewModel(
                 app,
                 groupState.group,
                 partialPerms.toList(),
-                userFixed = setUserFixed
+                userFixed = setUserFixed,
             )
             revokeForegroundRuntimePermissions(
                 app,
                 groupState.group,
                 userFixed = setUserFixed,
                 oneTime = false,
-                filterPermissions = nonSelectedPerms
+                filterPermissions = nonSelectedPerms,
             )
         }
         groupState.state = STATE_GRANTED
@@ -861,7 +827,7 @@ class GrantPermissionsViewModel(
             groupState,
             groupState.affectedPermissions,
             true,
-            PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__PHOTOS_SELECTED
+            PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__PHOTOS_SELECTED,
         )
     }
 
@@ -872,7 +838,7 @@ class GrantPermissionsViewModel(
         granted: Boolean,
         foregroundOnly: Boolean,
         isOneTime: Boolean,
-        doNotAskAgain: Boolean
+        doNotAskAgain: Boolean,
     ) {
         if (!isStateUnknown(groupState.state)) {
             // We already dealt with this group, don't re-grant/re-revoke
@@ -898,7 +864,7 @@ class GrantPermissionsViewModel(
                         app,
                         groupState.group,
                         affectedPermissions,
-                        isOneTime
+                        isOneTime,
                     )
                     // This prevents weird flag state when app targetSDK switches from S+ to R-
                     if (groupState.affectedPermissions.contains(ACCESS_FINE_LOCATION)) {
@@ -906,19 +872,32 @@ class GrantPermissionsViewModel(
                     }
                 } else {
                     affectedPermissions = affectedForegroundPermissions
-                    val newGroup =
+                    var newGroup =
                         grantForegroundRuntimePermissions(
                             app,
                             groupState.group,
                             affectedPermissions,
-                            isOneTime
+                            isOneTime,
                         )
-                    if (!isOneTime || newGroup.isOneTime) {
-                        KotlinUtils.setFlagsWhenLocationAccuracyChanged(
-                            app,
-                            newGroup,
+                    if (newGroup.permGroupName == LOCATION) {
+                        val isPreciseGranted =
                             affectedForegroundPermissions.contains(ACCESS_FINE_LOCATION)
-                        )
+                        newGroup =
+                            KotlinUtils.setFlagsWhenLocationAccuracyChanged(
+                                app,
+                                newGroup,
+                                isPreciseGranted,
+                            )
+                        // Upgrade flow for location permission, user has selected
+                        // "Change to precise location", and coarse was granted as one-time.
+                        if (isPreciseGranted && !isOneTime && newGroup.isOneTime) {
+                            KotlinUtils.setGroupFlags(
+                                app,
+                                newGroup,
+                                PackageManager.FLAG_PERMISSION_ONE_TIME to false,
+                                filterPermissions = listOf(ACCESS_COARSE_LOCATION),
+                            )
+                        }
                     }
                 }
             }
@@ -939,7 +918,7 @@ class GrantPermissionsViewModel(
                     app,
                     groupState.group,
                     userFixed = doNotAskAgain,
-                    filterPermissions = groupState.affectedPermissions
+                    filterPermissions = groupState.affectedPermissions,
                 )
             } else if (shouldAffectForegroundPermssions) {
                 if (
@@ -951,7 +930,7 @@ class GrantPermissionsViewModel(
                         groupState.group,
                         userFixed = doNotAskAgain,
                         filterPermissions = groupState.affectedPermissions,
-                        oneTime = isOneTime
+                        oneTime = isOneTime,
                     )
                 } else {
                     revokeForegroundRuntimePermissions(
@@ -959,7 +938,7 @@ class GrantPermissionsViewModel(
                         groupState.group,
                         userFixed = doNotAskAgain,
                         filterPermissions = affectedForegroundPermissions,
-                        oneTime = isOneTime
+                        oneTime = isOneTime,
                     )
                 }
             }
@@ -984,7 +963,7 @@ class GrantPermissionsViewModel(
         groupState: GroupState,
         permissions: Set<String>,
         granted: Boolean,
-        result: Int
+        result: Int,
     ) {
         reportRequestResult(permissions, result)
         // group state has changed, reload liveData
@@ -995,7 +974,7 @@ class GrantPermissionsViewModel(
                 app.applicationContext,
                 packageName,
                 groupState.group.permGroupName,
-                granted
+                granted,
             )
             PermissionChangeStorageImpl.recordPermissionChange(packageName)
         }
@@ -1015,13 +994,13 @@ class GrantPermissionsViewModel(
         DrivingDecisionReminderService.startServiceIfCurrentlyRestricted(
             Utils.getUserContext(app, user),
             packageName,
-            permGroupName
+            permGroupName,
         )
     }
 
     private fun getGroupWithPerm(
         perm: String,
-        groups: List<LightAppPermGroup>
+        groups: List<LightAppPermGroup>,
     ): LightAppPermGroup? {
         val groupsWithPerm = groups.filter { perm in it.permissions }
         if (groupsWithPerm.isEmpty()) {
@@ -1045,13 +1024,13 @@ class GrantPermissionsViewModel(
         val isPermissionRationaleShown =
             shouldShowPermissionRationale(
                 safetyLabelInfoLiveData?.value?.safetyLabel,
-                PermissionMapping.getGroupOfPlatformPermission(permission)
+                PermissionMapping.getGroupOfPlatformPermission(permission),
             )
         val isPackageRestrictedByEnhancedConfirmation =
             EnhancedConfirmationStatsLogUtils.isPackageEcmRestricted(
                 app,
                 packageName,
-                packageInfo.uid
+                packageInfo.uid,
             )
 
         Log.i(
@@ -1063,7 +1042,7 @@ class GrantPermissionsViewModel(
                 "isImplicit=$isImplicit result=$result " +
                 "isPermissionRationaleShown=$isPermissionRationaleShown" +
                 "isPackageRestrictedByEnhancedConfirmation=" +
-                "$isPackageRestrictedByEnhancedConfirmation"
+                "$isPackageRestrictedByEnhancedConfirmation",
         )
 
         PermissionControllerStatsLog.write(
@@ -1075,7 +1054,7 @@ class GrantPermissionsViewModel(
             isImplicit,
             result,
             isPermissionRationaleShown,
-            isPackageRestrictedByEnhancedConfirmation
+            isPackageRestrictedByEnhancedConfirmation,
         )
     }
 
@@ -1132,7 +1111,7 @@ class GrantPermissionsViewModel(
                         groupStates[HEALTH_PERMISSION_GROUP]?.state = STATE_SKIPPED
                         requestInfosLiveData.update()
                     },
-                    APP_PERMISSION_REQUEST_CODE
+                    APP_PERMISSION_REQUEST_CODE,
                 )
             val healthPermissions =
                 unfilteredAffectedPermissions
@@ -1167,14 +1146,14 @@ class GrantPermissionsViewModel(
                                     app,
                                     group,
                                     FLAG_PERMISSION_USER_FIXED to true,
-                                    filterPermissions = group.backgroundPermNames
+                                    filterPermissions = group.backgroundPermNames,
                                 )
                             } else {
                                 KotlinUtils.setGroupFlags(
                                     app,
                                     group,
                                     FLAG_PERMISSION_USER_SET to true,
-                                    filterPermissions = group.backgroundPermNames
+                                    filterPermissions = group.backgroundPermNames,
                                 )
                             }
                         }
@@ -1183,7 +1162,7 @@ class GrantPermissionsViewModel(
                         // Update our liveData now that there is a new skipped group
                         requestInfosLiveData.update()
                     },
-                    APP_PERMISSION_REQUEST_CODE
+                    APP_PERMISSION_REQUEST_CODE,
                 )
             startAppPermissionFragment(activity, groupName)
         }
@@ -1201,7 +1180,7 @@ class GrantPermissionsViewModel(
             activity,
             packageInfo.uid,
             unfilteredAffectedPermissions,
-            PHOTO_PICKER_REQUEST_CODE
+            PHOTO_PICKER_REQUEST_CODE,
         )
     }
 
@@ -1217,7 +1196,7 @@ class GrantPermissionsViewModel(
                     }
                     requestInfosLiveData.update()
                 },
-                PHOTO_PICKER_REQUEST_CODE
+                PHOTO_PICKER_REQUEST_CODE,
             )
     }
 
@@ -1240,7 +1219,7 @@ class GrantPermissionsViewModel(
                         requestInfosLiveData.update()
                     }
                 },
-                APP_PERMISSION_REQUEST_CODE
+                APP_PERMISSION_REQUEST_CODE,
             )
     }
 
@@ -1272,7 +1251,7 @@ class GrantPermissionsViewModel(
                         requestInfosLiveData.update()
                     }
                 },
-                APP_PERMISSION_REQUEST_CODE
+                APP_PERMISSION_REQUEST_CODE,
             )
         activity.startActivityForResult(intent, APP_PERMISSION_REQUEST_CODE)
     }
@@ -1285,7 +1264,7 @@ class GrantPermissionsViewModel(
                 .putExtra(Intent.EXTRA_USER, user)
                 .putExtra(
                     ManagePermissionsActivity.EXTRA_CALLER_NAME,
-                    GrantPermissionsActivity::class.java.name
+                    GrantPermissionsActivity::class.java.name,
                 )
                 .putExtra(Constants.EXTRA_SESSION_ID, sessionId)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -1321,25 +1300,25 @@ class GrantPermissionsViewModel(
             GRANTED_ALWAYS -> {
                 reportRequestResult(
                     groupState.affectedPermissions,
-                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_IN_SETTINGS
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_IN_SETTINGS,
                 )
             }
             GRANTED_FOREGROUND_ONLY -> {
                 reportRequestResult(
                     foregroundPerms,
-                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_IN_SETTINGS
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_GRANTED_IN_SETTINGS,
                 )
                 if (backgroundPerms.isNotEmpty()) {
                     reportRequestResult(
                         backgroundPerms,
-                        PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_DENIED_IN_SETTINGS
+                        PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_DENIED_IN_SETTINGS,
                     )
                 }
             }
             DENIED -> {
                 reportRequestResult(
                     groupState.affectedPermissions,
-                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_DENIED_IN_SETTINGS
+                    PERMISSION_GRANT_REQUEST_RESULT_REPORTED__RESULT__USER_DENIED_IN_SETTINGS,
                 )
             }
             DENIED_DO_NOT_ASK_AGAIN -> {
@@ -1371,10 +1350,10 @@ class GrantPermissionsViewModel(
         clickedButton: Int,
         presentedButtons: Int,
         isPermissionRationaleShown: Boolean,
-        prompt: Prompt,
+        prompt: Prompt?,
         initialLocationPrecision: Int = 0,
         selectedLocationPrecision: Int = 0,
-        locationAccuracyButtonClicked: Boolean = false
+        locationAccuracyButtonClicked: Boolean = false,
     ) {
         if (groupName == null) {
             return
@@ -1386,9 +1365,9 @@ class GrantPermissionsViewModel(
                 "Logged buttons presented and clicked permissionGroupName=" +
                     "$groupName package=$packageName presentedButtons=$presentedButtons " +
                     "clickedButton=$clickedButton isPermissionRationaleShown=" +
-                    "$isPermissionRationaleShown sessionId=$sessionId, but requests were not yet" +
-                    "initialized",
-                IllegalStateException()
+                    "$isPermissionRationaleShown sessionId=$sessionId, but requests were not " +
+                    "yet initialized",
+                IllegalStateException(),
             )
             return
         }
@@ -1406,7 +1385,7 @@ class GrantPermissionsViewModel(
             isPermissionRationaleShown,
             initialLocationPrecision,
             getLocationPromptType(prompt),
-            locationAccuracyButtonClicked
+            locationAccuracyButtonClicked,
         )
         Log.i(
             LOG_TAG,
@@ -1418,16 +1397,19 @@ class GrantPermissionsViewModel(
                 "targetSdk=${packageInfo.targetSdkVersion} " +
                 "prompt=$prompt initialLocationPrecision=$initialLocationPrecision " +
                 "selectedLocationPrecision=$selectedLocationPrecision " +
-                "locationAccuracyButtonClicked= $locationAccuracyButtonClicked"
+                "locationAccuracyButtonClicked= $locationAccuracyButtonClicked",
         )
     }
 
-    private fun getLocationPromptType(prompt: Prompt): Int {
+    private fun getLocationPromptType(prompt: Prompt?): Int {
         return when (prompt) {
             Prompt.LOCATION_TWO_BUTTON_COARSE_HIGHLIGHT,
-            Prompt.LOCATION_TWO_BUTTON_FINE_HIGHLIGHT -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__BOTH_PRECISIONS
-            Prompt.LOCATION_COARSE_ONLY -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__COARSE_ONLY
-            Prompt.LOCATION_FINE_UPGRADE -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__FINE_ONLY
+            Prompt.LOCATION_TWO_BUTTON_FINE_HIGHLIGHT ->
+                GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__BOTH_PRECISIONS
+            Prompt.LOCATION_COARSE_ONLY ->
+                GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__COARSE_ONLY
+            Prompt.LOCATION_FINE_UPGRADE ->
+                GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__FINE_ONLY
             else -> GRANT_PERMISSIONS_ACTIVITY_BUTTON_ACTIONS__LOCATION_PROMPT_TYPE__UNKNOWN
         }
     }
@@ -1467,7 +1449,7 @@ class GrantPermissionsViewModelFactory(
     private val requestedPermissions: List<String>,
     private val systemRequestedPermissions: List<String>,
     private val sessionId: Long,
-    private val savedState: Bundle?
+    private val savedState: Bundle?,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
@@ -1478,7 +1460,7 @@ class GrantPermissionsViewModelFactory(
             requestedPermissions,
             systemRequestedPermissions,
             sessionId,
-            savedState
+            savedState,
         )
             as T
     }

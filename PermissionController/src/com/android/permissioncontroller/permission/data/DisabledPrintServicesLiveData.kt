@@ -48,8 +48,7 @@ class DisabledPrintServicesLiveData(private val app: Application, private val us
                     } else {
                         pkgOrComponent
                     }
-                }
-                ?: emptyList()
+                } ?: emptyList()
 
         postValue(packageNames)
     }

@@ -36,7 +36,7 @@ import java.util.Objects
 internal class SafetyHomepageEntryPreference(
     context: Context,
     private val entryGroup: SafetyCenterEntryGroup,
-    sessionId: Long
+    sessionId: Long,
 ) : Preference(context), ComparablePreference {
 
     init {
@@ -45,10 +45,9 @@ internal class SafetyHomepageEntryPreference(
         SeverityIconPicker.selectIconResIdOrNull(
                 entryGroup.id,
                 entryGroup.severityLevel,
-                entryGroup.severityUnspecifiedIconType
+                entryGroup.severityUnspecifiedIconType,
             )
-            ?.let { setIcon(it) }
-            ?: setIconSpaceReserved(false)
+            ?.let { setIcon(it) } ?: setIconSpaceReserved(false)
 
         val intent = Intent(Intent.ACTION_SAFETY_CENTER)
         intent.putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID, entryGroup.id)

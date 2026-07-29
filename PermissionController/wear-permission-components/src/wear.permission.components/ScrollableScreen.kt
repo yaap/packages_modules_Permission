@@ -45,7 +45,7 @@ import com.android.permissioncontroller.wear.permission.components.theme.WearPer
 @Composable
 fun ScrollableScreen(
     materialUIVersion: WearPermissionMaterialUIVersion = ResourceHelper.materialUIVersionInSettings,
-    asScalingList: Boolean = false,
+    asScalingList: Boolean = true,
     showTimeText: Boolean = true,
     title: String? = null,
     subtitle: CharSequence? = null,

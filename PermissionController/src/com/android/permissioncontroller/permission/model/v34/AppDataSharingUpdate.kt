@@ -36,7 +36,7 @@ data class AppDataSharingUpdate(
     /** Package name for the app with the data sharing update. */
     val packageName: String,
     /** How data sharing for each category has changed. */
-    val categorySharingUpdates: Map<String, DataSharingUpdateType>
+    val categorySharingUpdates: Map<String, DataSharingUpdateType>,
 ) {
 
     /** Companion object for [AppDataSharingUpdate]. */
@@ -102,5 +102,5 @@ data class AppDataSharingUpdate(
 enum class DataSharingUpdateType {
     ADDS_ADVERTISING_PURPOSE,
     ADDS_SHARING_WITHOUT_ADVERTISING_PURPOSE,
-    ADDS_SHARING_WITH_ADVERTISING_PURPOSE
+    ADDS_SHARING_WITH_ADVERTISING_PURPOSE,
 }

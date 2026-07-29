@@ -36,5 +36,5 @@ class StoragePermissionAppsFragmentTest :
     PermissionAppsFragmentTest(
         "/data/local/tmp/pc-permissionui" + "/PermissionUiUseStoragePermissionApp.apk",
         "com.android.permissioncontroller.tests.appthatrequestpermission",
-        READ_EXTERNAL_STORAGE
+        READ_EXTERNAL_STORAGE,
     )

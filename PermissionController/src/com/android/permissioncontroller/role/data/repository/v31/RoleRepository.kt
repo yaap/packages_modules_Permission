@@ -71,7 +71,7 @@ class RoleRepositoryImpl(application: Application) : RoleRepository {
                 SYSTEM_AUDIO_INTELLIGENCE,
                 SYSTEM_NOTIFICATION_INTELLIGENCE,
                 SYSTEM_TEXT_INTELLIGENCE,
-                SYSTEM_VISUAL_INTELLIGENCE
+                SYSTEM_VISUAL_INTELLIGENCE,
             )
     }
 }

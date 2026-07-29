@@ -25,6 +25,7 @@ import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -34,6 +35,7 @@ import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.R;
@@ -194,12 +196,22 @@ public class PermissionApps {
             }
             return apps;
         }
-        int pkgQueryFlags = getPackageQueryFlags();
+
         if (mPackageName == null) {
-            return mPm.getInstalledPackagesAsUser(pkgQueryFlags, user.getIdentifier());
+            if (SdkLevel.isAtLeastU()) {
+                return mPm.getInstalledPackagesAsUser(getPackageQueryFlagsLong(),
+                        user.getIdentifier());
+            } else {
+                return mPm.getInstalledPackagesAsUser(getPackageQueryFlags(), user.getIdentifier());
+            }
         } else {
             try {
-                final PackageInfo packageInfo = mPm.getPackageInfo(mPackageName, pkgQueryFlags);
+                final PackageInfo packageInfo;
+                if (SdkLevel.isAtLeastU()) {
+                    packageInfo = mPm.getPackageInfo(mPackageName, getPackageQueryFlagsLong());
+                } else {
+                    packageInfo = mPm.getPackageInfo(mPackageName, getPackageQueryFlags());
+                }
                 apps = new ArrayList<>(1);
                 apps.add(packageInfo);
                 return apps;
@@ -502,7 +514,11 @@ public class PermissionApps {
         public synchronized List<PackageInfo> getPackages(int userId) {
             List<PackageInfo> ret = mPackageInfoCache.get(userId);
             if (ret == null) {
-                ret = mPm.getInstalledPackagesAsUser(getPackageQueryFlags(), userId);
+                if (SdkLevel.isAtLeastU()) {
+                    ret = mPm.getInstalledPackagesAsUser(getPackageQueryFlagsLong(), userId);
+                } else {
+                    ret = mPm.getInstalledPackagesAsUser(getPackageQueryFlags(), userId);
+                }
                 mPackageInfoCache.put(userId, ret);
             }
             return ret;
@@ -614,6 +630,12 @@ public class PermissionApps {
         protected void onPostExecute(Void result) {
             mCallback.run();
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private static PackageManager.PackageInfoFlags getPackageQueryFlagsLong() {
+        return PackageManager.PackageInfoFlags.of(
+                PackageManager.GET_PERMISSIONS | PackageManager.GET_ATTRIBUTIONS_LONG);
     }
 
     private static int getPackageQueryFlags() {

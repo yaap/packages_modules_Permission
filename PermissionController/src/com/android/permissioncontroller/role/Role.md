@@ -119,10 +119,10 @@ when the XML syntax cannot express certain UI behavior specific to the role.
 
 The following tags can be specified inside a `<role>` tag:
 
-- `<required-components>`: Child tags like `<activity>`, `<service>`, `<provider>`, `<receiver>` and
-`<meta-data>` can be used to specified the app manifest requirements of the role, and an app is only
-qualified when it declares all these components. They follow a similar syntax as in typical
-`AndroidManifest.xml`.
+- `<required-components>`: Child tags like `<uses-permission>`, `<activity>`, `<service>`,
+`<provider>`, `<receiver>` and `<meta-data>` can be used to specified the app manifest requirements
+of the role, and an app is only qualified when it satisfies all these requirements. They follow a
+similar syntax as in typical `AndroidManifest.xml`.
 - `<permissions>`: Child tags like `<permission-set>` and `<permission>` can be used to specify the
 permissions that should be granted to the app when it has the role. Several `<permission-set>` are
 defined at the beginning of `roles.xml`.

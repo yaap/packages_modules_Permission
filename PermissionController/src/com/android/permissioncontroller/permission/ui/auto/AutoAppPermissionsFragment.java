@@ -26,6 +26,7 @@ import static com.android.permissioncontroller.permission.ui.ManagePermissionsAc
 
 import static java.util.concurrent.TimeUnit.DAYS;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +34,8 @@ import android.content.pm.PackageInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -56,6 +59,7 @@ import com.android.permissioncontroller.permission.ui.model.AppPermissionGroupsV
 import com.android.permissioncontroller.permission.ui.model.AppPermissionGroupsViewModelFactory;
 import com.android.permissioncontroller.permission.utils.KotlinUtils;
 import com.android.permissioncontroller.permission.utils.StringUtils;
+import com.android.permissioncontroller.permission.utils.Utils;
 
 import java.text.Collator;
 import java.time.Instant;
@@ -72,7 +76,12 @@ public class AutoAppPermissionsFragment extends AutoSettingsFrameFragment implem
 
     private static final String IS_SYSTEM_PERMS_SCREEN = "_is_system_screen";
     private static final String KEY_ALLOWED_PERMISSIONS_GROUP = Category.ALLOWED.getCategoryName();
+    private static final String KEY_ALLOWED_FOR_COMPATIBILITY_PERMISSIONS_GROUP =
+            Category.ALLOWED_FOR_COMPATIBILITY.getCategoryName();
     private static final String KEY_DENIED_PERMISSIONS_GROUP = Category.DENIED.getCategoryName();
+    private static final String KEY_FOOTER_CATEGORY = Category.FOOTER.getCategoryName();
+    private static final String KEY_FOOTER_PREFERENCE = "footer_preference";
+    private static final String FOOTER_TEXT_DELIMITER = "\n\n";
 
     private AppPermissionGroupsViewModel mViewModel;
 
@@ -199,14 +208,49 @@ public class AutoAppPermissionsFragment extends AutoSettingsFrameFragment implem
         allowed.setTitle(R.string.allowed_header);
         getPreferenceScreen().addPreference(allowed);
 
+        PreferenceGroup allowedForCompatibility = new PreferenceCategory(getContext());
+        allowedForCompatibility.setKey(KEY_ALLOWED_FOR_COMPATIBILITY_PERMISSIONS_GROUP);
+        allowedForCompatibility.setTitle(R.string.allowed_for_compatibility_header);
+        getPreferenceScreen().addPreference(allowedForCompatibility);
+
         PreferenceGroup denied = new PreferenceCategory(getContext());
         denied.setKey(KEY_DENIED_PERMISSIONS_GROUP);
         denied.setTitle(R.string.denied_header);
         getPreferenceScreen().addPreference(denied);
+
+        PreferenceGroup footer = new PreferenceCategory(getContext());
+        footer.setKey(KEY_FOOTER_CATEGORY);
+        footer.setOrder(999);
+        getPreferenceScreen().addPreference(footer);
     }
 
     private void createPreferenceCategories(PackageInfo packageInfo) {
         bindUi(packageInfo);
+    }
+
+    private void updateFooter(List<CharSequence> footerTexts) {
+        PreferenceCategory preferenceCategory = findPreference(KEY_FOOTER_CATEGORY);
+        if (footerTexts.isEmpty()) {
+            preferenceCategory.setVisible(false);
+            return;
+        }
+        preferenceCategory.setVisible(true);
+
+        PreferenceCategory footerPreference = findPreference(KEY_FOOTER_PREFERENCE);
+        if (footerPreference == null) {
+            Context context = getPreferenceScreen().getPreferenceManager().getContext();
+            footerPreference = new PreferenceCategory(context);
+            footerPreference.setKey(KEY_FOOTER_PREFERENCE);
+            footerPreference.setIcon(Utils.applyTint(getActivity(), R.drawable.ic_info_outline,
+                    android.R.attr.colorControlNormal));
+            preferenceCategory.addPreference(footerPreference);
+        }
+
+        CharSequence footerText = footerTexts.get(0);
+        for (int i = 1; i < footerTexts.size(); i++) {
+            footerText = TextUtils.concat(footerText, FOOTER_TEXT_DELIMITER, footerTexts.get(i));
+        }
+        footerPreference.setTitle(footerText);
     }
 
     private void updatePreferences(@Nullable
@@ -229,6 +273,11 @@ public class AutoAppPermissionsFragment extends AutoSettingsFrameFragment implem
             return;
         }
 
+        findPreference(KEY_ALLOWED_FOR_COMPATIBILITY_PERMISSIONS_GROUP).setVisible(false);
+
+        findPreference(KEY_FOOTER_CATEGORY).setVisible(false);
+        boolean showNearbyDevicesAllowedForCompatibilityFooter = false;
+
         Map<String, Long> groupUsageLastAccessTime = new HashMap<>();
         mViewModel.extractGroupUsageLastAccessTime(groupUsageLastAccessTime, mAppPermissionUsages,
                 mPackageName);
@@ -242,11 +291,13 @@ public class AutoAppPermissionsFragment extends AutoSettingsFrameFragment implem
                     grantCategory.getCategoryName());
             if (grantCategory.equals(Category.ALLOWED_FOREGROUND)) {
                 category = findPreference(Category.ALLOWED.getCategoryName());
+            } else if (grantCategory.equals(Category.ALLOWED_FOR_COMPATIBILITY)) {
+                boolean showCategory = !groupMap.get(grantCategory).isEmpty();
+                category.setVisible(showCategory);
             }
             int numExtraPerms = 0;
 
             category.removeAll();
-
 
             for (AppPermissionGroupsViewModel.GroupUiInfo groupInfo : groupMap.get(grantCategory)) {
                 if (groupInfo.isSystem() == mIsSystemPermsScreen) {
@@ -256,8 +307,13 @@ public class AutoAppPermissionsFragment extends AutoSettingsFrameFragment implem
                 } else if (!groupInfo.isSystem()) {
                     numExtraPerms++;
                 }
-            }
 
+                if (Manifest.permission_group.NEARBY_DEVICES.equals(groupInfo.getGroupName())
+                        && findPreference(
+                        KEY_ALLOWED_FOR_COMPATIBILITY_PERMISSIONS_GROUP).isVisible()) {
+                    showNearbyDevicesAllowedForCompatibilityFooter = true;
+                }
+            }
 
             if (numExtraPerms > 0) {
                 setAdditionalPermissionsPreference(category, numExtraPerms, context);
@@ -270,6 +326,12 @@ public class AutoAppPermissionsFragment extends AutoSettingsFrameFragment implem
             KotlinUtils.INSTANCE.sortPreferenceGroup(category, this::comparePreferences, false);
         }
 
+        List<CharSequence> footerTexts = new ArrayList<>();
+        if (showNearbyDevicesAllowedForCompatibilityFooter) {
+            footerTexts.add(Html.fromHtml(getString(
+                    R.string.allowed_for_compatibility_nearby_devices_footer), 0));
+        }
+        updateFooter(footerTexts);
 
         if (mIsFirstLoad) {
             logAppPermissionsFragmentView();

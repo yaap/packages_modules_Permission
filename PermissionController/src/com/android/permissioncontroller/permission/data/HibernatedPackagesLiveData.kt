@@ -54,7 +54,7 @@ object HibernatedPackagesLiveData : SmartAsyncMediatorLiveData<Set<Pair<String, 
                 } catch (e: Exception) {
                     DumpableLog.e(
                         LOG_TAG,
-                        "Failed to get hibernation state of package: ${pkg.packageName}"
+                        "Failed to get hibernation state of package: ${pkg.packageName}",
                     )
                 }
             }

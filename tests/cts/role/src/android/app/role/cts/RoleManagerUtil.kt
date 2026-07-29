@@ -15,12 +15,22 @@
  */
 package android.app.role.cts
 
+import android.app.role.RoleManager
+import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Process
 import android.util.Log
+import com.android.compatibility.common.util.SystemUtil
+import com.google.common.truth.Truth
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
+import java.util.function.Consumer
+
+private const val TIMEOUT_MILLIS = 15_000L
 
 object RoleManagerUtil {
-    private val TAG = RoleManagerUtil::class.java.getSimpleName()
+    private val TAG = RoleManagerUtil::class.java.simpleName
 
     /**
      * This method checks for the minimum screen size described in CDD {@see
@@ -58,5 +68,84 @@ object RoleManagerUtil {
         // CDD does seem to follow width & height convention correctly, hence checking both ways
         return (widthDp >= minWidthDp && heightDp >= minHeightDp) ||
             (widthDp >= minHeightDp && heightDp >= minWidthDp)
+    }
+
+    /**
+     * Adds a package as a role holder for the specified role.
+     *
+     * @param roleManager The RoleManager instance.
+     * @param context The context to use for obtaining the main executor.
+     * @param roleName The name of the role to add the holder to.
+     * @param packageName The package name to add as a role holder.
+     */
+    fun addRoleHolder(
+        roleManager: RoleManager,
+        context: Context,
+        roleName: String,
+        packageName: String,
+    ) {
+        val future = CallbackFuture()
+        SystemUtil.runWithShellPermissionIdentity {
+            roleManager.addRoleHolderAsUser(
+                roleName,
+                packageName,
+                0,
+                Process.myUserHandle(),
+                context.mainExecutor,
+                future,
+            )
+        }
+        Truth.assertThat(future.get(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)).isTrue()
+    }
+
+    /**
+     * Removes a package as a role holder for the specified role.
+     *
+     * @param roleManager The RoleManager instance.
+     * @param context The context to use for obtaining the main executor.
+     * @param roleName The name of the role to remove the holder from.
+     * @param packageName The package name to remove from role holders.
+     */
+    fun removeRoleHolder(
+        roleManager: RoleManager,
+        context: Context,
+        roleName: String,
+        packageName: String,
+    ) {
+        val future = CallbackFuture()
+        SystemUtil.runWithShellPermissionIdentity {
+            roleManager.removeRoleHolderAsUser(
+                roleName,
+                packageName,
+                0,
+                Process.myUserHandle(),
+                context.mainExecutor,
+                future,
+            )
+        }
+        future.get(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
+    }
+
+    /**
+     * Retrieves the list of role holders for a specified role.
+     *
+     * @param roleManager The RoleManager instance.
+     * @param roleName The name of the role to retrieve holders for.
+     * @return A list of package names that are currently holding the role.
+     */
+    fun getRoleHolders(roleManager: RoleManager, roleName: String): List<String> {
+        return SystemUtil.callWithShellPermissionIdentity<List<String>> {
+            roleManager.getRoleHolders(roleName)
+        }
+    }
+}
+
+/**
+ * A CompletableFuture that acts as a Consumer<Boolean>, used for receiving results from
+ * asynchronous RoleManager operations.
+ */
+class CallbackFuture : CompletableFuture<Boolean>(), Consumer<Boolean> {
+    override fun accept(successful: Boolean) {
+        complete(successful)
     }
 }

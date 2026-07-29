@@ -19,8 +19,8 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material3.ListSubHeader
 import com.android.permissioncontroller.wear.permission.components.material2.ListSubheader
@@ -37,14 +37,11 @@ fun WearPermissionListSubHeader(
     isFirstItemInAList: Boolean,
     label: @Composable RowScope.() -> Unit,
 ) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    val screenHeight = LocalConfiguration.current.screenHeightDp
+    val paddingDefaults = rememberPaddingDefaults()
     val subtitlePaddingDefaults =
-        WearPermissionScaffoldPaddingDefaults(
-                screenWidth = screenWidth,
-                screenHeight = screenHeight,
-            )
-            .subHeaderPaddingValues(needsLargePadding = !isFirstItemInAList)
+        remember(paddingDefaults, isFirstItemInAList) {
+            paddingDefaults.subHeaderPaddingValues(needsLargePadding = !isFirstItemInAList)
+        }
 
     if (wearPermissionMaterialUIVersion == WearPermissionMaterialUIVersion.MATERIAL3) {
         ListSubHeader(

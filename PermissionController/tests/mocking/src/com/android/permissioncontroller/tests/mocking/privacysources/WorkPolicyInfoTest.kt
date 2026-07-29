@@ -87,14 +87,14 @@ class WorkPolicyInfoTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(UserManager::class.java)
+                    eq(UserManager::class.java),
                 )
             )
             .thenReturn(mockUserManager)
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(SafetyCenterManager::class.java)
+                    eq(SafetyCenterManager::class.java),
                 )
             )
             .thenReturn(mockSafetyCenterManager)
@@ -103,7 +103,7 @@ class WorkPolicyInfoTest {
                 Utils.getEnterpriseString(
                     any(ContextWrapper::class.java),
                     eq(WorkPolicyInfo.WORK_POLICY_TITLE),
-                    anyInt()
+                    anyInt(),
                 )
             )
             .thenReturn(WORK_POLICY_TITLE)
@@ -111,7 +111,7 @@ class WorkPolicyInfoTest {
                 Utils.getEnterpriseString(
                     any(ContextWrapper::class.java),
                     eq(WorkPolicyInfo.WORK_POLICY_SUMMARY),
-                    anyInt()
+                    anyInt(),
                 )
             )
             .thenReturn(WORK_POLICY_SUMMARY)
@@ -134,7 +134,7 @@ class WorkPolicyInfoTest {
             Intent(Intent.ACTION_BOOT_COMPLETED)
                 .putExtra(
                     SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID,
-                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID
+                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID,
                 )
 
         whenever(mockWorkPolicyUtils.workPolicyInfoIntentDO).thenReturn(intent)
@@ -148,7 +148,7 @@ class WorkPolicyInfoTest {
             SafetySourceStatus.Builder(
                     WORK_POLICY_TITLE,
                     WORK_POLICY_SUMMARY,
-                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED
+                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED,
                 )
                 .setPendingIntent(pendingIntent)
                 .build()
@@ -161,7 +161,7 @@ class WorkPolicyInfoTest {
             .setSafetySourceData(
                 WorkPolicyInfo.WORK_POLICY_INFO_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 
@@ -186,7 +186,7 @@ class WorkPolicyInfoTest {
             .setSafetySourceData(
                 WorkPolicyInfo.WORK_POLICY_INFO_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 
@@ -208,7 +208,7 @@ class WorkPolicyInfoTest {
         workPolicyInfo.rescanAndPushSafetyCenterData(
             context,
             intent,
-            RefreshEvent.EVENT_DEVICE_REBOOTED
+            RefreshEvent.EVENT_DEVICE_REBOOTED,
         )
 
         val pendingIntent =
@@ -217,7 +217,7 @@ class WorkPolicyInfoTest {
             SafetySourceStatus.Builder(
                     WORK_POLICY_TITLE,
                     WORK_POLICY_SUMMARY,
-                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED
+                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED,
                 )
                 .setPendingIntent(pendingIntent)
                 .build()
@@ -231,7 +231,7 @@ class WorkPolicyInfoTest {
             .setSafetySourceData(
                 WorkPolicyInfo.WORK_POLICY_INFO_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 
@@ -241,7 +241,7 @@ class WorkPolicyInfoTest {
             Intent(Intent.ACTION_BOOT_COMPLETED)
                 .putExtra(
                     SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID,
-                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID
+                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID,
                 )
 
         whenever(mockWorkPolicyUtils.workPolicyInfoIntentDO).thenReturn(intent)
@@ -250,7 +250,7 @@ class WorkPolicyInfoTest {
         workPolicyInfo.rescanAndPushSafetyCenterData(
             context,
             intent,
-            RefreshEvent.EVENT_REFRESH_REQUESTED
+            RefreshEvent.EVENT_REFRESH_REQUESTED,
         )
 
         val pendingIntent =
@@ -259,7 +259,7 @@ class WorkPolicyInfoTest {
             SafetySourceStatus.Builder(
                     WORK_POLICY_TITLE,
                     WORK_POLICY_SUMMARY,
-                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED
+                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED,
                 )
                 .setPendingIntent(pendingIntent)
                 .build()
@@ -278,7 +278,7 @@ class WorkPolicyInfoTest {
             .setSafetySourceData(
                 WorkPolicyInfo.WORK_POLICY_INFO_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 
@@ -298,7 +298,7 @@ class WorkPolicyInfoTest {
             SafetySourceStatus.Builder(
                     WORK_POLICY_TITLE,
                     WORK_POLICY_SUMMARY,
-                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED
+                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED,
                 )
                 .setPendingIntent(pendingIntent)
                 .build()
@@ -312,7 +312,7 @@ class WorkPolicyInfoTest {
             .setSafetySourceData(
                 WorkPolicyInfo.WORK_POLICY_INFO_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 
@@ -332,7 +332,7 @@ class WorkPolicyInfoTest {
             .setSafetySourceData(
                 WorkPolicyInfo.WORK_POLICY_INFO_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 }

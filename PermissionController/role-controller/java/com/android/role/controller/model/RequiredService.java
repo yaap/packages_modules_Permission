@@ -29,16 +29,18 @@ import androidx.annotation.Nullable;
 import com.android.role.controller.util.UserUtils;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Specifies a required {@code Service} for an application to qualify for a {@link Role}.
  */
 public class RequiredService extends RequiredComponent {
 
-    public RequiredService(@NonNull IntentFilterData intentFilterData, int minTargetSdkVersion,
-            int flags, @Nullable String permission, int queryFlags,
-            @NonNull List<RequiredMetaData> metaData) {
-        super(intentFilterData, minTargetSdkVersion, flags, permission, queryFlags, metaData);
+    public RequiredService(@Nullable Supplier<Boolean> featureFlag, int flags,
+            @NonNull IntentFilterData intentFilterData, @NonNull List<RequiredMetaData> metaData,
+            int minTargetSdkVersion, @Nullable String permission, int queryFlags) {
+        super(featureFlag, flags, intentFilterData, metaData, minTargetSdkVersion, permission,
+                queryFlags);
     }
 
     @NonNull

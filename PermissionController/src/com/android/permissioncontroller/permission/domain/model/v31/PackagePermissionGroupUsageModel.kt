@@ -21,5 +21,5 @@ data class PackagePermissionGroupUsageModel(
     val packageName: String,
     /** Permission group and recent usage time in milliseconds since the epoch */
     val usages: Map<String, Long>,
-    val userId: Int
+    val userId: Int,
 )

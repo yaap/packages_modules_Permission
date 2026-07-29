@@ -173,6 +173,10 @@ public class EnhancedConfirmationService extends SystemService {
     private Map<String, List<byte[]>> toTrustedPackageMap(Set<SignedPackage> signedPackages) {
         ArrayMap<String, List<byte[]>> trustedPackageMap = new ArrayMap<>();
         for (SignedPackage signedPackage : signedPackages) {
+            if (Flags.appFunctionAccessApiEnabled() && !signedPackage.hasCertificateDigest()) {
+                // certs are mandatory for ECM
+                continue;
+            }
             ArrayList<byte[]> certDigests = (ArrayList<byte[]>) trustedPackageMap.computeIfAbsent(
                     signedPackage.getPackageName(), packageName -> new ArrayList<>(1));
             certDigests.add(signedPackage.getCertificateDigest());
@@ -725,7 +729,7 @@ public class EnhancedConfirmationService extends SystemService {
                 // telephony service is unavailable.
             }
             UserHandle user = mContext.getUser();
-            if (com.android.server.telecom.flags.Flags.callDetailsGetAssociatedUserApi()) {
+            if (android.telecom.flags.Flags.callDetailsGetAssociatedUserApi2()) {
                 user = call.getDetails().getAssociatedUser();
             }
             if (number != null) {

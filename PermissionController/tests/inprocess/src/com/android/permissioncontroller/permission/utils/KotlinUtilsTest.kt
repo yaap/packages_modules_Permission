@@ -92,7 +92,7 @@ class KotlinUtilsTest {
         whenever(
                 mockPackageManager.resolveActivity(
                     argThat { intent -> intent.filterEquals(installerIntent) },
-                    /* flags= */ anyInt()
+                    /* flags= */ anyInt(),
                 )
             )
             .thenReturn(

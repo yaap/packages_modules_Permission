@@ -59,7 +59,7 @@ class AppDataSharingUpdatesPrivacySource : PrivacySource {
     override fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: RefreshEvent
+        refreshEvent: RefreshEvent,
     ) {
         val safetyCenterManager: SafetyCenterManager =
             Utils.getSystemServiceSafe(context, SafetyCenterManager::class.java)
@@ -71,17 +71,17 @@ class AppDataSharingUpdatesPrivacySource : PrivacySource {
                         SafetySourceStatus.Builder(
                                 context.getString(R.string.data_sharing_updates_title),
                                 context.getString(R.string.data_sharing_updates_summary),
-                                SEVERITY_LEVEL_INFORMATION
+                                SEVERITY_LEVEL_INFORMATION,
                             )
                             .setPendingIntent(
                                 PendingIntent.getActivity(
                                     context,
                                     /* requestCode= */ 0,
                                     Intent(ACTION_REVIEW_APP_DATA_SHARING_UPDATES),
-                                    FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+                                    FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE,
                                 )
                             )
-                            .build(),
+                            .build()
                     )
                     .build()
             } else {
@@ -91,13 +91,13 @@ class AppDataSharingUpdatesPrivacySource : PrivacySource {
         safetyCenterManager.setSafetySourceData(
             APP_DATA_SHARING_UPDATES_SOURCE_ID,
             safetySourceData,
-            createSafetyEventForDataSharingUpdates(refreshEvent, intent)
+            createSafetyEventForDataSharingUpdates(refreshEvent, intent),
         )
     }
 
     private fun createSafetyEventForDataSharingUpdates(
         refreshEvent: RefreshEvent,
-        intent: Intent
+        intent: Intent,
     ): SafetyEvent {
         return when (refreshEvent) {
             EVENT_REFRESH_REQUESTED -> {

@@ -32,7 +32,7 @@ import org.xmlpull.v1.XmlPullParserException
 /** Thread-safe implementation of [PermissionEventStorage] using an XML file as the database. */
 abstract class BasePermissionEventStorage<T : PermissionEvent>(
     private val context: Context,
-    jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)!!
+    jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)!!,
 ) : PermissionEventStorage<T> {
 
     private val dbFile: AtomicFile = AtomicFile(File(context.filesDir, getDatabaseFileName()))
@@ -87,7 +87,7 @@ abstract class BasePermissionEventStorage<T : PermissionEvent>(
 
             DumpableLog.d(
                 LOG_TAG,
-                "${originalCount - newEvents.size} old permission events removed"
+                "${originalCount - newEvents.size} old permission events removed",
             )
 
             return writeData(newEvents)

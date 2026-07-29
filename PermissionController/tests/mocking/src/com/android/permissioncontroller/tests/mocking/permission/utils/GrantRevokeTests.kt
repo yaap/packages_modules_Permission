@@ -31,7 +31,10 @@ import android.content.pm.PackageManager.FLAG_PERMISSION_AUTO_REVOKED
 import android.content.pm.PackageManager.FLAG_PERMISSION_ONE_TIME
 import android.content.pm.PackageManager.FLAG_PERMISSION_REVIEW_REQUIRED
 import android.content.pm.PackageManager.FLAG_PERMISSION_REVOKED_COMPAT
+import android.content.pm.PackageManager.FLAG_PERMISSION_REVOKE_WHEN_REQUESTED
 import android.content.pm.PackageManager.FLAG_PERMISSION_SYSTEM_FIXED
+import android.content.pm.PackageManager.FLAG_PERMISSION_TRUSTED_UI_CONSENTED
+import android.content.pm.PackageManager.FLAG_PERMISSION_TRUSTED_UI_SHOWN
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_FIXED
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SET
 import android.content.pm.PackageManager.PERMISSION_DENIED
@@ -73,9 +76,11 @@ private const val PERMISSION_CONTROLLER_CHANGED_FLAG_MASK =
         FLAG_PERMISSION_USER_FIXED or
         FLAG_PERMISSION_ONE_TIME or
         FLAG_PERMISSION_REVOKED_COMPAT or
-        FLAG_PERMISSION_ONE_TIME or
         FLAG_PERMISSION_REVIEW_REQUIRED or
-        FLAG_PERMISSION_AUTO_REVOKED
+        FLAG_PERMISSION_AUTO_REVOKED or
+        FLAG_PERMISSION_REVOKE_WHEN_REQUESTED or
+        FLAG_PERMISSION_TRUSTED_UI_SHOWN or
+        FLAG_PERMISSION_TRUSTED_UI_CONSENTED
 
 /**
  * A suite of unit tests to test the granting and revoking of permissions. Note- does not currently
@@ -150,7 +155,7 @@ class GrantRevokeTests {
     private fun createMockPackage(
         perms: Map<String, Boolean>,
         isPreMApp: Boolean = false,
-        isInstantApp: Boolean = false
+        isInstantApp: Boolean = false,
     ): LightPackageInfo {
         val permNames = mutableListOf<String>()
         val permFlags = mutableListOf<Int>()
@@ -183,7 +188,7 @@ class GrantRevokeTests {
             0L,
             false,
             emptyMap(),
-            ContextCompat.DEVICE_ID_DEFAULT
+            ContextCompat.DEVICE_ID_DEFAULT,
         )
     }
 
@@ -207,7 +212,7 @@ class GrantRevokeTests {
         backgroundPerm: String? = null,
         foregroundPerms: List<String>? = null,
         flags: Int = NO_FLAGS,
-        permInfoProtectionFlags: Int = 0
+        permInfoProtectionFlags: Int = 0,
     ): LightPermission {
         val permInfo =
             LightPermInfo(
@@ -218,7 +223,7 @@ class GrantRevokeTests {
                 PermissionInfo.PROTECTION_DANGEROUS,
                 permInfoProtectionFlags,
                 0,
-                pkgInfo.appFlags and ApplicationInfo.FLAG_SYSTEM != 0
+                pkgInfo.appFlags and ApplicationInfo.FLAG_SYSTEM != 0,
             )
         return LightPermission(
             pkgInfo,
@@ -226,7 +231,7 @@ class GrantRevokeTests {
             pkgInfo.requestedPermissionsFlags[pkgInfo.requestedPermissions.indexOf(permName)] ==
                 PERMISSION_GRANTED,
             flags,
-            foregroundPerms
+            foregroundPerms,
         )
     }
 
@@ -238,7 +243,7 @@ class GrantRevokeTests {
      */
     private fun createMockGroup(
         pkgInfo: LightPackageInfo,
-        perms: Map<String, LightPermission> = emptyMap()
+        perms: Map<String, LightPermission> = emptyMap(),
     ): LightAppPermGroup {
         val pGi = LightPermGroupInfo(PERM_GROUP_NAME, TEST_PACKAGE_NAME, 0, 0, 0, false)
         return LightAppPermGroup(pkgInfo, pGi, perms, false, false, false)
@@ -283,7 +288,7 @@ class GrantRevokeTests {
      */
     private fun assertGroupPermState(
         groupToCheck: LightAppPermGroup,
-        expectedState: Map<String, Pair<Boolean, Int>>
+        expectedState: Map<String, Pair<Boolean, Int>>,
     ) {
         val perms = groupToCheck.permissions
 
@@ -326,7 +331,7 @@ class GrantRevokeTests {
         expectPermChange: Boolean,
         expectPermGranted: Boolean = true,
         expectedFlags: Int = NO_FLAGS,
-        originalFlags: Int = NO_FLAGS
+        originalFlags: Int = NO_FLAGS,
     ) {
         val pm = context.packageManager
         if (expectPermChange) {
@@ -347,7 +352,7 @@ class GrantRevokeTests {
                     TEST_PACKAGE_NAME,
                     PERMISSION_CONTROLLER_CHANGED_FLAG_MASK,
                     expectedFlags,
-                    TEST_USER
+                    TEST_USER,
                 )
         } else {
             verify(pm, never())
@@ -356,7 +361,7 @@ class GrantRevokeTests {
                     eq(TEST_PACKAGE_NAME),
                     anyInt(),
                     anyInt(),
-                    eq(TEST_USER)
+                    eq(TEST_USER),
                 )
         }
     }
@@ -373,7 +378,7 @@ class GrantRevokeTests {
     private fun verifyAppOpState(
         appOpName: String,
         expectAppOpSet: Boolean,
-        expectedMode: Int = MODE_IGNORED
+        expectedMode: Int = MODE_IGNORED,
     ) {
         val aom = app.getSystemService(AppOpsManager::class.java)
         if (expectAppOpSet) {
@@ -416,7 +421,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyAppKillState(shouldBeKilled = false)
@@ -446,19 +451,19 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyPermissionState(
             permName = FG_PERM_2_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(
             appOpName = OP_2_NAME,
             expectAppOpSet = true,
-            expectedMode = MODE_FOREGROUND
+            expectedMode = MODE_FOREGROUND,
         )
         verifyAppKillState(shouldBeKilled = false)
 
@@ -486,7 +491,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME_NO_APP_OP,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppOpState(appOpName = OP_2_NAME, expectAppOpSet = false)
@@ -516,7 +521,7 @@ class GrantRevokeTests {
             permName = BG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyPermissionState(permName = FG_PERM_NAME, expectPermChange = false)
@@ -548,7 +553,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyPermissionState(permName = BG_PERM_NAME, expectPermChange = false)
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_FOREGROUND)
@@ -565,7 +570,7 @@ class GrantRevokeTests {
             permName = BG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyAppKillState(shouldBeKilled = false)
@@ -599,13 +604,13 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyPermissionState(
             permName = BG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = NO_FLAGS,
-            originalFlags = origBgFlags
+            originalFlags = origBgFlags,
         )
     }
 
@@ -630,14 +635,14 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyPermissionState(
             permName = FG_PERM_2_NAME,
             expectPermChange = false,
             expectedFlags = permFlags,
-            originalFlags = permFlags
+            originalFlags = permFlags,
         )
         verifyAppOpState(appOpName = OP_2_NAME, expectAppOpSet = false)
         verifyAppKillState(shouldBeKilled = false)
@@ -668,7 +673,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_FOREGROUND)
         verifyAppKillState(shouldBeKilled = false)
@@ -684,7 +689,7 @@ class GrantRevokeTests {
             permName = BG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = permFlags,
-            originalFlags = permFlags
+            originalFlags = permFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppKillState(shouldBeKilled = false)
@@ -714,7 +719,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppKillState(shouldBeKilled = false)
@@ -742,7 +747,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyAppKillState(shouldBeKilled = true)
@@ -769,7 +774,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = flags,
-            originalFlags = flags
+            originalFlags = flags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppKillState(shouldBeKilled = false)
@@ -808,7 +813,7 @@ class GrantRevokeTests {
             createMockPerm(
                 pkg,
                 FG_PERM_NAME,
-                permInfoProtectionFlags = PROTECTION_FLAG_RUNTIME_ONLY
+                permInfoProtectionFlags = PROTECTION_FLAG_RUNTIME_ONLY,
             )
         val group = createMockGroup(pkg, perms)
         resetMockAppState()
@@ -840,7 +845,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = true,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_ALLOWED)
         verifyAppKillState(shouldBeKilled = false)
@@ -865,7 +870,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppKillState(shouldBeKilled = false)
@@ -890,7 +895,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -916,14 +921,14 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyPermissionState(
             permName = FG_PERM_2_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_2_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -951,7 +956,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME_NO_APP_OP,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppOpState(appOpName = OP_2_NAME, expectAppOpSet = false)
@@ -982,7 +987,7 @@ class GrantRevokeTests {
             permName = BG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_FOREGROUND)
         verifyAppKillState(shouldBeKilled = false)
@@ -1013,7 +1018,7 @@ class GrantRevokeTests {
             permName = BG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_FOREGROUND)
         verifyAppKillState(shouldBeKilled = false)
@@ -1028,7 +1033,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -1059,7 +1064,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyPermissionState(permName = FG_PERM_2_NAME, expectPermChange = false)
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
@@ -1092,7 +1097,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -1134,7 +1139,7 @@ class GrantRevokeTests {
             expectPermChange = true,
             expectPermGranted = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -1161,7 +1166,7 @@ class GrantRevokeTests {
         verifyPermissionState(
             permName = FG_PERM_NAME,
             expectPermChange = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = true)
@@ -1212,7 +1217,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = true,
             expectPermGranted = false,
-            expectedFlags = newFlags
+            expectedFlags = newFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -1243,7 +1248,7 @@ class GrantRevokeTests {
             expectPermChange = true,
             expectPermGranted = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -1273,7 +1278,7 @@ class GrantRevokeTests {
             expectPermChange = true,
             expectPermGranted = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = true, expectedMode = MODE_IGNORED)
         verifyAppKillState(shouldBeKilled = false)
@@ -1302,7 +1307,7 @@ class GrantRevokeTests {
             permName = FG_PERM_NAME,
             expectPermChange = false,
             expectedFlags = newFlags,
-            originalFlags = oldFlags
+            originalFlags = oldFlags,
         )
         verifyAppOpState(appOpName = OP_NAME, expectAppOpSet = false)
         verifyAppKillState(shouldBeKilled = false)

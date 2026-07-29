@@ -35,7 +35,7 @@ abstract class GrantBehavior {
     abstract fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean = false
+        isSystemTriggeredPrompt: Boolean = false,
     ): Prompt
 
     /**
@@ -50,7 +50,7 @@ abstract class GrantBehavior {
     abstract fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton
 
     /**
@@ -67,7 +67,7 @@ abstract class GrantBehavior {
      */
     open fun isForegroundFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         return isGroupFullyGranted(group, requestedPerms)
     }

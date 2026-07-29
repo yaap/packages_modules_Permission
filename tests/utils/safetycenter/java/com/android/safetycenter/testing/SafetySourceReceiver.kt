@@ -162,6 +162,11 @@ class SafetySourceReceiver : BroadcastReceiver() {
             runBlockingWithTimeout { safetySourceIntentHandler.setResponse(request, response) }
         }
 
+        /** Clears all responses on this receiver. */
+        fun clearResponses() {
+            runBlockingWithTimeout { safetySourceIntentHandler.clearResponses() }
+        }
+
         fun SafetyCenterManager.refreshSafetySourcesWithReceiverPermissionAndWait(
             refreshReason: Int,
             safetySourceIds: List<String>? = null,

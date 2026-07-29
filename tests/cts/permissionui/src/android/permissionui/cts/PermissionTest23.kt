@@ -33,6 +33,19 @@ class PermissionTest23 : BaseUsePermissionTest() {
     }
 
     @Before
+    fun setupAutomotiveTos() {
+        // Dismiss the ToS dialog that can block the test
+        if (isAutomotive) {
+            SystemUtil.runShellCommandOrThrow(
+                "settings put secure android.car.KEY_USER_TOS_ACCEPTED 2"
+            )
+            SystemUtil.runShellCommandOrThrow(
+                "settings put secure android.car.KEY_UNACCEPTED_TOS_DISABLED_APPS \"\""
+            )
+        }
+    }
+
+    @Before
     fun installApp23() {
         installPackage(APP_APK_PATH_23)
     }
@@ -66,7 +79,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Go through normal grant flow
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.READ_CALENDAR to true,
-            android.Manifest.permission.WRITE_CALENDAR to true
+            android.Manifest.permission.WRITE_CALENDAR to true,
         ) {
             clickPermissionRequestAllowButton()
         }
@@ -121,7 +134,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is granted
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.WRITE_CONTACTS to true,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 
@@ -135,7 +148,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is not granted
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.WRITE_CONTACTS to false,
-            askTwice = true
+            askTwice = true,
         ) {
             clickPermissionRequestDenyButton()
             denyPermissionRequestWithPrejudice()
@@ -145,7 +158,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is not granted
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.WRITE_CONTACTS to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 
@@ -178,7 +191,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is not granted
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.READ_CALENDAR to false,
-            askTwice = true
+            askTwice = true,
         ) {
             clickPermissionRequestDenyButton()
             denyPermissionRequestWithPrejudice()
@@ -187,7 +200,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Clear the denial with prejudice
         uiAutomation.grantRuntimePermission(
             APP_PACKAGE_NAME,
-            android.Manifest.permission.READ_CALENDAR
+            android.Manifest.permission.READ_CALENDAR,
         )
         revokeAppPermissionsByUi(android.Manifest.permission.READ_CALENDAR)
 
@@ -211,7 +224,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is not granted
         requestAppPermissionsAndAssertResult(
             android.Manifest.permission.BIND_PRINT_SERVICE to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 
@@ -225,7 +238,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is not granted
         requestAppPermissionsAndAssertResult(
             NON_EXISTENT_PERMISSION to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 
@@ -242,7 +255,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         val result =
             requestAppPermissionsAndAssertResult(
                 android.Manifest.permission.WRITE_CONTACTS to true,
-                android.Manifest.permission.WRITE_CALENDAR to true
+                android.Manifest.permission.WRITE_CALENDAR to true,
             ) {
                 clickPermissionRequestAllowButton()
                 clickPermissionRequestAllowButton()
@@ -292,7 +305,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         requestAppPermissionsAndAssertResult(
             permissions,
             results,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 
@@ -310,12 +323,12 @@ class PermissionTest23 : BaseUsePermissionTest() {
                 android.Manifest.permission.WRITE_CONTACTS,
                 null,
                 android.Manifest.permission.RECORD_AUDIO,
-                null
+                null,
             ),
             arrayOf(
                 android.Manifest.permission.WRITE_CONTACTS to true,
-                android.Manifest.permission.RECORD_AUDIO to true
-            )
+                android.Manifest.permission.RECORD_AUDIO to true,
+            ),
         ) {
             clickPermissionRequestAllowForegroundButton()
             clickPermissionRequestAllowButton()
@@ -329,7 +342,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
         // Expect the permission is not granted
         requestAppPermissionsAndAssertResult(
             INVALID_PERMISSION to false,
-            waitForWindowTransition = false
+            waitForWindowTransition = false,
         ) {}
     }
 
@@ -338,7 +351,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
     fun testAskButtonSetsFlags() {
         Assume.assumeFalse(
             "other form factors might not support the ask button",
-            isTv || isAutomotive || isWatch
+            isTv || isAutomotive || isWatch,
         )
 
         grantAppPermissionsByUi(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION)
@@ -352,24 +365,24 @@ class PermissionTest23 : BaseUsePermissionTest() {
                 listOf(
                     android.Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                     android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
                 )
             for (perm in perms) {
                 var flags = packageManager.getPermissionFlags(perm, APP_PACKAGE_NAME, context.user)
                 Assert.assertEquals(
                     "USER_SET should not be set for $perm",
                     0,
-                    flags and PackageManager.FLAG_PERMISSION_USER_SET
+                    flags and PackageManager.FLAG_PERMISSION_USER_SET,
                 )
                 Assert.assertEquals(
                     "USER_FIXED should not be set for $perm",
                     0,
-                    flags and PackageManager.FLAG_PERMISSION_USER_FIXED
+                    flags and PackageManager.FLAG_PERMISSION_USER_FIXED,
                 )
                 Assert.assertEquals(
                     "ONE_TIME should be set for $perm",
                     PackageManager.FLAG_PERMISSION_ONE_TIME,
-                    flags and PackageManager.FLAG_PERMISSION_ONE_TIME
+                    flags and PackageManager.FLAG_PERMISSION_ONE_TIME,
                 )
             }
         }
@@ -410,7 +423,7 @@ class PermissionTest23 : BaseUsePermissionTest() {
                 android.Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                 // Storage permissions
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
             )
             .forEach { assertAppHasPermission(it, expectPermissions) }
     }

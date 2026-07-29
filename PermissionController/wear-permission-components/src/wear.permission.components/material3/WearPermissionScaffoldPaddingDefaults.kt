@@ -16,21 +16,31 @@
 package com.android.permissioncontroller.wear.permission.components.material3
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.android.permissioncontroller.wear.permission.components.theme.LocalCustomDimensions
+import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionCustomDimensions
 
 /* A common class for calculating padding for list items as per the latest design.
 https://www.figma.com/design/nb1atBKcK3luF8AXWLUe0X/BC25-Settings-on-Wear?node-id=2336-3304&t=n35PgTUC2O8hGSI0-0 */
 data class WearPermissionScaffoldPaddingDefaults(
+    private val customDimensions: WearPermissionCustomDimensions,
     private val screenWidth: Int,
     private val screenHeight: Int,
 ) {
-    private val scrollContentHorizontalPadding = (screenWidth * 0.052).dp
-    private val titleHorizontalPadding = (screenWidth * 0.1200).dp
-    private val subtitleHorizontalPadding = (screenWidth * 0.0416).dp
-    private val scrollContentTopPadding = (screenHeight * 0.1664).dp
+    private val scrollContentHorizontalPadding =
+        (screenWidth * customDimensions.scrollHorizontalPaddingMultiplier).dp
+    private val scrollContentTopPadding = (screenHeight * customDimensions.scrollTopMultiplier).dp
+    private val scrollContentBottomPadding =
+        (screenHeight * customDimensions.scrollBottomMultiplier).dp
     private val dialogScrollContentLargeTopPadding = (screenHeight * 0.10).dp
     private val dialogScrollContentTopPadding = (screenHeight * 0.012).dp
-    private val scrollContentBottomPadding = (screenHeight * 0.3646).dp
+    private val titleHorizontalPadding =
+        (screenWidth * customDimensions.titleHorizontalPaddingMultiplier).dp
+    private val subtitleHorizontalPadding =
+        (screenWidth * customDimensions.subtitleHorizontalPaddingMultiplier).dp
     private val noPadding = 0.dp
     private val defaultItemPadding = 4.dp
     private val largeItemPadding = 12.dp
@@ -79,4 +89,19 @@ data class WearPermissionScaffoldPaddingDefaults(
             top = scrollContentTopPadding,
             bottom = scrollContentBottomPadding,
         )
+}
+
+@Composable
+fun rememberPaddingDefaults(): WearPermissionScaffoldPaddingDefaults {
+    val customDimensions = LocalCustomDimensions.current
+    val screenWidth = LocalConfiguration.current.screenWidthDp
+    val screenHeight = LocalConfiguration.current.screenHeightDp
+
+    return remember(customDimensions, screenWidth, screenHeight) {
+        WearPermissionScaffoldPaddingDefaults(
+            customDimensions = customDimensions,
+            screenWidth = screenWidth,
+            screenHeight = screenHeight,
+        )
+    }
 }

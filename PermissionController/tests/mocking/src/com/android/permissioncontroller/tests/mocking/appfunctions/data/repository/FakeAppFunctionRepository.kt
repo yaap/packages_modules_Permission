@@ -20,7 +20,9 @@ import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_GRANTED
 import android.app.appfunctions.AppFunctionManager.ACCESS_REQUEST_STATE_DENIED
 import android.app.appfunctions.AppFunctionManager.ACCESS_REQUEST_STATE_GRANTED
 import android.app.appfunctions.AppFunctionManager.ACCESS_REQUEST_STATE_UNREQUESTABLE
+import android.app.appfunctions.AppFunctionManager.OnAppFunctionAccessChangedListener
 import com.android.permissioncontroller.appfunctions.data.repository.AppFunctionRepository
+import java.util.concurrent.Executor
 
 /** Fake implementation of [AppFunctionRepository] for testing. */
 class FakeAppFunctionRepository(
@@ -29,6 +31,7 @@ class FakeAppFunctionRepository(
     accessFlags: Map<Pair<String, String>, Int> = mutableMapOf(),
 ) : AppFunctionRepository {
     private val _accessFlags: MutableMap<Pair<String, String>, Int> = accessFlags.toMutableMap()
+    private val listeners: MutableSet<OnAppFunctionAccessChangedListener> = mutableSetOf()
 
     override suspend fun getValidAgents(): List<String> = agents
 
@@ -56,6 +59,23 @@ class FakeAppFunctionRepository(
         flags: Int,
     ) {
         _accessFlags[agentPackageName to targetPackageName] = flagMask and flags
+        notifyListeners()
+    }
+
+    override fun addAccessChangedListener(
+        executor: Executor,
+        listener: OnAppFunctionAccessChangedListener,
+    ) {
+        listeners.add(listener)
+    }
+
+    override fun removeAccessChangedListener(listener: OnAppFunctionAccessChangedListener) {
+        listeners.remove(listener)
+    }
+
+    private fun notifyListeners() {
+        // TODO: Implement agentPackageName to agentUid
+        listeners.forEach { listener -> listener.onAppFunctionAccessChanged(0) }
     }
 
     companion object {

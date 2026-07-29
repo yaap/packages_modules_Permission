@@ -29,6 +29,10 @@
         <item name="android:filterTouchesWhenObscured">true</item>
     </style>
 
+    <style name="Theme.DeviceDefault.AlertDialog.DefaultAppConfirmation.Expressive" parent="@style/Theme.DeviceDefault.AlertDialog.SettingsLib.Expressive">
+        <item name="android:buttonBarPositiveButtonStyle">@style/Widget.SettingsLib.DialogButton.Outline</item>
+    </style>
+
     <!-- START EXPRESSIVE ENHANCED CONFIRMATION DIALOG -->
 
     <!-- This is not overlayable -->

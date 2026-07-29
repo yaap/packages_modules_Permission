@@ -118,7 +118,7 @@ abstract class SmartUpdateMediatorLiveData<T>(private val isStaticVal: Boolean =
 
     private fun <S : Any?> addSourceWithStackTraceAttribution(
         source: LiveData<S>,
-        onChanged: Observer<in S>
+        onChanged: Observer<in S>,
     ) {
         val stackTrace =
             if (DEBUG) {
@@ -170,7 +170,7 @@ abstract class SmartUpdateMediatorLiveData<T>(private val isStaticVal: Boolean =
         desired: Collection<K>,
         have: MutableMap<K, V>,
         getLiveDataFun: (K) -> V,
-        onUpdateFun: ((K) -> Unit)? = null
+        onUpdateFun: ((K) -> Unit)? = null,
     ): Pair<Set<K>, Set<K>> {
         // Ensure the map is correct when method returns
         val (toAdd, toRemove) = KotlinUtils.getMapAndListDifferences(desired, have)
@@ -244,7 +244,7 @@ abstract class SmartUpdateMediatorLiveData<T>(private val isStaticVal: Boolean =
                     update()
                 }
             },
-            isValueInitialized = { isInitialized && (staleOk || !isStale) }
+            isValueInitialized = { isInitialized && (staleOk || !isStale) },
         )
     }
 }

@@ -22,13 +22,16 @@ import static com.android.permissioncontroller.PermissionControllerStatsLog.PERM
 import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SEE_OTHER_PERMISSIONS_CLICKED;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SHOW_7DAYS_CLICKED;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SHOW_SYSTEM_CLICKED;
+import static com.android.permissioncontroller.PermissionControllerStatsLog.PRIVACY_DASHBOARD_AGENT_ACTIVITY_VIEWED;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.write;
 
 import android.Manifest;
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,10 +46,19 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.permissioncontroller.R;
+import com.android.permissioncontroller.appfunctions.AppFunctionsUtil;
+import com.android.permissioncontroller.appfunctions.ui.v37.AgentUsageDetailsActivity;
+import com.android.permissioncontroller.appinteraction.domain.model.v31.AgentActivityItem;
+import com.android.permissioncontroller.permission.ui.ManagePermissionsActivity;
 import com.android.permissioncontroller.permission.ui.handheld.SettingsWithLargeHeader;
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsageViewModel;
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsageViewModelFactory;
 import com.android.permissioncontroller.permission.ui.viewmodel.v31.PermissionUsagesUiState;
+import com.android.permissioncontroller.permission.utils.KotlinUtils;
+import com.android.permissioncontroller.permission.utils.StringUtils;
+import com.android.settingslib.widget.SectionButtonPreference;
+
+import kotlin.Unit;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -66,11 +78,9 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
 
     public static final boolean DEBUG = true;
 
-    // Pie chart in this screen will be the first child.
-    // Hence we use PERMISSION_GROUP_ORDER + 1 here.
     private static final int PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT =
-            PERMISSION_GROUP_ORDER.size() + 1;
-    private static final int EXPAND_BUTTON_ORDER = 999;
+            PERMISSION_GROUP_ORDER.size();
+
     /** Map to represent ordering for permission groups in the permissions usage UI. */
     private static final String KEY_SESSION_ID = "_session_id";
 
@@ -87,6 +97,7 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
     private MenuItem mHideSystemMenu;
     private MenuItem mShow7DaysDataMenu;
     private MenuItem mShow24HoursDataMenu;
+    private SectionButtonPreference mExpandButton;
     private boolean mOtherExpanded;
     private boolean mMenuItemsCreated = false;
 
@@ -130,11 +141,6 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
         adapter.registerAdapterDataObserver(
                 new RecyclerView.AdapterDataObserver() {
                     @Override
-                    public void onChanged() {
-                        updatePreferenceScreenAdvancedTitleAndSummary(preferenceScreen, adapter);
-                    }
-
-                    @Override
                     public void onItemRangeInserted(int positionStart, int itemCount) {
                         onChanged();
                     }
@@ -155,34 +161,7 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
                     }
                 });
 
-        updatePreferenceScreenAdvancedTitleAndSummary(preferenceScreen, adapter);
         return adapter;
-    }
-
-    private void updatePreferenceScreenAdvancedTitleAndSummary(
-            PreferenceScreen preferenceScreen, PreferenceGroupAdapter adapter) {
-        int count = adapter.getItemCount();
-        if (count == 0) {
-            return;
-        }
-
-        Preference preference = adapter.getItem(count - 1);
-
-        // This is a hacky way of getting the expand button preference for advanced info
-        if (preference.getOrder() == EXPAND_BUTTON_ORDER) {
-            mOtherExpanded = false;
-            preference.setTitle(R.string.perm_usage_adv_info_title);
-            preference.setSummary(preferenceScreen.getSummary());
-            preference.setLayoutResource(R.layout.expand_button_with_large_title);
-            if (mGraphic != null) {
-                mGraphic.setShowOtherCategory(false);
-            }
-        } else {
-            mOtherExpanded = true;
-            if (mGraphic != null) {
-                mGraphic.setShowOtherCategory(true);
-            }
-        }
     }
 
     @Override
@@ -302,31 +281,33 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
         }
         screen.removeAll();
 
-        if (mOtherExpanded) {
-            screen.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
-        } else {
-            screen.setInitialExpandedChildrenCount(
-                    PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT);
-        }
-        screen.setOnExpandButtonClickListener(() -> {
-            write(
-                    PERMISSION_USAGE_FRAGMENT_INTERACTION,
-                    mSessionId,
-                    PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SEE_OTHER_PERMISSIONS_CLICKED);
-        });
+        // Create and sort access count entries
         Map<String, Integer> permissionGroupWithUsageCounts =
                 permissionUsagesUiData.getPermissionGroupUsageCount();
         List<Map.Entry<String, Integer>> permissionGroupWithUsageCountsEntries =
                 new ArrayList(permissionGroupWithUsageCounts.entrySet());
-
+        List<AgentActivityItem> agentActivityItems = permissionUsagesUiData.getAgentUsages();
         permissionGroupWithUsageCountsEntries.sort(Comparator.comparing(
-                (Map.Entry<String, Integer> permissionGroupWithUsageCount) ->
-                        PERMISSION_GROUP_ORDER.getOrDefault(
-                                permissionGroupWithUsageCount.getKey(), DEFAULT_ORDER))
+                        (Map.Entry<String, Integer> permissionGroupWithUsageCount) ->
+                                PERMISSION_GROUP_ORDER.getOrDefault(
+                                        permissionGroupWithUsageCount.getKey(), DEFAULT_ORDER))
                 .thenComparing((Map.Entry<String, Integer> permissionGroupWithUsageCount) ->
                         mViewModel.getPermissionGroupLabel(
-                                context, permissionGroupWithUsageCount.getKey())));
+                                permissionGroupWithUsageCount.getKey())));
+        if (AppFunctionsUtil.isPrivacyDashboardAgentActivityEnabled(context)) {
+            agentActivityItems.sort(
+                    Comparator
+                            .comparing((AgentActivityItem agentActivityItem) ->
+                                            mViewModel.getAppFunctionAgentLabel(
+                                                    context,
+                                                    agentActivityItem.getAgentPackageName())
+                            )
+                            .thenComparingInt(agentActivityItem ->
+                                    agentActivityItem.getUserHandle().getIdentifier()
+                            ));
+        }
 
+        // Calculate showSystem and show7Days states
         boolean containsSystemAppUsages = permissionUsagesUiData.getContainsSystemAppUsage();
         if (mHasSystemApps != containsSystemAppUsages) {
             mHasSystemApps = containsSystemAppUsages;
@@ -336,89 +317,150 @@ public class PermissionUsageFragment extends SettingsWithLargeHeader {
         updateShow7DaysToggle(show7Days);
         updateShowSystemToggle(showSystem);
 
+        // Add the preference category for app permissions
+        PreferenceCategory permissionsCategory = new PreferenceCategory(context);
+        permissionsCategory.setTitle(R.string.permission_usage_app_permissions_title);
+        screen.addPreference(permissionsCategory);
         mGraphic = new PermissionUsageGraphicPreference(context, show7Days);
-        screen.addPreference(mGraphic);
+        permissionsCategory.addPreference(mGraphic);
         mGraphic.setUsages(permissionGroupWithUsageCounts);
+        mGraphic.setShowOtherCategory(mOtherExpanded);
 
-        // Add the preference header.
-        PreferenceCategory category = new PreferenceCategory(context);
-        screen.addPreference(category);
-        CharSequence advancedInfoSummary =
-                getAdvancedInfoSummaryString(context, permissionGroupWithUsageCountsEntries);
-        screen.setSummary(advancedInfoSummary);
+        // Add the preference category for agent activity
+        PreferenceCategory agentsCategory = null;
+        if (AppFunctionsUtil.isPrivacyDashboardAgentActivityEnabled(context)) {
+            agentsCategory = new PreferenceCategory(context);
+            agentsCategory.setTitle(R.string.permission_usage_agent_activity_title);
+            screen.addPreference(agentsCategory);
+            write(PRIVACY_DASHBOARD_AGENT_ACTIVITY_VIEWED, mSessionId, show7Days);
+        }
 
-        addUIContent(context, permissionGroupWithUsageCountsEntries, category,
-                showSystem, show7Days);
+        addUiContent(
+                context,
+                permissionGroupWithUsageCountsEntries,
+                agentActivityItems,
+                permissionsCategory,
+                agentsCategory,
+                showSystem,
+                show7Days
+        );
     }
 
-    private CharSequence getAdvancedInfoSummaryString(
-            Context context, List<Map.Entry<String, Integer>> permissionGroupWithUsageCounts) {
-        int size = permissionGroupWithUsageCounts.size();
-        if (size <= PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT - 1) {
-            return "";
-        }
-
-        // case for 1 extra item in the advanced info
-        if (size == PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT) {
-            String permGroupName =
-                    permissionGroupWithUsageCounts
-                            .get(PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT - 1)
-                            .getKey();
-            return mViewModel.getPermissionGroupLabel(context, permGroupName);
-        }
-
-        String permGroupName1 =
-                permissionGroupWithUsageCounts
-                        .get(PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT - 1)
-                        .getKey();
-        String permGroupName2 =
-                permissionGroupWithUsageCounts
-                        .get(PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT)
-                        .getKey();
-        CharSequence permGroupLabel1 = mViewModel.getPermissionGroupLabel(context, permGroupName1);
-        CharSequence permGroupLabel2 = mViewModel.getPermissionGroupLabel(context, permGroupName2);
-
-        // case for 2 extra items in the advanced info
-        if (size == PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT + 1) {
-            return context.getResources()
-                    .getString(
-                            R.string.perm_usage_adv_info_summary_2_items,
-                            permGroupLabel1,
-                            permGroupLabel2);
-        }
-
-        // case for 3 or more extra items in the advanced info
-        int numExtraItems = size - PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT - 1;
-        return context.getResources()
-                .getString(
-                        R.string.perm_usage_adv_info_summary_more_items,
-                        permGroupLabel1,
-                        permGroupLabel2,
-                        numExtraItems);
-    }
-
-    /** Add preferences for permission usages. */
-    private void addUIContent(
+    /**
+     * Add preferences for permission usages.
+     *
+     * @param agentsCategory The PreferenceCategory for agents. If this is null, it indicates that
+     *                       the gating feature flag is disabled and we shouldn't attempt to add
+     *                       preferences to this category.
+     */
+    private void addUiContent(
             Context context,
-            List<Map.Entry<String, Integer>> permissionGroupWithUsageCounts,
-            PreferenceCategory category,
+            List<Map.Entry<String, Integer>> permissionGroupWithUsageCountEntries,
+            List<AgentActivityItem> agentActivityItems,
+            PreferenceCategory permissionsCategory,
+            PreferenceCategory agentsCategory,
             boolean showSystem,
             boolean show7Days
     ) {
-        for (int i = 0; i < permissionGroupWithUsageCounts.size(); i++) {
-            Map.Entry<String, Integer> permissionGroupWithUsageCount =
-                    permissionGroupWithUsageCounts.get(i);
+        for (int i = 0; i < permissionGroupWithUsageCountEntries.size(); i++) {
+            Map.Entry<String, Integer> permissionUsageEntry =
+                    permissionGroupWithUsageCountEntries.get(i);
             PermissionUsageControlPreference permissionUsagePreference =
                     new PermissionUsageControlPreference(
                             context,
-                            permissionGroupWithUsageCount.getKey(),
-                            permissionGroupWithUsageCount.getValue(),
+                            permissionUsageEntry.getKey(),
+                            permissionUsageEntry.getValue(),
                             showSystem,
                             mSessionId,
                             show7Days);
-            category.addPreference(permissionUsagePreference);
+            boolean isVisible = mOtherExpanded
+                    || i < PERMISSION_USAGE_INITIAL_EXPANDED_CHILDREN_COUNT;
+            permissionUsagePreference.setVisible(isVisible);
+            permissionsCategory.addPreference(permissionUsagePreference);
+        }
+
+        mExpandButton = new SectionButtonPreference(context);
+        mExpandButton.setTitle(R.string.perm_usage_adv_info_title);
+        mExpandButton.setIcon(R.drawable.ic_arrow_down);
+        mExpandButton.setOnClickListener(view -> onExpandButtonClick(permissionsCategory));
+        mExpandButton.setVisible(!mOtherExpanded);
+        permissionsCategory.addPreference(mExpandButton);
+
+        if (agentsCategory != null) {
+            if (agentActivityItems.isEmpty()) {
+                Preference emptyAgentsPreference = new Preference(context);
+                emptyAgentsPreference.setTitle(R.string.empty_agent_activity_preference_title);
+                emptyAgentsPreference.setSelectable(false);
+                agentsCategory.addPreference(emptyAgentsPreference);
+            } else {
+                for (int i = 0; i < agentActivityItems.size(); i++) {
+                    AgentActivityItem agentActivityItem = agentActivityItems.get(i);
+                    String agentPackageName = agentActivityItem.getAgentPackageName();
+                    int accessCount = show7Days ? agentActivityItem.getAccessCount7Days() :
+                            agentActivityItem.getAccessCount24Hours();
+                    UserHandle user = agentActivityItem.getUserHandle();
+                    Preference agentUsagePreference = new Preference(context);
+                    agentUsagePreference.setIcon(
+                            KotlinUtils.INSTANCE.getBadgedPackageIcon(
+                                    getActivity().getApplication(),
+                                    agentPackageName,
+                                    user
+                            )
+                    );
+                    agentUsagePreference.setTitle(
+                            KotlinUtils.INSTANCE.getPackageLabel(
+                                    getActivity().getApplication(),
+                                    agentPackageName,
+                                    user
+                            )
+                    );
+                    if (accessCount > 0) {
+                        agentUsagePreference.setSummary(StringUtils.getIcuPluralsString(
+                                context,
+                                R.string.agent_usage_preference_label,
+                                accessCount
+                        ));
+                    } else if (show7Days) {
+                        agentUsagePreference.setSummary(
+                                R.string.agent_activity_preference_summary_no_accesses_7d
+                        );
+                    } else {
+                        agentUsagePreference.setSummary(
+                                R.string.agent_activity_preference_summary_no_accesses_24h
+                        );
+                    }
+                    agentUsagePreference.setOnPreferenceClickListener(preference -> {
+                        Intent intent = new Intent(context, AgentUsageDetailsActivity.class);
+                        intent.putExtra(Intent.EXTRA_PACKAGE_NAME, agentPackageName);
+                        intent.putExtra(Intent.EXTRA_USER, user);
+                        intent.putExtra(ManagePermissionsActivity.EXTRA_SHOW_7_DAYS, show7Days);
+                        intent.putExtra(ManagePermissionsActivity.EXTRA_SHOW_SYSTEM, showSystem);
+                        context.startActivity(intent);
+                        return true;
+                    });
+                    agentsCategory.addPreference(agentUsagePreference);
+                }
+            }
         }
 
         setLoading(false, true);
+    }
+
+    private Unit onExpandButtonClick(PreferenceCategory permissionsCategory) {
+        mOtherExpanded = true;
+        if (mGraphic != null) {
+            mGraphic.setShowOtherCategory(true);
+        }
+        for (int i = 0; i < permissionsCategory.getPreferenceCount(); i++) {
+            // On ExpandButton click, just set all permission preferences as visible
+            permissionsCategory.getPreference(i).setVisible(true);
+        }
+        mExpandButton.setVisible(false);
+
+        write(
+                PERMISSION_USAGE_FRAGMENT_INTERACTION,
+                mSessionId,
+                PERMISSION_USAGE_FRAGMENT_INTERACTION__ACTION__SEE_OTHER_PERMISSIONS_CLICKED);
+        return Unit.INSTANCE;
     }
 }

@@ -44,7 +44,7 @@ class UserSensitivityLiveData
 private constructor(
     private val app: Application,
     private val uid: Int,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<Map<Int, UidSensitivityState>?>() {
 
     private val context: Context
@@ -97,7 +97,6 @@ private constructor(
         // map of <uid, userSensitiveState>
         val sensitiveStatePerUid = mutableMapOf<Int, UidSensitivityState>()
 
-        // TODO ntmyren: Figure out how to get custom runtime permissions in a less costly manner
         val runtimePerms = PermissionMapping.getRuntimePlatformPermissionNames()
 
         for (pkg in pkgs) {
@@ -186,7 +185,7 @@ private constructor(
             return UserSensitivityLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
 

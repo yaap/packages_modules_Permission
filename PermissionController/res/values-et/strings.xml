@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Rakenduse koondamine …"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Tundmatu"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Privaatsuse juhtpaneel"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Rakenduse load"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"AI-assistendi tegevus"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"AI-assistente pole installitud"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"24 tundi pole juurdepääse"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"7 päeva pole juurdepääse"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Rakenduse <xliff:g id="APP_NAME">%1$s</xliff:g> tegevus"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"Viimase 24 tunni jooksul"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"Viimase 7 päeva jooksul"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Täna"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Eile"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Viimane juurdepääs: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Kuva"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Juurdepääse pole"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"AI-assistent pääses rakendustele juurde, et teie eest teavet hankida või toiminguid teha. Saate seda alati muuta rakenduse <xliff:g id="APP_NAME">%1$s</xliff:g> seadetes."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Privaatsuse juhtpaneel kuvatakse ainult, kui rakendustele pääseb juurde AI-assistentide funktsioonide abil."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Seadme abi"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Vaadake, millised rakendused hiljuti lube kasutasid"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Loa <xliff:g id="PERMGROUP">%1$s</xliff:g> kasutus"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Muude lubade vaatamine"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Pole viimase # päeva jooksul kasutatud}other{Pole viimase # päeva jooksul kasutatud}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Pole viimase # tunni jooksul kasutatud}other{Pole viimase # tunni jooksul kasutatud}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Kasutab 1 rakendus}other{Kasutavad # rakendust}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Pääses juurde ühele rakendusele}other{Pääses juurde # rakendusele}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Kuva kõik juhtpaneelil"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Filtreerimisalus: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Eemalda filter"</string>
@@ -189,13 +206,15 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Luba juurdepääs ainult meediale"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Luba alati"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Luba ainult rakenduse kasutamise ajal"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Luba rakenduse töös hoidmiseks"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Luba alati kõik"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Küsi iga kord"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Küsi iga kord või luba jagamisel"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Ära luba"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Luba piiratud juurdepääs"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Täpne asukoht"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"Ligikaudne asukoht"</string>
-    <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Täpse asukoha kasutamine"</string>
+    <string name="app_permission_location_accuracy" msgid="7166912915040018669">"Kasuta täpset asukohta"</string>
     <string name="app_permission_location_accuracy_subtitle" msgid="2654077606404987210">"Kui täpne asukoht on välja lülitatud, pääsevad rakendused juurde teie ligikaudsele asukohale"</string>
     <string name="app_permission_title" msgid="2090897901051370711">"Funktsiooni <xliff:g id="PERM">%1$s</xliff:g> luba"</string>
     <string name="app_permission_header" msgid="2951363137032603806">"Rakenduse juurdepääs funktsioonile <xliff:g id="PERM">%1$s</xliff:g>"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Lubatud"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Alati lubatud"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Lubatud ainult kasutuse ajal"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Lubatud rakenduse töös hoidmiseks"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Luba ainult meediale juurdepääsemiseks"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Luba kõikide failide haldamiseks"</string>
     <string name="ask_header" msgid="2633816846459944376">"Küsi iga kord"</string>
     <string name="denied_header" msgid="903209608358177654">"Pole lubatud"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> seadmes <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Kuva rohkem rakendusi, mis kõigile failidele juurde pääsevad"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Lubatakse rakenduse töö jätkamiseks&lt;/b&gt;&lt;br&gt;&lt;br&gt;Rakenduse töö jätkamiseks võidakse lubada juurdepääs teie kohalikule võrgule ja ühenduse loomine ainult selles võrgus olevate seadmetega.&lt;br&gt;&lt;br&gt;Rakendus ei saa Bluetoothi ja muude tehnoloogiate abil seadmetega ühendust luua, kui te ei luba sellel kõiki läheduses olevaid seadmeid leida ja nendega ühendust luua."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Lubatud rakenduse töös hoidmiseks&lt;/b&gt;&lt;br&gt;&lt;br&gt;Rakenduse töös hoidmiseks võib olla lubatud juurdepääs teie kohalikule võrgule ja ühenduse loomine ainult selles võrgus olevate seadmetega.&lt;br&gt;&lt;br&gt;Rakendus ei saa Bluetoothi ja muude tehnoloogiate abil seadmetega ühendust luua, kui te ei luba sellel kõiki läheduses olevaid seadmeid leida ja nendega ühendust luua."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 päev}other{# päeva}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# tund}other{# tundi}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# minut}other{# minutit}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Puudub"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Süsteemi vaikeseade)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Rakendusi pole"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Muuda"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Kasuta praegust"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Muud NFC teenused"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Valitud"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Valitud – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Rakenduse erijuurdepääs puudub"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Rakendusi pole"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Ei toeta tööprofiili"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Kas soovite oma avakuva vaikerakenduse muuta rakenduseks &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"See asendab teie avakuva ja võib mõjutada juurdepääsu teie seadme funktsioonidele.&lt;br&gt;&lt;br&gt;Saate seda valikut igal ajal muuta &lt;b&gt;avakuva vaikerakenduse&lt;/b&gt; seadetes."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Märkus Kui taaskäivitate seadme ja olete määranud ekraaniluku, ei saa see rakendus käivituda enne, kui oma seadme avate."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Assistent saab teie süsteemis kasutatavate rakenduste kohta teavet (sh teie ekraanil kuvatud või rakendustes juurdepääsetavat teavet) lugeda."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Kas soovite oma digitaalse assistendi rakenduse muuta rakenduseks &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"See assistent pääseb juurde sellisele teabele nagu teie sõnumid ja andmetele, mida rakendused on otsustanud teie assistendiga jagada."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"See assistent pääseb juurde sellisele teabele nagu teie sõnumid ja andmetele, mida rakendused on otsustanud teie assistendiga jagada.&lt;br&gt;&lt;br&gt;Kuna olete varem ekraani- ja rakenduseandmed rakenduse <xliff:g id="APP_NAME">%1$s</xliff:g> jaoks sisse lülitanud, lubatakse sellel juurde pääseda ka teie ekraanil avatud rakenduse sisule."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Silumisandmete jagamine"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Kas jagada üksikasjalikke silumisandmeid?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> soovib üles laadida silumisteavet."</string>
@@ -497,7 +526,7 @@
     <string name="permgrouprequest_device_aware_sms" msgid="6639977653040502291">"Kas lubada rakendusel &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; seadmes &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; saata ja vaadata SMS-sõnumeid?"</string>
     <string name="permgrouprequest_storage" msgid="8717773092518621602">"Kas lubada rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; juurdepääs seadmes olevatele fotodele, meediale ja failidele?"</string>
     <string name="permgrouprequest_device_aware_storage" msgid="6933251810928606636">"Kas lubada rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; seadmes &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; juurdepääs fotodele, meediale ja failidele?"</string>
-    <string name="permgrouprequest_storage_q_to_s" msgid="8213701872983685505">"Kas anda rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&amp;gt seadmes juurdep. &lt;b&gt;fotodele, videotele, muusikale ja helidele&lt;/b&gt;?"</string>
+    <string name="permgrouprequest_storage_q_to_s" msgid="8213701872983685505">"Kas anda rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; seadmes juurdep. &lt;b&gt;fotodele, videotele, muusikale ja helidele&lt;/b&gt;?"</string>
     <string name="permgrouprequest_storage_pre_q" msgid="168130651144569428">"Kas anda rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; juurdepääs &lt;b&gt;foto-, video-, muusika-, heli- ja muudele failidele&lt;/b&gt;?"</string>
     <string name="permgrouprequest_read_media_aural" msgid="2593365397347577812">"Kas anda rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; selles seadmes juurdepääs muusikale ja helifailidele?"</string>
     <string name="permgrouprequest_device_aware_read_media_aural" msgid="7927884506238101064">"Kas lubada rakendusele &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; seadmes &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; juurdepääs muusikale ja helifailidele?"</string>
@@ -633,7 +662,7 @@
     <string name="mic_toggle_description" msgid="9163104307990677157">"Rakenduste ja teenuste jaoks. Isegi kui see seade on välja lülitatud, võidakse mikrofoni andmeid siiski jagada hädaabinumbrile helistades."</string>
     <string name="location_settings_subtitle" msgid="2328360561197430695">"Vaadake rakendusi ja teenuseid, mis pääsevad asukohale juurde"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Kuva juurdepääs lõikelauale"</string>
-    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Kui rakendused pääsevad juurde kopeeritud tekstile, piltidele või muule sisule, kuvatakse teade"</string>
+    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Kui rakendused pääsevad juurde kopeeritud tekstile, piltidele või muule sisule, kuvatakse teade."</string>
     <string name="show_password_title" msgid="2877269286984684659">"Kuva paroolid"</string>
     <string name="show_password_summary" msgid="1110166488865981610">"Sisestamisel kuvatakse hetkeks tähemärgid"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"See rakendus andis teada, et võib asukohaandmeid jagada kolmandate osapooltega"</string>
@@ -658,7 +687,7 @@
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"Asukohaandmeid võidakse jagada"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"See rakendus andis teada, et võib jagada teie asukohaandmeid kolmandate osapooltega."</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Andmete jagamise värskendused asukoha kohta"</string>
-    <string name="data_sharing_updates_summary" msgid="764113985772233889">"Vaadake üle rakendused, mis on muutnud teie asukohaandmete jagamise viisi"</string>
+    <string name="data_sharing_updates_summary" msgid="764113985772233889">"Vaadake üle rakendused, mis on muutnud teie asukohaandmete jagamise viisi."</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Need rakendused on muutnud teie asukohaandmete jagamise viisi. Võib-olla ei jaganud nad neid varem või hakkasid neid nüüd jagama reklaami- või turunduseesmärgil."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Nende rakenduste arendajad on esitanud rakenduste poele teavet oma andmejagamistavade kohta. Nad võivad neid aja jooksul muuta.\n\nAndmejagamistavad võivad oleneda teie piirkonnast ja vanusest ning rakenduse versioonist ja kasutusest."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"Teave andmete jagamise kohta"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Rakendused"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Agentide juurdepääs"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agendid, kellel on selles rakenduses juurdepääs teabele ja kes saavad teie eest toiminguid teha"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Lubatud"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Pole lubatud"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Agentide juurdepääs pole lubatud"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Agentide juurdepääs pole keelatud"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Rakenduste juurdepääs pole lubatud"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Rakenduste juurdepääs pole keelatud"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Juurdepääs rakendusele"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Juurdepääs rakendusele <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"Rakenduse <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> juurdepääs rakendusele <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Luba"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Ära luba"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Seadme seaded"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Kas lubada rakendusel <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> olla rakenduse <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> agent?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"See agent pääseb rakendusele <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> juurde, et teie eest teavet hankida ja toiminguid teha."</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Luba"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Ära luba"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Kas lubada rakendusel &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; kasutada ekraani- ja rakenduseandmeid?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"See assistent pääseb juurde teie ekraanil avatud rakenduse teabele ja sisule."</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Luba"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Ära luba"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Ekraani- ja rakenduseandmete kasutamine"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Lubage assistendil juurde pääseda teie ekraanil avatud rakenduse teabele ja sisule"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Kas lubada rakendusel <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> juurde pääseda teabele ja sisule, mis on teie ekraanil avatud rakenduses?"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Luba"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Ära luba"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Kas lubada rakendusel <xliff:g id="APP_NAME">%1$s</xliff:g> täpsele asukohale juurde pääseda, kui otsustate seda jagada?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Kui jagate oma asukohta, on sellel rakendusel juurdepääs täpsele asukohale, kuni rakenduse sulgete."</string>
 </resources>

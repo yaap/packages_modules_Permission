@@ -44,7 +44,8 @@ class AppPermissionConfirmDialogViewModel : ViewModel() {
 /** Factory for an AppPermissionConfirmDialogViewModel */
 class AppPermissionConfirmDialogViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return AppPermissionConfirmDialogViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return AppPermissionConfirmDialogViewModel() as T
     }
 }
 
@@ -53,5 +54,5 @@ data class ConfirmDialogArgs(
     val messageId: Int,
     val changeRequest: AppPermissionViewModel.ChangeRequest,
     val buttonPressed: Int,
-    val oneTime: Boolean
+    val oneTime: Boolean,
 )

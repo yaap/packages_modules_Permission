@@ -108,28 +108,28 @@ class NotificationListenerPrivacySourceTest {
         whenever(
                 Utils.getPackageInfoForComponentName(
                     any(ContextWrapper::class.java),
-                    eq(testComponent1)
+                    eq(testComponent1),
                 )
             )
             .thenReturn(packageInfo1)
         whenever(
                 Utils.getPackageInfoForComponentName(
                     any(ContextWrapper::class.java),
-                    eq(testComponent2)
+                    eq(testComponent2),
                 )
             )
             .thenReturn(packageInfo2)
         whenever(
                 Utils.getApplicationLabel(
                     any(ContextWrapper::class.java),
-                    eq(packageInfo1.applicationInfo!!)
+                    eq(packageInfo1.applicationInfo!!),
                 )
             )
             .thenReturn(testComponent1.className)
         whenever(
                 Utils.getApplicationLabel(
                     any(ContextWrapper::class.java),
-                    eq(packageInfo2.applicationInfo!!)
+                    eq(packageInfo2.applicationInfo!!),
                 )
             )
             .thenReturn(testComponent2.className)
@@ -138,7 +138,7 @@ class NotificationListenerPrivacySourceTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(UserManager::class.java)
+                    eq(UserManager::class.java),
                 )
             )
             .thenReturn(mockUserManager)
@@ -148,7 +148,7 @@ class NotificationListenerPrivacySourceTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(NotificationManager::class.java)
+                    eq(NotificationManager::class.java),
                 )
             )
             .thenReturn(mockNotificationManager)
@@ -158,7 +158,7 @@ class NotificationListenerPrivacySourceTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(RoleManager::class.java)
+                    eq(RoleManager::class.java),
                 )
             )
             .thenReturn(mockRoleManager)
@@ -168,7 +168,7 @@ class NotificationListenerPrivacySourceTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(SafetyCenterManager::class.java)
+                    eq(SafetyCenterManager::class.java),
                 )
             )
             .thenReturn(mockSafetyCenterManager)
@@ -199,7 +199,7 @@ class NotificationListenerPrivacySourceTest {
             .setSafetySourceData(
                 eq(SC_NLS_SOURCE_ID),
                 any(SafetySourceData::class.java),
-                any(SafetyEvent::class.java)
+                any(SafetyEvent::class.java),
             )
     }
 
@@ -217,7 +217,7 @@ class NotificationListenerPrivacySourceTest {
         privacySource.rescanAndPushSafetyCenterData(
             context,
             Intent(Intent.ACTION_BOOT_COMPLETED),
-            SafetyCenterReceiver.RefreshEvent.EVENT_DEVICE_REBOOTED
+            SafetyCenterReceiver.RefreshEvent.EVENT_DEVICE_REBOOTED,
         )
 
         val expectedSafetySourceData: SafetySourceData = createExpectedSafetyCenterData()
@@ -234,12 +234,12 @@ class NotificationListenerPrivacySourceTest {
             Intent(SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES)
                 .putExtra(
                     SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID,
-                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID
+                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID,
                 )
         privacySource.rescanAndPushSafetyCenterData(
             context,
             intent,
-            SafetyCenterReceiver.RefreshEvent.EVENT_REFRESH_REQUESTED
+            SafetyCenterReceiver.RefreshEvent.EVENT_REFRESH_REQUESTED,
         )
 
         val expectedSafetySourceData: SafetySourceData = createExpectedSafetyCenterData()
@@ -260,7 +260,7 @@ class NotificationListenerPrivacySourceTest {
         privacySource.rescanAndPushSafetyCenterData(
             context,
             Intent(Intent.ACTION_BOOT_COMPLETED),
-            SafetyCenterReceiver.RefreshEvent.UNKNOWN
+            SafetyCenterReceiver.RefreshEvent.UNKNOWN,
         )
 
         val expectedSafetySourceData: SafetySourceData = createExpectedSafetyCenterData()
@@ -278,7 +278,7 @@ class NotificationListenerPrivacySourceTest {
         privacySource.rescanAndPushSafetyCenterData(
             context,
             Intent(Intent.ACTION_BOOT_COMPLETED),
-            SafetyCenterReceiver.RefreshEvent.UNKNOWN
+            SafetyCenterReceiver.RefreshEvent.UNKNOWN,
         )
 
         verifyNoMoreInteractions(mockSafetyCenterManager)
@@ -289,7 +289,7 @@ class NotificationListenerPrivacySourceTest {
                 DeviceConfig.getBoolean(
                     eq(DeviceConfig.NAMESPACE_PRIVACY),
                     eq(PROPERTY_NOTIFICATION_LISTENER_CHECK_ENABLED),
-                    anyBoolean()
+                    anyBoolean(),
                 )
             )
             .thenReturn(enabled)

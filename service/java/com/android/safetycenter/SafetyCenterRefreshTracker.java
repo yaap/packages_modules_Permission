@@ -31,9 +31,11 @@ import android.safetycenter.SafetyCenterStatus.RefreshStatus;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 
 import androidx.annotation.Nullable;
 
+import com.android.permission.flags.Flags;
 import com.android.safetycenter.logging.SafetyCenterStatsdLogger;
 
 import java.io.PrintWriter;
@@ -61,6 +63,10 @@ public final class SafetyCenterRefreshTracker {
     //  one global refresh?
     private RefreshInProgress mRefreshInProgress = null;
 
+    // Stores whether a first user initiated refresh (page open or rescan button click) has been
+    // completed for a given profile parent user ID (thus keeping track of a user profile group).
+    private final SparseBooleanArray mUserInitiatedRefreshesSent = new SparseBooleanArray();
+
     private int mRefreshCounter = 0;
 
     SafetyCenterRefreshTracker(Context context) {
@@ -72,7 +78,9 @@ public final class SafetyCenterRefreshTracker {
      * refresh.
      */
     String reportRefreshInProgress(
-            @RefreshReason int refreshReason, UserProfileGroup userProfileGroup) {
+            @RefreshReason int refreshReason,
+            UserProfileGroup userProfileGroup,
+            ArraySet<String> untrackedSourceIds) {
         if (mRefreshInProgress != null) {
             Log.i(TAG, "Replacing ongoing refresh with id: " + mRefreshInProgress.getId());
         }
@@ -90,7 +98,7 @@ public final class SafetyCenterRefreshTracker {
                         refreshBroadcastId,
                         refreshReason,
                         userProfileGroup,
-                        SafetyCenterFlags.getUntrackedSourceIds());
+                        untrackedSourceIds);
 
         return refreshBroadcastId;
     }
@@ -106,6 +114,15 @@ public final class SafetyCenterRefreshTracker {
             return SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS;
         }
         return SafetyCenterStatus.REFRESH_STATUS_DATA_FETCH_IN_PROGRESS;
+    }
+
+    /**
+     * Returns whether a first user-initiated-refresh has been completed for the given profile
+     * parent user ID. Using the profile parent user ID we automatically keep track of any finished
+     * refreshes within the same user profile group.
+     */
+    boolean hasUserInitiatedRefreshCompleted(@UserIdInt int profileParentUserId) {
+        return mUserInitiatedRefreshesSent.get(profileParentUserId, false);
     }
 
     /**
@@ -194,19 +211,20 @@ public final class SafetyCenterRefreshTracker {
                 wholeResult,
                 refreshReason,
                 refreshInProgress.hasAnyTrackedSourceDataChanged());
+        maybeUpdateUserInitiatedRefreshes(refreshReason, refreshInProgress);
         mRefreshInProgress = null;
         return true;
     }
 
     /**
-     * Clears any ongoing refresh in progress, if any.
-     *
-     * <p>Note that this method simply clears the tracking of a refresh, and does not prevent
-     * scheduled broadcasts being sent by {@link
-     * android.safetycenter.SafetyCenterManager#refreshSafetySources}.
+     * Clears all held refresh data.
      */
-    void clearRefresh() {
+    void clear() {
         clearRefreshInternal();
+        if (Flags.betterSafetyCenterSourceTrackingOnRefresh()) {
+            mUserInitiatedRefreshesSent.clear();
+            mRefreshCounter = 0;
+        }
     }
 
     /**
@@ -307,7 +325,19 @@ public final class SafetyCenterRefreshTracker {
                 refreshReason,
                 clearedRefresh.hasAnyTrackedSourceDataChanged());
 
+        maybeUpdateUserInitiatedRefreshes(refreshReason, clearedRefresh);
+
         return timedOutSources;
+    }
+
+    private void maybeUpdateUserInitiatedRefreshes(
+                @RefreshReason int refreshReason, RefreshInProgress refreshInProgress) {
+        boolean isUserInitiated = !RefreshReasons.isBackgroundRefresh(refreshReason);
+        if (Flags.betterSafetyCenterSourceTrackingOnRefresh()
+                && isUserInitiated) {
+            mUserInitiatedRefreshesSent.put(
+                    refreshInProgress.getUserProfileGroup().getProfileParentUserId(), true);
+        }
     }
 
     /**
@@ -403,6 +433,10 @@ public final class SafetyCenterRefreshTracker {
         @RefreshReason
         private int getReason() {
             return mReason;
+        }
+
+        private UserProfileGroup getUserProfileGroup() {
+            return mUserProfileGroup;
         }
 
         /** Returns the {@link Duration} since this refresh started. */

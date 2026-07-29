@@ -72,7 +72,7 @@ class PermissionEventCleanupJobServiceTest {
                 DeviceConfig.getLong(
                     eq(DeviceConfig.NAMESPACE_PERMISSIONS),
                     eq(Utils.PROPERTY_PERMISSION_EVENTS_CHECK_OLD_FREQUENCY_MILLIS),
-                    eq(DEFAULT_CLEAR_OLD_EVENTS_CHECK_FREQUENCY)
+                    eq(DEFAULT_CLEAR_OLD_EVENTS_CHECK_FREQUENCY),
                 )
             )
             .thenReturn(DEFAULT_CLEAR_OLD_EVENTS_CHECK_FREQUENCY)

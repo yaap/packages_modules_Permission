@@ -21,15 +21,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,7 +51,6 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberTransformingLazyColumnState
 import androidx.wear.compose.material3.AppScaffold
 import androidx.wear.compose.material3.CircularProgressIndicator
-import androidx.wear.compose.material3.IconButtonDefaults
 import androidx.wear.compose.material3.ListHeader
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.ScreenScaffold
@@ -58,6 +60,7 @@ import androidx.wear.compose.material3.TimeText
 import com.android.permissioncontroller.wear.permission.components.AnnotatedText
 import com.android.permissioncontroller.wear.permission.components.ListScopeWrapper
 import com.android.permissioncontroller.wear.permission.components.material2.Wear2Scaffold
+import com.android.permissioncontroller.wear.permission.components.theme.LocalCustomDimensions
 import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion.MATERIAL2_5
@@ -136,7 +139,7 @@ private class ScalingScopeConverter(private val scope: ScalingLazyListScope) : L
 @Composable
 fun WearPermissionScaffold(
     materialUIVersion: WearPermissionMaterialUIVersion = ResourceHelper.materialUIVersionInSettings,
-    asScalingList: Boolean = false,
+    asScalingList: Boolean = true,
     showTimeText: Boolean,
     title: String?,
     subtitle: CharSequence?,
@@ -206,21 +209,30 @@ private fun WearPermissionScaffoldInternal(
                 scrollInfoProvider = scrollInfoProvider,
                 scrollIndicator = positionIndicator,
             ) {
-                Box(modifier = Modifier.fillMaxSize()) {
+                Box(
+                    modifier =
+                        Modifier.fillMaxSize().semantics {
+                            // Setting this to the title forces the Screen Reader
+                            // to treat the whole container as a new context.
+                            contentDescription = title ?: subtitle.toString()
+                        }
+                ) {
                     if (isLoading) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     } else {
-                        LazyColumnView(
-                            asScalingList = asScalingList,
-                            showTimeText = showTimeText,
-                            listState = listState,
-                            title = title,
-                            subtitle = subtitle,
-                            imageBuilder = imageBuilder,
-                            content = content,
-                            titleTestTag = titleTestTag,
-                            subtitleTestTag = subtitleTestTag,
-                        )
+                        key(title, subtitle) {
+                            LazyColumnView(
+                                asScalingList = asScalingList,
+                                showTimeText = showTimeText,
+                                listState = listState,
+                                title = title,
+                                subtitle = subtitle,
+                                imageBuilder = imageBuilder,
+                                content = content,
+                                titleTestTag = titleTestTag,
+                                subtitleTestTag = subtitleTestTag,
+                            )
+                        }
                     }
                 }
             }
@@ -240,13 +252,7 @@ private fun BoxScope.LazyColumnView(
     titleTestTag: String? = null,
     subtitleTestTag: String? = null,
 ) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    val screenHeight = LocalConfiguration.current.screenHeightDp
-    val paddingDefaults =
-        WearPermissionScaffoldPaddingDefaults(
-            screenWidth = screenWidth,
-            screenHeight = screenHeight,
-        )
+    val paddingDefaults = rememberPaddingDefaults()
     val scrollContentPadding =
         if (showTimeText) {
             paddingDefaults.scrollContentPadding
@@ -256,10 +262,7 @@ private fun BoxScope.LazyColumnView(
 
     fun BoxScope.scrollingViewContent(scopeWrapper: ListScopeWrapper) {
         with(scopeWrapper) {
-            iconItem(
-                imageBuilder =
-                    imageBuilder?.modifier(Modifier.size(IconButtonDefaults.LargeIconSize))
-            )
+            iconItem(imageBuilder = imageBuilder)
             titleItem(
                 text = title,
                 testTag = titleTestTag,
@@ -332,7 +335,13 @@ private fun Modifier.optionalTestTag(tag: String?): Modifier {
 }
 
 private fun ListScopeWrapper.iconItem(imageBuilder: WearPermissionIconBuilder?) =
-    imageBuilder?.let { item { imageBuilder.buildAsImage() } }
+    imageBuilder?.let {
+        item {
+            imageBuilder
+                .modifier(Modifier.size(LocalCustomDimensions.current.scrollScreenTitleIconSize.dp))
+                .buildAsImage()
+        }
+    }
 
 private fun ListScopeWrapper.titleItem(
     text: String?,
@@ -350,7 +359,10 @@ private fun ListScopeWrapper.titleItem(
                     MaterialTheme.typography.titleLarge
                 }
             ListHeader(
-                modifier = modifier.requiredHeightIn(1.dp), // We do not want default min height
+                modifier =
+                    modifier
+                        .fillMaxWidth()
+                        .requiredHeightIn(1.dp), // We do not want default min height
                 contentPadding = contentPaddingValues,
             ) {
                 Text(

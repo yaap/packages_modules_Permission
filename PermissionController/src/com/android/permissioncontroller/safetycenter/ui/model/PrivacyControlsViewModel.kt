@@ -35,7 +35,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.android.modules.utils.build.SdkLevel
-import com.android.permission.flags.Flags
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.data.SmartUpdateMediatorLiveData
 import com.android.settingslib.RestrictedLockUtils
@@ -86,13 +85,13 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
                     getSensorToggleState(
                         Sensors.CAMERA,
                         UserManager.DISALLOW_CAMERA_TOGGLE,
-                        CONFIG_CAMERA_TOGGLE_ENABLED
+                        CONFIG_CAMERA_TOGGLE_ENABLED,
                     )
                 shownPrefs[Pref.MIC] =
                     getSensorToggleState(
                         Sensors.MICROPHONE,
                         UserManager.DISALLOW_MICROPHONE_TOGGLE,
-                        CONFIG_MIC_TOGGLE_ENABLED
+                        CONFIG_MIC_TOGGLE_ENABLED,
                     )
                 shownPrefs[Pref.CLIPBOARD] =
                     PrefState(visible = true, checked = isClipboardEnabled(), admin = null)
@@ -100,7 +99,7 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
                     PrefState(
                         visible = shouldDisplayShowPasswordToggle(),
                         checked = isShowPasswordEnabled(),
-                        admin = null
+                        admin = null,
                     )
                 value = shownPrefs
             }
@@ -148,7 +147,7 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
     private fun getSensorToggleState(
         sensor: Int,
         restriction: String,
-        enableConfig: String
+        enableConfig: String,
     ): PrefState {
         val admin = RestrictedLockUtils.getProfileOrDeviceOwner(app, Process.myUserHandle())
         val sensorConfigEnabled =
@@ -165,7 +164,7 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
                     admin
                 } else {
                     null
-                }
+                },
         )
     }
 
@@ -178,13 +177,13 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_CLIPBOARD,
                 CONFIG_SHOW_ACCESS_NOTIFICATIONS_DEFAULT,
-                true
+                true,
             )
         val defaultSetting = if (clipboardDefaultEnabled) 1 else 0
         return Settings.Secure.getInt(
             app.contentResolver,
             CONFIG_CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS,
-            defaultSetting
+            defaultSetting,
         ) != 0
     }
 
@@ -198,7 +197,7 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
         Settings.Secure.putInt(
             app.contentResolver,
             CONFIG_CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS,
-            newState
+            newState,
         )
     }
 
@@ -211,7 +210,7 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
         Settings.System.putInt(
             app.contentResolver,
             Settings.System.TEXT_SHOW_PASSWORD,
-            if (isShowPasswordEnabled()) 0 else 1
+            if (isShowPasswordEnabled()) 0 else 1,
         )
     }
 
@@ -226,10 +225,9 @@ class PrivacyControlsViewModel(private val app: Application) : AndroidViewModel(
  * @param app The current application
  */
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-class PrivacyControlsViewModelFactory(
-    private val app: Application,
-) : ViewModelProvider.Factory {
+class PrivacyControlsViewModelFactory(private val app: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return PrivacyControlsViewModel(app) as T
+        @Suppress("UNCHECKED_CAST")
+        return PrivacyControlsViewModel(app) as T
     }
 }

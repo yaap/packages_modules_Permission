@@ -33,7 +33,7 @@ import com.android.permissioncontroller.permission.model.livedatatypes.LightPack
 class HibernationController(
     private val context: Context,
     private val unusedThreshold: Long,
-    private val targetsPreS: Boolean
+    private val targetsPreS: Boolean,
 ) {
 
     companion object {
@@ -101,7 +101,7 @@ class HibernationController(
             DumpableLog.i(
                 LOG_TAG,
                 "Done hibernating apps $hibernatedApps \n " +
-                    "Globally hibernating apps $globallyHibernatedApps"
+                    "Globally hibernating apps $globallyHibernatedApps",
             )
         }
 

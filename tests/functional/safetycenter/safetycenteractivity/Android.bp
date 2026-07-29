@@ -32,6 +32,7 @@ android_test {
         "aconfig_settingstheme_exported_flags_java_lib",
         "androidx.test.rules",
         "androidx.test.ext.junit",
+        "com.android.permissioncontroller.flags-aconfig-java",
         "compatibility-device-preconditions",
         "kotlin-test",
         "platform-test-rules",

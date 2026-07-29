@@ -97,10 +97,16 @@ public class RoleLiveData extends AsyncTaskLiveData<List<RoleApplicationItem>>
                 continue;
             }
             boolean isHolderApplication = holderPackageNames.contains(qualifyingPackageName);
-            applicationItems.add(
-                    new RoleApplicationItem(qualifyingApplicationInfo, isHolderApplication));
+            applicationItems.add(createRoleApplicationItem(qualifyingApplicationInfo,
+                    isHolderApplication));
         }
 
         return applicationItems;
+    }
+
+    @NonNull
+    protected RoleApplicationItem createRoleApplicationItem(
+            @NonNull ApplicationInfo applicationInfo, boolean isHolderApplication) {
+        return new RoleApplicationItem(applicationInfo, isHolderApplication);
     }
 }

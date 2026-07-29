@@ -38,7 +38,7 @@ class SafetyGroupPreference(
     private val getTaskIdForEntry: (String) -> Int,
     private val viewModel: SafetyCenterViewModel,
     private val onExpandedListener: (String) -> Unit,
-    private val onCollapsedListener: (String) -> Unit
+    private val onCollapsedListener: (String) -> Unit,
 ) : Preference(context), ComparablePreference {
 
     init {
@@ -56,7 +56,7 @@ class SafetyGroupPreference(
             getTaskIdForEntry,
             viewModel,
             onExpandedListener,
-            onCollapsedListener
+            onCollapsedListener,
         )
     }
 

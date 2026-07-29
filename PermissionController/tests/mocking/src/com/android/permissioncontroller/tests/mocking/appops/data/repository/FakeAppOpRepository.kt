@@ -16,6 +16,8 @@
 
 package com.android.permissioncontroller.tests.mocking.appops.data.repository
 
+import android.app.AppOpsManager
+import android.app.AppOpsManager.OnOpChangedListener
 import com.android.permissioncontroller.appops.data.model.v31.DiscretePackageOpsModel
 import com.android.permissioncontroller.appops.data.model.v31.PackageAppOpUsageModel
 import com.android.permissioncontroller.appops.data.repository.v31.AppOpRepository
@@ -27,10 +29,30 @@ class FakeAppOpRepository(
     override val packageAppOpsUsages: Flow<List<PackageAppOpUsageModel>>,
     private val discreteOps: Flow<List<DiscretePackageOpsModel>> = flowOf(),
 ) : AppOpRepository {
+    private val opModes: MutableMap<Pair<String, Int>, Int> = mutableMapOf()
+    private val onOpChangedListeners: MutableList<OnOpChangedListener> = mutableListOf()
+
     override fun getDiscreteOps(
         opNames: List<String>,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
     ): Flow<List<DiscretePackageOpsModel>> {
         return discreteOps
+    }
+
+    override fun checkOpNoThrow(op: String, uid: Int, packageName: String): Int =
+        opModes.getOrDefault(op to uid, AppOpsManager.MODE_ERRORED)
+
+    override fun setUidMode(op: String, uid: Int, mode: Int) {
+        opModes.put(op to uid, mode)
+        onOpChangedListeners.forEach { it.onOpChanged(op, "") }
+    }
+
+    // TODO: support watcher that filters based on package name
+    override fun startWatchingMode(op: String, packageName: String, callback: OnOpChangedListener) {
+        onOpChangedListeners.add(callback)
+    }
+
+    override fun stopWatchingMode(callback: OnOpChangedListener) {
+        onOpChangedListeners.remove(callback)
     }
 }

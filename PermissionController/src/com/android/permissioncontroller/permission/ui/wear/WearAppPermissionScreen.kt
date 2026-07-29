@@ -17,6 +17,9 @@
 package com.android.permissioncontroller.permission.ui.wear
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -26,7 +29,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.wear.compose.material.ToggleChipDefaults
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel
 import com.android.permissioncontroller.permission.ui.model.AppPermissionViewModel.ButtonState
@@ -35,15 +37,14 @@ import com.android.permissioncontroller.permission.ui.v33.AdvancedConfirmDialogA
 import com.android.permissioncontroller.permission.ui.wear.model.AppPermissionConfirmDialogViewModel
 import com.android.permissioncontroller.permission.ui.wear.model.ConfirmDialogArgs
 import com.android.permissioncontroller.wear.permission.components.ScrollableScreen
-import com.android.permissioncontroller.wear.permission.components.material2.ListFooter
-import com.android.permissioncontroller.wear.permission.components.material2.ToggleChip
-import com.android.permissioncontroller.wear.permission.components.material2.toggleChipDisabledColors
 import com.android.permissioncontroller.wear.permission.components.material3.DialogButtonContent
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionConfirmationDialog
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionListFooter
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionTextProvider
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControl
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlStyle
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlType
-import com.android.permissioncontroller.wear.permission.components.material3.defaultAlertConfirmIcon
-import com.android.permissioncontroller.wear.permission.components.material3.defaultAlertDismissIcon
 import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 import com.android.settingslib.RestrictedLockUtils
@@ -125,13 +126,13 @@ internal fun WearAppPermissionContent(
         buttonState?.get(ButtonType.LOCATION_ACCURACY)?.let {
             if (it.isShown) {
                 item {
-                    ToggleChip(
+                    WearPermissionToggleControl(
                         checked = it.isChecked,
                         enabled = it.isEnabled,
                         label = stringResource(R.string.app_permission_location_accuracy),
                         toggleControl = WearPermissionToggleControlType.Switch,
                         onCheckedChanged = onLocationSwitchChanged,
-                        labelMaxLine = Integer.MAX_VALUE,
+                        labelMaxLines = Integer.MAX_VALUE,
                     )
                 }
             }
@@ -140,13 +141,13 @@ internal fun WearAppPermissionContent(
             buttonState?.get(buttonType)?.let {
                 if (it.isShown) {
                     item {
-                        ToggleChip(
+                        WearPermissionToggleControl(
                             checked = it.isChecked,
-                            colors =
+                            style =
                                 if (it.isEnabled) {
-                                    ToggleChipDefaults.toggleChipColors()
+                                    WearPermissionToggleControlStyle.Default
                                 } else {
-                                    toggleChipDisabledColors()
+                                    WearPermissionToggleControlStyle.DisabledLike
                                 },
                             label = labelsByButton(buttonType),
                             toggleControl = WearPermissionToggleControlType.Radio,
@@ -157,7 +158,7 @@ internal fun WearAppPermissionContent(
                                     onDisabledAllowButtonClick()
                                 }
                             },
-                            labelMaxLine = Integer.MAX_VALUE,
+                            labelMaxLines = Integer.MAX_VALUE,
                         )
                     }
                 }
@@ -165,16 +166,21 @@ internal fun WearAppPermissionContent(
         }
         detailResIds?.let {
             item {
-                ListFooter(
-                    description = stringResource(detailResIds.first),
-                    iconRes = R.drawable.ic_info,
-                    onClick =
-                        if (admin != null) {
-                            { onFooterClicked(admin) }
-                        } else {
-                            null
-                        },
+                val infoButtonBuilder = remember {
+                    WearPermissionIconBuilder.builder(R.drawable.ic_info)
+                }
+                WearPermissionListFooter(
+                    label = WearPermissionTextProvider.Plain(stringResource(detailResIds.first)),
+                    iconBuilder = infoButtonBuilder,
+                    onClick = admin?.let { { onFooterClicked(admin) } },
                 )
+            }
+        }
+        buttonState?.get(ButtonType.ALLOW_FOR_COMPATIBILITY)?.let {
+            if (it.isShown && it.isChecked) {
+                item(key = "compatibility_footer") {
+                    CompatibilityFooter(R.string.allow_for_compatibility_nearby_devices_footer)
+                }
             }
         }
     }
@@ -185,6 +191,7 @@ internal val buttonTypeOrder =
         ButtonType.ALLOW,
         ButtonType.ALLOW_ALWAYS,
         ButtonType.ALLOW_FOREGROUND,
+        ButtonType.ALLOW_FOR_COMPATIBILITY,
         ButtonType.ASK_ONCE,
         ButtonType.ASK,
         ButtonType.DENY,
@@ -198,6 +205,8 @@ internal fun labelsByButton(buttonType: ButtonType) =
         ButtonType.ALLOW_ALWAYS -> stringResource(R.string.app_permission_button_allow_always)
         ButtonType.ALLOW_FOREGROUND ->
             stringResource(R.string.app_permission_button_allow_foreground)
+        ButtonType.ALLOW_FOR_COMPATIBILITY ->
+            stringResource(R.string.app_permission_button_allow_for_compatibility)
         ButtonType.ASK_ONCE -> stringResource(R.string.app_permission_button_ask)
         ButtonType.ASK -> stringResource(R.string.app_permission_button_ask)
         ButtonType.DENY -> stringResource(R.string.app_permission_button_deny)
@@ -213,13 +222,21 @@ internal fun ConfirmDialog(
     onOkButtonClick: (ConfirmDialogArgs) -> Unit,
     onCancelButtonClick: () -> Unit,
 ) {
-    args?.run {
+    args?.let {
+        val positiveButton =
+            remember(it, onOkButtonClick) { DialogButtonContent(onClick = { onOkButtonClick(it) }) }
+
+        val negativeButton =
+            remember(onCancelButtonClick) {
+                DialogButtonContent(onClick = { onCancelButtonClick() })
+            }
+
         WearPermissionConfirmationDialog(
             materialUIVersion = materialUIVersion,
             show = showDialog,
-            message = stringResource(messageId),
-            positiveButtonContent = DialogButtonContent(onClick = { onOkButtonClick(this) }),
-            negativeButtonContent = DialogButtonContent(onClick = { onCancelButtonClick() }),
+            message = stringResource(it.messageId),
+            positiveButtonContent = positiveButton,
+            negativeButtonContent = negativeButton,
         )
     }
 }
@@ -232,35 +249,43 @@ internal fun AdvancedConfirmDialog(
     onOkButtonClick: (AdvancedConfirmDialogArgs) -> Unit,
     onCancelButtonClick: () -> Unit,
 ) {
-    args?.run {
+    args?.let {
         val title =
-            if (titleId != 0) {
-                stringResource(titleId)
+            if (it.titleId != 0) {
+                stringResource(it.titleId)
             } else {
                 ""
             }
-        val okButtonIconBuilder =
-            WearPermissionIconBuilder.defaultAlertConfirmIcon()
-                .contentDescription(stringResource(positiveButtonTextId))
-        val cancelButtonIconBuilder =
-            WearPermissionIconBuilder.defaultAlertDismissIcon()
-                .contentDescription(stringResource(negativeButtonTextId))
+
+        val positiveText = stringResource(it.positiveButtonTextId)
+        val negativeText = stringResource(it.negativeButtonTextId)
+
+        val mainIcon = remember(it.iconId) { WearPermissionIconBuilder.builder(it.iconId) }
+
+        val positiveButton =
+            remember(it, onOkButtonClick, positiveText) {
+                val iconBuilder =
+                    WearPermissionIconBuilder.builder(Icons.Default.Check)
+                        .contentDescription(positiveText)
+                DialogButtonContent(icon = iconBuilder, onClick = { onOkButtonClick(it) })
+            }
+
+        val negativeButton =
+            remember(onCancelButtonClick, negativeText) {
+                val iconBuilder =
+                    WearPermissionIconBuilder.builder(Icons.Default.Close)
+                        .contentDescription(negativeText)
+                DialogButtonContent(icon = iconBuilder, onClick = { onCancelButtonClick() })
+            }
+
         WearPermissionConfirmationDialog(
             materialUIVersion = materialUIVersion,
             show = showDialog,
             title = title,
-            iconRes = WearPermissionIconBuilder.builder(iconId),
-            message = stringResource(messageId),
-            positiveButtonContent =
-                DialogButtonContent(
-                    icon = okButtonIconBuilder,
-                    onClick = { onOkButtonClick(this) },
-                ),
-            negativeButtonContent =
-                DialogButtonContent(
-                    icon = cancelButtonIconBuilder,
-                    onClick = { onCancelButtonClick() },
-                ),
+            iconRes = mainIcon,
+            message = stringResource(it.messageId),
+            positiveButtonContent = positiveButton,
+            negativeButtonContent = negativeButton,
         )
     }
 }

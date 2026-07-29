@@ -51,7 +51,7 @@ object EnhancedConfirmationStatsLogUtils {
         Cancelled(ENHANCED_CONFIRMATION_DIALOG_RESULT_REPORTED__RESULT__RESULT_CANCELLED),
         LearnMore(ENHANCED_CONFIRMATION_DIALOG_RESULT_REPORTED__RESULT__RESULT_LEARN_MORE),
         Okay(ENHANCED_CONFIRMATION_DIALOG_RESULT_REPORTED__RESULT__RESULT_OK),
-        Suppressed(ENHANCED_CONFIRMATION_DIALOG_RESULT_REPORTED__RESULT__RESULT_SUPPRESSED)
+        Suppressed(ENHANCED_CONFIRMATION_DIALOG_RESULT_REPORTED__RESULT__RESULT_SUPPRESSED),
     }
 
     enum class SettingType(val statsLogValue: Int) {
@@ -81,7 +81,7 @@ object EnhancedConfirmationStatsLogUtils {
         uid: Int,
         settingIdentifier: String,
         firstShowForApp: Boolean,
-        dialogResult: DialogResult
+        dialogResult: DialogResult,
     ) {
         if (!SdkLevel.isAtLeastV() || !Flags.enhancedConfirmationModeApisEnabled()) {
             return
@@ -95,7 +95,7 @@ object EnhancedConfirmationStatsLogUtils {
                 "settingIdentifier='$settingIdentifier', " +
                 "firstShowForApp='$firstShowForApp', " +
                 "settingType='$settingType', " +
-                "result='${dialogResult.statsLogValue}'"
+                "result='${dialogResult.statsLogValue}'",
         )
 
         PermissionControllerStatsLog.write(
@@ -104,7 +104,7 @@ object EnhancedConfirmationStatsLogUtils {
             settingIdentifier,
             firstShowForApp,
             settingType.statsLogValue,
-            dialogResult.statsLogValue
+            dialogResult.statsLogValue,
         )
     }
 

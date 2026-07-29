@@ -140,15 +140,6 @@ flag {
 }
 
 flag {
-    name: "decluttered_permission_manager_enabled"
-    is_exported: true
-    namespace: "permissions"
-    description: "Enables displaying unused permission groups in the additional page, instead of displaying them in the main permission manager page"
-    bug: "365823624"
-    is_fixed_read_only: true
-}
-
-flag {
     name: "expressive_design_enabled"
     is_exported: true
     namespace: "permissions"
@@ -190,4 +181,31 @@ flag {
     description: "This flag is used to enable device state app functions service"
     bug: "409105506"
     is_fixed_read_only: true
+}
+
+flag {
+    name: "safety_center_notification_style"
+    namespace: "permissions"
+    description: "This flag enabled big text style for safety center notification"
+    bug: "443322314"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
+    name: "migrate_to_new_safety_center_ui_features"
+    namespace: "safety_center"
+    description: "Migrates permission module functionality to better support latest Safety Center UI in the Settings app"
+    bug: "424092847"
+}
+
+flag {
+    name: "better_safety_center_source_tracking_on_refresh"
+    namespace: "safety_center"
+    description: "Calculates untracked sources based on internal data presence for refresh broadcasts"
+    bug: "465410831"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
 }

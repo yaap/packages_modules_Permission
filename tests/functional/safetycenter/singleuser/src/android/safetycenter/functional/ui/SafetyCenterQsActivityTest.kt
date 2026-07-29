@@ -16,14 +16,19 @@
 
 package android.safetycenter.functional.ui
 
+import android.app.AppOpsManager
 import android.content.Context
 import android.hardware.SensorPrivacyManager.Sensors.CAMERA
 import android.hardware.SensorPrivacyManager.Sensors.MICROPHONE
+import android.os.Bundle
+import android.os.Process
+import android.permission.PermissionManager
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
 import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.FreezeRotationRule
+import com.android.compatibility.common.util.SystemUtil
 import com.android.safetycenter.testing.EnableSensorRule
 import com.android.safetycenter.testing.SafetyCenterActivityLauncher.launchSafetyCenterQsActivity
 import com.android.safetycenter.testing.SafetyCenterTestConfigs
@@ -45,6 +50,8 @@ class SafetyCenterQsActivityTest {
     private val context: Context = getApplicationContext()
     private val safetyCenterTestHelper = SafetyCenterTestHelper(context)
     private val safetyCenterTestConfigs = SafetyCenterTestConfigs(context)
+
+    private val proxyLabel = "proxy label"
 
     @get:Rule(order = 0) val freezeRotationRule = FreezeRotationRule()
     @get:Rule(order = 1) val supportsSafetyCenterRule = SupportsSafetyCenterRule(context)
@@ -81,6 +88,29 @@ class SafetyCenterQsActivityTest {
             // Verify updated state of privacy controls
             waitDisplayed(By.desc("Switch. Camera access. Blocked"))
             waitDisplayed(By.desc("Switch. Mic access. Blocked"))
+        }
+    }
+
+    @Test
+    fun launchActivity_withPermGroupUsages_displaysUsage() {
+        val appOpsManager = context.getSystemService(AppOpsManager::class.java)!!
+        val permissionManager = context.getSystemService(PermissionManager::class.java)!!
+        val usages =
+            SystemUtil.callWithShellPermissionIdentity {
+                appOpsManager.noteOpNoThrow(
+                    AppOpsManager.OPSTR_CAMERA,
+                    Process.myUid(),
+                    context.packageName,
+                )
+                permissionManager.getIndicatorAppOpUsageData(false)
+            }
+        val extras =
+            Bundle().apply {
+                putParcelableArrayList(PermissionManager.EXTRA_PERMISSION_USAGES, ArrayList(usages))
+            }
+        context.launchSafetyCenterQsActivity(extras) {
+            // Ensure camera access chip shows
+            waitDisplayed(By.text("Camera access"))
         }
     }
 }

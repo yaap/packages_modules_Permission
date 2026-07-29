@@ -42,7 +42,7 @@ class CustomPermissionAppsFragmentTest :
         "com.android.permissioncontroller.tests.appthatrequestpermission",
         "com.android.permissioncontroller.tests.A",
         "/data/local/tmp/pc-permissionui" + "/PermissionUiDefineAdditionalPermissionApp.apk",
-        "com.android.permissioncontroller.tests.appthatdefinespermission"
+        "com.android.permissioncontroller.tests.appthatdefinespermission",
     ) {
     @Ignore("b/155112992")
     @Test

@@ -65,7 +65,7 @@ class PermissionRationaleViewModel(
     private val packageName: String,
     private val permissionGroupName: String,
     private val sessionId: Long,
-    private val storedState: Bundle?
+    private val storedState: Bundle?,
 ) : ViewModel() {
     private val user = Process.myUserHandle()
     private val safetyLabelInfoLiveData = SafetyLabelInfoLiveData[packageName, user]
@@ -81,6 +81,7 @@ class PermissionRationaleViewModel(
          */
         fun shouldFinishActivityForResult(data: Intent?): Boolean
     }
+
     var activityResultCallback: ActivityResultCallback? = null
 
     /**
@@ -92,7 +93,7 @@ class PermissionRationaleViewModel(
         val isPreloadedApp: Boolean,
         val installSourcePackageName: String?,
         val installSourceLabel: String?,
-        val purposeSet: Set<Int>
+        val purposeSet: Set<Int>,
     )
 
     /** A [LiveData] which holds the currently pending PermissionRationaleInfo */
@@ -129,7 +130,7 @@ class PermissionRationaleViewModel(
                 val purposes =
                     SafetyLabelUtils.getSafetyLabelSharingPurposesForGroup(
                         safetyLabelInfo.safetyLabel,
-                        permissionGroupName
+                        permissionGroupName,
                     )
                 if (value == null) {
                     logPermissionRationaleDialogViewed(purposes)
@@ -140,7 +141,7 @@ class PermissionRationaleViewModel(
                         safetyLabelInfo.installSourceInfo.isPreloadedApp,
                         installSourcePackageName,
                         installSourceLabel,
-                        purposes
+                        purposes,
                     )
             }
         }
@@ -223,7 +224,7 @@ class PermissionRationaleViewModel(
                 .putExtra(Intent.EXTRA_USER, user)
                 .putExtra(
                     ManagePermissionsActivity.EXTRA_CALLER_NAME,
-                    PermissionRationaleActivity::class.java.name
+                    PermissionRationaleActivity::class.java.name,
                 )
                 .putExtra(Constants.EXTRA_SESSION_ID, sessionId)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -243,7 +244,7 @@ class PermissionRationaleViewModel(
             sessionId,
             uid,
             permissionGroupName,
-            purposesPresented
+            purposesPresented,
         )
     }
 
@@ -254,7 +255,7 @@ class PermissionRationaleViewModel(
             sessionId,
             uid,
             permissionGroupName,
-            buttonPressed
+            buttonPressed,
         )
     }
 
@@ -275,7 +276,7 @@ class PermissionRationaleViewModelFactory(
     private val packageName: String,
     private val permissionGroupName: String,
     private val sessionId: Long,
-    private val savedState: Bundle?
+    private val savedState: Bundle?,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
@@ -284,7 +285,7 @@ class PermissionRationaleViewModelFactory(
             packageName,
             permissionGroupName,
             sessionId,
-            savedState
+            savedState,
         )
             as T
     }

@@ -41,7 +41,7 @@ constructor(
     context: Context?,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    defStyleRes: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private companion object {
@@ -61,7 +61,7 @@ constructor(
         entry: SafetyCenterEntry,
         position: PositionInCardList,
         launchTaskId: Int?,
-        viewModel: SafetyCenterViewModel
+        viewModel: SafetyCenterViewModel,
     ) {
         setBackgroundResource(position.backgroundDrawableResId)
         val topMargin: Int = position.getTopMargin(context)
@@ -85,7 +85,7 @@ constructor(
             entry.title,
             entry.summary,
             entry.severityLevel,
-            entry.severityUnspecifiedIconType
+            entry.severityUnspecifiedIconType,
         )
     }
 
@@ -101,7 +101,7 @@ constructor(
     private fun setupEntryClickListener(
         entry: SafetyCenterEntry,
         launchTaskId: Int?,
-        viewModel: SafetyCenterViewModel
+        viewModel: SafetyCenterViewModel,
     ) {
         val pendingIntent = entry.pendingIntent
         if (pendingIntent != null) {
@@ -123,7 +123,7 @@ constructor(
     private fun setupIconActionButton(
         entry: SafetyCenterEntry,
         launchTaskId: Int?,
-        viewModel: SafetyCenterViewModel
+        viewModel: SafetyCenterViewModel,
     ) {
         val iconAction = entry.iconAction
         if (iconAction != null) {
@@ -144,14 +144,14 @@ constructor(
                 sendIconActionIntent(iconAction, launchTaskId, entry)
                 viewModel.interactionLogger.recordForEntry(Action.ENTRY_ICON_ACTION_CLICKED, entry)
             }
-            setPaddingRelative(paddingStart, paddingTop, /* end = */ 0, paddingBottom)
+            setPaddingRelative(paddingStart, paddingTop, /* end= */ 0, paddingBottom)
         } else {
             widgetFrame?.visibility = GONE
             setPaddingRelative(
                 paddingStart,
                 paddingTop,
                 context.resources.getDimensionPixelSize(R.dimen.sc_entry_padding_end),
-                paddingBottom
+                paddingBottom,
             )
         }
     }
@@ -159,7 +159,7 @@ constructor(
     private fun sendIconActionIntent(
         iconAction: SafetyCenterEntry.IconAction,
         launchTaskId: Int?,
-        entry: SafetyCenterEntry
+        entry: SafetyCenterEntry,
     ) {
         try {
             PendingIntentSender.send(iconAction.pendingIntent, launchTaskId)
@@ -179,7 +179,7 @@ constructor(
             entry.isEnabled,
             isEnabled,
             commonEntryView?.titleView,
-            commonEntryView?.summaryView
+            commonEntryView?.summaryView,
         )
     }
 

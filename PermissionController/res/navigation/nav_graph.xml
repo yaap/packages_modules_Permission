@@ -20,8 +20,6 @@
             android:id="@+id/nav_graph"
             app:startDestination="@id/manage_standard">
 
-    <!-- TODO ntmyren: remove placeholder animations -->
-
     <!-- For explanation of the navigation component, and this graph, see
     https://developer.android.com/guide/navigation -->
 

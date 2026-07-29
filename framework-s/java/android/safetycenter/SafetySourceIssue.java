@@ -332,6 +332,9 @@ public final class SafetySourceIssue implements Parcelable {
      * <p>This is displayed in the UI and helps to attribute issue cards to a particular source. If
      * this value is {@code null}, the title of the group that contains the Safety Source will be
      * used.
+     *
+     * <p>Note: On SDKs where Safety Center UI is fully migrated to the Settings app, the UI won't
+     * rely on this data anymore.
      */
     @Nullable
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
@@ -412,7 +415,7 @@ public final class SafetySourceIssue implements Parcelable {
      * issue when no custom notification has been set. See {@link #getNotificationBehavior()} for
      * details
      *
-     * @see Builder#setCustomNotification(android.safetycenter.SafetySourceIssue.Notification
+     * @see Builder#setCustomNotification(android.safetycenter.SafetySourceIssue.Notification)
      * @see #getNotificationBehavior()
      */
     @Nullable
@@ -1272,6 +1275,9 @@ public final class SafetySourceIssue implements Parcelable {
          * <p>This is displayed in the UI and helps to attribute an issue to a particular source. If
          * this value is {@code null}, the title of the group that contains the Safety Source will
          * be used.
+         *
+         * <p>Note: On SDKs where Safety Center UI is fully migrated to the Settings app, the UI
+         * won't rely on this data anymore.
          */
         @NonNull
         @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)

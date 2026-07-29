@@ -36,7 +36,7 @@ object SafetyLabelUtils {
     @JvmStatic
     fun getSafetyLabelSharingPurposesForGroup(
         safetyLabel: SafetyLabel,
-        groupName: String
+        groupName: String,
     ): Set<Int> {
         val purposeSet = mutableSetOf<Int>()
         val categoriesForPermission =
@@ -64,9 +64,8 @@ object SafetyLabelUtils {
     }
 
     /**
-     * Returns the {@code TRUE} if [AppMetadataSource] for the given package is
-     * supported for permission rationale, as well as for U- where getAppMetadataSource isn't
-     * available.
+     * Returns the {@code TRUE} if [AppMetadataSource] for the given package is supported for
+     * permission rationale, as well as for U- where getAppMetadataSource isn't available.
      */
     fun isAppMetadataSourceSupported(userContext: Context, packageName: String): Boolean {
         if (!SdkLevel.isAtLeastV() || !android.content.pm.Flags.aslInApkAppMetadataSource()) {

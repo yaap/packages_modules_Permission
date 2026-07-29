@@ -60,7 +60,7 @@ fun PackageManager.updatePermissionFlags(
     permissionName: String,
     packageName: String,
     user: UserHandle,
-    vararg flags: Pair<Int, Boolean>
+    vararg flags: Pair<Int, Boolean>,
 ) {
     val mask = flags.fold(0, { mask, (flag, _) -> mask or flag })
     val value =

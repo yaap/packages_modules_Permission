@@ -555,8 +555,10 @@ public class LocationAccessCheck {
             // Never show notification for pregranted permissions as warning the user via the
             // notification and then warning the user again when revoking the permission is
             // confusing
-            if (userPkg.getLocationGroup().hasGrantedByDefaultPermission()
-                    && bgLocationGroup.hasGrantedByDefaultPermission()) {
+            AppPermissionGroup locationGroup = userPkg.getLocationGroup();
+            if (locationGroup == null || (
+                    locationGroup.hasGrantedByDefaultPermission()
+                            && bgLocationGroup.hasGrantedByDefaultPermission())) {
                 continue;
             }
 

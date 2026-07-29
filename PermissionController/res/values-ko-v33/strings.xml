@@ -19,7 +19,7 @@
     <string name="role_dialer_request_description" msgid="6188305064871543419">"앱이 알림을 전송할 수 있으며 카메라, 연락처, 마이크, 전화, SMS에 대한 액세스 권한을 부여받게 됩니다."</string>
     <string name="role_sms_request_description" msgid="1506966389698625395">"앱이 나에게 알림을 전송할 수 있으며 카메라, 연락처, 파일, 마이크, 전화, SMS에 대한 액세스 권한을 부여받게 됩니다."</string>
     <string name="permission_description_summary_storage" msgid="1917071243213043858">"이 권한이 있는 앱은 기기의 모든 파일에 액세스할 수 있습니다."</string>
-    <string name="work_policy_title" msgid="832967780713677409">"직장 프로필 정책 정보"</string>
+    <string name="work_policy_title" msgid="832967780713677409">"업무 정책 정보"</string>
     <string name="work_policy_summary" msgid="3886113358084963931">"IT 관리자가 관리하는 설정"</string>
     <string name="safety_center_entry_group_expand_action" msgid="5358289574941779652">"목록 펼치기 및 표시"</string>
     <string name="safety_center_entry_group_collapse_action" msgid="1525710152244405656">"목록 접기 및 설정 숨기기"</string>

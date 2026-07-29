@@ -35,7 +35,7 @@ class AppDataSharingUpdatePreference(
     app: Application,
     packageName: String,
     user: UserHandle,
-    context: Context
+    context: Context,
 ) : SmartIconLoadPackagePermissionPreference(app, packageName, user, context) {
 
     init {

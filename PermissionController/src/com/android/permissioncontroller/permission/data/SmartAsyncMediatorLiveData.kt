@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
  */
 abstract class SmartAsyncMediatorLiveData<T>(
     isStaticVal: Boolean = false,
-    private val alwaysUpdateOnActive: Boolean = true
+    private val alwaysUpdateOnActive: Boolean = true,
 ) : SmartUpdateMediatorLiveData<T>(isStaticVal) {
 
     private var currentJob: Job? = null
@@ -60,7 +60,6 @@ abstract class SmartAsyncMediatorLiveData<T>(
         GlobalScope.launch(IPC) {
             currentJob = coroutineContext[Job]
             loadDataAndPostValue(currentJob!!)
-            // TODO ntmyren: generalize this command to the IPC dispatcher
             Binder.flushPendingCommands()
             jobRunning = false
             if (jobQueued) {

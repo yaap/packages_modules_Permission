@@ -22,11 +22,4 @@ android_test_helper_app {
     name: "CtsAppThatRequestsLocationAndBackgroundPermission28",
     defaults: ["cts_defaults"],
     sdk_version: "current",
-    // Tag this module as a cts test artifact
-    test_suites: [
-        "cts",
-        "vts10",
-        "general-tests",
-        "mts-permission",
-    ],
 }

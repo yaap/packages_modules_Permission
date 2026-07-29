@@ -116,14 +116,39 @@
         <option name="push" value="CtsAppThatRequestsSystemAlertWindow23.apk->/data/local/tmp/cts-permission/CtsAppThatRequestsSystemAlertWindow23.apk" />
         <option name="push" value="CtsAppThatRequestCustomCameraPermission.apk->/data/local/tmp/cts-permission/CtsAppThatRequestCustomCameraPermission.apk" />
         <option name="push" value="CtsAppThatRequestsDevicePermissions.apk->/data/local/tmp/cts-permission/CtsAppThatRequestsDevicePermissions.apk" />
+        <option name="push"
+            value="CtsAppThatRequestPermissionWithInvalidPurpose37.apk->/data/local/tmp/cts-permission/CtsAppThatRequestPermissionWithInvalidPurpose37.apk" />
+        <option name="push"
+            value="CtsAppThatRequestPermissionWithNoPurpose37.apk->/data/local/tmp/cts-permission/CtsAppThatRequestPermissionWithNoPurpose37.apk" />
+        <option name="push"
+            value="CtsAppThatRequestPermissionWithValidPurpose37.apk->/data/local/tmp/cts-permission/CtsAppThatRequestPermissionWithValidPurpose37.apk" />
+        <option name="push"
+            value="CtsAppThatRequestPermissionWithNoPurposeOldTargetSdk36.apk->/data/local/tmp/cts-permission/CtsAppThatRequestPermissionWithNoPurposeOldTargetSdk36.apk" />
+        <option name="push"
+            value="CtsAppThatRequestPermissionWithNoPurposeUsingMinMaxAttrs37.apk->/data/local/tmp/cts-permission/CtsAppThatRequestPermissionWithNoPurposeUsingMinMaxAttrs37.apk" />
+        <option name="push"
+            value="CtsAppThatRequestsInternetAndNearbyWifiDevicesPermissions36.apk->/data/local/tmp/cts-permission/CtsAppThatRequestsInternetAndNearbyWifiDevicesPermissions36.apk" />
+        <option name="push"
+            value="CtsAppThatRequestsAccessLocalNetworkAndNearbyWifiDevicesPermissions37.apk->/data/local/tmp/cts-permission/CtsAppThatRequestsAccessLocalNetworkAndNearbyWifiDevicesPermissions37.apk" />
     </target_preparer>
 
     <!-- Remove additional apps if installed -->
     <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
-        <!-- disable DeprecatedAbi warning -->
+        <!-- Ensure device provisioning and user setup are marked as completed -->
+        <option name="run-command" value="settings put global device_provisioned 1" />
+        <option name="run-command" value="settings put secure user_setup_complete 1" />
+        <!-- Disable verifier target SDK warning -->
+        <option name="run-command" value="settings put global verifier_engprod 1" />
+        <option name="run-command" value="settings put global verifier_verify_adb_installs 0" />
+        <!-- Disable DeprecatedAbi warning -->
         <option name="run-command" value="setprop debug.wm.disable_deprecated_abi_dialog 1" />
-        <!-- disable DeprecatedTargetSdk warning -->
+        <!-- Disable DeprecatedTargetSdk warning -->
         <option name="run-command" value="setprop debug.wm.disable_deprecated_target_sdk_dialog 1" />
+        <!-- Dismiss any system dialogs (e.g. crashes, ANR). -->
+        <option name="run-command" value="am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS --receiver-foreground" />
+        <!-- Ensure all broadcasts are dispatched prior to running our tests. -->
+        <option name="run-command" value="am wait-for-broadcast-idle" />
+        <option name="run-command" value="am wait-for-broadcast-barrier" />
         <option name="teardown-command" value="pm uninstall android.permission.cts.appthatrequestpermission" />
         <option name="teardown-command" value="pm uninstall android.permission.cts.appthatrequestnopermission" />
         <option name="teardown-command" value="pm uninstall android.permission.cts.revokepermissionwhenremoved.AdversarialPermissionDefinerApp" />

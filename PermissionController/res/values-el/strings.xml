@@ -88,7 +88,7 @@
     <string name="app_permissions_group_summary2" msgid="4329922444840521150">"Επιτρέπονται <xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> εφαρμογές"</string>
     <string name="menu_show_system" msgid="4254021607027872504">"Εμφάνιση συστήματος"</string>
     <string name="menu_hide_system" msgid="3855390843744028465">"Απόκρυψη συστήματος"</string>
-    <string name="menu_show_7_days_data" msgid="8979611198508523706">"Εμφάνιση επτά ημερών"</string>
+    <string name="menu_show_7_days_data" msgid="8979611198508523706">"Εμφάνιση 7 ημερών"</string>
     <string name="menu_show_24_hours_data" msgid="8228054833323380780">"Εμφάνιση 24 ωρών"</string>
     <string name="manage_permission" msgid="2895385393037061964">"Διαχείριση άδειας"</string>
     <string name="no_apps" msgid="2412612731628386816">"Δεν υπάρχουν εφαρμογές"</string>
@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Σταδιακή διάθεση εφαρμογής…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Άγνωστο"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Πίνακας ελέγχου απορρήτου"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Άδειες εφαρμογών"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"Δραστηριότητα βοηθού AI"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"Καμία εγκατάσταση βοηθού AI"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Χωρίς πρόσβαση τελ. 24 ώρες"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Χωρίς πρόσβαση τελ. 7 ημέρες"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Δραστηριότητα - <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"Τις τελευταίες 24 ώρες"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"Τις τελευταίες 7 ημέρες"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Σήμερα"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Χθες"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Τελευταία πρόσβαση <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Προβολή"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Καμία πρόσβαση"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"Αυτός ο βοηθός AI απέκτησε πρόσβαση σε αυτές τις εφαρμογές για να λάβει πληροφορίες ή να εκτελέσει ενέργειες για εσάς. Μπορείτε να αλλάξετε τα δικαιώματα πρόσβασης ανά πάσα στιγμή στις ρυθμίσεις της εφαρμογής <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Ο πίνακας ελέγχου απορρήτου εμφανίζεται μόνο όταν η πρόσβαση σε εφαρμογές γίνεται μέσω λειτουργιών Android για βοηθούς AI."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Βοήθεια συσκευής"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Δείτε ποιες εφαρμογές χρησιμοποίησαν πρόσφατα άδειες"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Χρήση άδειας \"<xliff:g id="PERMGROUP">%1$s</xliff:g>\""</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Δείτε άλλες άδειες"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Δεν έχει χρησιμοποιηθεί την τελευταία # ημέρα}other{Δεν έχει χρησιμοποιηθεί τις τελευταίες # ημέρες}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Δεν έχει χρησιμοποιηθεί την τελευταία # ώρα}other{Δεν έχει χρησιμοποιηθεί τις τελευταίες # ώρες}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Χρησιμοποιείται από 1 εφαρμογή}other{Χρησιμοποιείται από # εφαρμογές}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Απέκτησε πρόσβαση σε 1 εφαρμογή}other{Απέκτησε πρόσβαση σε # εφαρμογές}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Εμφάνιση όλων στον Πίνακα ελέγχου"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Φιλτράρισμα κατά: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Κατάργηση φίλτρου"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Να επιτρέπεται η διαχείριση μόνο των μέσων"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Να επιτρέπεται πάντα"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Να επιτρέπεται μόνο κατά τη χρήση της εφαρμογής"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Να επιτρέπεται η συνέχιση λειτουργίας της εφαρμογής"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Να επιτρέπονται πάντα όλα"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Ερώτηση κάθε φορά"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Ερώτηση κάθε φορά ή να επιτρέπεται όταν κάνετε κοινοποίηση"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Να μην επιτρέπεται"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Να επιτρέπεται περιορισμένη πρόσβαση"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Ακριβής τοποθεσία"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Επιτρέπονται"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Να επιτρέπονται πάντα"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Να επιτρέπονται μόνο κατά τη χρήση"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Αποδοχή για λειτουργία εφαρμογής"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Επιτρέπεται η πρόσβαση μόνο σε μέσα"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Επιτρέπεται η διαχείριση όλων των αρχείων"</string>
     <string name="ask_header" msgid="2633816846459944376">"Ερώτηση κάθε φορά"</string>
     <string name="denied_header" msgid="903209608358177654">"Δεν επιτρέπονται"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> στη συσκευή <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Δείτε περισσότερες εφαρμογές με πρόσβαση σε όλα τα αρχεία"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Να επιτρέπεται η συνέχιση λειτουργίας της εφαρμογής&lt;/b&gt;&lt;br&gt;&lt;br&gt;Για να συνεχίσει να λειτουργεί μια εφαρμογή, μπορεί να επιτρέπεται η πρόσβασή της στο τοπικό σας δίκτυο και η σύνδεσή της μόνο με συσκευές σε αυτό.&lt;br&gt;&lt;br&gt;Η εφαρμογή δεν μπορεί να συνδεθεί με συσκευές χρησιμοποιώντας Bluetooth και άλλες τεχνολογίες, εκτός αν της επιτρέψετε να εντοπίζει και να συνδέεται με όλες τις κοντινές συσκευές."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Αποδοχή για λειτουργία εφαρμογής&lt;/b&gt;&lt;br&gt;&lt;br&gt;Για να συνεχίσει να λειτουργεί μια εφαρμογή, μπορεί να επιτρέπεται η πρόσβασή της στο τοπικό σας δίκτυο και η σύνδεσή της μόνο με συσκευές σε αυτό.&lt;br&gt;&lt;br&gt;Η εφαρμογή δεν μπορεί να συνδεθεί με συσκευές χρησιμοποιώντας Bluetooth και άλλες τεχνολογίες, εκτός αν της επιτρέψετε να εντοπίζει και να συνδέεται με όλες τις κοντινές συσκευές."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 ημέρα}other{# ημέρες}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# ώρα}other{# ώρες}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# λεπτό}other{# λεπτά}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Καμία"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Προεπιλογή συστήματος)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Δεν υπάρχουν εφαρμογές"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Αλλαγή"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Διατήρηση τρέχουσας"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Άλλες υπηρεσίες NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Επιλέχτηκε"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Επιλέχτηκε - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Χωρίς ειδική άδεια εφαρμογής"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Καμία εφαρμογή"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Δεν υποστηρίζει προφίλ εργασίας"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Αλλαγή προεπιλεγμένης εφαρμογής αρχικής οθόνης σε &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;;"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Αυτή η επιλογή θα αντικαταστήσει την αρχική οθόνη και ενδέχεται να επηρεάσει την πρόσβαση σε λειτουργίες της συσκευής σας.&lt;br&gt;&lt;br&gt;Μπορείτε να αλλάξετε αυτή την επιλογή ανά πάσα στιγμή στις ρυθμίσεις &lt;b&gt;Προεπιλεγμένη εφαρμογή αρχικής οθόνης&lt;/b&gt;."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Σημείωση: Εάν έχετε ορίσει ένα κλείδωμα οθόνης και επανεκκινήσετε τη συσκευή, η εκκίνηση αυτής της εφαρμογής δεν θα είναι δυνατή έως ότου ξεκλειδώσετε τη συσκευή σας."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Ο βοηθός θα μπορεί να διαβάσει πληροφορίες σχετικά με τις εφαρμογές που χρησιμοποιούνται στο σύστημά σας, συμπεριλαμβανομένων πληροφοριών που είναι ορατές στην οθόνη σας ή προσβάσιμες εντός των εφαρμογών."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Αλλαγή εφαρμογής ψηφιακού βοηθού σε &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;;"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Αυτός ο βοηθός θα μπορεί να έχει πρόσβαση σε πληροφορίες όπως τα μηνύματά σας και δεδομένα που οι εφαρμογές έχουν επιλέξει να κοινοποιούν στον βοηθό σας."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Αυτός ο βοηθός θα έχει πρόσβαση σε πληροφορίες όπως τα μηνύματά σας και δεδομένα που οι εφαρμογές έχουν επιλέξει να κοινοποιούν στον βοηθό σας.&lt;br&gt;&lt;br&gt;Επειδή έχετε ενεργοποιήσει τα δεδομένα οθόνης και εφαρμογών για την εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> στο παρελθόν, θα επιτρέπεται η πρόσβαση σε περιεχόμενο από την εφαρμογή που είναι ανοικτή στην οθόνη σας."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Κοινοποίηση δεδομένων αποσφαλμάτωσης"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Κοινοποίηση λεπτομερ. δεδομ. αποσφαλμάτωσης;"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> θέλει να ανεβάσει πληροφορίες αποσφαλμάτωσης."</string>
@@ -658,7 +687,7 @@
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"Τα δεδομένα τοποθεσίας ενδέχεται να κοινοποιούνται"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Αυτή η εφαρμογή έχει δηλώσει ότι ενδέχεται να κοινοποιήσει τα δεδομένα τοποθεσίας σας σε τρίτα μέρη"</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Ενημερώσεις στην κοινοποίηση δεδ. για τοποθεσία"</string>
-    <string name="data_sharing_updates_summary" msgid="764113985772233889">"Ελέγξτε εφαρμογές που άλλαξαν τον τρόπο με τον οποίο ενδέχεται να κοινοποιούν τα δεδομένα τοποθεσίας"</string>
+    <string name="data_sharing_updates_summary" msgid="764113985772233889">"Έλεγχος εφαρμογών που άλλαξαν τον τρόπο με τον οποίο ενδέχεται να κοινοποιούν τα δεδομένα τοποθεσίας"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Αυτές οι εφαρμογές έχουν αλλάξει τον τρόπο με τον οποίο μπορούν να κοινοποιούν τα δεδομένα τοποθεσία σας. Ενδέχεται να μην τα έχουν κοινοποιήσει στο παρελθόν ή να τα κοινοποιούν τώρα για σκοπούς διαφήμισης ή μάρκετινγκ."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Οι προγραμματιστές αυτών των εφαρμογών έχουν καταχωρίσει πληροφορίες σχετικά με τις πρακτικές κοινοποίησης δεδομένων σε ένα app store. Ενδέχεται να τις ενημερώσουν με την πάροδο του χρόνου.\n\nΟι πρακτικές κοινοποίησης δεδομένων ενδέχεται να διαφέρουν ανάλογα με την έκδοση και τη χρήση της εφαρμογής, καθώς και με την περιοχή και την ηλικία σας."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"Μάθετε σχετικά με την κοινοποίηση δεδομένων"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Εφαρμογές"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Πρόσβαση εκπροσώπου"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Εκπρόσωποι που μπορούν να έχουν πρόσβαση σε πληροφορίες και να εκτελούν ενέργειες για εσάς σε αυτή την εφαρμογή"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Επιτρέπεται"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Δεν επιτρέπεται"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Δεν επιτρέπονται άδειες πρόσβασης σε agent"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Δεν απορρίφθηκαν άδειες πρόσβασης σε agent"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Δεν επιτρέπονται άδειες πρόσβασης σε εφαρμογές"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Δεν απορρίφθηκαν άδειες πρόσβασης σε εφαρμογές"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Πρόσβαση στην εφαρμογή"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Πρόσβαση σε <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"Πρόσβαση <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> σε <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Να επιτρέπεται"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Να μην επιτρέπ."</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Ρυθμίσεις συσκευής"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Να επιτρέπεται στο <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> να ενεργεί ως agent για το <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>;"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Αυτό το agent θα μπορεί να έχει πρόσβαση στο <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> για να λαμβάνει πληροφορίες και να εκτελεί ενέργειες για εσάς"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Να επιτρέπεται"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Να μην επιτρέπ."</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Να επιτρέπεται στην εφαρμογή &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; η χρήση δεδομένων οθόνης και εφαρμογών;"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Αυτός ο βοηθός θα μπορεί να έχει πρόσβαση σε πληροφορίες και περιεχόμενο από την εφαρμογή που είναι ανοιχτή στην οθόνη σας"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Να επιτρέπεται"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Να μην επιτρέπεται"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Χρήση δεδομένων οθόνης και εφαρμογών"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Να επιτρέπεται στον βοηθό να έχει πρόσβαση σε πληροφορίες και περιεχόμενο από την εφαρμογή που είναι ανοιχτή στην οθόνη σας"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Να επιτρέπεται στην εφαρμογή <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> η πρόσβαση σε πληροφορίες και περιεχόμενο από την εφαρμογή που είναι ανοιχτή στην οθόνη σας"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Να επιτρέπεται"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Να μην επιτρέπεται"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Να επιτρέπεται στην εφαρμογή &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; η πρόσβαση στην ακριβή τοποθεσία όταν επιλέγετε να την κοινοποιείτε;"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Όταν κάνετε κοινοποίηση, αυτή η εφαρμογή θα έχει πρόσβαση στην ακριβή τοποθεσία μέχρι να κλείσετε την εφαρμογή"</string>
 </resources>

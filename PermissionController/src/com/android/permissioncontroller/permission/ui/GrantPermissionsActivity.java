@@ -24,7 +24,6 @@ import static android.view.WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import static com.android.permissioncontroller.Constants.EXTRA_IS_ECM_IN_APP;
-import static com.android.permissioncontroller.flags.Flags.grantActivityPauseHandover;
 import static com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.CANCELED;
 import static com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.DENIED;
 import static com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.DENIED_DO_NOT_ASK_AGAIN;
@@ -80,6 +79,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.core.util.Preconditions;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.android.modules.utils.build.SdkLevel;
@@ -112,7 +112,7 @@ import java.util.Set;
 /**
  * An activity which displays runtime permission prompts on behalf of an app.
  */
-public class GrantPermissionsActivity extends SettingsActivity
+public class GrantPermissionsActivity extends FragmentActivity
         implements GrantPermissionsViewHandler.ResultListener, ExpressiveDesignEnabledProvider {
 
     private static final String LOG_TAG = "GrantPermissionsActivity";
@@ -671,10 +671,9 @@ public class GrantPermissionsActivity extends SettingsActivity
     @Override
     public void onPause() {
         super.onPause();
-        if (!grantActivityPauseHandover()) {
+        if (isFinishing()) {
             return;
         }
-
         synchronized (sCurrentGrantRequests) {
             for (GrantPermissionsActivity follower: mFollowerActivities) {
                 if (follower.getLifecycle().getCurrentState() == Lifecycle.State.RESUMED) {
@@ -682,6 +681,7 @@ public class GrantPermissionsActivity extends SettingsActivity
                     // activities is resumed. That means that activity needs to be made the leader
                     follower.mDelegated = false;
                     follower.onNewFollowerActivityLocked(this, mRequestedPermissions, true);
+                    sCurrentGrantRequests.put(follower.mKey, follower);
                     mViewModel.getRequestInfosLiveData()
                             .observe(follower, follower::onRequestInfoLoad);
                     if (!mViewModel.getRequestInfosLiveData().isStale()) {
@@ -1295,6 +1295,9 @@ public class GrantPermissionsActivity extends SettingsActivity
     }
 
     private List<String> getPermissionsForPrompt(Prompt prompt) {
+        if (prompt == null) {
+            return List.of();
+        }
         return switch (prompt) {
             case LOCATION_COARSE_ONLY, LOCATION_TWO_BUTTON_COARSE_HIGHLIGHT -> List.of(
                     ACCESS_COARSE_LOCATION);

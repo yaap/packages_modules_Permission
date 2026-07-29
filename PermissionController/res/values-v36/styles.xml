@@ -38,17 +38,17 @@
         <item name="android:paddingTop">@dimen/settingslib_expressive_space_none</item>
         <item name="android:paddingStart">@dimen/settingslib_expressive_space_small4</item>
         <item name="android:paddingEnd">@dimen/settingslib_expressive_space_small4</item>
-        <item name="android:paddingBottom">14dp</item>
+        <item name="android:paddingBottom">@dimen/settingslib_expressive_space_extrasmall6</item>
     </style>
 
     <style name="PermissionGrantButtonExpressive"
            parent="@android:style/Widget.DeviceDefault.Button.Borderless.Colored">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/settingslib_expressive_space_medium3</item>
-        <item name="android:layout_marginTop">@dimen/settingslib_expressive_space_extrasmall2</item>
+        <item name="android:layout_height">@dimen/settingslib_expressive_space_medium4</item>
+        <item name="android:layout_marginTop">@dimen/settingslib_expressive_space_none</item>
         <item name="android:layout_marginStart">@dimen/settingslib_expressive_space_none</item>
         <item name="android:layout_marginEnd">@dimen/settingslib_expressive_space_none</item>
-        <item name="android:layout_marginBottom">@dimen/settingslib_expressive_space_extrasmall6</item>
+        <item name="android:layout_marginBottom">@dimen/settingslib_expressive_space_extrasmall4</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="android:background">@drawable/settingslib_expressive_button_background_filled</item>
@@ -85,11 +85,12 @@
 
     <style name="PermissionRationaleTitleMessageExpressive">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">google-sans</item>
         <item name="android:fontWeight">400</item>
         <item name="android:gravity">center</item>
         <item name="android:lineHeight">32sp</item>
+        <item name="android:minHeight">32dp</item>
         <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
         <item name="android:textSize">24sp</item>
     </style>
@@ -119,7 +120,8 @@
     <style name="PermissionRationaleSectionTitleExpressive"
            parent="@style/TextAppearance.SettingsLib.TitleMedium">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">24dp</item>
         <item name="android:fontFamily">google-sans-flex</item>
         <item name="android:fontWeight">500</item>
         <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
@@ -154,8 +156,10 @@
     </style>
 
     <style name="PermissionRationaleBackButtonExpressive">
-        <item name="android:layout_width">65dp</item>
-        <item name="android:layout_height">@dimen/settingslib_expressive_space_medium3</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minWidth">65dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/settingslib_expressive_space_medium3</item>
         <item name="android:paddingVertical">@dimen/settingslib_expressive_space_extrasmall5</item>
         <item name="android:paddingHorizontal">@dimen/settingslib_expressive_space_small1</item>
         <item name="android:background">@drawable/settingslib_expressive_button_background_filled</item>

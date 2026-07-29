@@ -30,7 +30,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteCallback;
+import android.permission.flags.Flags;
 import android.platform.test.annotations.AppModeFull;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.test.filters.SdkSuppress;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
@@ -39,6 +43,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -60,6 +65,9 @@ public class ActivityPermissionRationaleTest {
     private static Context sContext = InstrumentationRegistry.getInstrumentation().getContext();
     private static UiAutomation sUiAuto =
             InstrumentationRegistry.getInstrumentation().getUiAutomation();
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
 
     @BeforeClass
     public static void setUp() {
@@ -75,8 +83,9 @@ public class ActivityPermissionRationaleTest {
 
     private void assertAppShowRationaleIs(boolean expected) throws Exception {
         CompletableFuture<Boolean> callbackReturn = new CompletableFuture<>();
-        RemoteCallback cb = new RemoteCallback((Bundle result) ->
-                callbackReturn.complete(result.getBoolean(RESULT_KEY)));
+        RemoteCallback cb =
+                new RemoteCallback(
+                        (Bundle result) -> callbackReturn.complete(result.getBoolean(RESULT_KEY)));
         Intent intent = new Intent();
         intent.setComponent(new ComponentName(PACKAGE_NAME, PACKAGE_NAME + ".TestActivity"));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -86,12 +95,19 @@ public class ActivityPermissionRationaleTest {
         assertThat(callbackReturn.get(TIMEOUT, TimeUnit.MILLISECONDS)).isEqualTo(expected);
     }
 
+    private void assertAppContextShowRationaleIs(boolean expected) throws Exception {
+        assertThat(sContext.shouldShowRequestPermissionRationale(PERMISSION_NAME))
+                .isEqualTo(expected);
+    }
+
     @Before
     public void clearData() {
-        runShellCommand("pm clear --user " + sContext.getUserId()
-                + " android.permission.cts.appthatrunsrationaletests");
-        PermissionUtils.setPermissionFlags(PACKAGE_NAME, PERMISSION_NAME,
-                PackageManager.FLAG_PERMISSION_POLICY_FIXED, 0);
+        runShellCommand(
+                "pm clear --user "
+                        + sContext.getUserId()
+                        + " android.permission.cts.appthatrunsrationaletests");
+        PermissionUtils.setPermissionFlags(
+                PACKAGE_NAME, PERMISSION_NAME, PackageManager.FLAG_PERMISSION_POLICY_FIXED, 0);
     }
 
     @Test
@@ -119,8 +135,8 @@ public class ActivityPermissionRationaleTest {
 
     @Test
     public void notUserSetNoRationale() throws Exception {
-        PermissionUtils.setPermissionFlags(PACKAGE_NAME, PERMISSION_NAME,
-                PackageManager.FLAG_PERMISSION_USER_SET, 0);
+        PermissionUtils.setPermissionFlags(
+                PACKAGE_NAME, PERMISSION_NAME, PackageManager.FLAG_PERMISSION_USER_SET, 0);
 
         assertAppShowRationaleIs(false);
     }
@@ -131,5 +147,49 @@ public class ActivityPermissionRationaleTest {
         PermissionUtils.setPermissionFlags(PACKAGE_NAME, PERMISSION_NAME, flags, flags);
 
         assertAppShowRationaleIs(true);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_SHOULD_SHOW_PERMISSION_RATIONALE_IN_CONTEXT_ENABLED)
+    @Test
+    public void permissionGrantedNoRationaleViaContext() throws Exception {
+        sUiAuto.grantRuntimePermission(PACKAGE_NAME, PERMISSION_NAME);
+
+        assertAppContextShowRationaleIs(false);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_SHOULD_SHOW_PERMISSION_RATIONALE_IN_CONTEXT_ENABLED)
+    @Test
+    public void policyFixedNoRationaleViaContext() throws Exception {
+        int flags = PackageManager.FLAG_PERMISSION_POLICY_FIXED;
+        PermissionUtils.setPermissionFlags(PACKAGE_NAME, PERMISSION_NAME, flags, flags);
+
+        assertAppContextShowRationaleIs(false);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_SHOULD_SHOW_PERMISSION_RATIONALE_IN_CONTEXT_ENABLED)
+    @Test
+    public void userFixedNoRationaleViaContext() throws Exception {
+        int flags = PackageManager.FLAG_PERMISSION_USER_FIXED;
+        PermissionUtils.setPermissionFlags(PACKAGE_NAME, PERMISSION_NAME, flags, flags);
+
+        assertAppContextShowRationaleIs(false);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_SHOULD_SHOW_PERMISSION_RATIONALE_IN_CONTEXT_ENABLED)
+    @Test
+    public void notUserSetNoRationaleViaContext() throws Exception {
+        PermissionUtils.setPermissionFlags(
+                PACKAGE_NAME, PERMISSION_NAME, PackageManager.FLAG_PERMISSION_USER_SET, 0);
+
+        assertAppContextShowRationaleIs(false);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_SHOULD_SHOW_PERMISSION_RATIONALE_IN_CONTEXT_ENABLED)
+    @Test
+    public void userSetNeedRationaleViaContext() throws Exception {
+        int flags = PackageManager.FLAG_PERMISSION_USER_SET;
+        PermissionUtils.setPermissionFlags(PACKAGE_NAME, PERMISSION_NAME, flags, flags);
+
+        assertAppContextShowRationaleIs(false);
     }
 }

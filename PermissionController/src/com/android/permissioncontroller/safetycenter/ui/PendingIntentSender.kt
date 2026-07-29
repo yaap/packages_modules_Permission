@@ -46,7 +46,7 @@ object PendingIntentSender {
     fun getTaskIdForEntry(
         entryId: String,
         sameTaskSourceIds: List<String>,
-        activity: FragmentActivity
+        activity: FragmentActivity,
     ): Int? {
         val sourceId: String = SafetyCenterIds.entryIdFromString(entryId).getSafetySourceId()
         return if (sameTaskSourceIds.contains(sourceId)) activity.getTaskId() else null

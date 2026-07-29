@@ -22,10 +22,4 @@ android_test_helper_app {
     name: "CtsAppThatDefinesPermissionWithInvalidGroup30",
     defaults: ["cts_defaults"],
     sdk_version: "30",
-    test_suites: [
-        "cts",
-        "general-tests",
-        "mts-permission",
-        "sts",
-    ],
 }

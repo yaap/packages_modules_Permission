@@ -19,12 +19,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
-import androidx.preference.SwitchPreferenceCompat
-import androidx.preference.TwoStatePreference
 import com.android.permissioncontroller.appfunctions.ui.AgentAccessChildFragment
 import com.android.settingslib.widget.IntroPreference
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
-import com.android.settingslib.widget.TopIntroPreference
 
 /**
  * Handheld preference fragment for the management of app function agents.
@@ -56,10 +53,8 @@ class HandheldAgentAccessPreferenceFragment :
 
     override fun createHeaderPreference(): Preference = IntroPreference(requireContext())
 
-    override fun createEmptyStatePreference(): Preference = TopIntroPreference(requireContext())
-
-    override fun createPreference(): TwoStatePreference =
-        SwitchPreferenceCompat(requireContext()).apply { isPersistent = false }
+    override fun createPreference(): Preference =
+        Preference(requireContext()).apply { isPersistent = false }
 
     override fun onPreferenceScreenChanged() {
         requireParent().onPreferenceScreenChanged()

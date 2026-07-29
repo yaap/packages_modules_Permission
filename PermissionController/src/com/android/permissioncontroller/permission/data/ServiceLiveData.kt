@@ -48,7 +48,7 @@ class ServiceLiveData(
     private val app: Application,
     override val intentAction: String,
     private val permission: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) :
     SmartAsyncMediatorLiveData<Set<String>>(),
     PackageBroadcastReceiver.PackageBroadcastListener,
@@ -166,7 +166,7 @@ class ServiceLiveData(
                 .packageManager
                 .queryIntentServices(
                     Intent(intentAction),
-                    PackageManager.GET_SERVICES or PackageManager.GET_META_DATA
+                    PackageManager.GET_SERVICES or PackageManager.GET_META_DATA,
                 )
                 .mapNotNull { resolveInfo ->
                     if (resolveInfo?.serviceInfo?.permission != permission) {
@@ -178,7 +178,7 @@ class ServiceLiveData(
                             DumpableLog.i(
                                 LOG_TAG,
                                 "Not exempting $packageName - not an active $name " +
-                                    "for u${user.identifier}"
+                                    "for u${user.identifier}",
                             )
                         }
                         return@mapNotNull null
@@ -256,7 +256,7 @@ class ServiceLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
                 key.second,
-                key.third
+                key.third,
             )
         }
     }

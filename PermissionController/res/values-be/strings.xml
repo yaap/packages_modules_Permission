@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Падрыхтоўка праграмы…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Невядома"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Панэль кіравання доступам"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Дазволы праграм"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"Дзеянні AI-памочніка"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"AI-памочнікі не ўсталяваны"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"За апошнія 24 гадзіны спроб доступу не было"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"За апошнія 7 дзён спроб доступу не было"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Дзеянні праграмы \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"За апошнія 24 гадзіны"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"За апошнія 7 дзён"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Сёння"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Учора"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Апошні доступ: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Прагляд"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Няма спроб доступу"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"AI-памочнік звяртаўся да гэтых праграм, каб атрымаць інфармацыю ці выканаць дзеянні ад вашага імені. Змяніць параметры такога доступу можна ў любы час у наладах праграмы \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Панэль кіравання доступам паказваецца толькі пры доступе да праграм праз выкарыстанне функцый Android для AI-памочнікаў."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Памочнік па прыладзе"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Прагляд праграм, якія нядаўна выкарыстоўвалі дазволы"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Выкарыстанне групы дазволаў \"<xliff:g id="PERMGROUP">%1$s</xliff:g>\""</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Праглядзець іншыя дазволы"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{За апошнія # суткі дазвол не выкарыстоўваўся}one{За апошнія # суткі дазвол не выкарыстоўваўся}few{За апошнія # сутак дазвол не выкарыстоўваўся}many{За апошнія # сутак дазвол не выкарыстоўваўся}other{За апошнія # сутак дазвол не выкарыстоўваўся}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{За апошнюю # гадзіну дазвол не выкарыстоўваўся}one{За апошнюю # гадзіну дазвол не выкарыстоўваўся}few{За апошнія # гадзіны дазвол не выкарыстоўваўся}many{За апошнія # гадзін дазвол не выкарыстоўваўся}other{За апошнія # гадзіны дазвол не выкарыстоўваўся}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Выкарыстоўваецца 1 праграмай}one{Выкарыстоўваецца # праграмай}few{Выкарыстоўваецца # праграмамі}many{Выкарыстоўваецца # праграмамі}other{Выкарыстоўваецца # праграмы}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Выкарыстоўвалася 1 праграма}one{Выкарыстоўвалася # праграма}few{Выкарыстоўваліся # праграмы}many{Выкарыстоўваліся # праграм}other{Выкарыстоўваліся # праграмы}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Паказаць усе на панэлі кіравання"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Параметр фільтравання: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Выдаліць фільтр"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Дазволіць доступ толькі да мультымедыя"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Дазваляць заўсёды"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Дазваляць толькі падчас карыстання праграмай"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Дазволіць, каб праграма працягвала працаваць"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Заўсёды дазваляць усе"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Заўсёды пытацца"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Запытваць кожны раз або дазваляць пры абагульванні"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Не дазваляць"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Дазволіць абмежаваны доступ"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Дакладнае месцазнаходжанне"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Дазволеныя"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Дазволена заўсёды"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Дазволена толькі падчас карыстання"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Дазволена, каб праграма працавала"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Дазволены доступ толькі да мультымедыя"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Дазволена кіраванне ўсімі файламі"</string>
     <string name="ask_header" msgid="2633816846459944376">"Заўсёды пытацца"</string>
     <string name="denied_header" msgid="903209608358177654">"Забароненыя"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"Група дазволаў \"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g>\" на прыладзе \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Праглядзець іншыя праграмы, якія маюць доступ да ўсіх файлаў"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Дазволіць, каб праграма працягвала працаваць&lt;/b&gt;&lt;br&gt;&lt;br&gt;Каб праграма працягвала працаваць, ёй можа быць дазволена атрымліваць доступ да лакальнай сеткі і падключацца толькі да прылад у гэтай сетцы.&lt;br&gt;&lt;br&gt;Праграма не зможа падключацца да прылад праз Bluetooth і іншыя тэхналогіі, калі вы не дазволіце ёй знаходзіць усе прылады паблізу і падключацца да іх."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Дазволена, каб праграма працавала&lt;/b&gt;&lt;br&gt;&lt;br&gt;Каб праграма працягвала працаваць, ёй можа быць дазволена атрымліваць доступ да лакальнай сеткі і падключацца толькі да прылад у гэтай сетцы.&lt;br&gt;&lt;br&gt;Праграма не зможа падключацца да прылад з дапамогай Bluetooth і іншых тэхналогій, калі ў яе не будзе дазволу знаходзіць усе прылады паблізу і падключацца да іх."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 дзень}one{# дзень}few{# дні}many{# дзён}other{# дня}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# гадзіна}one{# гадзіна}few{# гадзіны}many{# гадзін}other{# гадзіны}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# хвіліна}one{# хвіліна}few{# хвіліны}many{# хвілін}other{# хвіліны}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Няма"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Стандартная сістэмная)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Няма праграм"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Змяніць"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Пакінуць цяперашнюю"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Іншыя сэрвісы NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Выбрана"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Выбрана – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Няма доступу для праграм"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Няма праграм"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Працоўны профіль не падтрымліваецца"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Змяніць стандартную праграму галоўнага экрана на праграму &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Гэта прывядзе да замены галоўнага экрана і можа паўплываць на доступ да функцый на прыладзе.&lt;br&gt;&lt;br&gt;Змяніць гэты параметр заўсёды можна ў раздзеле налад &lt;b&gt;Стандартны галоўны экран&lt;/b&gt;."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Заўвага. Калі перазапусціць прыладу з наладжанай блакіроўкай экрана, праграма не запусціцца, пакуль вы не разблакіруеце прыладу."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Памочнік атрымае доступ да інфармацыі пра праграмы, якія выкарыстоўваюцца ў вашай сістэме, у тым ліку да інфармацыі, бачнай на экране ці даступнай у праграмах."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Змяніць праграму лічбавага памочніка на праграму &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Памочнік зможа атрымліваць доступ да такой інфармацыі, як паведамленні і даныя, абагуленыя з ім праграмамі."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Памочнік зможа атрымліваць доступ да паведамленняў і даных, абагуленых з ім праграмамі.&lt;br&gt;&lt;br&gt;Раней вы ўключылі доступ да даных экрана і праграм для праграмы \"<xliff:g id="APP_NAME">%1$s</xliff:g>\", таму яна таксама зможа атрымліваць доступ да змесціва праграмы, адкрытай на экране."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Абагульванне даных адладкі"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Абагуліць падрабязнасці адладкі?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"Праграма \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" спрабуе запампаваць звесткі пра адладку."</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Праграмы"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Доступ для агента"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенты, якія маюць доступ да інфармацыі і могуць выконваць дзеянні ад вашага імені ў гэтай праграме"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Дазволена"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Забаронена"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Доступ агентаў забаронены"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Доступ агентаў дазволены"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Доступ праграм забаронены"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Доступ праграм дазволены"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Доступ да праграмы"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Доступ да праграмы \"<xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"Доступ праграмы \"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>\" да праграмы \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\""</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Дазволіць"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Не дазваляць"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Налады прылады"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"\"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>\" будзе агентам \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\""</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Доступ агента да \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\""</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Дазволіць"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Не дазваляць"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Дазволіць памочніку &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; выкарыстоўваць даныя з экрана і праграм?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Памочнік зможа атрымліваць доступ да інфармацыі і змесціва з праграмы, адкрытай на экране"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Дазволіць"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Не дазваляць"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Выкарыстоўваць даныя з экрана і праграм"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Дазволіць памочніку доступ да інфармацыі і змесціва з праграмы, адкрытай на экране"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Дазволіць памочніку \"<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>\" доступ да інфармацыі і змесціва з праграмы, адкрытай на экране"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Дазволіць"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Не дазваляць"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Дазволіць праграме &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; доступ да дакладнага месцазнаходжання, калі вы вырашыце абагуліць яго?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Калі вы абагуліце даныя, гэта праграма будзе мець доступ да дакладнага месцазнаходжання, пакуль вы яе не закрыеце"</string>
 </resources>

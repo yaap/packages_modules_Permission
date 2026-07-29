@@ -15,8 +15,19 @@
  */
 package com.android.permissioncontroller.wear.permission.components.theme
 
-import android.content.Context
 import android.os.Build
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.wear.compose.material3.ColorScheme
+import androidx.wear.compose.material3.Shapes
+import androidx.wear.compose.material3.Typography
+
+internal data class WearOverlayableMaterial3Theme(
+    val colorScheme: ColorScheme,
+    val typography: Typography,
+    val shapes: Shapes,
+)
 
 /**
  * Theme wrapper providing Material 3 styling while maintaining compatibility with Runtime Resource
@@ -25,21 +36,27 @@ import android.os.Build
  * Uses the tonal palette from the previous Material Design version until dynamic color tokens are
  * available in SDK 36.
  */
-internal class WearOverlayableMaterial3Theme(context: Context) {
-    val colorScheme =
-        when {
-            Build.VERSION.SDK_INT >= 36 -> {
-                WearComposeMaterial3ColorScheme.dynamicColorScheme(context)
-            }
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-                WearComposeMaterial3ColorScheme.tonalColorScheme(context)
-            }
-            else -> {
-                WearComposeMaterial3ColorScheme.legacyColorScheme()
-            }
-        }
+@Composable
+internal fun rememberWearOverlayableMaterial3Theme(): WearOverlayableMaterial3Theme {
+    val context = LocalContext.current.applicationContext
+    return remember(context) {
+        WearOverlayableMaterial3Theme(
+            colorScheme =
+                when {
+                    Build.VERSION.SDK_INT >= 36 -> {
+                        WearComposeMaterial3ColorScheme.dynamicColorScheme(context)
+                    }
 
-    val typography = WearComposeMaterial3Typography.dynamicTypography(context)
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                        WearComposeMaterial3ColorScheme.tonalColorScheme(context)
+                    }
 
-    val shapes = WearComposeMaterial3Shapes.dynamicShapes(context)
+                    else -> {
+                        WearComposeMaterial3ColorScheme.legacyColorScheme()
+                    }
+                },
+            typography = WearComposeMaterial3Typography.dynamicTypography(context),
+            shapes = WearComposeMaterial3Shapes.dynamicShapes(context),
+        )
+    }
 }

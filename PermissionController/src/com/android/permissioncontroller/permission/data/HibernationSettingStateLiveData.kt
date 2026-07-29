@@ -48,7 +48,7 @@ class HibernationSettingStateLiveData
 private constructor(
     private val app: Application,
     private val packageName: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<HibernationSettingState>(), AppOpsManager.OnOpChangedListener {
 
     private val packagePermsLiveData = PackagePermissionsLiveData[packageName, user]
@@ -113,13 +113,11 @@ private constructor(
                         permState.permFlags and
                             (FLAG_PERMISSION_GRANTED_BY_DEFAULT or
                                 FLAG_PERMISSION_GRANTED_BY_ROLE) != 0
-                    }
-                        ?: false
+                    } ?: false
                 val allExempt =
                     liveData.value?.all { (permName, _) ->
                         permName in AUTO_REVOKE_EXEMPT_PERMISSIONS
-                    }
-                        ?: false
+                    } ?: false
                 if (!default && !allExempt) {
                     revocableGroups.add(groupName)
                 }
@@ -155,27 +153,28 @@ private constructor(
             LOG_TAG,
             "overall state: isStale:$isStale, isInitialized:$isInitialized, " +
                 "value:$value, got perm LiveDatas:$gotPermLiveDatas, " +
-                "got isUserExempt$gotPastIsUserExempt, got isSystemExempt$gotPastIsSystemExempt"
+                "got isUserExempt$gotPastIsUserExempt, got isSystemExempt$gotPastIsSystemExempt",
         )
         Log.i(
             LOG_TAG,
             "packagePermsLivedata isStale:${packagePermsLiveData.isStale}, " +
-                "isInitialized:${packagePermsLiveData.isInitialized}"
+                "isInitialized:${packagePermsLiveData.isInitialized}",
         )
         Log.i(
             LOG_TAG,
             "ExemptServicesLiveData isStale:${exemptServicesLiveData.isStale}, " +
-                "isInitialized:${exemptServicesLiveData.isInitialized}"
+                "isInitialized:${exemptServicesLiveData.isInitialized}",
         )
         Log.i(LOG_TAG, "HibernationEnabledLivedata value:${HibernationEnabledLiveData.value}")
         for ((group, liveData) in permStateLiveDatas) {
             Log.i(
                 LOG_TAG,
                 "permStateLivedata $group isStale:${liveData.isStale}, " +
-                    "isInitialized:${liveData.isInitialized}"
+                    "isInitialized:${liveData.isInitialized}",
             )
         }
     }
+
     /**
      * Repository for HibernationSettingStateLiveDatas.
      *
@@ -188,7 +187,7 @@ private constructor(
             return HibernationSettingStateLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
     }

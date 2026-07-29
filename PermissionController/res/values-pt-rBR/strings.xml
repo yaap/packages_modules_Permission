@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Promovendo app…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Desconhecido"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Painel de privacidade"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Permissões do app"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"Atividade do assistente de IA"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"Nenhum assist. de IA instalado"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Nenhum acesso nas últimas 24h"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Sem acesso nos últimos 7 dias"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Atividade do app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"Nas últimas 24 horas"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"Nos últimos 7 dias"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Hoje"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Ontem"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Último acesso: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Ver"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Nenhum acesso"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"O assistente de IA acessou estes apps para ver informações ou realizar ações para você. Você pode mudar essa seleção a qualquer momento nas configurações do app <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"O Painel de Privacidade só aparece quando os apps são acessados usando recursos do Android para assistentes de IA."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Assistência do dispositivo"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Ver quais apps usaram as permissões recentemente"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Uso de <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Ver outras permissões"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Não usado no último # dia}one{Não usado no último # dia}many{Não usado nos últimos # de dias}other{Não usado nos últimos # dias}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Não usado na última # hora}one{Não usado na última # hora}many{Não usado nas últimas # de horas}other{Não usado nas últimas # horas}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Permissões usadas por 1 app}one{Permissões usadas por # app}many{Permissões usadas por # apps}other{Permissões usadas por # apps}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{1 app acessado}one{# app acessado}many{# de apps acessados}other{# apps acessados}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Ver tudo no painel"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Filtrado por: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Remover filtro"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Permitir acesso apenas a arquivos de mídia"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Permitir o tempo todo"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Permitir durante o uso do app"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Permitir para manter o app funcionando"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Sempre permitir tudo"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Perguntar sempre"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Perguntar sempre ou permitir quando você compartilhar"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Não permitir"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Permitir acesso limitado"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Local exato"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Com permissão"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Permitidos sempre"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Permitidos durante o uso"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Permitido para manter o app funcionando"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Com permissão para acessar apenas mídia"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Com permissão para gerenciar todos os arquivos"</string>
     <string name="ask_header" msgid="2633816846459944376">"Perguntar sempre"</string>
     <string name="denied_header" msgid="903209608358177654">"Sem permissão"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> no <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Veja mais apps que têm acesso a todos os arquivos"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Permitir para manter o app funcionando&lt;/b&gt;&lt;br&gt;&lt;br&gt;Para que um app continue funcionando, ele pode ter permissão para acessar sua rede local e se conectar apenas a dispositivos dessa rede.&lt;br&gt;&lt;br&gt;O app não pode se conectar a dispositivos via Bluetooth e outras tecnologias, a menos que você permita que ele encontre e se conecte a todos os dispositivos próximos."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Permitido para manter o app funcionando&lt;/b&gt;&lt;br&gt;&lt;br&gt;Para que um app continue funcionando, ele pode ter permissão para acessar sua rede local e se conectar apenas a dispositivos dessa rede.&lt;br&gt;&lt;br&gt;O app não pode se conectar a dispositivos via Bluetooth e outras tecnologias, a menos que você permita que ele encontre e se conecte a todos os dispositivos próximos."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 dia}one{# dia}many{# dias}other{# dias}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# hora}one{# hora}many{# de horas}other{# horas}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# minuto}one{# minuto}many{# de minutos}other{# minutos}}"</string>
@@ -355,8 +377,8 @@
     <string name="accessibility_service_dialog_title_multiple" msgid="5527879210683548175">"<xliff:g id="NUM_SERVICES">%s</xliff:g> apps de acessibilidade têm acesso total ao seu dispositivo"</string>
     <string name="accessibility_service_dialog_bottom_text_single" msgid="1128666197822205958">"O serviço <xliff:g id="SERVICE_NAME">%s</xliff:g> pode ver sua tela, ações e entradas, além de realizar ações e controlar a tela."</string>
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Esses apps podem ver sua tela, ações e entradas, além de realizar ações e controlar a tela."</string>
-    <string name="role_assistant_label" msgid="4727586018198208128">"App assistente digital padrão"</string>
-    <string name="role_assistant_short_label" msgid="3369003713187703399">"App assistente digital"</string>
+    <string name="role_assistant_label" msgid="4727586018198208128">"App de assistente digital padrão"</string>
+    <string name="role_assistant_short_label" msgid="3369003713187703399">"App de assistente digital"</string>
     <string name="role_assistant_description" msgid="6622458130459922952">"Apps assistivos podem ajudar com base nas informações da tela que você vê no momento. Alguns apps são compatíveis com a tela de início e com serviços de entrada de texto por voz para oferecer assistência integrada."</string>
     <string name="role_assistant_recommended_title" msgid="2093873159106905257">"Recomendados por <xliff:g id="OEM_NAME">%s</xliff:g>"</string>
     <string name="role_browser_label" msgid="2877796144554070207">"App de navegação padrão"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Nenhum"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Padrão do sistema)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Nenhum app"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Mudar"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Manter atual"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Outros serviços de NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Selecionado"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Selecionado: <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Nenhum acesso especial ao app"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Nenhum app"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Não é compatível com perfil de trabalho"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Mudar seu app inicial padrão para &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Isso vai substituir sua tela inicial e pode afetar o acesso a recursos no seu dispositivo.&lt;br&gt;&lt;br&gt;Mude essa seleção a qualquer momento nas configurações de &lt;b&gt;App de início padrão&lt;/b&gt;."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Observação: se você reiniciar o dispositivo e tiver um bloqueio de tela definido, não será possível iniciar este app até que você desbloqueie o dispositivo."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"O assistente lerá informações sobre apps em uso no seu sistema, incluindo informações visíveis na tela ou as que podem ser acessadas nos apps."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Mudar seu app de assistente digital para &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Esse assistente poderá acessar informações como suas mensagens e dados que os apps compartilharem com ele."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Esse assistente poderá acessar informações como suas mensagens e dados que os apps compartilharem com ele.&lt;br&gt;&lt;br&gt;Como você já ativou a tela e os dados de apps para <xliff:g id="APP_NAME">%1$s</xliff:g>, ele também poderá acessar conteúdo do app aberto na tela."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Compartilhar dados de depuração"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Compartilhar dados detalhados de depuração?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"Solicitação do <xliff:g id="APP_NAME">%1$s</xliff:g> para upload de informações de depuração."</string>
@@ -658,7 +687,7 @@
     <string name="app_location_permission_rationale_title" msgid="925420340572401350">"Os dados de local podem ser compartilhados"</string>
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Este app indicou que pode compartilhar seus dados de local com terceiros"</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Atualizações no compartilhamento de dados de local"</string>
-    <string name="data_sharing_updates_summary" msgid="764113985772233889">"Conferir apps que mudaram a forma de compartilhar seus dados de local"</string>
+    <string name="data_sharing_updates_summary" msgid="764113985772233889">"Revise os apps que mudaram a forma como podem compartilhar seus dados de local"</string>
     <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"Esses apps mudaram a forma de compartilhar os dados de local. É possível que eles não os tenham compartilhado antes ou que agora os compartilhem para fins de publicidade ou marketing."</string>
     <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Os desenvolvedores desses apps oferecem informações sobre as práticas deles de compartilhamento de dados com uma app store. Eles podem atualizar essas informações com o tempo.\n\nAs práticas de compartilhamento de dados podem variar de acordo com a versão do app e com a idade, o uso e a região do usuário."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"Saiba mais sobre o compartilhamento de dados"</string>
@@ -686,11 +715,11 @@
 </xliff:g>Golpistas podem pedir que você autorize recursos de acessibilidade em um app para tentar controlar seu dispositivo."</string>
     <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"O app não recebeu a seguinte permissão de acesso: <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>"</string>
-    <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"O app solicitou acesso a uma permissão sensível que pode colocar suas informações pessoais e financeiras em risco.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que o app não funcione corretamente sem essa permissão restrita. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Aprenda a conceder acesso&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"O app solicitou acesso a uma permissão sensível que pode colocar suas informações pessoais e financeiras em risco.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que o app não funcione corretamente sem essa permissão restrita. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Saiba como conceder acesso&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"O app não recebeu o acesso para ser a escolha padrão de: <xliff:g id="ROLE_NAME">%1$s</xliff:g>"</string>
-    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"O app solicitou acesso a permissões sensíveis que podem colocar suas informações pessoais e financeiras em risco.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que o app não funcione corretamente sem essas permissões restritas. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Aprenda a conceder acesso&lt;/a&gt;"</string>
-    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"O app não recebeu a permissão de acesso"</string>
-    <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"O acesso a essa permissão pode colocar suas informações pessoais e financeiras em risco.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que o app não funcione corretamente sem essa permissão restrita. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Aprenda a conceder acesso&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"O app solicitou acesso a permissões sensíveis que podem colocar suas informações pessoais e financeiras em risco.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que o app não funcione corretamente sem essas permissões restritas. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Saiba como conceder acesso&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Acesso negado ao app"</string>
+    <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"O acesso a essa permissão pode colocar suas informações pessoais e financeiras em risco.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>É possível que o app não funcione corretamente sem essa permissão restrita. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Saiba como conceder acesso&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"Saiba mais"</string>
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"OK"</string>
     <string name="permission_grant_dialog_streaming_blocked_title" msgid="8905241017017043649">"Solicitação de permissão suprimida"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Apps"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Acesso do agente"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agentes que podem acessar informações e realizar ações para você neste app"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Permitido"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Não permitido"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Nenhum acesso de agente foi permitido"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Nenhum acesso de agente foi negado"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Nenhum acesso ao app foi permitido"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Nenhum acesso ao app foi negado"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Acesso ao app"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Acesso ao app <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"Acesso de <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> ao app <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Permitir"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Não permitir"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Configurações do dispositivo"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Permitir que <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> seja agente do app <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Esse agente poderá acessar o app <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> para receber informações e realizar ações para você"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Permitir"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Não permitir"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Permitir que o &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; use dados da tela e do app?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Esse assistente poderá acessar informações e conteúdo do app aberto na tela"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Permitir"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Não permitir"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Usar dados da tela e do app"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Permitir que o assistente acesse informações e conteúdo do app aberto na tela"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Permitir que o app <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> acesse informações e conteúdo do app aberto na tela"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Permitir"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Não permitir"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Permitir que o app &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; acesse o local exato quando você compartilhar essa informação?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Quando você compartilha, este app tem acesso ao local exato até que você o feche"</string>
 </resources>

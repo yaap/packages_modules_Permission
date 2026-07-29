@@ -54,6 +54,7 @@ import com.android.permissioncontroller.hibernation.isPackageHibernationExemptBy
 import com.android.permissioncontroller.permission.model.livedatatypes.LightPackageInfo
 import com.android.permissioncontroller.permission.utils.ContextCompat
 import com.google.common.truth.Truth.assertThat
+import java.io.File
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -74,7 +75,6 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
 import org.mockito.quality.Strictness
-import java.io.File
 
 /** Unit tests for [HibernationPolicy]. */
 @RunWith(AndroidJUnit4::class)
@@ -116,7 +116,7 @@ class HibernationPolicyTest {
                 .startMocking()
         `when`(PermissionControllerApplication.get()).thenReturn(application)
         `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
-                .thenReturn(USER_SETUP_COMPLETE)
+            .thenReturn(USER_SETUP_COMPLETE)
         `when`(Settings.Secure.getUriFor(any())).thenReturn(Mockito.mock(Uri::class.java))
 
         realContext = ApplicationProvider.getApplicationContext()
@@ -150,41 +150,39 @@ class HibernationPolicyTest {
     @Test
     fun onReceive_userSetupIncomplete_doesNotInitializeStartTime() {
         `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
-                .thenReturn(USER_SETUP_INCOMPLETE)
+            .thenReturn(USER_SETUP_INCOMPLETE)
 
         receiver.onReceive(context, Intent(Intent.ACTION_BOOT_COMPLETED))
 
         val startTimeOfUnusedAppTracking =
-                sharedPreferences.getLong(
-                        PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-                        SNAPSHOT_UNINITIALIZED
-                )
+            sharedPreferences.getLong(
+                PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
+                SNAPSHOT_UNINITIALIZED,
+            )
         assertThat(startTimeOfUnusedAppTracking).isEqualTo(SNAPSHOT_UNINITIALIZED)
     }
 
     @Test
     fun onReceive_userSetupCompletes_initializesStartTime() {
         `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
-                .thenReturn(USER_SETUP_INCOMPLETE)
+            .thenReturn(USER_SETUP_INCOMPLETE)
 
         receiver.onReceive(context, Intent(Intent.ACTION_BOOT_COMPLETED))
 
         val contentObserverCaptor = ArgumentCaptor.forClass(ContentObserver::class.java)
         val uri = Settings.Secure.getUriFor(Settings.Secure.USER_SETUP_COMPLETE)
-        verify(contentResolver).registerContentObserver(
-                eq(uri),
-                anyBoolean(),
-                contentObserverCaptor.capture())
+        verify(contentResolver)
+            .registerContentObserver(eq(uri), anyBoolean(), contentObserverCaptor.capture())
         val contentObserver = contentObserverCaptor.value
         `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
-                .thenReturn(USER_SETUP_COMPLETE)
+            .thenReturn(USER_SETUP_COMPLETE)
         contentObserver.onChange(/* selfChange= */ false, uri)
 
         val startTimeOfUnusedAppTracking =
-                sharedPreferences.getLong(
-                        PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-                        SNAPSHOT_UNINITIALIZED
-                )
+            sharedPreferences.getLong(
+                PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
+                SNAPSHOT_UNINITIALIZED,
+            )
         assertThat(startTimeOfUnusedAppTracking).isNotEqualTo(SNAPSHOT_UNINITIALIZED)
     }
 
@@ -194,7 +192,7 @@ class HibernationPolicyTest {
         val startTimeOfUnusedAppTracking =
             sharedPreferences.getLong(
                 PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-                SNAPSHOT_UNINITIALIZED
+                SNAPSHOT_UNINITIALIZED,
             )
         val systemTimeSnapshot =
             sharedPreferences.getLong(PREF_KEY_SYSTEM_TIME_SNAPSHOT, SNAPSHOT_UNINITIALIZED)
@@ -242,10 +240,8 @@ class HibernationPolicyTest {
 
         val contentObserverCaptor = ArgumentCaptor.forClass(ContentObserver::class.java)
         val uri = Settings.Secure.getUriFor(Settings.Secure.USER_SETUP_COMPLETE)
-        verify(contentResolver).registerContentObserver(
-            eq(uri),
-            anyBoolean(),
-            contentObserverCaptor.capture())
+        verify(contentResolver)
+            .registerContentObserver(eq(uri), anyBoolean(), contentObserverCaptor.capture())
         val contentObserver = contentObserverCaptor.value
         `when`(Settings.Secure.getInt(any(), eq(Settings.Secure.USER_SETUP_COMPLETE), anyInt()))
             .thenReturn(USER_SETUP_COMPLETE)
@@ -279,29 +275,47 @@ class HibernationPolicyTest {
     // on GlobalScope which the unit test has no control over. This can lead to the code running
     // during other tests which may not have the right static mocks.
     // Until this is fixed, this test should be ignored to prevent flaky test faliures.
-    fun isPackageExemptBySystem_isCallingApp_returnsTrue() = runBlocking<Unit> {
-        val pkgInfo = makePackageInfo(TEST_PKG_NAME)
+    fun isPackageExemptBySystem_isCallingApp_returnsTrue() =
+        runBlocking<Unit> {
+            val pkgInfo = makePackageInfo(TEST_PKG_NAME)
 
-        `when`(context.checkPermission(
-                eq(Manifest.permission.MANAGE_OWN_CALLS), anyInt(), eq(pkgInfo.uid)))
+            `when`(
+                    context.checkPermission(
+                        eq(Manifest.permission.MANAGE_OWN_CALLS),
+                        anyInt(),
+                        eq(pkgInfo.uid),
+                    )
+                )
                 .thenReturn(PERMISSION_GRANTED)
-        `when`(context.checkPermission(
-                eq(Manifest.permission.RECORD_AUDIO), anyInt(), eq(pkgInfo.uid)))
+            `when`(
+                    context.checkPermission(
+                        eq(Manifest.permission.RECORD_AUDIO),
+                        anyInt(),
+                        eq(pkgInfo.uid),
+                    )
+                )
                 .thenReturn(PERMISSION_GRANTED)
-        `when`(context.checkPermission(
-                eq(Manifest.permission.WRITE_CALL_LOG), anyInt(), eq(pkgInfo.uid)))
+            `when`(
+                    context.checkPermission(
+                        eq(Manifest.permission.WRITE_CALL_LOG),
+                        anyInt(),
+                        eq(pkgInfo.uid),
+                    )
+                )
                 .thenReturn(PERMISSION_GRANTED)
-        `when`(telecomManager.selfManagedPhoneAccounts).thenReturn(
-                listOf(PhoneAccountHandle(ComponentName(TEST_PKG_NAME, "Service"), "id")))
+            `when`(telecomManager.selfManagedPhoneAccounts)
+                .thenReturn(
+                    listOf(PhoneAccountHandle(ComponentName(TEST_PKG_NAME, "Service"), "id"))
+                )
 
-        assertThat(isPackageHibernationExemptBySystem(pkgInfo, userHandle)).isTrue()
-    }
+            assertThat(isPackageHibernationExemptBySystem(pkgInfo, userHandle)).isTrue()
+        }
 
     private fun assertAdjustedTime(systemTimeSnapshot: Long, realtimeSnapshot: Long) {
         val newStartTimeOfUnusedAppTracking =
             sharedPreferences.getLong(
                 PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-                SNAPSHOT_UNINITIALIZED
+                SNAPSHOT_UNINITIALIZED,
             )
         val newSystemTimeSnapshot =
             sharedPreferences.getLong(PREF_KEY_SYSTEM_TIME_SNAPSHOT, SNAPSHOT_UNINITIALIZED)
@@ -316,20 +330,20 @@ class HibernationPolicyTest {
 
     private fun makePackageInfo(packageName: String): LightPackageInfo {
         return LightPackageInfo(
-                packageName,
-                emptyList(),
-                emptyList(),
-                emptyList(),
-                0 /* uid */,
-                Build.VERSION_CODES.CUR_DEVELOPMENT,
-                false /* isInstantApp */,
-                true /* enabled */,
-                0 /* appFlags */,
-                0 /* firstInstallTime */,
-                0 /* lastUpdateTime */,
-                false /* areAttributionsUserVisible */,
-                emptyMap() /* attributionTagsToLabels */,
-                ContextCompat.DEVICE_ID_DEFAULT
+            packageName,
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            0 /* uid */,
+            Build.VERSION_CODES.CUR_DEVELOPMENT,
+            false /* isInstantApp */,
+            true /* enabled */,
+            0 /* appFlags */,
+            0 /* firstInstallTime */,
+            0 /* lastUpdateTime */,
+            false /* areAttributionsUserVisible */,
+            emptyMap() /* attributionTagsToLabels */,
+            ContextCompat.DEVICE_ID_DEFAULT,
         )
     }
 }

@@ -17,11 +17,11 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="lock_screen_sources_title" msgid="5493678510117489865">"Sblocco dispositivo"</string>
+    <string name="lock_screen_sources_title" msgid="5493678510117489865">"Sblocco del dispositivo"</string>
     <string name="biometrics_title_for_work" msgid="1842284049407771568">"Biometria per il lavoro"</string>
     <string name="privacy_sources_summary" msgid="4083646673569677049">"Autorizzazioni, dashboard e controlli"</string>
-    <string name="health_connect_title" msgid="8318152190040327804">"Connessione Salute"</string>
-    <string name="health_connect_search_terms" msgid="4998970586245680829">"Salute, Connessione Salute"</string>
+    <string name="health_connect_title" msgid="8318152190040327804">"Health Connect"</string>
+    <string name="health_connect_search_terms" msgid="4998970586245680829">"Salute, Health Connect"</string>
     <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Aggiornamenti alla condivisione dei dati per la posizione"</string>
     <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"Dati, Condivisione dei dati, Aggiornamenti alla condivisione dei dati, Aggiornamenti alla condivisione dei dati per la posizione, Condivisione"</string>
     <string name="advanced_title" msgid="6259362998269627310">"Altre impostazioni"</string>

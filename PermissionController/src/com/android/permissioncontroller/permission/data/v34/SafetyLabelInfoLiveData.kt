@@ -43,7 +43,7 @@ class SafetyLabelInfoLiveData
 private constructor(
     private val app: Application,
     private val packageName: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) :
     SmartAsyncMediatorLiveData<SafetyLabelInfo>(),
     PackageBroadcastReceiver.PackageBroadcastListener {
@@ -135,7 +135,7 @@ private constructor(
             return SafetyLabelInfoLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
     }

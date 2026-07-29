@@ -90,7 +90,7 @@ class AutoUnusedAppsFragment :
     override fun createUnusedAppPref(
         app: Application,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): AutoUnusedAppsPreference {
         return AutoUnusedAppsPreference(app, packageName, user, requireContext())
     }

@@ -49,6 +49,7 @@ import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.UiSelector
 import com.android.compatibility.common.util.CddTest
 import com.android.compatibility.common.util.DisableAnimationRule
+import com.android.compatibility.common.util.FeatureUtil
 import com.android.compatibility.common.util.SystemUtil.callWithShellPermissionIdentity
 import com.android.compatibility.common.util.SystemUtil.eventually
 import com.android.compatibility.common.util.SystemUtil.runShellCommand
@@ -84,6 +85,7 @@ private const val USE_HOTWORD = "use_hotword"
 private const val FINISH_EARLY = "finish_early"
 private const val USE_INTENT_ACTION = "test.action.USE_CAMERA_OR_MIC"
 private const val PRIVACY_CHIP_ID = "com.android.systemui:id/privacy_chip"
+private const val XR_PRIVACY_CHIP_BUTTON_ID = "com.android.systemui:id/privacy_indicator_button"
 private const val PRIVACY_ITEM_ID = "com.android.systemui:id/privacy_item"
 private const val INDICATORS_FLAG = "camera_mic_icons_enabled"
 private const val WEAR_MIC_LABEL = "Microphone"
@@ -147,6 +149,14 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
             SAFETY_CENTER_ENABLED,
             false.toString(),
         )!!
+    }
+
+    private val expandedPrivacyIndicatorsEnabled = callWithShellPermissionIdentity {
+        DeviceConfig.getBoolean(
+            DeviceConfig.NAMESPACE_SYSTEMUI,
+            "com.android.systemui.expanded_privacy_indicators_on_large_screen",
+            false,
+        )
     }
 
     private fun uninstall() {
@@ -364,6 +374,10 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         if (useCamera) {
             assumeTrue(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY))
         }
+
+        // The Privacy Indicator on Desktop looks differently.
+        // TODO(477033488): Update the test to support the Desktop Privacy Indicator.
+        assumeFalse("Desktop AV controls popup feature enabled", expandedPrivacyIndicatorsEnabled)
         var chainAttribution: AttributionSource? = null
         openApp(useMic, useCamera, useHotword, finishEarly)
         try {
@@ -440,6 +454,8 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
             assertCarIndicatorsShown(useMic, useCamera, useHotword, chainUsage)
         } else if (isWatch) {
             assertWatchIndicatorsShown(useMic, useCamera, useHotword)
+        } else if (FeatureUtil.isXrHeadset()) {
+            assertXrIndicatorsShown(useMic, useCamera, useHotword, chainUsage)
         } else {
             uiDevice.openQuickSettings()
             val micInUse =
@@ -569,6 +585,45 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         }
     }
 
+    private fun assertXrIndicatorsShown(
+        useMic: Boolean,
+        useCamera: Boolean,
+        useHotword: Boolean,
+        chainUsage: Boolean,
+    ) {
+        // Ensure the privacy chip is present
+        if (useCamera || useMic) {
+            eventually {
+                val privacyChip =
+                    UiAutomatorUtils2.waitFindObjectOrNull(By.res(XR_PRIVACY_CHIP_BUTTON_ID))
+                assertNotNull("view with id $PRIVACY_CHIP_ID not found", privacyChip)
+                privacyChip.click()
+            }
+        } else {
+            val privacyChip =
+                UiAutomatorUtils2.waitFindObjectOrNull(By.res(XR_PRIVACY_CHIP_BUTTON_ID))
+            assertNull("Expected not to find view with id $PRIVACY_CHIP_ID", privacyChip)
+            return
+        }
+
+        eventually {
+            if (chainUsage) {
+                assertChainMicAndOtherCameraUsed(false)
+                return@eventually
+            }
+            if (useMic) {
+                val iconView = waitFindObject(By.descContains(micLabel))
+                assertNotNull("View with description '$micLabel' not found", iconView)
+            }
+            if (useCamera) {
+                val iconView = waitFindObject(By.descContains(cameraLabel))
+                assertNotNull("View with description '$cameraLabel' not found", iconView)
+            }
+            var appView = waitFindObject(By.textContains(APP_LABEL))
+            assertNotNull("View with text $APP_LABEL not found", appView)
+        }
+    }
+
     private fun assertPrivacyChipAndIndicatorsPresent(
         useMic: Boolean,
         useCamera: Boolean,
@@ -662,10 +717,27 @@ class CameraMicIndicatorsPermissionTest : StsExtraBusinessLogicTestCase {
         } else {
             val usageViews = uiDevice.findObjects(By.res(PRIVACY_ITEM_ID))
             assertEquals("Expected two usage views", 2, usageViews.size)
-            val appViews = uiDevice.findObjects(By.textContains(APP_LABEL))
-            assertEquals("Expected two $APP_LABEL view", 2, appViews.size)
-            val shellView = uiDevice.findObjects(By.textContains(shellLabel))
-            assertEquals("Expected only one shell view", 1, shellView.size)
+
+            var appViewCount = 0
+            var shellViewCount = 0
+            for (privacyItem in usageViews) {
+                val privacyItemText = privacyItem.getText() ?: ""
+                if (
+                    privacyItemText.contains(APP_LABEL) ||
+                        privacyItem.findObjects(By.textContains(APP_LABEL)).size > 0
+                ) {
+                    appViewCount++
+                }
+                if (
+                    privacyItemText.contains(shellLabel) ||
+                        privacyItem.findObjects(By.textContains(shellLabel)).size > 0
+                ) {
+                    shellViewCount++
+                }
+            }
+
+            assertEquals("Expected two $APP_LABEL view", 2, appViewCount)
+            assertEquals("Expected only one shell view", 1, shellViewCount)
         }
     }
 

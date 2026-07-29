@@ -18,12 +18,14 @@ package com.android.permissioncontroller.wear.permission.components.material3
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.requiredSizeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.Hyphens
+import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material3.CheckboxButton
 import androidx.wear.compose.material3.LocalTextConfiguration
 import androidx.wear.compose.material3.LocalTextStyle
@@ -32,6 +34,7 @@ import androidx.wear.compose.material3.SwitchButton
 import androidx.wear.compose.material3.Text
 import com.android.permissioncontroller.wear.permission.components.R
 import com.android.permissioncontroller.wear.permission.components.material2.ToggleChip
+import com.android.permissioncontroller.wear.permission.components.theme.LocalCustomDimensions
 import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 
@@ -140,7 +143,10 @@ private fun WearPermissionToggleControlInternal(
             }
         )
     val updatedModifier =
-        modifier.fillMaxWidth().semantics { stateDescription = toggleControlStateDescription }
+        modifier
+            .requiredSizeIn(minHeight = LocalCustomDimensions.current.toggleMinHeight.dp)
+            .fillMaxWidth()
+            .semantics { stateDescription = toggleControlStateDescription }
 
     when (toggleControl) {
         WearPermissionToggleControlType.Radio ->

@@ -20,6 +20,8 @@ import android.Manifest
 import android.app.Application
 import android.companion.virtual.VirtualDeviceManager
 import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FLAG_PERMISSION_ONE_TIME
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_FIXED
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SENSITIVE_WHEN_DENIED
@@ -157,7 +159,7 @@ object MultiDeviceUtils {
         persistentDeviceId: String,
         packageName: String,
         permissions: Set<String>,
-        userSet: Boolean
+        userSet: Boolean,
     ) {
         if (!SdkLevel.isAtLeastV() || isDefaultDeviceId(persistentDeviceId)) {
             return
@@ -170,7 +172,7 @@ object MultiDeviceUtils {
                     persistentDeviceId,
                     packageName,
                     permission,
-                    userSet
+                    userSet,
                 )
             }
     }
@@ -196,7 +198,7 @@ object MultiDeviceUtils {
         persistentDeviceId: String,
         packageName: String,
         permission: String,
-        userSet: Boolean
+        userSet: Boolean,
     ) {
         if (!SdkLevel.isAtLeastV() || isDefaultDeviceId(persistentDeviceId)) {
             return
@@ -213,7 +215,7 @@ object MultiDeviceUtils {
             permission,
             persistentDeviceId,
             DEVICE_AWARE_PERMISSION_FLAG_MASK,
-            newFlag
+            newFlag,
         )
         permissionManager.grantRuntimePermission(packageName, permission, persistentDeviceId)
     }
@@ -244,7 +246,7 @@ object MultiDeviceUtils {
         permissions: Set<String>,
         userSet: Boolean,
         oneTime: Boolean,
-        reason: String? = null
+        reason: String? = null,
     ) {
         if (!SdkLevel.isAtLeastV() || isDefaultDeviceId(persistentDeviceId)) {
             return
@@ -259,9 +261,45 @@ object MultiDeviceUtils {
                     permission,
                     userSet,
                     oneTime,
-                    reason
+                    reason,
                 )
             }
+    }
+
+    /**
+     * Given permission flags of the default device and an external device Id, return a new list of
+     * permission flags for that device by checking grant state of device aware permissions for the
+     * device.
+     */
+    fun getPermissionsFlagsForDevice(
+        app: Application,
+        requestedPermissions: List<String>,
+        requestedPermissionsFlags: List<Int>,
+        uid: Int,
+        deviceId: Int,
+    ): List<Int> {
+        val requestedPermissionsFlagsForDevice = requestedPermissionsFlags.toMutableList()
+        val deviceContext = ContextCompat.createDeviceContext(app, deviceId)
+
+        for ((idx, permName) in requestedPermissions.withIndex()) {
+            if (isPermissionDeviceAware(deviceContext, deviceId, permName)) {
+                val result = deviceContext.checkPermission(permName, -1, uid)
+
+                if (result == PackageManager.PERMISSION_GRANTED) {
+                    requestedPermissionsFlagsForDevice[idx] =
+                        requestedPermissionsFlagsForDevice[idx] or
+                            PackageInfo.REQUESTED_PERMISSION_GRANTED
+                }
+
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    requestedPermissionsFlagsForDevice[idx] =
+                        requestedPermissionsFlagsForDevice[idx] and
+                            PackageInfo.REQUESTED_PERMISSION_GRANTED.inv()
+                }
+            }
+        }
+
+        return requestedPermissionsFlagsForDevice
     }
 
     /**
@@ -289,7 +327,7 @@ object MultiDeviceUtils {
         permission: String,
         userSet: Boolean,
         oneTime: Boolean,
-        reason: String? = null
+        reason: String? = null,
     ) {
         if (!SdkLevel.isAtLeastV() || isDefaultDeviceId(persistentDeviceId)) {
             return
@@ -312,13 +350,13 @@ object MultiDeviceUtils {
             permission,
             persistentDeviceId,
             DEVICE_AWARE_PERMISSION_FLAG_MASK,
-            newFlag
+            newFlag,
         )
         permissionManager.revokeRuntimePermission(
             packageName,
             permission,
             persistentDeviceId,
-            reason
+            reason,
         )
     }
 
@@ -331,7 +369,7 @@ object MultiDeviceUtils {
         app: Application,
         persistentDeviceId: String,
         packageName: String,
-        permission: String
+        permission: String,
     ): Boolean {
         if (!SdkLevel.isAtLeastV()) {
             return true

@@ -105,13 +105,13 @@ fun getTimeDiffStr(context: Context, duration: Long): String {
             StringUtils.getIcuPluralsString(
                 context,
                 R.string.seconds,
-                timeDiffAndUnit.first.toInt()
+                timeDiffAndUnit.first.toInt(),
             )
         MINUTES ->
             StringUtils.getIcuPluralsString(
                 context,
                 R.string.minutes,
-                timeDiffAndUnit.first.toInt()
+                timeDiffAndUnit.first.toInt(),
             )
         HOURS ->
             StringUtils.getIcuPluralsString(context, R.string.hours, timeDiffAndUnit.first.toInt())
@@ -132,25 +132,25 @@ fun getDurationUsedStr(context: Context, duration: Long): String {
             StringUtils.getIcuPluralsString(
                 context,
                 R.string.duration_used_seconds,
-                timeDiffAndUnit.first.toInt()
+                timeDiffAndUnit.first.toInt(),
             )
         MINUTES ->
             StringUtils.getIcuPluralsString(
                 context,
                 R.string.duration_used_minutes,
-                timeDiffAndUnit.first.toInt()
+                timeDiffAndUnit.first.toInt(),
             )
         HOURS ->
             StringUtils.getIcuPluralsString(
                 context,
                 R.string.duration_used_hours,
-                timeDiffAndUnit.first.toInt()
+                timeDiffAndUnit.first.toInt(),
             )
         else ->
             StringUtils.getIcuPluralsString(
                 context,
                 R.string.duration_used_days,
-                timeDiffAndUnit.first.toInt()
+                timeDiffAndUnit.first.toInt(),
             )
     }
 }

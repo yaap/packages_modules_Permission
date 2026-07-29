@@ -33,6 +33,7 @@ import androidx.wear.compose.material3.LocalTextConfiguration
 import androidx.wear.compose.material3.LocalTextStyle
 import androidx.wear.compose.material3.Text
 import com.android.permissioncontroller.wear.permission.components.material2.Chip
+import com.android.permissioncontroller.wear.permission.components.theme.LocalCustomDimensions
 import com.android.permissioncontroller.wear.permission.components.theme.ResourceHelper
 import com.android.permissioncontroller.wear.permission.components.theme.WearPermissionMaterialUIVersion
 
@@ -99,9 +100,9 @@ internal fun WearPermissionButtonInternal(
 ) {
     val minHeight: Dp =
         if (requiresMinimumHeight) {
-            0.dp
+            LocalCustomDimensions.current.buttonMinHeight.dp
         } else {
-            1.dp
+            1.dp // Settings 0.dp uses framework minHeight.
         }
     val iconParam: (@Composable BoxScope.() -> Unit)? = iconBuilder?.let { { it.build() } }
     val labelParam: (@Composable RowScope.() -> Unit)? =

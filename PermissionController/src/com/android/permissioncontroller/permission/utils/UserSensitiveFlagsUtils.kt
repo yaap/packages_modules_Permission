@@ -56,7 +56,7 @@ fun updateUserSensitiveForUser(user: UserHandle, callback: Runnable) {
 private fun updateUserSensitiveForUidsInternal(
     uidsUserSensitivity: Map<Int, UidSensitivityState>,
     user: UserHandle,
-    callback: Runnable?
+    callback: Runnable?,
 ) {
     val userContext = Utils.getUserContext(PermissionControllerApplication.get(), user)
     val pm = userContext.packageManager
@@ -76,7 +76,7 @@ private fun updateUserSensitiveForUidsInternal(
                             pkg.packageName,
                             FLAGS_ALWAYS_USER_SENSITIVE,
                             flags,
-                            user
+                            user,
                         )
                     }
                 } catch (e: IllegalArgumentException) {
@@ -85,7 +85,7 @@ private fun updateUserSensitiveForUidsInternal(
                             LOG_TAG,
                             "Unexpected exception while updating flags for " +
                                 "${pkg.packageName} (uid $uid) permission $perm",
-                            e
+                            e,
                         )
                     } else {
                         // Unknown permission - ignore
@@ -111,7 +111,7 @@ fun updateUserSensitiveForUid(uid: Int, callback: Runnable? = null) {
             updateUserSensitiveForUidsInternal(
                 uidSensitivityState,
                 UserHandle.getUserHandleForUid(uid),
-                callback
+                callback,
             )
         } else {
             Log.e(LOG_TAG, "No packages associated with uid $uid, not updating flags")

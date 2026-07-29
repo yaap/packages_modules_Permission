@@ -15,9 +15,12 @@
  */
 package com.android.permissioncontroller.appfunctions.ui
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.icu.text.Collator
 import android.os.Bundle
+import android.os.Process
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle.State
@@ -25,15 +28,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceGroup
-import androidx.preference.TwoStatePreference
+import androidx.preference.PreferenceScreen
 import com.android.permissioncontroller.R
-import com.android.permissioncontroller.appfunctions.ui.viewmodel.AgentItem
-import com.android.permissioncontroller.appfunctions.ui.viewmodel.TargetAccessUiState
+import com.android.permissioncontroller.appfunctions.domain.model.v31.AppFunctionPackageInfo
+import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCaseImpl
+import com.android.permissioncontroller.appfunctions.domain.usecase.v31.GetAppFunctionPackageInfoUseCase
 import com.android.permissioncontroller.appfunctions.ui.viewmodel.TargetAccessViewModel
 import com.android.permissioncontroller.appfunctions.ui.viewmodel.TargetAccessViewModelFactory
 import com.android.permissioncontroller.common.model.Stateful
+import com.android.permissioncontroller.pm.data.repository.v31.PackageRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
@@ -45,12 +54,13 @@ import kotlinx.coroutines.launch
  *
  * @param <PF> type of the parent fragment
  */
-class TargetAccessChildFragment<PF>() : Fragment(), Preference.OnPreferenceClickListener where
-PF : PreferenceFragmentCompat,
-PF : TargetAccessChildFragment.Parent {
+class TargetAccessChildFragment<PF>() : Fragment(), Preference.OnPreferenceClickListener
+    where PF : PreferenceFragmentCompat, PF : TargetAccessChildFragment.Parent {
     private lateinit var targetPackageName: String
 
     private lateinit var viewModel: TargetAccessViewModel
+    private lateinit var getAppFunctionPackageInfoUseCase: GetAppFunctionPackageInfoUseCase
+    private lateinit var agentListComparator: Comparator<AppFunctionPackageInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,18 +70,72 @@ PF : TargetAccessChildFragment.Parent {
         val factory = TargetAccessViewModelFactory(requireActivity().application, targetPackageName)
         viewModel = ViewModelProvider(this, factory).get(TargetAccessViewModel::class.java)
 
+        val packageRepository = PackageRepository.createInstance(requireContext())
+        getAppFunctionPackageInfoUseCase = GetAppFunctionPackageInfoUseCaseImpl(packageRepository)
+
+        val collator =
+            Collator.getInstance(
+                requireActivity().application.resources.configuration.getLocales().get(0)
+            )
+        agentListComparator = compareBy(collator) { it.label }
+
         val preferenceFragment = requirePreferenceFragment()
         preferenceFragment.lifecycleScope.launch {
             preferenceFragment.lifecycle.repeatOnLifecycle(State.STARTED) {
-                viewModel.uiStateFlow.collect(::onUiStateChanged)
+                viewModel.uiStateFlow
+                    .map { uiState ->
+                        when (uiState) {
+                            is Stateful.Failure -> Stateful.Failure(throwable = uiState.throwable)
+                            is Stateful.Loading -> Stateful.Loading()
+                            is Stateful.Success -> {
+                                val targetPackageInfo =
+                                    getAppFunctionPackageInfoUseCase(
+                                        uiState.value.targetPackageName,
+                                        requireContext(),
+                                        Process.myUserHandle(),
+                                    )!!
+                                val allowedAgentPackageInfos =
+                                    uiState.value.allowedAgentPackageNames
+                                        .map {
+                                            getAppFunctionPackageInfoUseCase(
+                                                it,
+                                                requireContext(),
+                                                Process.myUserHandle(),
+                                            )!!
+                                        }
+                                        .sortedWith(agentListComparator)
+                                val notAllowedAgentPackageInfos =
+                                    uiState.value.notAllowedAgentPackageNames
+                                        .map {
+                                            getAppFunctionPackageInfoUseCase(
+                                                it,
+                                                requireContext(),
+                                                Process.myUserHandle(),
+                                            )!!
+                                        }
+                                        .sortedWith(agentListComparator)
+                                Stateful.Success(
+                                    TargetAccessRichUiState(
+                                        targetPackageInfo,
+                                        allowedAgentPackageInfos,
+                                        notAllowedAgentPackageInfos,
+                                    )
+                                )
+                            }
+                        }
+                    }
+                    .flowOn(Dispatchers.Default)
+                    .collect(::onUiStateChanged)
             }
         }
     }
 
-    private fun onUiStateChanged(uiState: Stateful<TargetAccessUiState>) {
+    private fun onUiStateChanged(uiState: Stateful<TargetAccessRichUiState>) {
         if (uiState is Stateful.Loading) {
             // do nothing
             return
+        } else if (uiState is Stateful.Failure) {
+            Log.e(LOG_TAG, "Failed to load agent list", uiState.throwable)
         }
 
         val preferenceFragment = requirePreferenceFragment()
@@ -79,33 +143,60 @@ PF : TargetAccessChildFragment.Parent {
         var preferenceScreen = preferenceFragment.preferenceScreen
         val context = preferenceManager.context
         val oldPreferences = mutableMapOf<String, Preference>()
+
+        var oldAllowedAgentsPreferenceCategory: PreferenceCategory? = null
+        var oldNotAllowedAgentsPreferenceCategory: PreferenceCategory? = null
+        val oldAgentsPreferences = mutableMapOf<String, Preference>()
+
         if (preferenceScreen == null) {
             preferenceScreen = preferenceManager.createPreferenceScreen(context)
             preferenceFragment.preferenceScreen = preferenceScreen
         } else {
+            oldAllowedAgentsPreferenceCategory =
+                preferenceScreen.findPreference(PREFERENCE_KEY_ALLOWED_CATEGORY)
+            clearPreferenceCategory(oldAllowedAgentsPreferenceCategory, oldAgentsPreferences)
+
+            oldNotAllowedAgentsPreferenceCategory =
+                preferenceScreen.findPreference(PREFERENCE_KEY_NOT_ALLOWED_CATEGORY)
+            clearPreferenceCategory(oldNotAllowedAgentsPreferenceCategory, oldAgentsPreferences)
+
             clearPreferences(preferenceScreen, oldPreferences)
         }
 
-        if (uiState is Stateful.Failure) {
-            Log.e(LOG_TAG, "Failed to load agent list", uiState.throwable)
-            val targetLabel = uiState.value?.target?.label ?: targetPackageName
-            val targetIcon = uiState.value?.target?.icon
-            addHeaderPreference(preferenceScreen, targetLabel, targetIcon, oldPreferences)
-            addEmptyStatePreference(preferenceScreen, oldPreferences)
-        } else if (uiState is Stateful.Success) {
-            val targetLabel = uiState.value.target.label
-            val targetIcon = uiState.value.target.icon
-            val targets = uiState.value.agents
+        val targetLabel = uiState.value?.targetPackageInfo?.label ?: targetPackageName
+        val targetIcon = uiState.value?.targetPackageInfo?.icon
+        val allowedAgents = uiState.value?.allowedAgentPackageInfos ?: emptyList()
+        val notAllowedAgents = uiState.value?.notAllowedAgentPackageInfos ?: emptyList()
 
-            addHeaderPreference(preferenceScreen, targetLabel, targetIcon, oldPreferences)
-            if (targets.isEmpty()) {
-                addEmptyStatePreference(preferenceScreen, oldPreferences)
-            } else {
-                addTargetPreferences(preferenceScreen, targets, oldPreferences)
-            }
-        }
+        addHeaderPreference(preferenceScreen, targetLabel, targetIcon, oldPreferences)
+        addAllowedAgentsPreferenceCategory(
+            oldAllowedAgentsPreferenceCategory,
+            preferenceScreen,
+            allowedAgents,
+            oldAgentsPreferences,
+            context,
+        )
+        addNotAllowedAgentsPreferenceCategory(
+            oldNotAllowedAgentsPreferenceCategory,
+            preferenceScreen,
+            notAllowedAgents,
+            oldAgentsPreferences,
+            context,
+        )
 
         preferenceFragment.onPreferenceScreenChanged()
+    }
+
+    private fun clearPreferenceCategory(
+        preferenceCategory: PreferenceCategory?,
+        oldPreferences: MutableMap<String, Preference>,
+    ) {
+        if (preferenceCategory == null) {
+            return
+        }
+        clearPreferences(preferenceCategory, oldPreferences)
+        preferenceCategory.parent?.removePreference(preferenceCategory)
+        preferenceCategory.order = Preference.DEFAULT_ORDER
     }
 
     private fun clearPreferences(
@@ -140,66 +231,123 @@ PF : TargetAccessChildFragment.Parent {
         preferenceGroup.addPreference(preference)
     }
 
+    private fun addAllowedAgentsPreferenceCategory(
+        oldPreferenceCategory: PreferenceCategory?,
+        preferenceScreen: PreferenceScreen,
+        agents: List<AppFunctionPackageInfo>,
+        oldPreferences: Map<String, Preference>,
+        context: Context,
+    ) {
+        val preferenceCategory =
+            oldPreferenceCategory
+                ?: PreferenceCategory(context).apply {
+                    key = PREFERENCE_KEY_ALLOWED_CATEGORY
+                    setTitle(R.string.app_function_access_allowed_header)
+                }
+        preferenceScreen.addPreference(preferenceCategory)
+
+        if (agents.isEmpty()) {
+            addEmptyStatePreference(
+                preferenceCategory,
+                PREFERENCE_KEY_ZERO_STATE_ALLOWED,
+                R.string.app_function_agent_access_none_allowed_title,
+                oldPreferences,
+            )
+        } else {
+            addAgentsPreference(preferenceCategory, agents, oldPreferences)
+        }
+    }
+
+    private fun addNotAllowedAgentsPreferenceCategory(
+        oldPreferenceCategory: PreferenceCategory?,
+        preferenceScreen: PreferenceScreen,
+        agents: List<AppFunctionPackageInfo>,
+        oldPreferences: Map<String, Preference>,
+        context: Context,
+    ) {
+        val preferenceCategory =
+            oldPreferenceCategory
+                ?: PreferenceCategory(context).apply {
+                    key = PREFERENCE_KEY_NOT_ALLOWED_CATEGORY
+                    setTitle(R.string.app_function_access_denied_header)
+                }
+        preferenceScreen.addPreference(preferenceCategory)
+
+        if (agents.isEmpty()) {
+            addEmptyStatePreference(
+                preferenceCategory,
+                PREFERENCE_KEY_ZERO_STATE_NOT_ALLOWED,
+                R.string.app_function_agent_access_none_denied_title,
+                oldPreferences,
+            )
+        } else {
+            addAgentsPreference(preferenceCategory, agents, oldPreferences)
+        }
+    }
+
     private fun addEmptyStatePreference(
         preferenceGroup: PreferenceGroup,
+        preferenceKey: String,
+        titleResId: Int,
         oldPreferences: Map<String, Preference>,
     ) {
         val preference =
-            oldPreferences[PREFERENCE_KEY_ZERO_STATE]
-                ?: requirePreferenceFragment().createEmptyStatePreference().apply {
-                    key = PREFERENCE_KEY_ZERO_STATE
-                    setTitle(R.string.app_function_agent_list_empty_title)
-                    setSummary(R.string.app_function_agent_list_empty_summary)
+            oldPreferences[preferenceKey]
+                ?: requirePreferenceFragment().createPreference().apply {
+                    key = preferenceKey
+                    setTitle(titleResId)
                 }
         preferenceGroup.addPreference(preference)
     }
 
-    private fun addTargetPreferences(
+    private fun addAgentsPreference(
         preferenceGroup: PreferenceGroup,
-        agents: List<AgentItem>,
+        agents: List<AppFunctionPackageInfo>,
         oldPreferences: Map<String, Preference>,
     ) {
         val preferenceFragment = requirePreferenceFragment()
         for (agent in agents) {
-            val agentPackageInfo = agent.packageInfo
-            val agentPackageName = agentPackageInfo.packageName
+            val agentPackageName = agent.packageName
             val preference =
-                oldPreferences[agentPackageName] as TwoStatePreference?
+                oldPreferences[agentPackageName]
                     ?: preferenceFragment.createPreference().apply {
                         key = agentPackageName
                         onPreferenceClickListener = this@TargetAccessChildFragment
                     }
             // Ensure current ux state reflects the data state
             preference.apply {
-                title = agentPackageInfo.label
-                icon = agentPackageInfo.icon
-                isChecked = agent.accessGranted
+                title = agent.label
+                icon = agent.icon
             }
             preferenceGroup.addPreference(preference)
         }
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
-        preference as TwoStatePreference
-        viewModel.updateAccessState(preference.key, preference.isChecked)
+        val agentPackageName = preference.key
+        val intent =
+            ManageAccessActivity.createIntent(requireContext(), agentPackageName, targetPackageName)
+        startActivity(intent)
         return true
     }
 
-    private fun requirePreferenceFragment(): PF {
-        @Suppress("UNCHECKED_CAST")
-        return requireParentFragment() as PF
-    }
+    @Suppress("UNCHECKED_CAST")
+    private fun requirePreferenceFragment(): PF = requireParentFragment() as PF
+
+    /** The data class for UI state of ManageAccess screen that includes drawables and labels. */
+    data class TargetAccessRichUiState(
+        val targetPackageInfo: AppFunctionPackageInfo,
+        val allowedAgentPackageInfos: List<AppFunctionPackageInfo> = emptyList(),
+        val notAllowedAgentPackageInfos: List<AppFunctionPackageInfo> = emptyList(),
+    )
 
     /** Interface that the parent fragment must implement. */
     interface Parent {
         /** Creates a new header preference for the screen */
         fun createHeaderPreference(): Preference
 
-        /** Creates a new empty state preference for the screen */
-        fun createEmptyStatePreference(): Preference
-
         /** Creates a new preference for a target app. */
-        fun createPreference(): TwoStatePreference
+        fun createPreference(): Preference
 
         /**
          * Callback when changes have been made to the {@link PreferenceScreen} of the parent {@link
@@ -212,8 +360,14 @@ PF : TargetAccessChildFragment.Parent {
         private val LOG_TAG = TargetAccessChildFragment::class.java.simpleName
         private val PREFERENCE_KEY_INTRO =
             TargetAccessChildFragment::class.java.name + ".preference.INTRO"
-        private val PREFERENCE_KEY_ZERO_STATE =
-            TargetAccessChildFragment::class.java.name + ".preference.ZERO_STATE"
+        private val PREFERENCE_KEY_ALLOWED_CATEGORY =
+            TargetAccessChildFragment::class.java.name + ".preference.ALLOWED_CATEGORY"
+        private val PREFERENCE_KEY_NOT_ALLOWED_CATEGORY =
+            TargetAccessChildFragment::class.java.name + ".preference.NOT_ALLOWED_CATEGORY"
+        private val PREFERENCE_KEY_ZERO_STATE_ALLOWED =
+            TargetAccessChildFragment::class.java.name + ".preference.ZERO_STATE_ALLOWED"
+        private val PREFERENCE_KEY_ZERO_STATE_NOT_ALLOWED =
+            TargetAccessChildFragment::class.java.name + ".preference.ZERO_STATE_NOT_ALLOWED"
 
         /**
          * Create a new instance of TargetAccessChildFragment

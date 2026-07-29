@@ -187,13 +187,13 @@ class ReviewPermissionsViewModel(val app: Application, val packageInfo: PackageI
     data class PermissionSummary(
         val msg: SummaryMessage,
         val isEnterprise: Boolean = false,
-        val revokeCount: Int = 0
+        val revokeCount: Int = 0,
     )
 
     fun getSummaryForFixedByPolicyPermissionGroup(
         mState: PermissionTarget,
         permGroup: LightAppPermGroup,
-        context: Context
+        context: Context,
     ): PermissionSummary {
         val admin = getAdmin(context, permGroup)
         val hasAdmin = admin != null
@@ -319,7 +319,7 @@ class ReviewPermissionsViewModel(val app: Application, val packageInfo: PackageI
 
 class ReviewPermissionViewModelFactory(
     private val app: Application,
-    private val packageInfo: PackageInfo
+    private val packageInfo: PackageInfo,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

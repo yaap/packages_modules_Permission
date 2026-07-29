@@ -52,7 +52,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
     override fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean
+        isSystemTriggeredPrompt: Boolean,
     ): Prompt {
         val requestsBg = hasBgPerms(group, requestedPerms)
         val requestsFg = requestedPerms.any { it !in group.backgroundPermNames }
@@ -72,7 +72,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
             Log.w(
                 LOG_TAG,
                 "Cannot grant ${group.permGroupName} as the foreground permissions" +
-                    " are not requested or already granted."
+                    " are not requested or already granted.",
             )
             return Prompt.NO_UI_REJECT_THIS_GROUP
         }
@@ -92,7 +92,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
         isOneTimeGroup: Boolean,
         requestsFg: Boolean,
         isFgGranted: Boolean,
-        isFgOneTime: Boolean
+        isFgOneTime: Boolean,
     ): Prompt {
         if (requestsFg && !isFgGranted) {
             if (isOneTimeGroup) {
@@ -118,7 +118,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
         groupName: String,
         splitSdk: Int,
         requestsFg: Boolean,
-        isFgGranted: Boolean
+        isFgGranted: Boolean,
     ): Prompt {
         if (!requestsFg && isFgGranted) {
             return Prompt.NO_UI_SETTINGS_REDIRECT
@@ -129,7 +129,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
                 LOG_TAG,
                 "For SDK $splitSdk+ apps requesting $groupName, " +
                     "background permissions must be requested alone after foreground permissions " +
-                    "are already granted"
+                    "are already granted",
             )
             return Prompt.NO_UI_REJECT_ALL_GROUPS
         } else if (!isFgGranted) {
@@ -137,7 +137,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
                 LOG_TAG,
                 "For SDK $splitSdk+ apps requesting, $groupName, " +
                     "background permissions must be requested after foreground permissions are " +
-                    "already granted"
+                    "already granted",
             )
             Prompt.NO_UI_REJECT_THIS_GROUP
         }
@@ -147,7 +147,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
     override fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton {
         val basicDenyBehavior = BasicGrantBehavior.getDenyButton(group, requestedPerms, prompt)
         if (prompt == Prompt.UPGRADE_SETTINGS_LINK || prompt == Prompt.OT_UPGRADE_SETTINGS_LINK) {
@@ -169,7 +169,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
 
     override fun isGroupFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         return (!hasBgPerms(group, requestedPerms) || group.background.allowFullGroupGrant) &&
             group.foreground.allowFullGroupGrant
@@ -177,7 +177,7 @@ object BackgroundGrantBehavior : GrantBehavior() {
 
     override fun isForegroundFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         return group.foreground.allowFullGroupGrant
     }

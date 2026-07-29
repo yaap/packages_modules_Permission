@@ -37,7 +37,7 @@ class NotificationListenerPregrants(private val context: Context) {
                 "com.android.keychain",
                 "com.android.localtransport",
                 "com.android.wallpaperbackup",
-                "com.android.location.fused"
+                "com.android.location.fused",
             )
             .also {
                 it.addAll(

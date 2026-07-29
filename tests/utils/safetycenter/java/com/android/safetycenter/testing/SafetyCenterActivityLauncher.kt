@@ -18,6 +18,7 @@ package com.android.safetycenter.testing
 
 import android.Manifest.permission.REVOKE_RUNTIME_PERMISSIONS
 import android.Manifest.permission.SEND_SAFETY_CENTER_UPDATE
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_SAFETY_CENTER
@@ -31,6 +32,7 @@ import androidx.test.uiautomator.By
 import com.android.compatibility.common.util.UiAutomatorUtils2.getUiDevice
 import com.android.safetycenter.testing.ShellPermissions.callWithShellPermissionIdentity
 import com.android.safetycenter.testing.UiTestHelper.waitDisplayed
+import org.junit.Assume.assumeTrue
 
 /** A class that provides a way to launch the SafetyCenter activity in tests. */
 @RequiresApi(TIRAMISU)
@@ -50,6 +52,10 @@ object SafetyCenterActivityLauncher {
         preventTrampolineToSettings: Boolean = true,
         block: () -> Unit,
     ) {
+        assumeTrue(
+            "New Safety Center UI enabled, old UI tests shouldn't run",
+            handledByPermissionControllerSafetyCenter(this, intentAction),
+        )
         val launchSafetyCenterIntent =
             createIntent(
                 intentAction,
@@ -103,6 +109,23 @@ object SafetyCenterActivityLauncher {
         block()
         uiDevice.pressBack()
         uiDevice.waitForIdle()
+    }
+
+    /**
+     * Check if the PermissionController Safety Center activity is the one to handle the Safety
+     * Center intent.
+     */
+    fun handledByPermissionControllerSafetyCenter(context: Context, action: String): Boolean {
+        val pm = context.packageManager
+        val pcScActivity =
+            ComponentName(
+                pm.permissionControllerPackageName,
+                "com.android.permissioncontroller.safetycenter.ui.SafetyCenterActivity",
+            )
+        val queryIntent = Intent(action)
+
+        val resolvedComponent = queryIntent.resolveActivity(pm)
+        return pcScActivity == resolvedComponent
     }
 
     private const val EXTRA_PREVENT_TRAMPOLINE_TO_SETTINGS: String =

@@ -44,6 +44,7 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.compatibility.common.util.CddTest;
 import com.android.compatibility.common.util.EnableLocationRule;
+import com.android.compatibility.common.util.UserHelper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -301,7 +302,12 @@ public class NearbyDevicesPermissionTest {
     }
 
     private boolean supportsBluetoothLe() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
+        // Check if the system has bluetooth_le feature. Also check if the test is running for
+        // visible background user; visible background user doesn't support separate bluetooth
+        // stack. Test should be skipped for visible background user for
+        // Multi-User-Multi-Display (MUMD) configuration
+        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)
+                && !(new UserHelper().isVisibleBackgroundUser());
     }
 
 }

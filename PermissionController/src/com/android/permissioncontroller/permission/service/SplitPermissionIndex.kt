@@ -45,7 +45,7 @@ class SplitPermissionIndex() {
                         SplitPermissionIndexEntry(
                             splitPermission,
                             splitPermissionInfo.targetSdk,
-                            newPermGroup
+                            newPermGroup,
                         )
                     )
                 }
@@ -54,7 +54,7 @@ class SplitPermissionIndex() {
                         SplitPermissionIndexEntry(
                             splitPermissionGroup,
                             splitPermissionInfo.targetSdk,
-                            newPermGroup
+                            newPermGroup,
                         )
                     )
                 }
@@ -74,7 +74,7 @@ class SplitPermissionIndex() {
      */
     fun getPermissionGroupsFromSplitPermission(
         splitPermission: String,
-        appTargetSdk: Int
+        appTargetSdk: Int,
     ): List<String> {
         return permToGroupSplits
             .filter { it.splitPermissionOrGroup == splitPermission && appTargetSdk < it.targetSdk }
@@ -92,7 +92,7 @@ class SplitPermissionIndex() {
      */
     fun getPermissionGroupsFromSplitPermissionGroup(
         splitPermissionGroup: String,
-        appTargetSdk: Int
+        appTargetSdk: Int,
     ): List<String> {
         return groupToGroupSplits
             .filter {
@@ -121,6 +121,6 @@ class SplitPermissionIndex() {
         val splitPermissionOrGroup: String,
         /** The split only applies to app target sdk below this */
         val targetSdk: Int,
-        val newPermissionGroup: String
+        val newPermissionGroup: String,
     )
 }

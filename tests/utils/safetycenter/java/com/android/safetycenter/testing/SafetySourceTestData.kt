@@ -634,7 +634,7 @@ class SafetySourceTestData(private val context: Context) {
      * General [SafetySourceIssue] with a [SEVERITY_LEVEL_CRITICAL_WARNING] and a resolving [Action]
      * .
      */
-    private fun criticalResolvingGeneralIssue(sourceId: String) =
+    fun criticalResolvingGeneralIssue(sourceId: String) =
         defaultCriticalResolvingIssueBuilder(sourceId = sourceId).build()
 
     /**

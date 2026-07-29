@@ -116,9 +116,11 @@ private fun RemoteConnectionProgressIndicator() {
     val indicatorPadding = 8.dp
     val iconSize = 48.dp
     val progressBarStrokeWidth = 4.dp
-    Box(modifier = Modifier.size(iconSize).clip(CircleShape)) {
+    Box(modifier = Modifier.fillMaxWidth().size(iconSize).clip(CircleShape)) {
         CircularProgressIndicator(
-            modifier = Modifier.size(iconSize - progressBarStrokeWidth + indicatorPadding),
+            modifier =
+                Modifier.align(Alignment.Center)
+                    .size(iconSize - progressBarStrokeWidth + indicatorPadding),
             strokeWidth = progressBarStrokeWidth,
         )
         Icon(

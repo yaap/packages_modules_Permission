@@ -38,7 +38,7 @@ data class LightPermGroupInfo(
     val labelRes: Int,
     val icon: Int,
     val descriptionRes: Int,
-    val isSinglePermGroup: Boolean
+    val isSinglePermGroup: Boolean,
 ) {
 
     constructor(

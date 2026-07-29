@@ -16,9 +16,12 @@
 
 package com.android.permissioncontroller.common.ui;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import androidx.activity.ComponentActivity;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.modules.utils.build.SdkLevel;
@@ -44,7 +47,7 @@ public class SettingsActivity extends SettingsTransitionActivity implements
         } else if (SettingsThemeHelper.isExpressiveTheme(this)) {
             setTheme(R.style.Theme_PermissionController_Settings_Expressive_FilterTouches);
         }
-        EdgeToEdgeUtils.enable(this);
+        enableEdgeToEdge(this);
 
         super.onCreate(savedInstanceState);
 
@@ -62,5 +65,35 @@ public class SettingsActivity extends SettingsTransitionActivity implements
     public boolean isExpressiveDesignEnabled() {
         return SdkLevel.isAtLeastB() && DeviceUtils.isHandheld()
                 && Flags.isExpressiveDesignEnabled();
+    }
+
+    /**
+     * Enable EdgeToEdge. For C+, it will also useThemeColors.
+     */
+    public static void enableEdgeToEdge(@NonNull ComponentActivity activity) {
+        if (isAtLeastC()) {
+            EdgeToEdgeUtils.enable(activity, true);
+        } else {
+            EdgeToEdgeUtils.enable(activity);
+        }
+    }
+
+    /**
+     * This is the private sdk check for CinnamonBun for pre-SDK-finalization.
+     */
+    private static boolean isAtLeastC() {
+        return Build.VERSION.SDK_INT >= 37
+                || (Build.VERSION.SDK_INT == 36 && isAtLeastPreReleaseCodename("CinnamonBun"));
+    }
+
+    private static boolean isAtLeastPreReleaseCodename(@NonNull String codename) {
+        // Special case "REL", which means the build is not a pre-release build.
+        if ("REL".equals(Build.VERSION.CODENAME)) {
+            return false;
+        }
+
+        // Otherwise lexically compare them. Return true if the build codename is equal to or
+        // greater than the requested codename.
+        return Build.VERSION.CODENAME.compareTo(codename) >= 0;
     }
 }

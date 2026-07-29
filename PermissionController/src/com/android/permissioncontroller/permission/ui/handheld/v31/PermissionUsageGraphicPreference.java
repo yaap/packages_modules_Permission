@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.permissioncontroller.R;
+import com.android.settingslib.widget.GroupSectionDividerMixin;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,7 +45,8 @@ import java.util.Objects;
  * A Preference for the permission usage graphic.
  */
 @RequiresApi(Build.VERSION_CODES.S)
-public class PermissionUsageGraphicPreference extends Preference {
+public class PermissionUsageGraphicPreference extends Preference implements
+        GroupSectionDividerMixin {
 
     /** Permission group to count mapping. */
     private @NonNull Map<String, Integer> mUsages = new HashMap<>();

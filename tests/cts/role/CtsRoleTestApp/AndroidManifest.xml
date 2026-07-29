@@ -127,5 +127,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Assist Structure -->
+        <activity
+            android:name=".RequestReadScreenContextActivity"
+            android:exported="true" />
     </application>
 </manifest>

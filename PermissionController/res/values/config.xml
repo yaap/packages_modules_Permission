@@ -48,6 +48,8 @@
       ~ are all set.
       -->
     <string name="config_recommendedAssistants" translatable="false"></string>
+    <!-- Whether to show the confirmation dialog when changing the default home app. -->
+    <bool name="config_showHomeConfirmationDialog">false</bool>
 
     <bool name="config_useAlternativePermGroupSummary">false</bool>
     <bool name="config_useWindowBlur">false</bool>
@@ -59,4 +61,6 @@
     <bool name="config_display_show_password_toggle">true</bool>
 
     <bool name="config_permissionFooterPreferenceIconVisible">true</bool>
+
+    <bool name="config_useFocusIndicatorInPermissionDialogBeforeUserSetupComplete">false</bool>
 </resources>

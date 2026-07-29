@@ -17,7 +17,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="permission_description_summary_contacts" msgid="2757597696923097587">"Апликациите со дозволава може да пристапуваат до вашите контакти и да го гледаат списокот со сметките што може да зачувуваат контакти на уредов"</string>
-    <string name="permgrouprequest_contacts" msgid="4011412821869715229">"Да ѝ се дозволи на апликацијата &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; да пристапува до контактите и сметките на уредов?"</string>
+    <string name="permgrouprequest_contacts" msgid="4011412821869715229">"Да се дозволи &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; да пристапува до контактите и сметките на уредов?"</string>
     <string name="permgrouprequestdetail_contacts" msgid="3314989542973932720">"Апликацијава ќе може да пристапува до вашите контакти и да го гледа списокот со сметките што може да зачувуваат контакти"</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="2668046201497840127">"Да ѝ се дозволи на апликацијата &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; да пристапува до контактите и сметките на &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
 </resources>

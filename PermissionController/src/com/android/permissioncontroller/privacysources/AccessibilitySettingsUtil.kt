@@ -43,7 +43,7 @@ object AccessibilitySettingsUtil {
                 Log.w(
                     LOG_TAG,
                     "${serviceToBeDisabled.toShortString()} is already disabled " +
-                        "or not installed."
+                        "or not installed.",
                 )
                 return
             }
@@ -58,7 +58,7 @@ object AccessibilitySettingsUtil {
             Settings.Secure.putString(
                 context.contentResolver,
                 Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
-                updatedEnabledServices
+                updatedEnabledServices,
             )
         }
     }
@@ -68,7 +68,7 @@ object AccessibilitySettingsUtil {
         val enabledServicesSetting =
             Settings.Secure.getString(
                 context.contentResolver,
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
             )
         val enabledServices = mutableSetOf<ComponentName>()
         if (TextUtils.isEmpty(enabledServicesSetting)) {

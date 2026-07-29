@@ -132,13 +132,20 @@ public class NoReceiveSmsPermissionTest extends AndroidTestCase {
 
         String token = SmsManager.getDefault().createAppSpecificSmsToken(receivedIntent);
         String message = "test message, token=" + token;
-        sendSMSToSelf(message);
+        sendSMSToSelf(message, false);
 
-        waitForForEvents(mSemaphore, 1);
+        // Wait for SMS to be sent
+        while (!receiver.isMessageSent() && waitForForEvents(mSemaphore, 1)) {
+            // keep waiting
+        }
         assertTrue("[RERUN] Sms not sent successfully. Check signal.",
                 receiver.isMessageSent());
         assertFalse("Sms received without proper permissions", receiver.isSmsReceived());
-        waitForForEvents(mSemaphore, 1);
+
+        // Wait for app-specific SMS to be received
+        while (!receiver.isAppSpecificSmsReceived() && waitForForEvents(mSemaphore, 1)) {
+            // keep waiting
+        }
         assertTrue("App specific SMS intent not triggered", receiver.isAppSpecificSmsReceived());
     }
 
@@ -156,13 +163,20 @@ public class NoReceiveSmsPermissionTest extends AndroidTestCase {
     }
 
     private void sendSMSToSelf(String message) {
+        sendSMSToSelf(message, true);
+    }
+
+    private void sendSMSToSelf(String message, boolean requestDelivery) {
         PendingIntent sentIntent = PendingIntent.getBroadcast(getContext(), 0,
                 new Intent(MESSAGE_SENT_ACTION).setPackage(getContext().getPackageName()),
                 PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
-        PendingIntent deliveryIntent = PendingIntent.getBroadcast(getContext(), 0,
-                new Intent(MESSAGE_STATUS_RECEIVED_ACTION)
-                        .setPackage(getContext().getPackageName()),
-                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent deliveryIntent = null;
+        if (requestDelivery) {
+            deliveryIntent = PendingIntent.getBroadcast(getContext(), 0,
+                    new Intent(MESSAGE_STATUS_RECEIVED_ACTION)
+                            .setPackage(getContext().getPackageName()),
+                    PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
+        }
 
         SubscriptionManager subscription = (SubscriptionManager)
                  getContext().getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);

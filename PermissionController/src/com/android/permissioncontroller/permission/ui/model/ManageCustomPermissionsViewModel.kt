@@ -23,11 +23,9 @@ import android.health.connect.HealthPermissions.HEALTH_PERMISSION_GROUP
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.android.permission.flags.Flags
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesLiveData
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesUiInfoLiveData
@@ -45,11 +43,7 @@ class ManageCustomPermissionsViewModel(private val app: Application) : AndroidVi
 
     val uiDataLiveData = PermGroupsPackagesUiInfoLiveData(app, UsedCustomPermGroupNamesLiveData())
     val additionaPermGroupsUiInfo =
-        PermGroupsPackagesUiInfoLiveData(
-            app,
-            if (Flags.declutteredPermissionManagerEnabled()) AdditionalPermGroupNamesLiveData(app)
-            else MutableLiveData<List<String>>(),
-        )
+        PermGroupsPackagesUiInfoLiveData(app, AdditionalPermGroupNamesLiveData(app))
 
     /**
      * Navigate to a Permission Apps fragment

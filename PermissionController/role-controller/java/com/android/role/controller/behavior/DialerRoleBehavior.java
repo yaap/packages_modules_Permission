@@ -60,7 +60,7 @@ public class DialerRoleBehavior implements RoleBehavior {
     }
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         if (SdkLevel.isAtLeastS()) {
             if (PackageUtils.isSystemPackageAsUser(packageName, user, context)) {

@@ -23,11 +23,5 @@ android_test_helper_app {
     target_sdk_version: "22",
     certificate: ":cts-testkey2",
     min_sdk_version: "22",
-    test_suites: [
-        "cts",
-        "general-tests",
-        "mts-permission",
-        "sts",
-    ],
     sdk_version: "test_current",
 }

@@ -19,9 +19,12 @@ package com.android.permissioncontroller
 import android.util.Log
 import com.android.permissioncontroller.Constants.LOGS_TO_DUMP_FILE
 import java.io.File
+import java.io.IOException
 
 /** Like {@link Log} but stores the logs in a file which can later be dumped via {@link #dump} */
 object DumpableLog {
+    private const val LOG_TAG = "DumpableLog"
+
     private const val MAX_FILE_SIZE = 64 * 1024
 
     private val lock = Any()
@@ -63,18 +66,22 @@ object DumpableLog {
 
     private fun addLogToDump(level: String, tag: String, message: String, exception: Throwable?) {
         synchronized(lock) {
-            // TODO: Needs to be replaced by proper log rotation
-            if (file.length() > MAX_FILE_SIZE) {
-                val dump = file.readLines()
+            try {
+                // TODO: Needs to be replaced by proper log rotation
+                if (file.length() > MAX_FILE_SIZE) {
+                    val dump = file.readLines()
 
-                file.writeText("truncated at ${System.currentTimeMillis()}\n")
-                dump.subList(dump.size / 2, dump.size).forEach { file.appendText(it + "\n") }
+                    file.writeText("truncated at ${System.currentTimeMillis()}\n")
+                    dump.subList(dump.size / 2, dump.size).forEach { file.appendText(it + "\n") }
+                }
+
+                file.appendText(
+                    "${System.currentTimeMillis()} $tag:$level $message " +
+                        "${exception?.let { it.message + Log.getStackTraceString(it) } ?: ""}\n"
+                )
+            } catch (e: IOException) {
+                Log.e(LOG_TAG, "IOException in addLogToDump()", e)
             }
-
-            file.appendText(
-                "${System.currentTimeMillis()} $tag:$level $message " +
-                    "${exception?.let { it.message + Log.getStackTraceString(it) } ?: ""}\n"
-            )
         }
     }
 

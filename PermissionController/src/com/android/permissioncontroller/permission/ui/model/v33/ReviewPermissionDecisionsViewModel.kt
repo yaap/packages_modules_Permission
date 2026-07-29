@@ -82,7 +82,7 @@ class ReviewPermissionDecisionsViewModel(val app: Application, val user: UserHan
                     if (lightPackageInfo == null) {
                         DumpableLog.e(
                             LOG_TAG,
-                            "Package $recentDecision.packageName " + "is no longer installed"
+                            "Package $recentDecision.packageName " + "is no longer installed",
                         )
                         continue
                     }
@@ -107,7 +107,7 @@ class ReviewPermissionDecisionsViewModel(val app: Application, val user: UserHan
                             "Permission decision grant state (${recentDecision.isGranted}) " +
                                 "for ${recentDecision.packageName} access to " +
                                 "${recentDecision.permissionGroupName} does not match current " +
-                                "grant state $currentlyGranted"
+                                "grant state $currentlyGranted",
                         )
                     }
                 }
@@ -130,13 +130,13 @@ class ReviewPermissionDecisionsViewModel(val app: Application, val user: UserHan
             app.getString(
                 R.string.granted_permission_decision,
                 packageLabel,
-                UCharacter.toLowerCase(permissionGroupLabel)
+                UCharacter.toLowerCase(permissionGroupLabel),
             )
         } else {
             app.getString(
                 R.string.denied_permission_decision,
                 packageLabel,
-                UCharacter.toLowerCase(permissionGroupLabel)
+                UCharacter.toLowerCase(permissionGroupLabel),
             )
         }
     }
@@ -148,7 +148,7 @@ class ReviewPermissionDecisionsViewModel(val app: Application, val user: UserHan
             putExtra(Intent.EXTRA_USER, user)
             putExtra(
                 ManagePermissionsActivity.EXTRA_CALLER_NAME,
-                AutoReviewPermissionDecisionsFragment::class.java.name
+                AutoReviewPermissionDecisionsFragment::class.java.name,
             )
         }
     }
@@ -166,6 +166,7 @@ class ReviewPermissionDecisionsViewModelFactory(val app: Application, val user: 
     ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return ReviewPermissionDecisionsViewModel(app, user) as T
+        @Suppress("UNCHECKED_CAST")
+        return ReviewPermissionDecisionsViewModel(app, user) as T
     }
 }

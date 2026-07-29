@@ -58,7 +58,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
         fun newInstance(
             sessionId: Long,
             userHandle: UserHandle,
-            source: String?
+            source: String?,
         ): AutoReviewPermissionDecisionsFragment {
             return AutoReviewPermissionDecisionsFragment().apply {
                 arguments =
@@ -170,7 +170,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
                                 putExtra(Intent.EXTRA_USER, user)
                                 putExtra(
                                     ManagePermissionsActivity.EXTRA_CALLER_NAME,
-                                    javaClass.name
+                                    javaClass.name,
                                 )
                                 putExtra(Constants.EXTRA_SESSION_ID, sessionId)
                             }
@@ -183,7 +183,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
 
     private fun addRecentDecisionPreferences(
         preferenceGroup: PreferenceGroup,
-        recentDecisions: List<PermissionDecision>
+        recentDecisions: List<PermissionDecision>,
     ) {
         for (i in 0 until min(recentDecisions.size, MAX_DECISIONS)) {
             val recentDecision = recentDecisions[i]
@@ -199,7 +199,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
                             }
                             logPermissionDecisionClicked(
                                 recentDecision.packageName,
-                                recentDecision.permissionGroupName
+                                recentDecision.permissionGroupName,
                             )
                             true
                         }
@@ -219,7 +219,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
                         val frag =
                             AutoReviewPermissionDecisionsViewAllFragment.newInstance(
                                 sessionId,
-                                user
+                                user,
                             )
                         getParentFragmentManager()
                             .beginTransaction()
@@ -247,7 +247,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
             sessionId,
             RECENT_PERMISSION_DECISIONS_INTERACTED__ACTION__SCREEN_VIEWED,
             0,
-            null
+            null,
         )
     }
 
@@ -257,7 +257,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
             sessionId,
             RECENT_PERMISSION_DECISIONS_INTERACTED__ACTION__VIEW_ALL_CLICKED,
             0,
-            null
+            null,
         )
     }
 
@@ -268,7 +268,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
             sessionId,
             RECENT_PERMISSION_DECISIONS_INTERACTED__ACTION__REVIEW_DECISION,
             uid,
-            permissionGroupName
+            permissionGroupName,
         )
     }
 
@@ -276,7 +276,7 @@ class AutoReviewPermissionDecisionsFragment : AutoSettingsFrameFragment() {
         PermissionControllerStatsLog.write(
             PermissionControllerStatsLog.PERMISSION_REMINDER_NOTIFICATION_INTERACTED,
             sessionId,
-            PERMISSION_REMINDER_NOTIFICATION_INTERACTED__RESULT__NOTIFICATION_CLICKED
+            PERMISSION_REMINDER_NOTIFICATION_INTERACTED__RESULT__NOTIFICATION_CLICKED,
         )
     }
 }

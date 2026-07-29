@@ -86,17 +86,6 @@
                 <action android:name="android.telecom.ConnectionService" />
             </intent-filter>
         </service>
-
-        <service android:name=".EcmInCallTestInCallService"
-            android:permission="android.permission.BIND_INCALL_SERVICE"
-            android:exported="true">
-            <meta-data android:name="android.telecom.INCLUDE_SELF_MANAGED_CALLS"
-                android:value="true" />
-            <intent-filter>
-                <action android:name="android.telecom.InCallService"/>
-            </intent-filter>
-        </service>
-
     </application>
 
     <instrumentation

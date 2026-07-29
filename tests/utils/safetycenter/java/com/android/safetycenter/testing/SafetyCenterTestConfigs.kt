@@ -60,6 +60,19 @@ class SafetyCenterTestConfigs(private val context: Context) {
     val singleSourceConfig = singleSourceConfig(dynamicSafetySource(SINGLE_SOURCE_ID))
 
     /**
+     * A simple [SafetyCenterConfig] for tests with a single source of id [SINGLE_SOURCE_ID]
+     * that explicitly allows notifications. Required to bypass SDK 37 strict config checks.
+     */
+    val singleSourceWithNotificationsConfig: SafetyCenterConfig
+        @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+        get() =
+            singleSourceConfig(
+                dynamicSafetySourceBuilder(SINGLE_SOURCE_ID)
+                    .setNotificationsAllowed(true)
+                    .build()
+            )
+
+    /**
      * A simple [SafetyCenterConfig] with an invalid intent action for tests with a single source of
      * id [SINGLE_SOURCE_ID].
      */
@@ -839,7 +852,10 @@ class SafetyCenterTestConfigs(private val context: Context) {
 
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     private fun issueOnlySafetySourceWithDuplicationInfo(id: String, deduplicationGroup: String) =
-        issueOnlySafetySourceBuilder(id).setDeduplicationGroup(deduplicationGroup).build()
+        issueOnlySafetySourceBuilder(id)
+            .setDeduplicationGroup(deduplicationGroup)
+            .setNotificationsAllowed(true)
+            .build()
 
     private fun issueOnlySafetySource(id: String) = issueOnlySafetySourceBuilder(id).build()
 

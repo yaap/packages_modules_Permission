@@ -45,7 +45,7 @@ val micMutedLiveData =
 
             app.registerReceiver(
                 isMicMuteRecevicer,
-                IntentFilter(AudioManager.ACTION_MICROPHONE_MUTE_CHANGED)
+                IntentFilter(AudioManager.ACTION_MICROPHONE_MUTE_CHANGED),
             )
             update()
         }

@@ -67,7 +67,7 @@ internal enum class PositionInCardList(val backgroundDrawableResId: Int) {
             isListStart: Boolean,
             isListEnd: Boolean,
             isCardStart: Boolean = !isListStart,
-            isCardEnd: Boolean = !isListEnd
+            isCardEnd: Boolean = !isListEnd,
         ): PositionInCardList =
             if (isListStart && isListEnd) {
                 LIST_START_END

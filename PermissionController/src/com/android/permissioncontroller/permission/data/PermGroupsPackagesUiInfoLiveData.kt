@@ -37,10 +37,11 @@ import com.android.permissioncontroller.permission.utils.Utils
  */
 class PermGroupsPackagesUiInfoLiveData(
     private val app: Application,
-    private val groupNamesLiveData: LiveData<List<String>>
+    private val groupNamesLiveData: LiveData<List<String>>,
 ) :
     SmartUpdateMediatorLiveData<
-        @kotlin.jvm.JvmSuppressWildcards Map<String, PermGroupPackagesUiInfo?>
+        @kotlin.jvm.JvmSuppressWildcards
+        Map<String, PermGroupPackagesUiInfo?>
     >() {
     private val SYSTEM_SHELL = "android.app.role.SYSTEM_SHELL"
 
@@ -86,7 +87,7 @@ class PermGroupsPackagesUiInfoLiveData(
 
     private fun createPermGroupPackageUiInfo(
         groupName: String,
-        appPermGroups: Map<Pair<String, UserHandle>, AppPermGroupUiInfo>
+        appPermGroups: Map<Pair<String, UserHandle>, AppPermGroupUiInfo>,
     ): PermGroupPackagesUiInfo {
         var nonSystem = 0
         var grantedNonSystem = 0
@@ -142,7 +143,7 @@ class PermGroupsPackagesUiInfoLiveData(
             userInteractedNonSystem,
             grantedSystem,
             userInteractedSystem,
-            onlyShellGranted
+            onlyShellGranted,
         )
     }
 
@@ -155,7 +156,7 @@ class PermGroupsPackagesUiInfoLiveData(
         val roleManager =
             Utils.getSystemServiceSafe(
                 PermissionControllerApplication.get(),
-                RoleManager::class.java
+                RoleManager::class.java,
             )
         return roleManager.getRoleHolders(SYSTEM_SHELL).contains(packageName)
     }

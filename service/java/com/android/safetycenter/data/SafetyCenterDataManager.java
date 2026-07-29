@@ -338,7 +338,6 @@ public final class SafetyCenterDataManager {
     }
 
     /** Returns {@code true} if an issue's notification is dismissed now. */
-    // TODO(b/259084807): Consider extracting notification dismissal logic to separate class
     public boolean isNotificationDismissedNow(
             SafetyCenterIssueKey issueKey, @SafetySourceData.SeverityLevel int severityLevel) {
         return mSafetyCenterIssueDismissalRepository.isNotificationDismissedNow(

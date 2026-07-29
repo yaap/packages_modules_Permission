@@ -401,6 +401,9 @@ public class PermissionPolicyTest {
                 case "softRestricted": {
                     protectionFlags |= PermissionInfo.FLAG_SOFT_RESTRICTED;
                 } break;
+                case "allowedInPrivateComputeCore": {
+                    protectionFlags |= PermissionInfo.FLAG_ALLOWED_IN_PRIVATE_COMPUTE_CORE;
+                } break;
             }
         }
         return protectionFlags;

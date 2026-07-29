@@ -20,8 +20,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build.VERSION_CODES
+import android.os.Build.VERSION_CODES.BAKLAVA
+import android.os.Build.VERSION_CODES.VANILLA_ICE_CREAM
 import android.os.UserHandle
 import android.permission.flags.Flags
+import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterEntry
@@ -29,6 +32,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.os.ParcelableSubject.assertThat
 import androidx.test.filters.SdkSuppress
+import com.android.compatibility.common.util.ApiTest
 import com.android.safetycenter.testing.EqualsHashCodeToStringTester
 import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterEntryBuilder
 import com.google.common.truth.Truth.assertThat
@@ -75,12 +79,14 @@ class SafetyCenterEntryTest {
             .build()
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getId"])
     fun getId_returnsId() {
         assertThat(SafetyCenterEntry.Builder(entry1).setId("id_one").build().id).isEqualTo("id_one")
         assertThat(SafetyCenterEntry.Builder(entry1).setId("id_two").build().id).isEqualTo("id_two")
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getTitle"])
     fun getTitle_returnsTitle() {
         assertThat(SafetyCenterEntry.Builder(entry1).setTitle("a title").build().title)
             .isEqualTo("a title")
@@ -89,6 +95,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getSummary"])
     fun getSummary_returnsSummary() {
         assertThat(SafetyCenterEntry.Builder(entry1).setSummary("a summary").build().summary)
             .isEqualTo("a summary")
@@ -98,6 +105,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getSeverityLevel"])
     fun getSeverityLevel_returnsSeverityLevel() {
         assertThat(
                 SafetyCenterEntry.Builder(entry1)
@@ -116,6 +124,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getSeverityUnspecifiedIconType"])
     fun getSeverityUnspecifiedIconType_returnsSeverityUnspecifiedIconType() {
         assertThat(entry1.severityUnspecifiedIconType)
             .isEqualTo(SafetyCenterEntry.SEVERITY_UNSPECIFIED_ICON_TYPE_NO_ICON)
@@ -131,12 +140,14 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#isEnabled"])
     fun isEnabled_returnsIsEnabled() {
         assertThat(SafetyCenterEntry.Builder(entry1).setEnabled(true).build().isEnabled).isTrue()
         assertThat(SafetyCenterEntry.Builder(entry1).setEnabled(false).build().isEnabled).isFalse()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#isEnabled"])
     fun isEnabled_defaultTrue() {
         assertThat(
                 createSafetyCenterEntryBuilder("eNtRy_iD", "a title", UserHandle.of(1), "source_id")
@@ -149,6 +160,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getPendingIntent"])
     fun getPendingIntent_returnsPendingIntent() {
         assertThat(
                 SafetyCenterEntry.Builder(entry1)
@@ -169,6 +181,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getIconAction"])
     fun getIconAction_returnsIconAction() {
         assertThat(SafetyCenterEntry.Builder(entry1).setIconAction(iconAction1).build().iconAction)
             .isEqualTo(iconAction1)
@@ -181,6 +194,7 @@ class SafetyCenterEntryTest {
     @SdkSuppress(minSdkVersion = VERSION_CODES.BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#hasError"])
     fun hasError_returnsHasError() {
         assertThat(entry1.hasError()).isFalse()
         assertThat(SafetyCenterEntry.Builder(entry1).setHasError(true).build().hasError()).isTrue()
@@ -189,7 +203,18 @@ class SafetyCenterEntryTest {
     @SdkSuppress(minSdkVersion = VERSION_CODES.BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getUser"])
     fun getUserHandle_returnsUser() {
+        assertThat(entry1.user).isEqualTo(UserHandle.of(1))
+        assertThat(SafetyCenterEntry.Builder(entry1).setUser(UserHandle.of(123)).build().user)
+            .isEqualTo(UserHandle.of(123))
+    }
+
+    @SdkSuppress(minSdkVersion = VERSION_CODES.BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#getSafetySourceId"])
+    fun getSafetySourceId_returnsSafetySourceId() {
         assertThat(entry1.safetySourceId).isEqualTo("source_id")
         assertThat(
                 SafetyCenterEntry.Builder(entry1)
@@ -200,16 +225,8 @@ class SafetyCenterEntryTest {
             .isEqualTo("custom_source_id")
     }
 
-    @SdkSuppress(minSdkVersion = VERSION_CODES.BAKLAVA)
-    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
-    fun getSafetySourceId_returnsSafetySourceId() {
-        assertThat(entry1.user).isEqualTo(UserHandle.of(1))
-        assertThat(SafetyCenterEntry.Builder(entry1).setUser(UserHandle.of(123)).build().user)
-            .isEqualTo(UserHandle.of(123))
-    }
-
-    @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry.Builder#setSeverityLevel"])
     fun build_withInvalidEntrySeverityLevel_throwsIllegalArgumentException() {
         val exception =
             assertFailsWith(IllegalArgumentException::class) {
@@ -222,6 +239,9 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(
+        apis = ["android.safetycenter.SafetyCenterEntry.Builder#setSeverityUnspecifiedIconType"]
+    )
     fun build_withInvalidSeverityUnspecifiedIconType_throwsIllegalArgumentException() {
         val exception =
             assertFailsWith(IllegalArgumentException::class) {
@@ -234,11 +254,19 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry#describeContents"])
     fun describeContents_returns0() {
         assertThat(entry1.describeContents()).isEqualTo(0)
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry.CREATOR",
+                "android.safetycenter.SafetyCenterEntry#writeToParcel",
+            ]
+    )
     fun parcelRoundTrip_recreatesEqual() {
         assertThat(entry1).recreatesEqual(SafetyCenterEntry.CREATOR)
         assertThat(
@@ -251,15 +279,59 @@ class SafetyCenterEntryTest {
             .recreatesEqual(SafetyCenterEntry.CREATOR)
     }
 
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry.CREATOR",
+                "android.safetycenter.SafetyCenterEntry#writeToParcel",
+            ]
+    )
+    fun parcelRoundTrip_forSimpleBuilderConstructor_onBPlus_recreatesEqual() {
+        assertThat(SafetyCenterEntry.Builder("id", "title").build())
+            .recreatesEqual(SafetyCenterEntry.CREATOR)
+    }
+
+    @Test
+    @SdkSuppress(maxSdkVersion = VANILLA_ICE_CREAM)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry.CREATOR",
+                "android.safetycenter.SafetyCenterEntry#writeToParcel",
+            ]
+    )
+    fun parcelRoundTrip_forSimpleBuilderConstructor_recreatesEqual() {
+        assertThat(SafetyCenterEntry.Builder("id", "title").build())
+            .recreatesEqual(SafetyCenterEntry.CREATOR)
+    }
+
     @SdkSuppress(minSdkVersion = VERSION_CODES.BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry.CREATOR",
+                "android.safetycenter.SafetyCenterEntry#writeToParcel",
+            ]
+    )
     fun parcelRoundTrip_whenOpenSafetyCenterApisEnabled_recreatesEqual() {
         assertThat(SafetyCenterEntry.Builder(entry1).setHasError(true).build())
             .recreatesEqual(SafetyCenterEntry.CREATOR)
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry#equals",
+                "android.safetycenter.SafetyCenterEntry#hashCode",
+                "android.safetycenter.SafetyCenterEntry#toString",
+            ]
+    )
     fun equalsHashCodeToString_usingEqualsHashCodeToStringTester() {
         EqualsHashCodeToStringTester.ofParcelable(
                 parcelableCreator = SafetyCenterEntry.CREATOR,
@@ -322,6 +394,14 @@ class SafetyCenterEntryTest {
     @SdkSuppress(minSdkVersion = VERSION_CODES.BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry#equals",
+                "android.safetycenter.SafetyCenterEntry#hashCode",
+                "android.safetycenter.SafetyCenterEntry#toString",
+            ]
+    )
     fun equalsHashCodeToString_whenOpenSafetyCenterApisEnabled_usingEqualsHashCodeToStringTester() {
         EqualsHashCodeToStringTester.ofParcelable(
                 parcelableCreator = SafetyCenterEntry.CREATOR,
@@ -401,6 +481,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry.IconAction#getType"])
     fun iconAction_getType_returnsType() {
         assertThat(
                 SafetyCenterEntry.IconAction(
@@ -421,6 +502,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry.IconAction#getPendingIntent"])
     fun iconAction_getPendingIntent_returnsPendingIntent() {
         assertThat(
                 SafetyCenterEntry.IconAction(
@@ -441,6 +523,7 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry.IconAction#<init>"])
     fun iconAction_withInvalidIconActionType_throwsIllegalArgumentException() {
         val exception =
             assertFailsWith(IllegalArgumentException::class) {
@@ -453,16 +536,32 @@ class SafetyCenterEntryTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterEntry.IconAction#describeContents"])
     fun iconAction_describeContents_returns0() {
         assertThat(iconAction1.describeContents()).isEqualTo(0)
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry.IconAction.CREATOR",
+                "android.safetycenter.SafetyCenterEntry.IconAction#writeToParcel",
+            ]
+    )
     fun iconAction_parcelRoundTrip_recreatesEqual() {
         assertThat(iconAction1).recreatesEqual(SafetyCenterEntry.IconAction.CREATOR)
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterEntry.IconAction#equals",
+                "android.safetycenter.SafetyCenterEntry.IconAction#hashCode",
+                "android.safetycenter.SafetyCenterEntry.IconAction#toString",
+            ]
+    )
     fun iconAction_equalsHashCodeToString_usingEqualsHashCodeToStringTester() {
         EqualsHashCodeToStringTester.ofParcelable(
                 parcelableCreator = SafetyCenterEntry.IconAction.CREATOR

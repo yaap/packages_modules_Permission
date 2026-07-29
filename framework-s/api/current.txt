@@ -1,7 +1,8 @@
-// Signature format: 2.0
+// Signature format: 6.0
+// - style=java
 package android.app.role {
 
-  @RestrictedForEnvironment(environments=android.annotation.RestrictedForEnvironment.ENVIRONMENT_SDK_RUNTIME, from=android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) public final class RoleManager {
+  public final class RoleManager {
     method @NonNull public android.content.Intent createRequestRoleIntent(@NonNull String);
     method public boolean isRoleAvailable(@NonNull String);
     method public boolean isRoleHeld(@NonNull String);

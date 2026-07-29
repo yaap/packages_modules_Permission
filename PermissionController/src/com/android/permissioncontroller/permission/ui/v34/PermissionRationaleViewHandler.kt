@@ -73,7 +73,7 @@ interface PermissionRationaleViewHandler {
         purposeTitle: CharSequence,
         purposeMessage: CharSequence,
         learnMoreMessage: CharSequence,
-        settingsMessage: CharSequence
+        settingsMessage: CharSequence,
     )
 
     /**

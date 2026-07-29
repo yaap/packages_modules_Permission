@@ -133,6 +133,7 @@ class AccessibilitySourceServiceTest {
             assertThat(notifiedServices.contains(it.flattenToShortString())).isTrue()
         }
     }
+
     @Test
     fun removeNotifiedService() {
         val a11yService = ComponentName("com.test.package", "AccessibilityService")
@@ -211,7 +212,7 @@ class AccessibilitySourceServiceTest {
     private fun getNotifiedServices(): MutableSet<String> {
         return sharedPref.getStringSet(
             AccessibilitySourceService.KEY_ALREADY_NOTIFIED_SERVICES,
-            mutableSetOf<String>()
+            mutableSetOf<String>(),
         )!!
     }
 

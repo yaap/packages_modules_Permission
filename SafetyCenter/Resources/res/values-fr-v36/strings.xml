@@ -28,5 +28,5 @@
     <string name="wear_unlock_title" msgid="1613730442896319515">"Montre"</string>
     <string name="wear_unlock_title_for_work" msgid="3103157953371670280">"Déverrouillage par une montre pour le travail"</string>
     <string name="wear_unlock_title_for_private_profile" msgid="927318621331822758"></string>
-    <string name="wear_unlock_search_terms" msgid="3769797118448924263">"Montre, Déverrouillage par une montre"</string>
+    <string name="wear_unlock_search_terms" msgid="3769797118448924263">"Montre, Déverrouillage par montre"</string>
 </resources>

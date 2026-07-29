@@ -26,6 +26,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Binder;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceIssue;
@@ -37,6 +39,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.modules.utils.build.SdkLevel;
+import com.android.permission.flags.Flags;
 import com.android.safetycenter.SafetyCenterFlags;
 import com.android.safetycenter.SafetySourceIssueInfo;
 import com.android.safetycenter.SafetySourceIssues;
@@ -354,12 +357,23 @@ public final class SafetyCenterNotificationSender {
     }
 
     private boolean areNotificationsAllowedForSource(SafetySource safetySource) {
+        if (isNotificationControlConfigOnly()) {
+            return safetySource.areNotificationsAllowed();
+        }
+
         if (SdkLevel.isAtLeastU()) {
             if (safetySource.areNotificationsAllowed()) {
                 return true;
             }
         }
         return SafetyCenterFlags.getNotificationsAllowedSourceIds().contains(safetySource.getId());
+    }
+
+    /** Whether notifications are allowed/disallowed for a source only based on the config file. */
+    private boolean isNotificationControlConfigOnly() {
+        // This is a mainline flag which effect we want to limit to new SDKs.
+        return Flags.migrateToNewSafetyCenterUiFeatures()
+                && VERSION.SDK_INT > VERSION_CODES.BAKLAVA;
     }
 
     private boolean canNotifyDelayedIssueNow(SafetyCenterIssueKey issueKey) {

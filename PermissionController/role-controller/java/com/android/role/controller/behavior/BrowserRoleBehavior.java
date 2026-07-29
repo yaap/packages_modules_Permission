@@ -133,7 +133,7 @@ public class BrowserRoleBehavior implements RoleBehavior {
     }
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         // @see com.android.server.pm.permission.DefaultPermissionGrantPolicy
         //      #grantDefaultPermissionsToDefaultBrowser(java.lang.String, int)

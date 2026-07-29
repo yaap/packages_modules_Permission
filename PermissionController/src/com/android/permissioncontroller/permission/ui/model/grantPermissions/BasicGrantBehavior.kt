@@ -26,7 +26,7 @@ object BasicGrantBehavior : GrantBehavior() {
     override fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean
+        isSystemTriggeredPrompt: Boolean,
     ): Prompt {
         return Prompt.BASIC
     }
@@ -34,7 +34,7 @@ object BasicGrantBehavior : GrantBehavior() {
     override fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton {
         if (prompt in noDenyButtonPrompts) {
             return DenyButton.NONE
@@ -53,6 +53,6 @@ object BasicGrantBehavior : GrantBehavior() {
             Prompt.NO_UI_HEALTH_REDIRECT,
             Prompt.NO_UI_REJECT_THIS_GROUP,
             Prompt.NO_UI_REJECT_ALL_GROUPS,
-            Prompt.NO_UI_FILTER_THIS_GROUP
+            Prompt.NO_UI_FILTER_THIS_GROUP,
         )
 }

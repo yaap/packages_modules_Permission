@@ -36,7 +36,7 @@ class PersistedStoragePackageUninstalledReceiver(
     @VisibleForTesting
     private val storages: List<PermissionEventStorage<out PermissionEvent>> =
         PermissionEventStorageImpls.getInstance(),
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : BroadcastReceiver() {
 
     companion object {

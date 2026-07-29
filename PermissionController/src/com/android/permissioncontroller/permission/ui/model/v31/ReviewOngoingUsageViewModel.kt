@@ -17,7 +17,6 @@
 
 package com.android.permissioncontroller.permission.ui.model.v31
 
-import android.Manifest
 import android.Manifest.permission_group.CAMERA
 import android.Manifest.permission_group.LOCATION
 import android.Manifest.permission_group.MICROPHONE
@@ -79,13 +78,13 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
          * A map of attribution, packageName and user -> list of attribution labels to show with
          * microphone
          */
-        val shownAttributions: Map<PackageAttribution, List<CharSequence>> = emptyMap()
+        val shownAttributions: Map<PackageAttribution, List<CharSequence>> = emptyMap(),
     )
 
     data class PackageAttribution(
         val attributionTag: String?,
         val packageName: String,
-        val user: UserHandle
+        val user: UserHandle,
     ) {
         fun pkgEq(other: PackageAttribution): Boolean {
             return packageName == other.packageName && user == other.user
@@ -109,8 +108,8 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                 } else {
                     listOf(CAMERA, MICROPHONE)
                 },
-                System.currentTimeMillis() - startTime
-            )
+                System.currentTimeMillis() - startTime,
+            ),
         )
 
     /** Whether the mic is muted */
@@ -155,16 +154,6 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
 
                 value = filteredUsages
             }
-
-            // TODO ntmyren: Replace this with better check if this moves beyond teamfood
-            private fun isAppPredictor(usage: OpAccess): Boolean {
-                return Utils.getUserContext(app, usage.user)
-                    .packageManager
-                    .checkPermission(
-                        Manifest.permission.MANAGE_APP_PREDICTIONS,
-                        usage.packageName
-                    ) == PackageManager.PERMISSION_GRANTED
-            }
         }
 
     /**
@@ -207,7 +196,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                 setSourcesToDifference(
                     toAddLabelLiveDatas,
                     attributionLabelLiveDatas,
-                    getLiveDataFun
+                    getLiveDataFun,
                 )
 
                 if (attributionLabelLiveDatas.any { !it.value.isInitialized }) {
@@ -219,7 +208,6 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                     val userContext =
                         Utils.getUserContext(PermissionControllerApplication.get(), user)
 
-                    // TODO ntmyren: Observe changes, possibly split into separate LiveDatas
                     val voiceInputs = mutableMapOf<String, CharSequence>()
                     userContext
                         .getSystemService(InputMethodManager::class.java)!!
@@ -231,7 +219,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                                         it.serviceInfo.loadSafeLabel(
                                             userContext.packageManager,
                                             Float.MAX_VALUE,
-                                            0
+                                            0,
                                         )
                                     break
                                 }
@@ -243,7 +231,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                         Settings.Secure.getString(
                                 userContext.contentResolver,
                                 // Settings.Secure.VOICE_RECOGNITION_SERVICE
-                                "voice_recognition_service"
+                                "voice_recognition_service",
                             )
                             ?.let(ComponentName::unflattenFromString)
                             ?.packageName
@@ -252,7 +240,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                     val availableRecognizers =
                         userContext.packageManager.queryIntentServices(
                             Intent(RecognitionService.SERVICE_INTERFACE),
-                            PackageManager.GET_META_DATA
+                            PackageManager.GET_META_DATA,
                         )
                     availableRecognizers.forEach {
                         val sI = it.serviceInfo
@@ -266,7 +254,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                     val availableRecognizerIntents =
                         userContext.packageManager.queryIntentActivities(
                             Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
-                            PackageManager.GET_META_DATA
+                            PackageManager.GET_META_DATA,
                         )
                     availableRecognizers.forEach { rI ->
                         val servicePkg = rI.serviceInfo.packageName
@@ -283,7 +271,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                                 rI.serviceInfo.loadSafeLabel(
                                     userContext.packageManager,
                                     Float.MAX_VALUE,
-                                    0
+                                    0,
                                 )
                         }
                     }
@@ -297,7 +285,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                             user,
                             false,
                             voiceInputs,
-                            approvedAttrs
+                            approvedAttrs,
                         )
                         setTrustedAttrsForAccess(
                             userContext,
@@ -305,7 +293,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                             user,
                             false,
                             recognizerIntents,
-                            approvedAttrs
+                            approvedAttrs,
                         )
                         setTrustedAttrsForAccess(
                             userContext,
@@ -313,7 +301,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                             user,
                             true,
                             recognizers,
-                            approvedAttrs
+                            approvedAttrs,
                         )
                     }
                 }
@@ -326,7 +314,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                 currUser: UserHandle,
                 getProxyLabel: Boolean,
                 trustedMap: Map<String, CharSequence>,
-                toSetMap: MutableMap<PackageAttribution, String>
+                toSetMap: MutableMap<PackageAttribution, String>,
             ) {
                 val access =
                     if (getProxyLabel) {
@@ -347,8 +335,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                 val labelResId =
                     attributionLabelLiveDatas[
                             Triple(access.attributionTag, access.packageName, access.user)]
-                        ?.value
-                        ?: 0
+                        ?.value ?: 0
                 val label =
                     try {
                         context.createPackageContext(packageName, 0).getString(labelResId)
@@ -371,6 +358,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
             init {
                 addSource(permGroupUsages) { update() }
             }
+
             override fun onUpdate() {
                 if (!permGroupUsages.isInitialized) {
                     return
@@ -440,7 +428,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                     state,
                     CALL_OP_USAGE_KEY,
                     OpUsageLiveData[
-                        listOf(PHONE_CALL, VIDEO_CALL), System.currentTimeMillis() - startTime]
+                        listOf(PHONE_CALL, VIDEO_CALL), System.currentTimeMillis() - startTime],
                 )
 
             init {
@@ -563,7 +551,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
                                 KotlinUtils.getPackageLabel(
                                     app,
                                     opAccess.packageName,
-                                    opAccess.user
+                                    opAccess.user,
                                 )
                             )
                         }
@@ -584,7 +572,7 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
             /** Merge any usages for the same app which don't have a special attribution */
             private fun removeDuplicates(
                 appUsages: MutableMap<PackageAttribution, Set<String>>,
-                approvedUsages: Collection<PackageAttribution>
+                approvedUsages: Collection<PackageAttribution>,
             ) {
                 // Iterate over all non-special attribution keys
                 for (packageAttr in appUsages.keys.minus(approvedUsages)) {
@@ -616,16 +604,16 @@ class ReviewOngoingUsageViewModel(state: SavedStateHandle, extraDurationMills: L
 class ReviewOngoingUsageViewModelFactory(
     private val extraDurationMillis: Long,
     owner: SavedStateRegistryOwner,
-    defaultArgs: Bundle
+    defaultArgs: Bundle,
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
     override fun <T : ViewModel> create(
         key: String,
         modelClass: Class<T>,
-        handle: SavedStateHandle
+        handle: SavedStateHandle,
     ): T {
         handle.set(
             FIRST_OPENED_KEY,
-            handle.get<Long>(FIRST_OPENED_KEY) ?: System.currentTimeMillis()
+            handle.get<Long>(FIRST_OPENED_KEY) ?: System.currentTimeMillis(),
         )
         @Suppress("UNCHECKED_CAST")
         return ReviewOngoingUsageViewModel(handle, extraDurationMillis) as T

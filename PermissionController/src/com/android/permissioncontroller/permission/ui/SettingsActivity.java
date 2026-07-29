@@ -16,6 +16,8 @@
 
 package com.android.permissioncontroller.permission.ui;
 
+import static com.android.permissioncontroller.common.ui.SettingsActivity.enableEdgeToEdge;
+
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,7 +25,6 @@ import androidx.annotation.Nullable;
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.DeviceUtils;
 import com.android.permissioncontroller.R;
-import com.android.settingslib.collapsingtoolbar.EdgeToEdgeUtils;
 import com.android.settingslib.collapsingtoolbar.SettingsTransitionActivity;
 import com.android.settingslib.widget.ExpressiveDesignEnabledProvider;
 import com.android.settingslib.widget.theme.flags.Flags;
@@ -36,7 +37,7 @@ public class SettingsActivity extends SettingsTransitionActivity implements
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (SdkLevel.isAtLeastV()) {
-            EdgeToEdgeUtils.enable(this);
+            enableEdgeToEdge(this);
         }
 
         super.onCreate(savedInstanceState);

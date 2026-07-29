@@ -114,7 +114,7 @@ public class SmsRoleBehavior implements RoleBehavior {
     }
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         if (SdkLevel.isAtLeastS() && PackageUtils.isSystemPackageAsUser(packageName, user,
                 context)) {

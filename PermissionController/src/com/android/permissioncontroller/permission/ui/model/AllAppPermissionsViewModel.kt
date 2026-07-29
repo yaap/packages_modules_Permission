@@ -44,7 +44,7 @@ class AllAppPermissionsViewModel(packageName: String, user: UserHandle, filterGr
     class AllPackagePermissionsLiveData(
         packageName: String,
         user: UserHandle,
-        private val filterGroup: String?
+        private val filterGroup: String?,
     ) : SmartUpdateMediatorLiveData<@kotlin.jvm.JvmSuppressWildcards Map<String, List<String>>>() {
 
         private val packagePermsLiveData = PackagePermissionsLiveData[packageName, user]
@@ -96,7 +96,7 @@ class AllAppPermissionsViewModel(packageName: String, user: UserHandle, filterGr
 class AllAppPermissionsViewModelFactory(
     private val packageName: String,
     private val user: UserHandle,
-    private val filterGroup: String?
+    private val filterGroup: String?,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

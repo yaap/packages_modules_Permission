@@ -50,8 +50,7 @@ abstract class DataRepository<K, V : DataRepository.InactiveTimekeeper> : Compon
     private var isLowMemoryDevice =
         PermissionControllerApplication.get()
             .getSystemService(ActivityManager::class.java)
-            ?.isLowRamDevice
-            ?: false
+            ?.isLowRamDevice ?: false
 
     init {
         PermissionControllerApplication.get().registerComponentCallbacks(this)
@@ -77,9 +76,7 @@ abstract class DataRepository<K, V : DataRepository.InactiveTimekeeper> : Compon
      */
     @MainThread protected abstract fun newValue(key: K): V
 
-    /**
-     * Remove LiveData objects with no observer.
-     */
+    /** Remove LiveData objects with no observer. */
     override fun onTrimMemory(level: Int) {
         if (isLowMemoryDevice) {
             trimInactiveData(TIME_THRESHOLD_ALL_NANOS)
@@ -99,11 +96,16 @@ abstract class DataRepository<K, V : DataRepository.InactiveTimekeeper> : Compon
                     ComponentCallbacks2.TRIM_MEMORY_BACKGROUND -> TIME_THRESHOLD_LAX_NANOS
                     // Allow handling for trim levels that are deprecated in newer API versions
                     // but are still supported on older devices that this code ships to.
-                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_MODERATE -> TIME_THRESHOLD_TIGHT_NANOS
-                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_COMPLETE -> TIME_THRESHOLD_ALL_NANOS
-                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE -> TIME_THRESHOLD_LAX_NANOS
-                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW -> TIME_THRESHOLD_TIGHT_NANOS
-                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL -> TIME_THRESHOLD_ALL_NANOS
+                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_MODERATE ->
+                        TIME_THRESHOLD_TIGHT_NANOS
+                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_COMPLETE ->
+                        TIME_THRESHOLD_ALL_NANOS
+                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE ->
+                        TIME_THRESHOLD_LAX_NANOS
+                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW ->
+                        TIME_THRESHOLD_TIGHT_NANOS
+                    @Suppress("DEPRECATION") ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL ->
+                        TIME_THRESHOLD_ALL_NANOS
                     else -> return
                 }
         )
@@ -211,14 +213,23 @@ abstract class DataRepositoryForDevice<K, V : DataRepository.InactiveTimekeeper>
 /** A convenience to retrieve data from a repository with a composite key */
 operator fun <K1, K2, V : DataRepository.InactiveTimekeeper> DataRepository<Pair<K1, K2>, V>.get(
     k1: K1,
-    k2: K2
+    k2: K2,
 ): V {
     return get(k1 to k2)
 }
 
+/** A getter on DataRepositoryForDevice to retrieve a LiveData for a device. */
+operator fun <K, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<K, V>.get(
+    k: K,
+    deviceId: Int,
+): V {
+    return getWithDeviceId(k, deviceId)
+}
+
 /** A convenience to retrieve data from a repository with a composite key */
 operator fun <K1, K2, K3, V : DataRepository.InactiveTimekeeper> DataRepository<
-    Triple<K1, K2, K3>, V
+    Triple<K1, K2, K3>,
+    V,
 >
     .get(k1: K1, k2: K2, k3: K3): V {
     return get(Triple(k1, k2, k3))
@@ -226,7 +237,8 @@ operator fun <K1, K2, K3, V : DataRepository.InactiveTimekeeper> DataRepository<
 
 /** A getter on DataRepositoryForDevice to retrieve a LiveData for a device. */
 operator fun <K1, K2, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<
-    Triple<K1, K2, Int>, V
+    Triple<K1, K2, Int>,
+    V,
 >
     .get(k1: K1, k2: K2, deviceId: Int): V {
     return getWithDeviceId(Triple(k1, k2, deviceId), deviceId)
@@ -237,31 +249,31 @@ operator fun <K1, K2, V : DataRepository.InactiveTimekeeper> DataRepositoryForDe
  * primary device. The param can be in the format of Pair<K1, K2> or [K1, K2]
  */
 operator fun <K1, K2, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<
-    Triple<K1, K2, Int>, V
+    Triple<K1, K2, Int>,
+    V,
 >
-    .get(
-    k1: K1,
-    k2: K2,
-): V {
+    .get(k1: K1, k2: K2): V {
     return getWithDeviceId(
         Triple(k1, k2, ContextCompat.DEVICE_ID_DEFAULT),
-        ContextCompat.DEVICE_ID_DEFAULT
+        ContextCompat.DEVICE_ID_DEFAULT,
     )
 }
 
 operator fun <K1, K2, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<
-    Triple<K1, K2, Int>, V
+    Triple<K1, K2, Int>,
+    V,
 >
     .get(key: Pair<K1, K2>): V {
     return getWithDeviceId(
         Triple(key.first, key.second, ContextCompat.DEVICE_ID_DEFAULT),
-        ContextCompat.DEVICE_ID_DEFAULT
+        ContextCompat.DEVICE_ID_DEFAULT,
     )
 }
 
 /** A getter on DataRepositoryForDevice to retrieve a LiveData for a device. */
 operator fun <K1, K2, K3, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<
-    KotlinUtils.Quadruple<K1, K2, K3, Int>, V
+    KotlinUtils.Quadruple<K1, K2, K3, Int>,
+    V,
 >
     .get(k1: K1, k2: K2, k3: K3, deviceId: Int): V {
     return getWithDeviceId(KotlinUtils.Quadruple(k1, k2, k3, deviceId), deviceId)
@@ -272,21 +284,23 @@ operator fun <K1, K2, K3, V : DataRepository.InactiveTimekeeper> DataRepositoryF
  * primary device. The param can be in the format of Triple<K1, K2, K3> or [K1, K2, K3]
  */
 operator fun <K1, K2, K3, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<
-    KotlinUtils.Quadruple<K1, K2, K3, Int>, V
+    KotlinUtils.Quadruple<K1, K2, K3, Int>,
+    V,
 >
     .get(k1: K1, k2: K2, k3: K3): V {
     return getWithDeviceId(
         KotlinUtils.Quadruple(k1, k2, k3, ContextCompat.DEVICE_ID_DEFAULT),
-        ContextCompat.DEVICE_ID_DEFAULT
+        ContextCompat.DEVICE_ID_DEFAULT,
     )
 }
 
 operator fun <K1, K2, K3, V : DataRepository.InactiveTimekeeper> DataRepositoryForDevice<
-    KotlinUtils.Quadruple<K1, K2, K3, Int>, V
+    KotlinUtils.Quadruple<K1, K2, K3, Int>,
+    V,
 >
     .get(key: Triple<K1, K2, K3>): V {
     return getWithDeviceId(
         KotlinUtils.Quadruple(key.first, key.second, key.third, ContextCompat.DEVICE_ID_DEFAULT),
-        ContextCompat.DEVICE_ID_DEFAULT
+        ContextCompat.DEVICE_ID_DEFAULT,
     )
 }

@@ -28,6 +28,7 @@ class WearAppPermissionUsagesViewModel : ViewModel() {
 /** Factory for a WearAppPermissionGroupsViewModel */
 class WearAppPermissionUsagesViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return WearAppPermissionUsagesViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return WearAppPermissionUsagesViewModel() as T
     }
 }

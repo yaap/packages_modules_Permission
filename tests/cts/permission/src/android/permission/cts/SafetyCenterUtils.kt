@@ -19,15 +19,11 @@ package android.permission.cts
 import android.app.Instrumentation
 import android.app.UiAutomation
 import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
-import android.os.Build
 import android.os.UserHandle
 import android.provider.DeviceConfig
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
-import androidx.annotation.RequiresApi
-import androidx.annotation.VisibleForTesting
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import com.android.compatibility.common.util.SystemUtil.callWithShellPermissionIdentity
@@ -64,17 +60,7 @@ object SafetyCenterUtils {
             "Cannot toggle Safety Center",
             callWithShellPermissionIdentity {
                 safetyCenterManager?.isSafetyCenterEnabled ?: false
-            } == enabled
-        )
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    @JvmStatic
-    fun startSafetyCenterActivity(context: Context) {
-        context.startActivity(
-            Intent(Intent.ACTION_SAFETY_CENTER)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            } == enabled,
         )
     }
 
@@ -88,7 +74,7 @@ object SafetyCenterUtils {
     fun setDeviceConfigPrivacyProperty(
         propertyName: String,
         value: String,
-        uiAutomation: UiAutomation = instrumentation.uiAutomation
+        uiAutomation: UiAutomation = instrumentation.uiAutomation,
     ) {
         runWithShellPermissionIdentity(uiAutomation) {
             val valueWasSet =
@@ -96,7 +82,7 @@ object SafetyCenterUtils {
                     DeviceConfig.NAMESPACE_PRIVACY,
                     /* name = */ propertyName,
                     /* value = */ value,
-                    /* makeDefault = */ false
+                    /* makeDefault = */ false,
                 )
             check(valueWasSet) { "Could not set $propertyName to $value" }
         }
@@ -105,7 +91,7 @@ object SafetyCenterUtils {
     @JvmStatic
     fun deleteDeviceConfigPrivacyProperty(
         propertyName: String,
-        uiAutomation: UiAutomation = instrumentation.uiAutomation
+        uiAutomation: UiAutomation = instrumentation.uiAutomation,
     ) {
         runWithShellPermissionIdentity(uiAutomation) {
             DeviceConfig.deleteProperty(DeviceConfig.NAMESPACE_PRIVACY, propertyName)
@@ -131,12 +117,12 @@ object SafetyCenterUtils {
         sourceId: String,
         issueId: String,
         issueTypeId: String,
-        automation: UiAutomation = instrumentation.uiAutomation
+        automation: UiAutomation = instrumentation.uiAutomation,
     ) {
         val safetyCenterIssueId = safetyCenterIssueId(sourceId, issueId, issueTypeId)
         Assert.assertTrue(
             "Expect issues in safety center",
-            getSafetyCenterIssues(automation).any { safetyCenterIssueId == it.id }
+            getSafetyCenterIssues(automation).any { safetyCenterIssueId == it.id },
         )
     }
 
@@ -145,12 +131,12 @@ object SafetyCenterUtils {
         sourceId: String,
         issueId: String,
         issueTypeId: String,
-        automation: UiAutomation = instrumentation.uiAutomation
+        automation: UiAutomation = instrumentation.uiAutomation,
     ) {
         val safetyCenterIssueId = safetyCenterIssueId(sourceId, issueId, issueTypeId)
         Assert.assertTrue(
             "Expect no issue in safety center",
-            getSafetyCenterIssues(automation).none { safetyCenterIssueId == it.id }
+            getSafetyCenterIssues(automation).none { safetyCenterIssueId == it.id },
         )
     }
 

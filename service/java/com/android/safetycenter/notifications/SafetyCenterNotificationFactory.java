@@ -40,6 +40,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.android.modules.utils.build.SdkLevel;
+import com.android.permission.flags.Flags;
 import com.android.safetycenter.PendingIntentFactory;
 import com.android.safetycenter.internaldata.SafetyCenterIds;
 import com.android.safetycenter.internaldata.SafetyCenterIssueActionId;
@@ -56,6 +57,7 @@ import java.util.List;
 final class SafetyCenterNotificationFactory {
 
     private static final int OPEN_SAFETY_CENTER_REQUEST_CODE = 1221;
+    private static final int MAX_STRING_LENGTH = 20;
     private static final Duration SUCCESS_NOTIFICATION_TIMEOUT = Duration.ofSeconds(10);
 
     private final Context mContext;
@@ -163,6 +165,10 @@ final class SafetyCenterNotificationFactory {
                         .setDeleteIntent(
                                 SafetyCenterNotificationReceiver.newNotificationDismissedIntent(
                                         mContext, issueKey));
+
+        if (Flags.safetyCenterNotificationStyle() && text.length() > MAX_STRING_LENGTH) {
+            builder.setStyle(new Notification.BigTextStyle().bigText(text));
+        }
 
         Integer color = getNotificationColor(issue.getSeverityLevel());
         if (color != null) {

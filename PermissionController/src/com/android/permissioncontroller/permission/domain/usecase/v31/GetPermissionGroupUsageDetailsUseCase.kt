@@ -288,8 +288,12 @@ class GetPermissionGroupUsageDetailsUseCase(
                 } ?: false
             // Since telecom doesn't request CAMERA/MIC permission, we explicitly let those
             // entries to be shown in permission timeline page.
-            if (isAnyPermissionRequestedFromPermissionGroup
-                || isTelecomPackageAndCameraOrMicGroup(packageOpsModel.packageName, permissionGroup)
+            if (
+                isAnyPermissionRequestedFromPermissionGroup ||
+                    isTelecomPackageAndCameraOrMicGroup(
+                        packageOpsModel.packageName,
+                        permissionGroup,
+                    )
             ) {
                 packageOpsModel
             } else {

@@ -7,6 +7,10 @@
 }
 -dontwarn androidx.core.**
 
+# Similarly, don't warn about missing references from the support library
+# to optional, Wear-specific libraries.
+-dontwarn com.google.wear.input.**
+
 # Keep classes that implements RoleBehavior, which are used by reflection.
 -keep class * implements com.android.role.controller.model.RoleBehavior {
     *;

@@ -15,7 +15,7 @@
 -->
 <resources>
     <overlayable name="WearPermissionControllerStyles">
-        <policy type="public|product|system|vendor|odm|oem">
+        <policy type="product|system|vendor|odm|oem">
             <!--START WEAR SPECIFIC MATERIAL3 COLOR TOKENS-->
             <item type="color" name="wear_compose_material3_primary_fixed" />
             <item type="color" name="wear_compose_material3_primary_fixed_dim" />
@@ -112,6 +112,20 @@
             <item type="dimen" name="wear_compose_material3_shape_corner_large_size" />
             <item type="dimen" name="wear_compose_material3_shape_corner_extra_large_size" />
             <!--END WEAR SPECIFIC MATERIAL3 SHAPE TOKENS-->
+
+            <!--START WEAR SPECIFIC EXTRA CUSTOMIZATION TOKENS-->
+            <item type="dimen" name="title_icon_size" />
+            <item type="dimen" name="button_min_height" />
+            <item type="dimen" name="toggle_min_height" />
+
+            <!-- Multipliers are applied to the screen size-->
+            <item type="dimen" name="scroll_content_horizontal_padding_multiplier" />
+            <item type="dimen" name="scroll_content_top_padding_multiplier" />
+            <item type="dimen" name="scroll_content_bottom_padding_multiplier" />
+            <item type="dimen" name="scroll_title_additional_horizonal_padding_multiplier" />
+            <item type="dimen" name="scroll_subtitle_additional_horizonal_padding_multiplier" />
+            <!--END WEAR SPECIFIC EXTRA CUSTOMIZATION TOKENS-->
+
         </policy>
     </overlayable>
 </resources>

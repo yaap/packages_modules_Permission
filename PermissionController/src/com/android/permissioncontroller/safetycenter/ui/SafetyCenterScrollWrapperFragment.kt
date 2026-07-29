@@ -40,8 +40,8 @@ internal class SafetyCenterScrollWrapperFragment :
                     R.id.fragment_container,
                     SafetyCenterDashboardFragment.newInstance(
                         Utils.getOrGenerateSessionId(requireActivity().getIntent()),
-                        /* isQuickSettingsFragment= */ false
-                    )
+                        /* isQuickSettingsFragment= */ false,
+                    ),
                 )
                 .commitNow()
         }

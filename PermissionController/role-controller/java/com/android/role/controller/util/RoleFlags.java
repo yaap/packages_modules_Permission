@@ -34,4 +34,14 @@ public final class RoleFlags {
     public static boolean isProfileGroupExclusivityAvailable() {
         return SdkLevel.isAtLeastB() && com.android.permission.flags.Flags.crossUserRoleEnabled();
     }
+
+    /**
+     * Returns whether the role managers can manage {@link android.app.role.RoleManager#ROLE_NOTES}
+     * via {@link android.app.role.RoleManager#getDefaultApplication(String)} and
+     * {@link android.app.role.RoleManager#setDefaultApplication(String, String, int,
+     * java.util.concurrent.Executor, java.util.function.Consumer)}.
+     */
+    public static boolean canManageDefaultNotesRolePackage() {
+        return android.permission.flags.Flags.manageDefaultNotesRolePackageEnabled();
+    }
 }

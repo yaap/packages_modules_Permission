@@ -55,7 +55,7 @@ data class LightPackageInfo(
     val lastUpdateTime: Long,
     val areAttributionsUserVisible: Boolean,
     val attributionTagsToLabels: Map<String, Int>,
-    var deviceId: Int
+    var deviceId: Int,
 ) {
     constructor(
         pI: PackageInfo
@@ -75,13 +75,13 @@ data class LightPackageInfo(
         pI.lastUpdateTime,
         if (SdkLevel.isAtLeastS()) pI.applicationInfo!!.areAttributionsUserVisible() else false,
         if (SdkLevel.isAtLeastS()) buildAttributionTagsToLabelsMap(pI.attributions) else emptyMap(),
-        ContextCompat.DEVICE_ID_DEFAULT
+        ContextCompat.DEVICE_ID_DEFAULT,
     )
 
     constructor(
         pI: PackageInfo,
         deviceId: Int,
-        requestedPermissionsFlagsForDevice: List<Int>
+        requestedPermissionsFlagsForDevice: List<Int>,
     ) : this(pI) {
         this.deviceId = deviceId
         this.requestedPermissionsFlags = requestedPermissionsFlagsForDevice
@@ -129,20 +129,18 @@ data class LightPackageInfo(
             val userContext = Utils.getUserContext(app, UserHandle.getUserHandleForUid(uid))
             return userContext.packageManager.getPackageInfo(
                 packageName,
-                PackageManager.GET_PERMISSIONS
+                PackageManager.GET_PERMISSIONS,
             )
         } catch (e: PackageManager.NameNotFoundException) {
-            Log.e(
-                LightPackageInfo::class.java.simpleName,
-                "Failed to get real package info for $packageName, $uid",
-                e
-            )
+            Log.e(LOG_TAG, "Failed to get real package info for $packageName, $uid", e)
         }
         return null
     }
 
     /** Companion object for [LightPackageInfo]. */
     companion object {
+        private const val LOG_TAG = "LightPackageInfo"
+
         /** Creates a mapping of attribution tag to labels from the provided attributions. */
         fun buildAttributionTagsToLabelsMap(attributions: Array<Attribution>?): Map<String, Int> {
             val attributionTagToLabel = mutableMapOf<String, Int>()

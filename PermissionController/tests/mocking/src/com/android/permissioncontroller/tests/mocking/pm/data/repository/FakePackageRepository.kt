@@ -27,8 +27,11 @@ class FakePackageRepository(
     private val packageAttributions: Map<String, PackageAttributionModel> = emptyMap(),
     private val packagesAndLabels: Map<String, String> = emptyMap(),
     private val packageIcons: Map<String, Drawable> = emptyMap(),
+    private val agents: List<String> = emptyList(),
     private val settingsPackageName: String? = null,
 ) : PackageRepository {
+    override fun getPackageUid(packageName: String, user: UserHandle): Int = TEST_UID
+
     override fun getPackageLabel(packageName: String, user: UserHandle): String =
         packagesAndLabels[packageName] ?: packageName
 
@@ -47,4 +50,13 @@ class FakePackageRepository(
     ): PackageAttributionModel? = packageAttributions[packageName]
 
     override fun getSettingsPackageName(user: UserHandle): String? = settingsPackageName
+
+    override fun getPackagesHoldingPermissions(
+        permissions: List<String>,
+        user: UserHandle,
+    ): List<String> = agents
+
+    companion object {
+        const val TEST_UID = 100203
+    }
 }

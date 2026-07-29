@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 class PermissionStorageTimeChangeReceiver(
     private val storages: List<PermissionEventStorage<out PermissionEvent>> =
         PermissionEventStorageImpls.getInstance(),
-    private val timeSource: TimeSource = SystemTimeSource()
+    private val timeSource: TimeSource = SystemTimeSource(),
 ) : BroadcastReceiver() {
 
     companion object {
@@ -74,7 +74,7 @@ class PermissionStorageTimeChangeReceiver(
                 persistTimeSnapshots(
                     context,
                     timeSource.currentTimeMillis(),
-                    timeSource.elapsedRealtime()
+                    timeSource.elapsedRealtime(),
                 )
             }
             Intent.ACTION_TIME_CHANGED -> {
@@ -119,7 +119,7 @@ class PermissionStorageTimeChangeReceiver(
     private fun persistTimeSnapshots(
         context: Context,
         systemTimeSnapshot: Long,
-        realtimeSnapshot: Long
+        realtimeSnapshot: Long,
     ) {
         DumpableLog.d(LOG_TAG, "systemTimeSnapshot set to $systemTimeSnapshot")
         DumpableLog.d(LOG_TAG, "realtimeSnapshot set to $realtimeSnapshot")
@@ -133,14 +133,14 @@ class PermissionStorageTimeChangeReceiver(
     private fun getSystemTimeSnapshot(context: Context): Long {
         return context.sharedPreferences.getLong(
             PREF_KEY_SYSTEM_TIME_SNAPSHOT,
-            SNAPSHOT_UNINITIALIZED
+            SNAPSHOT_UNINITIALIZED,
         )
     }
 
     private fun getElapsedRealtimeSnapshot(context: Context): Long {
         return context.sharedPreferences.getLong(
             PREF_KEY_ELAPSED_REALTIME_SNAPSHOT,
-            SNAPSHOT_UNINITIALIZED
+            SNAPSHOT_UNINITIALIZED,
         )
     }
 

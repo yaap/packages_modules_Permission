@@ -115,7 +115,7 @@
     <string name="permission_access_never" msgid="4647014230217936900">"Moenie toelaat nie"</string>
     <string name="loading" msgid="4789365003890741082">"Laai tans …"</string>
     <string name="all_permissions" msgid="6911125611996872522">"Alle toestemmings"</string>
-    <string name="other_permissions" msgid="2901186127193849594">"Ander programvermoëns"</string>
+    <string name="other_permissions" msgid="2901186127193849594">"Ander appvermoëns"</string>
     <string name="permission_request_title" msgid="8790310151025020126">"Toestemmingsversoek"</string>
     <string name="permission_review_title_template_install" msgid="1284337937156289081">"Kies waartoe &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toegang mag kry"</string>
     <string name="permission_review_title_template_update" msgid="3232333580548588657">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; is opgedateer. Kies waartoe hierdie app toegang mag kry."</string>
@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Voer tans app uit …"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Onbekend"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Privaatheidkontroleskerm"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Apptoestemmings"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"KI-assistentaktiwiteit"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"Geen KI-assistente geïnstalleer nie"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Geen toegang die afgelope 24 uur nie"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Geen toegang die laaste 7 dae nie"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"<xliff:g id="APP_NAME">%1$s</xliff:g>-aktiwiteit"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"In die afgelope 24 uur"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"In die afgelope 7 dae"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Vandag"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Gister"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Jongste toegang <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Bekyk"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Geen toegang nie"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"Hierdie KI-assistent het toegang tot hierdie apps gekry om inligting te kry of handelinge vir jou uit te voer. Jy kan hierdie toegang enige tyd in <xliff:g id="APP_NAME">%1$s</xliff:g>-instellings verander."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Privaatheidkontroleskerm wys net as toegang tot apps gekry word met Android-kenmerke vir KI-assistente."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Toestelhulp"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Bekyk watter programme onlangs toestemmings gebruik het"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g>-gebruik"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Sien ander toestemmings"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Nie in die afgelope # dag gebruik nie}other{Nie in die afgelope # dae gebruik nie}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Nie in die afgelope # uur gebruik nie}other{Nie in die afgelope # uur gebruik nie}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Gebruik deur 1 app}other{Gebruik deur # apps}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Het toegang tot 1 app gekry}other{Het toegang tot # apps gekry}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Sien alles in Dashboard"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Gefiltreer volgens: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Verwyder filter"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Laat net toegang tot media toe"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Laat altyd toe"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Laat net toe terwyl jy app gebruik"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Laat toe om app aan die gang te hou"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Laat altyd alles toe"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Vra elke keer"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Vra elke keer of laat toe wanneer jy deel"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Moenie toelaat nie"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Laat beperkte toegang toe"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Presiese ligging"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Toegelaat"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Altyd toegelaat"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Net toegelaat wanneer dit gebruik word"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Kan app aan die gang hou"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Net toegang tot media toegelaat"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Toegelaat om alle lêers te bestuur"</string>
     <string name="ask_header" msgid="2633816846459944376">"Vra elke keer"</string>
     <string name="denied_header" msgid="903209608358177654">"Nie toegelaat nie"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> op <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Sien meer apps wat toegang tot alle lêers het"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Laat toe om app aan die gang hou&lt;/b&gt;&lt;br&gt;&lt;br&gt;’n App kan toegelaat word om toegang tot jou plaaslike netwerk te kry en net met toestelle op hierdie netwerk te koppel om aan die gang te bly.&lt;br&gt;&lt;br&gt;Die app kan nie met Bluetooth en ander tegnologieë aan toestelle koppel nie, tensy jy dit toelaat om alle toestelle in die omtrek te vind en daaraan te koppel."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Kan app aan die gang hou&lt;/b&gt;&lt;br&gt;&lt;br&gt;’n App kan toegelaat word om toegang tot jou plaaslike netwerk te kry en net met toestelle op hierdie netwerk te koppel om aan die gang te bly.&lt;br&gt;&lt;br&gt;Die app kan nie met Bluetooth en ander tegnologieë aan toestelle koppel nie, tensy jy dit toelaat om alle toestelle in die omtrek te vind en daaraan te koppel."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 dag}other{# dae}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# uur}other{# uur}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# minuut}other{# minute}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Geen"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Stelselverstek)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Geen apps nie"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Verander"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Hou huidige"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Ander NFC-dienste"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Gekies"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Gekies – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Geen spesiale apptoegang nie"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Geen apps nie"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Steun nie werkprofiel nie"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Verander jou verstekhuisapp na &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Dit sal jou tuisskerm vervang en kan toegang tot kenmerke op jou toestel beïnvloed.&lt;br&gt;&lt;br&gt;Jy kan hierdie keuse enige tyd in die &lt;b&gt;verstekhuisapp&lt;/b&gt; se instellings verander."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Let wel: As jy jou toestel herbegin en \'n skermslot is gestel, kan hierdie app nie begin totdat jy jou toestel ontsluit nie."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Die assistent sal inligting oor programme wat tans op jou stelsel gebruik word, kan lees, insluitend inligting wat op jou skerm sigbaar is of toeganklik is binne die programme."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Verander jou digitaleassistentapp na &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Hierdie assistent sal toegang kan kry tot inligting soos jou boodskappe en data wat apps gekies het om met jou assistent te deel."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Hierdie assistent sal toegang kan kry tot inligting soos jou boodskappe en data wat apps gekies het om met jou assistent te deel.&lt;br&gt;&lt;br&gt;Omdat jy voorheen skerm- en appdata vir <xliff:g id="APP_NAME">%1$s</xliff:g> aangeskakel het, sal dit ook toegelaat word om toegang te kry tot inhoud uit die app wat op jou skerm oop is."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Deel ontfoutingsdata"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Deel gedetailleerde ontfoutingsdata?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil graag ontfoutingsinligting oplaai."</string>
@@ -516,10 +545,10 @@
     <string name="permgroupupgraderequestdetail_microphone" msgid="2870497719571464239">"Hierdie app wil die hele tyd oudio opneem, selfs wanneer jy nie die app gebruik nie. "<annotation id="link">"Laat toe in instellings."</annotation></string>
     <string name="permgrouprequest_activityRecognition" msgid="5415121592794230330">"Gee &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toegang tot jou fisieke aktiwiteit?"</string>
     <string name="permgrouprequest_device_aware_activityRecognition" msgid="1243869530588745374">"Gee &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toegang tot jou fisieke aktiwiteit op &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
-    <string name="permgrouprequest_camera" msgid="5123097035410002594">"Laat &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toe om foto\'s te neem en video\'s op te neem?"</string>
+    <string name="permgrouprequest_camera" msgid="5123097035410002594">"Laat &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toe om foto’s te neem en video’s op te neem?"</string>
     <string name="permgrouprequest_device_aware_camera" msgid="5340173564041615494">"Gee &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toegang om foto’s te neem en video’s op te neem op &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgrouprequestdetail_camera" msgid="9085323239764667883">"Die app sal net kan foto\'s neem en video\'s opneem terwyl jy die app gebruik"</string>
-    <string name="permgroupbackgroundrequest_camera" msgid="1274286575704213875">"Laat &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toe om foto\'s te neem en video\'s op te neem?"</string>
+    <string name="permgroupbackgroundrequest_camera" msgid="1274286575704213875">"Laat &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toe om foto’s te neem en video’s op te neem?"</string>
     <string name="permgroupbackgroundrequest_device_aware_camera" msgid="8533353179594971475">"Gee &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toegang om foto’s te neem en video’s op te neem op &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;?"</string>
     <string name="permgroupbackgroundrequestdetail_camera" msgid="4458783509089859078">"Hierdie app wil dalk die hele tyd foto\'s neem en video\'s opneem, selfs wanneer jy nie die app gebruik nie. "<annotation id="link">"Laat toe in instellings."</annotation></string>
     <string name="permgroupupgraderequest_camera" msgid="640758449200241582">"Verander kameratoegang vir &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Apps"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Agenttoegang"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Agente wat toegang tot inligting kan kry en aksies namens jou kan neem in hierdie app"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Toegelaat"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Nie toegelaat nie"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Geen agenttoegang toegelaat nie"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Geen agenttoegang geweier nie"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Geen apptoegang toegelaat nie"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Geen apptoegang geweier nie"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Toegang tot app"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Toegang tot <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>-toegang tot <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Laat toe"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Moenie toelaat nie"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Toestelinstellings"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Laat <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> toe om ’n agent vir <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> te wees?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Hierdie agent sal toegang tot <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> hê om inligting te kry en aksies vir jou te neem"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Laat toe"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Moenie toelaat nie"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Gee &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; toestemming om skerm- en appdata te gebruik?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Hierdie assistent sal toegang kan kry tot inligting en inhoud uit die app wat op jou skerm oop is"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Laat toe"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Moenie toelaat nie"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Gebruik skerm- en appdata"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Gee assistent toegang tot inligting en inhoud van die app wat op jou skerm oop is"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Gee <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> toegang tot inligting en inhoud van die app wat op jou skerm oop is"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Laat toe"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Moenie toelaat nie"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Wil jy vir &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; toegang tot presiese ligging gee wanneer jy kies om dit te deel?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Wanneer jy deel, sal hierdie app toegang tot presiese ligging hê totdat jy die app toemaak"</string>
 </resources>

@@ -83,7 +83,8 @@ public class RevokeSelfPermissionTest {
     @Before
     public void wakeUpScreen() {
         SystemUtil.runShellCommand("input keyevent KEYCODE_WAKEUP");
-        SystemUtil.runShellCommand("input keyevent 82");
+        SystemUtil.runShellCommand("input keyevent KEYCODE_MENU");
+        SystemUtil.runShellCommand("input keyevent KEYCODE_ESCAPE");
         mOldScreenOffTimeoutValue = SystemUtil.runShellCommand(
                 "settings get system screen_off_timeout");
         mOldSleepTimeoutValue = SystemUtil.runShellCommand("settings get secure sleep_timeout");

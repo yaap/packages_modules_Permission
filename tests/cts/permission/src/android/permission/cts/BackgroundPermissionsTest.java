@@ -96,7 +96,6 @@ public class BackgroundPermissionsTest {
     }
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
-    @RequiresFlagsEnabled({Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED})
     @Test
     @AppModeFull(reason = "Instant apps cannot read properties of other packages")
     public void verifyBackgroundPropertiesForHealthPermissions() throws Exception {

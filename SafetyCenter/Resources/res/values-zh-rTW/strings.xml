@@ -31,7 +31,7 @@
     <string name="permission_usage_summary" msgid="5323079206029964468">"顯示最近曾使用權限的應用程式"</string>
     <string name="permission_usage_search_terms" msgid="3852343592870257104">"隱私,隱私資訊主頁"</string>
     <string name="permission_manager_title" msgid="5277347862821255015">"權限管理員"</string>
-    <string name="permission_manager_summary" msgid="8099852107340970790">"控管可存取資料的應用程式"</string>
+    <string name="permission_manager_summary" msgid="8099852107340970790">"控管應用程式的資料存取權"</string>
     <string name="permission_manager_search_terms" msgid="2895147613099694722">"權限,權限管理員"</string>
     <string name="privacy_controls_title" msgid="5322875777945432395">"隱私權控制項"</string>
     <string name="privacy_controls_summary" msgid="2402066941190435424">"控管麥克風、相機等裝置存取權"</string>

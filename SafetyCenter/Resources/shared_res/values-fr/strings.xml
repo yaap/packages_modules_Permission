@@ -25,8 +25,8 @@
     <string name="overall_severity_level_action_taken_summary" msgid="8064091657855656545">"{count,plural, =1{Mesure prise}one{Mesure prise}many{Mesures prises}other{Mesures prises}}"</string>
     <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"Vérifier les paramètres"</string>
     <string name="overall_severity_level_ok_review_summary" msgid="7743619617413076275">"Vérifier la liste des paramètres"</string>
-    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"Appareil présentant un risque potentiel"</string>
-    <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"Appareil présentant un risque"</string>
+    <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"L\'appareil présente un risque potentiel"</string>
+    <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"L\'appareil présente un risque"</string>
     <string name="overall_severity_level_data_recommendation_title" msgid="1424269714861655302">"Risque potentiel sur vos données"</string>
     <string name="overall_severity_level_critical_data_warning_title" msgid="1012704126634698604">"Risque sur vos données"</string>
     <string name="overall_severity_level_passwords_recommendation_title" msgid="8625105570296877719">"Mots de passe compromis (anciens)"</string>

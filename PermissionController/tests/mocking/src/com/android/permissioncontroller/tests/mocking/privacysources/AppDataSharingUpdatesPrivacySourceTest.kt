@@ -83,7 +83,7 @@ class AppDataSharingUpdatesPrivacySourceTest {
         whenever(
                 Utils.getSystemServiceSafe(
                     any(ContextWrapper::class.java),
-                    eq(SafetyCenterManager::class.java)
+                    eq(SafetyCenterManager::class.java),
                 )
             )
             .thenReturn(mockSafetyCenterManager)
@@ -121,7 +121,7 @@ class AppDataSharingUpdatesPrivacySourceTest {
         appDataSharingUpdatesPrivacySource.rescanAndPushSafetyCenterData(
             context,
             refreshIntent,
-            EVENT_REFRESH_REQUESTED
+            EVENT_REFRESH_REQUESTED,
         )
 
         val expectedSafetySourceData: SafetySourceData =
@@ -130,14 +130,14 @@ class AppDataSharingUpdatesPrivacySourceTest {
                     SafetySourceStatus.Builder(
                             DATA_SHARING_UPDATES_TITLE,
                             DATA_SHARING_UPDATES_SUMMARY,
-                            SafetySourceData.SEVERITY_LEVEL_INFORMATION
+                            SafetySourceData.SEVERITY_LEVEL_INFORMATION,
                         )
                         .setPendingIntent(
                             PendingIntent.getActivity(
                                 context,
                                 /* requestCode= */ 0,
                                 Intent(ACTION_REVIEW_APP_DATA_SHARING_UPDATES),
-                                FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+                                FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE,
                             )
                         )
                         .build()
@@ -151,7 +151,7 @@ class AppDataSharingUpdatesPrivacySourceTest {
             .setSafetySourceData(
                 APP_DATA_SHARING_UPDATES_SOURCE_ID,
                 expectedSafetySourceData,
-                expectedSafetyEvent
+                expectedSafetyEvent,
             )
     }
 
@@ -163,7 +163,7 @@ class AppDataSharingUpdatesPrivacySourceTest {
         appDataSharingUpdatesPrivacySource.rescanAndPushSafetyCenterData(
             context,
             bootCompleteIntent,
-            EVENT_DEVICE_REBOOTED
+            EVENT_DEVICE_REBOOTED,
         )
 
         val expectedSafetyEvent = SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build()
@@ -181,7 +181,7 @@ class AppDataSharingUpdatesPrivacySourceTest {
         appDataSharingUpdatesPrivacySource.rescanAndPushSafetyCenterData(
             context,
             refreshIntent,
-            EVENT_REFRESH_REQUESTED
+            EVENT_REFRESH_REQUESTED,
         )
 
         val expectedSafetyEvent =
@@ -209,7 +209,7 @@ class AppDataSharingUpdatesPrivacySourceTest {
                     DeviceConfig.getBoolean(
                         eq(NAMESPACE_PRIVACY),
                         eq(SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED),
-                        anyBoolean()
+                        anyBoolean(),
                     )
                 )
                 .thenReturn(enabled)

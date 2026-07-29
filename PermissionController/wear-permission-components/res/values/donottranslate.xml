@@ -108,4 +108,14 @@
     <color name="wear_compose_material3_error_container_dark">@android:color/system_error_container_dark</color>
     <color name="wear_compose_material3_on_error_container_dark">@android:color/system_on_error_container_dark</color>
 
+    <dimen name="title_icon_size">32dp</dimen>
+    <dimen name="button_min_height">52dp</dimen>
+    <dimen name="toggle_min_height">52dp</dimen>
+    <!-- Multipliers are applied to the screen size-->
+    <dimen name="scroll_content_horizontal_padding_multiplier">0.052</dimen>
+    <dimen name="scroll_content_top_padding_multiplier">0.1664</dimen>
+    <dimen name="scroll_content_bottom_padding_multiplier">0.3646</dimen>
+    <dimen name="scroll_title_additional_horizonal_padding_multiplier">0.1200</dimen>
+    <dimen name="scroll_subtitle_additional_horizonal_padding_multiplier">0.0416</dimen>
+
 </resources>

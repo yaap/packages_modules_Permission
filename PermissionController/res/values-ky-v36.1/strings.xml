@@ -16,8 +16,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="permission_description_summary_contacts" msgid="2757597696923097587">"Бул уруксатка ээ болгон колдонмолор байланыштарыңызга кире алат жана бул түзмөктө байланыштарды сактай ала турган аккаунттардын тизмесин көрө алат"</string>
-    <string name="permgrouprequest_contacts" msgid="4011412821869715229">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; бул түзмөктөгү байланыштарга жана аккаунттарга кирүүгө уруксат бересизби?"</string>
-    <string name="permgrouprequestdetail_contacts" msgid="3314989542973932720">"Бул колдонмо байланыштарыңызга кире алат жана байланыштарды сактай ала турган аккаунттардын тизмесин көрө алат"</string>
+    <string name="permission_description_summary_contacts" msgid="2757597696923097587">"Ушундай уруксат алган колдонмолорго байланыштарыңыз жеткиликтүү болуп, байланыштар сакталуучу аккаунттардын тизмесин көрө алышат."</string>
+    <string name="permgrouprequest_contacts" msgid="4011412821869715229">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; колдонмосуна бул түзмөктөгү байланыштар менен аккаунттарды жеткиликтүү кыласызбы?"</string>
+    <string name="permgrouprequestdetail_contacts" msgid="3314989542973932720">"Бул колдонмого байланыштарыңыз жеткиликтүү болуп, байланыштар сакталуучу аккаунттардын тизмесин көрө алат."</string>
     <string name="permgrouprequest_device_aware_contacts" msgid="2668046201497840127">"&lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; колдонмосуна &lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; түзмөгүндөгү байланыштар менен аккаунттарга кирүүгө уруксат бересизби?"</string>
 </resources>

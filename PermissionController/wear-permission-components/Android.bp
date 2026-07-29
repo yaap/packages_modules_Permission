@@ -48,6 +48,7 @@ android_library {
         "androidx.compose.ui_ui",
         "androidx.wear.compose_compose-material",
         "androidx.wear.compose_compose-material3",
+        "com.android.permission.flags-aconfig-java-export",
     ],
     kotlin_lang_version: "1.9",
     kotlincflags: [
@@ -65,4 +66,7 @@ android_library {
         "com.android.permission",
         "com.android.healthfitness",
     ],
+    lint: {
+        baseline_filename: "lint-baseline.xml",
+    },
 }

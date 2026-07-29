@@ -19,6 +19,7 @@ package android.permissionui.cts.usepermission
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import com.android.modules.utils.build.SdkLevel
@@ -27,6 +28,7 @@ class RequestPermissionsActivity : Activity() {
 
     private var shouldAskTwice = false
     private var timesAsked = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,11 +39,18 @@ class RequestPermissionsActivity : Activity() {
 
         val permissions = intent.getStringArrayExtra("$packageName.PERMISSIONS")!!
         shouldAskTwice = intent.getBooleanExtra("$packageName.ASK_TWICE", false)
-        if (SdkLevel.isAtLeastV()) {
+        val inNewTask = intent.getBooleanExtra("$packageName.IS_NEW_TASK", false)
+        if (inNewTask) {
+            val intent = Intent(PackageManager.ACTION_REQUEST_PERMISSIONS)
+            intent.putExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES, permissions)
+            intent.setPackage(packageManager.permissionControllerPackageName)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+            startActivityForResult(intent, REQUEST_CODE)
+        } else if (SdkLevel.isAtLeastV()) {
             // TODO: make deviceId dynamic
-            requestPermissions(permissions, 1, Context.DEVICE_ID_DEFAULT)
+            requestPermissions(permissions, REQUEST_CODE, Context.DEVICE_ID_DEFAULT)
         } else {
-            requestPermissions(permissions, 1)
+            requestPermissions(permissions, REQUEST_CODE)
         }
         timesAsked = 1
     }
@@ -49,7 +58,7 @@ class RequestPermissionsActivity : Activity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         handleResult(permissions, grantResults)
     }
@@ -58,15 +67,28 @@ class RequestPermissionsActivity : Activity() {
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray,
-        deviceId: Int
+        deviceId: Int,
     ) {
         handleResult(permissions, grantResults, deviceId)
+    }
+
+    // If we manually set a new task, the permission results will come in via onActivityResult
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != REQUEST_CODE) {
+            return
+        }
+        val permissions =
+            data?.getStringArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES)
+                ?: emptyArray<String>()
+        val results =
+            data?.getIntArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_RESULTS) ?: IntArray(0)
+        handleResult(permissions, results)
     }
 
     private fun handleResult(
         permissions: Array<out String>,
         grantResults: IntArray,
-        deviceId: Int? = null
+        deviceId: Int? = null,
     ) {
         if (shouldAskTwice && timesAsked < 2) {
             requestPermissions(permissions, 1)
@@ -82,12 +104,14 @@ class RequestPermissionsActivity : Activity() {
                 if (deviceId != null) {
                     putExtra("$packageName.DEVICE_ID", deviceId)
                 }
-            }
+            },
         )
         finish()
     }
 
     companion object {
         private val TAG = RequestPermissionsActivity::class.simpleName
+
+        private val REQUEST_CODE = 1
     }
 }

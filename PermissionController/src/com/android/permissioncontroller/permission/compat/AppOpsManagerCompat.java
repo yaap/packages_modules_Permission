@@ -30,6 +30,24 @@ public class AppOpsManagerCompat {
     private AppOpsManagerCompat() {}
 
     /**
+     * For platform version <= V, call the deprecated unsafeCheckOpNoThrow. For newer platforms,
+     * call the new API checkOpNoThrow.
+     *
+     * @return the raw mode of the op
+     */
+    // TODO: b/379749734
+    @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
+    public static int checkOpNoThrow(@NonNull AppOpsManager appOpsManager, @NonNull String op,
+            int uid, @NonNull String packageName) {
+        if (Flags.checkOpOverloadApiEnabled()) {
+            return appOpsManager.checkOpNoThrow(op, uid, packageName, null);
+        } else {
+            return appOpsManager.unsafeCheckOpNoThrow(op, uid, packageName);
+        }
+    }
+
+    /**
      * For platform version <= V, call the deprecated unsafeCheckOpRawNoThrow. For newer platforms,
      * call the new API checkOpRawNoThrow.
      *

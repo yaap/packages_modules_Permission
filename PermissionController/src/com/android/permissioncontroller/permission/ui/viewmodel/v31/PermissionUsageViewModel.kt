@@ -16,9 +16,11 @@
 
 package com.android.permissioncontroller.permission.ui.viewmodel.v31
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import android.os.Process
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AndroidViewModel
@@ -30,12 +32,23 @@ import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.android.permissioncontroller.DeviceUtils
+import com.android.permissioncontroller.appfunctions.AppFunctionsUtil
+import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCaseImpl
+import com.android.permissioncontroller.appfunctions.domain.usecase.v31.GetAgentUsageUseCase
+import com.android.permissioncontroller.appfunctions.domain.usecase.v31.GetAppFunctionPackageInfoUseCase
+import com.android.permissioncontroller.appfunctions.domain.usecase.v31.NoOpAgentUsageUseCase
+import com.android.permissioncontroller.appfunctions.domain.usecase.v31.NoOpAppFunctionPackageInfoUseCase
+import com.android.permissioncontroller.appfunctions.domain.usecase.v37.GetAgentUsageUseCaseImpl
+import com.android.permissioncontroller.appinteraction.data.repository.AppInteractionRepository
+import com.android.permissioncontroller.appinteraction.domain.model.v31.AgentActivityItem
+import com.android.permissioncontroller.common.model.Stateful
 import com.android.permissioncontroller.permission.data.repository.v31.PermissionRepository
 import com.android.permissioncontroller.permission.domain.model.v31.PermissionGroupUsageModel
 import com.android.permissioncontroller.permission.domain.model.v31.PermissionGroupUsageModelWrapper
 import com.android.permissioncontroller.permission.domain.usecase.v31.GetPermissionGroupUsageUseCase
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.Companion.SHOULD_SHOW_7_DAYS_KEY
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageDetailsViewModel.Companion.SHOULD_SHOW_SYSTEM_KEY
+import com.android.permissioncontroller.pm.data.repository.v31.PackageRepository
 import java.time.Instant
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
@@ -49,6 +62,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 /** Privacy dashboard's new implementation. */
@@ -56,6 +70,8 @@ class PermissionUsageViewModel(
     val app: Application,
     private val permissionRepository: PermissionRepository,
     private val getPermissionUsageUseCase: GetPermissionGroupUsageUseCase,
+    private val getAppFunctionAgentUsageUseCase: GetAgentUsageUseCase,
+    private val getAppFunctionPackageInfoUseCase: GetAppFunctionPackageInfoUseCase,
     scope: CoroutineScope? = null,
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
     private val savedState: SavedStateHandle = SavedStateHandle(emptyMap()),
@@ -70,17 +86,35 @@ class PermissionUsageViewModel(
             .stateIn(
                 coroutineScope,
                 SharingStarted.WhileSubscribed(5000),
-                PermissionGroupUsageModelWrapper.Loading
+                PermissionGroupUsageModelWrapper.Loading,
             )
+    }
+
+    private val agentUsageStateFlow =
+        MutableStateFlow<Stateful<List<AgentActivityItem>>>(Stateful.Loading())
+
+    private val agentUsageUiStateFlow: StateFlow<Stateful<List<AgentActivityItem>>> by lazy {
+        coroutineScope.launch(defaultDispatcher) {
+            val agentUsageUseCase = getAppFunctionAgentUsageUseCase(app.applicationContext)
+            agentUsageStateFlow.value = Stateful.Success(agentUsageUseCase)
+        }
+        agentUsageStateFlow
     }
 
     @VisibleForTesting
     val permissionUsagesUiDataFlow: Flow<PermissionUsagesUiState> by lazy {
-        combine(permissionUsagesUiStateFlow, showSystemFlow, show7DaysFlow) {
-                permGroupUsages,
-                showSystemApps,
-                show7Days ->
-                buildPermissionUsagesUiState(permGroupUsages, showSystemApps, show7Days)
+        combine(
+                permissionUsagesUiStateFlow,
+                agentUsageUiStateFlow,
+                showSystemFlow,
+                show7DaysFlow,
+            ) { permGroupUsages, agentAccessCountState, showSystemApps, show7Days ->
+                buildPermissionUsagesUiState(
+                    permGroupUsages,
+                    agentAccessCountState,
+                    showSystemApps,
+                    show7Days,
+                )
             }
             .flowOn(defaultDispatcher)
     }
@@ -103,11 +137,16 @@ class PermissionUsageViewModel(
     /** Builds a [PermissionUsagesUiState] containing all data necessary to render the UI. */
     private fun buildPermissionUsagesUiState(
         usages: PermissionGroupUsageModelWrapper,
+        agentUsages: Stateful<List<AgentActivityItem>>,
         showSystemApps: Boolean,
         show7DaysData: Boolean,
     ): PermissionUsagesUiState {
-        if (usages is PermissionGroupUsageModelWrapper.Loading) {
+        if (usages is PermissionGroupUsageModelWrapper.Loading || agentUsages is Stateful.Loading) {
             return PermissionUsagesUiState.Loading
+        }
+
+        if (agentUsages is Stateful.Failure) {
+            return PermissionUsagesUiState.Failure
         }
 
         val permissionGroupOps: List<PermissionGroupUsageModel> =
@@ -131,8 +170,9 @@ class PermissionUsageViewModel(
         return PermissionUsagesUiState.Success(
             permGroupOps.any { !it.isUserSensitive },
             permissionUsageCountMap,
+            agentUsages.value!!,
             showSystemApps,
-            show7DaysData
+            show7DaysData,
         )
     }
 
@@ -159,12 +199,19 @@ class PermissionUsageViewModel(
 
     private val permissionGroupLabels = mutableMapOf<String, String>()
 
-    fun getPermissionGroupLabel(context: Context, permissionGroup: String): String {
+    fun getPermissionGroupLabel(permissionGroup: String): String {
         return runBlocking(coroutineScope.coroutineContext + Dispatchers.Default) {
             permissionGroupLabels.getOrDefault(
                 permissionGroup,
-                permissionRepository.getPermissionGroupLabel(context, permissionGroup).toString()
+                permissionRepository.getPermissionGroupLabel(permissionGroup).toString(),
             )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.BAKLAVA)
+    fun getAppFunctionAgentLabel(context: Context, packageName: String): String? {
+        return runBlocking(coroutineScope.coroutineContext + Dispatchers.Default) {
+            getAppFunctionPackageInfoUseCase(packageName, context, Process.myUserHandle())?.label
         }
     }
 
@@ -182,9 +229,12 @@ sealed class PermissionUsagesUiState {
     data class Success(
         val containsSystemAppUsage: Boolean,
         val permissionGroupUsageCount: Map<String, Int>,
+        val agentUsages: List<AgentActivityItem>,
         val showSystem: Boolean,
         val show7Days: Boolean,
     ) : PermissionUsagesUiState()
+
+    data object Failure : PermissionUsagesUiState()
 }
 
 /** Factory for [PermissionUsageViewModel]. */
@@ -194,11 +244,29 @@ class PermissionUsageViewModelFactory(private val app: Application) : ViewModelP
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         val permissionRepository = PermissionRepository.getInstance(app)
         val permissionUsageUseCase = GetPermissionGroupUsageUseCase.create(app)
+        @SuppressLint("NewApi")
+        val appFunctionAgentUsageUseCase =
+            if (AppFunctionsUtil.isPrivacyDashboardAgentActivityEnabled(app.applicationContext)) {
+                val appInteractionRepository = AppInteractionRepository.getInstance()
+                val packageRepository = PackageRepository.getInstance(app)
+                GetAgentUsageUseCaseImpl(appInteractionRepository, packageRepository)
+            } else {
+                NoOpAgentUsageUseCase()
+            }
+        val appFunctionPackageInfoUseCase =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
+                val packageRepository = PackageRepository.getInstance(app)
+                GetAppFunctionPackageInfoUseCaseImpl(packageRepository)
+            } else {
+                NoOpAppFunctionPackageInfoUseCase()
+            }
         return PermissionUsageViewModel(
             app,
             permissionRepository,
             permissionUsageUseCase,
-            savedState = extras.createSavedStateHandle()
+            appFunctionAgentUsageUseCase,
+            appFunctionPackageInfoUseCase,
+            savedState = extras.createSavedStateHandle(),
         )
             as T
     }

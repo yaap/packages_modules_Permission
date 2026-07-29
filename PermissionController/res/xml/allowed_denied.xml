@@ -26,6 +26,10 @@
         android:title="@string/allowed_foreground_header" />
 
     <com.android.permissioncontroller.permission.ui.handheld.PermissionPreferenceCategory
+        android:key="allowed_for_compatibility"
+        android:title="@string/allowed_for_compatibility_header" />
+
+    <com.android.permissioncontroller.permission.ui.handheld.PermissionPreferenceCategory
         android:key="ask"
         android:title="@string/ask_header" />
 
@@ -35,5 +39,8 @@
 
     <com.android.permissioncontroller.permission.ui.handheld.PermissionPreferenceCategory
         android:key="storage_footer_category" />
+
+    <com.android.permissioncontroller.permission.ui.handheld.PermissionPreferenceCategory
+        android:key="footer" android:order="999"/>
 
 </PreferenceScreen>

@@ -38,7 +38,7 @@ public class RoleFrameworkInitializer {
      * {@link RoleManager} to {@link Context}, so that {@link Context#getSystemService} can return
      * it.
      *
-     * <p>If this is called from other places, it throws a {@link IllegalStateException).
+     * <p>If this is called from other places, it throws a {@link IllegalStateException}.
      */
     public static void registerServiceWrappers() {
         SystemServiceRegistry.registerContextAwareService(Context.ROLE_SERVICE, RoleManager.class,

@@ -87,7 +87,7 @@ class AppDataSharingUpdatesViewModel(app: Application) {
         activity: Activity,
         sessionId: Long,
         packageName: String,
-        userHandle: UserHandle
+        userHandle: UserHandle,
     ) {
         activity.startActivity(
             Intent(ACTION_MANAGE_APP_PERMISSION).apply {
@@ -124,7 +124,7 @@ class AppDataSharingUpdatesViewModel(app: Application) {
                         AppLocationDataSharingUpdateUiInfo(
                             appDataSharingUpdate.packageName,
                             user,
-                            locationDataSharingUpdate
+                            locationDataSharingUpdate,
                         )
                     }
                 }
@@ -148,8 +148,7 @@ class AppDataSharingUpdatesViewModel(app: Application) {
             }
             ?.keys
             ?.filter { packageUser: Pair<String, UserHandle> -> packageUser.first == packageName }
-            ?.map { packageUser: Pair<String, UserHandle> -> packageUser.second }
-            ?: listOf()
+            ?.map { packageUser: Pair<String, UserHandle> -> packageUser.second } ?: listOf()
     }
 
     private fun AppPermGroupUiInfo.isPermissionGranted() =
@@ -159,7 +158,7 @@ class AppDataSharingUpdatesViewModel(app: Application) {
     data class AppLocationDataSharingUpdateUiInfo(
         val packageName: String,
         val userHandle: UserHandle,
-        val dataSharingUpdateType: DataSharingUpdateType
+        val dataSharingUpdateType: DataSharingUpdateType,
     )
 
     /** LiveData for all data sharing updates to be displayed in the UI. */

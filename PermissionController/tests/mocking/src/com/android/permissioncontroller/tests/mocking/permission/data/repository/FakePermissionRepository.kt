@@ -16,7 +16,6 @@
 
 package com.android.permissioncontroller.tests.mocking.permission.data.repository
 
-import android.content.Context
 import android.os.UserHandle
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.permission.data.repository.v31.PermissionRepository
@@ -27,15 +26,12 @@ class FakePermissionRepository(private val permissionFlags: Map<String, Int> = e
     override suspend fun getPermissionFlags(
         permissionName: String,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): Int {
         return permissionFlags[permissionName] ?: 0
     }
 
-    override suspend fun getPermissionGroupLabel(
-        context: Context,
-        groupName: String
-    ): CharSequence {
+    override suspend fun getPermissionGroupLabel(groupName: String): CharSequence {
         TODO("Not yet implemented")
     }
 

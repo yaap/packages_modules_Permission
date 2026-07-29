@@ -26,7 +26,7 @@ object MockUtil {
     fun createMockPackageOps(
         packageName: String,
         ops: List<AppOpsManager.OpEntry>,
-        uid: Int
+        uid: Int,
     ): AppOpsManager.PackageOps {
         val pkgOp = Mockito.mock(AppOpsManager.PackageOps::class.java)
         whenever(pkgOp.packageName).thenReturn(packageName)
@@ -46,7 +46,7 @@ object MockUtil {
         testPackageName: String,
         requestedPerms: List<String>,
         requestedFlags: List<Int>,
-        applicationInfoFlags: Int = 0
+        applicationInfoFlags: Int = 0,
     ): PackageInfo {
         val appInfo = ApplicationInfo()
         appInfo.flags = applicationInfoFlags

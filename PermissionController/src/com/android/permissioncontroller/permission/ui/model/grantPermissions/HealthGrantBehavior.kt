@@ -26,7 +26,7 @@ object HealthGrantBehavior : GrantBehavior() {
     override fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean
+        isSystemTriggeredPrompt: Boolean,
     ): Prompt {
         return if (Utils.isHealthPermissionUiEnabled()) {
             Prompt.NO_UI_HEALTH_REDIRECT
@@ -38,14 +38,14 @@ object HealthGrantBehavior : GrantBehavior() {
     override fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton {
         return DenyButton.NONE
     }
 
     override fun isGroupFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         return requestedPerms.all { group.permissions[it]?.isGranted != false }
     }

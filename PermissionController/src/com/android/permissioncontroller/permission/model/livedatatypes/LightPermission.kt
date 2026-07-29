@@ -19,6 +19,7 @@ package com.android.permissioncontroller.permission.model.livedatatypes
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PermissionInfo
+import android.permission.flags.Flags
 import com.android.permissioncontroller.permission.utils.PermissionMapping.isRuntimePlatformPermission
 import com.android.permissioncontroller.permission.utils.SoftRestrictedPermissionPolicy
 import com.android.permissioncontroller.permission.utils.Utils
@@ -39,14 +40,14 @@ data class LightPermission(
     val permInfo: LightPermInfo,
     val isGranted: Boolean,
     val flags: Int,
-    val foregroundPerms: List<String>?
+    val foregroundPerms: List<String>?,
 ) {
 
     constructor(
         pkgInfo: LightPackageInfo,
         permInfo: LightPermInfo,
         permState: PermState,
-        foregroundPerms: List<String>?
+        foregroundPerms: List<String>?,
     ) : this(pkgInfo, permInfo, permState.granted, permState.permFlags, foregroundPerms)
 
     /** The name of this permission */
@@ -86,6 +87,24 @@ data class LightPermission(
         }
         implicit
     }
+
+    /** Whether precise location permission can only be granted by location button */
+    val isOnlyForLocationButton: Boolean by lazy {
+        if (
+            name != android.Manifest.permission.ACCESS_FINE_LOCATION ||
+                !Flags.locationButtonEnabled()
+        ) {
+            return@lazy false
+        }
+        val index = pkgInfo.requestedPermissions.indexOf(name)
+        if (index >= 0) {
+            val flags = pkgInfo.requestedPermissionsFlags.getOrNull(index) ?: 0
+            (flags and PackageInfo.REQUESTED_PERMISSION_ONLY_FOR_LOCATION_BUTTON) != 0
+        } else {
+            false
+        }
+    }
+
     /** Whether this permission is a runtime only permission */
     val isRuntimeOnly =
         permInfo.protectionFlags and PermissionInfo.PROTECTION_FLAG_RUNTIME_ONLY != 0
@@ -122,6 +141,10 @@ data class LightPermission(
      */
     val isSelectedLocationAccuracy =
         flags and PackageManager.FLAG_PERMISSION_SELECTED_LOCATION_ACCURACY != 0
+    /** Whether the trusted ui has been shown at least once to the user. */
+    val isTrustedUiShown = flags and PackageManager.FLAG_PERMISSION_TRUSTED_UI_SHOWN != 0
+    /** Whether the trusted ui has been consented by the user. */
+    val isTrustedUiConsented = flags and PackageManager.FLAG_PERMISSION_TRUSTED_UI_CONSENTED != 0
     /** Whether this permission is defined by platform or a system app */
     val isPlatformOrSystem = permInfo.packageName == Utils.OS_PKG || permInfo.isSystem == true
     /**

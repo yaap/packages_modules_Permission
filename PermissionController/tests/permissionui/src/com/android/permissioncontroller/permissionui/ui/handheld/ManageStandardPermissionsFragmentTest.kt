@@ -23,8 +23,6 @@ import android.permission.cts.PermissionUtils.grantPermission
 import android.permission.cts.PermissionUtils.install
 import android.permission.cts.PermissionUtils.revokePermission
 import android.permission.cts.PermissionUtils.uninstallApp
-import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
@@ -32,23 +30,18 @@ import com.android.compatibility.common.util.SystemUtil.eventually
 import com.android.compatibility.common.util.SystemUtil.getEventually
 import com.android.compatibility.common.util.SystemUtil.runWithShellPermissionIdentity
 import com.android.compatibility.common.util.UiAutomatorUtils2.waitFindObjectOrNull
-import com.android.permission.flags.Flags
 import com.android.permissioncontroller.permissionui.getUsageCountsFromUi
 import com.android.permissioncontroller.permissionui.wakeUpScreen
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Assert.assertNull
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /** Simple tests for {@link ManageStandardPermissionsFragment} */
 @RunWith(AndroidJUnit4::class)
 class ManageStandardPermissionsFragmentTest : BaseHandheldPermissionUiTest() {
-
-    @JvmField @Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
-
     @Before
     fun setup() {
         wakeUpScreen()
@@ -239,7 +232,6 @@ class ManageStandardPermissionsFragmentTest : BaseHandheldPermissionUiTest() {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_DECLUTTERED_PERMISSION_MANAGER_ENABLED)
     fun noUnusedPermissionGroupDisplayedInTheMainPage() {
         eventually { assertNull(waitFindObjectOrNull(By.hasChild(By.textStartsWith("0 of 0")))) }
         eventually { assertNull(waitFindObjectOrNull(By.hasChild(By.textStartsWith("0/0")))) }

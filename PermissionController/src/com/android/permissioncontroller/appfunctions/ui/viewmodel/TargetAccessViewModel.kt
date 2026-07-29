@@ -16,21 +16,17 @@
 package com.android.permissioncontroller.appfunctions.ui.viewmodel
 
 import android.app.Application
-import android.icu.text.Collator
-import android.os.Process
+import android.app.appfunctions.AppFunctionManager.OnAppFunctionAccessChangedListener
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.android.permissioncontroller.appfunctions.data.repository.AppFunctionRepository
-import com.android.permissioncontroller.appfunctions.domain.model.AppFunctionPackageInfo
 import com.android.permissioncontroller.appfunctions.domain.usecase.GetAccessRequestStateUseCase
-import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCase
-import com.android.permissioncontroller.appfunctions.domain.usecase.UpdateAccessUseCase
 import com.android.permissioncontroller.common.model.Stateful
 import com.android.permissioncontroller.data.repository.v31.PackageChangeListener
-import com.android.permissioncontroller.pm.data.repository.v31.PackageRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,18 +38,13 @@ class TargetAccessViewModel(
     application: Application,
     private val targetPackageName: String,
     private val appFunctionRepository: AppFunctionRepository,
-    private val getAppFunctionPackageInfoUseCase: GetAppFunctionPackageInfoUseCase,
     private val getAccessRequestStateUseCase: GetAccessRequestStateUseCase,
-    private val updateAccessUseCase: UpdateAccessUseCase,
     scope: CoroutineScope? = null,
     val dispatcher: CoroutineDispatcher = Dispatchers.Default,
-    collator: Collator =
-        Collator.getInstance(application.resources.configuration.getLocales().get(0)),
 ) : AndroidViewModel(application) {
     private val coroutineScope = scope ?: viewModelScope
-    private val agentListComparator: Comparator<AgentItem> =
-        compareBy(collator) { it.packageInfo.label }
 
+    private val accessChangedListener = OnAppFunctionAccessChangedListener { refresh() }
     private val packageChangeListener = PackageChangeListener(::refresh)
 
     // Backing property to avoid state updates from other classes
@@ -61,27 +52,28 @@ class TargetAccessViewModel(
     val uiStateFlow: StateFlow<Stateful<TargetAccessUiState>> = _uiStateFlow
 
     init {
+        appFunctionRepository.addAccessChangedListener(
+            ContextCompat.getMainExecutor(application.applicationContext),
+            accessChangedListener,
+        )
         packageChangeListener.register()
         refresh()
     }
 
     override fun onCleared() {
+        appFunctionRepository.removeAccessChangedListener(accessChangedListener)
         packageChangeListener.unregister()
     }
 
-    // TODO(b/432096594): refresh on app function manager change listener
     private fun refresh() {
         coroutineScope.launch(dispatcher) {
             try {
-                // FIXME: What if this needs to be DEVICE_SETTINGS_TARGET_PACKAGE_NAME?
-                val targetPackageInfo =
-                    getAppFunctionPackageInfoUseCase(targetPackageName, Process.myUserHandle())
                 val agentPackageNames = appFunctionRepository.getValidAgents()
                 val accessRequestStates =
                     getAccessRequestStateUseCase(agentPackageNames, targetPackageName)
                 _uiStateFlow.value =
                     Stateful.Success(
-                        createTargetAccessUiState(targetPackageInfo, accessRequestStates)
+                        createTargetAccessUiState(targetPackageName, accessRequestStates)
                     )
             } catch (e: Exception) {
                 _uiStateFlow.value = Stateful.Failure(throwable = e)
@@ -90,34 +82,26 @@ class TargetAccessViewModel(
     }
 
     private fun createTargetAccessUiState(
-        targetPackageInfo: AppFunctionPackageInfo,
+        targetPackageName: String,
         accessRequestStates: Map<String, Boolean> = emptyMap(),
     ): TargetAccessUiState {
-        val agents =
-            accessRequestStates
-                .mapNotNull {
-                    val agentPackageInfo =
-                        getAppFunctionPackageInfoUseCase(it.key, Process.myUserHandle())
-                    return@mapNotNull AgentItem(agentPackageInfo, it.value)
-                }
-                .sortedWith(agentListComparator)
-        return TargetAccessUiState(targetPackageInfo, agents)
-    }
-
-    fun updateAccessState(agentPackageName: String, granted: Boolean) {
-        coroutineScope.launch(dispatcher) {
-            updateAccessUseCase(agentPackageName, targetPackageName, granted)
-            refresh()
-        }
+        val allowedAgentPackageNames =
+            accessRequestStates.filter { (_, isAllowed) -> isAllowed }.keys.toList()
+        val notAllowedAgentPackageNames =
+            accessRequestStates.filter { (_, isAllowed) -> !isAllowed }.keys.toList()
+        return TargetAccessUiState(
+            targetPackageName,
+            allowedAgentPackageNames,
+            notAllowedAgentPackageNames,
+        )
     }
 }
 
 data class TargetAccessUiState(
-    val target: AppFunctionPackageInfo,
-    val agents: List<AgentItem> = emptyList(),
+    val targetPackageName: String,
+    val allowedAgentPackageNames: List<String> = emptyList(),
+    val notAllowedAgentPackageNames: List<String> = emptyList(),
 )
-
-data class AgentItem(val packageInfo: AppFunctionPackageInfo, val accessGranted: Boolean)
 
 /** Factory for [TargetAccessViewModel]. */
 class TargetAccessViewModelFactory(
@@ -127,17 +111,12 @@ class TargetAccessViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         val appFunctionRepository = AppFunctionRepository.getInstance(application)
-        val packageRepository = PackageRepository.getInstance(application)
-        val getAppFunctionPackageInfoUseCase = GetAppFunctionPackageInfoUseCase(packageRepository)
         val getAccessRequestStateUseCase = GetAccessRequestStateUseCase(appFunctionRepository)
-        val updateAccessUseCase = UpdateAccessUseCase(appFunctionRepository)
         return TargetAccessViewModel(
             application,
             targetPackageName,
             appFunctionRepository,
-            getAppFunctionPackageInfoUseCase,
             getAccessRequestStateUseCase,
-            updateAccessUseCase,
         )
             as T
     }

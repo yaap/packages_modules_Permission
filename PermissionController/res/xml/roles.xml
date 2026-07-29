@@ -86,6 +86,10 @@
         <permission name="android.permission.BLUETOOTH_CONNECT" minSdkVersion="31" />
         <permission name="android.permission.BLUETOOTH_SCAN" minSdkVersion="31" />
         <permission name="android.permission.NEARBY_WIFI_DEVICES" minSdkVersion="33" />
+        <permission
+            name="android.permission.ACCESS_LOCAL_NETWORK"
+            minSdkVersion="36"
+            featureFlag="android.permission.flags.Flags.accessLocalNetworkPermissionEnabled" />
     </permission-set>
 
     <permission-set name="notifications">
@@ -98,7 +102,7 @@
         <permission name="android.permission.ADD_ALWAYS_UNLOCKED_DISPLAY" minSdkVersion="33" />
         <permission
             name="android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE"
-            featureFlag="android.companion.virtualdevice.flags.Flags.activityControlApi" />
+            minSdkVersion="36" />
     </permission-set>
 
     <role
@@ -155,12 +159,18 @@
                 minSdkVersion="35" optionalMinSdkVersion="34" />
             <permission name="android.permission.EMBED_ANY_APP_IN_UNTRUSTED_MODE"
                 minSdkVersion="35" />
+            <permission name="android.permission.SHOW_POWER_MENU"
+                featureFlag="android.app.Flags.statusbarApiShowPowerMenu" />
+            <permission name="android.permission.MANAGE_ASSISTANT_AUDIO"
+                featureFlag="android.media.audio.Flags.manageAssistantAudioPermission" />
         </permissions>
         <app-op-permissions>
             <app-op-permission name="android.permission.SYSTEM_ALERT_WINDOW" />
         </app-op-permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
     </role>
 
@@ -274,6 +284,8 @@
             <app-op name="android:run_in_background" maxTargetSdkVersion="25" mode="allowed" />
             <app-op name="android:run_any_in_background" mode="allowed" />
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
         <preferred-activities>
             <preferred-activity>
@@ -366,6 +378,10 @@
             <app-op name="android:run_any_in_background" mode="allowed" />
             <app-op name="android:read_device_identifiers" mode="allowed" />
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:write_restricted_messages" mode="allowed"
+                    featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                    featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
         <preferred-activities>
             <preferred-activity>
@@ -423,6 +439,8 @@
         </required-components>
         <permissions>
             <permission-set name="notifications" />
+            <permission name="android.permission.ACCESS_AMBIENT_CONTEXT_EVENT"
+                featureFlag="android.app.Flags.ambientContextEmergencyEvent" />
             <permission name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND" minSdkVersion="31" />
             <permission name="android.permission.OBSERVE_SENSOR_PRIVACY" minSdkVersion="31" />
         </permissions>
@@ -473,6 +491,7 @@
             <permission name="android.permission.READ_HOME_APP_SEARCH_DATA" minSdkVersion="33" />
             <permission name="android.permission.ALLOW_SLIPPERY_TOUCHES" minSdkVersion="33" optionalMinSdkVersion="30" />
             <permission name="android.permission.RECEIVE_SENSITIVE_NOTIFICATIONS" minSdkVersion="35" />
+            <permission name="android.permission.LOCK_APPS" featureFlag="android.security.Flags.appLockApis" />
         </permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
@@ -596,6 +615,8 @@
         </app-op-permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
     </role>
 
@@ -630,9 +651,12 @@
                  notifications with sensitive content unredacted-->
             <permission name="android.permission.RECEIVE_SENSITIVE_NOTIFICATIONS" minSdkVersion="35"/>
             <permission name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT" minSdkVersion="35" />
+            <permission name="android.permission.GET_INTENT_SENDER_INTENT" minSdkVersion="37" />
         </permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
     </role>
 
@@ -735,11 +759,21 @@
                 minSdkVersion="35" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_MTE"
                 minSdkVersion="36" />
+            <permission name="android.permission.SHOW_POWER_MENU"
+                featureFlag="android.app.Flags.statusbarApiShowPowerMenu" />
+            <permission name="android.permission.ACCESS_BIOMETRIC_SENSOR_STRENGTHS"
+                featureFlag="android.hardware.biometrics.Flags.getBiometricSensorStrengths" />
+            <permission name="android.permission.DISCOVER_APP_FUNCTIONS"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionPermissionV2" />
+            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_SYSTEM"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionPermissionV2" />
         </permissions>
         <!-- App ops needed to allow background access to audio APIs for CTS -->
         <app-ops>
             <app-op name="android:control_audio" mode="allowed" minSdkVersion="36"/>
             <app-op name="android:control_audio_partial" mode="allowed" minSdkVersion="36"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
     </role>
 
@@ -913,6 +947,8 @@
             <permission name="android.permission.READ_GLOBAL_APP_SEARCH_DATA" />
             <permission name="android.permission.READ_BLOCKED_NUMBERS"
                 featureFlag="android.permission.flags.Flags.grantReadBlockedNumbersToSystemUiIntelligence" />
+            <permission name="android.permission.DISCOVER_APP_FUNCTIONS"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionPermissionV2" />
         </permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
@@ -1217,6 +1253,8 @@
             <!-- If this role holder has a NotificationListenerService, let that service receive
                  notifications with sensitive content unredacted-->
             <permission name="android.permission.RECEIVE_SENSITIVE_NOTIFICATIONS" minSdkVersion="35"/>
+            <permission name="android.permission.EXECUTE_APP_FUNCTIONS_SYSTEM"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionPermissionV2" />
         </permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
@@ -1256,14 +1294,29 @@
         <permissions>
             <permission-set name="notifications" />
             <permission-set name="virtual_device" />
+            <permission-set
+                name="storage"
+                featureFlag="android.companion.Flags.expandAppStreamingRolePermissions"
+                minSdkVersion="36" />
             <!-- For capturing audio from the app on the device. -->
             <permission name="android.permission.RECORD_AUDIO" />
             <permission
                 name="android.permission.ADD_MIRROR_DISPLAY"
                 featureFlag="android.companion.virtualdevice.flags.Flags.vdmMirrorDisplayPermission" />
+            <permission
+                name="android.permission.RECEIVE_SENSITIVE_NOTIFICATIONS"
+                featureFlag="android.companion.Flags.expandAppStreamingRolePermissions"
+                minSdkVersion="36" />
             <!--TODO(b/201605314) For calling Telecom framework API for audio streaming-->
             <!--<permission name="android.permission.PROVIDE_CALL_ENDPOINTS" />-->
        </permissions>
+       <app-ops>
+            <app-op
+                name="android:receive_sensitive_notifications"
+                featureFlag="android.companion.Flags.expandAppStreamingRolePermissions"
+                minSdkVersion="36"
+                mode="allowed" />
+        </app-ops>
     </role>
 
     <!---
@@ -1288,6 +1341,8 @@
        </permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
     </role>
 
@@ -1315,6 +1370,8 @@
        </app-op-permissions>
         <app-ops>
             <app-op name="android:receive_sensitive_notifications" mode="allowed" minSdkVersion="35"/>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
         </app-ops>
     </role>
 
@@ -1396,6 +1453,8 @@
                 featureFlag="android.app.admin.flags.Flags.setApplicationRestrictionsCoexistence"/>
             <permission name="android.permission.MANAGE_DEVICE_POLICY_PROFILES"
                 featureFlag="android.app.admin.flags.Flags.setApplicationRestrictionsCoexistence"/>
+            <permission name="android.permission.MANAGE_SUPERVISION"
+                featureFlag="android.app.supervision.flags.Flags.enableSupervisionManagerPolicyApis" />
         </permissions>
     </role>
 
@@ -1425,6 +1484,8 @@
             <permission name="android.permission.MANAGE_DEVICE_POLICY_SCREEN_CONTENT" />
             <permission name="android.permission.MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS" />
             <permission name="android.permission.SUSPEND_APPS" />
+            <permission name="android.permission.MANAGE_SUPERVISION"
+                featureFlag="android.app.supervision.flags.Flags.enableSupervisionManagerPolicyApis" />
         </permissions>
     </role>
 
@@ -1548,6 +1609,12 @@
                 featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionManager" />
             <permission name="android.permission.MANAGE_DEFAULT_APPLICATIONS" minSdkVersion="36"
                 featureFlag="com.android.permission.flags.Flags.crossUserRoleEnabled" />
+            <permission name="android.permission.COPY_ACCOUNTS"
+                        featureFlag="android.permission.flags.Flags.devicePolicyManagementRoleSplitCreateManagedProfileEnabled" />
+            <permission name="android.permission.REMOVE_ACCOUNTS"
+                        featureFlag="android.permission.flags.Flags.devicePolicyManagementRoleSplitCreateManagedProfileEnabled" />
+            <permission name="android.permission.ACCESS_BIOMETRIC_SENSOR_STRENGTHS"
+                featureFlag="android.hardware.biometrics.Flags.getBiometricSensorStrengths" />
         </permissions>
     </role>
 
@@ -1569,6 +1636,8 @@
             <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND" />
             <permission name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND" />
             <permission name="android.permission.SYSTEM_APPLICATION_OVERLAY" />
+            <permission name="android.permission.SET_CONTENT_PROTECTION_ALLOWLIST"
+                featureFlag="android.view.contentprotection.flags.Flags.setContentProtectionAllowlistEnabled" />
         </permissions>
         <app-op-permissions>
             <app-op-permission name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -1715,6 +1784,10 @@
             <permission name="android.permission.DEVICE_POWER" />
             <permission name="android.permission.NET_TUNNELING" />
         </permissions>
+        <app-ops>
+            <app-op name="android:read_restricted_messages" mode="allowed"
+                featureFlag="com.android.internal.telephony.flags.Flags.secureAccessToRestrictedRcsMessages"/>
+        </app-ops>
     </role>
 
     <!--
@@ -1778,6 +1851,18 @@
             <permission name="android.permission.ACCESS_BACKGROUND_LOCATION" />
             <permission name="android.permission.ACTIVITY_RECOGNITION" />
             <permission name="android.permission.health.READ_HEART_RATE" minSdkVersion="36"/>
+            <permission name="android.permission.health.READ_OXYGEN_SATURATION"
+                featureFlag="android.permission.flags.Flags.skinTempOxygenSaturationHealthServicesPregrantEnabled" />
+            <permission name="android.permission.health.READ_SKIN_TEMPERATURE"
+                featureFlag="android.permission.flags.Flags.skinTempOxygenSaturationHealthServicesPregrantEnabled" />
+            <permission name="android.permission.health.READ_BLOOD_PRESSURE"
+                featureFlag="android.permission.flags.Flags.granularHealthPermissionsPhaseTwoEnabled" />
+            <permission name="android.permission.health.READ_HEART_RATE_VARIABILITY"
+                featureFlag="android.permission.flags.Flags.granularHealthPermissionsPhaseTwoEnabled" />
+            <permission name="android.permission.health.READ_RESPIRATORY_RATE"
+                featureFlag="android.permission.flags.Flags.granularHealthPermissionsPhaseTwoEnabled" />
+            <permission name="android.permission.health.READ_VO2_MAX"
+                featureFlag="android.permission.flags.Flags.granularHealthPermissionsPhaseTwoEnabled" />
             <permission name="android.permission.health.READ_HEALTH_DATA_IN_BACKGROUND" minSdkVersion="36"/>
         </permissions>
     </role>
@@ -1892,7 +1977,12 @@
         requestTitle="@string/role_wallet_request_title"
         showNone="true"
         shortLabel="@string/role_wallet_short_label"
-        uiBehavior="v35.WalletRoleUiBehavior"/>
+        uiBehavior="v35.WalletRoleUiBehavior" >
+        <permissions>
+            <permission name="android.permission.ACCESS_BIOMETRIC_SENSOR_STRENGTHS"
+                featureFlag="android.hardware.biometrics.Flags.getBiometricSensorStrengths" />
+        </permissions>
+    </role>
 
     <role
         name="android.app.role.SYSTEM_DEPENDENCY_INSTALLER"
@@ -1980,6 +2070,14 @@
             <permission
                 name="android.permission.READ_FRAME_BUFFER"
                 featureFlag="com.android.graphics.surfaceflinger.flags.Flags.readbackScreenshot" />
+            <permission
+                name="android.permission.ACCESS_ATTENTION_LISTENER"
+                featureFlag="com.android.input.flags.Flags.enableAttentionServiceApis" />
+            <permission name="android.permission.DISCOVER_APP_FUNCTIONS"
+                featureFlag="android.app.appfunctions.flags.Flags.enableAppFunctionPermissionV2" />
+            <permission
+                name="android.permission.ACCESS_COMPANION_MESSAGE_PCC"
+                featureFlag="android.companion.Flags.trustedDevices" />
         </permissions>
     </role>
 
@@ -2027,7 +2125,7 @@
     <role
         name="android.app.role.WATCH_FACE"
         behavior="v37.WatchFaceRoleBehavior"
-        featureFlag="android.permission.flags.Flags.watchFaceRoleEnabled"
+        featureFlag="android.permission.flags.Flags.activeWatchFaceRoleEnabled"
         exclusive="true"
         exclusivity="user"
         visible="false">
@@ -2036,6 +2134,9 @@
         </permissions>
     </role>
 
+    <!---
+      ~ A role for the content restriction apps.
+    -->
     <role
         name="android.app.role.CONTENT_RESTRICTION"
         featureFlag="android.permission.flags.Flags.contentRestrictionRoleEnabled"
@@ -2049,5 +2150,32 @@
                 </intent-filter>
             </service>
         </required-components>
+    </role>
+
+    <!--
+        A role for the management of the device policies.
+
+        The role is used for the management of the device policies. Intended to
+        be used only on managed devices.
+    -->
+    <role
+        name="android.app.role.DEVICE_CONTROLLER"
+        behavior="v38.DeviceControllerRoleBehavior"
+        exclusive="true"
+        exclusivity="user"
+        featureFlag="android.app.admin.flags.Flags.multiUserManagementDeviceProvisioning"
+        visible="false">
+        <permissions>
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_CONTENT_PROTECTION" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_INPUT_METHODS" />
+            <permission
+                name="android.permission.MANAGE_DEVICE_POLICY_LOCKSCREEN_MESSAGE"
+                featureFlag="android.app.admin.flags.Flags.lockscreenInfoCoexistence" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY" />
+            <permission name="android.permission.MANAGE_DEVICE_POLICY_SAFE_BOOT" />
+            <permission name="android.permission.SET_TIME" />
+            <permission name="android.permission.SET_TIME_ZONE" />
+        </permissions>
     </role>
 </roles>

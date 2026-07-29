@@ -17,11 +17,13 @@
 package com.android.permissioncontroller.permission.data.repository.v31
 
 import android.app.Application
-import android.content.Context
 import android.content.pm.PackageItemInfo
 import android.content.pm.PackageManager
+import android.content.pm.PermissionGroupInfo
+import android.content.pm.PermissionInfo
 import android.os.UserHandle
 import android.text.TextUtils
+import android.util.Log
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.permission.utils.PermissionMapping
 import kotlin.concurrent.Volatile
@@ -43,16 +45,23 @@ interface PermissionRepository {
     suspend fun getPermissionFlags(
         permissionName: String,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): Int
 
     /**
-     * Gets a permission group label for a given permission group.
+     * Retrieves the localized label for a given permission group.
      *
+     * This method prioritizes finding a [android.content.pm.PermissionGroupInfo] matching the
+     * [groupName]. If that fails, it falls back to looking up a
+     * [android.content.pm.PermissionInfo]. Finally, it loads the safe label from the found
+     * [PackageItemInfo].
+     *
+     * @param groupName The name of the permission group.
+     * @return The localized label, or the raw [groupName] if no matching info is found.
      * @see PackageManager.getPermissionGroupInfo
      * @see PackageItemInfo.loadSafeLabel
      */
-    suspend fun getPermissionGroupLabel(context: Context, groupName: String): CharSequence
+    suspend fun getPermissionGroupLabel(groupName: String): CharSequence
 
     /** Gets a list of permission group to be shown in the privacy dashboard. */
     fun getPermissionGroupsForPrivacyDashboard(): List<String>
@@ -77,51 +86,39 @@ class PermissionRepositoryImpl(
     override suspend fun getPermissionFlags(
         permissionName: String,
         packageName: String,
-        user: UserHandle
+        user: UserHandle,
     ): Int =
         withContext(dispatcher) {
             packageManager.getPermissionFlags(permissionName, packageName, user)
         }
 
-    /**
-     * Gets a permission group's label from the system.
-     *
-     * @param context The context from which to get the label
-     * @param groupName The name of the permission group whose label we want
-     * @return The permission group's label, or the group name, if the group is invalid
-     */
-    override suspend fun getPermissionGroupLabel(
-        context: Context,
-        groupName: String
-    ): CharSequence =
+    override suspend fun getPermissionGroupLabel(groupName: String): CharSequence =
         withContext(dispatcher) {
-            val groupInfo = getPermissionGroupInfo(groupName, context)
+            val groupInfo: PackageItemInfo? =
+                getPermissionGroupInfo(groupName) ?: getPermissionInfo(groupName)
             groupInfo?.loadSafeLabel(
-                context.packageManager,
+                packageManager,
                 0f,
-                TextUtils.SAFE_STRING_FLAG_FIRST_LINE or TextUtils.SAFE_STRING_FLAG_TRIM
-            )
-                ?: groupName
+                TextUtils.SAFE_STRING_FLAG_FIRST_LINE or TextUtils.SAFE_STRING_FLAG_TRIM,
+            ) ?: groupName
         }
 
-    /**
-     * Get the [PackageItemInfo] for the given permission group.
-     *
-     * @param groupName the group
-     * @param context the `Context` to retrieve `PackageManager`
-     * @return The info of permission group or null if the group does not have runtime permissions.
-     */
-    private fun getPermissionGroupInfo(groupName: String, context: Context): PackageItemInfo? {
+    private fun getPermissionGroupInfo(groupName: String): PermissionGroupInfo? {
         return try {
-            context.packageManager.getPermissionGroupInfo(groupName, 0)
-        } catch (e: PackageManager.NameNotFoundException) {
+            packageManager.getPermissionGroupInfo(groupName, 0)
+        } catch (_: PackageManager.NameNotFoundException) {
+            Log.w(LOG_TAG, "Permission group `$groupName` not found.")
             null
         }
-            ?: try {
-                context.packageManager.getPermissionInfo(groupName, 0)
-            } catch (e: PackageManager.NameNotFoundException) {
-                null
-            }
+    }
+
+    private fun getPermissionInfo(permissionName: String): PermissionInfo? {
+        return try {
+            packageManager.getPermissionInfo(permissionName, 0)
+        } catch (_: PackageManager.NameNotFoundException) {
+            Log.w(LOG_TAG, "Permission `$permissionName` not found.")
+            null
+        }
     }
 
     override fun getPermissionGroupsForPrivacyDashboard(): List<String> {
@@ -132,5 +129,9 @@ class PermissionRepositoryImpl(
         } else {
             PermissionMapping.getPlatformPermissionGroups()
         }
+    }
+
+    companion object {
+        private const val LOG_TAG = "PermissionRepository"
     }
 }

@@ -44,7 +44,7 @@ private constructor(
     private val packageName: String,
     private val permGroupName: String,
     private val user: UserHandle,
-    private val deviceId: Int
+    private val deviceId: Int,
 ) :
     SmartAsyncMediatorLiveData<Map<String, PermState>>(),
     PermissionListenerMultiplexer.PermissionChangeCallback {
@@ -146,18 +146,19 @@ private constructor(
      */
     companion object :
         DataRepositoryForDevice<
-            KotlinUtils.Quadruple<String, String, UserHandle, Int>, PermStateLiveData
+            KotlinUtils.Quadruple<String, String, UserHandle, Int>,
+            PermStateLiveData,
         >() {
         override fun newValue(
             key: KotlinUtils.Quadruple<String, String, UserHandle, Int>,
-            deviceId: Int
+            deviceId: Int,
         ): PermStateLiveData {
             return PermStateLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
                 key.second,
                 key.third,
-                deviceId
+                deviceId,
             )
         }
     }

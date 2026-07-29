@@ -27,5 +27,5 @@ package com.android.permissioncontroller.permission.model.livedatatypes
  */
 data class UidSensitivityState(
     val packages: MutableSet<LightPackageInfo>,
-    val permStates: MutableMap<String, Int>
+    val permStates: MutableMap<String, Int>,
 )

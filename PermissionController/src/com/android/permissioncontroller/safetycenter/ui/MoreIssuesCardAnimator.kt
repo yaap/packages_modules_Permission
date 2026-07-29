@@ -33,7 +33,7 @@ class MoreIssuesCardAnimator {
         statusIcon: ImageView,
         startSeverityLevel: Int,
         endSeverityLevel: Int,
-        @DrawableRes endSeverityLevelResId: Int
+        @DrawableRes endSeverityLevelResId: Int,
     ) {
         val severityLevelAnimationResId =
             selectIconAnimationResId(startSeverityLevel, endSeverityLevel)
@@ -110,8 +110,8 @@ class MoreIssuesCardAnimator {
                     MoreIssuesCardPreference.TAG,
                     String.format(
                         "Unexpected SafetyCenterIssue.IssueSeverityLevel: %d",
-                        endSeverityLevel
-                    )
+                        endSeverityLevel,
+                    ),
                 )
                 R.drawable.ic_safety_null_state
             }

@@ -33,8 +33,7 @@ class WearUnusedAppsViewModel : ViewModel() {
     val infoMsgCategoryVisibilityLiveData = MutableLiveData<Boolean>()
 
     /** A livedata which stores a map of unused apps group by UnusedPeriod. */
-    val unusedAppChipsLiveData =
-        MutableLiveData<Map<UnusedPeriod, Map<String, UnusedAppChip>>>()
+    val unusedAppChipsLiveData = MutableLiveData<Map<UnusedPeriod, Map<String, UnusedAppChip>>>()
 
     data class UnusedAppChip(
         val label: String,
@@ -55,6 +54,7 @@ class WearUnusedAppsViewModel : ViewModel() {
 /** Factory for a WearUnusedAppsViewModel */
 class WearUnusedAppsViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return WearUnusedAppsViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return WearUnusedAppsViewModel() as T
     }
 }

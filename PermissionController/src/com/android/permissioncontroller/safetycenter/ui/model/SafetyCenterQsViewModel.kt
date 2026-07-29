@@ -57,7 +57,7 @@ import kotlin.collections.set
 class SafetyCenterQsViewModel(
     private val app: Application,
     private val sessionId: Long,
-    private val permGroupUsages: List<PermissionGroupUsage>
+    private val permGroupUsages: List<PermissionGroupUsage>,
 ) : AndroidViewModel(app) {
     private val configMicToggleEnabled = app.getString(R.string.mic_toggle_enable_config)
     private val configCameraToggleEnabled = app.getString(R.string.camera_toggle_enable_config)
@@ -86,7 +86,7 @@ class SafetyCenterQsViewModel(
                         LightAppPermissionGroupUsageKey(
                             packageName,
                             permissionGroupName,
-                            userHandle
+                            userHandle,
                         )
                     val appPermGroupLiveData: LightAppPermGroupLiveData =
                         LightAppPermGroupLiveData[
@@ -114,9 +114,8 @@ class SafetyCenterQsViewModel(
                 LightAppPermissionGroupUsageKey(
                     usage.packageName,
                     usage.permissionGroupName,
-                    UserHandle.getUserHandleForUid(usage.uid)
-                )]
-                ?: return false
+                    UserHandle.getUserHandleForUid(usage.uid),
+                )] ?: return false
         return group.supportsRuntimePerms &&
             !group.hasInstallToRuntimeSplit &&
             !group.isBackgroundFixed &&
@@ -130,9 +129,8 @@ class SafetyCenterQsViewModel(
                 LightAppPermissionGroupUsageKey(
                     usage.packageName,
                     usage.permissionGroupName,
-                    UserHandle.getUserHandleForUid(usage.uid)
-                )]
-                ?: return
+                    UserHandle.getUserHandleForUid(usage.uid),
+                )] ?: return
 
         KotlinUtils.revokeForegroundRuntimePermissions(app, group)
         KotlinUtils.revokeBackgroundRuntimePermissions(app, group)
@@ -183,15 +181,15 @@ class SafetyCenterQsViewModel(
                             getSensorState(
                                 Sensors.CAMERA,
                                 UserManager.DISALLOW_CAMERA_TOGGLE,
-                                configCameraToggleEnabled
+                                configCameraToggleEnabled,
                             ),
                         MICROPHONE to
                             getSensorState(
                                 Sensors.MICROPHONE,
                                 UserManager.DISALLOW_MICROPHONE_TOGGLE,
-                                configMicToggleEnabled
+                                configMicToggleEnabled,
                             ),
-                        LOCATION to SensorState(true, locationEnabled, locationEnforcedAdmin)
+                        LOCATION to SensorState(true, locationEnabled, locationEnforcedAdmin),
                     )
             }
 
@@ -223,14 +221,14 @@ class SafetyCenterQsViewModel(
     private fun getSensorState(
         sensor: Int,
         restriction: String,
-        enableConfig: String
+        enableConfig: String,
     ): SensorState {
         val sensorConfigEnabled =
             DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY, enableConfig, true)
         return SensorState(
             sensorConfigEnabled && sensorPrivacyManager.supportsSensorToggle(sensor),
             !sensorPrivacyManager.isSensorPrivacyEnabled(TOGGLE_TYPE_SOFTWARE, sensor),
-            getEnforcedAdmin(restriction)
+            getEnforcedAdmin(restriction),
         )
     }
 
@@ -298,7 +296,7 @@ class SafetyCenterQsViewModel(
     data class LightAppPermissionGroupUsageKey(
         val packageName: String,
         val permissionGroupName: String,
-        val userHandle: UserHandle
+        val userHandle: UserHandle,
     )
 }
 
@@ -312,7 +310,7 @@ class SafetyCenterQsViewModel(
 class SafetyCenterQsViewModelFactory(
     private val app: Application,
     private val sessionId: Long,
-    private val permGroupUsages: List<PermissionGroupUsage>
+    private val permGroupUsages: List<PermissionGroupUsage>,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

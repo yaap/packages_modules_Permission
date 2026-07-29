@@ -163,7 +163,7 @@ class RuntimePermissionsUpgradeControllerTest {
             whenever(
                     packageManager.getInstalledPackagesAsUser(
                         any(PackageManager.PackageInfoFlags::class.java),
-                        anyInt()
+                        anyInt(),
                     )
                 )
                 .thenAnswer {
@@ -180,6 +180,22 @@ class RuntimePermissionsUpgradeControllerTest {
                 ?: throw PackageManager.NameNotFoundException()
         }
 
+        if (SdkLevel.isAtLeastU()) {
+            whenever(
+                    packageManager.getPackageInfo(
+                        anyString(),
+                        any<PackageManager.PackageInfoFlags>(),
+                    )
+                )
+                .thenAnswer {
+                    val packageName = it.arguments[0] as String
+
+                    packageManager.getInstalledPackagesAsUser(0, 0).find {
+                        it.packageName == packageName
+                    } ?: throw PackageManager.NameNotFoundException()
+                }
+        }
+
         whenever(packageManager.getPermissionFlags(any(), any(), any())).thenAnswer {
             val permissionName = it.arguments[0] as String
             val packageName = it.arguments[1] as String
@@ -188,8 +204,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 .find { it.name == packageName }
                 ?.permissions
                 ?.find { it.name == permissionName }
-                ?.flags
-                ?: 0
+                ?.flags ?: 0
         }
     }
 
@@ -260,7 +275,7 @@ class RuntimePermissionsUpgradeControllerTest {
         runWithShellPermissionIdentity {
             RuntimePermissionsUpgradeController.upgradeIfNeeded(
                 application,
-                Runnable { completionCallback.complete(Unit) }
+                Runnable { completionCallback.complete(Unit) },
             )
             completionCallback.join()
         }
@@ -276,7 +291,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 .addWhitelistedRestrictedPermission(
                     packageName,
                     permissionName,
-                    FLAG_PERMISSION_WHITELIST_UPGRADE
+                    FLAG_PERMISSION_WHITELIST_UPGRADE,
                 )
         }
     }
@@ -399,7 +414,7 @@ class RuntimePermissionsUpgradeControllerTest {
             Package(
                 TEST_PKG_NAME,
                 Permission(ACCESS_FINE_LOCATION, isGranted = true),
-                Permission(ACCESS_BACKGROUND_LOCATION)
+                Permission(ACCESS_BACKGROUND_LOCATION),
             )
         )
 
@@ -415,7 +430,7 @@ class RuntimePermissionsUpgradeControllerTest {
             Package(
                 TEST_PKG_NAME,
                 Permission(ACCESS_FINE_LOCATION, isGranted = true),
-                Permission(ACCESS_BACKGROUND_LOCATION)
+                Permission(ACCESS_BACKGROUND_LOCATION),
             )
         )
 
@@ -431,7 +446,7 @@ class RuntimePermissionsUpgradeControllerTest {
             Package(
                 TEST_PKG_NAME,
                 Permission(ACCESS_FINE_LOCATION),
-                Permission(ACCESS_BACKGROUND_LOCATION)
+                Permission(ACCESS_BACKGROUND_LOCATION),
             )
         )
 
@@ -449,9 +464,9 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(
                     READ_EXTERNAL_STORAGE,
                     isGranted = true,
-                    flags = FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT
+                    flags = FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT,
                 ),
-                Permission(ACCESS_MEDIA_LOCATION)
+                Permission(ACCESS_MEDIA_LOCATION),
             )
         )
 
@@ -469,9 +484,9 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(
                     READ_EXTERNAL_STORAGE,
                     isGranted = true,
-                    flags = FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT
+                    flags = FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT,
                 ),
-                Permission(ACCESS_MEDIA_LOCATION)
+                Permission(ACCESS_MEDIA_LOCATION),
             )
         )
 
@@ -488,9 +503,9 @@ class RuntimePermissionsUpgradeControllerTest {
                 TEST_PKG_NAME,
                 Permission(
                     READ_EXTERNAL_STORAGE,
-                    flags = FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT
+                    flags = FLAG_PERMISSION_RESTRICTION_INSTALLER_EXEMPT,
                 ),
-                Permission(ACCESS_MEDIA_LOCATION)
+                Permission(ACCESS_MEDIA_LOCATION),
             )
         )
 
@@ -508,9 +523,9 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(
                     READ_EXTERNAL_STORAGE,
                     isGranted = true,
-                    flags = FLAG_PERMISSION_RESTRICTION_SYSTEM_EXEMPT
+                    flags = FLAG_PERMISSION_RESTRICTION_SYSTEM_EXEMPT,
                 ),
-                Permission(ACCESS_MEDIA_LOCATION)
+                Permission(ACCESS_MEDIA_LOCATION),
             )
         )
 
@@ -522,7 +537,7 @@ class RuntimePermissionsUpgradeControllerTest {
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
         maxSdkVersion = Build.VERSION_CODES.TIRAMISU,
-        codeName = "Tiramisu"
+        codeName = "Tiramisu",
     )
     @Test
     fun storagePermissionsMigrateToMediaPermissionsWhenVersionIs9() {
@@ -535,22 +550,22 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(
                     READ_EXTERNAL_STORAGE,
                     isGranted = true,
-                    flags = FLAG_PERMISSION_USER_SET
+                    flags = FLAG_PERMISSION_USER_SET,
                 ),
                 Permission(
                     WRITE_EXTERNAL_STORAGE,
                     isGranted = true,
-                    flags = FLAG_PERMISSION_USER_SET
+                    flags = FLAG_PERMISSION_USER_SET,
                 ),
                 Permission(
                     ACCESS_MEDIA_LOCATION,
                     isGranted = true,
-                    flags = FLAG_PERMISSION_USER_SET
+                    flags = FLAG_PERMISSION_USER_SET,
                 ),
                 Permission(READ_MEDIA_AUDIO, isGranted = false),
                 Permission(READ_MEDIA_VIDEO, isGranted = false),
                 Permission(READ_MEDIA_IMAGES, isGranted = false),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -572,7 +587,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(READ_MEDIA_VIDEO, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
                 Permission(READ_MEDIA_IMAGES, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
                 Permission(READ_MEDIA_VISUAL_USER_SELECTED, isGranted = false),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -592,7 +607,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(READ_MEDIA_VIDEO, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
                 Permission(READ_MEDIA_IMAGES, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
                 Permission(READ_MEDIA_VISUAL_USER_SELECTED, isGranted = false),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -612,7 +627,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 Permission(READ_MEDIA_VIDEO, isGranted = false, flags = FLAG_PERMISSION_USER_SET),
                 Permission(READ_MEDIA_IMAGES, isGranted = false, flags = FLAG_PERMISSION_USER_SET),
                 Permission(READ_MEDIA_VISUAL_USER_SELECTED, isGranted = false),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -640,7 +655,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 TEST_PKG_NAME,
                 Permission(BODY_SENSORS, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
                 Permission(BODY_SENSORS_BACKGROUND, isGranted = false),
-                targetSdkVersion = 30
+                targetSdkVersion = 30,
             )
         )
 
@@ -660,7 +675,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 TEST_PKG_NAME,
                 Permission(BODY_SENSORS, isGranted = false, flags = FLAG_PERMISSION_USER_SET),
                 Permission(BODY_SENSORS_BACKGROUND, isGranted = false),
-                targetSdkVersion = 30
+                targetSdkVersion = 30,
             )
         )
 
@@ -680,7 +695,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 TEST_PKG_NAME,
                 Permission(BODY_SENSORS, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
                 Permission(BODY_SENSORS_BACKGROUND, isGranted = false),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -700,7 +715,7 @@ class RuntimePermissionsUpgradeControllerTest {
                 TEST_PKG_NAME,
                 Permission(BODY_SENSORS, isGranted = false, flags = FLAG_PERMISSION_USER_SET),
                 Permission(BODY_SENSORS_BACKGROUND, isGranted = false),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -719,7 +734,7 @@ class RuntimePermissionsUpgradeControllerTest {
             Package(
                 TEST_PKG_NAME,
                 Permission(BODY_SENSORS, isGranted = true, flags = FLAG_PERMISSION_USER_SET),
-                targetSdkVersion = 33
+                targetSdkVersion = 33,
             )
         )
 
@@ -739,20 +754,20 @@ class RuntimePermissionsUpgradeControllerTest {
     private data class Permission(
         val name: String,
         val isGranted: Boolean = false,
-        val flags: Int = 0
+        val flags: Int = 0,
     )
 
     private open class Package(
         val name: String,
         val permissions: List<Permission> = emptyList(),
         val isPreinstalled: Boolean = false,
-        val targetSdkVersion: Int = R
+        val targetSdkVersion: Int = R,
     ) {
         constructor(
             name: String,
             vararg permission: Permission,
             isPreinstalled: Boolean = false,
-            targetSdkVersion: Int = R
+            targetSdkVersion: Int = R,
         ) : this(name, permission.toList(), isPreinstalled, targetSdkVersion)
     }
 

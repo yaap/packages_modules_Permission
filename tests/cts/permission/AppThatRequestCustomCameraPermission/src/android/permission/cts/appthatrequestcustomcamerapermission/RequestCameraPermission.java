@@ -34,6 +34,8 @@ public class RequestCameraPermission extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mHandler = new Handler(getMainLooper());
+
         if (savedInstanceState != null) {
             Log.w(LOG_TAG, "Activity was recreated. (Perhaps due to a configuration change?)");
             return;
@@ -43,8 +45,6 @@ public class RequestCameraPermission extends Activity {
                 checkSelfPermission(CAMERA) == PERMISSION_GRANTED;
         boolean customGranted =
                 checkSelfPermission(CUSTOM_PERMISSION) == PERMISSION_GRANTED;
-
-        mHandler = new Handler(getMainLooper());
 
         if (!cameraGranted && !customGranted) {
             requestPermissions(new String[] {CAMERA}, 0);

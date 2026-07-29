@@ -19,7 +19,9 @@ package com.android.permissioncontroller.appfunctions.data.repository
 import android.app.Application
 import android.app.appfunctions.AppFunctionManager
 import android.app.appfunctions.AppFunctionManager.ACCESS_REQUEST_STATE_UNREQUESTABLE
+import android.app.appfunctions.AppFunctionManager.OnAppFunctionAccessChangedListener
 import android.permission.flags.Flags
+import java.util.concurrent.Executor
 import kotlin.concurrent.Volatile
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +69,23 @@ interface AppFunctionRepository {
         flagMask: Int,
         flags: Int,
     )
+
+    /**
+     * Registers the provided [OnAppFunctionAccessChangedListener]. See
+     * [AppFunctionManager#addAccessChangedListener] for more details.
+     *
+     * @param executor The executor to run the listener callbacks on
+     * @param listener The listener to add
+     */
+    fun addAccessChangedListener(executor: Executor, listener: OnAppFunctionAccessChangedListener)
+
+    /**
+     * Unregisters the provided [OnAppFunctionAccessChangedListener]. See
+     * [AppFunctionManager#removeAccessChangedListener] for more details.
+     *
+     * @param listener The listener to remove
+     */
+    fun removeAccessChangedListener(listener: OnAppFunctionAccessChangedListener)
 
     companion object {
         const val DEVICE_SETTINGS_TARGET_PACKAGE_NAME = "android"
@@ -129,5 +148,16 @@ class AppFunctionRepositoryImpl(
                 flags,
             )
         }
+    }
+
+    override fun addAccessChangedListener(
+        executor: Executor,
+        listener: OnAppFunctionAccessChangedListener,
+    ) {
+        appFunctionManager?.addAccessChangedListener(executor, listener)
+    }
+
+    override fun removeAccessChangedListener(listener: OnAppFunctionAccessChangedListener) {
+        appFunctionManager?.removeAccessChangedListener(listener)
     }
 }

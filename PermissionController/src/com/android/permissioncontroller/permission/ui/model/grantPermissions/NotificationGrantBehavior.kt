@@ -34,7 +34,7 @@ object NotificationGrantBehavior : GrantBehavior() {
     override fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean
+        isSystemTriggeredPrompt: Boolean,
     ): Prompt {
         val isPreT = group.packageInfo.targetSdkVersion < TIRAMISU
         if (!isSystemTriggeredPrompt && isPreT) {
@@ -50,7 +50,7 @@ object NotificationGrantBehavior : GrantBehavior() {
     override fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton {
         return BasicGrantBehavior.getDenyButton(group, requestedPerms, prompt)
     }

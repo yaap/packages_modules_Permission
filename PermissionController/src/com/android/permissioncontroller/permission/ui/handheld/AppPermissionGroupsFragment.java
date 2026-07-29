@@ -23,11 +23,14 @@ import static com.android.permissioncontroller.PermissionControllerStatsLog.APP_
 import static com.android.permissioncontroller.PermissionControllerStatsLog.APP_PERMISSIONS_FRAGMENT_VIEWED__CATEGORY__ALLOWED_FOREGROUND;
 import static com.android.permissioncontroller.PermissionControllerStatsLog.APP_PERMISSIONS_FRAGMENT_VIEWED__CATEGORY__DENIED;
 import static com.android.permissioncontroller.hibernation.HibernationPolicyKt.isHibernationEnabled;
+import static com.android.permissioncontroller.permission.ui.Category.ALLOWED_FOR_COMPATIBILITY;
+import static com.android.permissioncontroller.permission.ui.Category.FOOTER;
 import static com.android.permissioncontroller.permission.ui.Category.STORAGE_FOOTER;
 import static com.android.permissioncontroller.permission.ui.handheld.UtilsKt.pressBack;
 
 import static java.util.concurrent.TimeUnit.DAYS;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -45,6 +48,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -55,6 +60,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
@@ -103,10 +109,12 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
     private static final String IS_SYSTEM_PERMS_SCREEN = "_is_system_screen";
     private static final String AUTO_REVOKE_CATEGORY_KEY = "_AUTO_REVOKE_KEY";
     private static final String AUTO_REVOKE_SWITCH_KEY = "_AUTO_REVOKE_SWITCH_KEY";
-    private static final String AUTO_REVOKE_SUMMARY_KEY = "_AUTO_REVOKE_SUMMARY_KEY";
     private static final String ASSISTANT_MIC_CATEGORY_KEY = "_ASSISTANT_MIC_KEY";
     private static final String ASSISTANT_MIC_SWITCH_KEY = "_ASSISTANT_MIC_SWITCH_KEY";
     private static final String ASSISTANT_MIC_SUMMARY_KEY = "_ASSISTANT_MIC_SUMMARY_KEY";
+    private static final String FOOTER_PREFERENCE_KEY = "footer_preference";
+
+    private static final String FOOTER_TEXT_DELIMITER = "\n\n";
 
     static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
 
@@ -312,6 +320,31 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
         }
     }
 
+    private void updateFooter(List<CharSequence> footerTexts) {
+        PreferenceCategory preferenceCategory = findPreference(FOOTER.getCategoryName());
+        if (footerTexts.isEmpty()) {
+            preferenceCategory.setVisible(false);
+            return;
+        }
+        preferenceCategory.setVisible(true);
+
+        PermissionFooterPreference footerPreference = findPreference(FOOTER_PREFERENCE_KEY);
+        if (footerPreference == null) {
+            Context context = getPreferenceScreen().getPreferenceManager().getContext();
+            footerPreference = new PermissionFooterPreference(context);
+            footerPreference.setKey(FOOTER_PREFERENCE_KEY);
+            footerPreference.setIcon(Utils.applyTint(getActivity(), R.drawable.ic_info_outline,
+                    android.R.attr.colorControlNormal));
+            preferenceCategory.addPreference(footerPreference);
+        }
+
+        CharSequence footerText = footerTexts.get(0);
+        for (int i = 1; i < footerTexts.size(); i++) {
+            footerText = TextUtils.concat(footerText, FOOTER_TEXT_DELIMITER, footerTexts.get(i));
+        }
+        footerPreference.setTitle(footerText);
+    }
+
     private void updatePreferences(Map<Category, List<GroupUiInfo>> groupMap) {
         if (groupMap == null && !mViewModel.getPackagePermGroupsLiveData().isStale()) {
             // null because explicitly set to null
@@ -341,8 +374,14 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
 
         findPreference(Category.ALLOWED_FOREGROUND.getCategoryName()).setVisible(false);
 
+        findPreference(ALLOWED_FOR_COMPATIBILITY.getCategoryName()).setVisible(false);
+
         // Hide storage footer category
         findPreference(STORAGE_FOOTER.getCategoryName()).setVisible(false);
+
+        // Hide footer category initially
+        findPreference(FOOTER.getCategoryName()).setVisible(false);
+        boolean showNearbyDevicesAllowedForCompatibilityFooter = false;
 
         long sessionId = getArguments().getLong(EXTRA_SESSION_ID, INVALID_SESSION_ID);
 
@@ -365,12 +404,17 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
                 }
             }
 
+            if (grantCategory.equals(ALLOWED_FOR_COMPATIBILITY)) {
+                boolean showCategory = !groupMap.get(grantCategory).isEmpty();
+                category.setVisible(showCategory);
+            }
+
             for (GroupUiInfo groupInfo : groupMap.get(grantCategory)) {
                 String groupName = groupInfo.getGroupName();
 
                 PermissionControlPreference preference = new PermissionControlPreference(context,
                         mPackageName, groupName, mUser, AppPermissionGroupsFragment.class.getName(),
-                        sessionId, grantCategory.getCategoryName(), true);
+                        sessionId, grantCategory.getCategoryName());
 
                 CharSequence permissionGroupName = KotlinUtils.INSTANCE.getPermGroupLabel(context,
                         groupName);
@@ -423,6 +467,11 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
                 } else if (!groupInfo.isSystem()) {
                     numExtraPerms++;
                 }
+                if (Manifest.permission_group.NEARBY_DEVICES.equals(groupInfo.getGroupName())
+                        && findPreference(
+                        ALLOWED_FOR_COMPATIBILITY.getCategoryName()).isVisible()) {
+                    showNearbyDevicesAllowedForCompatibilityFooter = true;
+                }
             }
 
             int noPermsStringRes = grantCategory.equals(Category.DENIED)
@@ -442,6 +491,18 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
         }
 
         setAutoRevokeToggleState(mViewModel.getAutoRevokeLiveData().getValue());
+
+        List<CharSequence> footerTexts = new ArrayList<>();
+        CharSequence autoRevokeFooterText = getAutoRevokeFooterText(
+                mViewModel.getAutoRevokeLiveData().getValue());
+        if (autoRevokeFooterText != null) {
+            footerTexts.add(autoRevokeFooterText);
+        }
+        if (showNearbyDevicesAllowedForCompatibilityFooter) {
+            footerTexts.add(Html.fromHtml(getString(
+                    R.string.allowed_for_compatibility_nearby_devices_footer), 0));
+        }
+        updateFooter(footerTexts);
 
         if (mIsFirstLoad) {
             logAppPermissionGroupsFragmentView();
@@ -481,18 +542,11 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
         autoRevokeSwitch.setKey(AUTO_REVOKE_SWITCH_KEY);
         autoRevokeCategory.addPreference(autoRevokeSwitch);
 
-        Preference autoRevokeSummary =
-                SdkLevel.isAtLeastS() ? new PermissionFooterPreference(context)
-                : new PermissionPreference(context);
-        autoRevokeSummary.setIcon(Utils.applyTint(getActivity(), R.drawable.ic_info_outline,
-                android.R.attr.colorControlNormal));
-        autoRevokeSummary.setKey(AUTO_REVOKE_SUMMARY_KEY);
         if (isHibernationEnabled()) {
             autoRevokeCategory.setTitle(
                     SdkLevel.isAtLeastT() ? R.string.unused_apps_category_title
                             : R.string.unused_apps);
         }
-        autoRevokeCategory.addPreference(autoRevokeSummary);
     }
 
     private boolean isArchivingEnabled() {
@@ -509,11 +563,19 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
                 .findPreference(AUTO_REVOKE_CATEGORY_KEY);
         TwoStatePreference autoRevokeSwitch = autoRevokeCategory.findPreference(
                 AUTO_REVOKE_SWITCH_KEY);
-        Preference autoRevokeSummary = autoRevokeCategory.findPreference(
-                AUTO_REVOKE_SUMMARY_KEY);
-
         autoRevokeSwitch.setChecked(state.isEligibleForHibernation());
         autoRevokeSwitch.setEnabled(!state.isExemptBySystem());
+    }
+
+    @Nullable
+    private CharSequence getAutoRevokeFooterText(HibernationSettingState state) {
+        if (state == null || !mViewModel.getPackagePermGroupsLiveData().isInitialized()
+                || getPreferenceScreen() == null || getListView() == null || getView() == null) {
+            return null;
+        }
+        if (state.isExemptBySystem()) {
+            return null;
+        }
 
         List<String> groupLabels = new ArrayList<>();
         for (String groupName : state.getRevocableGroupNames()) {
@@ -524,16 +586,12 @@ public final class AppPermissionGroupsFragment extends SettingsWithLargeHeader i
                 groupLabels.add(pref.getTitle().toString());
             }
         }
-
         groupLabels.sort(mCollator);
-        autoRevokeSummary.setVisible(true);
-        if (state.isExemptBySystem()) {
-            autoRevokeSummary.setVisible(false);
-        } else if (groupLabels.isEmpty()) {
-            autoRevokeSummary.setSummary(R.string.auto_revoke_summary);
+        if (groupLabels.isEmpty()) {
+            return getText(R.string.auto_revoke_summary);
         } else {
-            autoRevokeSummary.setSummary(getString(R.string.auto_revoke_summary_with_permissions,
-                    ListFormatter.getInstance().format(groupLabels)));
+            return getString(R.string.auto_revoke_summary_with_permissions,
+                    ListFormatter.getInstance().format(groupLabels));
         }
     }
 

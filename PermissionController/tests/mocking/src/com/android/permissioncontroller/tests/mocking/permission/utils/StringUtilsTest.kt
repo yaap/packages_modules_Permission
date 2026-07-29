@@ -33,7 +33,7 @@ class StringUtilsTest {
                 StringUtils.getIcuPluralsString(
                     ApplicationProvider.getApplicationContext(),
                     R.string.test_icu_plural,
-                    1
+                    1,
                 )
             )
             .isEqualTo("1 test")
@@ -45,7 +45,7 @@ class StringUtilsTest {
                 StringUtils.getIcuPluralsString(
                     ApplicationProvider.getApplicationContext(),
                     R.string.test_icu_plural,
-                    2
+                    2,
                 )
             )
             .isEqualTo("2 tests")
@@ -58,7 +58,7 @@ class StringUtilsTest {
                     ApplicationProvider.getApplicationContext(),
                     R.string.test_icu_plural_with_argument,
                     1,
-                    "with argument"
+                    "with argument",
                 )
             )
             .isEqualTo("1 test with argument")
@@ -71,7 +71,7 @@ class StringUtilsTest {
                     ApplicationProvider.getApplicationContext(),
                     R.string.test_icu_plural_with_argument,
                     2,
-                    "with argument"
+                    "with argument",
                 )
             )
             .isEqualTo("2 tests with argument")

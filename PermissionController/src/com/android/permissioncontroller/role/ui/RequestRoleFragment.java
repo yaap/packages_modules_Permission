@@ -111,7 +111,6 @@ public class RequestRoleFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setCancelable(false);
 
         Bundle arguments = getArguments();
         mPackageName = arguments.getString(Intent.EXTRA_PACKAGE_NAME);
@@ -194,6 +193,7 @@ public class RequestRoleFragment extends DialogFragment {
                 // The default behavior for a null listener is to dismiss the dialog, not cancel.
                 .setNegativeButton(android.R.string.cancel, (dialog2, which) -> dialog2.cancel())
                 .create();
+        dialog.setCanceledOnTouchOutside(false);
         dialog.getWindow().addSystemFlags(
                 WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         dialog.setOnShowListener(dialog2 -> dialog.getButton(Dialog.BUTTON_POSITIVE)
@@ -568,10 +568,14 @@ public class RequestRoleFragment extends DialogFragment {
 
         public void replace(@NonNull List<RoleApplicationItem> applicationItems) {
             mApplicationItems.clear();
-            if (mRole.shouldShowNone()) {
+            if (mRole.shouldShowNone() && !isAssistSettingsPrivacyImprovementsEnabled()) {
                 mApplicationItems.add(0, null);
             }
             mApplicationItems.addAll(applicationItems);
+            if (mRole.shouldShowNone() && isAssistSettingsPrivacyImprovementsEnabled()) {
+                mApplicationItems.add(null);
+            }
+
             mHolderUserPackage = getHolderUserPackage(applicationItems);
 
             if (mUserChecked && mCheckedUserPackage != null) {
@@ -704,7 +708,8 @@ public class RequestRoleFragment extends DialogFragment {
                 applicationInfo = null;
                 restricted = false;
                 checked = mCheckedUserPackage == null;
-                icon = AppCompatResources.getDrawable(context, R.drawable.ic_remove_circle);
+                icon = isAssistSettingsPrivacyImprovementsEnabled() ? null :
+                        AppCompatResources.getDrawable(context, R.drawable.ic_remove_circle);
                 title = context.getString(R.string.default_app_none);
                 subtitle = mHolderUserPackage == null ? context.getString(
                         R.string.request_role_current_default) : null;
@@ -741,6 +746,10 @@ public class RequestRoleFragment extends DialogFragment {
             }
 
             return view;
+        }
+
+        private static boolean isAssistSettingsPrivacyImprovementsEnabled() {
+            return android.permission.flags.Flags.assistSettingsPrivacyImprovementsEnabled();
         }
 
         private static class ViewHolder implements RequestRoleItemView {

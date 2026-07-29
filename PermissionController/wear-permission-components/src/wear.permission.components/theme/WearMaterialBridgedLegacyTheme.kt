@@ -15,10 +15,18 @@
  */
 package com.android.permissioncontroller.wear.permission.components.theme
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.Colors
 import androidx.wear.compose.material.Shapes
 import androidx.wear.compose.material.Typography
+
+internal data class WearMaterialBridgedLegacyTheme(
+    val colors: Colors,
+    val typography: Typography,
+    val shapes: Shapes,
+)
 
 /**
  * This exists to support Permission Controller screens that may still use Material 2.5 components
@@ -27,52 +35,50 @@ import androidx.wear.compose.material.Typography
  * However to avoid maintaining two sets of resources for overlays, this class construct 2.5 theme
  * from 3.0
  */
-internal class WearMaterialBridgedLegacyTheme
-private constructor(newTheme: WearOverlayableMaterial3Theme) {
-    val colors =
-        newTheme.colorScheme.run {
-            Colors(
-                background = background,
-                onBackground = onBackground,
-                primary = onPrimaryContainer, // primary90
-                primaryVariant = primaryDim, // primary80
-                onPrimary = onPrimary, // primary10
-                secondary = tertiary, // Tertiary90
-                secondaryVariant = tertiaryDim, // Tertiary60 - Tertiary80 BestFit.
-                onSecondary = onTertiary, // Tertiary10
-                surface = surfaceContainer, // neutral20
-                onSurface = onSurface, // neutral95
-                onSurfaceVariant = onSurfaceVariant, // neutralVariant80
-            )
-        }
+@Composable
+internal fun rememberBridgedLegacyTheme(
+    m3Theme: WearOverlayableMaterial3Theme
+): WearMaterialBridgedLegacyTheme {
+    // This ensures the entire mapping logic runs only when the underlying
+    // M3 theme changes, not on every recomposition.
+    return remember(m3Theme) {
+        val colors =
+            m3Theme.colorScheme.run {
+                Colors(
+                    background = background,
+                    onBackground = onBackground,
+                    primary = onPrimaryContainer, // primary90
+                    primaryVariant = primaryDim, // primary80
+                    onPrimary = onPrimary, // primary10
+                    secondary = tertiary, // Tertiary90
+                    secondaryVariant = tertiaryDim, // Tertiary60 - Tertiary80 BestFit.
+                    onSecondary = onTertiary, // Tertiary10
+                    surface = surfaceContainer, // neutral20
+                    onSurface = onSurface, // neutral95
+                    onSurfaceVariant = onSurfaceVariant, // neutralVariant80
+                )
+            }
 
-    // Based on:
-    // Material 2:
-    // wear/compose/compose-material/src/main/java/androidx/wear/compose/material/Typography.kt
-    // Material 3:
-    // wear/compose/compose-material3/src/main/java/androidx/wear/compose/material3/tokens/TypeScaleTokens.kt
-    val typography =
-        newTheme.typography.run {
-            Typography(
-                display1 = displayLarge, // 40.sp
-                display2 = displayMedium.copy(fontSize = 34.sp, lineHeight = 40.sp),
-                display3 = displayMedium, // 30.sp
-                title1 = displaySmall, // 24.sp
-                title2 = titleLarge, // 20.sp
-                title3 = titleMedium, // 16.sp
-                body1 = bodyLarge, // 16.sp
-                body2 = bodyMedium, // 14.sp
-                caption1 = bodyMedium, // 14.sp
-                caption2 = bodySmall, // 12.sp
-                caption3 = bodyExtraSmall, // 10.sp
-                button = labelMedium, // 15.sp
-            )
-        }
+        val typography =
+            m3Theme.typography.run {
+                Typography(
+                    display1 = displayLarge, // 40.sp
+                    display2 = displayMedium.copy(fontSize = 34.sp, lineHeight = 40.sp),
+                    display3 = displayMedium, // 30.sp
+                    title1 = displaySmall, // 24.sp
+                    title2 = titleLarge, // 20.sp
+                    title3 = titleMedium, // 16.sp
+                    body1 = bodyLarge, // 16.sp
+                    body2 = bodyMedium, // 14.sp
+                    caption1 = bodyMedium, // 14.sp
+                    caption2 = bodySmall, // 12.sp
+                    caption3 = bodyExtraSmall, // 10.sp
+                    button = labelMedium, // 15.sp
+                )
+            }
 
-    val shapes = newTheme.shapes.run { Shapes(large = large, medium = medium, small = small) }
+        val shapes = m3Theme.shapes.run { Shapes(large = large, medium = medium, small = small) }
 
-    companion object {
-        fun createFrom(newTheme: WearOverlayableMaterial3Theme) =
-            WearMaterialBridgedLegacyTheme(newTheme)
+        WearMaterialBridgedLegacyTheme(colors, typography, shapes)
     }
 }

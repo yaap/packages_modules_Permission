@@ -18,8 +18,6 @@ package com.android.permissioncontroller.permission.ui.handheld;
 
 import static android.health.connect.HealthPermissions.HEALTH_PERMISSION_GROUP;
 
-import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
-import static com.android.permissioncontroller.permission.ui.ManagePermissionsActivity.EXTRA_CALLER_NAME;
 import static com.android.permissioncontroller.permission.utils.KotlinUtilsKt.navigateSafe;
 
 import android.Manifest;
@@ -67,24 +65,12 @@ public class PermissionControlPreference extends PermissionPreference {
     private @NonNull String mPermGroupName;
     private @NonNull String mCaller;
     private @NonNull long mSessionId;
-    private boolean mHasNavGraph;
     private @NonNull UserHandle mUser;
     private @Nullable String mPersistentDeviceId;
 
     public PermissionControlPreference(@NonNull Context context,
-            @NonNull AppPermissionGroup group, @NonNull String caller) {
-        this(context, group, caller, 0);
-    }
-
-    public PermissionControlPreference(@NonNull Context context,
-            @NonNull AppPermissionGroup group, @NonNull String caller, long sessionId) {
-        this(context, group.getApp().packageName, group.getName(), group.getUser(), caller,
-                sessionId, null, false);
-    }
-
-    public PermissionControlPreference(@NonNull Context context,
             @NonNull String packageName, @NonNull String permGroupName, @NonNull UserHandle user,
-            @NonNull String caller, long sessionId, String granted, boolean hasNavGraph) {
+            @NonNull String caller, long sessionId, String granted) {
         super(context);
         mContext = context;
         mWidgetIcon = null;
@@ -98,7 +84,6 @@ public class PermissionControlPreference extends PermissionPreference {
         mSessionId = sessionId;
         mUser = user;
         mGranted = granted;
-        mHasNavGraph = hasNavGraph;
     }
 
     /**
@@ -228,7 +213,7 @@ public class PermissionControlPreference extends PermissionPreference {
                     mContext, mPermGroupName, mPackageName)) {
                 // Redirect to location controller extra package settings.
                 LocationUtils.startLocationControllerExtraPackageSettings(mContext, mUser);
-            } else if (mHasNavGraph) {
+            } else {
                 if (mPermGroupName.equals(Manifest.permission_group.NOTIFICATIONS)) {
                     Utils.navigateToAppNotificationSettings(mContext, mPackageName, mUser);
                     return true;
@@ -242,16 +227,6 @@ public class PermissionControlPreference extends PermissionPreference {
                         mPermGroupName, mUser, mCaller, mSessionId, mGranted, mPersistentDeviceId);
                 navigateSafe(Navigation.findNavController(holder.itemView), R.id.perm_groups_to_app,
                         args);
-            } else {
-                // TODO ntmyren, yianyliu: Remove once Auto has been adapted to new permission model
-                // see b/150229448
-                Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
-                intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
-                intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, mPermGroupName);
-                intent.putExtra(Intent.EXTRA_USER, mUser);
-                intent.putExtra(EXTRA_CALLER_NAME, mCaller);
-                intent.putExtra(EXTRA_SESSION_ID, mSessionId);
-                mContext.startActivity(intent);
             }
             return true;
         });

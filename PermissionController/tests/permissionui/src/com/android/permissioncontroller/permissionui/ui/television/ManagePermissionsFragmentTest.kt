@@ -36,7 +36,7 @@ class ManagePermissionsFragmentTest : TelevisionUiBaseTest() {
     fun test_bodySensors_permissionGroup_isNotShown() {
         assertFalse(
             "Found \"Body sensors\" permission",
-            uiDevice.hasElementWithTitle(bodySensorsPermissionLabel)
+            uiDevice.hasElementWithTitle(bodySensorsPermissionLabel),
         )
     }
 
@@ -45,7 +45,7 @@ class ManagePermissionsFragmentTest : TelevisionUiBaseTest() {
         // Make sure Camera permission group is not shown at first.
         assertFalse(
             "Found \"Camera\" permission",
-            uiDevice.hasElementWithTitle(cameraPermissionLabel)
+            uiDevice.hasElementWithTitle(cameraPermissionLabel),
         )
 
         // Install app that uses Camera permission...
@@ -55,7 +55,7 @@ class ManagePermissionsFragmentTest : TelevisionUiBaseTest() {
         // ... make sure now the Camera permission is shown.
         assertTrue(
             "Could not find \"Camera\" permission",
-            uiDevice.focusOnElementWithTitle(cameraPermissionLabel)
+            uiDevice.focusOnElementWithTitle(cameraPermissionLabel),
         )
     }
 
@@ -65,11 +65,11 @@ class ManagePermissionsFragmentTest : TelevisionUiBaseTest() {
         assertEquals(
             "The last item should be the \"Other permissions\" button",
             otherPermissionsLabel,
-            uiDevice.focusedElementTitle
+            uiDevice.focusedElementTitle,
         )
         assertTrue(
             "\"Other permissions\" button should be clickable",
-            uiDevice.focusedElement.isClickable
+            uiDevice.focusedElement.isClickable,
         )
     }
 }

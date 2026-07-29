@@ -26,9 +26,9 @@ import android.util.ArraySet
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.android.modules.utils.build.SdkLevel
 import com.android.permission.flags.Flags
 import com.android.permissioncontroller.R
-import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.hibernation.isHibernationEnabled
 import com.android.permissioncontroller.permission.model.AppPermissionGroup
 import com.android.permissioncontroller.permission.model.AppPermissions
@@ -97,12 +97,14 @@ class WearAppPermissionGroupsHelper(
             .partition { PermissionMapping.isPlatformPermissionGroup(it.name) }
             .let { it.first.plus(it.second) }
             .forEach { group ->
+                val category = grantedTypes[group.name]
                 if (Utils.areGroupPermissionsIndividuallyControlled(context, group.name)) {
                     // If permission is controlled individually, we show all requested permission
                     // inside this group.
                     for (perm in getPermissionInfosFromGroup(group)) {
                         list.add(
                             PermissionGroupChipParam(
+                                category = category,
                                 group = group,
                                 perm = perm,
                                 label = perm.loadLabel(context.packageManager).toString(),
@@ -114,10 +116,10 @@ class WearAppPermissionGroupsHelper(
                         )
                     }
                 } else {
-                    val category = grantedTypes[group.name]
                     if (category != null) {
                         list.add(
                             PermissionGroupChipParam(
+                                category = category,
                                 group = group,
                                 label = group.label.toString(),
                                 summary =
@@ -167,6 +169,8 @@ class WearAppPermissionGroupsHelper(
                     }
                 Category.ASK -> return R.string.ask_header
                 Category.DENIED -> return R.string.denied_header
+                Category.ALLOWED_FOR_COMPATIBILITY ->
+                    return R.string.allowed_for_compatibility_header
                 else -> {
                     /* Fallback though */
                 }
@@ -322,8 +326,7 @@ class WearAppPermissionGroupsHelper(
         ) {
             // Redirect to location controller extra package settings.
             LocationUtils.startLocationControllerExtraPackageSettings(context, user)
-        } else if (
-            permGroupName.equals(HEALTH_PERMISSION_GROUP) && SdkLevel.isAtLeastB()) {
+        } else if (permGroupName.equals(HEALTH_PERMISSION_GROUP) && SdkLevel.isAtLeastB()) {
             // Redirect to Health&Fitness UI
             Utils.navigateToAppHealthConnectSettings(fragment.requireContext(), packageName, user)
         } else {
@@ -370,6 +373,10 @@ class WearAppPermissionGroupsHelper(
             )
         }
 
+    fun isCompatibilityFooterRequired(groupChips: List<PermissionGroupChipParam>): Boolean {
+        return groupChips.any { it.category == Category.ALLOWED_FOR_COMPATIBILITY }
+    }
+
     companion object {
         const val DEBUG = false
         const val TAG = WearAppPermissionGroupsFragment.LOG_TAG
@@ -378,8 +385,9 @@ class WearAppPermissionGroupsHelper(
 
 data class PermissionGroupChipParam(
     val group: AppPermissionGroup,
-    val perm: PermissionInfo? = null,
     val label: String,
+    val category: Category? = null,
+    val perm: PermissionInfo? = null,
     val summary: String? = null,
     val enabled: Boolean = true,
     val checked: Boolean? = null,

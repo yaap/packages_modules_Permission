@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Приложението се подготвя…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Неизвестно"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Управление на поверителността"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Разрешения за приложенията"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"Активност в асистента с AI"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"Няма инсталир. асистенти с AI"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Няма достъп за последн. 24 ч."</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Няма достъп за последн. 7 дни"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Дейност във: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"През последните 24 часа"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"През последните 7 дни"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Днес"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Вчера"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Последен достъп: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Преглед"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Няма осъществявания на достъп"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"Асистентът с AI осъщ. достъп до тези прил., за да получава инф./действа вместо вас. Можете да промените това от настр. на <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Таблото за у-ние на поверит. се показва само когато до прил. се осъщ. достъп чрез функц. на Android за асистенти с AI."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Помощ за устройството"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Преглед на приложенията, които наскоро са използвали разрешения"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Използване на: <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Вижте други разрешения"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Не е използвано през последния # ден}other{Не е използвано през последните # дни}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Не е използвано през последния # час}other{Не е използвано през последните # часа}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Използва се от 1 приложение}other{Използва се от # приложения}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Осъществен бе достъп до 1 приложение}other{Осъществен бе достъп до # приложения}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Преглед на всичко в таблото за управление"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Филтрирано по: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Премахване на филтъра"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Разрешаване на достъп само до мултимедията"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Разрешаване във всички случаи"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Разрешаване само докато приложението се използва"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Разрешаване с цел приложението да продължи да работи"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Винаги да се разрешава пълен достъп"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Извеждане на запитване всеки път"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Запитване всеки път или разрешаване при споделяне"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Забраняване"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Разрешаване на ограничен достъп"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Точно местоположение"</string>
@@ -209,7 +228,7 @@
     <string name="auto_revoke_label" msgid="5068393642936571656">"Премахване на разрешенията, ако приложението не се използва"</string>
     <string name="unused_apps_label" msgid="2595428768404901064">"Премахване на разреш. и освоб. на място"</string>
     <string name="unused_apps_label_v2" msgid="7058776770056517980">"Поставяне на активн. в прилож. на пауза, ако не се ползва"</string>
-    <string name="unused_apps_label_v3" msgid="693340578642156657">"Управление на прилож., ако не се ползва"</string>
+    <string name="unused_apps_label_v3" msgid="693340578642156657">"Управление на приложението, ако не се ползва"</string>
     <string name="unused_apps_summary" msgid="8839466950318403115">"Премахване на разрешенията, изтриване на временните файлове и спиране на известията"</string>
     <string name="unused_apps_summary_v2" msgid="5011313200815115802">"Премахване на разрешенията, изтриване на временните файлове, спиране на известията и архивиране на приложението"</string>
     <string name="auto_revoke_summary" msgid="5867548789805911683">"За да защитим данните ви, разрешенията за това приложение ще бъдат премахнати, ако не го използвате няколко месеца."</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Разрешено"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Разрешено във всички случаи"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Разрешено само при използване"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Разрешено е, за да работи приложението"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"С разрешение за достъп само до мултимедията"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"С разрешение за управление на всички файлове"</string>
     <string name="ask_header" msgid="2633816846459944376">"Запитване всеки път"</string>
     <string name="denied_header" msgid="903209608358177654">"Не е разрешено"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> на <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Вижте още приложения, които имат достъп до всички файлове"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Разрешаване с цел приложението да продължи да работи&lt;/b&gt;&lt;br&gt;&lt;br&gt;За да продължи да работи дадено приложение, може да му бъде разрешено да осъществява достъп до локалната ви мрежа и да се свързва само с устройства в тази мрежа.&lt;br&gt;&lt;br&gt;Приложението не може да се свързва с устройства чрез Bluetooth и други технологии, освен ако не му разрешите да намира всички устройства в близост и да се свързва с тях."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Разрешено е, за да работи приложението&lt;/b&gt;&lt;br&gt;&lt;br&gt;За да продължи да работи дадено приложение, може да му бъде разрешен достъп до локалната ви мрежа и свързване само с устройства в тази мрежа.&lt;br&gt;&lt;br&gt;Приложението не може да се свързва с устройства чрез Bluetooth и други технологии, освен ако не му разрешите да намира всички устройства в близост и да се свързва с тях."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 ден}other{# дни}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# час}other{# часа}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# минута}other{# минути}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Няма"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Стандартно за системата)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Няма приложения"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Промяна"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Запазване на текущото"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Други услуги за NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Избрано"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Избрано – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Няма спец. достъп за прилож."</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Няма приложения"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Не се поддържат служебни потребителски профили"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Да се промени ли основното ви приложение за начален екран на &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Това ще замени началния ви екран и може да засегне достъпа до функциите на устройството ви.&lt;br&gt;&lt;br&gt;Можете да промените този избор по всяко време от настройките за &lt;b&gt;основно приложение за начален екран&lt;/b&gt;."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Забележка: Ако рестартирате устройството си и сте задали опция за заключване на екрана, това приложение не може да стартира, докато не отключите устройството си."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Асистентът ще може да чете информацията за използваните в системата приложения, включително данните, видими на екрана или достъпни в тях."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Да се промени ли приложението ви за дигитален асистент на &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Този асистент ще има достъп до различна информация, като например съобщенията ви, и до данните, които приложенията са избрали да споделят с асистента ви."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Този асистент ще има достъп до различна информация, като например съобщенията ви, и до данните, които приложенията са избрали да споделят с асистента ви.&lt;br&gt;&lt;br&gt;Тъй като сте включили данните от екрана и приложението за <xliff:g id="APP_NAME">%1$s</xliff:g> по-рано, ще бъде разрешен и достъпът до съдържанието от приложението, отворено на екрана ви."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Споделяне на данните за отстраняване на грешки"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Споделяне на подробни данни за отстран. на грешки?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> иска да качи информация за отстраняване на грешки."</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Приложения"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Достъп на агент"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенти, които имат достъп до информация и могат да предприемат действия вместо вас в това приложение"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Разрешено"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Не е разрешено"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Няма разрешен достъп на агенти"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Няма отказан достъп на агенти"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Няма разрешен достъп на приложения"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Няма отказан достъп на приложения"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Достъп до приложението"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Достъп до <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"на <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> достъп до <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Разрешаване"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Забраняване"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Настройки на устройството"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Да се разреши ли на <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> да бъде агент за <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Този агент ще има достъп до <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>, за да получава информация и да предприема действия вместо вас"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Разрешаване"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Забраняване"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Да се разреши ли на <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> да използва данните от екрана и приложението?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Този асистент ще има достъп до информацията и съдържанието от приложението, отворено на екрана ви"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Разрешаване"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Забраняване"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Използване на данните от екрана и приложението"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Разрешаване на асистента да осъществява достъп до информацията и съдържанието от приложението, отворено на екрана ви"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Разрешаване на <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> да осъществява достъп до информацията и съдържанието от приложението, отворено на екрана ви"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Разрешаване"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Забраняване"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Да се разреши ли на &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; да осъществява достъп до точното местоположение, когато решите да го споделите?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Когато споделяте, това приложение ще има достъп до точното местоположение, докато не го затворите"</string>
 </resources>

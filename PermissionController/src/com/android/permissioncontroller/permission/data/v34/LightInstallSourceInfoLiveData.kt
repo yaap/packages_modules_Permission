@@ -41,7 +41,7 @@ class LightInstallSourceInfoLiveData
 private constructor(
     private val app: Application,
     private val packageName: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) :
     SmartAsyncMediatorLiveData<LightInstallSourceInfo>(),
     PackageBroadcastReceiver.PackageBroadcastListener {
@@ -75,7 +75,7 @@ private constructor(
                 val installSourceInfo = getInstallSourceInfo(packageName)
                 LightInstallSourceInfo(
                     installSourceInfo.packageSource,
-                    installSourceInfo.initiatingPackageName
+                    installSourceInfo.initiatingPackageName,
                 )
             } catch (e: PackageManager.NameNotFoundException) {
                 Log.w(LOG_TAG, "InstallSourceInfo for $packageName not found")
@@ -105,7 +105,7 @@ private constructor(
             return LightInstallSourceInfoLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
     }

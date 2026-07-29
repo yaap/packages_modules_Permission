@@ -19,6 +19,7 @@ package android.permissionpolicy.cts
 import android.Manifest.permission.ACCEPT_HANDOVER
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest.permission.ACCESS_LOCAL_NETWORK
 import android.Manifest.permission.ACTIVITY_RECOGNITION
 import android.Manifest.permission.ADD_VOICEMAIL
 import android.Manifest.permission.ANSWER_PHONE_CALLS
@@ -69,6 +70,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.common.truth.Truth.assertWithMessage
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.android.modules.utils.build.SdkLevel
 
 @RunWith(AndroidJUnit4::class)
 class RuntimePermissionProperties {
@@ -185,6 +187,9 @@ class RuntimePermissionProperties {
         // runtime permission
         expectedPerms.add(POST_NOTIFICATIONS)
         expectedPerms.add(NEARBY_WIFI_DEVICES)
+        if (Flags.accessLocalNetworkPermissionEnabled()) {
+            expectedPerms.add(ACCESS_LOCAL_NETWORK)
+        }
 
         // Add runtime permissions added in U which were _not_ split from a previously existing
         // runtime permission
@@ -197,7 +202,7 @@ class RuntimePermissionProperties {
         }
 
         // Separately check health permissions.
-        if (Flags.replaceBodySensorPermissionEnabled()) {
+        if (SdkLevel.isAtLeastB()) {
             assertThat(expectedPerms).contains(HealthPermissions.READ_HEART_RATE);
             assertThat(expectedPerms).contains(HealthPermissions.READ_HEALTH_DATA_IN_BACKGROUND);
 

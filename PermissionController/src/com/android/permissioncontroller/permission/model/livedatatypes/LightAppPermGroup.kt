@@ -38,7 +38,8 @@ import com.android.permissioncontroller.permission.utils.Utils
  * @param specialFixedStorageGrant If this package holds the SYSTEM_GALLERY role, and has the
  *   WRITE_MEDIA_IMAGES app op granted, then we should show the grant state of the storage
  *   permissions as system fixed and granted.
- *
+ * @param specialCompatibilityGrant This permission is split from another permission in a different
+ *   permission group and is granted for compatibility.
  */
 data class LightAppPermGroup(
     val packageInfo: LightPackageInfo,
@@ -47,11 +48,12 @@ data class LightAppPermGroup(
     val hasInstallToRuntimeSplit: Boolean,
     val specialLocationGrant: Boolean?,
     val specialFixedStorageGrant: Boolean,
+    val specialCompatibilityGrant: Boolean = false,
 ) {
     constructor(
         pI: LightPackageInfo,
         pGI: LightPermGroupInfo,
-        perms: Map<String, LightPermission>
+        perms: Map<String, LightPermission>,
     ) : this(pI, pGI, perms, false, null, false)
 
     /** All unrestricted permissions. Usually restricted permissions are ignored */
@@ -89,7 +91,7 @@ data class LightAppPermGroup(
             packageInfo,
             isPlatformPermissionGroup,
             specialLocationGrant,
-            specialFixedStorageGrant
+            specialFixedStorageGrant,
         )
 
     val background =
@@ -98,7 +100,7 @@ data class LightAppPermGroup(
             packageInfo,
             isPlatformPermissionGroup,
             specialLocationGrant,
-            specialFixedStorageGrant
+            specialFixedStorageGrant,
         )
 
     /** Whether or not this App Permission Group has a permission which has a background mode */
@@ -139,6 +141,9 @@ data class LightAppPermGroup(
             (permGroupName == Manifest.permission_group.LOCATION &&
                 permissions[ACCESS_COARSE_LOCATION]?.isOneTime == true)
 
+    /** Whether precise location permission can only be granted by location button */
+    val isOnlyForLocationButton = permissions.values.any { it.isOnlyForLocationButton }
+
     /** Whether any permissions in this group are granted by default (pregrant) */
     val isGrantedByDefault = foreground.isGrantedByDefault || background.isGrantedByDefault
 
@@ -167,6 +172,14 @@ data class LightAppPermGroup(
     val isUserSet = foreground.isUserSet || background.isUserSet
 
     /**
+     * Whether the trusted ui has been shown at least once to the user for this permission group.
+     */
+    val isTrustedUiShown = foreground.isTrustedUiShown || background.isTrustedUiShown
+
+    /** Whether the trusted ui has been consented by the user for this permission group. */
+    val isTrustedUiConsented = foreground.isTrustedUiConsented || background.isTrustedUiConsented
+
+    /**
      * A subset of the AppPermissionGroup, representing either the background or foreground
      * permissions of the full group.
      *
@@ -182,12 +195,12 @@ data class LightAppPermGroup(
         private val packageInfo: LightPackageInfo,
         private val isPlatformPermissionGroup: Boolean,
         private val specialLocationGrant: Boolean?,
-        private val specialFixedStorageGrant: Boolean
+        private val specialFixedStorageGrant: Boolean,
     ) {
         /** Whether any of this App Permission SubGroup's permissions are granted */
         val isGranted =
-            specialLocationGrant
-                ?: specialFixedStorageGrant || permissions.any {
+            specialLocationGrant ?: specialFixedStorageGrant ||
+                permissions.any {
                     val mayGrantByPlatformOrSystem =
                         !isPlatformPermissionGroup || it.value.isPlatformOrSystem
                     it.value.isGranted && mayGrantByPlatformOrSystem
@@ -249,5 +262,14 @@ data class LightAppPermGroup(
         val isGrantable =
             (!packageInfo.isInstantApp || hasInstantPerm) &&
                 (packageInfo.targetSdkVersion >= Build.VERSION_CODES.M || hasPreRuntimePerm)
+
+        /**
+         * Whether the trusted ui has been shown at least once to the user for this permission
+         * group.
+         */
+        val isTrustedUiShown = permissions.values.any { it.isTrustedUiShown }
+
+        /** Whether the trusted ui has been consented by the user for this permission group. */
+        val isTrustedUiConsented = permissions.values.any { it.isTrustedUiConsented }
     }
 }

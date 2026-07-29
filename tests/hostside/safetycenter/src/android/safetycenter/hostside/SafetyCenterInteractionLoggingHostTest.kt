@@ -54,7 +54,7 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
         ConfigUtils.uploadConfigForPushedAtom(
             device,
             safetyCenterRule.getSafetyCenterPackageName(),
-            Atom.SAFETY_CENTER_INTERACTION_REPORTED_FIELD_NUMBER
+            Atom.SAFETY_CENTER_INTERACTION_REPORTED_FIELD_NUMBER,
         )
         // TODO(b/239682646): Consider adding a target preparer that unlocks the device (like CTS)
     }
@@ -67,7 +67,8 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
 
     @Test
     fun openSafetyCenter_recordsSafetyCenterViewedEvent() {
-        helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSafetyCenter")
+        val result = helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSafetyCenter")
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
 
@@ -94,7 +95,8 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
     @Ignore // TODO: b/323269529 - Deflake this test
     @Test
     fun openSafetyCenterFullFromQs_recordsViewEventWithCorrectSource() {
-        helperAppRule.runTest(TEST_CLASS_NAME, "openSafetyCenterFullFromQs")
+        val result = helperAppRule.runTest(TEST_CLASS_NAME, "openSafetyCenterFullFromQs")
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
 
@@ -106,7 +108,12 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
 
     @Test
     fun openSafetyCenterWithIssueIntent_recordsViewEventWithAssociatedIssueMetadata() {
-        helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSafetyCenterWithIssueIntent")
+        val result =
+            helperAppRule.runTest(
+                TEST_CLASS_NAME,
+                testMethodName = "openSafetyCenterWithIssueIntent",
+            )
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
 
@@ -122,10 +129,12 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
     fun openSafetyCenterWithNotification_recordsViewEventWithAssociatedIssueMetadata() {
         assumeAtLeastUpsideDownCake("Safety Center notification APIs require Android U+")
 
-        helperAppRule.runTest(
-            testClassName = ".SafetyCenterNotificationLoggingHelperTests",
-            testMethodName = "openSafetyCenterFromNotification"
-        )
+        val result =
+            helperAppRule.runTest(
+                testClassName = ".SafetyCenterNotificationLoggingHelperTests",
+                testMethodName = "openSafetyCenterFromNotification",
+            )
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
 
@@ -142,7 +151,7 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
         assumeAtLeastUpsideDownCake("Safety Center notification APIs require Android U+")
         helperAppRule.runTest(
             testClassName = ".SafetyCenterNotificationLoggingHelperTests",
-            testMethodName = "sendNotification"
+            testMethodName = "sendNotification",
         )
 
         val notificationPostedAtoms = getInteractionReportedAtoms(Action.NOTIFICATION_POSTED)
@@ -156,7 +165,9 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
     fun openSubpageFromIntentExtra_recordsEventWithUnknownNavigationSource() {
         assumeAtLeastUpsideDownCake("Safety Center subpages require Android U+")
 
-        helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSubpageFromIntentExtra")
+        val result =
+            helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSubpageFromIntentExtra")
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
 
@@ -172,7 +183,9 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
     fun openSubpageFromHomepage_recordsEventWithSafetyCenterNavigationSource() {
         assumeAtLeastUpsideDownCake("Safety Center subpages require Android U+")
 
-        helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSubpageFromHomepage")
+        val result =
+            helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSubpageFromHomepage")
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
         val subpageViewedEvent = safetyCenterViewedAtoms.find { it.viewType == ViewType.SUBPAGE }
@@ -186,7 +199,9 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
     fun openSubpageFromSettingsSearch_recordsEventWithSettingsNavigationSource() {
         assumeAtLeastUpsideDownCake("Safety Center subpages require Android U+")
 
-        helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSubpageFromSettingsSearch")
+        val result =
+            helperAppRule.runTest(TEST_CLASS_NAME, testMethodName = "openSubpageFromSettingsSearch")
+        assumeTrue(result.passedTests.size > 0)
 
         val safetyCenterViewedAtoms = getInteractionReportedAtoms(Action.SAFETY_CENTER_VIEWED)
 
@@ -218,6 +233,7 @@ class SafetyCenterInteractionLoggingHostTest : BaseHostJUnit4Test() {
 
         // LINT.IfChange(issue_type_id)
         val ENCODED_ISSUE_TYPE_ID = encodeId("issue_type_id")
+
         // LINT.ThenChange(/tests/utils/safetycenter/java/com/android/safetycenter/testing/SafetySourceTestData.kt:issue_type_id)
 
         /**

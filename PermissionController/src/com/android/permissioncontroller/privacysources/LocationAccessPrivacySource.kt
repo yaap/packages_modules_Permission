@@ -34,7 +34,7 @@ class LocationAccessPrivacySource : PrivacySource {
     override fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: RefreshEvent
+        refreshEvent: RefreshEvent,
     ) {
         val safetyRefreshEvent = getSafetyCenterEvent(refreshEvent, intent)
         LocationAccessCheck(context, null).rescanAndPushSafetyCenterData(safetyRefreshEvent, null)

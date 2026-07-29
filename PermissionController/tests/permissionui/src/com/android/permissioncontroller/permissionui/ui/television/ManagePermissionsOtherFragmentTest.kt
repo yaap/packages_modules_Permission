@@ -46,7 +46,7 @@ class ManagePermissionsOtherFragmentTest : TelevisionUiBaseTest() {
         assertEquals(
             "\"Other permissions\" didn't open",
             otherPermissionsLabel,
-            uiDevice.fragmentDecorTitle
+            uiDevice.fragmentDecorTitle,
         )
     }
 
@@ -59,7 +59,7 @@ class ManagePermissionsOtherFragmentTest : TelevisionUiBaseTest() {
     fun bodySensors_permissionGroup_isNotShown() {
         assertFalse(
             "Found \"Body sensors\" permission",
-            uiDevice.focusOnElementWithTitle(bodySensorsPermissionLabel)
+            uiDevice.focusOnElementWithTitle(bodySensorsPermissionLabel),
         )
     }
 
@@ -67,7 +67,7 @@ class ManagePermissionsOtherFragmentTest : TelevisionUiBaseTest() {
     fun additionalPermissions_section_isNotShown_ifAllUnused() {
         assertFalse(
             "\"Additional permissions\" section is shown",
-            uiDevice.hasElementWithTitle(additionalPermissionsLabel)
+            uiDevice.hasElementWithTitle(additionalPermissionsLabel),
         )
     }
 
@@ -84,12 +84,12 @@ class ManagePermissionsOtherFragmentTest : TelevisionUiBaseTest() {
         // Make sure the "Additional permissions" section is now shown...
         assertTrue(
             "\"Additional permissions\" section should be shown",
-            uiDevice.hasElementWithTitle(additionalPermissionsLabel)
+            uiDevice.hasElementWithTitle(additionalPermissionsLabel),
         )
         // ... and that we now have "Permission A" row.
         assertTrue(
             "Could not find \"Permission A\" row",
-            uiDevice.focusOnElementWithTitle(TEST_APP_DEFINED_PERMISSION_A_LABEL)
+            uiDevice.focusOnElementWithTitle(TEST_APP_DEFINED_PERMISSION_A_LABEL),
         )
     }
 }

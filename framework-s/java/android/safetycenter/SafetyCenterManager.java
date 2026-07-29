@@ -36,9 +36,12 @@ import android.annotation.SystemApi;
 import android.annotation.SystemService;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.compat.annotation.ChangeId;
+import android.compat.annotation.EnabledSince;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Build.VERSION_CODES;
 import android.os.RemoteException;
 import android.permission.flags.Flags;
 import android.safetycenter.config.SafetyCenterConfig;
@@ -215,6 +218,17 @@ public final class SafetyCenterManager {
     @RequiresApi(UPSIDE_DOWN_CAKE)
     public static final String EXTRA_SAFETY_SOURCES_GROUP_ID =
             "android.safetycenter.extra.SAFETY_SOURCES_GROUP_ID";
+
+    /**
+     * As the Safety Center API access has been opened up more widely, this change restricts access
+     * to deprecated data builder constructors (e.g. for {@link SafetyCenterEntry} which lack the
+     * information that's required to show the data in the UI.
+     *
+     * @hide
+     */
+    @ChangeId
+    @EnabledSince(targetSdkVersion = VERSION_CODES.CINNAMON_BUN)
+    public static final long RESTRICT_DEPRECATED_DATA_BUILDER_CONSTRUCTORS = 424093067L;
 
     /**
      * Used as an int value for {@link #EXTRA_REFRESH_SAFETY_SOURCES_REQUEST_TYPE} to indicate that

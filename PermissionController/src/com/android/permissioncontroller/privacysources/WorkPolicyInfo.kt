@@ -47,6 +47,7 @@ class WorkPolicyInfo(private val workPolicyUtils: WorkPolicyUtils) : PrivacySour
         const val WORK_POLICY_INFO_SOURCE_ID = "AndroidWorkPolicyInfo"
         const val WORK_POLICY_TITLE = "SafetyCenter.WORK_POLICY_TITLE"
         const val WORK_POLICY_SUMMARY = "SafetyCenter.WORK_POLICY_SUMMARY"
+
         fun create(context: Context): WorkPolicyInfo {
             val workPolicyUtils = WorkPolicyUtils(context)
             return WorkPolicyInfo(workPolicyUtils)
@@ -66,7 +67,7 @@ class WorkPolicyInfo(private val workPolicyUtils: WorkPolicyUtils) : PrivacySour
     override fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: RefreshEvent
+        refreshEvent: RefreshEvent,
     ) {
         val safetyCenterManager: SafetyCenterManager =
             Utils.getSystemServiceSafe(context, SafetyCenterManager::class.java)
@@ -76,7 +77,7 @@ class WorkPolicyInfo(private val workPolicyUtils: WorkPolicyUtils) : PrivacySour
         safetyCenterManager.setSafetySourceData(
             WORK_POLICY_INFO_SOURCE_ID,
             safetySourceData,
-            safetyEvent
+            safetyEvent,
         )
     }
 
@@ -90,7 +91,7 @@ class WorkPolicyInfo(private val workPolicyUtils: WorkPolicyUtils) : PrivacySour
                         context,
                         0,
                         deviceOwnerIntent,
-                        PendingIntent.FLAG_IMMUTABLE
+                        PendingIntent.FLAG_IMMUTABLE,
                     )
                 }
                 profileOwnerIntent != null -> {
@@ -98,32 +99,31 @@ class WorkPolicyInfo(private val workPolicyUtils: WorkPolicyUtils) : PrivacySour
                         context.createPackageContextAsUser(
                             context.packageName,
                             0,
-                            UserHandle.of(workPolicyUtils.managedProfileUserId)
+                            UserHandle.of(workPolicyUtils.managedProfileUserId),
                         )
                     PendingIntent.getActivity(
                         managedProfileContext,
                         0,
                         profileOwnerIntent,
-                        PendingIntent.FLAG_IMMUTABLE
+                        PendingIntent.FLAG_IMMUTABLE,
                     )
                 }
                 else -> null
-            }
-                ?: return null
+            } ?: return null
 
         val safetySourceStatus: SafetySourceStatus =
             SafetySourceStatus.Builder(
                     Utils.getEnterpriseString(
                         context,
                         WORK_POLICY_TITLE,
-                        R.string.work_policy_title
+                        R.string.work_policy_title,
                     ),
                     Utils.getEnterpriseString(
                         context,
                         WORK_POLICY_SUMMARY,
-                        R.string.work_policy_summary
+                        R.string.work_policy_summary,
                     ),
-                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED
+                    SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED,
                 )
                 .setPendingIntent(pendingIntent)
                 .build()
@@ -133,7 +133,7 @@ class WorkPolicyInfo(private val workPolicyUtils: WorkPolicyUtils) : PrivacySour
 
     private fun createSafetyEventForWorkPolicy(
         refreshEvent: RefreshEvent,
-        intent: Intent
+        intent: Intent,
     ): SafetyEvent {
         return when (refreshEvent) {
             RefreshEvent.EVENT_REFRESH_REQUESTED -> {

@@ -40,7 +40,7 @@ public class WatchFaceRoleBehavior implements RoleBehavior {
     }
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         Permissions.grantAsUser(packageName, getNonAndroidPermissions(context),
             /* ignoreDisabledSystemPackage= */ true, /* overrideUserSetAndFixed= */ false,

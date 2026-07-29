@@ -37,7 +37,7 @@ class AutoUnusedAppsPreference(
     app: Application,
     packageName: String,
     user: UserHandle,
-    context: Context
+    context: Context,
 ) : CarUiTwoActionIconPreference(context), RemovablePref {
 
     init {

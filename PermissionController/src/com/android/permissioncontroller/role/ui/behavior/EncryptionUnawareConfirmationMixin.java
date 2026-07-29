@@ -28,18 +28,18 @@ import com.android.permissioncontroller.role.utils.PackageUtils;
 import com.android.role.controller.model.Role;
 
 /**
- * Mixin for {@link RoleUiBehavior#getConfirmationMessage(Role, String, Context)}
- * that returns a confirmation message when the application is not direct boot aware.
+ * Mixin for {@link RoleUiBehavior#getConfirmationDialogInfo(Role, String, Context)}
+ * that returns a confirmation dialog info when the application is not direct boot aware.
  */
 public class EncryptionUnawareConfirmationMixin {
 
     private static final String LOG_TAG = EncryptionUnawareConfirmationMixin.class.getSimpleName();
 
     /**
-     * @see RoleUiBehavior#getConfirmationMessage(Role, String, Context)
+     * @see RoleUiBehavior#getConfirmationDialogInfo(Role, String, Context)
      */
     @Nullable
-    public static CharSequence getConfirmationMessage(@NonNull Role role,
+    public static ConfirmationDialogInfo getConfirmationDialogInfo(@NonNull Role role,
             @NonNull String packageName, @NonNull Context context) {
         ApplicationInfo applicationInfo = PackageUtils.getApplicationInfo(packageName, context);
         if (applicationInfo == null) {
@@ -50,6 +50,9 @@ public class EncryptionUnawareConfirmationMixin {
         if (applicationInfo.isEncryptionAware()) {
             return null;
         }
-        return context.getString(R.string.encryption_unaware_confirmation_message);
+        return new ConfirmationDialogInfo(null,
+                context.getString(R.string.encryption_unaware_confirmation_message),
+                context.getString(android.R.string.ok),
+                context.getString(android.R.string.cancel), false);
     }
 }

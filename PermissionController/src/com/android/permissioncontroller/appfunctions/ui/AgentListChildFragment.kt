@@ -15,7 +15,9 @@
  */
 package com.android.permissioncontroller.appfunctions.ui
 
+import android.icu.text.Collator
 import android.os.Bundle
+import android.os.Process
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle.State
@@ -27,11 +29,16 @@ import androidx.preference.Preference.OnPreferenceClickListener
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceGroup
 import com.android.permissioncontroller.R
-import com.android.permissioncontroller.appfunctions.domain.model.AppFunctionPackageInfo
-import com.android.permissioncontroller.appfunctions.ui.viewmodel.AgentListUiState
+import com.android.permissioncontroller.appfunctions.domain.model.v31.AppFunctionPackageInfo
+import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCaseImpl
+import com.android.permissioncontroller.appfunctions.domain.usecase.v31.GetAppFunctionPackageInfoUseCase
 import com.android.permissioncontroller.appfunctions.ui.viewmodel.AgentListViewModel
 import com.android.permissioncontroller.appfunctions.ui.viewmodel.AgentListViewModelFactory
 import com.android.permissioncontroller.common.model.Stateful
+import com.android.permissioncontroller.pm.data.repository.v31.PackageRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
@@ -43,10 +50,11 @@ import kotlinx.coroutines.launch
  *
  * @param <PF> type of the parent fragment
  */
-class AgentListChildFragment<PF> : Fragment(), OnPreferenceClickListener where
-PF : PreferenceFragmentCompat,
-PF : AgentListChildFragment.Parent {
+class AgentListChildFragment<PF> : Fragment(), OnPreferenceClickListener
+    where PF : PreferenceFragmentCompat, PF : AgentListChildFragment.Parent {
     private lateinit var viewModel: AgentListViewModel
+    private lateinit var getAppFunctionPackageInfoUseCase: GetAppFunctionPackageInfoUseCase
+    private lateinit var agentListComparator: Comparator<AppFunctionPackageInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,15 +62,45 @@ PF : AgentListChildFragment.Parent {
         val factory = AgentListViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this, factory).get(AgentListViewModel::class.java)
 
+        val packageRepository = PackageRepository.createInstance(requireContext())
+        getAppFunctionPackageInfoUseCase = GetAppFunctionPackageInfoUseCaseImpl(packageRepository)
+
+        val collator =
+            Collator.getInstance(
+                requireActivity().application.resources.configuration.getLocales().get(0)
+            )
+        agentListComparator = compareBy(collator) { it.label }
+
         val preferenceFragment = requirePreferenceFragment()
         preferenceFragment.lifecycleScope.launch {
             preferenceFragment.lifecycle.repeatOnLifecycle(State.STARTED) {
-                viewModel.uiStateFlow.collect(::onUiStateChanged)
+                viewModel.uiStateFlow
+                    .map { uiState ->
+                        when (uiState) {
+                            is Stateful.Failure -> Stateful.Failure(throwable = uiState.throwable)
+                            is Stateful.Loading -> Stateful.Loading()
+                            is Stateful.Success -> {
+                                val agentPackageInfos =
+                                    uiState.value.agentPackageNames
+                                        .map {
+                                            getAppFunctionPackageInfoUseCase(
+                                                it,
+                                                requireContext(),
+                                                Process.myUserHandle(),
+                                            )!!
+                                        }
+                                        .sortedWith(agentListComparator)
+                                Stateful.Success(AgentListRichUiState(agentPackageInfos))
+                            }
+                        }
+                    }
+                    .flowOn(Dispatchers.Default)
+                    .collect(::onUiStateChanged)
             }
         }
     }
 
-    private fun onUiStateChanged(uiState: Stateful<AgentListUiState>) {
+    private fun onUiStateChanged(uiState: Stateful<AgentListRichUiState>) {
         val preferenceFragment = requirePreferenceFragment()
         val preferenceManager = preferenceFragment.preferenceManager
         var preferenceScreen = preferenceFragment.preferenceScreen
@@ -84,7 +122,7 @@ PF : AgentListChildFragment.Parent {
                 addEmptyStatePreference(preferenceScreen, oldPreferences)
             }
             is Stateful.Success -> {
-                val agents = uiState.value.agents
+                val agents = uiState.value.agentPackageInfos
                 if (agents.isEmpty()) {
                     addEmptyStatePreference(preferenceScreen, oldPreferences)
                 } else {
@@ -168,6 +206,10 @@ PF : AgentListChildFragment.Parent {
         @Suppress("UNCHECKED_CAST")
         return requireParentFragment() as PF
     }
+
+    data class AgentListRichUiState(
+        val agentPackageInfos: List<AppFunctionPackageInfo> = emptyList()
+    )
 
     /** Interface that the parent fragment must implement. */
     interface Parent {

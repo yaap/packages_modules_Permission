@@ -19,7 +19,6 @@ package com.android.permissioncontroller.permission.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.permissioncontroller.Constants;
@@ -76,8 +75,7 @@ public class ManagePermissionsActivityTrampoline extends Activity {
                                 intent.getStringExtra(Intent.EXTRA_PERMISSION_GROUP_NAME))
                         .putExtra(Intent.EXTRA_PACKAGE_NAME,
                                 intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME))
-                        .putExtra(Intent.EXTRA_USER,
-                                intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle.class));
+                        .putExtra(Intent.EXTRA_USER, android.os.Process.myUserHandle());
                 break;
             case AppFunctionsUtil.ACTION_MANAGE_UNUSED_APPS:
                 newIntent.setAction(Intent.ACTION_MANAGE_UNUSED_APPS);

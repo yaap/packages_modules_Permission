@@ -42,7 +42,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
     fun transitionToIssueResolvedThenMarkComplete(
         context: Context,
         holder: PreferenceViewHolder,
-        action: SafetyCenterIssue.Action
+        action: SafetyCenterIssue.Action,
     ) {
         var successMessage = action.successMessage
         if (TextUtils.isEmpty(successMessage)) {
@@ -72,7 +72,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
                                     super.onTransitionEnd(transition)
                                     startIssueResolvedAnimation(
                                         resolvedIssueContentGroup,
-                                        resolvedImageView
+                                        resolvedImageView,
                                     )
                                 }
                             }
@@ -84,7 +84,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
         holder.itemView.post {
             TransitionManager.beginDelayedTransition(
                 defaultIssueContentGroup.parent as ViewGroup?,
-                transitionSet
+                transitionSet,
             )
 
             // Setting INVISIBLE rather than GONE to ensure consistent card height between
@@ -106,12 +106,13 @@ class IssueCardAnimator(val callback: AnimationCallback) {
         holder.itemView.addOnAttachStateChangeListener(
             object : View.OnAttachStateChangeListener {
                 override fun onViewAttachedToWindow(v: View) {}
+
                 override fun onViewDetachedFromWindow(v: View) {
                     holder.itemView.removeOnAttachStateChangeListener(this)
                     cancelIssueResolvedUiTransitionsAndMarkCompleted(
                         defaultIssueContentGroup,
                         resolvedIssueContentGroup,
-                        resolvedImageView
+                        resolvedImageView,
                     )
                 }
             }
@@ -126,7 +127,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
 
     private fun startIssueResolvedAnimation(
         resolvedIssueContentGroup: View,
-        resolvedImageView: ImageView
+        resolvedImageView: ImageView,
     ) {
         val animatedDrawable = resolvedImageView.drawable as AnimatedVectorDrawable
         animatedDrawable.reset()
@@ -157,7 +158,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
                 )
         TransitionManager.beginDelayedTransition(
             resolvedIssueContentGroup.parent as ViewGroup,
-            hideTransition
+            hideTransition,
         )
         resolvedIssueContentGroup.visibility = View.GONE
     }
@@ -165,7 +166,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
     private fun cancelIssueResolvedUiTransitionsAndMarkCompleted(
         defaultIssueContentGroup: View,
         resolvedIssueContentGroup: View,
-        resolvedImageView: ImageView
+        resolvedImageView: ImageView,
     ) {
         // Cancel any in flight initial fade (in and out) transitions
         TransitionManager.endTransitions(defaultIssueContentGroup.parent as ViewGroup)
@@ -204,7 +205,7 @@ class IssueCardAnimator(val callback: AnimationCallback) {
                     DeviceConfig.getLong(
                         DeviceConfig.NAMESPACE_PRIVACY,
                         PROPERTY_HIDE_RESOLVED_UI_TRANSITION_DELAY_MILLIS,
-                        400
+                        400,
                     )
                 )
 

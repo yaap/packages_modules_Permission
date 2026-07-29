@@ -111,7 +111,7 @@ class GetPermissionGroupUsageUseCase(
                 PackagePermissionGroupUsageModel(
                     packageOps.packageName,
                     permissionGroupUsages,
-                    packageOps.userId
+                    packageOps.userId,
                 )
             } else {
                 null
@@ -150,8 +150,8 @@ class GetPermissionGroupUsageUseCase(
                     isPermissionGroupUserSensitive(
                         pkgOps.packageName,
                         permGroupLastAccessTimeEntry.key,
-                        pkgOps.userId
-                    )
+                        pkgOps.userId,
+                    ),
                 )
             }
         }
@@ -164,7 +164,7 @@ class GetPermissionGroupUsageUseCase(
     private suspend fun isPermissionGroupUserSensitive(
         packageName: String,
         permissionGroup: String,
-        userId: Int
+        userId: Int,
     ): Boolean {
         if (isTelecomPackageAndCameraOrMicGroup(packageName, permissionGroup)) {
             return false
@@ -194,7 +194,7 @@ class GetPermissionGroupUsageUseCase(
 
     private fun isPermissionUserSensitive(
         isPermissionGranted: Boolean,
-        permissionFlags: Int
+        permissionFlags: Int,
     ): Boolean {
         return if (isPermissionGranted) {
             permissionFlags and PackageManager.FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED != 0
@@ -218,7 +218,7 @@ class GetPermissionGroupUsageUseCase(
                 permissionRepository,
                 appOpRepository,
                 roleRepository,
-                userRepository
+                userRepository,
             )
         }
     }

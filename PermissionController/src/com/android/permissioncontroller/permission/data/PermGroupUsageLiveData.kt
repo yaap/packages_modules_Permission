@@ -38,7 +38,7 @@ import kotlin.collections.set
 class PermGroupUsageLiveData(
     private val app: Application,
     private val permGroupsNames: List<String>,
-    private val usageDurationMs: Long
+    private val usageDurationMs: Long,
 ) : SmartUpdateMediatorLiveData<Map<String, List<OpAccess>>>() {
     /** Perm group name -> OpUsageLiveData */
     private val permGroupUsages =
@@ -95,7 +95,7 @@ class PermGroupUsageLiveData(
             return PermGroupUsageLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
     }

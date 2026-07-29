@@ -59,7 +59,7 @@ object PackageBroadcastReceiver : BroadcastReceiver() {
                     this@PackageBroadcastReceiver,
                     intentFilter,
                     null,
-                    null
+                    null,
                 )
             }
         }
@@ -82,7 +82,7 @@ object PackageBroadcastReceiver : BroadcastReceiver() {
                     this@PackageBroadcastReceiver,
                     intentFilter,
                     null,
-                    null
+                    null,
                 )
             }
         }

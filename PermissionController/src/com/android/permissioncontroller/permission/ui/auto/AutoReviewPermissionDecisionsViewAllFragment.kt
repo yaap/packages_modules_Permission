@@ -42,7 +42,7 @@ class AutoReviewPermissionDecisionsViewAllFragment : AutoSettingsFrameFragment()
         /** Creates a new instance of [AutoReviewPermissionDecisionsViewAllFragment]. */
         fun newInstance(
             sessionId: Long,
-            userHandle: UserHandle
+            userHandle: UserHandle,
         ): AutoReviewPermissionDecisionsViewAllFragment {
             return AutoReviewPermissionDecisionsViewAllFragment().apply {
                 arguments =

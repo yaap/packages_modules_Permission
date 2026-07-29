@@ -28,7 +28,7 @@ import com.android.permissioncontroller.role.service.RoleSearchIndexablesProvide
 /**
  * Trampoline activity for activities exposed from
  * {@link com.android.permissioncontroller.role.service.RoleSearchIndexablesProvider} and
- * {@link com.android.permissioncontroller.appfunctions.AppFunctionsUtil#ACTION_MANAGE_DEFAULT_APP}.
+ * {@link AppFunctionsUtil#ACTION_MANAGE_DEFAULT_APP}.
  */
 public class RoleTrampolineActivity extends Activity {
 

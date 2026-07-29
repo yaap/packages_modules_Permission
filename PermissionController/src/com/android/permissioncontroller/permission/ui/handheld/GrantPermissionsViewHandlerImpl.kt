@@ -22,7 +22,9 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.app.Activity
 import android.graphics.Typeface
 import android.graphics.drawable.Icon
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.provider.Settings
 import android.text.method.LinkMovementMethod
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
@@ -42,6 +44,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.annotation.RawRes
+import androidx.core.util.size
 import com.airbnb.lottie.LottieCompositionFactory
 import com.airbnb.lottie.LottieDrawable
 import com.android.modules.utils.build.SdkLevel
@@ -77,6 +80,7 @@ import com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandle
 import com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.GRANTED_ONE_TIME
 import com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.GRANTED_USER_SELECTED
 import com.android.permissioncontroller.permission.ui.GrantPermissionsViewHandler.ResultListener
+import com.android.permissioncontroller.permission.utils.KotlinUtils
 import com.android.settingslib.widget.SettingsThemeHelper
 
 class GrantPermissionsViewHandlerImpl(
@@ -112,6 +116,10 @@ class GrantPermissionsViewHandlerImpl(
     private var coarseOnDrawable: LottieDrawable? = null
     private var fineOffDrawable: LottieDrawable? = null
     private var fineOnDrawable: LottieDrawable? = null
+    private var coarseOffLayerDrawable: LayerDrawable? = null
+    private var coarseOnLayerDrawable: LayerDrawable? = null
+    private var fineOffLayerDrawable: LayerDrawable? = null
+    private var fineOnLayerDrawable: LayerDrawable? = null
 
     // Views
     private var iconView: ImageView? = null
@@ -204,7 +212,9 @@ class GrantPermissionsViewHandlerImpl(
         val useMaterial3PermissionGrantDialog =
             mActivity.resources.getBoolean(R.bool.config_useMaterial3PermissionGrantDialog)
         val layoutResource =
-            if (SettingsThemeHelper.isExpressiveTheme(mActivity)) {
+            if (KotlinUtils.isLocationPermissionNewRadioButtonsEnabled(mActivity)) {
+                R.layout.grant_permissions_new_location_design
+            } else if (SettingsThemeHelper.isExpressiveTheme(mActivity)) {
                 R.layout.grant_permissions_expressive
             } else if (useMaterial3PermissionGrantDialog || SdkLevel.isAtLeastT()) {
                 R.layout.grant_permissions_material3
@@ -234,16 +244,30 @@ class GrantPermissionsViewHandlerImpl(
         permissionRationaleView!!.setOnClickListener(this)
 
         val buttons = arrayOfNulls<Button>(NEXT_BUTTON)
-        val numButtons = BUTTON_RES_ID_TO_NUM.size()
+        val numButtons = BUTTON_RES_ID_TO_NUM.size
+        val useFocusIndicator =
+            mActivity.resources.getBoolean(
+                R.bool.config_useFocusIndicatorInPermissionDialogBeforeUserSetupComplete
+            ) &&
+                (Settings.Secure.getInt(
+                    mActivity.getContentResolver(),
+                    Settings.Secure.USER_SETUP_COMPLETE,
+                    0,
+                ) != 1)
         for (i in 0 until numButtons) {
             val button = rootView.findViewById<Button>(BUTTON_RES_ID_TO_NUM.keyAt(i))
+            if (useFocusIndicator) {
+                button?.setForeground(
+                    mActivity.getDrawable(R.drawable.permission_dialog_focus_indicator)
+                )
+            }
             button!!.setOnClickListener(this)
             buttons[BUTTON_RES_ID_TO_NUM.valueAt(i)] = button
         }
         this.buttons = buttons
 
         val locationViews = arrayOfNulls<View>(NEXT_LOCATION_DIALOG)
-        for (i in 0 until LOCATION_RES_ID_TO_NUM.size()) {
+        for (i in 0 until LOCATION_RES_ID_TO_NUM.size) {
             val locationView = rootView.findViewById<View>(LOCATION_RES_ID_TO_NUM.keyAt(i))
             locationViews[LOCATION_RES_ID_TO_NUM.valueAt(i)] = locationView
         }
@@ -281,11 +305,30 @@ class GrantPermissionsViewHandlerImpl(
         return drawable
     }
 
+    private fun getLottieDrawableForLocation(@RawRes rawResId: Int): LottieDrawable {
+        val composition = LottieCompositionFactory.fromRawResSync(mActivity, rawResId, null).value!!
+        val drawable = LottieDrawable()
+        drawable.composition = composition
+        return drawable
+    }
+
     private fun initializeAnimatedImages() {
-        coarseOffDrawable = getLottieDrawable(R.raw.coarse_loc_off)
-        coarseOnDrawable = getLottieDrawable(R.raw.coarse_loc_on)
-        fineOffDrawable = getLottieDrawable(R.raw.fine_loc_off)
-        fineOnDrawable = getLottieDrawable(R.raw.fine_loc_on)
+        if (KotlinUtils.isLocationPermissionNewRadioButtonsEnabled(mActivity)) {
+            coarseOffDrawable = getLottieDrawableForLocation(R.raw.coarse_loc_radio_off)
+            coarseOnDrawable = getLottieDrawableForLocation(R.raw.coarse_loc_radio_on)
+            fineOffDrawable = getLottieDrawableForLocation(R.raw.fine_loc_radio_off)
+            fineOnDrawable = getLottieDrawableForLocation(R.raw.fine_loc_radio_on)
+
+            coarseOffLayerDrawable = getLayerDrawableForLocationAccuracy(coarseOffDrawable!!)
+            coarseOnLayerDrawable = getLayerDrawableForLocationAccuracy(coarseOnDrawable!!)
+            fineOffLayerDrawable = getLayerDrawableForLocationAccuracy(fineOffDrawable!!)
+            fineOnLayerDrawable = getLayerDrawableForLocationAccuracy(fineOnDrawable!!)
+        } else {
+            coarseOffDrawable = getLottieDrawable(R.raw.coarse_loc_off)
+            coarseOnDrawable = getLottieDrawable(R.raw.coarse_loc_on)
+            fineOffDrawable = getLottieDrawable(R.raw.fine_loc_off)
+            fineOnDrawable = getLottieDrawable(R.raw.fine_loc_on)
+        }
     }
 
     override fun updateWindowAttributes(outLayoutParams: LayoutParams) {
@@ -341,7 +384,7 @@ class GrantPermissionsViewHandlerImpl(
     }
 
     private fun updateButtons() {
-        for (i in 0 until BUTTON_RES_ID_TO_NUM.size()) {
+        for (i in 0 until BUTTON_RES_ID_TO_NUM.size) {
             val pos = BUTTON_RES_ID_TO_NUM.valueAt(i)
             buttons[pos]?.visibility =
                 if (buttonVisibilities[pos]) {
@@ -350,8 +393,18 @@ class GrantPermissionsViewHandlerImpl(
                     View.GONE
                 }
             if (pos == ALLOW_FOREGROUND_BUTTON && buttonVisibilities[pos]) {
-                buttons[pos]?.text =
-                    mActivity.resources.getString(R.string.grant_dialog_button_allow_foreground)
+                if (
+                    locationVisibilities[LOCATION_ACCURACY_LAYOUT] &&
+                        locationVisibilities[DIALOG_WITH_FINE_LOCATION_ONLY]
+                ) {
+                    buttons[pos]?.text =
+                        mActivity.resources.getString(
+                            R.string.grant_dialog_button_change_to_precise_location
+                        )
+                } else {
+                    buttons[pos]?.text =
+                        mActivity.resources.getString(R.string.grant_dialog_button_allow_foreground)
+                }
             }
             if ((pos == DENY_BUTTON || pos == DENY_AND_DONT_ASK_AGAIN_BUTTON)) {
                 if (
@@ -403,15 +456,31 @@ class GrantPermissionsViewHandlerImpl(
                     runLocationAccuracyAnimation(true)
                 }
             } else if (locationVisibilities[DIALOG_WITH_COARSE_LOCATION_ONLY]) {
-                (locationViews[DIALOG_WITH_COARSE_LOCATION_ONLY] as ImageView).setImageDrawable(
-                    coarseOnDrawable
-                )
-                coarseOnDrawable?.start()
+                if (KotlinUtils.isLocationPermissionNewRadioButtonsEnabled(mActivity)) {
+                    (locationViews[DIALOG_WITH_COARSE_LOCATION_ONLY] as RadioButton).let {
+                        it.setBackgroundDrawable(coarseOnLayerDrawable)
+                        it.isChecked = true
+                    }
+                    coarseOnDrawable?.start()
+                } else {
+                    (locationViews[DIALOG_WITH_COARSE_LOCATION_ONLY] as ImageView).setImageDrawable(
+                        coarseOnDrawable
+                    )
+                    coarseOnDrawable?.start()
+                }
             } else if (locationVisibilities[DIALOG_WITH_FINE_LOCATION_ONLY]) {
-                (locationViews[DIALOG_WITH_FINE_LOCATION_ONLY] as ImageView).setImageDrawable(
-                    fineOnDrawable
-                )
-                fineOnDrawable?.start()
+                if (KotlinUtils.isLocationPermissionNewRadioButtonsEnabled(mActivity)) {
+                    (locationViews[DIALOG_WITH_FINE_LOCATION_ONLY] as RadioButton).let {
+                        it.setBackgroundDrawable(fineOnLayerDrawable)
+                        it.isChecked = true
+                    }
+                    fineOnDrawable?.start()
+                } else {
+                    (locationViews[DIALOG_WITH_FINE_LOCATION_ONLY] as ImageView).setImageDrawable(
+                        fineOnDrawable
+                    )
+                    fineOnDrawable?.start()
+                }
             }
         } else {
             locationViews[LOCATION_ACCURACY_LAYOUT]?.visibility = View.GONE
@@ -423,6 +492,49 @@ class GrantPermissionsViewHandlerImpl(
     }
 
     private fun runLocationAccuracyAnimation(isFineSelected: Boolean) {
+        if (KotlinUtils.isLocationPermissionNewRadioButtonsEnabled(mActivity)) {
+            runLocationAccuracyAnimationNew(isFineSelected)
+        } else {
+            runLocationAccuracyAnimationOld(isFineSelected)
+        }
+    }
+
+    private fun runLocationAccuracyAnimationNew(isFineSelected: Boolean) {
+        if (isFineSelected) {
+            coarseOnDrawable?.stop()
+            fineOffDrawable?.stop()
+            coarseRadioButton?.setBackgroundDrawable(coarseOffLayerDrawable)
+            fineRadioButton?.setBackgroundDrawable(fineOnLayerDrawable)
+            coarseOffDrawable?.start()
+            fineOnDrawable?.start()
+        } else {
+            coarseOffDrawable?.stop()
+            fineOnDrawable?.stop()
+            coarseRadioButton?.setBackgroundDrawable(coarseOnLayerDrawable)
+            fineRadioButton?.setBackgroundDrawable(fineOffLayerDrawable)
+            coarseOnDrawable?.start()
+            fineOffDrawable?.start()
+        }
+    }
+
+    private fun getLayerDrawableForLocationAccuracy(
+        locationAccuracyDrawable: LottieDrawable
+    ): LayerDrawable {
+        val radioButtonBackground =
+            mActivity.getDrawable(R.drawable.location_permission_granularity_card_background)
+
+        return LayerDrawable(arrayOf(radioButtonBackground, locationAccuracyDrawable)).apply {
+            paddingMode = LayerDrawable.PADDING_MODE_STACK
+            val padding =
+                mActivity.resources.getDimensionPixelSize(
+                    R.dimen.location_permission_grant_dialog_radio_button_padding
+                )
+            setLayerInset(1, padding, padding, padding, padding)
+            setLayerGravity(1, Gravity.BOTTOM)
+        }
+    }
+
+    private fun runLocationAccuracyAnimationOld(isFineSelected: Boolean) {
         if (isFineSelected) {
             coarseOnDrawable?.stop()
             fineOffDrawable?.stop()
@@ -503,7 +615,16 @@ class GrantPermissionsViewHandlerImpl(
 
         var affectedForegroundPermissions: List<String>? = null
         if (locationVisibilities[DIALOG_WITH_BOTH_LOCATIONS]) {
-            when ((locationViews[DIALOG_WITH_BOTH_LOCATIONS] as RadioGroup).checkedRadioButtonId) {
+            val radioGroup =
+                if (KotlinUtils.isLocationPermissionNewRadioButtonsEnabled(mActivity)) {
+                    rootView?.findViewById<RadioGroup>(
+                        R.id.permission_location_accuracy_radio_group
+                    )
+                } else {
+                    locationViews[DIALOG_WITH_BOTH_LOCATIONS] as RadioGroup
+                }
+
+            when (radioGroup?.checkedRadioButtonId) {
                 R.id.permission_location_accuracy_radio_coarse ->
                     affectedForegroundPermissions = listOf(ACCESS_COARSE_LOCATION)
                 R.id.permission_location_accuracy_radio_fine ->
@@ -685,7 +806,7 @@ class GrantPermissionsViewHandlerImpl(
                 COARSE_RADIO_BUTTON,
             )
             LOCATION_RES_ID_TO_NUM.put(
-                R.id.permission_location_accuracy_radio_group,
+                R.id.permission_location_accuracy_radio_container,
                 DIALOG_WITH_BOTH_LOCATIONS,
             )
             LOCATION_RES_ID_TO_NUM.put(

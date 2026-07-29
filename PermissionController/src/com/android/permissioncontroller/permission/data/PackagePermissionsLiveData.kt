@@ -118,7 +118,7 @@ private constructor(private val app: Application, packageName: String, user: Use
             return PackagePermissionsLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
 

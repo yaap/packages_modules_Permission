@@ -33,7 +33,7 @@ class RoleHoldersLiveData
 private constructor(
     private val app: Application,
     private val roleName: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<List<String>>(), RoleHoldersChangeCallback {
 
     private val roleManager = app.getSystemService(RoleManager::class.java)!!

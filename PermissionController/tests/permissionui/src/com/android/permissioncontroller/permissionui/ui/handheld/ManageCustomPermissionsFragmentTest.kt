@@ -18,14 +18,13 @@ package com.android.permissioncontroller.permissionui.ui.handheld
 
 import android.content.Intent
 import android.os.Build
-import android.permission.flags.Flags
 import android.permission.cts.PermissionUtils.grantPermission
 import android.permission.cts.PermissionUtils.install
 import android.permission.cts.PermissionUtils.revokePermission
 import android.permission.cts.PermissionUtils.uninstallApp
+import android.permission.flags.Flags
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
-import android.platform.test.flag.junit.CheckFlagsRule
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
@@ -107,7 +106,6 @@ class ManageCustomPermissionsFragmentTest : BaseHandheldPermissionUiTest() {
         eventually { assertThat(getUsageCountsFromUi(PERM_LABEL)).isEqualTo(original) }
     }
 
-
     @SdkSuppress(
         minSdkVersion = Build.VERSION_CODES.TIRAMISU,
         maxSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE,
@@ -121,17 +119,6 @@ class ManageCustomPermissionsFragmentTest : BaseHandheldPermissionUiTest() {
     }
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsDisabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
-    @Test
-    fun testFindBodySensor_replaceBodySensorFlagDisabled_labelDisplayed() {
-        if (waitFindObjectOrNull(By.textContains(BODY_SENSORS_LABEL)) == null) {
-            waitFindObject(By.textContains(ADDITIONAL_PERMISSIONS_LABEL)).click()
-            assertNotNull(waitFindObjectOrNull(By.textContains(BODY_SENSORS_LABEL)))
-        }
-    }
-
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
-    @RequiresFlagsEnabled(Flags.FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)
     @Test
     fun testFindBodySensor_replaceBodySensorFlagEnabled_labelNotDisplayed() {
         install(ONE_PERMISSION_DEFINER_APK)

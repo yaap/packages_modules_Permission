@@ -140,9 +140,7 @@ object PermissionMapping {
             PLATFORM_PERMISSIONS[Manifest.permission.NEARBY_WIFI_DEVICES] =
                 Manifest.permission_group.NEARBY_DEVICES
         }
-        // Ranging permission will be supported from Android B+, update this when isAtLeastB()
-        // is available.
-        if (SdkLevel.isAtLeastV() && Flags.rangingPermissionEnabled()) {
+        if (SdkLevel.isAtLeastB() && Flags.rangingPermissionEnabled()) {
             PLATFORM_PERMISSIONS[Manifest.permission.RANGING] =
                 Manifest.permission_group.NEARBY_DEVICES
         }

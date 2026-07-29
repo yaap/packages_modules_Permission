@@ -37,7 +37,7 @@ data class AppsSafetyLabelHistory(val appSafetyLabelHistories: List<AppSafetyLab
          * The last [SafetyLabel] in this list can be considered the last known [SafetyLabel] of the
          * app.
          */
-        val safetyLabelHistory: List<SafetyLabel>
+        val safetyLabelHistory: List<SafetyLabel>,
     ) {
         init {
             require(safetyLabelHistory.sortedBy { it.receivedAt } == safetyLabelHistory)
@@ -59,14 +59,12 @@ data class AppsSafetyLabelHistory(val appSafetyLabelHistories: List<AppSafetyLab
                     .toMutableList()
                     .apply { add(safetyLabel) }
                     .sortedBy { it.receivedAt }
-                    .takeLast(maxToPersist)
+                    .takeLast(maxToPersist),
             )
     }
 
     /** Data class representing the information about an app. */
-    data class AppInfo(
-        val packageName: String,
-    )
+    data class AppInfo(val packageName: String)
 
     /** Data class representing an app's safety label. */
     data class SafetyLabel(
@@ -75,7 +73,7 @@ data class AppsSafetyLabelHistory(val appSafetyLabelHistories: List<AppSafetyLab
         /** Earliest time at which the safety label was known to be accurate. */
         val receivedAt: Instant,
         /** Information about data use policies for an app. */
-        val dataLabel: DataLabel
+        val dataLabel: DataLabel,
     ) {
         /** Companion object for [SafetyLabel]. */
         companion object {
@@ -86,12 +84,12 @@ data class AppsSafetyLabelHistory(val appSafetyLabelHistories: List<AppSafetyLab
             fun extractLocationSharingSafetyLabel(
                 packageName: String,
                 receivedAt: Instant,
-                appMetadataSafetyLabel: AppMetadataSafetyLabel
+                appMetadataSafetyLabel: AppMetadataSafetyLabel,
             ): SafetyLabel =
                 SafetyLabel(
                     AppInfo(packageName),
                     receivedAt,
-                    DataLabel.extractLocationSharingDataLabel(appMetadataSafetyLabel.dataLabel)
+                    DataLabel.extractLocationSharingDataLabel(appMetadataSafetyLabel.dataLabel),
                 )
         }
     }
@@ -145,7 +143,7 @@ data class AppsSafetyLabelHistory(val appSafetyLabelHistories: List<AppSafetyLab
     /** Data class representing a change of an app's safety label over time. */
     data class AppSafetyLabelDiff(
         val safetyLabelBefore: SafetyLabel,
-        val safetyLabelAfter: SafetyLabel
+        val safetyLabelAfter: SafetyLabel,
     ) {
         init {
             require(safetyLabelBefore.appInfo == safetyLabelAfter.appInfo)

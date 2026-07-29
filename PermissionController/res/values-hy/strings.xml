@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Սպասեք…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Անհայտ"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Հասանելիության կառավարման վահանակ"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Հավելվածների թույլտվություններ"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"ԱԲ օգնականների պատմություն"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"ԱԲ օգնականներ տեղադրված չեն"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Վերջին 24 ժամում չի օգտագործվել"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Վերջին 7 օրում չի օգտագործվել"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Գործողություններ (<xliff:g id="APP_NAME">%1$s</xliff:g>)"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"Վերջին 24 ժամվա ընթացքում"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"Վերջին 7 օրվա ընթացքում"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Այսօր"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Երեկ"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Վերջին մուտքը՝ <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Դիտել"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Օգտագործում չկա"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"ԱԲ գործակալն օգտագործել է այս հավելվածները՝ ստանալու տվյալներ կամ կատարելու գործողություններ ձեզ համար։ Օգտագործման թույլտվությունը կարող եք փոխել <xliff:g id="APP_NAME">%1$s</xliff:g>-ի կարգավորումներում։"</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Թույլտվությունների կառավարման վահանակը ցուցադրվում է միայն այն ժամանակ, երբ հավելվածներ են օգտագործվում Android-ի՝ ԱԲ օգնականների համար նախատեսված գործառույթների օգնությամբ։"</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Սարքի հետ կապված օգնություն"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Տեսեք՝ որ հավելվածներն են վերջերս թույլտվություն օգտագործել"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"«<xliff:g id="PERMGROUP">%1$s</xliff:g>» թույլտվության օգտագործում"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Տեսնել այլ թույլտվություններ"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Չի օգտագործվել վերջին # օրվա ընթացքում}one{Չի օգտագործվել վերջին # օրվա ընթացքում}other{Չի օգտագործվել վերջին # օրվա ընթացքում}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Չի օգտագործվել վերջին # ժամվա ընթացքում}one{Չի օգտագործվել վերջին # ժամվա ընթացքում}other{Չի օգտագործվել վերջին # ժամվա ընթացքում}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Օգտագործվում է 1 հավելվածի կողմից}one{Օգտագործվում է # հավելվածի կողմից}other{Օգտագործվում է # հավելվածի կողմից}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Օգտագործվել է 1 հավելված}one{Օգտագործվել է # հավելված}other{Օգտագործվել է # հավելված}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Դիտել բոլորը կառավարման վահանակում"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Զտիչ՝ <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Հեռացնել զտիչը"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Հասանելի դարձնել միայն մեդիաֆայլերը"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Միշտ թույլատրել"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Թույլատրել միայն հավելվածի օգտագործման ժամանակ"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Թույլատրել հավելվածի աշխատանքի համար"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Միշտ թույլատրել բոլորը"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Ամեն անգամ հարցնել"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Ամեն անգամ հարցնել կամ թույլատրել կիսվելիս"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Չթույլատրել"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Տրամադրել սահմանափակ հասանելիություն"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Ճշգրիտ տեղադրություն"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Թույլատրված"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Միշտ թույլատրված"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Միայն հավելվածի օգտագործման ժամանակ"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Թույլատրված է հավելվածի աշխատանքի համար"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Հավելվածներ, որոնց հասանելի են մեդիաֆայլերը"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Հավելվածներ, որոնց հասանելի են բոլոր ֆայլերը"</string>
     <string name="ask_header" msgid="2633816846459944376">"Ամեն անգամ հարցնել"</string>
     <string name="denied_header" msgid="903209608358177654">"Արգելված"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> <xliff:g id="DEVICE_NAME">%2$s</xliff:g> սարքում"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Տեսնել այլ հավելվածներ, որոնց հասանելի են բոլոր ֆայլերը"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Թույլատրել հավելվածի աշխատանքի համար&lt;/b&gt;&lt;br&gt;&lt;br&gt;Որպեսզի հավելվածը շարունակի աշխատել, հնարավոր է, որ դրան թույլտվություն տրամադրվի՝ օգտագործելու ձեր տեղական ցանցը և միանալու միայն այս ցանցի սարքերին։&lt;br&gt;&lt;br&gt;Հավելվածը չի կարող միանալ սարքերին Bluetooth-ի և այլ տեխնոլոգիաների միջոցով, քանի դեռ չեք թույլատրել դրան գտնել բոլոր մոտակա սարքերը և միանալ դրանց։"</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Թույլատրված է հավելվածի աշխատանքի համար&lt;/b&gt;&lt;br&gt;&lt;br&gt;Որպեսզի հավելվածը շարունակի աշխատել, հնարավոր է, որ դրան թույլտվություն տրամադրվի՝ օգտագործելու ձեր տեղական ցանցը և միանալու միայն այս ցանցի սարքերին։&lt;br&gt;&lt;br&gt;Հավելվածը չի կարող միանալ սարքերին Bluetooth-ի և այլ տեխնոլոգիաների միջոցով, քանի դեռ չեք թույլատրել դրան գտնել բոլոր մոտակա սարքերը և միանալ դրանց։"</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 օր}one{# օր}other{# օր}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# ժամ}one{# ժամ}other{# ժամ}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# րոպե}one{# րոպե}other{# րոպե}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Չկա"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Համակարգի կանխադրված հավելված)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Հավելվածներ չկան"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Փոխել"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Թողնել ընթացիկը"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Այլ NFC ծառայություններ"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Ընտրված է"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Ընտրված է – <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Հատուկ հասանելիություն չկա"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Հավելվածներ չկան"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Աշխատանքային պրոֆիլներ չի աջակցում"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Փոխարինե՞լ ձեր կանխադրված հիմնական հավելվածը &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; հավելվածով"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Սա կփոխարինի ձեր հիմնական էկրանը և կարող է ազդել ձեր սարքի գործառույթների հասանելիության վրա։&lt;br&gt;&lt;br&gt;Այս ընտրությունը ցանկացած պահի կարող եք փոխել &lt;b&gt;Հիմնական էկրանի կանխադրված հավելված&lt;/b&gt; կարգավորումներում։"</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Ուշադրություն. եթե դուք վերագործարկեք ձեր սարքը, որում սահմանված է էկրանի կողպում, այս հավելվածը չի աշխատի, մինչև չապակողպեք սարքը։"</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Օգնականը կկարողանա կարդալ համակարգում օգտագործվող հավելվածների մասին տվյալները, այդ թվում՝ էկրանին ցուցադրվող կամ հավելվածներից ստացվող տեղեկությունները:"</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Փոխարինե՞լ ձեր թվային օգնականի հավելվածը &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; հավելվածով"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Այս օգնականին հասանելի կլինեն այնպիսի տեղեկություններ, ինչպիսիք են ձեր հաղորդագրությունները և այն տվյալները, որոնցով հավելվածները որոշել են կիսվել ձեր օգնականի հետ։"</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Այս օգնականին հասանելի կլինեն այնպիսի տեղեկություններ, ինչպիսիք են ձեր հաղորդագրությունները և այն տվյալները, որոնցով հավելվածները որոշել են կիսվել ձեր օգնականի հետ։&lt;br&gt;&lt;br&gt;Քանի որ դուք նախկինում միացրել եք էկրանի և հավելվածների տվյալների օգտագործումը <xliff:g id="APP_NAME">%1$s</xliff:g>-ի համար, այն նաև կտեսնի ձեր էկրանին բացված հավելվածի բովանդակությունը։"</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Վրիպազերծման տվյալների ուղարկում"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Ուղարկե՞լ վրիպազերծման մանրամասն տվյալները"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ն ուզում է վերբեռնել վրիպազերծման տվյալները:"</string>
@@ -581,7 +610,7 @@
     <string name="safety_status_preference_title_and_summary_content_description" msgid="3511373256505058464">"Անվտանգության և գաղտնիության կարգավիճակը։ <xliff:g id="OVERALL_SAFETY_STATUS">%1$s</xliff:g>։ <xliff:g id="SUMMARY_OF_DEVICE_STATUS">%2$s</xliff:g>"</string>
     <string name="security_settings" msgid="3808106921175271317">"Անվտանգության կարգավորումներ"</string>
     <string name="sensor_permissions_qs" msgid="1022267900031317472">"Թույլտվություններ"</string>
-    <string name="safety_privacy_qs_tile_title" msgid="727301867710374052">"Ապահովություն և գաղտնիություն"</string>
+    <string name="safety_privacy_qs_tile_title" msgid="727301867710374052">"Ապահովութ­յուն և գաղտնիություն"</string>
     <string name="safety_privacy_qs_tile_subtitle" msgid="3621544532041936749">"Ստուգեք կարգավիճակը"</string>
     <string name="privacy_controls_qs" msgid="5780144882040591169">"Գաղտնիության կարգավորումներ"</string>
     <string name="security_settings_button_label_qs" msgid="8280343822465962330">"Այլ կարգավորումներ"</string>
@@ -635,7 +664,7 @@
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Ցուցադրել սեղմատախտակի օգտագործման մասին ծանուցումներ"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Ցուցադրել հաղորդագրություն, երբ հավելվածներին հասանելի են դառնում ձեր պատճենած տեքստը, պատկերները կամ այլ բովանդակություն"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Ցուցադրել գաղտնաբառերը"</string>
-    <string name="show_password_summary" msgid="1110166488865981610">"Տեքստ մուտքագրելիս կարճ ժամանակով ցուցադրել գրանշանները"</string>
+    <string name="show_password_summary" msgid="1110166488865981610">"Տեքստ մուտքագրելիս կարճ ժամանակով ցուցադրել նիշերը"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"Այս հավելվածը կարող է երրորդ կողմերի հետ կիսվել տեղադրության տվյալներով"</string>
     <string name="permission_rationale_location_title" msgid="2404797182678793506">"Տվյալների փոխանցում և տեղորոշում"</string>
     <string name="permission_rationale_data_sharing_source_title" msgid="6874604543125814316">"Որտեղից են վերցվում տվյալներով կիսվելու մասին տեղեկությունները"</string>
@@ -689,7 +718,7 @@
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Հավելվածը հայցել է կոնֆիդենցիալ տեղեկությունների օգտագործման թույլտվություն, որը կարող է վտանգի ենթարկել ձեր անձնական և ֆինանսական տեղեկությունները։<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Հնարավոր է, որ առանց այս սահմանափակված թույլտվության՝ հավելվածը չաշխատի պատշաճ կերպով։ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Ինչպես տրամադրել տվյալների օգտագործման թույլտվություն&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Հավելվածին մերժվել է «<xliff:g id="ROLE_NAME">%1$s</xliff:g>» կատեգորիայում կանխադրված լինելու թույլտվությունը"</string>
     <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"Հավելվածը հայցել է կոնֆիդենցիալ տեղեկությունների օգտագործման թույլտվություններ, որոնք կարող են վտանգի ենթարկել ձեր անձնական և ֆինանսական տեղեկությունները։<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Հնարավոր է, որ առանց այս սահմանափակված թույլտվությունների՝ հավելվածը չաշխատի պատշաճ կերպով։ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Ինչպես տրամադրել տվյալների օգտագործման թույլտվություն&lt;/a&gt;"</string>
-    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Հավելվածին մերժվել է թույլտվությունը"</string>
+    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Հավելվածը թույլտվություն չի ստացել"</string>
     <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"Եթե տրամադրեք այս թույլտվությունը, ձեր անձնական և ֆինանսական տեղեկությունները կարող են վտանգված լինել։<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Հնարավոր է, որ առանց այս սահմանափակված թույլտվության՝ հավելվածը չաշխատի պատշաճ կերպով։ &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Ինչպես տրամադրել տվյալների օգտագործման թույլտվություն&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"Իմանալ ավելին"</string>
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"Եղավ"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Հավելվածներ"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Գործակալի հասանելիություն"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Գործակալներ, որոնք կարող են տեղեկությունների հասանելիություն ստանալ և այս հավելվածում ձեր անունից գործողություններ կատարել"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Թույլատրված է"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Թույլատրված չէ"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Գործակալ հավելվածների հասանելիությունը թույլատրված չէ"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Գործակալ հավելվածների հասանելիությունը թույլատրված է"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Հավելվածների հասանելիությունը թույլատրված չէ"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Հավելվածների հասանելիությունը թույլատրված է"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Հավելվածի հասանելիություն"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"<xliff:g id="TARGET_APP_NAME">%1$s</xliff:g> հավելվածի հասանելիություն"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> հավելվածի հասանելիություն <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> գործակալի համար"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Թույլատրել"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Չթույլատրել"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Սարքի կարգավորումներ"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"Թույլատրե՞լ <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> հավելվածին լինել <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> հավելվածի գործակալը"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Այս գործակալին հասանելի կդառնա <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> հավելվածը՝ տեղեկություններ ստանալու և ձեր փոխարեն գործողություններ ձեռնարկելու համար"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Թույլատրել"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Չթույլատրել"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Թույլատրե՞լ &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; հավելվածին օգտագործել էկրանի և հավելվածների տվյալները"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Այս օգնականը կկարողանա օգտագործել ձեր էկրանին բացված հավելվածի տեղեկությունները և բովանդակությունը"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Թույլատրել"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Չթույլատրել"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Էկրանի և հավելվածների տվյալների հասանելիություն"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Թույլատրեք օգնականին օգտագործել ձեր էկրանին բացված հավելվածի տեղեկությունները և բովանդակությունը"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Թույլատրեք <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> հավելվածին օգտագործել ձեր էկրանին բացված հավելվածի տեղեկությունները և բովանդակությունը"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Թույլատրել"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Չթույլատրել"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Թույլատրե՞լ &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; հավելվածին օգտագործել ճշգրիտ տեղադրությունը, երբ դուք հասանելի դարձնեք այն"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Եթե կիսվեք, այս հավելվածին հասանելի կլինի ձեր ճշգրիտ տեղադրությունը, մինչև չփակեք հավելվածը"</string>
 </resources>

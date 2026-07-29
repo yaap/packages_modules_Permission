@@ -15,6 +15,8 @@
  */
 package com.android.permissioncontroller.appfunctions.domain.usecase
 
+import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_OTHER_DENIED
+import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_OTHER_GRANTED
 import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_DENIED
 import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_GRANTED
 import com.android.permissioncontroller.appfunctions.data.repository.AppFunctionRepository
@@ -33,7 +35,10 @@ class UpdateAccessUseCase(private val appFunctionRepository: AppFunctionReposito
         appFunctionRepository.updateAccessFlags(
             agentPackageName,
             targetPackageName,
-            ACCESS_FLAG_USER_GRANTED or ACCESS_FLAG_USER_DENIED,
+            ACCESS_FLAG_USER_GRANTED or
+                ACCESS_FLAG_USER_DENIED or
+                ACCESS_FLAG_OTHER_GRANTED or
+                ACCESS_FLAG_OTHER_DENIED,
             if (isGranted) ACCESS_FLAG_USER_GRANTED else ACCESS_FLAG_USER_DENIED,
         )
     }

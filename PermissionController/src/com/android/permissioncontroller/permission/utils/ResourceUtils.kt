@@ -15,6 +15,7 @@
  */
 
 package com.android.permissioncontroller.permission.utils
+
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.AttrRes

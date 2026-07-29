@@ -126,6 +126,9 @@ public class RoleService extends SystemService implements RoleUserState.Callback
             defaultApplicationRoles.add(
                     RoleManager.ROLE_RESERVED_FOR_TESTING_PROFILE_GROUP_EXCLUSIVITY);
         }
+        if (RoleFlags.canManageDefaultNotesRolePackage()) {
+            defaultApplicationRoles.add(RoleManager.ROLE_NOTES);
+        }
         DEFAULT_APPLICATION_ROLES = defaultApplicationRoles.toArray(new String[0]);
     }
 

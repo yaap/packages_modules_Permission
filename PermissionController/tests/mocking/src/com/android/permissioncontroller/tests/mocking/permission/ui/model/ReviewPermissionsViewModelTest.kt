@@ -109,7 +109,7 @@ class ReviewPermissionsViewModelTest {
         val summary = model.getSummaryForIndividuallyControlledPermGroup(permGroup)
         assertEquals(
             ReviewPermissionsViewModel.PermissionSummary(SummaryMessage.REVOKED_COUNT, false, 1),
-            summary
+            summary,
         )
     }
 
@@ -122,7 +122,7 @@ class ReviewPermissionsViewModelTest {
             model.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_FOREGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENABLED_BY_POLICY_FOREGROUND_ONLY.toPermSummary(), summary)
 
@@ -132,11 +132,11 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_FOREGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(
             SummaryMessage.ENABLED_BY_ADMIN_FOREGROUND_ONLY.toPermSummary(true),
-            summaryAdmin
+            summaryAdmin,
         )
     }
 
@@ -148,7 +148,7 @@ class ReviewPermissionsViewModelTest {
             model.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_FOREGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.DISABLED_BY_POLICY_BACKGROUND_ONLY.toPermSummary(), summary)
 
@@ -158,11 +158,11 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_FOREGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(
             SummaryMessage.DISABLED_BY_ADMIN_BACKGROUND_ONLY.toPermSummary(true),
-            summaryAdmin
+            summaryAdmin,
         )
     }
 
@@ -174,7 +174,7 @@ class ReviewPermissionsViewModelTest {
             model.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_BACKGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENABLED_BY_POLICY_BACKGROUND_ONLY.toPermSummary(), summary)
 
@@ -184,11 +184,11 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_BACKGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(
             SummaryMessage.ENABLED_BY_ADMIN_BACKGROUND_ONLY.toPermSummary(true),
-            summaryAdmin
+            summaryAdmin,
         )
     }
 
@@ -201,7 +201,7 @@ class ReviewPermissionsViewModelTest {
             model.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_FOREGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENABLED_BY_POLICY_BACKGROUND_ONLY.toPermSummary(), summary)
 
@@ -211,7 +211,7 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_FOREGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENABLED_BY_ADMIN_FOREGROUND_ONLY.toPermSummary(), summaryAdmin)
     }
@@ -225,7 +225,7 @@ class ReviewPermissionsViewModelTest {
             model.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_BACKGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENFORCED_BY_POLICY.toPermSummary(), summary)
 
@@ -235,7 +235,7 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_BACKGROUND,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENABLED_BY_ADMIN.toPermSummary(), summaryAdmin)
     }
@@ -254,7 +254,7 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_BOTH,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.ENABLED_BY_ADMIN.toPermSummary(), summaryAdmin)
     }
@@ -274,7 +274,7 @@ class ReviewPermissionsViewModelTest {
             spyViewModel.getSummaryForFixedByPolicyPermissionGroup(
                 PERMISSION_BOTH,
                 permGroup,
-                context
+                context,
             )
         assertEquals(SummaryMessage.DISABLED_BY_ADMIN.toPermSummary(), adminSummary)
     }

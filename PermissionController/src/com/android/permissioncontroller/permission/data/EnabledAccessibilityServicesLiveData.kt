@@ -34,7 +34,7 @@ import kotlinx.coroutines.Job
 // TODO(eugenesusla): think of a way to observe the data
 class EnabledAccessibilityServicesLiveData(
     private val app: Application,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<List<String>>() {
 
     override suspend fun loadDataAndPostValue(job: Job) {

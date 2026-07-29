@@ -36,7 +36,7 @@ class WearDefaultAppListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val context = requireContext()
         val viewModel = ViewModelProvider(this).get(DefaultAppListViewModel::class.java)
@@ -45,7 +45,7 @@ class WearDefaultAppListFragment : Fragment() {
             setContent {
                 WearDefaultAppListScreen(
                     WearDefaultAppListHelper(context, user),
-                    viewModel.liveData
+                    viewModel.liveData,
                 )
             }
         }

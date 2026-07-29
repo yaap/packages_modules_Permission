@@ -83,7 +83,7 @@ class AccessBluetoothOnCommand : ContentProvider() {
                 }
 
             Log.v(LOG_TAG, "call() - startScan...")
-            scanner.startScan(scanCallback)
+            scanner!!.startScan(scanCallback)
 
             // Wait a few seconds to figure out what we actually observed
             Log.v(LOG_TAG, "call() - sleep...")

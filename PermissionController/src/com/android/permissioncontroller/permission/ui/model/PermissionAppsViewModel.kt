@@ -78,7 +78,7 @@ import kotlin.math.max
 class PermissionAppsViewModel(
     private val state: SavedStateHandle,
     private val app: Application,
-    private val groupName: String
+    private val groupName: String,
 ) : ViewModel() {
 
     companion object {
@@ -211,6 +211,10 @@ class PermissionAppsViewModel(
             categoryMap[Category.ALLOWED_FOREGROUND] = mutableListOf()
             categoryMap[Category.ASK] = mutableListOf()
             categoryMap[Category.DENIED] = mutableListOf()
+            // TODO(b/479896440): Support TV form factor
+            if (!DeviceUtils.isTelevision(app.applicationContext)) {
+                categoryMap[Category.ALLOWED_FOR_COMPATIBILITY] = mutableListOf()
+            }
 
             val packageMap =
                 packagesUiInfoLiveData.value
@@ -251,6 +255,8 @@ class PermissionAppsViewModel(
                         PermGrantState.PERMS_ALLOWED_ALWAYS -> Category.ALLOWED
                         PermGrantState.PERMS_DENIED -> Category.DENIED
                         PermGrantState.PERMS_ASK -> Category.ASK
+                        PermGrantState.PERMS_ALLOWED_FOR_COMPATIBILITY ->
+                            Category.ALLOWED_FOR_COMPATIBILITY
                     }
 
                 if (
@@ -313,7 +319,7 @@ class PermissionAppsViewModel(
         fragment: Fragment,
         packageName: String,
         user: UserHandle,
-        args: Bundle
+        args: Bundle,
     ) {
         val activity = fragment.activity!!
         if (LocationUtils.isLocationGroupAndProvider(activity, groupName, packageName)) {
@@ -342,7 +348,7 @@ class PermissionAppsViewModel(
         return max(
             System.currentTimeMillis() -
                 TimeUnit.DAYS.toMillis(aggregateDataFilterBeginDays.toLong()),
-            Instant.EPOCH.toEpochMilli()
+            Instant.EPOCH.toEpochMilli(),
         )
     }
 
@@ -365,7 +371,7 @@ class PermissionAppsViewModel(
         val filterTimeBeginMillis =
             max(
                 now - TimeUnit.DAYS.toMillis(aggregateDataFilterBeginDays.toLong()),
-                Instant.EPOCH.toEpochMilli()
+                Instant.EPOCH.toEpochMilli(),
             )
         val numApps: Int = appPermissionUsages.size
         for (appIndex in 0 until numApps) {
@@ -393,7 +399,7 @@ class PermissionAppsViewModel(
     /** Return the String preference summary based on the last access time. */
     fun getPreferenceSummary(
         res: Resources,
-        summaryTimestamp: Triple<String, Int, String>
+        summaryTimestamp: Triple<String, Int, String>,
     ): String {
         return when (summaryTimestamp.second) {
             Utils.LAST_24H_CONTENT_PROVIDER ->
@@ -407,7 +413,7 @@ class PermissionAppsViewModel(
                 res.getString(
                     R.string.app_perms_7d_access,
                     summaryTimestamp.third,
-                    summaryTimestamp.first
+                    summaryTimestamp.first,
                 )
             else -> ""
         }
@@ -433,7 +439,7 @@ class PermissionAppsViewModel(
         sessionId: Long,
         application: Application,
         permGroupName: String,
-        tag: String
+        tag: String,
     ) {
         var category = PERMISSION_APPS_FRAGMENT_VIEWED__CATEGORY__UNDEFINED
         when {
@@ -455,7 +461,7 @@ class PermissionAppsViewModel(
             permGroupName,
             uid,
             packageName,
-            category
+            category,
         )
         Log.i(
             tag,
@@ -469,7 +475,7 @@ class PermissionAppsViewModel(
                 " packageName=" +
                 packageName +
                 " category=" +
-                category
+                category,
         )
     }
 }
@@ -486,17 +492,18 @@ class PermissionAppsViewModelFactory(
     private val app: Application,
     private val groupName: String,
     owner: SavedStateRegistryOwner,
-    defaultArgs: Bundle
+    defaultArgs: Bundle,
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
     override fun <T : ViewModel> create(
         key: String,
         modelClass: Class<T>,
-        handle: SavedStateHandle
+        handle: SavedStateHandle,
     ): T {
         handle.set(SHOULD_SHOW_SYSTEM_KEY, handle.get<Boolean>(SHOULD_SHOW_SYSTEM_KEY) ?: false)
         handle.set(HAS_SYSTEM_APPS_KEY, handle.get<Boolean>(HAS_SYSTEM_APPS_KEY) ?: true)
         handle.set(SHOW_ALWAYS_ALLOWED, handle.get<Boolean>(SHOW_ALWAYS_ALLOWED) ?: false)
         handle.set(CREATION_LOGGED_KEY, handle.get<Boolean>(CREATION_LOGGED_KEY) ?: false)
-        @Suppress("UNCHECKED_CAST") return PermissionAppsViewModel(handle, app, groupName) as T
+        @Suppress("UNCHECKED_CAST")
+        return PermissionAppsViewModel(handle, app, groupName) as T
     }
 }

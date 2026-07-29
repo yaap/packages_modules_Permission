@@ -56,6 +56,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.text.BidiFormatter;
+import android.text.Html;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -123,6 +124,7 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
     private @NonNull RadioButton mAllowButton;
     private @NonNull RadioButton mAllowAlwaysButton;
     private @NonNull RadioButton mAllowForegroundButton;
+    private @NonNull RadioButton mAllowForCompatibilityButton;
     private @NonNull RadioButton mAskOneTimeButton;
     private @NonNull RadioButton mAskButton;
     private @NonNull RadioButton mSelectButton;
@@ -253,6 +255,8 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
         mAllowButton = root.requireViewById(R.id.allow_radio_button);
         mAllowAlwaysButton = root.requireViewById(R.id.allow_always_radio_button);
         mAllowForegroundButton = root.requireViewById(R.id.allow_foreground_only_radio_button);
+        mAllowForCompatibilityButton =
+                root.requireViewById(R.id.allow_for_compatibility_radio_button);
         mAskOneTimeButton = root.requireViewById(R.id.ask_one_time_radio_button);
         mAskButton = root.requireViewById(R.id.ask_radio_button);
         mSelectButton = root.requireViewById(R.id.select_radio_button);
@@ -275,6 +279,7 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
             mAllowButton.setVisibility(View.GONE);
             mAllowAlwaysButton.setVisibility(View.GONE);
             mAllowForegroundButton.setVisibility(View.GONE);
+            mAllowForCompatibilityButton.setVisibility(View.GONE);
             mAskOneTimeButton.setVisibility(View.GONE);
             mAskButton.setVisibility(View.GONE);
             mDenyButton.setVisibility(View.GONE);
@@ -465,6 +470,8 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
         setButtonState(mAllowButton, states.get(ButtonType.ALLOW));
         setButtonState(mAllowAlwaysButton, states.get(ButtonType.ALLOW_ALWAYS));
         setButtonState(mAllowForegroundButton, states.get(ButtonType.ALLOW_FOREGROUND));
+        setButtonState(mAllowForCompatibilityButton,
+                states.get(ButtonType.ALLOW_FOR_COMPATIBILITY));
         setButtonState(mAskOneTimeButton, states.get(ButtonType.ASK_ONCE));
         setButtonState(mAskButton, states.get(ButtonType.ASK));
         setButtonState(mDenyButton, states.get(ButtonType.DENY));
@@ -492,6 +499,22 @@ public class LegacyAppPermissionFragment extends SettingsWithLargeHeader
 
         if (mViewModel.getFullStorageStateLiveData().isInitialized()) {
             setSpecialStorageState(mViewModel.getFullStorageStateLiveData().getValue());
+        }
+
+        // Also update the Allow for Compatibility footer visibility based on button visibility
+        View view = getView();
+        if (view != null) {
+            AppPermissionViewModel.ButtonState allowForCompatibilityButtonState =
+                    states.get(ButtonType.ALLOW_FOR_COMPATIBILITY);
+            TextView footerAllowForCompatibility =
+                    view.requireViewById(R.id.footer_allow_for_compatibility);
+            if (allowForCompatibilityButtonState.isShown()) {
+                footerAllowForCompatibility.setText(Html.fromHtml(getString(
+                        R.string.allow_for_compatibility_nearby_devices_footer), 0));
+                footerAllowForCompatibility.setVisibility(View.VISIBLE);
+            } else {
+                footerAllowForCompatibility.setVisibility(View.GONE);
+            }
         }
     }
 

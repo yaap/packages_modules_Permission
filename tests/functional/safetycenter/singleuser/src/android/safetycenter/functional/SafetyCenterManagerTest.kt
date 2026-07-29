@@ -44,7 +44,6 @@ import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyCenterManager.REFRESH_REASON_OTHER
 import android.safetycenter.SafetyCenterManager.REFRESH_REASON_PAGE_OPEN
 import android.safetycenter.SafetyCenterManager.REFRESH_REASON_RESCAN_BUTTON_CLICK
-import android.safetycenter.SafetyCenterStaticEntry
 import android.safetycenter.SafetyCenterStaticEntryGroup
 import android.safetycenter.SafetyCenterStatus
 import android.safetycenter.SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
@@ -123,6 +122,7 @@ import com.android.safetycenter.testing.SafetyCenterTestData.Companion.withDismi
 import com.android.safetycenter.testing.SafetyCenterTestData.Companion.withoutExtras
 import com.android.safetycenter.testing.SafetyCenterTestHelper
 import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterEntryBuilder
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterStaticEntryBuilder
 import com.android.safetycenter.testing.SafetyCenterTestRule
 import com.android.safetycenter.testing.SafetySourceIntentHandler.Request
 import com.android.safetycenter.testing.SafetySourceIntentHandler.Response
@@ -364,14 +364,18 @@ class SafetyCenterManagerTest {
             SafetyCenterStaticEntryGroup(
                 "OK",
                 listOf(
-                    SafetyCenterStaticEntry.Builder("OK")
+                    createSafetyCenterStaticEntryBuilder("OK", "static_barebone", UserHandle.of(0))
                         .setPendingIntent(
                             safetySourceTestData.createTestActivityRedirectPendingIntent(
                                 explicit = false
                             )
                         )
                         .build(),
-                    SafetyCenterStaticEntry.Builder("OK")
+                    createSafetyCenterStaticEntryBuilder(
+                            "OK",
+                            "static_all_optional",
+                            UserHandle.of(0),
+                        )
                         .setSummary("OK")
                         .setPendingIntent(
                             safetySourceTestData.createTestActivityRedirectPendingIntent(
@@ -387,13 +391,21 @@ class SafetyCenterManagerTest {
             SafetyCenterStaticEntryGroup(
                 "OK",
                 listOf(
-                    SafetyCenterStaticEntry.Builder("OK")
+                    createSafetyCenterStaticEntryBuilder(
+                            "OK",
+                            "dynamic_in_stateless",
+                            UserHandle.of(0),
+                        )
                         .setSummary("OK")
                         .setPendingIntent(
                             safetySourceTestData.createTestActivityRedirectPendingIntent()
                         )
                         .build(),
-                    SafetyCenterStaticEntry.Builder("OK")
+                    createSafetyCenterStaticEntryBuilder(
+                            "OK",
+                            "static_in_stateless",
+                            UserHandle.of(0),
+                        )
                         .setSummary("OK")
                         .setPendingIntent(
                             safetySourceTestData.createTestActivityRedirectPendingIntent(
@@ -410,13 +422,21 @@ class SafetyCenterManagerTest {
             SafetyCenterStaticEntryGroup(
                 "OK",
                 listOf(
-                    SafetyCenterStaticEntry.Builder("Unspecified title")
+                    createSafetyCenterStaticEntryBuilder(
+                            "Unspecified title",
+                            "dynamic_in_stateless",
+                            UserHandle.of(0),
+                        )
                         .setSummary("Unspecified summary")
                         .setPendingIntent(
                             safetySourceTestData.createTestActivityRedirectPendingIntent()
                         )
                         .build(),
-                    SafetyCenterStaticEntry.Builder("OK")
+                    createSafetyCenterStaticEntryBuilder(
+                            "OK",
+                            "static_in_stateless",
+                            UserHandle.of(0),
+                        )
                         .setSummary("OK")
                         .setPendingIntent(
                             safetySourceTestData.createTestActivityRedirectPendingIntent(
@@ -865,6 +885,7 @@ class SafetyCenterManagerTest {
         }
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_BETTER_SAFETY_CENTER_SOURCE_TRACKING_ON_REFRESH)
     @Test
     fun refreshSafetySources_timeout_keepsShowingErrorUntilClearedBySource() {
         SafetyCenterFlags.setAllRefreshTimeoutsTo(TIMEOUT_SHORT)
@@ -890,6 +911,46 @@ class SafetyCenterManagerTest {
         val safetyCenterDataWhenTryingAgain = listener.receiveSafetyCenterData()
         assertThat(safetyCenterDataWhenTryingAgain)
             .isEqualTo(safetyCenterDataUnknownScanningWithError)
+        val safetyCenterDataWhenFinishingRefresh = listener.receiveSafetyCenterData()
+        assertThat(safetyCenterDataWhenFinishingRefresh).isEqualTo(safetyCenterDataOk)
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_BETTER_SAFETY_CENTER_SOURCE_TRACKING_ON_REFRESH)
+    @Test
+    fun refreshSafetySources_timeout_withBetterTracking_keepsShowingErrorUntilClearedBySource() {
+        SafetyCenterFlags.setAllRefreshTimeoutsTo(TIMEOUT_SHORT)
+        safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.singleSourceConfig)
+        val listener = safetyCenterTestHelper.addListener()
+
+        // 1. Initial refresh that times out, putting the source into an error state.
+        safetyCenterManager.refreshSafetySourcesWithReceiverPermissionAndWait(
+            REFRESH_REASON_RESCAN_BUTTON_CLICK
+        )
+        val scanningData = listener.receiveSafetyCenterData()
+        checkState(scanningData == safetyCenterDataFromConfigScanning)
+        val initialData = listener.receiveSafetyCenterData()
+        checkState(initialData == safetyCenterDataUnknownReviewError)
+
+        // 2. Intermediate refresh. The source is now "untracked" because its data was cleared.
+        // There's no tracked sources, so refresh terminates instantaneously.
+        // The error state persists, data isn't updated as there's no data change whatsoever (even
+        // "Scanning" won't be shown since no tracked sources").
+        SafetyCenterFlags.setAllRefreshTimeoutsTo(TIMEOUT_LONG)
+        safetyCenterManager.refreshSafetySourcesWithReceiverPermissionAndWait(
+            REFRESH_REASON_RESCAN_BUTTON_CLICK
+        )
+        val apiSafetyCenterData = safetyCenterManager.getSafetyCenterDataWithPermission()
+        assertThat(apiSafetyCenterData).isEqualTo(safetyCenterDataUnknownReviewError)
+
+        // 3. Refresh where the source clears the error by responding with data.
+        // Again, no "Scanning" intermediate data change, because no tracked sources.
+        SafetySourceReceiver.setResponse(
+            Request.Rescan(SINGLE_SOURCE_ID),
+            Response.SetData(safetySourceTestData.information),
+        )
+        safetyCenterManager.refreshSafetySourcesWithReceiverPermissionAndWait(
+            REFRESH_REASON_RESCAN_BUTTON_CLICK
+        )
         val safetyCenterDataWhenFinishingRefresh = listener.receiveSafetyCenterData()
         assertThat(safetyCenterDataWhenFinishingRefresh).isEqualTo(safetyCenterDataOk)
     }
@@ -1313,10 +1374,6 @@ class SafetyCenterManagerTest {
             SINGLE_SOURCE_ID,
             SafetySourceErrorDetails(EVENT_SOURCE_STATE_CHANGED),
         )
-        val expectedEntry =
-            SafetyCenterEntry.Builder(safetyCenterTestData.safetyCenterEntryError(SINGLE_SOURCE_ID))
-                .setHasError(true)
-                .build()
         val expectedSafetyCenterData =
             SafetyCenterData(
                 safetyCenterTestData.safetyCenterStatusUnknown,
@@ -1324,7 +1381,7 @@ class SafetyCenterManagerTest {
                 listOf(
                     safetyCenterTestData.singletonSafetyCenterEntryOrGroup(
                         SINGLE_SOURCE_GROUP_ID,
-                        expectedEntry,
+                        safetyCenterTestData.safetyCenterEntryError(SINGLE_SOURCE_ID),
                         "Couldn’t check setting",
                     )
                 ),

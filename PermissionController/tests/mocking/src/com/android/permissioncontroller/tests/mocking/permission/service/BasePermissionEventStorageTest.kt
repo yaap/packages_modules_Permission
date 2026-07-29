@@ -243,7 +243,7 @@ class BasePermissionEventStorageTest {
 
         override fun hasTheSamePrimaryKey(
             first: TestPermissionEvent,
-            second: TestPermissionEvent
+            second: TestPermissionEvent,
         ): Boolean {
             // use package name and id as primary key
             return first.packageName == second.packageName && first.id == second.id

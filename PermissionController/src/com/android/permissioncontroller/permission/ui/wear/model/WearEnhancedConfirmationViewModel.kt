@@ -36,7 +36,7 @@ class WearEnhancedConfirmationViewModel : ViewModel() {
         SHOW_RESTRICTION_DIALOG,
         SHOW_CONNECTION_IN_PROGRESS,
         SHOW_CONNECTION_ERROR,
-        SHOW_CONNECTION_SUCCESS
+        SHOW_CONNECTION_SUCCESS,
     }
 
     private val mutableScreenState: MutableState<ScreenState> =

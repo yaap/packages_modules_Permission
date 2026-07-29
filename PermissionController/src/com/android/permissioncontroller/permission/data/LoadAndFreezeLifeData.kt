@@ -29,7 +29,7 @@ import androidx.lifecycle.SavedStateHandle
 class LoadAndFreezeLifeData<T>(
     private val state: SavedStateHandle,
     private val key: String,
-    private val wrapped: SmartUpdateMediatorLiveData<T>
+    private val wrapped: SmartUpdateMediatorLiveData<T>,
 ) : SmartUpdateMediatorLiveData<T>() {
     init {
         if (state.get<T>(key) == null) {

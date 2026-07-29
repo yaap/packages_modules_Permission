@@ -37,6 +37,7 @@ import com.android.permissioncontroller.wear.permission.components.material3.Wea
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionButtonStyle
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionIconBuilder
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionListFooter
+import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionTextProvider
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControl
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlStyle
 import com.android.permissioncontroller.wear.permission.components.material3.WearPermissionToggleControlType
@@ -136,7 +137,7 @@ internal fun WearRequestRoleContent(
                 item {
                     WearPermissionListFooter(
                         materialUIVersion = materialUIVersion,
-                        label = subTitle,
+                        label = WearPermissionTextProvider.Plain(subTitle),
                     )
                 }
             }
@@ -160,7 +161,7 @@ internal fun WearRequestRoleContent(
                 item {
                     WearPermissionListFooter(
                         materialUIVersion = materialUIVersion,
-                        label = subTitle,
+                        label = WearPermissionTextProvider.Plain(subTitle),
                     )
                 }
             }

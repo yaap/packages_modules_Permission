@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.Attribution
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.PackageInfoFlags
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.modules.utils.build.SdkLevel
@@ -35,7 +36,9 @@ import org.junit.Assume
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
+import org.mockito.Mockito.argThat
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when` as whenever
@@ -56,6 +59,7 @@ class PackageRepositoryTest {
 
     private val currentUser = android.os.Process.myUserHandle()
     private val testPackageName = "test.package"
+    private val testPackageUid = 100203
 
     @Before
     fun setup() {
@@ -83,13 +87,25 @@ class PackageRepositoryTest {
     fun verifyMissingPackageAttributionInfo() = runTest {
         Assume.assumeTrue(SdkLevel.isAtLeastS())
         val mockData = getPackageInfoWithoutAttribution()
-        whenever(
-                packageManager.getPackageInfo(
-                    eq(testPackageName),
-                    eq(PackageManager.GET_ATTRIBUTIONS)
+        if (SdkLevel.isAtLeastU()) {
+            whenever(
+                    packageManager.getPackageInfo(
+                        eq(testPackageName),
+                        argThat<PackageInfoFlags>({ flags ->
+                            flags.getValue() == PackageManager.GET_ATTRIBUTIONS_LONG
+                        }),
+                    )
                 )
-            )
-            .thenReturn(mockData)
+                .thenReturn(mockData)
+        } else {
+            whenever(
+                    packageManager.getPackageInfo(
+                        eq(testPackageName),
+                        eq(PackageManager.GET_ATTRIBUTIONS),
+                    )
+                )
+                .thenReturn(mockData)
+        }
 
         val attributionInfo = underTest.getPackageAttributionInfo(testPackageName, currentUser)
         assertThat(attributionInfo).isNotNull()
@@ -106,13 +122,25 @@ class PackageRepositoryTest {
         val mockData = getPackageInfoWithAttribution()
         whenever(application.createPackageContext(eq(testPackageName), eq(0))).thenReturn(context)
         whenever(context.getString(eq(100))).thenReturn("tag1 Label")
-        whenever(
-                packageManager.getPackageInfo(
-                    eq(testPackageName),
-                    eq(PackageManager.GET_ATTRIBUTIONS)
+        if (SdkLevel.isAtLeastU()) {
+            whenever(
+                    packageManager.getPackageInfo(
+                        eq(testPackageName),
+                        argThat<PackageInfoFlags>({ flags ->
+                            flags.getValue() == PackageManager.GET_ATTRIBUTIONS_LONG
+                        }),
+                    )
                 )
-            )
-            .thenReturn(mockData)
+                .thenReturn(mockData)
+        } else {
+            whenever(
+                    packageManager.getPackageInfo(
+                        eq(testPackageName),
+                        eq(PackageManager.GET_ATTRIBUTIONS),
+                    )
+                )
+                .thenReturn(mockData)
+        }
 
         val expectedAttributionMap = mutableMapOf<Int, String>()
         expectedAttributionMap[100] = "tag1 Label"
@@ -126,6 +154,21 @@ class PackageRepositoryTest {
         assertThat(attributionInfo?.areUserVisible).isEqualTo(true)
         assertThat(attributionInfo?.tagResourceMap).isEqualTo(expectedTagToLabelResMap)
         assertThat(attributionInfo?.resourceLabelMap).isEqualTo(expectedAttributionMap)
+    }
+
+    @Test
+    fun verifyGetPackageUid() {
+        whenever(packageManager.getPackageUid(eq(testPackageName), anyInt()))
+            .thenReturn(testPackageUid)
+        assertThat(underTest.getPackageUid(testPackageName, currentUser)).isEqualTo(testPackageUid)
+    }
+
+    @Test
+    fun verifyGetPackageUid_unknownPackageName() {
+        whenever(packageManager.getPackageUid(eq(testPackageName), anyInt()))
+            .thenThrow(PackageManager.NameNotFoundException::class.java)
+        assertThat(underTest.getPackageUid(testPackageName, currentUser))
+            .isEqualTo(android.os.Process.INVALID_UID)
     }
 
     private fun getPackageInfoWithoutAttribution(): PackageInfo {

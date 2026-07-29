@@ -41,6 +41,7 @@ android_test {
         "android.permission.flags-aconfig-java-export",
         "update_engine_exported_flags_java_lib",
         "appsearch_flags_java_exported_lib",
+        "anomaly-detector-exported-aconfig-flags-lib",
     ],
     srcs: [
         "src/**/*.java",

@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="face_unlock_title" msgid="3991635517593572926">"Фейсконтроль"</string>
-    <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Лицо для работы"</string>
+    <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Модель лица для рабочего профиля"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>
     <string name="face_unlock_search_terms" msgid="2708195853333028283">"Фейсконтроль, лицо"</string>
     <string name="fingerprint_unlock_title" msgid="5579868242026550596">"Отпечаток пальца"</string>

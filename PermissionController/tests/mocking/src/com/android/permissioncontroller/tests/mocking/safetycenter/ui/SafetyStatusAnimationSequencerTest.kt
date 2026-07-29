@@ -89,7 +89,7 @@ class SafetyStatusAnimationSequencerTest {
 
         sequencer.onContinueScanningAnimationEnd(
             REFRESHING,
-            OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+            OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
         )
 
         assertThat(sequencer.getCurrentlyVisibleSeverityLevel())
@@ -104,7 +104,7 @@ class SafetyStatusAnimationSequencerTest {
 
         sequencer.onContinueScanningAnimationEnd(
             NOT_REFRESHING,
-            OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+            OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
         )
 
         assertThat(sequencer.getCurrentlyVisibleSeverityLevel())
@@ -164,7 +164,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onContinueScanningAnimationEnd(
                     NOT_REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_UNKNOWN
+                    OVERALL_SEVERITY_LEVEL_UNKNOWN,
                 )
             )
             .isNull()
@@ -180,7 +180,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onContinueScanningAnimationEnd(
                     REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.RESET_SCANNING_ANIMATION)
@@ -290,7 +290,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onFinishScanAnimationEnd(
                     NOT_REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.CHANGE_ICON_WITHOUT_ANIMATION)
@@ -318,7 +318,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onIconChangeAnimationEnd(
                     NOT_REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.CHANGE_ICON_WITHOUT_ANIMATION)
@@ -333,7 +333,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onIconChangeAnimationEnd(
                     NOT_REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.START_ICON_CHANGE_ANIMATION)
@@ -349,7 +349,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onIconChangeAnimationEnd(
                     NOT_REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.CHANGE_ICON_WITHOUT_ANIMATION)
@@ -364,7 +364,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onIconChangeAnimationEnd(
                     REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.START_SCANNING_ANIMATION)
@@ -378,7 +378,7 @@ class SafetyStatusAnimationSequencerTest {
         assertThat(
                 sequencer.onCouldNotStartIconChangeAnimation(
                     NOT_REFRESHING,
-                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
+                    OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
                 )
             )
             .isEqualTo(SafetyStatusAnimationSequencer.Action.CHANGE_ICON_WITHOUT_ANIMATION)

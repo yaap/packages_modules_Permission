@@ -16,6 +16,7 @@
 
 package android.permissionui.cts
 
+import android.app.ActivityOptions
 import android.content.ComponentName
 import android.content.Intent
 import androidx.test.filters.FlakyTest
@@ -60,12 +61,18 @@ class PermissionReviewTapjackingTest : BaseUsePermissionTest() {
 
     @Test
     fun testOverlaysAreHidden() {
+        val options =
+            ActivityOptions.makeBasic().apply {
+                setLaunchWindowingMode(1) // Fullscreen
+            }
+
         context.startActivity(
             Intent()
                 .setComponent(
                     ComponentName(HELPER_PACKAGE_NAME, "$HELPER_PACKAGE_NAME.OverlayActivity")
                 )
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            options.toBundle(),
         )
         findOverlay()
 
@@ -74,17 +81,20 @@ class PermissionReviewTapjackingTest : BaseUsePermissionTest() {
                 .setComponent(
                     ComponentName(APP_PACKAGE_NAME, "$APP_PACKAGE_NAME.FinishOnCreateActivity")
                 )
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            options.toBundle(),
         )
 
         if (isWatch) {
             waitFindObject(
                 By.text(getPermissionControllerString("review_button_cancel")).displayId(displayId),
-                TIMEOUT_MILLIS * 2
+                TIMEOUT_MILLIS * 2,
             )
         } else {
-            waitFindObject(By.res("com.android.permissioncontroller:id/permissions_message")
-                    .displayId(displayId))
+            waitFindObject(
+                By.res("com.android.permissioncontroller:id/permissions_message")
+                    .displayId(displayId)
+            )
         }
 
         try {

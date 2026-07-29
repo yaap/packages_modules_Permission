@@ -29,6 +29,7 @@ android_test {
         "src/**/*.kt",
     ],
     static_libs: [
+        "android.app.privatecompute.flags-aconfig-java-export",
         "android.permission.flags-aconfig-java-export",
         "androidx.core_core-ktx",
         "androidx.test.core",

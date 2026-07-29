@@ -206,7 +206,9 @@ class NotificationPermissionTest : BaseUsePermissionTest() {
         } else {
             waitFindObject(By.res(ALLOW_BUTTON).displayId(displayId))
         }
-        pressBack()
+        if (!isWatch) {
+            pressBack()
+        }
         clickPermissionRequestAllowButton()
     }
 

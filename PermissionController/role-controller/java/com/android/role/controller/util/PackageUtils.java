@@ -25,12 +25,32 @@ import android.os.UserHandle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.List;
+
 /**
  * Utility methods about application packages.
  */
 public final class PackageUtils {
 
     private PackageUtils() {}
+
+    /**
+     * Retrieve the {@link PackageInfo} of all installed applications.
+     *
+     * @param extraFlags  the extra flags to pass to {@link PackageManager#getInstalledPackages(
+     *                    int)}
+     * @param user        the user of all installed applications
+     * @param context     the {@code Context} to retrieve system services
+     * @return the {@link PackageInfo} of all installed applications
+     */
+    @NonNull
+    public static List<PackageInfo> getInstalledPackagesAsUser(int extraFlags,
+            @NonNull UserHandle user, @NonNull Context context) {
+        Context userContext = UserUtils.getUserContext(context, user);
+        PackageManager userPackageManager = userContext.getPackageManager();
+        return userPackageManager.getInstalledPackages(PackageManager.MATCH_DIRECT_BOOT_AWARE
+                | PackageManager.MATCH_DIRECT_BOOT_UNAWARE | extraFlags);
+    }
 
     /**
      * Retrieve the {@link PackageInfo} of an application.

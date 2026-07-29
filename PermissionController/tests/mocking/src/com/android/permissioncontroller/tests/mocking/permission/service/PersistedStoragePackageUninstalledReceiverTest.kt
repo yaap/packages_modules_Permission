@@ -84,7 +84,7 @@ class PersistedStoragePackageUninstalledReceiverTest {
             spy(
                 PersistedStoragePackageUninstalledReceiver(
                     listOf(permissionEventStorage),
-                    Dispatchers.Main.immediate
+                    Dispatchers.Main.immediate,
                 )
             )
     }

@@ -23,7 +23,7 @@
     <string name="lock_screen_title" msgid="4069104894527169877">"Экранды құлыптау"</string>
     <string name="lock_screen_summary_disabled" msgid="354071230916616692">"Әзірге мәлімет жоқ."</string>
     <string name="lock_screen_search_terms" msgid="2678486357779794826">"Құрылғыны құлыптау, құлып экраны, құлыптаулы экран, құлып, құпия сөз, PIN коды, өрнек"</string>
-    <string name="biometrics_title" msgid="5859504610285212938">"Биометрика"</string>
+    <string name="biometrics_title" msgid="5859504610285212938">"Биометрия"</string>
     <string name="biometrics_search_terms" msgid="6040319118762671981">"Саусақ ізі, саусақ, саусақ ізін қосу, бет тану, бет"</string>
     <string name="privacy_sources_title" msgid="4061110826457365957">"Құпиялық"</string>
     <string name="privacy_sources_summary" msgid="4089719981155120864">"Басқару тақтасы, рұқсаттар, басқару элементтері"</string>

@@ -19,9 +19,7 @@ package com.android.permissioncontroller.appfunctions.ui.viewmodel
 import android.app.Application
 import android.app.appfunctions.AppFunctionManager.ACCESS_REQUEST_STATE_GRANTED
 import android.app.appfunctions.AppFunctionManager.ACCESS_REQUEST_STATE_UNREQUESTABLE
-import android.graphics.drawable.Drawable
 import android.os.Build
-import android.os.UserHandle
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AndroidViewModel
@@ -31,10 +29,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.android.permissioncontroller.appfunctions.data.repository.AppFunctionRepository
 import com.android.permissioncontroller.appfunctions.domain.usecase.GetAccessRequestStateUseCase
-import com.android.permissioncontroller.appfunctions.domain.usecase.GetAppFunctionPackageInfoUseCase
 import com.android.permissioncontroller.appfunctions.domain.usecase.UpdateAccessUseCase
 import com.android.permissioncontroller.common.model.Stateful
-import com.android.permissioncontroller.pm.data.repository.v31.PackageRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,10 +40,8 @@ import kotlinx.coroutines.launch
 
 class RequestAppFunctionAccessViewModel(
     application: Application,
-    user: UserHandle,
     private val agentPackageName: String,
     private val targetPackageName: String,
-    getAppFunctionPackageInfoUseCase: GetAppFunctionPackageInfoUseCase,
     private val getAccessRequestStateUseCase: GetAccessRequestStateUseCase,
     private val updateAccessUseCase: UpdateAccessUseCase,
     scope: CoroutineScope? = null,
@@ -63,20 +57,12 @@ class RequestAppFunctionAccessViewModel(
         coroutineScope.launch(dispatcher) {
             try {
                 val grantState = getAccessRequestStateUseCase(agentPackageName, targetPackageName)
-                val agentPackageInfo = getAppFunctionPackageInfoUseCase(agentPackageName, user)
-                val targetPackageInfo = getAppFunctionPackageInfoUseCase(targetPackageName, user)
                 val isRequestable =
                     grantState != ACCESS_REQUEST_STATE_GRANTED &&
                         grantState != ACCESS_REQUEST_STATE_UNREQUESTABLE
                 _uiStateFlow.value =
                     Stateful.Success(
-                        RequestAccessUiState(
-                            agentPackageInfo.label,
-                            targetPackageInfo.label,
-                            agentPackageInfo.icon,
-                            targetPackageInfo.icon,
-                            isRequestable,
-                        )
+                        RequestAccessUiState(agentPackageName, targetPackageName, isRequestable)
                     )
             } catch (e: Exception) {
                 _uiStateFlow.value = Stateful.Failure(throwable = e)
@@ -93,33 +79,26 @@ class RequestAppFunctionAccessViewModel(
 
 /** The data class for UI state of RequestAppFunctionAccess dialog. */
 data class RequestAccessUiState(
-    val agentLabel: String,
-    val targetLabel: String,
-    val agentIcon: Drawable?,
-    val targetIcon: Drawable?,
+    val agentPackageName: String,
+    val targetPackageName: String,
     val isRequestable: Boolean,
 )
 
 @RequiresApi(Build.VERSION_CODES.BAKLAVA)
 class RequestAppFunctionAccessViewModelFactory(
     private val application: Application,
-    private val user: UserHandle,
     private val agentPackageName: String,
     private val targetPackageName: String,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-        val packageRepository = PackageRepository.getInstance(application)
         val appFunctionRepository = AppFunctionRepository.getInstance(application)
-        val getAppFunctionPackageInfoUseCase = GetAppFunctionPackageInfoUseCase(packageRepository)
         val getAccessRequestStateUseCase = GetAccessRequestStateUseCase(appFunctionRepository)
         val updateAccessUseCase = UpdateAccessUseCase(appFunctionRepository)
         return RequestAppFunctionAccessViewModel(
             application,
-            user,
             agentPackageName,
             targetPackageName,
-            getAppFunctionPackageInfoUseCase,
             getAccessRequestStateUseCase,
             updateAccessUseCase,
         )

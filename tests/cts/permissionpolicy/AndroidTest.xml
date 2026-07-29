@@ -71,13 +71,20 @@
     </target_preparer>
 
     <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
-        <!-- ensure device provisioning and user setup are marked as completed -->
+        <!-- Ensure device provisioning and user setup are marked as completed -->
         <option name="run-command" value="settings put global device_provisioned 1" />
         <option name="run-command" value="settings put secure user_setup_complete 1" />
-        <!-- disable DeprecatedAbi warning -->
+        <!-- Disable verifier target SDK warning -->
+        <option name="run-command" value="settings put global verifier_engprod 1" />
+        <option name="run-command" value="settings put global verifier_verify_adb_installs 0" />
+        <!-- Disable DeprecatedAbi warning -->
         <option name="run-command" value="setprop debug.wm.disable_deprecated_abi_dialog 1" />
-        <!-- disable DeprecatedTargetSdk warning -->
+        <!-- Disable DeprecatedTargetSdk warning -->
         <option name="run-command" value="setprop debug.wm.disable_deprecated_target_sdk_dialog 1" />
+        <!-- Dismiss any system dialogs (e.g. crashes, ANR). -->
+        <option name="run-command" value="am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS --receiver-foreground" />
+        <!-- Ensure all broadcasts are dispatched prior to running our tests. -->
+        <option name="run-command" value="am wait-for-broadcast-idle" />
         <option name="run-command" value="am wait-for-broadcast-barrier" />
     </target_preparer>
 

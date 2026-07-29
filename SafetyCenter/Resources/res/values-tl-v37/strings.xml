@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"Mga Agent"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"Mga agent na makaka-access ng impormasyon o makakagawa ng aksyon sa mga app"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"Aktibidad sa app at AI assistant"</string>
 </resources>

@@ -24,7 +24,7 @@ class ExemptRestrictedPermission : BroadcastReceiver() {
         userContext.packageManager.addWhitelistedRestrictedPermission(
             packageName,
             permission,
-            PackageManager.FLAG_PERMISSION_WHITELIST_UPGRADE
+            PackageManager.FLAG_PERMISSION_WHITELIST_UPGRADE,
         )
     }
 }

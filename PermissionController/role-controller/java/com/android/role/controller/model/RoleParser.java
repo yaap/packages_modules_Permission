@@ -65,7 +65,10 @@ public class RoleParser {
     private static final String TAG_PERMISSION_SET = "permission-set";
     private static final String TAG_PERMISSION = "permission";
     private static final String TAG_ROLE = "role";
-    private static final String TAG_REQUIRED_COMPONENTS = "required-components";
+    // We cannot actually rename the tag in APK resources because the APK may need to work on an
+    // older platform with an older APEX.
+    private static final String TAG_REQUIREMENTS = "required-components";
+    private static final String TAG_USES_PERMISSION = "uses-permission";
     private static final String TAG_ACTIVITY = "activity";
     private static final String TAG_PROVIDER = "provider";
     private static final String TAG_RECEIVER = "receiver";
@@ -527,7 +530,7 @@ public class RoleParser {
 
         String uiBehaviorName = getAttributeValue(parser, ATTRIBUTE_UI_BEHAVIOR);
 
-        List<RequiredComponent> requiredComponents = null;
+        List<Requirement> requirements = null;
         List<Permission> permissions = null;
         List<Permission> appOpPermissions = null;
         List<AppOp> appOps = null;
@@ -544,13 +547,13 @@ public class RoleParser {
             }
 
             switch (parser.getName()) {
-                case TAG_REQUIRED_COMPONENTS:
-                    if (requiredComponents != null) {
-                        throwOrLogMessage("Duplicate <required-components> in role: " + name);
+                case TAG_REQUIREMENTS:
+                    if (requirements != null) {
+                        throwOrLogMessage("Duplicate <requirements> in role: " + name);
                         skipCurrentTag(parser);
                         continue;
                     }
-                    requiredComponents = parseRequiredComponents(parser);
+                    requirements = parseRequirements(parser);
                     break;
                 case TAG_PERMISSIONS:
                     if (permissions != null) {
@@ -596,8 +599,8 @@ public class RoleParser {
             }
         }
 
-        if (requiredComponents == null) {
-            requiredComponents = Collections.emptyList();
+        if (requirements == null) {
+            requirements = Collections.emptyList();
         }
         if (permissions == null) {
             permissions = Collections.emptyList();
@@ -616,14 +619,14 @@ public class RoleParser {
                 labelResource, maxSdkVersion, minSdkVersion, onlyGrantWhenAdded,
                 overrideUserWhenGranting, requestDescriptionResource, requestTitleResource,
                 requestable, searchKeywordsResource, shortLabelResource, showNone, statik,
-                systemOnly, visible, requiredComponents, permissions, appOpPermissions, appOps,
+                systemOnly, visible, requirements, permissions, appOpPermissions, appOps,
                 preferredActivities, uiBehaviorName);
     }
 
     @NonNull
-    private List<RequiredComponent> parseRequiredComponents(
-            @NonNull XmlResourceParser parser) throws IOException, XmlPullParserException {
-        List<RequiredComponent> requiredComponents = new ArrayList<>();
+    private List<Requirement> parseRequirements(@NonNull XmlResourceParser parser)
+            throws IOException, XmlPullParserException {
+        List<Requirement> requirements = new ArrayList<>();
 
         int type;
         int depth;
@@ -637,6 +640,17 @@ public class RoleParser {
 
             String name = parser.getName();
             switch (name) {
+                case TAG_USES_PERMISSION: {
+                    RequiredUsesPermission requiredUsesPermission = parseRequiredUsesPermission(
+                            parser);
+                    if (requiredUsesPermission == null) {
+                        continue;
+                    }
+                    validateNoDuplicateElement(requiredUsesPermission, requirements,
+                            "required uses-permission");
+                    requirements.add(requiredUsesPermission);
+                    break;
+                }
                 case TAG_ACTIVITY:
                 case TAG_PROVIDER:
                 case TAG_RECEIVER:
@@ -645,9 +659,9 @@ public class RoleParser {
                     if (requiredComponent == null) {
                         continue;
                     }
-                    validateNoDuplicateElement(requiredComponent, requiredComponents,
-                            "require component");
-                    requiredComponents.add(requiredComponent);
+                    validateNoDuplicateElement(requiredComponent, requirements,
+                            "required component");
+                    requirements.add(requiredComponent);
                     break;
                 }
                 default:
@@ -656,17 +670,38 @@ public class RoleParser {
             }
         }
 
-        return requiredComponents;
+        return requirements;
+    }
+
+    @Nullable
+    private RequiredUsesPermission parseRequiredUsesPermission(@NonNull XmlResourceParser parser)
+            throws IOException, XmlPullParserException {
+        String name = requireAttributeValue(parser, ATTRIBUTE_NAME, TAG_USES_PERMISSION);
+        if (name == null) {
+            skipCurrentTag(parser);
+            return null;
+        }
+
+        Supplier<Boolean> featureFlag = getAttributeMethodValue(parser, ATTRIBUTE_FEATURE_FLAG,
+                boolean.class, sFeatureFlagFallback, TAG_PERMISSION);
+
+        int minTargetSdkVersion = getAttributeIntValue(parser, ATTRIBUTE_MIN_TARGET_SDK_VERSION,
+                Build.VERSION_CODES.BASE);
+
+        return new RequiredUsesPermission(name, featureFlag, minTargetSdkVersion);
     }
 
     @Nullable
     private RequiredComponent parseRequiredComponent(@NonNull XmlResourceParser parser,
             @NonNull String name) throws IOException, XmlPullParserException {
+        Supplier<Boolean> featureFlag = getAttributeMethodValue(parser, ATTRIBUTE_FEATURE_FLAG,
+                boolean.class, sFeatureFlagFallback, name);
+        int flags = getAttributeIntValue(parser, ATTRIBUTE_FLAGS, 0);
         int minTargetSdkVersion = getAttributeIntValue(parser, ATTRIBUTE_MIN_TARGET_SDK_VERSION,
                 Build.VERSION_CODES.BASE);
-        int flags = getAttributeIntValue(parser, ATTRIBUTE_FLAGS, 0);
         String permission = getAttributeValue(parser, ATTRIBUTE_PERMISSION);
         int queryFlags = getAttributeIntValue(parser, ATTRIBUTE_QUERY_FLAGS, 0);
+
         IntentFilterData intentFilterData = null;
         List<RequiredMetaData> metaData = new ArrayList<>();
         List<String> validationMetaDataNames = mThrowOnError ? new ArrayList<>() : null;
@@ -729,17 +764,17 @@ public class RoleParser {
         }
         switch (name) {
             case TAG_ACTIVITY:
-                return new RequiredActivity(intentFilterData, minTargetSdkVersion, flags,
-                        permission, queryFlags, metaData);
+                return new RequiredActivity(featureFlag, flags, intentFilterData, metaData,
+                        minTargetSdkVersion, permission, queryFlags);
             case TAG_PROVIDER:
-                return new RequiredContentProvider(intentFilterData, minTargetSdkVersion, flags,
-                        permission, queryFlags, metaData);
+                return new RequiredContentProvider(featureFlag, flags, intentFilterData, metaData,
+                        minTargetSdkVersion, permission, queryFlags);
             case TAG_RECEIVER:
-                return new RequiredBroadcastReceiver(intentFilterData, minTargetSdkVersion, flags,
-                        permission, queryFlags, metaData);
+                return new RequiredBroadcastReceiver(featureFlag, flags, intentFilterData, metaData,
+                        minTargetSdkVersion, permission, queryFlags);
             case TAG_SERVICE:
-                return new RequiredService(intentFilterData, minTargetSdkVersion, flags, permission,
-                        queryFlags, metaData);
+                return new RequiredService(featureFlag, flags, intentFilterData, metaData,
+                        minTargetSdkVersion, permission, queryFlags);
             default:
                 throwOrLogMessage("Unknown tag <" + name + ">");
                 return null;

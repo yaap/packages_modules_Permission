@@ -54,5 +54,5 @@ data class UsageCount(
     /** Number of apps with permission granted */
     val granted: Int,
     /** Number of apps that request permissions */
-    val total: Int
+    val total: Int,
 )

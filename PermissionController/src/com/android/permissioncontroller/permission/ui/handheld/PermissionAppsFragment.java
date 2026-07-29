@@ -19,8 +19,10 @@ import static com.android.permissioncontroller.Constants.EXTRA_SESSION_ID;
 import static com.android.permissioncontroller.Constants.INVALID_SESSION_ID;
 import static com.android.permissioncontroller.permission.ui.Category.ALLOWED;
 import static com.android.permissioncontroller.permission.ui.Category.ALLOWED_FOREGROUND;
+import static com.android.permissioncontroller.permission.ui.Category.ALLOWED_FOR_COMPATIBILITY;
 import static com.android.permissioncontroller.permission.ui.Category.ASK;
 import static com.android.permissioncontroller.permission.ui.Category.DENIED;
+import static com.android.permissioncontroller.permission.ui.Category.FOOTER;
 import static com.android.permissioncontroller.permission.ui.Category.STORAGE_FOOTER;
 import static com.android.permissioncontroller.permission.ui.handheld.UtilsKt.pressBack;
 
@@ -37,6 +39,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.safetycenter.SafetyCenterManager;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,7 +94,10 @@ public final class PermissionAppsFragment extends SettingsWithLargeHeader implem
     private static final String STORAGE_ALLOWED_SCOPED = "allowed_storage_scoped";
     private static final String BLOCKED_SENSOR_PREF_KEY = "sensor_card";
     private static final String STORAGE_FOOTER_PREFERENCE_KEY = "storage_footer_preference";
+    private static final String FOOTER_PREFERENCE_KEY = "footer_preference";
     private static final int SHOW_LOAD_DELAY_MS = 200;
+
+    private static final String FOOTER_TEXT_DELIMITER = "\n\n";
 
     private static final String PRIVACY_CONTROLS_ACTION = "android.settings.PRIVACY_CONTROLS";
 
@@ -337,6 +344,34 @@ public final class PermissionAppsFragment extends SettingsWithLargeHeader implem
         preferenceCategory.addPreference(preference);
     }
 
+    private void updateFooter(List<CharSequence> footerTexts) {
+        PreferenceCategory preferenceCategory = findPreference(FOOTER.getCategoryName());
+        if (preferenceCategory == null) {
+            return;
+        }
+        if (footerTexts.isEmpty()) {
+            preferenceCategory.setVisible(false);
+            return;
+        }
+        preferenceCategory.setVisible(true);
+
+        PermissionFooterPreference footerPreference = findPreference(FOOTER_PREFERENCE_KEY);
+        if (footerPreference == null) {
+            Context context = getPreferenceScreen().getPreferenceManager().getContext();
+            footerPreference = new PermissionFooterPreference(context);
+            footerPreference.setKey(FOOTER_PREFERENCE_KEY);
+            footerPreference.setIcon(Utils.applyTint(getActivity(), R.drawable.ic_info_outline,
+                    android.R.attr.colorControlNormal));
+            preferenceCategory.addPreference(footerPreference);
+        }
+
+        CharSequence footerText = footerTexts.get(0);
+        for (int i = 1; i < footerTexts.size(); i++) {
+            footerText = TextUtils.concat(footerText, FOOTER_TEXT_DELIMITER, footerTexts.get(i));
+        }
+        footerPreference.setTitle(footerText);
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
     private void removeSensorCard() {
         CardViewPreference sensorCard = findPreference(BLOCKED_SENSOR_PREF_KEY);
@@ -414,6 +449,11 @@ public final class PermissionAppsFragment extends SettingsWithLargeHeader implem
             List<Pair<String, UserHandle>> packages = categories.get(grantCategory);
             PreferenceCategory category = findPreference(grantCategory.getCategoryName());
 
+            // ALLOWED_FOR_COMPATIBILITY category is not applicable and not defined in legacy
+            // allowed_denied_storage, hence skipping if missing.
+            if (grantCategory == ALLOWED_FOR_COMPATIBILITY && category == null) {
+                continue;
+            }
 
             // If this category is empty, and this isn't the "allowed" category of the storage
             // permission, set up the empty preference.
@@ -428,6 +468,8 @@ public final class PermissionAppsFragment extends SettingsWithLargeHeader implem
                     category.setVisible(false);
                 } else if (grantCategory.equals(ASK)) {
                     category.setVisible(false);
+                } else if (grantCategory.equals(ALLOWED_FOR_COMPATIBILITY)) {
+                    category.setVisible(false);
                 } else {
                     empty.setTitle(getString(R.string.no_apps_denied));
                 }
@@ -436,6 +478,8 @@ public final class PermissionAppsFragment extends SettingsWithLargeHeader implem
             } else if (grantCategory.equals(ALLOWED_FOREGROUND)) {
                 category.setVisible(true);
             } else if (grantCategory.equals(ASK)) {
+                category.setVisible(true);
+            } else if (grantCategory.equals(ALLOWED_FOR_COMPATIBILITY)) {
                 category.setVisible(true);
             }
 
@@ -527,6 +571,15 @@ public final class PermissionAppsFragment extends SettingsWithLargeHeader implem
                 storageFooterPreferenceCategory.setVisible(false);
             }
         }
+
+        Preference category = findPreference(ALLOWED_FOR_COMPATIBILITY.getCategoryName());
+        boolean isNearbyDevices = Manifest.permission_group.NEARBY_DEVICES.equals(mPermGroupName);
+        List<CharSequence> footerTexts = new ArrayList<>();
+        if (isNearbyDevices && category != null && category.isVisible()) {
+            footerTexts.add(Html.fromHtml(getString(
+                    R.string.allowed_for_compatibility_nearby_devices_footer), 0));
+        }
+        updateFooter(footerTexts);
 
         mViewModel.setCreationLogged(true);
 

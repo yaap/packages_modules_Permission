@@ -242,6 +242,28 @@
 
             <!-- END EXPRESSIVE PERMISSION DIALOG -->
 
+            <!-- START GRANT LOCATION BUTTON PERMISSION DIALOG -->
+            <item type="style" name="RequestLocationButtonPermissionsDialogScrollView" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogContent" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogIcon" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogTitle" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogSubtitle" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogIllustration" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogAllowButton" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogDontAllowButton" />
+            <item type="style" name="RequestLocationButtonPermissionsDialogButton" />
+            <!-- END GRANT LOCATION BUTTON PERMISSION DIALOG -->
+
+            <!-- START LOCATION PERMISSION GRANT DIALOG -->
+
+            <item type="style" name="PermissionLocationAccuracyContainer" />
+            <item type="style" name="PermissionLocationAccuracyRadioGroupNewLocationDesign" />
+            <item type="style" name="PermissionLocationAccuracyRadioFineNewLocationDesign" />
+            <item type="style" name="PermissionLocationAccuracyRadioNewLocationDesign" />
+            <item type="style" name="PermissionLocationAccuracySingleRadio" />
+
+            <!-- END LOCATION PERMISSION GRANT DIALOG -->
+
             <!-- END PERMISSION GRANT DIALOG -->
 
             <!-- START PERMISSION RATIONALE DIALOG -->
@@ -469,6 +491,7 @@
             <item type="string" name="config_recommendedAssistantsBy" />
             <item type="string" name="config_recommendedAssistantsDescription" />
             <item type="string" name="config_recommendedAssistants" />
+            <item type="bool" name="config_showHomeConfirmationDialog" />
             <!-- END ROLE CONFIGS -->
 
             <!-- START CAR DIMENS -->
@@ -500,6 +523,7 @@
             <item type="bool" name="config_useAlternativePermGroupSummary" />
             <item type="bool" name="config_useMaterial3PermissionGrantDialog" />
             <item type="string" name="config_headlineFontFamily" />
+            <item type="bool" name="config_useFocusIndicatorInPermissionDialogBeforeUserSetupComplete"/>
             <!-- END GENERAL CONFIGS -->
 
             <!-- START WARNING BANNER PREFERENCE STYLE -->
@@ -577,6 +601,8 @@
 
             <!-- START EXPRESSIVE DESIGN CONFIGS -->
             <item type="bool" name="config_enableExpressiveDesignInPermissionSettings"/>
+            <!-- config for opting out of the 2dp spacing between preferences -->
+            <item type="bool" name="config_usePreferenceSpacingInPermissionSettings"/>
             <!-- config for opting out of expressive permission dialogs -->
             <item type="bool" name="config_enableExpressiveDesignInRequestPermissionDialog"/>
             <!-- config for opting out of expressive enhanced confirmation dialogs -->

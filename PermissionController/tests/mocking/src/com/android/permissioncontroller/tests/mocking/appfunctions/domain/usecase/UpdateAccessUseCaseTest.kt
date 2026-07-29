@@ -15,6 +15,8 @@
  */
 package com.android.permissioncontroller.tests.mocking.appfunctions.domain.usecase
 
+import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_OTHER_DENIED
+import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_OTHER_GRANTED
 import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_DENIED
 import android.app.appfunctions.AppFunctionManager.ACCESS_FLAG_USER_GRANTED
 import android.os.Build
@@ -36,9 +38,12 @@ class UpdateAccessUseCaseTest {
     fun updateAccess() = runTest {
         val repository = FakeAppFunctionRepository()
         val useCase = UpdateAccessUseCase(repository)
-
-        assertThat(repository.getAccessFlags(TEST_AGENT_PACKAGE_NAME, TEST_TARGET_PACKAGE_NAME))
-            .isEqualTo(0)
+        repository.updateAccessFlags(
+            TEST_AGENT_PACKAGE_NAME,
+            TEST_TARGET_PACKAGE_NAME,
+            FLAG_MASK,
+            ACCESS_FLAG_OTHER_DENIED,
+        )
 
         useCase(TEST_AGENT_PACKAGE_NAME, TEST_TARGET_PACKAGE_NAME, true)
         assertThat(
@@ -58,6 +63,10 @@ class UpdateAccessUseCaseTest {
     companion object {
         private const val TEST_AGENT_PACKAGE_NAME = "test.agent.package"
         private const val TEST_TARGET_PACKAGE_NAME = "test.target.package"
-        private const val FLAG_MASK = ACCESS_FLAG_USER_GRANTED or ACCESS_FLAG_USER_DENIED
+        private const val FLAG_MASK =
+            ACCESS_FLAG_USER_GRANTED or
+                ACCESS_FLAG_USER_DENIED or
+                ACCESS_FLAG_OTHER_GRANTED or
+                ACCESS_FLAG_OTHER_DENIED
     }
 }

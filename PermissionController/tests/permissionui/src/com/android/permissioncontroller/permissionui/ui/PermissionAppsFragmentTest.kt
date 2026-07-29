@@ -48,7 +48,7 @@ abstract class PermissionAppsFragmentTest(
     val userPkg: String,
     val perm: String,
     val definerApk: String? = null,
-    val definerPkg: String? = null
+    val definerPkg: String? = null,
 ) : BasePermissionUiTest() {
     val pkgSelector = By.text(userPkg)
     var startTimeMillis: Long = 0
@@ -92,7 +92,7 @@ abstract class PermissionAppsFragmentTest(
                 }
             },
             Until.newWindow(),
-            NEW_WINDOW_TIMEOUT_MILLIS
+            NEW_WINDOW_TIMEOUT_MILLIS,
         )
         logCheckPoint("setUp: finished")
     }
@@ -115,7 +115,7 @@ abstract class PermissionAppsFragmentTest(
                     .that(pkg)
                     .isNotNull()
             },
-            Companion.SCROLL_TIMEOUT_MILLIS
+            Companion.SCROLL_TIMEOUT_MILLIS,
         )
 
         // Uninstall app
@@ -132,7 +132,7 @@ abstract class PermissionAppsFragmentTest(
                     .that(pkg)
                     .isNull()
             },
-            Companion.SCROLL_TIMEOUT_MILLIS
+            Companion.SCROLL_TIMEOUT_MILLIS,
         )
 
         logCheckPoint("confirmed installed app shown on screen")

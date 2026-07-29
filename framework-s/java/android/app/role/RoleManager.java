@@ -16,8 +16,6 @@
 
 package android.app.role;
 
-import static android.annotation.RestrictedForEnvironment.ENVIRONMENT_SDK_RUNTIME;
-
 import android.Manifest;
 import android.annotation.CallbackExecutor;
 import android.annotation.FlaggedApi;
@@ -25,7 +23,6 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
-import android.annotation.RestrictedForEnvironment;
 import android.annotation.SuppressLint;
 import android.annotation.SystemApi;
 import android.annotation.SystemService;
@@ -81,8 +78,6 @@ import java.util.function.Consumer;
  * Upon becoming a role holder, the application may be granted certain privileges that are role
  * specific. When the application loses its role, these privileges will also be revoked.
  */
-@RestrictedForEnvironment(
-        environments = ENVIRONMENT_SDK_RUNTIME, from = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @SystemService(Context.ROLE_SERVICE)
 public final class RoleManager {
     /**
@@ -228,7 +223,6 @@ public final class RoleManager {
      * @hide
      */
     @SystemApi
-    @FlaggedApi(com.android.permission.flags.Flags.FLAG_SYSTEM_FINANCED_DEVICE_CONTROLLER)
     public static final String ROLE_SYSTEM_FINANCED_DEVICE_CONTROLLER =
             "android.app.role.SYSTEM_FINANCED_DEVICE_CONTROLLER";
 
@@ -256,9 +250,25 @@ public final class RoleManager {
      *
      * This role enables the ability to view and restrict content for the user.
      *
+     * @see android.app.contentrestriction.ContentRestrictionAppService
+     * @see android.app.contentrestriction.ContentRestrictionManager
      */
     @FlaggedApi(Flags.FLAG_CONTENT_RESTRICTION_ROLE_ENABLED)
     public static final String ROLE_CONTENT_RESTRICTION = "android.app.role.CONTENT_RESTRICTION";
+
+    /**
+     * The name of the device controller role.
+     *
+     * This role enables the ability to manage the device in multiuser environments.
+     *
+     * @see android.app.admin.DevicePolicyManager
+     * @see android.os.UserManager
+     *
+     * @hide
+     */
+    @FlaggedApi(Flags.FLAG_DEVICE_CONTROLLER_ROLE_API_ENABLED)
+    @SystemApi
+    public static final String ROLE_DEVICE_CONTROLLER = "android.app.role.DEVICE_CONTROLLER";
 
     /**
      * @hide
@@ -309,12 +319,25 @@ public final class RoleManager {
      * A dependency installer installs missing SDK or static shared library dependencies that an app
      * requires to be installed.
      *
+     * @deprecated The automatic dependency installation feature is no longer supported.
      * @hide
      */
-    @FlaggedApi("android.content.pm.sdk_dependency_installer")
+    @SuppressWarnings("FlaggedApiLiteral")
+    @Deprecated
+    @FlaggedApi("android.content.pm.sdk_dependency_installer_deprecation")
     @SystemApi
     public static final String ROLE_SYSTEM_DEPENDENCY_INSTALLER =
             "android.app.role.SYSTEM_DEPENDENCY_INSTALLER";
+
+    /**
+     * The name of the role for the active watch face on Wear devices.
+     * This role is managed from a Wear system component for the lifecycle of the active watch face.
+     *
+     * @hide
+     */
+    @FlaggedApi(android.permission.flags.Flags.FLAG_ACTIVE_WATCH_FACE_ROLE_ENABLED)
+    @SystemApi
+    public static final String ROLE_WATCH_FACE = "android.app.role.WATCH_FACE";
 
     @NonNull
     private final Context mContext;
@@ -1080,7 +1103,7 @@ public final class RoleManager {
 
     /**
      * Set the role holder of {@link #ROLE_BROWSER} requiring
-     * {@link Manifest.permission.SET_PREFERRED_APPLICATIONS} instead of
+     * {@link Manifest.permission#SET_PREFERRED_APPLICATIONS} instead of
      * {@link Manifest.permission#MANAGE_ROLE_HOLDERS}, as in
      * {@link android.content.pm.PackageManager#setDefaultBrowserPackageNameAsUser(String, int)}
      *

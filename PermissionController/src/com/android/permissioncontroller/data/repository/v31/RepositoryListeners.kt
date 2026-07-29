@@ -23,7 +23,7 @@ import com.android.permissioncontroller.permission.data.PackageBroadcastReceiver
 
 class PermissionChangeListener(
     private val packageManager: PackageManager,
-    private val callback: () -> Unit
+    private val callback: () -> Unit,
 ) : PackageManager.OnPermissionsChangedListener {
     fun register() {
         packageManager.addOnPermissionsChangeListener(this)
@@ -59,7 +59,7 @@ class PackageChangeListener(private val callback: () -> Unit) :
 class AppOpChangeListener(
     private val opNames: Set<String>,
     private val appOpsManager: AppOpsManager,
-    private val callback: () -> Unit
+    private val callback: () -> Unit,
 ) :
     AppOpsManager.OnOpChangedListener,
     AppOpsManager.OnOpNotedListener,
@@ -110,7 +110,7 @@ class AppOpChangeListener(
         packageName: String,
         attributionTag: String?,
         flags: Int,
-        result: Int
+        result: Int,
     ) {
         callback()
     }

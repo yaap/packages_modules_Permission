@@ -106,4 +106,5 @@
 
     <dimen name="privhub_details_recycler_view_bottom_padding">96dp</dimen>
 
+    <dimen name="location_permission_grant_dialog_radio_button_padding">12dp</dimen>
 </resources>

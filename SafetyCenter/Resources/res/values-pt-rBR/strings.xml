@@ -28,7 +28,7 @@
     <string name="privacy_sources_title" msgid="4061110826457365957">"Privacidade"</string>
     <string name="privacy_sources_summary" msgid="4089719981155120864">"Painel, permissões, controles"</string>
     <string name="permission_usage_title" msgid="3633779688945350407">"Painel de privacidade"</string>
-    <string name="permission_usage_summary" msgid="5323079206029964468">"Mostra quais apps usaram as permissões recentemente"</string>
+    <string name="permission_usage_summary" msgid="5323079206029964468">"Mostre quais apps usaram as permissões recentemente"</string>
     <string name="permission_usage_search_terms" msgid="3852343592870257104">"Privacidade, Painel de privacidade"</string>
     <string name="permission_manager_title" msgid="5277347862821255015">"Gestão de permissões"</string>
     <string name="permission_manager_summary" msgid="8099852107340970790">"Controlar o acesso de apps aos seus dados"</string>

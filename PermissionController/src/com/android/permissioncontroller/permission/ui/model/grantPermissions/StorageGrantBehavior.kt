@@ -38,7 +38,7 @@ object StorageGrantBehavior : GrantBehavior() {
     override fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean
+        isSystemTriggeredPrompt: Boolean,
     ): Prompt {
         val appSupportsSplitStoragePermissions = appSupportsSplitStoragePermissions(group)
         if (!SdkLevel.isAtLeastT()) {
@@ -80,7 +80,7 @@ object StorageGrantBehavior : GrantBehavior() {
     override fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton {
         if (prompt == Prompt.SELECT_MORE_PHOTOS) {
             return DenyButton.DONT_SELECT_MORE
@@ -90,7 +90,7 @@ object StorageGrantBehavior : GrantBehavior() {
 
     override fun isGroupFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         if (!isPhotoPickerPromptSupported() || group.permGroupName != READ_MEDIA_VISUAL) {
             return super.isGroupFullyGranted(group, requestedPerms)

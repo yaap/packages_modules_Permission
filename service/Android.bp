@@ -88,10 +88,17 @@ java_sdk_library {
         "framework-permission-s.impl",
         "framework-permission-s-shared",
         "framework-statsd.stubs.module_lib",
+        "framework-telecom.stubs.module_lib",
         "jsr305",
         "safety-center-annotations",
     ],
+    system_server: {
+        libs: [
+            "framework-telecom.stubs.module_lib",
+        ],
+    },
     static_libs: [
+        "android.app.privatecompute.flags-aconfig-java-export",
         "modules-utils-backgroundthread",
         "modules-utils-build",
         "modules-utils-os",
@@ -107,7 +114,7 @@ java_sdk_library {
         "permissioncontroller-statsd",
         "service-permission-proto-stream",
         "com.android.permission.flags-aconfig-java",
-        "telecom_flags_core_java_aconfig_java_exported_lib",
+        "telecom_module_flags-export-java",
     ],
     errorprone: {
         javacflags: ["-Xep:GuardedBy:ERROR"],

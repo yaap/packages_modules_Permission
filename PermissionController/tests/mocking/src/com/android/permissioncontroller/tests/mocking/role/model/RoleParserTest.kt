@@ -26,6 +26,9 @@ import com.android.permissioncontroller.role.model.RoleParserInitializer
 import com.android.role.controller.model.AppOp
 import com.android.role.controller.model.Permission
 import com.android.role.controller.model.PermissionSet
+import com.android.role.controller.model.RequiredComponent
+import com.android.role.controller.model.RequiredUsesPermission
+import com.android.role.controller.model.Requirement
 import com.android.role.controller.model.Role
 import com.android.role.controller.model.RoleParser
 import org.junit.BeforeClass
@@ -83,11 +86,8 @@ class RoleParserTest {
                 continue
             }
 
-            for (requiredComponent in role.requiredComponents) {
-                val permission = requiredComponent.permission
-                if (permission != null) {
-                    validatePermission(permission)
-                }
+            for (requirement in role.requirements) {
+                validateRequirement(requirement)
             }
 
             for (permission in role.permissions) {
@@ -103,11 +103,21 @@ class RoleParserTest {
             }
 
             for (preferredActivity in role.preferredActivities) {
-                require(preferredActivity.activity in role.requiredComponents) {
-                    "<activity> of <preferred-activity> not required in <required-components>," +
+                require(preferredActivity.activity in role.requirements) {
+                    "<activity> of <preferred-activity> not required in <requirements>," +
                         " role: ${role.name}, preferred activity: $preferredActivity"
                 }
             }
+        }
+    }
+
+    private fun validateRequirement(requirement: Requirement) {
+        if (!requirement.isAvailable) {
+            return
+        }
+        when (requirement) {
+            is RequiredUsesPermission -> validatePermissionName(requirement.name)
+            is RequiredComponent -> requirement.permission?.let { validatePermissionName(it) }
         }
     }
 
@@ -115,14 +125,13 @@ class RoleParserTest {
         if (!permission.isAvailableAsUser(Process.myUserHandle(), targetContext)) {
             return
         }
-        validatePermission(permission.name, true)
+        validatePermissionName(permission.name, true)
     }
 
-    private fun validatePermission(permissionName: String) {
-        validatePermission(permissionName, false)
-    }
-
-    private fun validatePermission(permissionName: String, enforceIsRuntimeOrRole: Boolean) {
+    private fun validatePermissionName(
+        permissionName: String,
+        enforceIsRuntimeOrRole: Boolean = false,
+    ) {
         val isAutomotive = packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)
         // Skip validation for car permissions which may not be available on all build targets.
         if (!isAutomotive && permissionName.startsWith("android.car")) {

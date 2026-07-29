@@ -28,7 +28,7 @@
     <string name="privacy_sources_title" msgid="4061110826457365957">"Privadesa"</string>
     <string name="privacy_sources_summary" msgid="4089719981155120864">"Tauler, permisos, controls"</string>
     <string name="permission_usage_title" msgid="3633779688945350407">"Tauler de privadesa"</string>
-    <string name="permission_usage_summary" msgid="5323079206029964468">"Mostra quines aplicacions han utilitzat permisos fa poc"</string>
+    <string name="permission_usage_summary" msgid="5323079206029964468">"Mostra quines aplicacions han utilitzat permisos recentment"</string>
     <string name="permission_usage_search_terms" msgid="3852343592870257104">"Privadesa, tauler de privadesa"</string>
     <string name="permission_manager_title" msgid="5277347862821255015">"Gestor de permisos"</string>
     <string name="permission_manager_summary" msgid="8099852107340970790">"Controla l\'accés de les aplicacions a les teves dades"</string>

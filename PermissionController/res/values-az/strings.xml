@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Tətbiq hazırlanır..."</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Naməlum"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Məxfilik paneli"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Tətbiq icazələri"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"Sİ assistenti fəaliyyəti"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"Sİ assistenti quraşdırılmayıb"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Son 24 saatda giriş olmayıb"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Son 7 gündə giriş olmayıb"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"<xliff:g id="APP_NAME">%1$s</xliff:g> üzrə fəaliyyət"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"Son 24 saat ərzində"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"Son 7 gündə"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Bu gün"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Dünən"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Son giriş: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Baxın"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Giriş yoxdur"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"Sİ assistenti adınızdan məlumat almaq və ya tədbir görmək üçün bu tətbiqlərə daxil oldu. İstənilən vaxt <xliff:g id="APP_NAME">%1$s</xliff:g> ayarlarında dəyişin."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Məxfilik paneli yalnız Sİ assistenti üçün Android funksiyası ilə tətbiqə daxil olduqda görünür."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Cihaz yardımı"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Hansı tətbiqlərin bu yaxınlarda icazələri istifadə etdiyinə baxın"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g> istifadəsi"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Digər icazələrə baxın"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Son # gün ərzində istifadə edilməyib}other{Son # gün ərzində istifadə edilməyib}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Son # saat ərzində istifadə edilməyib}other{Son # saat ərzində istifadə edilməyib}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{1 tətbiq istifadə edir}other{# tətbiq istifadə edir}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{1 tətbiqə daxil olunub}other{# tətbiqə daxil olunub}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Hamısına İdarə panelində baxın"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Filtrlədi: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Filtri silin"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Yalnız mediaya giriş icazəsi verin"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Həmişə icazə verin"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Yalnız istifadə zamanı"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Tətbiqin işləməsinə icazə verin"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Həmişə hamısına icazə verin"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Həmişə soruşulsun"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Hər dəfə soruşun və ya paylaşdıqda icazə verin"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"İcazə verməyin"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Məhdud girişə icazə verin"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Dəqiq məkan"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"İcazə verilib"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Həmişə icazə verilib"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"İstifadə zamanı icazə verilib"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Tətbiqin işləməsinə icazə verildi"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Mediafayllara girişi olanlar"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Bütün fayllara girişi olanlar"</string>
     <string name="ask_header" msgid="2633816846459944376">"Həmişə soruşulsun"</string>
     <string name="denied_header" msgid="903209608358177654">"İcazə verilməyib"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> cihazında <xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Bütün fayllara giriş edə bilən digər tətbiqlərə baxın"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Tətbiqin işləməsinə icazə verin&lt;/b&gt;&lt;br&gt;&lt;br&gt;Tətbiqin işləməyə davam etməsi üçün ona yalnız yerli şəbəkənizə daxil olmaq və bu şəbəkədəki cihazlara qoşulmaq icazəsi verilə bilər.&lt;br&gt;&lt;br&gt;Yaxınlıqdakı bütün cihazları tapmaq və onlara qoşulmaq icazəsi vermədiyiniz təqdirdə tətbiq Bluetooth və digər texnologiyalardan istifadə edərək cihazlara qoşula bilməz."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Tətbiqin işləməsinə icazə verildi&lt;/b&gt;&lt;br&gt;&lt;br&gt;Tətbiqin işləməyə davam etməsi üçün ona yalnız yerli şəbəkənizə daxil olmaq və bu şəbəkədəki cihazlara qoşulmaq icazəsi verilə bilər.&lt;br&gt;&lt;br&gt;Yaxınlıqdakı bütün cihazları tapmaq və onlara qoşulmaq icazəsi vermədiyiniz təqdirdə tətbiq Bluetooth və digər texnologiyalardan istifadə edərək cihazlara qoşula bilməz."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 gün}other{# gün}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# saat}other{# saat}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# dəqiqə}other{# dəqiqə}}"</string>
@@ -343,7 +365,7 @@
     <string name="app_perms_7d_access_all_files" msgid="8246193786397635824">"Son giriş: <xliff:g id="TIME_DATE_0">%1$s</xliff:g>, <xliff:g id="TIME_DATE_1">%2$s</xliff:g> • Bütün Fayllar"</string>
     <string name="app_perms_content_provider_24h_all_files" msgid="573104317727770850">"Son 24 saat ərzində giriş edilib • Bütün Fayllar"</string>
     <string name="app_perms_content_provider_7d_all_files" msgid="7962416229708835558">"Son 7 gün ərzində giriş edilib • Bütün Fayllar"</string>
-    <string name="no_permissions_allowed" msgid="6081976856354669209">"İcazə verilmədi"</string>
+    <string name="no_permissions_allowed" msgid="6081976856354669209">"Heç bir icazə yoxdur"</string>
     <string name="no_permissions_denied" msgid="8159923922804043282">"İcazə verilib"</string>
     <string name="no_apps_allowed" msgid="7718822655254468631">"İcazəli tətbiq yoxdur"</string>
     <string name="no_apps_allowed_full" msgid="8011716991498934104">"Heç bir tətbiqə bütün fayllar üçün icazə verilməyib"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Yoxdur"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Sistem defoltu)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Tətbiq yoxdur"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Dəyişin"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Cari tətbiqi saxlayın"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Digər NFC xidmətləri"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Seçilib"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Seçilib - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Xüsusi tətbiq girişi yoxdur"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Tətbiq yoxdur"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"İş profilini dəstəkləmir"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Defolt əsas ekran tətbiqi &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; olaraq dəyişdirilsin?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Bu, əsas ekranı əvəz edəcək və cihazdakı funksiyalara girişə təsir edə bilər.&lt;br&gt;&lt;br&gt;Bu seçimi istənilən vaxt &lt;b&gt;Defolt əsas ekran tətbiqi&lt;/b&gt; ayarlarında dəyişə bilərsiniz."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Qeyd: Cihazı yenidən başlatmısınızsa və cihazda ekran kilidi varsa, kilidi açmamış tətbiq başlaya bilməz."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Assistent sistemdə işlədilən tətbiqlər haqqında məlumatı oxuya biləcək, buraya ekranınızda görünən və ya tətbiqlər içində əlçatan olan bilgilər də daxildir."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Rəqəmsal assistent tətbiqi &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; olaraq dəyişdirilsin?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Bu assistent mesajlarınıza və tətbiqlərin assistentinizlə paylaşmağı seçdiyi data kimi məlumatlara daxil ola biləcək."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Bu assistent mesajlarınız kimi məlumatlara və tətbiqlərin assistentinizlə paylaşmağı seçdiyi dataya daxil ola biləcək.&lt;br&gt;&lt;br&gt;Daha öncə <xliff:g id="APP_NAME">%1$s</xliff:g> üçün ekran və tətbiq datasını aktiv etdiyinizə görə ona ekranda açıq olan tətbiqdən kontentə daxil olmaq icazəsi də veriləcək."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Sazlama Datasını Paylaşın"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Ətraflı sazlama datası paylaşılsın?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> sazlama məlumatını yükləmək istəyir."</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Tətbiqlər"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Agent girişi"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Bu tətbiqdə məlumatlara daxil ola bilən və sizin üçün tədbir görə bilən agentlər"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"İcazə verilib"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"İcazə verilməyib"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Agent girişlərinə icazə verilmir"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Bütün agent girişləri rədd edildi"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Heç bir agent girişinə icazə verilmədi"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Heç bir agent girişi rədd edilmədi"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Tətbiqə giriş"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"<xliff:g id="TARGET_APP_NAME">%1$s</xliff:g> tətbiqinə giriş"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> tətbiqinin <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> tətbiqinə girişi"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"İcazə verin"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"İcazə verməyin"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Cihaz ayarları"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> tətbiqinə <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> üçün agent olmağa icazə verilsin?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Bu agent sizin adınıza məlumat əldə etmək və tədbir görmək üçün <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> tətbiqinə daxil ola biləcək"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"İcazə verilsin"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"İcazə verməyin"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"&lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; tətbiqinə ekran və tətbiq datasından istifadə etmək icazəsi verilsin?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Bu assistent ekranda açıq olan tətbiqdən məlumat və kontentə daxil ola biləcək"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"İcazə verin"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"İcazə verməyin"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Ekran və tətbiq datasından istifadə edin"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Assistentə ekranda açıq olan tətbiqdən məlumat və kontentə daxil olmaq icazəsi verin"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> tətbiqinə ekranda açıq olan tətbiqdən məlumat və kontentə daxil olmağa icazə verin"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"İcazə verin"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"İcazə verməyin"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Paylaşmağı seçdiyiniz zaman &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; tətbiqinə dəqiq məkana daxil olmaq icazəsi verilsin?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Paylaşdıqda tətbiqi bağlayana qədər dəqiq məkana daxil olacaq"</string>
 </resources>

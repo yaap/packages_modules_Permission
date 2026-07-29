@@ -26,7 +26,7 @@
     <string name="overall_severity_level_ok_review_title" msgid="1494321117696765360">"Revisa los ajustes"</string>
     <string name="overall_severity_level_ok_review_summary" msgid="7743619617413076275">"Comprueba la lista de ajustes"</string>
     <string name="overall_severity_level_device_recommendation_title" msgid="5250040236433061827">"El dispositivo puede estar en riesgo"</string>
-    <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"El dispositivo está en riesgo"</string>
+    <string name="overall_severity_level_critical_device_warning_title" msgid="5901771721834272596">"Tu dispositivo está en riesgo"</string>
     <string name="overall_severity_level_data_recommendation_title" msgid="1424269714861655302">"Tus datos pueden estar en riesgo"</string>
     <string name="overall_severity_level_critical_data_warning_title" msgid="1012704126634698604">"Tus datos están en riesgo"</string>
     <string name="overall_severity_level_passwords_recommendation_title" msgid="8625105570296877719">"Contraseñas vulneradas (antiguas)"</string>

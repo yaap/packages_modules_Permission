@@ -46,10 +46,13 @@ abstract class PerScreenDeviceState(val context: Context) {
 
     /** Intent Uri of the screen */
     val intentUri: String?
-        get() =
-            intent
-                ?.putExtra(EXTRA_DEVICE_STATE_KEY, AppFunctionsUtil.getPasswordForIntent(context))
-                ?.toUri(Intent.URI_INTENT_SCHEME)
+        get() = buildIntentUri()
+
+    protected open fun buildIntentUri(): String? {
+        return intent
+            ?.putExtra(EXTRA_DEVICE_STATE_KEY, AppFunctionsUtil.getPasswordForIntent(context))
+            ?.toUri(Intent.URI_INTENT_SCHEME)
+    }
 
     open fun getDeviceStateItems(): List<DeviceStateItem> {
         return emptyList()
@@ -113,17 +116,18 @@ class AppPermissionsScreen(context: Context) : PerScreenDeviceState(context) {
     override val description: String
         get() =
             "App Permissions Screen. Note that to get to the app permissions for a given " +
-                "package, the intent uri is $intentWithPlaceholder"
+                "package, substitute \${package} with the package name in the intent uri"
 
-    override val intent = null
+    override val intent: Intent? = null
 
-    private val intentWithPlaceholder =
-        Intent(AppFunctionsUtil.ACTION_MANAGE_APP_PERMISSIONS)
+    override fun buildIntentUri(): String {
+        return Intent(AppFunctionsUtil.ACTION_MANAGE_APP_PERMISSIONS)
             .apply {
-                putExtra(Intent.EXTRA_PACKAGE_NAME, "\$packageName")
+                putExtra(Intent.EXTRA_PACKAGE_NAME, "\${package}")
                 putExtra(EXTRA_DEVICE_STATE_KEY, AppFunctionsUtil.getPasswordForIntent(context))
             }
             .toUri(Intent.URI_INTENT_SCHEME)
+    }
 
     companion object {
         const val KEY = "app_permissions"
@@ -140,18 +144,21 @@ class AppPermissionSettingScreen(context: Context, val permissionGroup: String) 
 
     override val description: String
         get() =
-            "$permissionGroupLabel permission setting screen for a package. The intent uri is $intentWithPlaceholder"
+            "$permissionGroupLabel permission setting screen for a package. Note that to get to the " +
+                "app permissions for a given package, substitute \${package} with the package name in " +
+                "the intent uri."
 
-    override val intent = null
+    override val intent: Intent? = null
 
-    private val intentWithPlaceholder =
-        Intent(AppFunctionsUtil.ACTION_MANAGE_APP_PERMISSIONS)
+    override fun buildIntentUri(): String {
+        return Intent(AppFunctionsUtil.ACTION_MANAGE_APP_PERMISSION)
             .apply {
                 putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, permissionGroup)
-                putExtra(Intent.EXTRA_PACKAGE_NAME, "\$packageName")
+                putExtra(Intent.EXTRA_PACKAGE_NAME, "\${package}")
                 putExtra(EXTRA_DEVICE_STATE_KEY, AppFunctionsUtil.getPasswordForIntent(context))
             }
             .toUri(Intent.URI_INTENT_SCHEME)
+    }
 
     companion object {
         const val KEY = "app_permission_setting"
@@ -225,6 +232,7 @@ class AppPermissionGrantStateScreen(
             PermGrantState.PERMS_ALLOWED_FOREGROUND_ONLY -> "Allowed while using the app"
             PermGrantState.PERMS_ALLOWED_ALWAYS -> "Always Allowed"
             PermGrantState.PERMS_ASK -> "Ask every time"
+            PermGrantState.PERMS_ALLOWED_FOR_COMPATIBILITY -> "Allowed to keep app working"
         }
     }
 

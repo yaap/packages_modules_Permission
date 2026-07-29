@@ -27,7 +27,6 @@ import android.view.MenuItem;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.permission.flags.Flags;
 import com.android.permissioncontroller.PermissionControllerStatsLog;
 import com.android.permissioncontroller.permission.data.PermGroupsPackagesUiInfoLiveData;
 import com.android.permissioncontroller.permission.ui.model.ManageCustomPermissionsViewModel;
@@ -55,11 +54,7 @@ public class ManageCustomPermissionsFragment extends ManagePermissionsFragment {
     }
 
     private PermGroupsPackagesUiInfoLiveData getPermGroupsLiveData() {
-        if (Flags.declutteredPermissionManagerEnabled()) {
-            return mViewModel.getAdditionaPermGroupsUiInfo();
-        } else {
-            return mViewModel.getUiDataLiveData();
-        }
+        return mViewModel.getAdditionaPermGroupsUiInfo();
     }
 
     @Override

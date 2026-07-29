@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"代理應用程式"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"可以在應用程式存取資訊並採取行動的代理應用程式"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"應用程式和 AI 助理活動"</string>
 </resources>

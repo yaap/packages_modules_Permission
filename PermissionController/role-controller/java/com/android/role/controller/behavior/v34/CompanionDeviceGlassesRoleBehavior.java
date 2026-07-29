@@ -32,7 +32,7 @@ import com.android.role.controller.util.UserUtils;
 public class CompanionDeviceGlassesRoleBehavior implements RoleBehavior {
 
     @Override
-    public void grantAsUser(@NonNull Role role, @NonNull String packageName,
+    public void grantAsUser(@NonNull Role role, @NonNull String packageName, boolean overrideUser,
             @NonNull UserHandle user, @NonNull Context context) {
         if (!UserUtils.isManagedProfile(user, context)) {
             NotificationUtils.grantNotificationAccessForPackageAsUser(packageName, user, context);

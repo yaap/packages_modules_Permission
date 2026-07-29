@@ -27,7 +27,7 @@ import com.android.permissioncontroller.permission.model.livedatatypes.v34.Light
  */
 class SafetyLabelInfo(
     val safetyLabel: SafetyLabel?,
-    val installSourceInfo: LightInstallSourceInfo
+    val installSourceInfo: LightInstallSourceInfo,
 ) {
     companion object {
         /** Default definition of unavailable or no safety label found */

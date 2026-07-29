@@ -39,10 +39,11 @@ constructor(targetIds: List<Int>, changeDuration: Duration = DEFAULT_TEXT_CHANGE
     @JvmOverloads
     constructor(
         targetId: Int,
-        changeDuration: Duration = DEFAULT_TEXT_CHANGE_DURATION
+        changeDuration: Duration = DEFAULT_TEXT_CHANGE_DURATION,
     ) : this(listOf(targetId), changeDuration)
 
     private val textChangeTransition: TransitionSet
+
     init {
         var transition =
             AutoTransition()
@@ -92,7 +93,7 @@ constructor(targetIds: List<Int>, changeDuration: Duration = DEFAULT_TEXT_CHANGE
     private fun fadeTextIn(
         textChanges: List<Pair<TextView, String>>,
         parent: ViewGroup,
-        onFinish: Runnable?
+        onFinish: Runnable?,
     ) {
         val fadeInTransition =
             textChangeTransition

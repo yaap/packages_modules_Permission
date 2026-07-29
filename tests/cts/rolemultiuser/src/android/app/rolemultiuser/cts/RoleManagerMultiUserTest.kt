@@ -22,6 +22,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.FEATURE_MANAGED_USERS
 import android.os.Build
 import android.os.Process
 import android.os.UserHandle
@@ -43,7 +44,7 @@ import com.android.bedstead.harrier.BedsteadJUnit4
 import com.android.bedstead.harrier.DeviceState
 import com.android.bedstead.harrier.UserType.INITIAL_USER
 import com.android.bedstead.harrier.UserType.WORK_PROFILE
-import com.android.bedstead.multiuser.annotations.EnsureCanAddUser
+import com.android.bedstead.harrier.annotations.RequireFeature
 import com.android.bedstead.multiuser.annotations.EnsureHasAdditionalUser
 import com.android.bedstead.multiuser.annotations.EnsureHasPrivateProfile
 import com.android.bedstead.multiuser.annotations.EnsureHasSecondaryUser
@@ -662,10 +663,11 @@ class RoleManagerMultiUserTest {
 
     @RequireFlagsEnabled(com.android.permission.flags.Flags.FLAG_CROSS_USER_ROLE_ENABLED)
     @EnsureHasPermission(INTERACT_ACROSS_USERS_FULL, MANAGE_ROLE_HOLDERS)
-    @EnsureCanAddUser
+    // TODO(b/442891661) Check that Managed Profile is supported?
     @EnsureHasNoWorkProfile
     @RequireRunOnPrimaryUser
     @EnsureDoesNotHaveUserRestriction(DISALLOW_ADD_MANAGED_PROFILE)
+    @RequireFeature(FEATURE_MANAGED_USERS)
     @Test
     @Throws(Exception::class)
     fun ensureActiveUserSetToParentOnUserRemoved() {
@@ -1156,10 +1158,10 @@ class RoleManagerMultiUserTest {
                     .click()
                 getUiDevice().waitForIdle()
                 waitFindObject(
-                        By.clickable(true)
-                            .hasDescendant(By.checkable(true).checked(true))
-                            .hasDescendant(By.text(targetAppLabel))
-                    )
+                    By.clickable(true)
+                        .hasDescendant(By.checkable(true).checked(true))
+                        .hasDescendant(By.text(targetAppLabel))
+                )
                 getUiDevice().waitForIdle()
                 waitFindObject(
                         By.clickable(true)

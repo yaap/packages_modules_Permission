@@ -30,7 +30,7 @@ import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EX
  */
 data class HibernationSettingState(
     val hibernationEligibility: Int,
-    val revocableGroupNames: List<String>
+    val revocableGroupNames: List<String>,
 ) {
     /** Whether package will hibernate if it is unused. */
     fun isEligibleForHibernation(): Boolean {

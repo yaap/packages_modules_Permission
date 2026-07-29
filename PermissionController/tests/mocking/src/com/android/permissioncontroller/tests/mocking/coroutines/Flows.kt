@@ -45,12 +45,7 @@ fun <T> TestScope.collectLastValue(
     context: CoroutineContext = EmptyCoroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
 ): FlowValue<T?> {
-    val values by
-        collectValues(
-            flow = flow,
-            context = context,
-            start = start,
-        )
+    val values by collectValues(flow = flow, context = context, start = start)
     return FlowValueImpl { values.lastOrNull() }
 }
 
@@ -85,5 +80,6 @@ interface FlowValue<T> : ReadOnlyProperty<Any?, T> {
 
 private class FlowValueImpl<T>(private val block: () -> T) : FlowValue<T> {
     override operator fun invoke(): T = block()
+
     override fun getValue(thisRef: Any?, property: KProperty<*>): T = invoke()
 }

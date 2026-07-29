@@ -29,6 +29,7 @@ import com.android.permissioncontroller.role.ui.RequestRoleItemView;
 import com.android.permissioncontroller.role.ui.RoleApplicationItem;
 import com.android.permissioncontroller.role.ui.RoleApplicationPreference;
 import com.android.permissioncontroller.role.ui.RolePreference;
+import com.android.permissioncontroller.role.ui.behavior.ConfirmationDialogInfo;
 import com.android.permissioncontroller.role.ui.behavior.RoleUiBehavior;
 import com.android.role.controller.model.Role;
 
@@ -158,15 +159,15 @@ public final class RoleUiBehaviorUtils {
     }
 
     /**
-     * @see RoleUiBehavior#getConfirmationMessage
+     * @see RoleUiBehavior#getConfirmationDialogInfo
      */
     @Nullable
-    public static CharSequence getConfirmationMessage(@NonNull Role role,
-            @NonNull String packageName, @NonNull Context context) {
+    public static ConfirmationDialogInfo getConfirmationDialogInfo(@NonNull Role role,
+            @NonNull String packageName, @NonNull UserHandle user, @NonNull Context context) {
         RoleUiBehavior uiBehavior = getUiBehavior(role);
         if (uiBehavior == null) {
             return null;
         }
-        return uiBehavior.getConfirmationMessage(role, packageName, context);
+        return uiBehavior.getConfirmationDialogInfo(role, packageName, user, context);
     }
 }

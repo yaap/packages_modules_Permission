@@ -44,7 +44,7 @@ data class LightPermInfo(
 ) {
     constructor(
         permInfo: PermissionInfo,
-        isSystem: Boolean?
+        isSystem: Boolean?,
     ) : this(
         permInfo.name,
         permInfo.packageName,
@@ -53,7 +53,7 @@ data class LightPermInfo(
         permInfo.protection,
         permInfo.protectionFlags,
         permInfo.flags,
-        isSystem
+        isSystem,
     )
 
     /**

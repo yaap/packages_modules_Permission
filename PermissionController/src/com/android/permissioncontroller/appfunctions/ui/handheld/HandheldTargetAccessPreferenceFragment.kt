@@ -19,13 +19,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
-import androidx.preference.SwitchPreferenceCompat
-import androidx.preference.TwoStatePreference
 import com.android.permissioncontroller.appfunctions.ui.TargetAccessChildFragment
 import com.android.permissioncontroller.appfunctions.ui.handheld.HandheldTargetAccessPreferenceFragment.Parent
 import com.android.settingslib.widget.IntroPreference
 import com.android.settingslib.widget.SettingsBasePreferenceFragment
-import com.android.settingslib.widget.ZeroStatePreference
 
 /**
  * Handheld preference fragment for the management of app function targets.
@@ -57,11 +54,8 @@ class HandheldTargetAccessPreferenceFragment :
 
     override fun createHeaderPreference(): Preference = IntroPreference(requireContext())
 
-    override fun createEmptyStatePreference(): Preference =
-        ZeroStatePreference(requireContext()).apply { isPersistent = false }
-
-    override fun createPreference(): TwoStatePreference =
-        SwitchPreferenceCompat(requireContext()).apply { isPersistent = false }
+    override fun createPreference(): Preference =
+        Preference(requireContext()).apply { isPersistent = false }
 
     override fun onPreferenceScreenChanged() {
         requireParent().onPreferenceScreenChanged()

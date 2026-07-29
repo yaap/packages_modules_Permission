@@ -29,7 +29,7 @@ internal object SeverityIconPicker {
     fun selectIconResIdOrNull(
         id: String,
         severityLevel: Int,
-        severityUnspecifiedIconType: Int
+        severityUnspecifiedIconType: Int,
     ): Int? {
         if (SdkLevel.isAtLeastV() && id == PRIVACY_SOURCES_GROUP_ID) {
             return null
@@ -55,7 +55,7 @@ internal object SeverityIconPicker {
         }
         Log.e(
             TAG,
-            String.format("Unexpected SafetyCenterEntry.EntrySeverityLevel: %s", severityLevel)
+            String.format("Unexpected SafetyCenterEntry.EntrySeverityLevel: %s", severityLevel),
         )
         return R.drawable.ic_safety_null_state
     }
@@ -72,8 +72,8 @@ internal object SeverityIconPicker {
             TAG,
             String.format(
                 "Unexpected SafetyCenterEntry.SeverityNoneIconType: %s",
-                severityUnspecifiedIconType
-            )
+                severityUnspecifiedIconType,
+            ),
         )
         return R.drawable.ic_safety_null_state
     }

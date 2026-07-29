@@ -81,6 +81,11 @@ class SafetySourceIntentHandler {
         mutex.withLock { requestsToResponses.put(request, response) }
     }
 
+    /** Clears all responses. */
+    suspend fun clearResponses() {
+        mutex.withLock { requestsToResponses.clear() }
+    }
+
     /**
      * Suspends until an [ACTION_REFRESH_SAFETY_SOURCES] [Intent] is processed, and returns the
      * associated [EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID].

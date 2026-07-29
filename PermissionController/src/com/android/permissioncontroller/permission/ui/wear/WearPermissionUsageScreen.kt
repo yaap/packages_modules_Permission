@@ -17,7 +17,6 @@
 package com.android.permissioncontroller.permission.ui.wear
 
 import android.os.Build
-import android.permission.flags.Flags
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable

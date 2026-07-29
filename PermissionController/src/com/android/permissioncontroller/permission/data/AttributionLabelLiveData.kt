@@ -48,7 +48,7 @@ private constructor(
     private val app: Application,
     private val attributionTag: String?,
     private val packageName: String,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<Int>(), PackageBroadcastReceiver.PackageBroadcastListener {
     private val LOG_TAG = AttributionLabelLiveData::class.java.simpleName
 
@@ -171,14 +171,14 @@ private constructor(
                 PermissionControllerApplication.get(),
                 key.first,
                 key.second,
-                key.third
+                key.third,
             )
         }
 
         operator fun get(
             attributionTag: String?,
             packageName: String,
-            user: UserHandle
+            user: UserHandle,
         ): AttributionLabelLiveData = get(Triple(attributionTag, packageName, user))
     }
 }

@@ -709,4 +709,10 @@
         android:label="@string/car_permission_label_read_property_vendor_status"
         android:description="@string/car_permission_desc_read_property_vendor_status"
         android:featureFlag="android.car.feature.car_property_status_detailed_not_available" />
+    <permission
+        android:name="android.car.permission.READ_PROPERTY_VENDOR_ERROR_CODE"
+        android:protectionLevel="signature|privileged"
+        android:label="@string/car_permission_label_read_property_vendor_error_code"
+        android:description="@string/car_permission_desc_read_property_vendor_error_code"
+        android:featureFlag="android.car.feature.car_property_vendor_error_code_permission" />
 </manifest>

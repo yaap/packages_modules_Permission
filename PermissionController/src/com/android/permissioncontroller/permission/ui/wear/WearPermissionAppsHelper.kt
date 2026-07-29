@@ -46,7 +46,7 @@ class WearPermissionAppsHelper(
     private val isStorageAndLessThanT: Boolean,
     private val onAppClick: (String, UserHandle, String) -> Unit,
     val onShowSystemClick: (Boolean) -> Unit,
-    val logFragmentCreated: (String, UserHandle, Long, Boolean, Boolean, Boolean) -> Unit
+    val logFragmentCreated: (String, UserHandle, Long, Boolean, Boolean, Boolean) -> Unit,
 ) {
     fun categorizedAppsLiveData() = viewModel.categorizedAppsLiveData
 
@@ -62,7 +62,7 @@ class WearPermissionAppsHelper(
 
     fun getChipsByCategory(
         categorizedApps: Map<Category, List<Pair<String, UserHandle>>>,
-        appPermissionUsages: List<AppPermissionUsage>
+        appPermissionUsages: List<AppPermissionUsage>,
     ): Map<String, List<ChipInfo>> {
         val chipsByCategory: MutableMap<String, MutableList<ChipInfo>> = HashMap()
 
@@ -89,7 +89,7 @@ class WearPermissionAppsHelper(
                                         it.first,
                                         viewIdForLogging,
                                         comparator,
-                                        groupUsageLastAccessTime
+                                        groupUsageLastAccessTime,
                                     )
                             }
                             if (it.second.isNotEmpty()) {
@@ -99,7 +99,7 @@ class WearPermissionAppsHelper(
                                         it.second,
                                         viewIdForLogging,
                                         comparator,
-                                        groupUsageLastAccessTime
+                                        groupUsageLastAccessTime,
                                     )
                             }
                         }
@@ -114,7 +114,7 @@ class WearPermissionAppsHelper(
                         list,
                         viewIdForLogging,
                         comparator,
-                        groupUsageLastAccessTime
+                        groupUsageLastAccessTime,
                     )
             }
         }
@@ -129,7 +129,7 @@ class WearPermissionAppsHelper(
         list: List<Pair<String, UserHandle>>,
         viewIdForLogging: Long,
         comparator: Comparator<ChipInfo>,
-        groupUsageLastAccessTime: Map<String, Long>
+        groupUsageLastAccessTime: Map<String, Long>,
     ) =
         list
             .map { p ->
@@ -141,7 +141,7 @@ class WearPermissionAppsHelper(
                     category,
                     onAppClick,
                     viewIdForLogging,
-                    lastAccessTime
+                    lastAccessTime,
                 )
             }
             .sortedWith(comparator)
@@ -158,7 +158,7 @@ class WearPermissionAppsHelper(
         category: Category,
         onClick: (packageName: String, user: UserHandle, category: String) -> Unit,
         viewIdForLogging: Long,
-        lastAccessTime: Long?
+        lastAccessTime: Long?,
     ): ChipInfo {
         if (!viewModel.creationLogged) {
             logFragmentCreated(
@@ -167,7 +167,7 @@ class WearPermissionAppsHelper(
                 viewIdForLogging,
                 category == Category.ALLOWED,
                 category == Category.ALLOWED_FOREGROUND,
-                category == Category.DENIED
+                category == Category.DENIED,
             )
         }
         val summary =
@@ -187,14 +187,14 @@ class WearPermissionAppsHelper(
                     LocationUtils.isLocationGroupAndProvider(
                         application.applicationContext,
                         permGroupName,
-                        packageName
+                        packageName,
                     )
                 ) {
                     locationProviderDialogViewModel.showDialog(context, packageName)
                 } else {
                     onClick(packageName, user, category.categoryName)
                 }
-            }
+            },
         )
     }
 
@@ -222,7 +222,7 @@ class WearPermissionAppsHelper(
     private fun addNoAppsTo(
         chipsByCategory: MutableMap<String, MutableList<ChipInfo>>,
         categoryName: String,
-        titleResId: Int
+        titleResId: Int,
     ) {
         if (chipsByCategory[categoryName].isNullOrEmpty()) {
             chipsByCategory[categoryName] =
@@ -244,7 +244,7 @@ class ChipInfo(
     val contentDescription: String? = null,
     val onClick: () -> Unit = {},
     val icon: Drawable? = null,
-    val enabled: Boolean = true
+    val enabled: Boolean = true,
 )
 
 internal class ChipComparator(val collator: Collator) : Comparator<ChipInfo> {

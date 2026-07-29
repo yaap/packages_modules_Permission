@@ -26,5 +26,5 @@ import com.android.permissioncontroller.permission.data.PermissionEvent
 data class TestPermissionEvent(
     override val packageName: String,
     override val eventTime: Long,
-    val id: Int = 1
+    val id: Int = 1,
 ) : PermissionEvent(packageName, eventTime)

@@ -110,7 +110,7 @@ private fun isNotificationListenerCheckFlagEnabled(): Boolean {
     return DeviceConfig.getBoolean(
         DeviceConfig.NAMESPACE_PRIVACY,
         PROPERTY_NOTIFICATION_LISTENER_CHECK_ENABLED,
-        false
+        false,
     )
 }
 
@@ -125,7 +125,7 @@ private fun getPeriodicCheckIntervalMillis(): Long {
     return DeviceConfig.getLong(
         DeviceConfig.NAMESPACE_PRIVACY,
         PROPERTY_NOTIFICATION_LISTENER_CHECK_INTERVAL_MILLIS,
-        DEFAULT_NOTIFICATION_LISTENER_CHECK_INTERVAL_MILLIS
+        DEFAULT_NOTIFICATION_LISTENER_CHECK_INTERVAL_MILLIS,
     )
 }
 
@@ -191,7 +191,7 @@ private fun getSafetySourceIssueIdFromComponentName(componentName: ComponentName
 @VisibleForTesting
 class NotificationListenerCheckInternal(
     context: Context,
-    private val shouldCancel: BooleanSupplier?
+    private val shouldCancel: BooleanSupplier?,
 ) {
     private val parentUserContext = Utils.getParentUserContext(context)
     private val random = Random()
@@ -203,7 +203,7 @@ class NotificationListenerCheckInternal(
     val exemptPackagesDelegate = lazy {
         getExemptedPackages(
             getSystemServiceSafe(parentUserContext, RoleManager::class.java),
-            parentUserContext
+            parentUserContext,
         )
     }
     @VisibleForTesting val exemptPackages: Set<String> by exemptPackagesDelegate
@@ -235,7 +235,7 @@ class NotificationListenerCheckInternal(
                 SYSTEM_AUDIO_INTELLIGENCE,
                 SYSTEM_NOTIFICATION_INTELLIGENCE,
                 SYSTEM_TEXT_INTELLIGENCE,
-                SYSTEM_VISUAL_INTELLIGENCE
+                SYSTEM_VISUAL_INTELLIGENCE,
             )
 
         /** Lock required for all public methods */
@@ -256,7 +256,7 @@ class NotificationListenerCheckInternal(
     @WorkerThread
     suspend fun getEnabledNotificationListenersAndNotifyIfNeeded(
         params: JobParameters,
-        service: NotificationListenerCheckJobService
+        service: NotificationListenerCheckJobService,
     ) {
         nlsLock.withLock {
             try {
@@ -291,7 +291,7 @@ class NotificationListenerCheckInternal(
                 TAG,
                 "Found ${enabledComponents.size} enabled notification listeners. " +
                     "${notifiedComponents.size} already notified. ${unNotifiedComponents.size} " +
-                    "unnotified, sessionId = $sessionId"
+                    "unnotified, sessionId = $sessionId",
             )
         }
 
@@ -324,7 +324,7 @@ class NotificationListenerCheckInternal(
                 TAG,
                 "enabledNotificationListeners=$enabledNotificationListeners\n" +
                     "enabledNotificationListenersExcludingExemptPackages=" +
-                    "$enabledNotificationListenersExcludingExemptPackages"
+                    "$enabledNotificationListenersExcludingExemptPackages",
             )
         }
 
@@ -423,7 +423,7 @@ class NotificationListenerCheckInternal(
     @Throws(InterruptedException::class)
     private suspend fun postSystemNotificationIfNeeded(
         components: List<ComponentName>,
-        sessionId: Long
+        sessionId: Long,
     ) {
         val componentsInternal = components.toMutableList()
 
@@ -436,7 +436,7 @@ class NotificationListenerCheckInternal(
                 Log.d(
                     TAG,
                     "Notification not posted, within " +
-                        "$DEFAULT_NOTIFICATION_LISTENER_CHECK_INTERVAL_MILLIS ms"
+                        "$DEFAULT_NOTIFICATION_LISTENER_CHECK_INTERVAL_MILLIS ms",
                 )
             }
             return
@@ -468,7 +468,7 @@ class NotificationListenerCheckInternal(
                 if (DEBUG) {
                     Log.d(
                         TAG,
-                        "Attempting to get PackageInfo for " + componentToNotifyFor.packageName
+                        "Attempting to get PackageInfo for " + componentToNotifyFor.packageName,
                     )
                 }
                 pkgInfo =
@@ -494,7 +494,7 @@ class NotificationListenerCheckInternal(
             NotificationChannel(
                 Constants.PERMISSION_REMINDER_CHANNEL_ID,
                 parentUserContext.getString(R.string.permission_reminders),
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_LOW,
             )
 
         val notificationManager =
@@ -513,7 +513,7 @@ class NotificationListenerCheckInternal(
     private suspend fun createNotificationForNotificationListener(
         componentName: ComponentName,
         pkg: PackageInfo,
-        sessionId: Long
+        sessionId: Long,
     ) {
         val pkgLabel = Utils.getApplicationLabel(parentUserContext, pkg.applicationInfo!!)
         val uid = pkg.applicationInfo!!.uid
@@ -528,7 +528,7 @@ class NotificationListenerCheckInternal(
         val text =
             parentUserContext.getString(
                 R.string.notification_listener_reminder_notification_content,
-                pkgLabel
+                pkgLabel,
             )
 
         val (appLabel, smallIcon, color) =
@@ -558,14 +558,14 @@ class NotificationListenerCheckInternal(
         notificationManager.notify(
             componentName.flattenToString(),
             NOTIFICATION_LISTENER_CHECK_NOTIFICATION_ID,
-            b.build()
+            b.build(),
         )
 
         if (DEBUG) {
             Log.d(
                 TAG,
                 "Notification listener check notification shown with component=" +
-                    "${componentName.flattenToString()}, uid=$uid, sessionId=$sessionId"
+                    "${componentName.flattenToString()}, uid=$uid, sessionId=$sessionId",
             )
         }
 
@@ -574,7 +574,7 @@ class NotificationListenerCheckInternal(
             PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__PRIVACY_SOURCE__NOTIFICATION_LISTENER,
             uid,
             PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__ACTION__NOTIFICATION_SHOWN,
-            sessionId
+            sessionId,
         )
         updateLastShownNotificationTime()
     }
@@ -584,12 +584,12 @@ class NotificationListenerCheckInternal(
         context: Context,
         componentName: ComponentName,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent =
             Intent(
                     parentUserContext,
-                    NotificationListenerCheckNotificationDeleteHandler::class.java
+                    NotificationListenerCheckNotificationDeleteHandler::class.java,
                 )
                 .apply {
                     putExtra(EXTRA_COMPONENT_NAME, componentName)
@@ -602,7 +602,7 @@ class NotificationListenerCheckInternal(
             context,
             0,
             intent,
-            FLAG_ONE_SHOT or FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+            FLAG_ONE_SHOT or FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE,
         )
     }
 
@@ -611,14 +611,14 @@ class NotificationListenerCheckInternal(
         context: Context,
         componentName: ComponentName,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent =
             Intent(Intent.ACTION_SAFETY_CENTER).apply {
                 putExtra(EXTRA_SAFETY_SOURCE_ID, SC_NLS_SOURCE_ID)
                 putExtra(
                     EXTRA_SAFETY_SOURCE_ISSUE_ID,
-                    getSafetySourceIssueIdFromComponentName(componentName)
+                    getSafetySourceIssueIdFromComponentName(componentName),
                 )
                 putExtra(EXTRA_COMPONENT_NAME, componentName)
                 putExtra(Constants.EXTRA_SESSION_ID, sessionId)
@@ -630,7 +630,7 @@ class NotificationListenerCheckInternal(
             context,
             0,
             intent,
-            FLAG_ONE_SHOT or FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+            FLAG_ONE_SHOT or FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE,
         )
     }
 
@@ -698,7 +698,7 @@ class NotificationListenerCheckInternal(
     private fun sendIssuesToSafetyCenter(
         enabledComponents: List<ComponentName>,
         sessionId: Long,
-        safetyEvent: SafetyEvent = sourceStateChangedSafetyEvent
+        safetyEvent: SafetyEvent = sourceStateChangedSafetyEvent,
     ) {
         val pendingIssues = enabledComponents.mapNotNull { createSafetySourceIssue(it, sessionId) }
         val dataBuilder = SafetySourceData.Builder()
@@ -735,7 +735,7 @@ class NotificationListenerCheckInternal(
                 safetySourceIssueId,
                 componentName,
                 uid,
-                sessionId
+                sessionId,
             )
 
         val disableNlsAction =
@@ -744,7 +744,7 @@ class NotificationListenerCheckInternal(
                     parentUserContext.getString(
                         R.string.notification_listener_remove_access_button_label
                     ),
-                    disableNlsPendingIntent
+                    disableNlsPendingIntent,
                 )
                 .setWillResolve(true)
                 .setSuccessMessage(
@@ -759,7 +759,7 @@ class NotificationListenerCheckInternal(
                 parentUserContext,
                 componentName,
                 uid,
-                sessionId
+                sessionId,
             )
 
         val showNotificationListenerSettingsAction =
@@ -768,7 +768,7 @@ class NotificationListenerCheckInternal(
                     parentUserContext.getString(
                         R.string.notification_listener_review_app_button_label
                     ),
-                    notificationListenerDetailSettingsPendingIntent
+                    notificationListenerDetailSettingsPendingIntent,
                 )
                 .build()
 
@@ -785,7 +785,7 @@ class NotificationListenerCheckInternal(
                 title,
                 summary,
                 SafetySourceData.SEVERITY_LEVEL_INFORMATION,
-                SC_NLS_ISSUE_TYPE_ID
+                SC_NLS_ISSUE_TYPE_ID,
             )
             .setSubtitle(pkgLabel)
             .addAction(disableNlsAction)
@@ -801,7 +801,7 @@ class NotificationListenerCheckInternal(
         safetySourceIssueId: String,
         componentName: ComponentName,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent =
             Intent(context, DisableNotificationListenerComponentHandler::class.java).apply {
@@ -821,7 +821,7 @@ class NotificationListenerCheckInternal(
         context: Context,
         componentName: ComponentName,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent =
             Intent(ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS).apply {
@@ -829,7 +829,7 @@ class NotificationListenerCheckInternal(
                 identifier = componentName.flattenToString()
                 putExtra(
                     EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME,
-                    componentName.flattenToString()
+                    componentName.flattenToString(),
                 )
                 putExtra(Constants.EXTRA_SESSION_ID, sessionId)
                 putExtra(Intent.EXTRA_UID, uid)
@@ -842,7 +842,7 @@ class NotificationListenerCheckInternal(
         context: Context,
         componentName: ComponentName,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent =
             Intent(context, NotificationListenerActionCardDismissalReceiver::class.java).apply {
@@ -889,7 +889,7 @@ class NotificationListenerCheckJobService : JobService() {
                         val job = addNotificationListenerNotificationIfNeededJob
                         return@BooleanSupplier job?.isCancelled ?: false
                     }
-                }
+                },
             )
     }
 
@@ -916,9 +916,8 @@ class NotificationListenerCheckJobService : JobService() {
                     notificationListenerCheckInternal
                         ?.getEnabledNotificationListenersAndNotifyIfNeeded(
                             params,
-                            this@NotificationListenerCheckJobService
-                        )
-                        ?: jobFinished(params, true)
+                            this@NotificationListenerCheckJobService,
+                        ) ?: jobFinished(params, true)
                 }
         }
         return true
@@ -969,7 +968,7 @@ class SetupPeriodicNotificationListenerCheck : BroadcastReceiver() {
             val job =
                 JobInfo.Builder(
                         PERIODIC_NOTIFICATION_LISTENER_CHECK_JOB_ID,
-                        ComponentName(context, NotificationListenerCheckJobService::class.java)
+                        ComponentName(context, NotificationListenerCheckJobService::class.java),
                     )
                     .setPeriodic(getPeriodicCheckIntervalMillis(), getFlexForPeriodicCheckMillis())
                     .build()
@@ -977,7 +976,7 @@ class SetupPeriodicNotificationListenerCheck : BroadcastReceiver() {
             if (scheduleResult != JobScheduler.RESULT_SUCCESS) {
                 Log.e(
                     TAG,
-                    "Could not schedule periodic notification listener check $scheduleResult"
+                    "Could not schedule periodic notification listener check $scheduleResult",
                 )
             } else if (DEBUG) {
                 Log.i(TAG, "Scheduled periodic notification listener check")
@@ -1007,7 +1006,7 @@ class NotificationListenerCheckNotificationDeleteHandler : BroadcastReceiver() {
             Log.d(
                 TAG,
                 "Notification listener check notification declined with component=" +
-                    "${componentName.flattenToString()} , uid=$uid, sessionId=$sessionId"
+                    "${componentName.flattenToString()} , uid=$uid, sessionId=$sessionId",
             )
         }
         PermissionControllerStatsLog.write(
@@ -1015,7 +1014,7 @@ class NotificationListenerCheckNotificationDeleteHandler : BroadcastReceiver() {
             PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__PRIVACY_SOURCE__NOTIFICATION_LISTENER,
             uid,
             PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__ACTION__DISMISSED,
-            sessionId
+            sessionId,
         )
     }
 }
@@ -1036,7 +1035,7 @@ class DisableNotificationListenerComponentHandler : BroadcastReceiver() {
                 Log.d(
                     TAG,
                     "DisableComponentHandler: disabling $componentName," +
-                        "uid=$uid, sessionId=$sessionId"
+                        "uid=$uid, sessionId=$sessionId",
                 )
             }
 
@@ -1048,7 +1047,7 @@ class DisableNotificationListenerComponentHandler : BroadcastReceiver() {
                         notificationManager.setNotificationListenerAccessGranted(
                             componentName,
                             /* granted= */ false,
-                            /* userSet= */ true
+                            /* userSet= */ true,
                         )
                     }
 
@@ -1075,7 +1074,7 @@ class DisableNotificationListenerComponentHandler : BroadcastReceiver() {
                 PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__PRIVACY_SOURCE__NOTIFICATION_LISTENER,
                 uid,
                 PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__ACTION__CLICKED_CTA1,
-                sessionId
+                sessionId,
             )
         }
     }
@@ -1101,7 +1100,7 @@ class NotificationListenerActionCardDismissalReceiver : BroadcastReceiver() {
                 Log.d(
                     TAG,
                     "ActionCardDismissalReceiver: $componentName dismissed," +
-                        "uid=$uid, sessionId=$sessionId"
+                        "uid=$uid, sessionId=$sessionId",
                 )
             }
             NotificationListenerCheckInternal(context, null).run {
@@ -1114,7 +1113,7 @@ class NotificationListenerActionCardDismissalReceiver : BroadcastReceiver() {
             PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__PRIVACY_SOURCE__NOTIFICATION_LISTENER,
             uid,
             PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__ACTION__CARD_DISMISSED,
-            sessionId
+            sessionId,
         )
     }
 }
@@ -1171,7 +1170,7 @@ class NotificationListenerPrivacySource : PrivacySource {
     override fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: RefreshEvent
+        refreshEvent: RefreshEvent,
     ) {
         if (!isNotificationListenerCheckFlagEnabled()) {
             return

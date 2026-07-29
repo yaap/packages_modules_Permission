@@ -47,7 +47,7 @@ constructor(
     context: Context?,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    defStyleRes: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     private companion object {
@@ -83,7 +83,7 @@ constructor(
         getTaskIdForEntry: (String) -> Int,
         viewModel: SafetyCenterViewModel,
         onGroupExpanded: (String) -> Unit,
-        onGroupCollapsed: (String) -> Unit
+        onGroupCollapsed: (String) -> Unit,
     ) {
         applyPosition(isFirstCard, isLastCard)
         showGroupDetails(group)
@@ -124,7 +124,7 @@ constructor(
             group.title,
             group.summary,
             group.severityLevel,
-            group.severityUnspecifiedIconType
+            group.severityUnspecifiedIconType,
         )
     }
 
@@ -154,12 +154,12 @@ constructor(
         } else if (shouldBeExpanded) {
             chevronIconView?.animate(
                 R.drawable.safety_center_group_expand_anim,
-                R.drawable.ic_safety_group_collapse
+                R.drawable.ic_safety_group_collapse,
             )
         } else {
             chevronIconView?.animate(
                 R.drawable.safety_center_group_collapse_anim,
-                R.drawable.ic_safety_group_expand
+                R.drawable.ic_safety_group_expand,
             )
         }
 
@@ -206,7 +206,7 @@ constructor(
     private fun showGroupEntries(
         group: SafetyCenterEntryGroup,
         getTaskIdForEntry: (String) -> Int,
-        viewModel: SafetyCenterViewModel
+        viewModel: SafetyCenterViewModel,
     ) {
         val entriesCount = group.entries.size
         val existingViewsCount = entriesContainerView?.childCount ?: 0
@@ -227,7 +227,7 @@ constructor(
                 entry,
                 PositionInCardList.INSIDE_GROUP,
                 getTaskIdForEntry(entry.id),
-                viewModel
+                viewModel,
             )
         }
     }
@@ -260,14 +260,14 @@ constructor(
             this,
             AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK,
             context.getString(accessibilityActionResId),
-            null
+            null,
         )
     }
 
     private fun toggleExpandedState(
         group: SafetyCenterEntryGroup,
         onGroupExpanded: (String) -> Unit,
-        onGroupCollapsed: (String) -> Unit
+        onGroupCollapsed: (String) -> Unit,
     ) {
         val transition = AutoTransition()
         transition.duration = EXPAND_COLLAPSE_ANIMATION_DURATION_MS

@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"એજન્ટ"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"માહિતી ઍક્સેસ કરી શકે અથવા ઍપમાં પગલાં લઈ શકે તેવા એજન્ટ"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"ઍપ અને AI આસિસ્ટન્ટની ઍક્ટિવિટી"</string>
 </resources>

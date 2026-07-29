@@ -162,7 +162,7 @@ class HibernationControllerTest {
             0 /* lastUpdateTime */,
             false /* areAttributionsUserVisible */,
             emptyMap() /* attributionTagsToLabels */,
-            ContextCompat.DEVICE_ID_DEFAULT
+            ContextCompat.DEVICE_ID_DEFAULT,
         )
     }
 }

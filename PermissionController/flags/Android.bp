@@ -35,6 +35,7 @@ java_aconfig_library {
     libs: ["framework-configinfrastructure.stubs.module_lib"],
     visibility: [
         "//packages/modules/Permission/PermissionController:__subpackages__",
+        "//packages/modules/Permission/tests/functional/safetycenter/safetycenteractivity",
     ],
     apex_available: [
         "com.android.permission",

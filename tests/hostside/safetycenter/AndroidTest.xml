@@ -15,7 +15,6 @@
   ~ limitations under the License.
   -->
 <configuration description="Config for Safety Center hostside tests">
-    <!-- TODO(b/239682646): Integrate these tests into MTS -->
     <option name="config-descriptor:metadata" key="component" value="framework"/>
     <option name="config-descriptor:metadata" key="parameter" value="not_instant_app"/>
     <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi"/>

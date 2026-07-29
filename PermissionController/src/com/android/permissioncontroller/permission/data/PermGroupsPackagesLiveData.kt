@@ -127,12 +127,12 @@ private constructor(private val app: Application, groupNamesLiveData: LiveData<L
         private val customInstance =
             PermGroupsPackagesLiveData(
                 PermissionControllerApplication.get(),
-                CustomPermGroupNamesLiveData
+                CustomPermGroupNamesLiveData,
             )
         private val standardInstance =
             PermGroupsPackagesLiveData(
                 PermissionControllerApplication.get(),
-                StandardPermGroupNamesLiveData
+                StandardPermGroupNamesLiveData,
             )
 
         /**

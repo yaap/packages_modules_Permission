@@ -27,6 +27,8 @@ import android.os.UserHandle
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.PermissionControllerApplication
 import com.android.permissioncontroller.permission.model.livedatatypes.LightPackageInfo
+import com.android.permissioncontroller.permission.utils.ContextCompat
+import com.android.permissioncontroller.permission.utils.v35.MultiDeviceUtils
 import kotlinx.coroutines.Job
 
 /**
@@ -36,7 +38,11 @@ import kotlinx.coroutines.Job
  * @param user The user whose packages are desired
  */
 class UserPackageInfosLiveData
-private constructor(private val app: Application, private val user: UserHandle) :
+private constructor(
+    private val app: Application,
+    private val user: UserHandle,
+    private val deviceId: Int,
+) :
     SmartAsyncMediatorLiveData<@JvmSuppressWildcards List<LightPackageInfo>>(),
     PackageBroadcastReceiver.PackageBroadcastListener,
     PermissionListenerMultiplexer.PermissionChangeCallback {
@@ -48,7 +54,6 @@ private constructor(private val app: Application, private val user: UserHandle) 
         updateAsync()
     }
 
-    // TODO ntmyren: replace with correctly updating
     override fun onPermissionChange() {
         permChangeStale = true
         for (packageInfo in value ?: emptyList()) {
@@ -81,21 +86,43 @@ private constructor(private val app: Application, private val user: UserHandle) 
                     PackageManager.PackageInfoFlags.of(
                         GET_PERMISSIONS.toLong() or GET_ATTRIBUTIONS_LONG or MATCH_ALL.toLong()
                     ),
-                    user.identifier
+                    user.identifier,
                 )
             } else if (SdkLevel.isAtLeastS()) {
                 app.applicationContext.packageManager.getInstalledPackagesAsUser(
                     GET_PERMISSIONS or GET_ATTRIBUTIONS or MATCH_ALL,
-                    user.identifier
+                    user.identifier,
                 )
             } else {
                 app.applicationContext.packageManager.getInstalledPackagesAsUser(
                     GET_PERMISSIONS or MATCH_ALL,
-                    user.identifier
+                    user.identifier,
                 )
             }
 
-        postValue(packageInfos.map { packageInfo -> LightPackageInfo(packageInfo) })
+        val lightPackageInfos =
+            packageInfos.map { packageInfo ->
+                // PackageInfo#requestedPermissionsFlags is not device aware. Hence for
+                // device aware permissions if the deviceId is not the primary device we
+                // need to separately check permission for that device and update
+                // requestedPermissionsFlags.
+                if (SdkLevel.isAtLeastV() && deviceId != ContextCompat.DEVICE_ID_DEFAULT) {
+                    val requestedPermissionsFlagsForDevice =
+                        MultiDeviceUtils.getPermissionsFlagsForDevice(
+                            app,
+                            packageInfo.requestedPermissions?.toList() ?: emptyList(),
+                            packageInfo.requestedPermissionsFlags?.toList() ?: emptyList(),
+                            packageInfo.applicationInfo!!.uid,
+                            deviceId,
+                        )
+
+                    LightPackageInfo(packageInfo, deviceId, requestedPermissionsFlagsForDevice)
+                } else {
+                    LightPackageInfo(packageInfo)
+                }
+            }
+
+        postValue(lightPackageInfos)
     }
 
     override fun onActive() {
@@ -123,9 +150,9 @@ private constructor(private val app: Application, private val user: UserHandle) 
      *
      * <p> Key value is a UserHandle, value is its corresponding LiveData.
      */
-    companion object : DataRepository<UserHandle, UserPackageInfosLiveData>() {
-        override fun newValue(key: UserHandle): UserPackageInfosLiveData {
-            return UserPackageInfosLiveData(PermissionControllerApplication.get(), key)
+    companion object : DataRepositoryForDevice<UserHandle, UserPackageInfosLiveData>() {
+        override fun newValue(key: UserHandle, deviceId: Int): UserPackageInfosLiveData {
+            return UserPackageInfosLiveData(PermissionControllerApplication.get(), key, deviceId)
         }
     }
 }

@@ -36,5 +36,5 @@ class LocationPermissionAppsFragmentTest :
     PermissionAppsFragmentTest(
         "/data/local/tmp/pc-permissionui/AppThatRequestsLocation.apk",
         "android.permission.cts.appthatrequestpermission",
-        ACCESS_COARSE_LOCATION
+        ACCESS_COARSE_LOCATION,
     )

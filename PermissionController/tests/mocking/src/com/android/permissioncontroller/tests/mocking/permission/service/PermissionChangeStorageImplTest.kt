@@ -116,7 +116,7 @@ class PermissionChangeStorageImplTest {
                 DeviceConfig.getBoolean(
                     ArgumentMatchers.eq(DeviceConfig.NAMESPACE_PERMISSIONS),
                     ArgumentMatchers.eq(Utils.PROPERTY_PERMISSION_CHANGES_STORE_EXACT_TIME),
-                    ArgumentMatchers.anyBoolean()
+                    ArgumentMatchers.anyBoolean(),
                 )
             )
             .thenReturn(true)
@@ -137,7 +137,7 @@ class PermissionChangeStorageImplTest {
                 DeviceConfig.getBoolean(
                     ArgumentMatchers.eq(DeviceConfig.NAMESPACE_PERMISSIONS),
                     ArgumentMatchers.eq(Utils.PROPERTY_PERMISSION_CHANGES_STORE_EXACT_TIME),
-                    ArgumentMatchers.anyBoolean()
+                    ArgumentMatchers.anyBoolean(),
                 )
             )
             .thenReturn(true)
@@ -152,7 +152,7 @@ class PermissionChangeStorageImplTest {
                 DeviceConfig.getBoolean(
                     ArgumentMatchers.eq(DeviceConfig.NAMESPACE_PERMISSIONS),
                     ArgumentMatchers.eq(Utils.PROPERTY_PERMISSION_CHANGES_STORE_EXACT_TIME),
-                    ArgumentMatchers.anyBoolean()
+                    ArgumentMatchers.anyBoolean(),
                 )
             )
             .thenReturn(true)
@@ -165,7 +165,7 @@ class PermissionChangeStorageImplTest {
                 DeviceConfig.getBoolean(
                     ArgumentMatchers.eq(DeviceConfig.NAMESPACE_PERMISSIONS),
                     ArgumentMatchers.eq(Utils.PROPERTY_PERMISSION_CHANGES_STORE_EXACT_TIME),
-                    ArgumentMatchers.anyBoolean()
+                    ArgumentMatchers.anyBoolean(),
                 )
             )
             .thenReturn(false)

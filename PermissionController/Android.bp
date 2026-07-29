@@ -206,8 +206,10 @@ android_app {
     certificate: "platform",
     use_resource_processor: true,
     rename_resources_package: false,
+    preinstall_allowlist: ":preinstalled-packages-com.android.permissioncontroller.xml",
     privapp_allowlist: ":privapp_allowlist_com.android.permissioncontroller.xml",
     flags_packages: [
+        "android.permission.flags-aconfig",
         "com.android.permission.flags-aconfig",
     ],
 
@@ -215,6 +217,7 @@ android_app {
 
     lint: {
         error_checks: ["Recycle"],
+        baseline_filename: "lint-baseline2.xml",
     },
 
     optimize: {

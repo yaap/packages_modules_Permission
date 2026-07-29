@@ -36,6 +36,11 @@
             app:checkboxId="@+id/allow_foreground_only_radio_button" />
 
         <com.android.permissioncontroller.permission.ui.handheld.v36.PermissionSelectorWithWidgetPreference
+            android:key="app_permission_allow_for_compatibility_radio_button"
+            android:title="@string/app_permission_button_allow_for_compatibility"
+            app:checkboxId="@+id/allow_for_compatibility_radio_button" />
+
+        <com.android.permissioncontroller.permission.ui.handheld.v36.PermissionSelectorWithWidgetPreference
             android:key="app_permission_select_photos_radio_button"
             android:title="@string/app_permission_button_allow_limited_access"
             app:checkboxId="@+id/select_radio_button"
@@ -94,15 +99,7 @@
         android:summary="@string/app_permission_footer_permission_apps_link" />
 
     <com.android.permissioncontroller.permission.ui.handheld.PermissionFooterPreference
-        android:key="app_permission_footer_storage_special_app_access"
+        android:key="app_permission_footer"
         android:icon="@drawable/ic_info_outline"
-        android:title="@string/app_permission_footer_special_file_access"
         app:isPreferenceVisible="false" />
-
-    <com.android.permissioncontroller.permission.ui.handheld.PermissionFooterPreference
-        android:key="app_permission_additional_info"
-        android:icon="@drawable/ic_info_outline"
-        android:title="@string/exempt_info_label"
-        app:isPreferenceVisible="false" />
-
 </PreferenceScreen>

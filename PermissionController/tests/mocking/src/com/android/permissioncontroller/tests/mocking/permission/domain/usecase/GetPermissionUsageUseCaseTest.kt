@@ -103,19 +103,14 @@ class GetPermissionUsageUseCaseTest {
 
     @Test
     fun guestUserUsageIsFiltered() = runTest {
-        val appOpsUsage =
-            listOf(
-                AppOpUsageModel(AppOpsManager.OPSTR_CAMERA, 100),
-            )
+        val appOpsUsage = listOf(AppOpUsageModel(AppOpsManager.OPSTR_CAMERA, 100))
         val guestAppOpsUsage =
-            listOf(
-                AppOpUsageModel(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE, 100),
-            )
+            listOf(AppOpUsageModel(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE, 100))
         val appOpsUsageModelFlow = flow {
             emit(
                 listOf(
                     PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                    PackageAppOpUsageModel(guestUserPkgName, guestAppOpsUsage, guestUser.identifier)
+                    PackageAppOpUsageModel(guestUserPkgName, guestAppOpsUsage, guestUser.identifier),
                 )
             )
         }
@@ -137,16 +132,14 @@ class GetPermissionUsageUseCaseTest {
 
         val appOpsUsageModelFlow = flow {
             emit(
-                listOf(
-                    PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                )
+                listOf(PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier))
             )
         }
         val userRepository =
             FakeUserRepository(
                 currentUserProfiles = listOf(currentUser.identifier),
                 quietUserProfiles = listOf(currentUser.identifier),
-                showInQuiteModeProfiles = listOf(currentUser.identifier)
+                showInQuiteModeProfiles = listOf(currentUser.identifier),
             )
         val underTest =
             getPermissionGroupUsageUseCase(appOpsUsageModelFlow, userRepo = userRepository)
@@ -156,7 +149,7 @@ class GetPermissionUsageUseCaseTest {
             .isEqualTo(
                 listOf(
                     PermissionGroupUsageModel(CAMERA_PERMISSION_GROUP, 100, true),
-                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 150, true)
+                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 150, true),
                 )
             )
     }
@@ -164,22 +157,17 @@ class GetPermissionUsageUseCaseTest {
     @Test
     fun quietProfileAppOpsUsageIsFiltered() = runTest {
         Assume.assumeTrue(SdkLevel.isAtLeastV())
-        val appOpsUsage =
-            listOf(
-                AppOpUsageModel(AppOpsManager.OPSTR_CAMERA, 100),
-            )
+        val appOpsUsage = listOf(AppOpUsageModel(AppOpsManager.OPSTR_CAMERA, 100))
         val appOpsUsageModelFlow = flow {
             emit(
-                listOf(
-                    PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                )
+                listOf(PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier))
             )
         }
         val userRepository =
             FakeUserRepository(
                 currentUserProfiles = listOf(currentUser.identifier),
                 quietUserProfiles = listOf(currentUser.identifier),
-                showInQuiteModeProfiles = emptyList()
+                showInQuiteModeProfiles = emptyList(),
             )
         val underTest =
             getPermissionGroupUsageUseCase(appOpsUsageModelFlow, userRepo = userRepository)
@@ -189,14 +177,9 @@ class GetPermissionUsageUseCaseTest {
 
     @Test
     fun exemptedPackageIsFiltered() = runTest {
-        val appOpsUsage =
-            listOf(
-                AppOpUsageModel(AppOpsManager.OPSTR_CAMERA, 100),
-            )
+        val appOpsUsage = listOf(AppOpUsageModel(AppOpsManager.OPSTR_CAMERA, 100))
         val exemptedOpsUsage =
-            listOf(
-                AppOpUsageModel(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE, 100),
-            )
+            listOf(AppOpUsageModel(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE, 100))
         val appOpsUsageModelFlow = flow {
             emit(
                 listOf(
@@ -204,8 +187,8 @@ class GetPermissionUsageUseCaseTest {
                     PackageAppOpUsageModel(
                         exemptedPkgName,
                         exemptedOpsUsage,
-                        currentUser.identifier
-                    )
+                        currentUser.identifier,
+                    ),
                 )
             )
         }
@@ -225,15 +208,13 @@ class GetPermissionUsageUseCaseTest {
             )
         val appOpsUsageModelFlow = flow {
             emit(
-                listOf(
-                    PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                )
+                listOf(PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier))
             )
         }
         packageInfos[testPackageName] =
             getPackageInfoModel(
                 testPackageName,
-                requestedPermissions = listOf(RECORD_AUDIO_PERMISSION)
+                requestedPermissions = listOf(RECORD_AUDIO_PERMISSION),
             )
         val underTest = getPermissionGroupUsageUseCase(appOpsUsageModelFlow)
 
@@ -253,9 +234,7 @@ class GetPermissionUsageUseCaseTest {
             )
         val appOpsUsageModelFlow = flow {
             emit(
-                listOf(
-                    PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                )
+                listOf(PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier))
             )
         }
         val underTest = getPermissionGroupUsageUseCase(appOpsUsageModelFlow)
@@ -265,7 +244,7 @@ class GetPermissionUsageUseCaseTest {
             .isEqualTo(
                 listOf(
                     PermissionGroupUsageModel(CAMERA_PERMISSION_GROUP, 150, true),
-                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 100, true)
+                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 100, true),
                 )
             )
     }
@@ -279,9 +258,7 @@ class GetPermissionUsageUseCaseTest {
             )
         val appOpsUsageModelFlow = flow {
             emit(
-                listOf(
-                    PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                )
+                listOf(PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier))
             )
         }
         // test package is not a system package
@@ -292,7 +269,7 @@ class GetPermissionUsageUseCaseTest {
             .isEqualTo(
                 listOf(
                     PermissionGroupUsageModel(CAMERA_PERMISSION_GROUP, 100, true),
-                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 100, true)
+                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 100, true),
                 )
             )
     }
@@ -306,9 +283,7 @@ class GetPermissionUsageUseCaseTest {
             )
         val appOpsUsageModelFlow = flow {
             emit(
-                listOf(
-                    PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier),
-                )
+                listOf(PackageAppOpUsageModel(testPackageName, appOpsUsage, currentUser.identifier))
             )
         }
         val permissionFlags =
@@ -323,9 +298,9 @@ class GetPermissionUsageUseCaseTest {
                 permissionsFlags =
                     listOf(
                         PackageInfo.REQUESTED_PERMISSION_GRANTED,
-                        PackageInfo.REQUESTED_PERMISSION_GRANTED
+                        PackageInfo.REQUESTED_PERMISSION_GRANTED,
                     ),
-                applicationFlags = ApplicationInfo.FLAG_SYSTEM
+                applicationFlags = ApplicationInfo.FLAG_SYSTEM,
             )
         val underTest =
             getPermissionGroupUsageUseCase(appOpsUsageModelFlow, permissionFlags = permissionFlags)
@@ -335,7 +310,7 @@ class GetPermissionUsageUseCaseTest {
             .isEqualTo(
                 listOf(
                     PermissionGroupUsageModel(CAMERA_PERMISSION_GROUP, 100, true),
-                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 100, false)
+                    PermissionGroupUsageModel(MICROPHONE_PERMISSION_GROUP, 100, false),
                 )
             )
     }
@@ -357,7 +332,7 @@ class GetPermissionUsageUseCaseTest {
     private fun getPermissionGroupUsageUseCase(
         packageAppOpsUsages: Flow<List<PackageAppOpUsageModel>>,
         permissionFlags: Map<String, Int> = emptyMap(),
-        userRepo: UserRepository = userRepository
+        userRepo: UserRepository = userRepository,
     ): GetPermissionGroupUsageUseCase {
         val permissionRepository = FakePermissionRepository(permissionFlags)
         val packageRepository = FakePackageRepository(packageInfos)
@@ -367,7 +342,7 @@ class GetPermissionUsageUseCaseTest {
             permissionRepository,
             appOpUsageRepository,
             roleRepository,
-            userRepo
+            userRepo,
         )
     }
 

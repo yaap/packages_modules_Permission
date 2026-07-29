@@ -73,20 +73,30 @@
         <option name="push" value="CtsMediaPermissionApp33WithStorage.apk->/data/local/tmp/cts-permissionui/CtsMediaPermissionApp33WithStorage.apk" />
         <option name="push" value="CtsUsePermissionAppImplicitUserSelectStorage.apk->/data/local/tmp/cts-permissionui/CtsUsePermissionAppImplicitUserSelectStorage.apk" />
         <option name="push" value="CtsAppThatAccessesMicAndCameraPermission.apk->/data/local/tmp/cts-permissionui/CtsAppThatAccessesMicAndCameraPermission.apk" />
+        <option name="push" value="CtsAppThatAccessesLocationPermission.apk->/data/local/tmp/cts-permissionui/CtsAppThatAccessesLocationPermission.apk" />
         <option name="push" value="CtsUsePermissionAppStorage33.apk->/data/local/tmp/cts-permissionui/CtsUsePermissionAppStorage33.apk" />
         <option name="push" value="CtsAppThatMakesTwoPermRequests.apk->/data/local/tmp/cts-permissionui/CtsAppThatMakesTwoPermRequests.apk" />
+        <option name="push" value="CtsLocationButtonApp.apk->/data/local/tmp/cts-permissionui/CtsLocationButtonApp.apk" />
+        <option name="push" value="CtsAppThatRequestsInternet36.apk->/data/local/tmp/cts-permissionui/CtsAppThatRequestsInternet36.apk" />
     </target_preparer>
 
     <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
         <option name="run-command" value="appops set android.permissionui.cts REQUEST_INSTALL_PACKAGES allow" />
-        <option name="run-command" value="am wait-for-broadcast-barrier"  />
-        <!-- ensure device provisioning and user setup are marked as completed -->
+        <!-- Ensure device provisioning and user setup are marked as completed -->
         <option name="run-command" value="settings put global device_provisioned 1" />
         <option name="run-command" value="settings put secure user_setup_complete 1" />
-        <!-- disable DeprecatedAbi warning -->
+        <!-- Disable verifier target SDK warning -->
+        <option name="run-command" value="settings put global verifier_engprod 1" />
+        <option name="run-command" value="settings put global verifier_verify_adb_installs 0" />
+        <!-- Disable DeprecatedAbi warning -->
         <option name="run-command" value="setprop debug.wm.disable_deprecated_abi_dialog 1" />
-        <!-- disable DeprecatedTargetSdk warning -->
+        <!-- Disable DeprecatedTargetSdk warning -->
         <option name="run-command" value="setprop debug.wm.disable_deprecated_target_sdk_dialog 1" />
+        <!-- Dismiss any system dialogs (e.g. crashes, ANR). -->
+        <option name="run-command" value="am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS --receiver-foreground" />
+        <!-- Ensure all broadcasts are dispatched prior to running our tests. -->
+        <option name="run-command" value="am wait-for-broadcast-idle" />
+        <option name="run-command" value="am wait-for-broadcast-barrier" />
     </target_preparer>
 
     <!-- Create place to store apks -->

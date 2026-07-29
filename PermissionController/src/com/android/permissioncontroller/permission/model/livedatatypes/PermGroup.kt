@@ -25,7 +25,7 @@ package com.android.permissioncontroller.permission.model.livedatatypes
  */
 data class PermGroup(
     var groupInfo: LightPermGroupInfo,
-    val permissionInfos: Map<String, LightPermInfo>
+    val permissionInfos: Map<String, LightPermInfo>,
 ) {
     val name: String = groupInfo.name
 

@@ -37,7 +37,7 @@ class UsageStatsLiveData
 private constructor(
     private val app: Application,
     private val searchTimeMs: Long,
-    private val interval: Int = INTERVAL_MONTHLY
+    private val interval: Int = INTERVAL_MONTHLY,
 ) : SmartAsyncMediatorLiveData<Map<UserHandle, List<UsageStats>>>() {
 
     init {

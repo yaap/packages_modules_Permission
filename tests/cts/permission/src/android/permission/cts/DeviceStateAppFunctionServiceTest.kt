@@ -41,6 +41,7 @@ import com.android.compatibility.common.util.DeviceConfigStateChangerRule
 import com.android.compatibility.common.util.SystemUtil
 import com.google.common.truth.Truth.assertThat
 import com.google.common.truth.Truth.assertWithMessage
+import java.security.MessageDigest
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.test.runTest
@@ -97,6 +98,7 @@ class DeviceStateAppFunctionServiceTest {
         Assume.assumeFalse(isTv)
         Assume.assumeFalse(isWatch)
 
+        setAppFunctionAllowlist(permissionControllerPackageName)
         appFunctionManager = context.getSystemService(AppFunctionManager::class.java)
         assertThat(appFunctionManager).isNotNull()
         installTestAppAndGrantPermission()
@@ -104,13 +106,12 @@ class DeviceStateAppFunctionServiceTest {
 
     @After
     fun tearDown() {
+        clearAppFunctionAllowlist()
         SystemUtil.runShellCommand("pm uninstall " + TEST_PACKAGE_NAME)
     }
 
     @Test
     fun onExecuteFunction_withInvalidFunctionIdentifier_returnsFunctionNotFoundError() = runTest {
-        grantAppFunctionAccess(CURRENT_PKG, permissionControllerPackageName)
-
         val request =
             ExecuteAppFunctionRequest.Builder(
                     permissionControllerPackageName,
@@ -131,8 +132,6 @@ class DeviceStateAppFunctionServiceTest {
 
     @Test
     fun onExecuteFunction_withValidIdentifier_returnsSuccessfulResponse() = runTest {
-        grantAppFunctionAccess(CURRENT_PKG, permissionControllerPackageName)
-
         val request =
             ExecuteAppFunctionRequest.Builder(
                     permissionControllerPackageName,
@@ -218,12 +217,12 @@ class DeviceStateAppFunctionServiceTest {
         screenValidations: MutableMap<String, Boolean>,
     ) {
         val description = screen.getPropertyString("description")
-        val regex = """the intent uri is (.*)""".toRegex()
-        val matchResult = regex.find(description!!)
-        val intentUri = matchResult!!.groups[1]!!.value
+        assertThat(description)
+            .contains("substitute \${package} with the package name in the intent uri")
+        val intentUri = screen.getPropertyString("intentUri")
         val intent = Intent.parseUri(intentUri, 0)
         assertThat(intent.action).isEqualTo(ACTION_MANAGE_APP_PERMISSIONS)
-        assertThat(intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)).isEqualTo("\$packageName")
+        assertThat(intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)).isEqualTo("\${package}")
         assertThat(intent.getStringExtra(EXTRA_DEVICE_STATE_KEY)).isNotNull()
 
         screenValidations.putIfAbsent("AppPermissionsScreen", true)
@@ -234,12 +233,12 @@ class DeviceStateAppFunctionServiceTest {
         screenValidations: MutableMap<String, Boolean>,
     ) {
         val description = screen.getPropertyString("description")
-        val regex = """The intent uri is (.*)""".toRegex()
-        val matchResult = regex.find(description!!)
-        val intentUri = matchResult!!.groups[1]!!.value
+        assertThat(description)
+            .contains("substitute \${package} with the package name in the intent uri")
+        val intentUri = screen.getPropertyString("intentUri")
         val intent = Intent.parseUri(intentUri, 0)
-        assertThat(intent.action).isEqualTo(ACTION_MANAGE_APP_PERMISSIONS)
-        assertThat(intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)).isEqualTo("\$packageName")
+        assertThat(intent.action).isEqualTo(ACTION_MANAGE_APP_PERMISSION)
+        assertThat(intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)).isEqualTo("\${package}")
         assertThat(intent.getStringExtra(Intent.EXTRA_PERMISSION_GROUP_NAME)).isNotNull()
         assertThat(intent.getStringExtra(EXTRA_DEVICE_STATE_KEY)).isNotNull()
 
@@ -315,10 +314,44 @@ class DeviceStateAppFunctionServiceTest {
         screenValidations.putIfAbsent("DefaultAppScreen", true)
     }
 
-    private fun grantAppFunctionAccess(agentPackage: String, targetPackage: String) {
+    private fun setAppFunctionAllowlist(targetPackage: String) {
+        val packageInfo =
+            context.packageManager.getPackageInfo(
+                context.packageName,
+                PackageManager.GET_SIGNING_CERTIFICATES,
+            )
+        val signatures = packageInfo.signingInfo?.signingCertificateHistory
+        val certificate =
+            if (!signatures.isNullOrEmpty()) {
+                val digest =
+                    MessageDigest.getInstance("SHA-256")
+                        .digest(signatures.last().toByteArray())
+                digest.joinToString("") { "%02X".format(it) }
+            } else {
+                throw IllegalStateException(
+                    "No signatures found for package ${context.packageName}"
+                )
+            }
+        val signedPackage = "${context.packageName}:$certificate"
+
+        SystemUtil.runShellCommand("cmd app_function purge-allowlist-cache")
         SystemUtil.runShellCommand(
-            "cmd app_function grant-app-function-access --agent-package $agentPackage --target-package $targetPackage"
+            buildString {
+                append("cmd allowlist add-package-multimap")
+                append(" ")
+                append("$APP_FUNCTION_ALLOWLIST_TYPE")
+                append(" ")
+                append(signedPackage)
+                append(" ")
+                append(targetPackage)
+            }
         )
+    }
+
+    private fun clearAppFunctionAllowlist() {
+        SystemUtil.runShellCommand("cmd app_function purge-allowlist-cache")
+        SystemUtil.runShellCommand(
+            "cmd allowlist clear-shell-allowlist $APP_FUNCTION_ALLOWLIST_TYPE")
     }
 
     private fun installTestAppAndGrantPermission() {
@@ -332,8 +365,8 @@ class DeviceStateAppFunctionServiceTest {
     }
 
     private companion object {
+        const val APP_FUNCTION_ALLOWLIST_TYPE = 2
         const val APP_FUNCTION_IDENTIFIER = "getPermissionsDeviceState"
-        const val CURRENT_PKG = "android.permission.cts"
         const val EXECUTE_APP_FUNCTIONS_PERMISSION = Manifest.permission.EXECUTE_APP_FUNCTIONS
         const val EXTRA_DEVICE_STATE_KEY = "com.android.permissioncontroller.devicestate.key"
         const val ACTION_MANAGE_PERMISSIONS =

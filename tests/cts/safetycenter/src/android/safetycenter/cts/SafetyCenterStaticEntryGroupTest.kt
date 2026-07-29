@@ -19,12 +19,13 @@ package android.safetycenter.cts
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.safetycenter.SafetyCenterStaticEntry
+import android.os.UserHandle
 import android.safetycenter.SafetyCenterStaticEntryGroup
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.os.ParcelableSubject.assertThat
 import com.android.safetycenter.testing.EqualsHashCodeToStringTester
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterStaticEntryBuilder
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Test
@@ -43,17 +44,21 @@ class SafetyCenterStaticEntryGroupTest {
         PendingIntent.getActivity(context, 0, Intent("Fake Data 3"), PendingIntent.FLAG_IMMUTABLE)
 
     private val staticEntry1 =
-        SafetyCenterStaticEntry.Builder("an entry title")
+        createSafetyCenterStaticEntryBuilder("an entry title", "sourceId", UserHandle.of(0))
             .setSummary("an entry summary")
             .setPendingIntent(pendingIntent1)
             .build()
     private val staticEntry2 =
-        SafetyCenterStaticEntry.Builder("another entry title")
+        createSafetyCenterStaticEntryBuilder("another entry title", "sourceId", UserHandle.of(0))
             .setSummary("another entry summary")
             .setPendingIntent(pendingIntent2)
             .build()
     private val staticEntry3 =
-        SafetyCenterStaticEntry.Builder("yet another entry title")
+        createSafetyCenterStaticEntryBuilder(
+                "yet another entry title",
+                "sourceId",
+                UserHandle.of(0),
+            )
             .setSummary("yet another entry summary")
             .setPendingIntent(pendingIntent3)
             .build()

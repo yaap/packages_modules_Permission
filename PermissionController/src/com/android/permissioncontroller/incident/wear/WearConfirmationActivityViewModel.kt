@@ -51,6 +51,7 @@ class WearConfirmationActivityViewModel : ViewModel() {
 /** Factory for a WearConfirmationActivityViewModel */
 class WearConfirmationActivityViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST") return WearConfirmationActivityViewModel() as T
+        @Suppress("UNCHECKED_CAST")
+        return WearConfirmationActivityViewModel() as T
     }
 }

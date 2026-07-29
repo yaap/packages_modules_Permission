@@ -20,7 +20,7 @@
     <string name="ok" msgid="1936281769725676272">"تأیید"</string>
     <string name="permission_search_keyword" msgid="1214451577494730543">"اجازه‌ها"</string>
     <string name="cancel" msgid="8943320028373963831">"لغو"</string>
-    <string name="back" msgid="6249950659061523680">"برگشت"</string>
+    <string name="back" msgid="6249950659061523680">"برگشتن"</string>
     <string name="dialog_close" msgid="6840699812532384661">"بستن"</string>
     <string name="available" msgid="6007778121920339498">"دردسترس"</string>
     <string name="blocked" msgid="9195547604866033708">"مسدود"</string>
@@ -33,9 +33,9 @@
     <string name="grant_dialog_button_no_upgrade" msgid="8344732743633736625">"تغییر ندادن اجازه «هنگامی که از برنامه استفاده می‌شود»"</string>
     <string name="grant_dialog_button_no_upgrade_one_time" msgid="5125892775684968694">"«فقط این بار» نگه داشته شود"</string>
     <string name="grant_dialog_button_more_info" msgid="213350268561945193">"اطلاعات بیشتر"</string>
-    <string name="grant_dialog_button_allow_all" msgid="5939066403732409516">"مجاز بودن همه"</string>
-    <string name="grant_dialog_button_always_allow_all" msgid="1719900027660252167">"همه موارد همیشه مجازاند"</string>
-    <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"مجاز کردن دسترسی محدود"</string>
+    <string name="grant_dialog_button_allow_all" msgid="5939066403732409516">"اجازه دادن همه"</string>
+    <string name="grant_dialog_button_always_allow_all" msgid="1719900027660252167">"همه همیشه اجازه داشتن"</string>
+    <string name="grant_dialog_button_allow_limited_access" msgid="5713551784422137594">"اجازه دادن به دسترسی محدود"</string>
     <string name="grant_dialog_button_allow_selected_photos" msgid="5497042471576153842">"انتخاب عکس و ویدیو"</string>
     <string name="grant_dialog_button_allow_more_selected_photos" msgid="5145657877588697709">"انتخاب موارد بیشتر"</string>
     <string name="grant_dialog_button_dont_select_more" msgid="6643552729129461268">"دیگر چیزی انتخاب نشود"</string>
@@ -51,12 +51,12 @@
     <string name="permission_revoked_all" msgid="3397649017727222283">"همه مجوزها غیرفعال است"</string>
     <string name="permission_revoked_none" msgid="9213345075484381180">"هیچ‌ موردی غیرفعال نیست"</string>
     <string name="grant_dialog_button_allow" msgid="5314677880021102550">"اجازه دادن"</string>
-    <string name="grant_dialog_button_allow_always" msgid="4485552579273565981">"همیشه مجاز"</string>
+    <string name="grant_dialog_button_allow_always" msgid="4485552579273565981">"همیشه اجازه داشتن"</string>
     <string name="grant_dialog_button_allow_foreground" msgid="501896824973636533">"هنگام استفاده از برنامه"</string>
     <string name="grant_dialog_button_change_to_precise_location" msgid="3273115879467236033">"تغییر به مکان دقیق"</string>
     <string name="grant_dialog_button_keey_approximate_location" msgid="438025182769080011">"حفظ مکان تقریبی"</string>
     <string name="grant_dialog_button_allow_one_time" msgid="2618088516449706391">"فقط این بار"</string>
-    <string name="grant_dialog_button_allow_background" msgid="8236044729434367833">"همیشه مجاز"</string>
+    <string name="grant_dialog_button_allow_background" msgid="8236044729434367833">"همیشه اجازه داشتن"</string>
     <string name="grant_dialog_button_allow_all_files" msgid="4955436994954829894">"اجازه دادن برای مدیریت همه فایل‌ها"</string>
     <string name="grant_dialog_button_allow_media_only" msgid="4832877658422573832">"اجازه دادن برای دسترسی به فایل‌های رسانه"</string>
     <string name="app_permissions_breadcrumb" msgid="5136969550489411650">"برنامه‌ها"</string>
@@ -77,7 +77,7 @@
     <string name="app_permission_manager" msgid="3903811137630909550">"مدیر اجازه‌ها"</string>
     <string name="never_ask_again" msgid="4728762438198560329">"دوباره پرسیده نشود"</string>
     <string name="no_permissions" msgid="3881676756371148563">"مجوزی موجود نیست"</string>
-    <string name="additional_permissions" msgid="5801285469338873430">"اجازه‌های جانبی"</string>
+    <string name="additional_permissions" msgid="5801285469338873430">"اجازه‌های اضافی"</string>
     <string name="app_permissions_info_button_label" msgid="7633312050729974623">"باز کردن اطلاعات برنامه"</string>
     <string name="additional_permissions_more" msgid="5681220714755304407">"{count,plural, =1{# اجازه دیگر}one{# اجازه دیگر}other{# اجازه دیگر}}"</string>
     <string name="old_sdk_deny_warning" msgid="2382236998845153919">"‏این برنامه برای نسخه قدیمی‌تری از Android طراحی شده بود. رد کردن مجوز ممکن است باعث شود که برنامه دیگر عملکرد موردانتظار را نداشته باشند."</string>
@@ -110,7 +110,7 @@
     <!-- no translation found for background_access_chooser_dialog_choices:0 (1351721623256561996) -->
     <!-- no translation found for background_access_chooser_dialog_choices:1 (9127301153688725448) -->
     <!-- no translation found for background_access_chooser_dialog_choices:2 (4305536986042401191) -->
-    <string name="permission_access_always" msgid="1474641821883823446">"همیشه مجاز"</string>
+    <string name="permission_access_always" msgid="1474641821883823446">"همیشه اجازه داشتن"</string>
     <string name="permission_access_only_foreground" msgid="7801170728159326195">"مجاز فقط هنگام استفاده از برنامه"</string>
     <string name="permission_access_never" msgid="4647014230217936900">"اجازه ندادن"</string>
     <string name="loading" msgid="4789365003890741082">"درحال بارگیری…"</string>
@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"مرحله‌بندی برنامه…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"نامشخص"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"داشبورد حریم خصوصی"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"اجازه‌های برنامه"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"فعالیت دستیار هوشواره‌ای"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"هیچ دستیار هوشواره‌ای نصب نشده است"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"در ۲۴ ساعت گذشته دسترسی نداشته است"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"دسترسی در ۷ روز گذشته وجود ندارد"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"فعالیت <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"در ۲۴ ساعت گذشته"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"در ۳۶۵ روز گذشته"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"امروز"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"دیروز"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"آخرین دسترسی: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"مشاهده"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"دسترسی وجود ندارد"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"این دستیار هوشواره‌ای برای دریافت اطلاعات یا اقدام ازطرف شما به این برنامه‌ها دسترسی دارد. می‌توانید این دسترسی را در تنظیمات <xliff:g id="APP_NAME">%1$s</xliff:g> تغییر دهید"</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"‏داشبورد حریم خصوصی فقط زمانی نشان داده می‌شود که برنامه بااستفاده از ویژگی Android برای دستیار هوشواره‌ای دردسترس باشد."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"دستیار دستگاه"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"مشاهده برنامه‌هایی که اخیراً از اجازه‌ها استفاده کرده‌اند"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"استفاده از <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"دیدن اجازه‌های دیگر"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{در # روز گذشته استفاده نشده است}one{در # روز گذشته استفاده نشده است}other{در # روز گذشته استفاده نشده است}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{در # ساعت گذشته استفاده نشده است}one{در # ساعت گذشته استفاده نشده است}other{در # ساعت گذشته استفاده نشده است}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{یک برنامه از آن استفاده کرده است}one{# برنامه از آن استفاده کرده است}other{# برنامه از آن استفاده کرده است}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{به ۱ برنامه دسترسی داشته است}one{به # برنامه دسترسی داشته است}other{به # برنامه دسترسی داشته است}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"دیدن همه موارد در داشبورد"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"فیلترشده براساس: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"حذف فیلتر"</string>
@@ -187,12 +204,14 @@
     <string name="app_permission_button_allow" msgid="5808039516494774647">"اجازه دادن"</string>
     <string name="app_permission_button_allow_all_files" msgid="1792232272599018825">"اجازه دادن برای مدیریت همه فایل‌ها"</string>
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"اجازه دادن فقط برای دسترسی به رسانه‌ها"</string>
-    <string name="app_permission_button_allow_always" msgid="4573292371734011171">"همیشه مجاز"</string>
+    <string name="app_permission_button_allow_always" msgid="4573292371734011171">"همیشه اجازه داشتن"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"مجاز فقط هنگام استفاده از برنامه"</string>
-    <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"همه موارد همیشه مجازاند"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"اجازه دادن به ادامه کار برنامه"</string>
+    <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"همه همیشه اجازه داشتن"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"هربار پرسیده شود"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"هربار پرسیده شود یا هنگام هم‌رسانی اجازه داده شود"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"اجازه ندادن"</string>
-    <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"مجاز کردن دسترسی محدود"</string>
+    <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"اجازه دادن به دسترسی محدود"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"مکان دقیق"</string>
     <string name="approximate_image_description" msgid="938803699637069884">"مکان تقریبی"</string>
     <string name="app_permission_location_accuracy" msgid="7166912915040018669">"استفاده از مکان دقیق"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"اجازه داشتن"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"همیشه مجاز بودن"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"مجاز فقط هنگام استفاده"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"اجازه داشتن برای حفظ کار کردن برنامه"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"مجاز فقط برای دسترسی به رسانه‌ها"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"مجاز برای مدیریت همه فایل‌ها"</string>
     <string name="ask_header" msgid="2633816846459944376">"هربار پرسیده شود"</string>
     <string name="denied_header" msgid="903209608358177654">"اجازه نداشتن"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> در <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"دیدن برنامه‌های دیگری که به همه فایل‌ها دسترسی دارند"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"‏&lt;b&gt;اجازه دادن به برنامه برای ادامه کار&lt;/b&gt;&lt;br&gt;&lt;br&gt;برای اینکه برنامه همچنان به کار ادامه دهد، ممکن است به آن اجازه داده شود به شبکه محلی شما دسترسی داشته باشد و فقط با دستگاه‌های این شبکه متصل شود.&lt;br&gt;&lt;br&gt;برنامه نمی‌تواند بااستفاده از بلوتوث و فناوری‌های دیگر به دستگاه‌ها متصل شود، مگر اینکه به آن اجازه دهید همه دستگاه‌های اطراف را پیدا کند و به آن‌ها متصل شود."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"‏&lt;b&gt;اجازه داشتن برای حفظ کار کردن برنامه&lt;/b&gt;&lt;br&gt;&lt;br&gt;برای اینکه برنامه همچنان به کار ادامه دهد، ممکن است به آن اجازه داده شود به شبکه محلی شما دسترسی داشته باشد و فقط با دستگاه‌های این شبکه متصل شود.&lt;br&gt;&lt;br&gt;برنامه نمی‌تواند بااستفاده از بلوتوث و فناوری‌های دیگر به دستگاه‌ها متصل شود، مگر اینکه به آن اجازه دهید همه دستگاه‌های اطراف را پیدا کند و به آن‌ها متصل شود."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{یک روز}one{# روز}other{# روز}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# ساعت}one{# ساعت}other{# ساعت}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# دقیقه}one{# دقیقه}other{# دقیقه}}"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"هیچ‌کدام"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(پیش‌فرض سیستم)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"برنامه‌ای موجود نیست"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"تغییر دادن"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"حفظ برنامه فعلی"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"‏دیگر سرویس‌های NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"انتخاب شد"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"انتخاب‌شده - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"دسترسی ویژه برنامه وجود ندارد"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"برنامه‌ای موجود نیست"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"از نمایه کاری پشتیبانی نمی‌کند"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"‏برنامه صفحه اصلی پیش‌فرض به &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; تغییر کند؟"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"‏با این کار، صفحه اصلی جایگزین خواهد شد و ممکن است بر دسترسی به ویژگی‌های دستگاهتان تأثیر بگذارد.&lt;br&gt;&lt;br&gt;همیشه می‌توانید این انتخاب را در تنظیمات &lt;b&gt;برنامه صفحه اصلی پیش‌فرض&lt;/b&gt; تغییر دهید."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"توجه: اگر دستگاهتان را بازراه‌اندازی کنید و قفل صفحه تنظیم کرده باشید، تا قفل تلفن را باز نکنید، این برنامه نمی‌تواند شروع به کار کند."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"دستیار می‌تواند اطلاعات مربوط به برنامه‌های درحال استفاده در سیستم شما را بخواند، ازجمله اطلاعاتی که در صفحه‌نمایش شما قابل‌مشاهده است یا در برنامه‌ها قابل‌دسترسی است."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"‏برنامه دستیار دیجیتال به &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; تغییر کند؟"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"این دستیار می‌تواند به اطلاعاتی مانند پیام‌هایتان و داده‌هایی که برنامه‌ها برای هم‌رسانی با دستیار شما انتخاب کرده‌اند، دسترسی داشته باشد."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"‏این دستیار می‌تواند به اطلاعاتی مانند پیام‌های شما و داده‌هایی که برنامه‌ها برای هم‌رسانی با دستیارتان انتخاب کرده‌اند، دسترسی داشته باشد.&lt;br&gt;&lt;br&gt;از آنجایی‌که قبلاً داده‌های برنامه و صفحه‌نمایش را برای <xliff:g id="APP_NAME">%1$s</xliff:g> روشن کرده‌اید، این دستیار اجازه خواهد داشت به محتوای برنامه باز در صفحه‌نمایش شما هم دسترسی داشته باشد."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"هم‌رسانی داده‌های اشکال‌زدایی"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"جزئیات داده‌های اشکال‌زدایی هم‌رسانی شود؟"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد اطلاعات اشکال‌زدایی را بارگذاری کند."</string>
@@ -461,7 +490,7 @@
     <string name="incident_report_dialog_text" msgid="1819244417678973362">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> درخواست بارگذاری گزارش اشکالی را دارد که در <xliff:g id="DATE">%2$s</xliff:g> ساعت <xliff:g id="TIME">%3$s</xliff:g> در این دستگاه پیش آمده است. گزارش‌های اشکال شامل اطلاعات شخصی درباره دستگاه شما است یا اطلاعاتی که توسط برنامه‌ها گزارش شده است، برای مثال، نام‌های کاربری، داده‌های مکان، شناسه‌های دستگاه و اطلاعات شبکه. گزارش‌های اشکال را فقط با افراد و برنامه‌هایی هم‌رسانی کنید که به آن‌ها در این‌باره اعتماد دارید.\n\nبه <xliff:g id="APP_NAME_1">%4$s</xliff:g> اجازه بارگذاری گزارش اشکال داده شود؟"</string>
     <string name="incident_report_error_dialog_text" msgid="4189647113387092272">"هنگام پردازش گزارش اشکال برای <xliff:g id="APP_NAME">%1$s</xliff:g> خطایی رخ داد. بنابراین هم‌رسانی داده‌های اشکال‌زدایی دقیق رد شد. از وقفه پیش‌آمده پوزش می‌طلبیم."</string>
     <string name="incident_report_dialog_allow_label" msgid="2970242967721155239">"اجازه دادن"</string>
-    <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"مجاز نبودن"</string>
+    <string name="incident_report_dialog_deny_label" msgid="3535314290677579383">"نپذیرفتن"</string>
     <string name="adjust_user_sensitive_title" msgid="4196724451314280527">"تنظیمات پیشرفته"</string>
     <string name="menu_adjust_user_sensitive" msgid="6497923610654425780">"تنظیمات پیشرفته"</string>
     <string name="adjust_user_sensitive_globally_title" msgid="8649190949066029174">"نمایش استفادهٔ برنامه سیستم"</string>
@@ -545,12 +574,12 @@
     <string name="other_permissions_label" msgid="8986184335503271992">"اجازه‌های دیگر"</string>
     <string name="not_used_permissions_label" msgid="3939839426115141264">"اجازه‌هایی که سیستم استفاده می‌کند"</string>
     <string name="not_used_permissions_description" msgid="7595514824169388718">"اجازه‌هایی که فقط برنامه‌های سیستم استفاده می‌کنند."</string>
-    <string name="additional_permissions_label" msgid="7693557637462569046">"اجازه‌های جانبی"</string>
+    <string name="additional_permissions_label" msgid="7693557637462569046">"اجازه‌های اضافی"</string>
     <string name="additional_permissions_description" msgid="2186611950890732112">"اجازه‌هایی که برنامه‌ها تعریف کرده‌اند."</string>
     <string name="privdash_label_camera" msgid="1426440033626198096">"دوربین"</string>
     <string name="privdash_label_microphone" msgid="8415035835803511693">"میکروفون"</string>
     <string name="privdash_label_location" msgid="6882400763866489291">"مکان"</string>
-    <string name="privdash_label_other" msgid="3710394147423236033">"موارد دیگر"</string>
+    <string name="privdash_label_other" msgid="3710394147423236033">"غیره"</string>
     <string name="privdash_label_none" msgid="5991866260360484858">"هیچ‌کدام"</string>
     <string name="privdash_label_24h" msgid="1512532123865375319">"۲۴\nساعت گذشته"</string>
     <string name="privdash_label_7d" msgid="5645301995348656931">"۷ روز\nگذشته"</string>
@@ -630,12 +659,12 @@
     <string name="camera_toggle_title" msgid="1251201397431837666">"دسترسی به دوربین"</string>
     <string name="mic_toggle_title" msgid="2649991093496110162">"دسترسی به میکروفون"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"برای برنامه‌ها و سرویس‌ها"</string>
-    <string name="mic_toggle_description" msgid="9163104307990677157">"برای برنامه‌ها و سرویس‌ها. اگر این تنظیم خاموش باشد، ممکن است وقتی با شماره تلفنی اضطراری تماس می‌گیرید داده‌های میکروفون همچنان هم‌رسانی شود."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"دیدن برنامه‌ها و سرویس‌هایی که به مکان دسترسی دارند"</string>
-    <string name="show_clip_access_notification_title" msgid="5168467637351109096">"نمایش دسترسی به بریده‌دان"</string>
-    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"وقتی برنامه‌ها به نوشتار، تصویر، یا محتوای دیگری که کپی کرده‌اید دسترسی پیدا می‌کنند، پیامی نشان داده می‌شود"</string>
+    <string name="mic_toggle_description" msgid="9163104307990677157">"برای برنامه‌ها و سرویس‌ها. اگر این تنظیم خاموش باشد، ممکن است وقتی که با شماره تلفنی اضطراری تماس می‌گیرید داده‌های میکروفون همچنان هم‌رسانی شود."</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"برنامه‌ها و سرویس‌هایی را که به مکان دسترسی دارند ببینید"</string>
+    <string name="show_clip_access_notification_title" msgid="5168467637351109096">"نشان دادن دسترسی به بریده‌دان"</string>
+    <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"وقتی که برنامه‌ها به نوشتار، تصویر، یا محتوای دیگری که کپی کرده‌اید دسترسی پیدا می‌کنند، پیامی نشان داده می‌شود"</string>
     <string name="show_password_title" msgid="2877269286984684659">"نمایش گذرواژه‌ها"</string>
-    <string name="show_password_summary" msgid="1110166488865981610">"همان‌طور که تایپ می‌کنید، نویسه‌ها را برای مدت کوتاهی نشان می‌دهد"</string>
+    <string name="show_password_summary" msgid="1110166488865981610">"همان‌طور که تایپ می‌کنید، نویسه‌ها را برای مدت کوتاهی نشان داده می‌شوند"</string>
     <string name="permission_rationale_message_location" msgid="2153841534298068414">"این برنامه اعلام کرده است که ممکن است داده‌های مکان را با اشخاص ثالث هم‌رسانی کند"</string>
     <string name="permission_rationale_location_title" msgid="2404797182678793506">"هم‌رسانی داده‌ها و مکان"</string>
     <string name="permission_rationale_data_sharing_source_title" msgid="6874604543125814316">"اطلاعات هم‌رسانی داده از کجا می‌آید"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"برنامه‌ها"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"دسترسی عامل"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"عامل‌ها می‌توانند به اطلاعات دسترسی داشته باشند و ازطرف شما در این برنامه اقدام کنند"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"اجازه داشتن"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"اجازه نداشتن"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"هیچ دسترسی برای عامل مجاز نشده است"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"هیچ دسترسی برای عامل رد نشده است"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"هیچ دسترسی برای برنامه مجاز نشده است"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"هیچ دسترسی برای برنامه رد نشده است"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"دسترسی به برنامه"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"دسترسی به <xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"دسترسی <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> به <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"اجازه دادن"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"اجازه ندادن"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"تنظیمات دستگاه"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"به <xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> اجازه می دهید که نماینده <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g> شود؟"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"این نماینده برای دریافت معلومات و انجام اعمال برای شما قادر به دسترسی به <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>خواهد بود"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"اجازه دادن"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"اجازه ندادن"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"‏&lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; مجاز است از داده‌های برنامه و صفحه‌نمایش استفاده کند؟"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"این دستیار می‌تواند به اطلاعات و محتوای برنامه باز در صفحه‌نمایش شما دسترسی داشته باشد"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"اجازه داده شود"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"اجازه داده نشود"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"استفاده کردن از داده‌های برنامه و صفحه‌نمایش"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"اجازه دسترسی دستیار به اطلاعات و محتوای برنامه باز در صفحه‌نمایش شما"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"اجازه دسترسی <xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g> به اطلاعات و محتوای برنامه باز در صفحه‌نمایش شما"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"اجازه دادن"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"اجازه ندادن"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"‏به &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; اجازه می‌دهید وقتی انتخاب می‌کنید مکان دقیق را هم‌رسانی کنید به آن دسترسی داشته باشد؟"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"وقتی هم‌رسانی می‌کنید، این برنامه تا زمانی که آن را نبندید به مکان دقیق دسترسی خواهد داشت"</string>
 </resources>

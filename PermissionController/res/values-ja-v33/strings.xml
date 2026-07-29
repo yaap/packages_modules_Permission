@@ -28,7 +28,7 @@
     <string name="safety_center_entry_group_item_content_description" msgid="7348298582877249787">"リストアイテム。<xliff:g id="ENTRY_ITEM_TITLE">%1$s</xliff:g>。<xliff:g id="ENTRY_ITEM_SUMMARY">%2$s</xliff:g>"</string>
     <string name="safety_center_entry_content_description" msgid="3639565652938224321">"<xliff:g id="ENTRY_ITEM_TITLE">%1$s</xliff:g>。<xliff:g id="ENTRY_ITEM_SUMMARY">%2$s</xliff:g>"</string>
     <string name="safety_center_more_issues_card_title" msgid="7425844746197493312">"その他のアラート"</string>
-    <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"削除されたアラート"</string>
+    <string name="safety_center_dismissed_issues_card_title" msgid="2340129842725145733">"確認済みのアラート"</string>
     <string name="safety_center_expressive_more_issues_collapse_title" msgid="4022284109267834224">"閉じる"</string>
     <string name="safety_center_more_issues_card_expand_action" msgid="7109451851052272946">"{count,plural, =1{1 個以上のアラートを開いて表示する}other{# 個以上のアラートを開いて表示する}}"</string>
     <string name="safety_center_more_issues_card_collapse_action" msgid="7485597582198474637">"閉じる"</string>

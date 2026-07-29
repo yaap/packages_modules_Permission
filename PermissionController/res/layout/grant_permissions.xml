@@ -94,7 +94,7 @@
                 android:id="@+id/permission_location_accuracy">
 
                 <RadioGroup
-                    android:id="@+id/permission_location_accuracy_radio_group"
+                    android:id="@+id/permission_location_accuracy_radio_container"
                     style="@style/PermissionLocationAccuracyRadioGroup">
 
                     <RadioButton

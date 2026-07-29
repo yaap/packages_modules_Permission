@@ -39,4 +39,10 @@ android_library {
         "//apex_available:platform",
         "com.android.permission",
     ],
+
+    visibility: [
+        "//packages/apps/Car/Settings",
+        "//packages/apps/Settings",
+        "//packages/modules/Permission/PermissionController"
+    ],
 }

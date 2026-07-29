@@ -40,7 +40,7 @@ internal class SafetyEntryCommonViewsManager(rootEntryView: ViewGroup?) {
         title: CharSequence,
         summary: CharSequence?,
         severityLevel: Int,
-        severityUnspecifiedIconType: Int
+        severityUnspecifiedIconType: Int,
     ) {
         titleView?.text = title
         summaryView?.showText(summary)
@@ -82,7 +82,7 @@ internal class SafetyEntryCommonViewsManager(rootEntryView: ViewGroup?) {
             isEntryEnabled: Boolean,
             isPreferenceEnabled: Boolean,
             titleView: TextView?,
-            summaryView: TextView?
+            summaryView: TextView?,
         ) {
             val disabledAlpha = getDisabledAlpha(context)
             if (isEntryEnabled) {

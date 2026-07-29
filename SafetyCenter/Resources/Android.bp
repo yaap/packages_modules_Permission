@@ -42,6 +42,7 @@ android_app {
     min_sdk_version: "30",
     apex_available: ["com.android.permission"],
     certificate: ":com.android.safetycenter.resources.certificate",
+    preinstall_allowlist: ":preinstalled-packages-com.android.safetycenter.resources.xml",
     // TODO(b/322944911): Reconsider enabling linter checker
     //lint: {
     //    extra_check_modules: ["ConfigLintChecker"],

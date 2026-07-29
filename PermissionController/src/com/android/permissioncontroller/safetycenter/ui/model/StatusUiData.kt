@@ -15,7 +15,7 @@ import com.android.permissioncontroller.R
 data class StatusUiData(
     private val status: SafetyCenterStatus,
     @get:JvmName("hasIssues") val hasIssues: Boolean = false,
-    @get:JvmName("hasPendingActions") val hasPendingActions: Boolean = false
+    @get:JvmName("hasPendingActions") val hasPendingActions: Boolean = false,
 ) {
 
     constructor(
@@ -28,6 +28,7 @@ data class StatusUiData(
 
     companion object {
         private val TAG: String = StatusUiData::class.java.simpleName
+
         fun getStatusImageResId(severityLevel: Int) =
             when (severityLevel) {
                 OVERALL_SEVERITY_LEVEL_UNKNOWN,
@@ -63,7 +64,7 @@ data class StatusUiData(
         return context.getString(
             R.string.safety_status_preference_title_and_summary_content_description,
             title,
-            getSummary(context)
+            getSummary(context),
         )
     }
 
@@ -87,8 +88,9 @@ data class StatusUiData(
 
     enum class ButtonToShow {
         RESCAN,
-        REVIEW_SETTINGS
+        REVIEW_SETTINGS,
     }
+
     val buttonToShow: ButtonToShow?
         get() =
             when {

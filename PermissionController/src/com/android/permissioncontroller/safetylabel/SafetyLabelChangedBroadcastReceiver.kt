@@ -78,7 +78,7 @@ class SafetyLabelChangedBroadcastReceiver : BroadcastReceiver() {
                 "received broadcast packageName: $packageName, current user: $currentUser," +
                     " packageChangeEvent: $packageChangeEvent, intent user:" +
                     " ${intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle::class.java)
-                                    ?: currentUser}"
+                                    ?: currentUser}",
             )
         }
         val userManager = Utils.getSystemServiceSafe(context, UserManager::class.java)
@@ -132,7 +132,7 @@ class SafetyLabelChangedBroadcastReceiver : BroadcastReceiver() {
             Log.i(
                 TAG,
                 "writeSafetyLabel called for packageName: $packageName, currentUser:" +
-                    " ${Process.myUserHandle()}"
+                    " ${Process.myUserHandle()}",
             )
         }
 
@@ -170,7 +170,7 @@ class SafetyLabelChangedBroadcastReceiver : BroadcastReceiver() {
             AppsSafetyLabelHistory.SafetyLabel.extractLocationSharingSafetyLabel(
                 packageName,
                 Instant.ofEpochMilli(receivedAtMs),
-                safetyLabel
+                safetyLabel,
             )
         val historyFile = AppsSafetyLabelHistoryPersistence.getSafetyLabelHistoryFile(context)
 
@@ -217,7 +217,7 @@ class SafetyLabelChangedBroadcastReceiver : BroadcastReceiver() {
         private fun forwardBroadcastToParentUser(
             context: Context,
             userManager: UserManager,
-            intent: Intent
+            intent: Intent,
         ) {
             val currentUser = Process.myUserHandle()
             val profileParent = userManager.getProfileParent(currentUser)
@@ -229,13 +229,13 @@ class SafetyLabelChangedBroadcastReceiver : BroadcastReceiver() {
             Log.i(
                 TAG,
                 "Forwarding intent from current user: $currentUser to profile parent" +
-                    " $profileParent"
+                    " $profileParent",
             )
             context.sendBroadcastAsUser(
                 Intent(intent)
                     .setAction(ACTION_PACKAGE_ADDED_PERMISSIONCONTROLLER_FORWARDED)
                     .putExtra(Intent.EXTRA_USER, currentUser),
-                profileParent
+                profileParent,
             )
         }
 

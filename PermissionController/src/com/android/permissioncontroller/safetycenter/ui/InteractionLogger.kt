@@ -87,7 +87,7 @@ class InteractionLogger private constructor(private val noLogSourceIds: Set<Stri
                     SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__DISMISSED
                 } else {
                     SAFETY_CENTER_INTERACTION_REPORTED__ISSUE_STATE__ACTIVE
-                }
+                },
         )
     }
 
@@ -97,7 +97,7 @@ class InteractionLogger private constructor(private val noLogSourceIds: Set<Stri
             action,
             LogSeverityLevel.fromEntrySeverityLevel(entry.severityLevel),
             sourceId = decodedId.safetySourceId,
-            sourceProfileType = SafetySourceProfileType.fromUserId(decodedId.userId)
+            sourceProfileType = SafetySourceProfileType.fromUserId(decodedId.userId),
         )
     }
 
@@ -135,7 +135,7 @@ class InteractionLogger private constructor(private val noLogSourceIds: Set<Stri
             encodeStringId(issueTypeId),
             (if (sensor != Sensor.UNKNOWN) sensor else navigationSensor).statsLogValue,
             encodeStringId(groupId),
-            issueState
+            issueState,
         )
     }
 
@@ -232,7 +232,7 @@ enum class Action(val statsLogValue: Int) {
     REVIEW_SETTINGS_CLICKED(
         PermissionControllerStatsLog
             .SAFETY_CENTER_INTERACTION_REPORTED__ACTION__REVIEW_SETTINGS_CLICKED
-    )
+    ),
 }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -245,7 +245,7 @@ enum class ViewType(val statsLogValue: Int) {
     QUICK_SETTINGS(
         PermissionControllerStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__QUICK_SETTINGS
     ),
-    SUBPAGE(PermissionControllerStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__SUBPAGE)
+    SUBPAGE(PermissionControllerStatsLog.SAFETY_CENTER_INTERACTION_REPORTED__VIEW_TYPE__SUBPAGE),
 }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -308,7 +308,7 @@ enum class NavigationSource(val statsLogValue: Int) {
             val usages =
                 intent.getParcelableArrayListExtra(
                     PermissionManager.EXTRA_PERMISSION_USAGES,
-                    PermissionGroupUsage::class.java
+                    PermissionGroupUsage::class.java,
                 )
 
             return if (usages != null && usages.isNotEmpty()) {
@@ -414,7 +414,7 @@ enum class Sensor(val statsLogValue: Int) {
             val usages =
                 intent.getParcelableArrayListExtra(
                     PermissionManager.EXTRA_PERMISSION_USAGES,
-                    PermissionGroupUsage::class.java
+                    PermissionGroupUsage::class.java,
                 )
 
             // Multiple usages may be in effect, but we can only log one. Log unknown in this

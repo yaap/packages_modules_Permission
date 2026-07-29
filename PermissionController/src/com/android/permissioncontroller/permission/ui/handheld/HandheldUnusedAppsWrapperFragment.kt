@@ -37,7 +37,7 @@ class HandheldUnusedAppsWrapperFragment : CollapsingToolbarBaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         inflater.inflate(R.layout.settings_fragment_include, contentFrameLayout)

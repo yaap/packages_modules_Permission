@@ -118,17 +118,18 @@ abstract class BasePermissionTest {
         protected val isAutomotive =
             packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)
         @JvmStatic
-        protected val isAutomotiveSplitscreen = isAutomotive &&
-            packageManager.hasSystemFeature(
+        protected val isAutomotiveSplitscreen =
+            isAutomotive &&
+                packageManager.hasSystemFeature(
                     /* PackageManager.FEATURE_CAR_SPLITSCREEN_MULTITASKING */
-                    "android.software.car.splitscreen_multitasking")
+                    "android.software.car.splitscreen_multitasking"
+                )
         @JvmStatic
-        protected val isAutomotiveVisibleBackgroundUser = isAutomotive &&
-            UserHelper(context).isVisibleBackgroundUser()
+        protected val isAutomotiveVisibleBackgroundUser =
+            isAutomotive && UserHelper(context).isVisibleBackgroundUser()
 
         // TODO(b/382327037):find a way to avoid specifying the display ID for each UiSelector.
-        @JvmStatic
-        protected val displayId = UserHelper().mainDisplayId
+        @JvmStatic protected val displayId = UserHelper().mainDisplayId
     }
 
     @get:Rule val screenRecordRule = ScreenRecordRule(false, false)
@@ -166,7 +167,7 @@ abstract class BasePermissionTest {
             Settings.System.putLong(
                 context.contentResolver,
                 Settings.System.SCREEN_OFF_TIMEOUT,
-                1800000L
+                1800000L,
             )
         }
 
@@ -181,7 +182,7 @@ abstract class BasePermissionTest {
         context.registerReceiver(
             installSessionResultReceiver,
             IntentFilter(INSTALL_ACTION_CALLBACK),
-            RECEIVER_EXPORTED
+            RECEIVER_EXPORTED,
         )
     }
 
@@ -195,13 +196,13 @@ abstract class BasePermissionTest {
     @After
     fun tearDown() {
         if (!TestUtils.isCddCompliantScreenSize()) {
-            return;
+            return
         }
         runWithShellPermissionIdentity {
             Settings.System.putLong(
                 context.contentResolver,
                 Settings.System.SCREEN_OFF_TIMEOUT,
-                screenTimeoutBeforeTest
+                screenTimeoutBeforeTest,
             )
         }
 
@@ -214,17 +215,14 @@ abstract class BasePermissionTest {
         pressHome()
     }
 
-    protected fun setDeviceConfigPrivacyProperty(
-        propertyName: String,
-        value: String,
-    ) {
+    protected fun setDeviceConfigPrivacyProperty(propertyName: String, value: String) {
         runWithShellPermissionIdentity(instrumentation.uiAutomation) {
             val valueWasSet =
                 DeviceConfig.setProperty(
                     DeviceConfig.NAMESPACE_PRIVACY,
                     /* name = */ propertyName,
                     /* value = */ value,
-                    /* makeDefault = */ false
+                    /* makeDefault = */ false,
                 )
             check(valueWasSet) { "Could not set $propertyName to $value" }
         }
@@ -236,14 +234,14 @@ abstract class BasePermissionTest {
                 mPermissionControllerResources.getIdentifier(
                     res,
                     "string",
-                    "com.android.permissioncontroller"
+                    "com.android.permissioncontroller",
                 ),
-                *formatArgs
+                *formatArgs,
             )
         val textWithoutHtml = Html.fromHtml(textWithHtml, 0).toString()
         return Pattern.compile(
             Pattern.quote(textWithoutHtml),
-            Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE
+            Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE,
         )
     }
 
@@ -253,7 +251,7 @@ abstract class BasePermissionTest {
                 mPermissionControllerResources.getIdentifier(
                     res,
                     "string",
-                    "com.android.permissioncontroller"
+                    "com.android.permissioncontroller",
                 )
             )
         } catch (e: Resources.NotFoundException) {
@@ -272,7 +270,7 @@ abstract class BasePermissionTest {
             regex = regex.dropLast(1)
         }
         return By.text(Pattern.compile(regex, Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE))
-                .displayId(displayId)
+            .displayId(displayId)
     }
 
     protected open fun installPackage(
@@ -280,7 +278,7 @@ abstract class BasePermissionTest {
         reinstall: Boolean = false,
         grantRuntimePermissions: Boolean = false,
         expectSuccess: Boolean = true,
-        installSource: String? = null
+        installSource: String? = null,
     ) {
         val output =
             runShellCommandOrThrow(
@@ -300,12 +298,10 @@ abstract class BasePermissionTest {
         apkName: String,
         appMetadata: PersistableBundle? = null,
         packageSource: Int? = null,
-        allowlistedRestrictedPermissions: Set<String>? = null
+        allowlistedRestrictedPermissions: Set<String>? = null,
     ) {
-        val (sessionId, session) = createPackageInstallerSession(
-            packageSource,
-            allowlistedRestrictedPermissions
-        )
+        val (sessionId, session) =
+            createPackageInstallerSession(packageSource, allowlistedRestrictedPermissions)
         runWithShellPermissionIdentity {
             writePackageInstallerSession(session, apkName)
             if (appMetadata != null) {
@@ -334,7 +330,7 @@ abstract class BasePermissionTest {
     protected fun waitFindObject(selector: BySelector, timeoutMillis: Long): UiObject2 {
         return findObjectWithRetry(
             { t -> UiAutomatorUtils2.waitFindObject(selector, t) },
-            timeoutMillis
+            timeoutMillis,
         )!!
     }
 
@@ -345,13 +341,13 @@ abstract class BasePermissionTest {
     protected fun waitFindObjectOrNull(selector: BySelector, timeoutMillis: Long): UiObject2? {
         return findObjectWithRetry(
             { t -> UiAutomatorUtils2.waitFindObjectOrNull(selector, t) },
-            timeoutMillis
+            timeoutMillis,
         )
     }
 
     private fun findObjectWithRetry(
         automatorMethod: (timeoutMillis: Long) -> UiObject2?,
-        timeoutMillis: Long = 20_000L
+        timeoutMillis: Long = 20_000L,
     ): UiObject2? {
         val startTime = SystemClock.elapsedRealtime()
         return try {
@@ -371,10 +367,24 @@ abstract class BasePermissionTest {
 
     protected fun clickAndWaitForWindowTransition(
         selector: BySelector,
-        timeoutMillis: Long = 20_000
+        timeoutMillis: Long = 20_000,
     ) {
         waitFindObject(selector, timeoutMillis)
             .clickAndWait(Until.newWindow(), NEW_WINDOW_TIMEOUT_MILLIS)
+    }
+
+    protected fun waitForFocusThenClickAndWaitForWindowTransition(
+        selector: BySelector,
+        timeoutMillis: Long = 20_000,
+    ) {
+        val obj = waitFindObject(selector, timeoutMillis)
+        waitForFocus()
+        obj.clickAndWait(Until.newWindow(), NEW_WINDOW_TIMEOUT_MILLIS)
+    }
+
+    protected fun waitForFocus() {
+        // Wait for any element to be focused, which indicates that the window is ready for input.
+        uiDevice.wait(Until.hasObject(By.focused(true)), IDLE_LONG_TIMEOUT_MILLIS)
     }
 
     protected fun findView(selector: BySelector, timeoutMs: Long, expected: Boolean) {
@@ -413,24 +423,34 @@ abstract class BasePermissionTest {
      * @param maxSearchSwipes See {@link UiScrollable#setMaxSearchSwipes}
      */
     protected fun clickPermissionControllerUi(text: String, maxSearchSwipes: Int = 5) {
-        scrollToText(text, maxSearchSwipes).click()
+        if (isWatch) {
+            click(By.text(text).displayId(displayId), 120_000)
+        } else {
+            scrollToText(text, maxSearchSwipes).click()
+        }
     }
 
     private fun scrollToText(text: String, maxSearchSwipes: Int = MAX_SWIPES): UiObject2 {
-        var foundObject: UiObject2?
+        // Check if it's already there
+        var foundObject = uiDevice.findObject(By.text(text))
+        if (foundObject != null) {
+            return foundObject
+        }
+
         if (isAutomotiveVisibleBackgroundUser) {
             val scrollableObject = uiDevice.findObject(By.scrollable(true).displayId(displayId))
             foundObject =
-                    scrollableObject.scrollUntil(Direction.DOWN, Until.findObject(By.text(text)))
+                scrollableObject.scrollUntil(Direction.DOWN, Until.findObject(By.text(text)))
         } else {
             val scrollable =
                 UiScrollable(UiSelector().scrollable(true)).apply {
                     this.maxSearchSwipes = maxSearchSwipes
                 }
             scrollable.scrollTextIntoView(text)
-            foundObject = uiDevice.findObject(
+            foundObject =
+                uiDevice.findObject(
                     By.text(text).pkg(context.packageManager.permissionControllerPackageName)
-            )
+                )
         }
         Assert.assertNotNull("View not found after scrolling", foundObject)
         return foundObject
@@ -452,7 +472,7 @@ abstract class BasePermissionTest {
     protected fun waitForIdle() = uiAutomation.waitForIdle(IDLE_TIMEOUT_MILLIS, TIMEOUT_MILLIS)
 
     protected fun waitForIdleLong() =
-            uiAutomation.waitForIdle(IDLE_LONG_TIMEOUT_MILLIS, TIMEOUT_MILLIS)
+        uiAutomation.waitForIdle(IDLE_LONG_TIMEOUT_MILLIS, TIMEOUT_MILLIS)
 
     protected fun startActivityForFuture(
         intent: Intent
@@ -468,7 +488,7 @@ abstract class BasePermissionTest {
         packageManager.setComponentEnabledSetting(
             component,
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
@@ -476,13 +496,13 @@ abstract class BasePermissionTest {
         packageManager.setComponentEnabledSetting(
             component,
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
+            PackageManager.DONT_KILL_APP,
         )
     }
 
     private fun createPackageInstallerSession(
         packageSource: Int? = null,
-        allowlistedRestrictedPermissions: Set<String>? = null
+        allowlistedRestrictedPermissions: Set<String>? = null,
     ): Pair<Int, PackageInstaller.Session> {
         // Create session
         val sessionParam = SessionParams(SessionParams.MODE_FULL_INSTALL)
@@ -518,7 +538,7 @@ abstract class BasePermissionTest {
                 context,
                 0,
                 Intent(INSTALL_ACTION_CALLBACK).setPackage(context.packageName),
-                FLAG_UPDATE_CURRENT or FLAG_MUTABLE
+                FLAG_UPDATE_CURRENT or FLAG_MUTABLE,
             )
         session.commit(installActionPendingIntent.intentSender)
     }

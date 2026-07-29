@@ -37,7 +37,7 @@ class PreinstalledUserPackageInfosLiveData
 private constructor(private val app: Application, private val user: UserHandle) :
     SmartAsyncMediatorLiveData<@kotlin.jvm.JvmSuppressWildcards List<LightPackageInfo>>(
         isStaticVal = true,
-        alwaysUpdateOnActive = false
+        alwaysUpdateOnActive = false,
     ) {
 
     /** Get all of the preinstalled packages in the system for this user */
@@ -48,7 +48,7 @@ private constructor(private val app: Application, private val user: UserHandle) 
         val packageInfos =
             app.applicationContext.packageManager.getInstalledPackagesAsUser(
                 GET_PERMISSIONS or MATCH_UNINSTALLED_PACKAGES or MATCH_FACTORY_ONLY,
-                user.identifier
+                user.identifier,
             )
         postValue(packageInfos.map { packageInfo -> LightPackageInfo(packageInfo) })
     }

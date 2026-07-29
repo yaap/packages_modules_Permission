@@ -169,7 +169,7 @@ class PermissionStorageTimeChangeReceiverTest {
 
     class FakeTimeSource(
         var currentTimeMillis: Long = System.currentTimeMillis(),
-        var elapsedRealtime: Long = SystemClock.elapsedRealtime()
+        var elapsedRealtime: Long = SystemClock.elapsedRealtime(),
     ) : TimeSource {
 
         override fun currentTimeMillis(): Long {

@@ -91,12 +91,12 @@ object AppsSafetyLabelHistoryPersistence {
         } catch (e: IOException) {
             Log.e(
                 LOG_TAG,
-                "Failed to read file: $file, encountered exception ${e.localizedMessage}"
+                "Failed to read file: $file, encountered exception ${e.localizedMessage}",
             )
         } catch (e: XmlPullParserException) {
             Log.e(
                 LOG_TAG,
-                "Failed to parse file: $file, encountered exception ${e.localizedMessage}"
+                "Failed to parse file: $file, encountered exception ${e.localizedMessage}",
             )
         }
 
@@ -238,7 +238,7 @@ object AppsSafetyLabelHistoryPersistence {
                         // be used as the "before" safety label when determining updates.
                         AppSafetyLabelHistory(
                             appHistory.appInfo,
-                            history.subList(last, history.size)
+                            history.subList(last, history.size),
                         )
                     }
                 }
@@ -275,7 +275,7 @@ object AppsSafetyLabelHistoryPersistence {
             Log.i(
                 LOG_TAG,
                 "Failed to write to $file. Previous version of file will be restored.",
-                e
+                e,
             )
             atomicFile.failWrite(outputStream)
         } finally {
@@ -365,7 +365,7 @@ object AppsSafetyLabelHistoryPersistence {
 
         return AppsSafetyLabelHistoryFileContent(
             AppsSafetyLabelHistory(appSafetyLabelHistories),
-            version
+            version,
         )
     }
 
@@ -560,7 +560,7 @@ object AppsSafetyLabelHistoryPersistence {
         attribute(
             null,
             ATTRIBUTE_CONTAINS_ADS,
-            dataSharedEntry.value.containsAdvertisingPurpose.toString()
+            dataSharedEntry.value.containsAdvertisingPurpose.toString(),
         )
         endTag(null, TAG_DATA_SHARED_ENTRY)
     }
@@ -600,7 +600,7 @@ object AppsSafetyLabelHistoryPersistence {
             it.receivedAt.isBefore(startTime) || it.receivedAt == startTime
         }
             ?: // the first safety label received after startTime, as a fallback
-        safetyLabelHistory.firstOrNull { it.receivedAt.isAfter(startTime) }
+            safetyLabelHistory.firstOrNull { it.receivedAt.isAfter(startTime) }
 
     private const val PROPERTY_MAX_SAFETY_LABELS_PERSISTED_PER_APP =
         "max_safety_labels_persisted_per_app"
@@ -615,7 +615,7 @@ object AppsSafetyLabelHistoryPersistence {
         DeviceConfig.getInt(
             DeviceConfig.NAMESPACE_PRIVACY,
             PROPERTY_MAX_SAFETY_LABELS_PERSISTED_PER_APP,
-            20
+            20,
         )
 
     /** An interface to listen to changes to persisted safety labels. */

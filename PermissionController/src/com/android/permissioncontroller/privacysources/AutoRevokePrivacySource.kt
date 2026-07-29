@@ -37,7 +37,7 @@ class AutoRevokePrivacySource : PrivacySource {
     override fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: SafetyCenterReceiver.RefreshEvent
+        refreshEvent: SafetyCenterReceiver.RefreshEvent,
     ) {
         var sessionId = Constants.INVALID_SESSION_ID
         while (sessionId == Constants.INVALID_SESSION_ID) {

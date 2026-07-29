@@ -52,7 +52,7 @@ private constructor(private val app: Application, val packageName: String, val u
     data class ExternalDeviceGrantInfo(
         val groupName: String,
         val permGrantState: AppPermGroupUiInfo.PermGrantState,
-        val persistentDeviceId: String
+        val persistentDeviceId: String,
     )
 
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
@@ -101,7 +101,8 @@ private constructor(private val app: Application, val packageName: String, val u
 
     companion object :
         DataRepositoryForPackage<
-            Pair<String, UserHandle>, PackagePermissionsExternalDeviceLiveData
+            Pair<String, UserHandle>,
+            PackagePermissionsExternalDeviceLiveData,
         >() {
         override fun newValue(
             key: Pair<String, UserHandle>
@@ -109,7 +110,7 @@ private constructor(private val app: Application, val packageName: String, val u
             return PackagePermissionsExternalDeviceLiveData(
                 PermissionControllerApplication.get(),
                 key.first,
-                key.second
+                key.second,
             )
         }
     }

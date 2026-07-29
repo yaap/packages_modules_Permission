@@ -19,11 +19,10 @@ package com.android.role.controller.model;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.ArraySet;
@@ -31,16 +30,20 @@ import android.util.ArraySet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.modules.utils.build.SdkLevel;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Specifies a required component for an application to qualify for a {@link Role}.
  */
-public abstract class RequiredComponent {
+public abstract class RequiredComponent extends Requirement {
+
+    /**
+     * Optional flags required to be set on a component for match to succeed.
+     */
+    private final int mFlags;
 
     /**
      * The {@code Intent} or {@code IntentFilter} data to match the components.
@@ -49,16 +52,12 @@ public abstract class RequiredComponent {
     private final IntentFilterData mIntentFilterData;
 
     /**
-     * The minimum target SDK version for this component to be required.
-     * <p>
-     * This also implies a minimum platform SDK version for this component to be required.
+     * The meta data required on a component for match to succeed.
+     *
+     * @see android.content.pm.PackageItemInfo#metaData
      */
-    private final int mMinTargetSdkVersion;
-
-    /**
-     * Optional flags required to be set on a component for match to succeed.
-     */
-    private final int mFlags;
+    @NonNull
+    private final List<RequiredMetaData> mMetaData;
 
     /**
      * Optional permission required on a component for match to succeed.
@@ -74,23 +73,20 @@ public abstract class RequiredComponent {
      */
     private final int mQueryFlags;
 
-    /**
-     * The meta data required on a component for match to succeed.
-     *
-     * @see android.content.pm.PackageItemInfo#metaData
-     */
-    @NonNull
-    private final List<RequiredMetaData> mMetaData;
+    public RequiredComponent(@Nullable Supplier<Boolean> featureFlag, int flags,
+            @NonNull IntentFilterData intentFilterData, @NonNull List<RequiredMetaData> metaData,
+            int minTargetSdkVersion, @Nullable String permission, int queryFlags) {
+        super(featureFlag, minTargetSdkVersion);
 
-    public RequiredComponent(@NonNull IntentFilterData intentFilterData, int minTargetSdkVersion,
-            int flags, @Nullable String permission, int queryFlags,
-            @NonNull List<RequiredMetaData> metaData) {
-        mIntentFilterData = intentFilterData;
-        mMinTargetSdkVersion = minTargetSdkVersion;
         mFlags = flags;
+        mIntentFilterData = intentFilterData;
+        mMetaData = metaData;
         mPermission = permission;
         mQueryFlags = queryFlags;
-        mMetaData = metaData;
+    }
+
+    public int getFlags() {
+        return mFlags;
     }
 
     @NonNull
@@ -98,36 +94,9 @@ public abstract class RequiredComponent {
         return mIntentFilterData;
     }
 
-    public int getMinTargetSdkVersion() {
-        return mMinTargetSdkVersion;
-    }
-
-    /**
-     * Check whether this required component is available.
-     *
-     * @return whether this required component is available
-     */
-    public boolean isAvailable() {
-        // Workaround to match the value 35+ for V+ in roles.xml before SDK finalization.
-        if (mMinTargetSdkVersion >= 35) {
-            return SdkLevel.isAtLeastV();
-        } else {
-            return Build.VERSION.SDK_INT >= mMinTargetSdkVersion;
-        }
-    }
-
-    /**
-     * Check whether this required component is required for a package.
-     *
-     * @param applicationInfo the {@link ApplicationInfo} for the package
-     * @return whether this required component is required
-     */
-    public boolean isRequired(@NonNull ApplicationInfo applicationInfo) {
-        return isAvailable() && applicationInfo.targetSdkVersion >= mMinTargetSdkVersion;
-    }
-
-    public int getFlags() {
-        return mFlags;
+    @NonNull
+    public List<RequiredMetaData> getMetaData() {
+        return mMetaData;
     }
 
     @Nullable
@@ -135,9 +104,15 @@ public abstract class RequiredComponent {
         return mPermission;
     }
 
-    @NonNull
-    public List<RequiredMetaData> getMetaData() {
-        return mMetaData;
+    public int getQueryFlags() {
+        return mQueryFlags;
+    }
+
+    @Override
+    public boolean isQualifiedAsUser(@NonNull PackageInfo packageInfo, @NonNull UserHandle user,
+            @NonNull Context context) {
+        return getQualifyingComponentForPackageAsUser(packageInfo.packageName, user, context)
+                != null;
     }
 
     /**
@@ -299,13 +274,12 @@ public abstract class RequiredComponent {
     @Override
     public String toString() {
         return "RequiredComponent{"
-                + "mIntentFilterData=" + mIntentFilterData
-                + ", mMinTargetSdkVersion=" + mMinTargetSdkVersion
-                + ", mFlags='" + mFlags + '\''
+                + "mFlags='" + mFlags + '\''
+                + ", mIntentFilterData=" + mIntentFilterData
+                + ", mMetaData=" + mMetaData
                 + ", mPermission='" + mPermission + '\''
                 + ", mQueryFlags=" + mQueryFlags
-                + ", mMetaData=" + mMetaData
-                + '}';
+                + "} " + super.toString();
     }
 
     @Override
@@ -316,18 +290,20 @@ public abstract class RequiredComponent {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
+        if (!super.equals(object)) {
+            return false;
+        }
         RequiredComponent that = (RequiredComponent) object;
-        return Objects.equals(mIntentFilterData, that.mIntentFilterData)
-                && Objects.equals(mMinTargetSdkVersion, that.mMinTargetSdkVersion)
-                && mFlags == that.mFlags
+        return mFlags == that.mFlags
+                && Objects.equals(mIntentFilterData, that.mIntentFilterData)
+                && Objects.equals(mMetaData, that.mMetaData)
                 && Objects.equals(mPermission, that.mPermission)
-                && mQueryFlags == that.mQueryFlags
-                && Objects.equals(mMetaData, that.mMetaData);
+                && mQueryFlags == that.mQueryFlags;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mIntentFilterData, mMinTargetSdkVersion, mFlags, mPermission,
-                mQueryFlags, mMetaData);
+        return Objects.hash(super.hashCode(), mFlags, mIntentFilterData, mMetaData, mPermission,
+                mQueryFlags);
     }
 }

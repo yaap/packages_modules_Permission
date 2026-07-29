@@ -55,11 +55,12 @@ import java.text.Collator
  * A fragment displaying all applications that are unused as well as the option to remove them and
  * to open them.
  */
-class UnusedAppsFragment<PF, UnusedAppPref> : Fragment() where
-PF : PreferenceFragmentCompat,
-PF : UnusedAppsFragment.Parent<UnusedAppPref>,
-UnusedAppPref : Preference,
-UnusedAppPref : RemovablePref {
+class UnusedAppsFragment<PF, UnusedAppPref> : Fragment()
+    where
+        PF : PreferenceFragmentCompat,
+        PF : UnusedAppsFragment.Parent<UnusedAppPref>,
+        UnusedAppPref : Preference,
+        UnusedAppPref : RemovablePref {
 
     private lateinit var viewModel: UnusedAppsViewModel
     private lateinit var collator: Collator
@@ -74,11 +75,12 @@ UnusedAppPref : RemovablePref {
         private val LOG_TAG = UnusedAppsFragment::class.java.simpleName
 
         @JvmStatic
-        fun <PF, UnusedAppPref> newInstance(): UnusedAppsFragment<PF, UnusedAppPref> where
-        PF : PreferenceFragmentCompat,
-        PF : UnusedAppsFragment.Parent<UnusedAppPref>,
-        UnusedAppPref : Preference,
-        UnusedAppPref : RemovablePref {
+        fun <PF, UnusedAppPref> newInstance(): UnusedAppsFragment<PF, UnusedAppPref>
+            where
+                PF : PreferenceFragmentCompat,
+                PF : UnusedAppsFragment.Parent<UnusedAppPref>,
+                UnusedAppPref : Preference,
+                UnusedAppPref : RemovablePref {
             return UnusedAppsFragment()
         }
 
@@ -116,7 +118,7 @@ UnusedAppPref : RemovablePref {
                     updatePackages(pkgs)
                     preferenceFragment.setLoadingState(loading = false, animate = true)
                 }
-            }
+            },
         )
 
         activity?.getActionBar()?.setDisplayHomeAsUpEnabled(true)
@@ -131,7 +133,7 @@ UnusedAppPref : RemovablePref {
                         updatePackages(viewModel.unusedPackageCategoriesLiveData.value!!)
                     }
                 },
-                SHOW_LOAD_DELAY_MS
+                SHOW_LOAD_DELAY_MS,
             )
         } else {
             updatePackages(viewModel.unusedPackageCategoriesLiveData.value!!)
@@ -166,7 +168,7 @@ UnusedAppPref : RemovablePref {
             preferenceFragment.preferenceManager.inflateFromResource(
                 context!!,
                 R.xml.unused_app_categories,
-                /* rootPreferences= */ null
+                /* rootPreferences= */ null,
             )
 
         for (period in allPeriods) {
@@ -219,7 +221,7 @@ UnusedAppPref : RemovablePref {
             category.title =
                 MessageFormat.format(
                     getString(R.string.last_opened_category_title),
-                    mapOf("count" to months)
+                    mapOf("count" to months),
                 )
             category.isVisible = packages.isNotEmpty()
             if (packages.isNotEmpty()) {
@@ -237,7 +239,7 @@ UnusedAppPref : RemovablePref {
                             ?: preferenceFragment.createUnusedAppPref(
                                 activity!!.application,
                                 pkgName,
-                                user
+                                user,
                             )
                     pref.key = key
                     pref.title = KotlinUtils.getPackageLabel(activity!!.application, pkgName, user)
@@ -269,14 +271,14 @@ UnusedAppPref : RemovablePref {
                             getString(
                                 R.string.auto_revoked_app_summary_two,
                                 importantLabel,
-                                otherLabel
+                                otherLabel,
                             )
                         }
                         else ->
                             getString(
                                 R.string.auto_revoked_app_summary_many,
                                 importantLabel,
-                                "${revokedPerms.size - 1}"
+                                "${revokedPerms.size - 1}",
                             )
                     }
                 category.addPreference(pref)
@@ -294,7 +296,7 @@ UnusedAppPref : RemovablePref {
             for (period in allPeriods) {
                 Log.i(
                     LOG_TAG,
-                    "sessionId: $sessionId $period unused: " + "${categorizedPackages[period]}"
+                    "sessionId: $sessionId $period unused: " + "${categorizedPackages[period]}",
                 )
                 for (revokedPackageInfo in categorizedPackages[period]!!) {
                     for (groupName in revokedPackageInfo.revokedGroups) {
@@ -303,7 +305,7 @@ UnusedAppPref : RemovablePref {
                             revokedPackageInfo.packageName,
                             revokedPackageInfo.user,
                             groupName,
-                            isNewlyRevoked
+                            isNewlyRevoked,
                         )
                     }
                 }
@@ -368,9 +370,8 @@ UnusedAppPref : RemovablePref {
     }
 
     /** Interface that the parent fragment must implement. */
-    interface Parent<UnusedAppPref> where
-    UnusedAppPref : Preference,
-    UnusedAppPref : RemovablePref {
+    interface Parent<UnusedAppPref>
+        where UnusedAppPref : Preference, UnusedAppPref : RemovablePref {
 
         /**
          * Set the title of the current settings page.

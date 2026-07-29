@@ -75,7 +75,7 @@ import kotlinx.coroutines.launch
 class AppPermissionGroupsViewModel(
     private val packageName: String,
     private val user: UserHandle,
-    private val sessionId: Long
+    private val sessionId: Long,
 ) : ViewModel() {
 
     companion object {
@@ -102,12 +102,12 @@ class AppPermissionGroupsViewModel(
     ) {
         constructor(
             groupName: String,
-            isSystem: Boolean
+            isSystem: Boolean,
         ) : this(
             groupName,
             isSystem,
             PermSubtitle.NONE,
-            MultiDeviceUtils.getDefaultDevicePersistentDeviceId()
+            MultiDeviceUtils.getDefaultDevicePersistentDeviceId(),
         )
 
         constructor(
@@ -118,7 +118,7 @@ class AppPermissionGroupsViewModel(
             groupName,
             isSystem,
             subtitle,
-            MultiDeviceUtils.getDefaultDevicePersistentDeviceId()
+            MultiDeviceUtils.getDefaultDevicePersistentDeviceId(),
         )
     }
 
@@ -145,7 +145,7 @@ class AppPermissionGroupsViewModel(
                     packageManager.getApplicationInfoAsUser(packageName, 0, user).uid,
                     packageName,
                     null,
-                    null
+                    null,
                 ) == MODE_IGNORED
             return isRestricted
         }
@@ -162,7 +162,7 @@ class AppPermissionGroupsViewModel(
                 AppOpsManager.OPSTR_ACCESS_RESTRICTED_SETTINGS,
                 packageManager.getApplicationInfoAsUser(packageName, 0, user).uid,
                 packageName,
-                MODE_ALLOWED
+                MODE_ALLOWED,
             )
         }
     }
@@ -215,6 +215,10 @@ class AppPermissionGroupsViewModel(
                 groupGrantStates[Category.ALLOWED] = mutableListOf()
                 groupGrantStates[Category.ASK] = mutableListOf()
                 groupGrantStates[Category.DENIED] = mutableListOf()
+                // TODO(b/479896440): Support TV form factor
+                if (!DeviceUtils.isTelevision(app.applicationContext)) {
+                    groupGrantStates[Category.ALLOWED_FOR_COMPATIBILITY] = mutableListOf()
+                }
 
                 val fullStorageState =
                     fullStoragePermsLiveData.value?.find { pkg ->
@@ -265,6 +269,11 @@ class AppPermissionGroupsViewModel(
                                 groupGrantStates[Category.ALLOWED]!!.add(
                                     GroupUiInfo(groupName, isSystem, PermSubtitle.FOREGROUND_ONLY)
                                 )
+                            PermGrantState.PERMS_ALLOWED_FOR_COMPATIBILITY -> {
+                                groupGrantStates[Category.ALLOWED_FOR_COMPATIBILITY]!!.add(
+                                    GroupUiInfo(groupName, isSystem, PermSubtitle.NONE)
+                                )
+                            }
                             PermGrantState.PERMS_DENIED ->
                                 groupGrantStates[Category.DENIED]!!.add(
                                     GroupUiInfo(groupName, isSystem)
@@ -289,7 +298,7 @@ class AppPermissionGroupsViewModel(
                                     groupName,
                                     isSystem,
                                     PermSubtitle.NONE,
-                                    persistentDeviceId
+                                    persistentDeviceId,
                                 )
                             )
                         }
@@ -299,7 +308,7 @@ class AppPermissionGroupsViewModel(
                                     groupName,
                                     isSystem,
                                     PermSubtitle.BACKGROUND,
-                                    persistentDeviceId
+                                    persistentDeviceId,
                                 )
                             )
                         PermGrantState.PERMS_ALLOWED_FOREGROUND_ONLY ->
@@ -308,16 +317,26 @@ class AppPermissionGroupsViewModel(
                                     groupName,
                                     isSystem,
                                     PermSubtitle.FOREGROUND_ONLY,
-                                    persistentDeviceId
+                                    persistentDeviceId,
                                 )
                             )
+                        PermGrantState.PERMS_ALLOWED_FOR_COMPATIBILITY -> {
+                            groupGrantStates[Category.ALLOWED_FOR_COMPATIBILITY]!!.add(
+                                GroupUiInfo(
+                                    groupName,
+                                    isSystem,
+                                    PermSubtitle.NONE,
+                                    persistentDeviceId,
+                                )
+                            )
+                        }
                         PermGrantState.PERMS_DENIED ->
                             groupGrantStates[Category.DENIED]!!.add(
                                 GroupUiInfo(
                                     groupName,
                                     isSystem,
                                     PermSubtitle.NONE,
-                                    persistentDeviceId
+                                    persistentDeviceId,
                                 )
                             )
                         PermGrantState.PERMS_ASK ->
@@ -326,7 +345,7 @@ class AppPermissionGroupsViewModel(
                                     groupName,
                                     isSystem,
                                     PermSubtitle.NONE,
-                                    persistentDeviceId
+                                    persistentDeviceId,
                                 )
                             )
                     }
@@ -342,32 +361,32 @@ class AppPermissionGroupsViewModel(
             LOG_TAG,
             "Overall liveData isStale: ${packagePermGroupsLiveData.isStale}, " +
                 "isInitialized: ${packagePermGroupsLiveData.isInitialized}, " +
-                "value: ${packagePermGroupsLiveData.value}"
+                "value: ${packagePermGroupsLiveData.value}",
         )
         Log.i(
             LOG_TAG,
             "AutoRevoke liveData isStale: ${autoRevokeLiveData.isStale}, " +
                 "isInitialized: ${autoRevokeLiveData.isInitialized}, " +
-                "value: ${autoRevokeLiveData.value}"
+                "value: ${autoRevokeLiveData.value}",
         )
         Log.i(
             LOG_TAG,
             "PackagePerms liveData isStale: ${packagePermsLiveData.isStale}, " +
                 "isInitialized: ${packagePermsLiveData.isInitialized}, " +
-                "value: ${packagePermsLiveData.value}"
+                "value: ${packagePermsLiveData.value}",
         )
         Log.i(
             LOG_TAG,
             "FullStorage liveData isStale: ${fullStoragePermsLiveData.isStale}, " +
                 "isInitialized: ${fullStoragePermsLiveData.isInitialized}, " +
-                "value size: ${fullStoragePermsLiveData.value?.size}"
+                "value size: ${fullStoragePermsLiveData.value?.size}",
         )
         for ((group, liveData) in appPermGroupUiInfoLiveDatas) {
             Log.i(
                 LOG_TAG,
                 "$group ui liveData isStale: ${liveData.isStale}, " +
                     "isInitialized: ${liveData.isInitialized}, " +
-                    "value size: ${liveData.value}"
+                    "value size: ${liveData.value}",
             )
         }
     }
@@ -381,7 +400,7 @@ class AppPermissionGroupsViewModel(
                 Log.i(
                     LOG_TAG,
                     "sessionId $sessionId setting auto revoke enabled to $enabled for" +
-                        "$packageName $user"
+                        "$packageName $user",
                 )
                 val tag =
                     if (enabled) {
@@ -394,7 +413,7 @@ class AppPermissionGroupsViewModel(
                     sessionId,
                     lightPackageInfo.uid,
                     packageName,
-                    tag
+                    tag,
                 )
 
                 val mode =
@@ -427,7 +446,7 @@ class AppPermissionGroupsViewModel(
     fun extractGroupUsageLastAccessTime(
         accessTime: MutableMap<String, Long>,
         appPermissionUsages: List<AppPermissionUsage>,
-        packageName: String
+        packageName: String,
     ) {
         if (!SdkLevel.isAtLeastS()) {
             return
@@ -442,13 +461,15 @@ class AppPermissionGroupsViewModel(
             max(
                 System.currentTimeMillis() -
                     TimeUnit.DAYS.toMillis(aggregateDataFilterBeginDays.toLong()),
-                Instant.EPOCH.toEpochMilli()
+                Instant.EPOCH.toEpochMilli(),
             )
         val numApps: Int = appPermissionUsages.size
         for (appIndex in 0 until numApps) {
             val appUsage: AppPermissionUsage = appPermissionUsages[appIndex]
-            if (appUsage.packageName != packageName
-                || UserHandle.getUserHandleForUid(appUsage.uid) != user) {
+            if (
+                appUsage.packageName != packageName ||
+                    UserHandle.getUserHandleForUid(appUsage.uid) != user
+            ) {
                 continue
             }
             val appGroups = appUsage.groupUsages
@@ -467,13 +488,13 @@ class AppPermissionGroupsViewModel(
     fun getPreferenceSummary(
         groupInfo: GroupUiInfo,
         context: Context,
-        lastAccessTime: Long?
+        lastAccessTime: Long?,
     ): String {
         val summaryTimestamp =
             Utils.getPermissionLastAccessSummaryTimestamp(
                 lastAccessTime,
                 context,
-                groupInfo.groupName
+                groupInfo.groupName,
             )
         @AppPermsLastAccessType val lastAccessType: Int = summaryTimestamp.second
 
@@ -487,18 +508,18 @@ class AppPermissionGroupsViewModel(
                     Utils.LAST_24H_SENSOR_TODAY ->
                         context.getString(
                             R.string.app_perms_24h_access_background,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_24H_SENSOR_YESTERDAY ->
                         context.getString(
                             R.string.app_perms_24h_access_yest_background,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_7D_SENSOR ->
                         context.getString(
                             R.string.app_perms_7d_access_background,
                             summaryTimestamp.third,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.NOT_IN_LAST_7D ->
                         context.getString(R.string.permission_subtitle_background)
@@ -513,18 +534,18 @@ class AppPermissionGroupsViewModel(
                     Utils.LAST_24H_SENSOR_TODAY ->
                         context.getString(
                             R.string.app_perms_24h_access_media_only,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_24H_SENSOR_YESTERDAY ->
                         context.getString(
                             R.string.app_perms_24h_access_yest_media_only,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_7D_SENSOR ->
                         context.getString(
                             R.string.app_perms_7d_access_media_only,
                             summaryTimestamp.third,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.NOT_IN_LAST_7D ->
                         context.getString(R.string.permission_subtitle_media_only)
@@ -539,18 +560,18 @@ class AppPermissionGroupsViewModel(
                     Utils.LAST_24H_SENSOR_TODAY ->
                         context.getString(
                             R.string.app_perms_24h_access_all_files,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_24H_SENSOR_YESTERDAY ->
                         context.getString(
                             R.string.app_perms_24h_access_yest_all_files,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_7D_SENSOR ->
                         context.getString(
                             R.string.app_perms_7d_access_all_files,
                             summaryTimestamp.third,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.NOT_IN_LAST_7D ->
                         context.getString(R.string.permission_subtitle_all_files)
@@ -568,13 +589,13 @@ class AppPermissionGroupsViewModel(
                     Utils.LAST_24H_SENSOR_YESTERDAY ->
                         context.getString(
                             R.string.app_perms_24h_access_yest,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.LAST_7D_SENSOR ->
                         context.getString(
                             R.string.app_perms_7d_access,
                             summaryTimestamp.third,
-                            summaryTimestamp.first
+                            summaryTimestamp.first,
                         )
                     Utils.NOT_IN_LAST_7D -> ""
                     else -> ""
@@ -592,7 +613,7 @@ class AppPermissionGroupsViewModel(
 class AppPermissionGroupsViewModelFactory(
     private val packageName: String,
     private val user: UserHandle,
-    private val sessionId: Long
+    private val sessionId: Long,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

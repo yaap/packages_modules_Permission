@@ -772,7 +772,8 @@ public final class SafetyCenterService extends SystemService {
             if (callingUid == Process.ROOT_UID || callingUid == Process.SYSTEM_UID) {
                 return true;
             }
-            if (UserHandle.getAppId(callingUid) != UserHandle.getAppId(actualUid)) {
+
+            if (!isSameAppIncludingPccUid(getContext(), callingUid, actualUid)) {
                 throw new SecurityException(
                         "Package: "
                                 + packageName
@@ -780,6 +781,21 @@ public final class SafetyCenterService extends SystemService {
                                 + callingUid);
             }
             return true;
+        }
+
+        private boolean isSameAppIncludingPccUid(Context context, int uid1, int uid2) {
+            int appUid1 = getAppUid(context, uid1);
+            int appUid2 = getAppUid(context, uid2);
+            return UserHandle.getAppId(appUid1) == UserHandle.getAppId(appUid2);
+        }
+
+        private int getAppUid(Context context, int uid) {
+            if (SdkLevel.isAtLeastC()
+                    && android.app.privatecompute.flags.Flags.enablePccFrameworkSupport()
+                    && Process.isPrivateComputeCoreUid(uid)) {
+                return context.getPackageManager().getAppUidForPrivateComputeCoreUid(uid);
+            }
+            return uid;
         }
 
         private boolean checkApiEnabled(String message) {
@@ -1374,7 +1390,7 @@ public final class SafetyCenterService extends SystemService {
     private void clearDataLocked() {
         mSafetyCenterDataManager.clear();
         mSafetyCenterTimeouts.clear();
-        mSafetyCenterRefreshTracker.clearRefresh();
+        mSafetyCenterRefreshTracker.clear();
         mNotificationSender.cancelAllNotifications();
     }
 

@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"智能体"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"可在应用中访问信息或执行操作的智能体"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"应用和 AI 助理活动记录"</string>
 </resources>

@@ -247,4 +247,10 @@ public abstract class PermissionsFrameFragment extends SettingsBasePreferenceFra
     public int getEmptyViewString() {
         return R.string.no_permissions;
     }
+
+    @Override
+    protected final boolean isPreferenceSpacingEnabled() {
+        return SdkLevel.isAtLeastB() && getResources()
+                .getBoolean(R.bool.config_usePreferenceSpacingInPermissionSettings);
+    }
 }

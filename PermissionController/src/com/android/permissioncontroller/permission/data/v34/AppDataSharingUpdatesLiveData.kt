@@ -40,7 +40,7 @@ class AppDataSharingUpdatesLiveData(val app: Application) :
             DeviceConfig.getLong(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 PROPERTY_DATA_SHARING_UPDATE_PERIOD_MILLIS,
-                Duration.ofDays(DEFAULT_DATA_SHARING_UPDATE_PERIOD_DAYS).toMillis()
+                Duration.ofDays(DEFAULT_DATA_SHARING_UPDATE_PERIOD_DAYS).toMillis(),
             )
         val file =
             AppsSafetyLabelHistoryPersistence.getSafetyLabelHistoryFile(app.applicationContext)
@@ -48,7 +48,7 @@ class AppDataSharingUpdatesLiveData(val app: Application) :
         val appSafetyLabelDiffsFromPersistence =
             AppsSafetyLabelHistoryPersistence.getAppSafetyLabelDiffs(
                 Instant.now().atZone(ZoneId.systemDefault()).toInstant().minusMillis(updatePeriod),
-                file
+                file,
             )
         val updatesFromPersistence =
             appSafetyLabelDiffsFromPersistence.mapNotNull { it.buildUpdateIfSignificantChange() }

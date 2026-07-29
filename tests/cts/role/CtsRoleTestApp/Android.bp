@@ -21,6 +21,7 @@ android_test_helper_app {
     defaults: ["mts-target-sdk-version-current"],
     min_sdk_version: "30",
     srcs: [
-        "src/**/*.java"
+        "src/**/*.java",
+        "src/**/*.kt",
     ],
 }

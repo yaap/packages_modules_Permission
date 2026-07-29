@@ -63,7 +63,7 @@
     <string name="app_permissions" msgid="3369917736607944781">"Разрешения приложений"</string>
     <string name="unused_apps" msgid="2058057455175955094">"Неиспользуемые приложения"</string>
     <string name="edit_photos_description" msgid="5540108003480078892">"Изменить список фото для этого приложения"</string>
-    <string name="no_unused_apps" msgid="12809387670415295">"Неиспользуемых приложений нет"</string>
+    <string name="no_unused_apps" msgid="12809387670415295">"Неиспользуемых приложений нет."</string>
     <string name="zero_unused_apps" msgid="9024448554157499748">"Нет неиспользуемых приложений"</string>
     <string name="review_permission_decisions" msgid="309559429150613632">"Действия с разрешениями"</string>
     <string name="review_permission_decisions_view_all" msgid="90391040431566130">"Все недавние действия с разрешениями"</string>
@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Подождите…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Неизвестное приложение"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Панель управления разрешениями"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Разрешения для приложений"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"История ИИ-помощников"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"ИИ-помощники не установлены"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"За 24 ч. доступ не получался"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"За 7 дн. доступ не получался"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"Действия (<xliff:g id="APP_NAME">%1$s</xliff:g>)"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"За последние 24 часа"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"За последние 7 дней"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Сегодня"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Вчера"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Последний доступ: <xliff:g id="TIME_DATE">%1$s</xliff:g>"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Посмотреть"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Не было попыток доступа"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"ИИ-помощник использовал эти приложения, чтобы найти сведения или выполнить действия по вашему запросу. Параметры доступа можно изменить в настройках приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Информация на панели управления разрешениями появляется, только если к приложениям обращаются через функции Android для ИИ-помощников."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Помощь с устройством"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Посмотреть, какие приложения недавно использовали разрешения"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Использование разрешения \"<xliff:g id="PERMGROUP">%1$s</xliff:g>\""</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Показать другие разрешения"</string>
@@ -164,7 +180,8 @@
     <string name="permission_usage_bar_chart_title_last_minute" msgid="820450867183487607">"Разрешения, использованные за последнюю минуту"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{С момента последнего использования прошел # день}one{С момента последнего использования прошел # день}few{С момента последнего использования прошло # дня}many{С момента последнего использования прошло # дней}other{С момента последнего использования прошло # дня}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{С момента последнего использования прошел # час}one{С момента последнего использования прошел # час}few{С момента последнего использования прошло # часа}many{С момента последнего использования прошло # часов}other{С момента последнего использования прошло # часа}}"</string>
-    <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Использовано 1 приложением}one{Использовано # приложением}few{Использовано # приложениями}many{Использовано # приложениями}other{Использовано # приложения}}"</string>
+    <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{Использовалось 1 приложением}one{Использовалось # приложением}few{Использовалось # приложениями}many{Использовалось # приложениями}other{Использовалось # приложения}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{Получен доступ к 1 приложению}one{Получен доступ к # приложению}few{Получен доступ к # приложениям}many{Получен доступ к # приложениям}other{Получен доступ к # приложения}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Показать все в панели управления"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Фильтр: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Удалить фильтр"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Разрешить доступ только к медиафайлам"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Разрешить в любом режиме"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Разрешить только во время использования приложения"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Разрешить для работы приложения"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Постоянный полный доступ"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Спрашивать каждый раз"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Спрашивать каждый раз или разрешать при отправке"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Запретить"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Разрешить ограниченный доступ"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Точное местоположение"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Разрешено"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Разрешено всегда"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Разрешено только при использовании"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Разрешено для работы приложения"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Приложения с доступом только к медиафайлам"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Приложения с доступом ко всем файлам"</string>
     <string name="ask_header" msgid="2633816846459944376">"Спрашивать каждый раз"</string>
     <string name="denied_header" msgid="903209608358177654">"Запрещено"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g> на устройстве \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Ещё приложения с доступом ко всем файлам"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Разрешить для работы приложения&lt;/b&gt;&lt;br&gt;&lt;br&gt;Для корректной работы приложения вы можете разрешить ему доступ к вашей локальной сети и подключение к устройствам в ней.&lt;br&gt;&lt;br&gt;Приложение не сможет подключаться к устройствам с помощью Bluetooth и других технологий, если вы не разрешите ему находить все устройства поблизости и подключаться к ним."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Разрешено для работы приложения&lt;/b&gt;&lt;br&gt;&lt;br&gt;Это может означать, что приложению разрешен только доступ к локальной сети и подключение к устройствам в ней.&lt;br&gt;&lt;br&gt;Приложение не сможет подключаться к устройствам с помощью Bluetooth и других технологий, если только вы не разрешите ему находить все устройства поблизости и подключаться к ним."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 день}one{# день}few{# дня}many{# дней}other{# дня}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# час}one{# час}few{# часа}many{# часов}other{# часа}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# минута}one{# минута}few{# минуты}many{# минут}other{# минуты}}"</string>
@@ -436,13 +458,15 @@
     <string name="default_apps" msgid="5119201969348748639">"Приложения по умолчанию"</string>
     <string name="no_default_apps" msgid="2593466527182950231">"Нет приложений по умолчанию"</string>
     <string name="default_apps_more" msgid="4078194675848858093">"Другие приложения по умолчанию"</string>
-    <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Переход по ссылкам"</string>
+    <string name="default_apps_manage_domain_urls" msgid="6775566451561036069">"Открытие ссылок"</string>
     <string name="default_apps_for_work" msgid="4970308943596201811">"Стандартные для работы"</string>
     <string name="default_apps_for_private_profile" msgid="2022024112144880785">"Приложения по умолчанию для личного пространства"</string>
     <string name="default_app_others" msgid="7793029848126079876">"Прочие"</string>
     <string name="default_app_none" msgid="9084592086808194457">"Нет"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(по умолчанию)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Приложений нет"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Изменить"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Оставить как есть"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Другие сервисы NFC"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Выбрано"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Выбрано: <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Специальный доступ не настроен"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Нет приложений"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Рабочий профиль не поддерживается"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Выбрать сервис &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; как приложение по умолчанию для главного экрана?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Будет заменен главный экран. Это может повлиять на доступ к функциям устройства.&lt;br&gt;&lt;br&gt;Выбрать другое приложение можно в любое время, используя параметр &lt;b&gt;Главный экран по умолчанию&lt;/b&gt;."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Примечание. Если у вас установлена блокировка экрана, после перезагрузки вам потребуется разблокировать устройство, чтобы запустить приложение."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Ассистент сможет получать данные об используемых в вашей системе приложениях, в том числе сведения с экрана и из самих приложений."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Изменить выбранного цифрового помощника на приложение &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Новому помощнику будут доступны ваши сообщения и другая информация, а также данные, которыми с ним делятся другие приложения."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Новому помощнику будут доступны ваши сообщения и прочая информация, а также данные, которыми с ним делятся другие приложения.&lt;br&gt;&lt;br&gt;Поскольку вы уже разрешили сервису \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" обращаться к данным экрана и приложений, ему также будет доступен контент приложения, открытого на экране."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Отправка данных об отладке"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Отправка детализированных данных об отладке"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" запрашивает разрешение на загрузку данных об отладке."</string>
@@ -549,7 +578,7 @@
     <string name="additional_permissions_description" msgid="2186611950890732112">"Разрешения, определяемые приложениями."</string>
     <string name="privdash_label_camera" msgid="1426440033626198096">"Камера"</string>
     <string name="privdash_label_microphone" msgid="8415035835803511693">"Микрофон"</string>
-    <string name="privdash_label_location" msgid="6882400763866489291">"Местоположение"</string>
+    <string name="privdash_label_location" msgid="6882400763866489291">"Геолокация"</string>
     <string name="privdash_label_other" msgid="3710394147423236033">"Другое"</string>
     <string name="privdash_label_none" msgid="5991866260360484858">"Нет"</string>
     <string name="privdash_label_24h" msgid="1512532123865375319">"Последние\n24 часа"</string>
@@ -574,7 +603,7 @@
     <string name="safety_center_rescan_button" msgid="4517514567809409596">"Сканировать устройство"</string>
     <string name="safety_center_issue_card_dismiss_button" msgid="5113965506144222402">"Закрыть"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="2734809473425036382">"Закрыть оповещение?"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"Проверить и изменить настройки защиты и безопасности можно в любое время."</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="3775418736671093563">"Вы в любое время можете проверить настройки безопасности и конфиденциальности, чтобы усилить защиту."</string>
     <string name="safety_center_issue_card_confirm_dismiss_button" msgid="5884137843083634556">"Закрыть"</string>
     <string name="safety_center_issue_card_cancel_dismiss_button" msgid="2874578798877712346">"Отмена"</string>
     <string name="safety_center_entries_category_title" msgid="34356964062813115">"Настройки"</string>
@@ -659,8 +688,8 @@
     <string name="app_location_permission_rationale_subtitle" msgid="6986985722752868692">"Это приложение уведомило, что оно может передавать данные о вашем местоположении третьим лицам."</string>
     <string name="data_sharing_updates_title" msgid="7996933386875213859">"Изменения в передаче геоданных"</string>
     <string name="data_sharing_updates_summary" msgid="764113985772233889">"Проверить приложения, в которых изменились разрешения на передачу геоданных"</string>
-    <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"В этих приложениях изменились разрешения на передачу геоданных. Возможно, эти данные ранее не передавались вообще или теперь передаются в рекламных или маркетинговых целях."</string>
-    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Разработчики этих приложений указали в магазине приложений, как их приложения передают данные. Эта информация может изменяться.\n\nРазрешения на передачу данных могут зависеть от версии приложения, способа его использования, а также от вашего региона и возраста."</string>
+    <string name="data_sharing_updates_subtitle" msgid="6311537708950632329">"В этих приложениях изменились условия передачи геоданных. Возможно, эти данные ранее не передавались вообще или теперь передаются в рекламных или маркетинговых целях."</string>
+    <string name="data_sharing_updates_footer_message" msgid="1582711655172892107">"Разработчики этих приложений указали в магазине приложений, как их приложения передают данные. Эта информация может изменяться.\n\nУсловия передачи данных могут зависеть от версии приложения, способа его использования, а также от вашего региона и возраста."</string>
     <string name="learn_about_data_sharing" msgid="4200480587079488045">"Сведения о передаче данных"</string>
     <string name="shares_location_with_third_parties" msgid="2278051743742057767">"Теперь данные о вашем местоположении передаются третьим лицам."</string>
     <string name="shares_location_with_third_parties_for_advertising" msgid="1918588064014480513">"Теперь данные о вашем местоположении передаются третьим лицам в рекламных или маркетинговых целях."</string>
@@ -689,7 +718,7 @@
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Приложение запрашивает разрешение на доступ к конфиденциальной информации. Если вы предоставите его, ваши личные и финансовые данные могут оказаться под угрозой.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Без такого разрешения приложение может работать неправильно. Узнайте, &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;как предоставить доступ к данным&lt;/a&gt;."</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Запрос на использование в качестве приложения по умолчанию (<xliff:g id="ROLE_NAME">%1$s</xliff:g>) отклонен"</string>
     <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"Приложение запросило разрешения на доступ к конфиденциальной информации. Такие разрешения могут поставить ваши личные и финансовые данные под угрозу.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Без них приложение может работать неправильно. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Как предоставить доступ к данным.&lt;/a&gt;"</string>
-    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Доступ запрещен"</string>
+    <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Доступ для приложения запрещен"</string>
     <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"Если вы предоставите это разрешение, ваши личные и финансовые данные могут оказаться под угрозой.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Без него приложение может работать неправильно. Узнайте, &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;как предоставить доступ к данным&lt;/a&gt;."</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"Подробнее"</string>
     <string name="enhanced_confirmation_dialog_ok" msgid="8560373821598619924">"ОК"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Приложения"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Доступ агента"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Агенты, которые могут получать доступ к информации и выполнять действия в этом приложении от вашего лица"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Доступ разрешен"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Доступ запрещен"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Доступ запрещен для агентов"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Доступ разрешен для агентов"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Доступ к приложениям запрещен"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Доступ к приложениям разрешен"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Доступ к приложению"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"Доступ к приложению \"<xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"Доступ агента \"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>\" к приложению \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\""</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Разрешить"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Запретить"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Настройки устройства"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> станет агентом прил-я \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\"?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Агент сможет искать сведения и выполнять действия в приложении \"<xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>\"."</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Разрешить"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Запретить"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"Разрешить приложению &lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt; доступ к данным экрана и приложений?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Новому помощнику будут доступны данные и контент из приложения, открытого на экране."</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Разрешить"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Не разрешать"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Доступ к данным экрана и приложений"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Разрешите помощнику доступ к данным и контенту приложения, открытого на экране"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"Разрешить приложению \"<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>\" доступ к данным и контенту приложения, открытого на экране"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Разрешить"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Запретить"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Разрешить приложению &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; доступ к данным о точном местоположении, когда вы ими делитесь?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Когда вы делитесь данными, это приложение получает доступ к точному местоположению, пока вы его не закроете."</string>
 </resources>

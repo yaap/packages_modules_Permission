@@ -19,4 +19,5 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_function_access_settings_title" msgid="2755147062089099851">"Agente"</string>
     <string name="app_function_access_settings_summary" msgid="6409382291361390766">"Agente wat toegang tot inligting kan kry of handelinge in apps kan uitvoer"</string>
+    <string name="permission_usage_summary" msgid="5178155152906671751">"App- en KI-assistentaktiwiteit"</string>
 </resources>

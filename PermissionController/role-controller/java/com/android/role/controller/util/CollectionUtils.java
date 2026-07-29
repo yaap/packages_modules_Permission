@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,6 +32,19 @@ import java.util.List;
 public final class CollectionUtils {
 
     private CollectionUtils() {}
+
+    /**
+     * Check whether a collection contains an element.
+     *
+     * @param <T> the class of the elements of the collection
+     * @param collection the collection to check
+     * @param element the element to check for
+     *
+     * @return {@code true} if the collection contains the element, {@code false} otherwise
+     */
+    public static <T> boolean contains(@Nullable Collection<T> collection, @Nullable T element) {
+        return collection != null && collection.contains(element);
+    }
 
     /**
      * Return the first element of a list, or {@code null} if the list is {@code null} or empty.

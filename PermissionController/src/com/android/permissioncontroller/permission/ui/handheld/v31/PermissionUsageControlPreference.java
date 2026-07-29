@@ -29,7 +29,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permissioncontroller.permission.ui.model.v31.PermissionUsageControlPreferenceUtils;
 
-/** Preference for the top level privacy hub page */
+/** App Permissions Preference for the Privacy Dashboard */
 @RequiresApi(Build.VERSION_CODES.S)
 public class PermissionUsageControlPreference extends Preference {
 

@@ -48,8 +48,7 @@ class EnabledDreamServicesLiveData(private val app: Application, private val use
                     } else {
                         pkgOrComponent
                     }
-                }
-                ?: emptyList()
+                } ?: emptyList()
 
         postValue(packageNames)
     }

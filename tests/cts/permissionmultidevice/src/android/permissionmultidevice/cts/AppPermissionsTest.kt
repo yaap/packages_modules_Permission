@@ -28,14 +28,15 @@ import android.os.Build
 import android.permission.PermissionManager
 import android.permission.cts.TestUtils
 import android.permission.flags.Flags
+import android.platform.test.annotations.LargeTest
 import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.rule.ScreenRecordRule
+import android.util.Log
 import android.virtualdevice.cts.common.VirtualDeviceRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiScrollable
-import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.SystemUtil.eventually
@@ -53,6 +54,8 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
+@LargeTest
+@ScreenRecordRule.ScreenRecord
 class AppPermissionsTest {
     private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
     private val defaultDeviceContext = instrumentation.targetContext
@@ -68,14 +71,14 @@ class AppPermissionsTest {
 
     @get:Rule val disableAnimationRule = DisableAnimationRule()
 
+    @get:Rule val screenRecordRule = ScreenRecordRule(false, false)
+
     private lateinit var persistentDeviceId: String
     private lateinit var externalDeviceCameraText: String
     private lateinit var permissionMessage: String
 
     private val permissionManager =
         defaultDeviceContext.getSystemService(PermissionManager::class.java)!!
-
-    private val TAG = AppPermissionsTest::class.java.simpleName
 
     @Before
     fun setup() {
@@ -361,26 +364,37 @@ class AppPermissionsTest {
             )
         val outOfScopeTitles = setOf("Unused app settings", "Manage app if unused")
 
-        val titleSelector = UiSelector().resourceId(TITLE)
-        var currentGrantText = ""
+        val recyclerView = UiAutomatorUtils2.waitFindObject(By.res(RECYCLER_VIEW))
+        val titleSelector = By.res(TITLE)
 
-        val scrollable = getScrollableRecyclerView()
+        UiAutomatorUtils2.getUiDevice().waitForIdle()
 
-        // Scrolling to end inorder to have the scrollable object loaded with all child element data
-        // ready to be read. If the scroll happens in the middle of the reading process, it has been
-        // observed that child items will be skipped during the reading (could be a bug). Hence this
-        // solution is to scroll to the bottom in the beginning and be more efficient as well.
-        scrollable.scrollToEnd(1)
+        val allTitles = LinkedHashSet<String>()
+        val startTime = System.currentTimeMillis()
 
-        for (i in 0..scrollable.childCount) {
-            val child = scrollable.getChild(UiSelector().index(i))
-            val titleText = child.getChild(titleSelector).text
-            if (outOfScopeTitles.contains(titleText)) {
-                break
+        loop@ while (System.currentTimeMillis() - startTime < GRANT_INFO_SCROLL_TIMEOUT_MILLIS) {
+            val visibleTitles = recyclerView.findObjects(titleSelector)
+            for (titleObj in visibleTitles) {
+                if (outOfScopeTitles.contains(titleObj.text)) {
+                    break@loop
+                }
+                allTitles.add(titleObj.text)
             }
-            if (grantInfoMap.contains(titleText)) {
+
+            recyclerView.scroll(androidx.test.uiautomator.Direction.DOWN, 0.6f)
+            UiAutomatorUtils2.getUiDevice().waitForIdle()
+        }
+
+        Log.i(TAG, "time took to scroll recycler=${System.currentTimeMillis() - startTime}ms")
+
+        var currentGrantText = ""
+        for (titleText in allTitles) {
+            if (outOfScopeTitles.contains(titleText)) {
+                continue
+            }
+            if (grantInfoMap.containsKey(titleText)) {
                 currentGrantText = titleText
-            } else if (!titleText.startsWith("No permissions")) {
+            } else if (currentGrantText.isNotEmpty() && !titleText.startsWith("No permissions")) {
                 grantInfoMap[currentGrantText]!!.add(titleText)
             }
         }
@@ -426,12 +440,6 @@ class AppPermissionsTest {
             )
     }
 
-    private fun getScrollableRecyclerView(): UiScrollable {
-        // Wait for object to load
-        UiAutomatorUtils2.waitFindObject(By.res(RECYCLER_VIEW))
-        return UiScrollable(UiSelector().resourceId(RECYCLER_VIEW))
-    }
-
     private fun clickPermissionItem(permissionItemName: String) =
         UiAutomatorUtils2.waitFindObject(By.text(permissionItemName)).click()
 
@@ -475,5 +483,7 @@ class AppPermissionsTest {
         private const val TITLE = "android:id/title"
         private const val RECYCLER_VIEW = "com.android.permissioncontroller:id/recycler_view"
         private const val NEW_WINDOW_TIMEOUT_MILLIS: Long = 20_000
+        private val TAG = AppPermissionsTest::class.java.simpleName
+        private const val GRANT_INFO_SCROLL_TIMEOUT_MILLIS = 40_000
     }
 }

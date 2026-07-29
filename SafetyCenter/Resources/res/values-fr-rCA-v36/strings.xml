@@ -18,11 +18,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="face_unlock_title" msgid="3991635517593572926">"Reconnaissance faciale"</string>
-    <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Reconnaissance faciale pour le travail"</string>
+    <string name="face_unlock_title_for_work" msgid="1451170625947022012">"Reconnaissance faciale professionnelle"</string>
     <string name="face_unlock_title_for_private_profile" msgid="2758692637409168420"></string>
     <string name="face_unlock_search_terms" msgid="2708195853333028283">"Déverrouillage par reconnaissance faciale, reconnaissance faciale"</string>
     <string name="fingerprint_unlock_title" msgid="5579868242026550596">"Empreinte digitale"</string>
-    <string name="fingerprint_unlock_title_for_work" msgid="6343690273672384918">"Empreinte digitale pour le travail"</string>
+    <string name="fingerprint_unlock_title_for_work" msgid="6343690273672384918">"Empreinte digitale professionnelle"</string>
     <string name="fingerprint_unlock_title_for_private_profile" msgid="9004513575240235691"></string>
     <string name="fingerprint_unlock_search_terms" msgid="688405183240088603">"Empreinte digitale, doigt, ajouter une empreinte digitale"</string>
     <string name="wear_unlock_title" msgid="1613730442896319515">"Montre"</string>

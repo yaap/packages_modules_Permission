@@ -374,6 +374,54 @@
     <!-- Title for permission usage [CHAR LIMIT=30] -->
     <string name="permission_usage_title">Privacy dashboard</string>
 
+    <!-- Title for app permissions category in privacy dashboard [CHAR LIMIT=30] -->
+    <string name="permission_usage_app_permissions_title">App permissions</string>
+
+    <!-- Title for agent activity category in privacy dashboard [CHAR LIMIT=30] [SCREENSHOT=screen/9fW4XJSjGe8wQqY] -->
+    <string name="permission_usage_agent_activity_title">AI assistant activity</string>
+
+    <!-- Preference title for the agent activity when there's no agents installed on the device [CHAR LIMIT=30] [SCREENSHOT=screen/9fW4XJSjGe8wQqY] -->
+    <string name="empty_agent_activity_preference_title">No AI assistants installed</string>
+
+    <!-- Preference summary for the agent in agent activity when there's no target accesses in past 24 hours [CHAR LIMIT=30] -->
+    <string name="agent_activity_preference_summary_no_accesses_24h">No accesses in past 24 hours</string>
+
+    <!-- Preference summary for the agent in agent activity when there's no target accesses in past 7 days [CHAR LIMIT=30] -->
+    <string name="agent_activity_preference_summary_no_accesses_7d">No accesses in past 7 days</string>
+
+    <!-- Title for agent activity timeline [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_title"><xliff:g id="app_name" example="Example AI assistant App">%1$s</xliff:g> activity</string>
+
+    <!-- Category title for the past 24 hours agent activity timeline [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_category_title_24h">In the past 24 hours</string>
+
+    <!-- Category title for the past 7 days agent activity timeline [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_category_title_7d">In the past 7 days</string>
+
+    <!-- Category title for today's agent activity timeline [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_category_title_today">Today</string>
+
+    <!-- Category title for yesterday's agent activity timeline [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_category_title_yesterday">Yesterday</string>
+
+    <!-- Summary for the activity in the agent activity timeline [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_activity_summary">Last access <xliff:g id="time_date" example="12:42 PM">%1$s</xliff:g></string>
+
+    <!-- Text for the agent activity timeline preference widget [CHAR LIMIT=30] -->
+    <string name="agent_activity_timeline_preference_widget">View</string>
+
+    <!-- Preference title for the agent activity timeline when there's no target accesses [CHAR LIMIT=30] -->
+    <string name="empty_agent_activity_timeline_preference_title">No accesses</string>
+
+    <!-- Top intro text for the agent activity timeline [CHAR LIMIT=30] [SCREENSHOT=screen/4rus3vLNMCEppr7] -->
+    <string name="agent_activity_timeline_top_intro_title">This AI assistant accessed these apps to get info or take actions for you. You can change this access anytime in <xliff:g id="app_name" example="Example AI assistant App">%1$s</xliff:g> settings.</string>
+
+    <!-- Footer text for the agent activity timeline [CHAR LIMIT=30] [SCREENSHOT=screen/4rus3vLNMCEppr7] -->
+    <string name="agent_activity_timeline_footer_title">Privacy dashboard only shows when apps are accessed using Android features for AI assistants.</string>
+
+    <!-- The title for the device assistance apps [CHAR LIMIT=30] -->
+    <string name="device_assistance_title">Device Assistance</string>
+
     <!-- Summary for permission usage preference row [CHAR LIMIT=60] -->
     <string name="auto_permission_usage_summary">View which apps recently used permissions</string>
 
@@ -521,6 +569,12 @@
         other   {Used by # apps}
     }</string>
 
+    <!-- Label for the agent usage preference that shows how many apps the agent have accessed [CHAR LIMIT=50] -->
+    <string name="agent_usage_preference_label">{count, plural,
+        =1      {Accessed 1 app}
+        other   {Accessed # apps}
+    }</string>
+
     <!-- Label for the button to bring the user to view the details of recent permission accesses [CHAR LIMIT=42] -->
     <string name="permission_usage_view_details">See all in Dashboard</string>
 
@@ -599,11 +653,17 @@
     <!-- Title for the settings radio button to allow a permission grant only when the app is in the foreground. [CHAR LIMIT=60] -->
     <string name="app_permission_button_allow_foreground">Allow only while using the app</string>
 
+    <!-- Title for the settings radio button to allow a permission grant to keep app working. [CHAR LIMIT=60] [SCREENSHOT=screen/ATXndkdevKtpssc] -->
+    <string name="app_permission_button_allow_for_compatibility">Allow to keep app working</string>
+
     <!-- Title for the settings radio button to allow the user to always allow access to all resources guarded by a permission. [CHAR LIMIT=60] -->
     <string name="app_permission_button_always_allow_all">Always allow all</string>
 
     <!-- Title for the settings radio button to require an app to ask for a permission next time they need it. [CHAR LIMIT=60] -->
     <string name="app_permission_button_ask">Ask every time</string>
+
+    <!-- Title for the settings radio button to require an app to ask for a permission next time they need it. [CHAR LIMIT=60] -->
+    <string name="app_permission_button_ask_or_when_you_share">Ask every time or allow when you share</string>
 
     <!-- Title for the settings radio button to deny with prejudice a permission grant. [CHAR LIMIT=60] -->
     <string name="app_permission_button_deny">Don\u2019t allow</string>
@@ -801,6 +861,9 @@
     <!-- Header for permissions/apps that are granted only when in the foreground [CHAR LIMIT=40] -->
     <string name="allowed_foreground_header">Allowed only while in use</string>
 
+    <!-- Header for granted apps, granted inorder to keep app working [CHAR LIMIT=40] -->
+    <string name="allowed_for_compatibility_header">Allowed to keep app working</string>
+
     <!-- Subtitle for scoped storage permissions, showing apps that have access to media files only [CHAR LIMIT=45] -->
     <string name="allowed_storage_scoped">Allowed access to media only</string>
 
@@ -818,6 +881,12 @@
 
     <!-- Text of hyperlink shown in storage_footer [CHAR LIMIT=60] -->
     <string name="storage_footer_hyperlink_text">See more apps that can access all files</string>
+
+    <!-- Info text shown as a footer in App Permission page for "NearBy Devices" permission group [CHAR LIMIT=None] [SCREENSHOT=screen/ATXndkdevKtpssc] -->
+    <string name="allow_for_compatibility_nearby_devices_footer">&lt;b>Allow to keep app working&lt;/b>&lt;br>&lt;br>For an app to keep working, it may be allowed to access your local network and connect with devices on this network only.&lt;br>&lt;br>The app can\u2019t connect to devices using Bluetooth and other technologies unless you allow it to find and connect to all nearby devices.</string>
+
+    <!-- Info text shown as a footer in "NearBy Devices" permission group [CHAR LIMIT=None] [SCREENSHOT=screen/BkRpY3g9Yd79MJh] -->
+    <string name="allowed_for_compatibility_nearby_devices_footer">&lt;b>Allowed to keep app working&lt;/b>&lt;br>&lt;br>For an app to keep working, it may be allowed to access your local network and connect with devices on this network only.&lt;br>&lt;br>The app can\u2019t connect to devices using Bluetooth and other technologies unless you allow it to find and connect to all nearby devices.</string>
 
     <!-- Time in days -->
     <string name="days">{count, plural,
@@ -1345,6 +1414,12 @@
     <!-- Label when there are no apps available for a default app [CHAR LIMIT=30] -->
     <string name="default_app_no_apps">No apps</string>
 
+    <!-- Dialog positive button text for warning about implications of changing a default app, displayed when the user selects an app as default. [CHAR LIMIT=20] [SCREENSHOT=screen/4wJyeY6r53KvJfz] -->
+    <string name="default_app_confirmation_positive_button">Change</string>
+
+    <!-- Dialog negative button text for warning about implications of changing a default app, displayed when the user selects an app as default. [CHAR LIMIT=20] [SCREENSHOT=screen/4wJyeY6r53KvJfz] -->
+    <string name="default_app_confirmation_negative_button">Keep current</string>
+
     <!-- Title for preference item that will open a screen to manage other NFC services [CHAR LIMIT=50] -->
     <string name="default_payment_app_other_nfc_services">Other NFC services</string>
 
@@ -1372,11 +1447,26 @@
     <!-- Summary indicating that a home app is missing work profile support [CHAR LIMIT=60] -->
     <string name="home_missing_work_profile_support">Doesn\u2019t support work profile</string>
 
+    <!-- Dialog title for warning about implications of changing the default home app, displayed when the user selects a home app as default. The home app here is a generic concept and can be any home app. [CHAR LIMIT=NONE] [SCREENSHOT=screen/8pvqxixufArhFPN] -->
+    <string name="home_confirmation_title">Change your default home app to &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b>?</string>
+
+    <!-- Dialog message for warning about implications of changing the default home app, displayed when the user selects a home app as default. The home app here is a generic concept and can be any home app. [CHAR LIMIT=NONE] [SCREENSHOT=screen/4wJyeY6r53KvJfz] -->
+    <string name="home_confirmation_message">This will replace your home screen and may affect access to features on your device.&lt;br>&lt;br>You can change this selection anytime in &lt;b>Default home app&lt;/b> settings.</string>
+
     <!-- Dialog message explaining that the app just selected by the user will not work after a reboot until the user enters their credentials, such as a PIN or password. [CHAR LIMIT=NONE] -->
     <string name="encryption_unaware_confirmation_message">Note: If you restart your device and have a screen lock set, this app can\u2019t start until you unlock your device.</string>
 
-    <!-- Dialog message warning about security implications of setting an assistant, displayed when the user selects an assistant. The assitant app here is a generic concept and can be any assistant app. [CHAR LIMIT=NONE] -->
+    <!-- Dialog message warning about security implications of setting an assistant, displayed when the user selects an assistant. The assistant app here is a generic concept and can be any assistant app. [CHAR LIMIT=NONE] -->
     <string name="assistant_confirmation_message">The assistant will be able to read information about apps in use on your system, including information visible on your screen or accessible within the apps.</string>
+
+    <!-- Dialog title for warning about implications of changing the default digital assistant app, displayed when the user selects a digital assistant app as default. The digital assistant app here is a generic concept and can be any digital assistant app. [CHAR LIMIT=NONE] [SCREENSHOT=screen/7CRorpTKNtyw9ZB] -->
+    <string name="assistant_confirmation_title_v37">Change your digital assistant app to &lt;b><xliff:g id="app_name" example="Example assistant app">%1$s</xliff:g>&lt;/b>?</string>
+
+    <!-- Dialog message for warning about implications of changing the default digital assistant app, displayed when the user selects an assistant as default. The digital assistant app here is a generic concept and can be any digital assistant app. [CHAR LIMIT=NONE] [SCREENSHOT=screen/7CRorpTKNtyw9ZB] -->
+    <string name="assistant_confirmation_message_v37">This assistant will be able to access info, like your messages, and data that apps have chosen to share with your assistant.</string>
+
+    <!-- Dialog message for warning about implications of changing the default digital assistant app, displayed when the user selects an assistant as default. The digital assistant app here is a generic concept and can be any digital assistant app. [CHAR LIMIT=NONE] [SCREENSHOT=screen/9NK2i96Lvz3WXZb] -->
+    <string name="assistant_confirmation_message_access_restored_v37">This assistant will be able to access info, like your messages, and data that apps have chosen to share with your assistant.&lt;br>&lt;br>Since you\u2019ve turned on screen and app data for <xliff:g id="app_name" example="Example assistant app">%1$s</xliff:g> before, it will also be allowed to access content from the app open on your screen.</string>
 
     <!-- Name for the notification channel for incident / bug report confirmation. Appears in
     Settings.
@@ -2113,6 +2203,30 @@
     <!-- Summary for App Function Target Access Settings page. [CHAR LIMIT=130] -->
     <string name="app_function_target_access_summary" description="The summary of the App Function Target Access Settings, which describes the page contents">Agents that can access info and take actions for you in this app</string>
 
+    <!-- Header for allowed app function agent access of target [CHAR LIMIT=40] -->
+    <string name="app_function_access_allowed_header">Allowed</string>
+    <!-- Header for denied app function agent access of target [CHAR LIMIT=40] -->
+    <string name="app_function_access_denied_header">Not allowed</string>
+    <!-- Label when there are no allowed agent-app access associations [CHAR LIMIT=70] -->
+    <string name="app_function_agent_access_none_allowed_title">No agent accesses allowed</string>
+    <!-- Label when there are no denied agent-app access associations [CHAR LIMIT=70] -->
+    <string name="app_function_agent_access_none_denied_title">No agent accesses denied</string>
+    <!-- Label when there are no allowed agent-app access associations [CHAR LIMIT=70] -->
+    <string name="app_function_target_access_none_allowed_title">No app accesses allowed</string>
+    <!-- Label when there are no denied agent-app access associations [CHAR LIMIT=70] -->
+    <string name="app_function_target_access_none_denied_title">No app accesses denied</string>
+
+    <!-- Default Title for App Function Manage Access Settings page. [CHAR LIMIT=70] -->
+    <string name="app_function_manage_access_default_title">Access to app</string>
+    <!-- Title for App Function Manage Access Settings page. [CHAR LIMIT=70] -->
+    <string name="app_function_manage_access_title">Access to <xliff:g id="target_app_name" example="Example Target App">%1$s</xliff:g></string>
+    <!-- Allow/Deny group title for App Function Manage Access Settings page. [CHAR LIMIT=70] -->
+    <string name="app_function_manage_access_radiobutton_group_title"><xliff:g id="agent_app_name" example="Example Agent App">%1$s</xliff:g> access to <xliff:g id="target_app_name" example="Example Target App">%2$s</xliff:g></string>
+    <!-- Label for the allow button for App Function Manage Access Settings page. [CHAR LIMIT=15]  -->
+    <string name="manage_app_function_access_allow">Allow</string>
+    <!-- Label for the deny button for rApp Function Manage Access Settings page. [CHAR LIMIT=15]  -->
+    <string name="manage_app_function_access_dont_allow">Don\u2019t allow</string>
+
     <!-- Device settings target title [CHAR LIMIT=30] -->
     <string name="app_function_device_settings_target_title" description="Target app title used for Device Settings">Device Settings</string>
     <!-- END APP FUNCTION SETTINGS -->
@@ -2129,4 +2243,41 @@
     <string name="request_app_function_dialog_button_dont_allow">Don\u2019t allow</string>
 
     <!-- END REQUEST APP FUNCTION DIALOG -->
+
+    <!-- START REQUEST READ SCREEN CONTEXT DIALOG -->
+
+    <!-- Label for the title of request read screen context dialog [CHAR LIMIT=100]-->
+    <string name="request_read_screen_context_dialog_title">Allow &lt;b><xliff:g id="assistant_app_name" example="Example Assistant App">%1$s</xliff:g>&lt;/b> to use screen and app data?</string>
+    <!-- Label for the description of request read screen context dialog [CHAR LIMIT=150]-->
+    <string name="request_read_screen_context_dialog_description">This assistant will be able to access info and content from the app open on your screen</string>
+    <!-- Label for the allow button for request read screen context dialog. [CHAR LIMIT=15]  -->
+    <string name="request_read_screen_context_dialog_button_allow">Allow</string>
+    <!-- Label for the deny button for request read screen context dialog. [CHAR LIMIT=15]  -->
+    <string name="request_read_screen_context_dialog_button_dont_allow">Don\u2019t allow</string>
+
+    <!-- END REQUEST READ SCREEN CONTEXT DIALOG -->
+
+    <!-- START READ SCREEN CONTEXT SETTINGS  -->
+
+    <!-- Label for the title of request read screen context dialog [CHAR LIMIT=60]-->
+    <string name="read_screen_context_setting_title">Use screen and app data</string>
+    <!-- Label for the description of request read screen context dialog [CHAR LIMIT=150]-->
+    <string name="read_screen_context_setting_default_description">Allow assistant to access info and content from the app open on your screen</string>
+    <!-- Label for the description of request read screen context dialog [CHAR LIMIT=150]-->
+    <string name="read_screen_context_setting_description">Allow <xliff:g id="assistant_app_name" example="Example Assistant App">%1$s</xliff:g> to access info and content from the app open on your screen</string>
+
+    <!-- END READ SCREEN CONTEXT SETTINGS  -->
+
+    <!-- START LOCATION BUTTON GRANT DIALOG -->
+
+    <!-- Label for the allow button for location button permissions request dialog. -->
+    <string name="request_location_button_permissions_dialog_button_allow">Allow</string>
+    <!-- Label for the deny button for location button permissions request dialog. -->
+    <string name="request_location_button_permissions_dialog_button_dont_allow">Don\u2019t allow</string>
+    <!-- Label for the title of location button permissions request dialog. -->
+    <string name="request_location_button_permissions_dialog_title">Allow &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to access precise location when you choose to share it?</string>
+    <!-- Label for the subtitle of location button permissions request dialog. -->
+    <string name="request_location_button_permissions_dialog_subtitle">When you share, this app will have access to precise location until you close the app</string>
+
+    <!-- END LOCATION BUTTON GRANT DIALOG -->
 </resources>

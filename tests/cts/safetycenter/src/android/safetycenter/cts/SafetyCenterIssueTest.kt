@@ -22,8 +22,10 @@ import android.content.Intent
 import android.os.Build.VERSION_CODES.BAKLAVA
 import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
+import android.os.Build.VERSION_CODES.VANILLA_ICE_CREAM
 import android.os.UserHandle
 import android.permission.flags.Flags
+import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterIssue
@@ -33,7 +35,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.ext.truth.os.ParcelableSubject.assertThat
 import androidx.test.filters.SdkSuppress
-import com.android.modules.utils.build.SdkLevel
+import com.android.compatibility.common.util.ApiTest
 import com.android.safetycenter.testing.EqualsHashCodeToStringTester
 import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterIssueBuilder
 import com.google.common.truth.Truth.assertThat
@@ -80,7 +82,9 @@ class SafetyCenterIssueTest {
                 "Please acknowledge this",
                 UserHandle.of(1),
                 setOf("safety_source_id_1"),
-                "issue_type_id_1")
+                "issue_type_id_1",
+                "safety_source_issue_id_1",
+            )
             .setSubtitle("In the neighborhood")
             .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
             .setDismissible(true)
@@ -95,7 +99,9 @@ class SafetyCenterIssueTest {
                 "Please acknowledge this",
                 UserHandle.of(1),
                 setOf("safety_source_id_1"),
-                "issue_type_id_1")
+                "issue_type_id_1",
+                "safety_source_issue_id_1",
+            )
             .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
             .build()
 
@@ -107,6 +113,7 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getTitle"])
     fun getTitle_returnsTitle() {
         assertThat(SafetyCenterIssue.Builder(issue1).setTitle("a title").build().title)
             .isEqualTo("a title")
@@ -115,6 +122,7 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getSubtitle"])
     fun getSubtitle_returnsSubtitle() {
         assertThat(SafetyCenterIssue.Builder(issue1).setSubtitle("a subtitle").build().subtitle)
             .isEqualTo("a subtitle")
@@ -125,6 +133,7 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getSummary"])
     fun getSummary_returnsSummary() {
         assertThat(SafetyCenterIssue.Builder(issue1).setSummary("a summary").build().summary)
             .isEqualTo("a summary")
@@ -134,6 +143,7 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getAttributionTitle"])
     fun getAttributionTitle_returnsAttributionTitle() {
         assertThat(
                 SafetyCenterIssue.Builder(issue1)
@@ -153,21 +163,25 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getAttributionTitle"])
     fun getAttributionTitle_withNullAttributionTitle_returnsNull() {
         val safetyCenterIssue =
-        createSafetyCenterIssueBuilder(
-                "issue_id",
-                "Everything's good",
-                "Please acknowledge this",
-                UserHandle.of(1),
-                setOf("safety_source_id_1"),
-                "issue_type_id_1")
-            .build()
+            createSafetyCenterIssueBuilder(
+                    "issue_id",
+                    "Everything's good",
+                    "Please acknowledge this",
+                    UserHandle.of(1),
+                    setOf("safety_source_id_1"),
+                    "issue_type_id_1",
+                    "safety_source_issue_id_1",
+                )
+                .build()
 
         assertThat(safetyCenterIssue.attributionTitle).isNull()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getSeverityLevel"])
     fun getSeverityLevel_returnsSeverityLevel() {
         assertThat(
                 SafetyCenterIssue.Builder(issue1)
@@ -186,6 +200,7 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#isDismissible"])
     fun isDismissible_returnsIsDismissible() {
         assertThat(SafetyCenterIssue.Builder(issue1).setDismissible(true).build().isDismissible)
             .isTrue()
@@ -194,11 +209,13 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#isDismissible"])
     fun isDismissible_defaultsToTrue() {
         assertThat(issueWithRequiredFieldsOnly.isDismissible).isTrue()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#shouldConfirmDismissal"])
     fun shouldConfirmDismissal_returnsShouldConfirmDismissal() {
         assertThat(
                 SafetyCenterIssue.Builder(issue1)
@@ -217,11 +234,13 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#shouldConfirmDismissal"])
     fun shouldConfirmDismissal_defaultsToTrue() {
         assertThat(issueWithRequiredFieldsOnly.shouldConfirmDismissal()).isTrue()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getActions"])
     fun getActions_returnsActions() {
         assertThat(
                 SafetyCenterIssue.Builder(issue1)
@@ -237,6 +256,7 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getActions"])
     fun getActions_mutationsAreNotAllowed() {
         val mutatedActions = issue1.actions
 
@@ -244,6 +264,7 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Builder#setSeverityLevel"])
     fun build_withInvalidIssueSeverityLevel_throwsIllegalArgumentException() {
         val exception =
             assertFailsWith(IllegalArgumentException::class) {
@@ -257,6 +278,7 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getGroupId"])
     fun getGroupId_withNonNullValue_returnsGroupId() {
         val issue = SafetyCenterIssue.Builder(issue1).setGroupId("group_id").build()
 
@@ -265,6 +287,7 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getGroupId"])
     fun getGroupId_withNullValue_returnsNull() {
         val issue =
             createSafetyCenterIssueBuilder(
@@ -273,7 +296,9 @@ class SafetyCenterIssueTest {
                     "Please acknowledge this",
                     UserHandle.of(1),
                     setOf("safety_source_id_1"),
-                    "issue_type_id_1")
+                    "issue_type_id_1",
+                    "safety_source_issue_id_1",
+                )
                 .build()
 
         assertThat(issue.groupId).isNull()
@@ -281,22 +306,26 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(maxSdkVersion = TIRAMISU)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getGroupId"])
     fun getGroupId_withVersionLessThanU_throws() {
         val issue =
             createSafetyCenterIssueBuilder(
-                "issue_id",
-                "Everything's good",
-                "Please acknowledge this",
-                UserHandle.of(1),
-                setOf("safety_source_id_1"),
-                "issue_type_id_1")
-            .build()
+                    "issue_id",
+                    "Everything's good",
+                    "Please acknowledge this",
+                    UserHandle.of(1),
+                    setOf("safety_source_id_1"),
+                    "issue_type_id_1",
+                    "safety_source_issue_id_1",
+                )
+                .build()
 
         assertFails { issue.groupId }
     }
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Builder#setGroupId"])
     fun setGroupId_withNullValue_returnsNull() {
         val issue = SafetyCenterIssue.Builder(issue1).setGroupId(null).build()
 
@@ -305,6 +334,7 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(maxSdkVersion = TIRAMISU)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Builder#setGroupId"])
     fun setGroupId_withVersionLessThanU_throws() {
         assertFails { SafetyCenterIssue.Builder(issue1).setGroupId("group_id").build() }
     }
@@ -312,17 +342,17 @@ class SafetyCenterIssueTest {
     @SdkSuppress(minSdkVersion = BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getUser"])
     fun getUser_returnsUser() {
         assertThat(issue1.user).isEqualTo(UserHandle.of(1))
-        assertThat(
-                SafetyCenterIssue.Builder(issue1).setUser(UserHandle.of(123)).build().user
-            )
+        assertThat(SafetyCenterIssue.Builder(issue1).setUser(UserHandle.of(123)).build().user)
             .isEqualTo(UserHandle.of(123))
     }
 
     @SdkSuppress(minSdkVersion = BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getSafetySourceIds"])
     fun getSafetySourceIds_returnsSafetySourceIds() {
         assertThat(issue1.safetySourceIds).containsExactly("safety_source_id_1")
         assertThat(
@@ -337,6 +367,7 @@ class SafetyCenterIssueTest {
     @SdkSuppress(minSdkVersion = BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getIssueTypeId"])
     fun getIssueTypeId_returnsIssueTypeId() {
         assertThat(issue1.issueTypeId).isEqualTo("issue_type_id_1")
         assertThat(
@@ -348,23 +379,90 @@ class SafetyCenterIssueTest {
             .isEqualTo("issue_type_id_2")
     }
 
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#getSafetySourceIssueId"])
+    fun getSafetySourceIssueId_returnSafetySourceIssueId() {
+        assertThat(issue1.safetySourceIssueId).isEqualTo("safety_source_issue_id_1")
+        assertThat(
+                SafetyCenterIssue.Builder(issue1)
+                    .setSafetySourceIssueId("safety_source_issue_id_2")
+                    .build()
+                    .safetySourceIssueId
+            )
+            .isEqualTo("safety_source_issue_id_2")
+    }
+
+    @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue#describeContents"])
     fun describeContents_returns0() {
         assertThat(issue1.describeContents()).isEqualTo(0)
         assertThat(issueWithRequiredFieldsOnly.describeContents()).isEqualTo(0)
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.CREATOR",
+                "android.safetycenter.SafetyCenterIssue#writeToParcel",
+            ]
+    )
     fun parcelRoundTrip_recreatesEqual() {
         assertThat(issue1).recreatesEqual(SafetyCenterIssue.CREATOR)
         assertThat(issueWithRequiredFieldsOnly).recreatesEqual(SafetyCenterIssue.CREATOR)
     }
 
     @Test
+    @SdkSuppress(minSdkVersion = BAKLAVA)
+    @RequiresFlagsDisabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.CREATOR",
+                "android.safetycenter.SafetyCenterIssue#writeToParcel",
+            ]
+    )
+    fun parcelRoundTrip_forSimpleBuilderConstructor_onBPlus_recreatesEqual() {
+        assertThat(SafetyCenterIssue.Builder("id", "title", "summary").build())
+            .recreatesEqual(SafetyCenterIssue.CREATOR)
+    }
+
+    @Test
+    @SdkSuppress(maxSdkVersion = VANILLA_ICE_CREAM)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.CREATOR",
+                "android.safetycenter.SafetyCenterIssue#writeToParcel",
+            ]
+    )
+    fun parcelRoundTrip_forSimpleBuilderConstructor_recreatesEqual() {
+        assertThat(SafetyCenterIssue.Builder("id", "title", "summary").build())
+            .recreatesEqual(SafetyCenterIssue.CREATOR)
+    }
+
+    @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.CREATOR",
+                "android.safetycenter.SafetyCenterIssue#writeToParcel",
+            ]
+    )
     fun parcelRoundTrip_recreatesEqual_atLeastAndroidU() {
         val safetyCenterIssue =
-           createSafetyCenterIssueBuilder("issue_id", "Everything's good", "Please acknowledge this", UserHandle.of(1), setOf("safety_source_id_1"), "issue_type_id_1")
+            createSafetyCenterIssueBuilder(
+                    "issue_id",
+                    "Everything's good",
+                    "Please acknowledge this",
+                    UserHandle.of(1),
+                    setOf("safety_source_id_1"),
+                    "issue_type_id_1",
+                    "safety_source_issue_id_1",
+                )
                 .setSubtitle("In the neighborhood")
                 .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                 .setDismissible(true)
@@ -386,12 +484,28 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue#equals",
+                "android.safetycenter.SafetyCenterIssue#hashCode",
+                "android.safetycenter.SafetyCenterIssue#toString",
+            ]
+    )
     fun equalsHashCodeToString_usingEqualsHashCodeToStringTester() {
         newTiramisuEqualsHashCodeToStringTester().test()
     }
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue#equals",
+                "android.safetycenter.SafetyCenterIssue#hashCode",
+                "android.safetycenter.SafetyCenterIssue#toString",
+            ]
+    )
     fun equalsHashCodeToString_usingEqualsHashCodeToStringTester_atLeastAndroidU() {
         newUpsideDownCakeEqualsHashCodeToStringTester().test()
     }
@@ -399,41 +513,55 @@ class SafetyCenterIssueTest {
     @Test
     @SdkSuppress(minSdkVersion = BAKLAVA)
     @RequiresFlagsEnabled(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun equalsHashCodeToString_usingEqualsHashCodeToStringTester_atLeastAndroidB() {
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue#equals",
+                "android.safetycenter.SafetyCenterIssue#hashCode",
+                "android.safetycenter.SafetyCenterIssue#toString",
+            ]
+    )
+    fun equalsHashCodeToString_usingEqualsHashCodeToStringTester_withOpenScApisFlagOn() {
         newBaklavaEqualsHashCodeToStringTester().test()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getId"])
     fun action_getId_returnsId() {
         assertThat(action1.id).isEqualTo("action_id_1")
         assertThat(action2.id).isEqualTo("action_id_2")
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getLabel"])
     fun action_getLabel_returnsLabel() {
         assertThat(action1.label).isEqualTo("an action")
         assertThat(action2.label).isEqualTo("another action")
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getPendingIntent"])
     fun action_getPendingIntent_returnsPendingIntent() {
         assertThat(action1.pendingIntent).isEqualTo(pendingIntent1)
         assertThat(action2.pendingIntent).isEqualTo(pendingIntent2)
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#willResolve"])
     fun action_willResolve_returnsWillResolve() {
         assertThat(action1.willResolve()).isTrue()
         assertThat(action2.willResolve()).isFalse()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#isInFlight"])
     fun action_isInFlight_returnsIsInFlight() {
         assertThat(action1.isInFlight).isTrue()
         assertThat(action2.isInFlight).isFalse()
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getSuccessMessage"])
     fun action_getSuccessMessage_returnsSuccessMessage() {
         assertThat(action1.successMessage).isEqualTo("a success message")
         assertThat(action2.successMessage).isNull()
@@ -441,12 +569,17 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(maxSdkVersion = TIRAMISU)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getConfirmationDialogDetails"])
     fun action_getConfirmationDialogDetails_withVersionLessThanU_throws() {
         assertFails { action1.confirmationDialogDetails }
     }
 
     @Test
     @SdkSuppress(maxSdkVersion = TIRAMISU)
+    @ApiTest(
+        apis =
+            ["android.safetycenter.SafetyCenterIssue.Action.Builder#setConfirmationDialogDetails"]
+    )
     fun action_setConfirmationDialogDetails_withVersionLessThanU_throws() {
         assertFails {
             SafetyCenterIssue.Action.Builder("action_id", "Action label", pendingIntent1)
@@ -458,6 +591,7 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getConfirmationDialogDetails"])
     fun action_getConfirmationDialogDetails_withDefaultBuilder_returnsNull() {
         val action =
             SafetyCenterIssue.Action.Builder("action_id", "Action label", pendingIntent1).build()
@@ -467,6 +601,7 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#getConfirmationDialogDetails"])
     fun action_getConfirmationDialogDetails_whenSetExplicitly_returnsConfirmation() {
         val action =
             SafetyCenterIssue.Action.Builder("action_id", "Action label", pendingIntent1)
@@ -480,12 +615,20 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(apis = ["android.safetycenter.SafetyCenterIssue.Action#describeContents"])
     fun action_describeContents_returns0() {
         assertThat(action1.describeContents()).isEqualTo(0)
         assertThat(action2.describeContents()).isEqualTo(0)
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.CREATOR",
+                "android.safetycenter.SafetyCenterIssue.Action#writeToParcel",
+            ]
+    )
     fun action_parcelRoundTrip_recreatesEqual() {
         assertThat(action1).recreatesEqual(SafetyCenterIssue.Action.CREATOR)
         assertThat(action2).recreatesEqual(SafetyCenterIssue.Action.CREATOR)
@@ -493,6 +636,13 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.CREATOR",
+                "android.safetycenter.SafetyCenterIssue.Action#writeToParcel",
+            ]
+    )
     fun action_parcelRoundTrip_recreatesEqual_atLeastAndroidU() {
         val action =
             SafetyCenterIssue.Action.Builder(action1)
@@ -505,12 +655,28 @@ class SafetyCenterIssueTest {
     }
 
     @Test
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action#equals",
+                "android.safetycenter.SafetyCenterIssue.Action#hashCode",
+                "android.safetycenter.SafetyCenterIssue.Action#toString",
+            ]
+    )
     fun action_equalsHashCodeToString_usingEqualsHashCodeToStringTester() {
         issueActionNewTiramisuEqualsHashCodeToStringTester().test()
     }
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action#equals",
+                "android.safetycenter.SafetyCenterIssue.Action#hashCode",
+                "android.safetycenter.SafetyCenterIssue.Action#toString",
+            ]
+    )
     fun action_equalsHashCodeToString_usingEqualsHashCodeToStringTester_atLeastAndroidU() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
         issueActionNewTiramisuEqualsHashCodeToStringTester(
@@ -604,13 +770,15 @@ class SafetyCenterIssueTest {
     private fun newUpsideDownCakeEqualsHashCodeToStringTester():
         EqualsHashCodeToStringTester<SafetyCenterIssue> {
         val issueWithTiramisuFields =
-        createSafetyCenterIssueBuilder(
-                "issue_id",
-                "Everything's good",
-                "Please acknowledge this",
-                UserHandle.of(1),
-                setOf("safety_source_id_1"),
-                "issue_type_id_1")
+            createSafetyCenterIssueBuilder(
+                    "issue_id",
+                    "Everything's good",
+                    "Please acknowledge this",
+                    UserHandle.of(1),
+                    setOf("safety_source_id_1"),
+                    "issue_type_id_1",
+                    "safety_source_issue_id_1",
+                )
                 .setSubtitle("In the neighborhood")
                 .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                 .setDismissible(true)
@@ -674,23 +842,25 @@ class SafetyCenterIssueTest {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
         val issueWithUpsideDownCakeFields =
             createSafetyCenterIssueBuilder(
-                "issue_id",
-                "Everything's good",
-                "Please acknowledge this",
-                UserHandle.of(1),
-                setOf("safety_source_id_1"),
-                "issue_type_id_1")
+                    "issue_id",
+                    "Everything's good",
+                    "Please acknowledge this",
+                    UserHandle.of(1),
+                    setOf("safety_source_id_1"),
+                    "issue_type_id_1",
+                    "safety_source_issue_id_1",
+                )
                 .setSubtitle("In the neighborhood")
                 .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                 .setDismissible(true)
                 .setShouldConfirmDismissal(true)
                 .setActions(
-                        listOf(
-                            SafetyCenterIssue.Action.Builder(action1)
-                                .setConfirmationDialogDetails(confirmationDialogDetails)
-                                .build()
-                        )
+                    listOf(
+                        SafetyCenterIssue.Action.Builder(action1)
+                            .setConfirmationDialogDetails(confirmationDialogDetails)
+                            .build()
                     )
+                )
                 .setAttributionTitle("Attribution title")
                 .setGroupId("group_id")
                 .build()
@@ -719,10 +889,21 @@ class SafetyCenterIssueTest {
                     .setIssueTypeId("issue_type_id_2")
                     .build(),
             )
+            .addEqualityGroup(
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setSafetySourceIssueId("safety_source_issue_id_2")
+                    .build(),
+                SafetyCenterIssue.Builder(issueWithUpsideDownCakeFields)
+                    .setSafetySourceIssueId("safety_source_issue_id_2")
+                    .build(),
+            )
     }
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis = ["android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#getTitle"]
+    )
     fun actionConfirmation_getTitle_returnsTitle() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
 
@@ -731,6 +912,9 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis = ["android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#getText"]
+    )
     fun actionConfirmation_getText_returnsText() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
 
@@ -739,6 +923,12 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#getAcceptButtonText"
+            ]
+    )
     fun actionConfirmation_getAcceptButtonText_returnsAcceptButtonText() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
 
@@ -747,6 +937,12 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#getDenyButtonText"
+            ]
+    )
     fun actionConfirmation_getDenyButtonText_returnsDenyButtonText() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
 
@@ -755,6 +951,12 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#describeContents"
+            ]
+    )
     fun actionConfirmation_describeContents_returns0() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
 
@@ -763,6 +965,13 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails.CREATOR",
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#writeToParcel",
+            ]
+    )
     fun actionConfirmation_parcelRoundTrip_recreatesEqual() {
         val confirmationDialogDetails = ConfirmationDialogDetails("Title", "Text", "Accept", "Deny")
 
@@ -771,6 +980,14 @@ class SafetyCenterIssueTest {
 
     @Test
     @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    @ApiTest(
+        apis =
+            [
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#equals",
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#hashCode",
+                "android.safetycenter.SafetyCenterIssue.Action.ConfirmationDialogDetails#toString",
+            ]
+    )
     fun actionConfirmation_equalsHashCodeToString_usingEqualsHashCodeToStringTester() {
         EqualsHashCodeToStringTester.ofParcelable(
                 parcelableCreator = ConfirmationDialogDetails.CREATOR
@@ -801,12 +1018,14 @@ class SafetyCenterIssueTest {
             .addEqualityGroup(issueWithRequiredFieldsOnly)
             .addEqualityGroup(
                 createSafetyCenterIssueBuilder(
-                "an id",
-                "a title",
-                "Please acknowledge this",
-                UserHandle.of(1),
-                setOf("safety_source_id_1"),
-                "issue_type_id_1")
+                        "an id",
+                        "a title",
+                        "Please acknowledge this",
+                        UserHandle.of(1),
+                        setOf("safety_source_id_1"),
+                        "issue_type_id_1",
+                        "safety_source_issue_id_1",
+                    )
                     .setSubtitle("In the neighborhood")
                     .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)
                     .setActions(listOf(action1))
@@ -818,6 +1037,7 @@ class SafetyCenterIssueTest {
                         UserHandle.of(1),
                         setOf("safety_source_id_1"),
                         "issue_type_id_1",
+                        "safety_source_issue_id_1",
                     )
                     .setSubtitle("In the neighborhood")
                     .setSeverityLevel(SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK)

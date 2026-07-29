@@ -41,8 +41,7 @@ class EnabledDeviceAdminsLiveData(private val app: Application, private val user
             Utils.getUserContext(app, user)
                 .getSystemService(DevicePolicyManager::class.java)!!
                 .activeAdmins
-                ?.map { component -> component.packageName }
-                ?: emptyList()
+                ?.map { component -> component.packageName } ?: emptyList()
 
         postValue(packageNames)
     }

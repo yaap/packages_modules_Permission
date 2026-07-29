@@ -110,13 +110,13 @@ import com.android.permissioncontroller.permission.utils.KotlinUtils
 import com.android.permissioncontroller.permission.utils.StringUtils
 import com.android.permissioncontroller.permission.utils.Utils
 import com.android.permissioncontroller.permission.utils.forEachInParallel
+import java.util.Date
+import java.util.Random
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.Date
-import java.util.Random
-import java.util.concurrent.TimeUnit
 
 private const val LOG_TAG = "HibernationPolicy"
 
@@ -128,7 +128,7 @@ fun getUnusedThresholdMs() =
     DeviceConfig.getLong(
         DeviceConfig.NAMESPACE_PERMISSIONS,
         Utils.PROPERTY_HIBERNATION_UNUSED_THRESHOLD_MILLIS,
-        DEFAULT_UNUSED_THRESHOLD_MS
+        DEFAULT_UNUSED_THRESHOLD_MS,
     )
 
 private val DEFAULT_CHECK_FREQUENCY_MS = TimeUnit.DAYS.toMillis(15)
@@ -137,7 +137,7 @@ private fun getCheckFrequencyMs() =
     DeviceConfig.getLong(
         DeviceConfig.NAMESPACE_PERMISSIONS,
         Utils.PROPERTY_HIBERNATION_CHECK_FREQUENCY_MILLIS,
-        DEFAULT_CHECK_FREQUENCY_MS
+        DEFAULT_CHECK_FREQUENCY_MS,
     )
 
 // Intentionally kept value of the key same as before because we want to continue reading value of
@@ -158,7 +158,7 @@ fun isHibernationEnabled(): Boolean {
         DeviceConfig.getBoolean(
             NAMESPACE_APP_HIBERNATION,
             Utils.PROPERTY_APP_HIBERNATION_ENABLED,
-            true /* defaultValue */
+            true, /* defaultValue */
         )
 }
 
@@ -170,7 +170,7 @@ fun hibernationTargetsPreSApps(): Boolean {
     return DeviceConfig.getBoolean(
         NAMESPACE_APP_HIBERNATION,
         Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS,
-        false /* defaultValue */
+        false, /* defaultValue */
     )
 }
 
@@ -180,7 +180,7 @@ fun isSystemExemptFromHibernationEnabled(): Boolean {
         DeviceConfig.getBoolean(
             NAMESPACE_APP_HIBERNATION,
             Utils.PROPERTY_SYSTEM_EXEMPT_HIBERNATION_ENABLED,
-            true /* defaultValue */
+            true, /* defaultValue */
         )
 }
 
@@ -198,11 +198,7 @@ fun cancelUnusedAppsNotification(context: Context) {
  */
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Suppress("MissingPermission")
-fun rescanAndPushDataToSafetyCenter(
-    context: Context,
-    sessionId: Long,
-    safetyEvent: SafetyEvent,
-) {
+fun rescanAndPushDataToSafetyCenter(context: Context, sessionId: Long, safetyEvent: SafetyEvent) {
     val safetyCenterManager: SafetyCenterManager =
         context.getSystemService(SafetyCenterManager::class.java)!!
     if (getUnusedAppsReviewNeeded(context)) {
@@ -210,7 +206,7 @@ fun rescanAndPushDataToSafetyCenter(
             Action.Builder(
                     Constants.UNUSED_APPS_SAFETY_CENTER_SEE_UNUSED_APPS_ID,
                     context.getString(R.string.unused_apps_safety_center_action_title),
-                    makeUnusedAppsIntent(context, sessionId)
+                    makeUnusedAppsIntent(context, sessionId),
                 )
                 .build()
 
@@ -220,7 +216,7 @@ fun rescanAndPushDataToSafetyCenter(
                     context.getString(R.string.unused_apps_safety_center_card_title),
                     context.getString(R.string.unused_apps_safety_center_card_content),
                     SafetySourceData.SEVERITY_LEVEL_INFORMATION,
-                    Constants.UNUSED_APPS_SAFETY_CENTER_ISSUE_ID
+                    Constants.UNUSED_APPS_SAFETY_CENTER_ISSUE_ID,
                 )
                 .addAction(seeUnusedAppsAction)
                 .setOnDismissPendingIntent(makeDismissIntent(context, sessionId))
@@ -231,13 +227,13 @@ fun rescanAndPushDataToSafetyCenter(
         safetyCenterManager.setSafetySourceData(
             Constants.UNUSED_APPS_SAFETY_CENTER_SOURCE_ID,
             safetySourceData,
-            safetyEvent
+            safetyEvent,
         )
     } else {
         safetyCenterManager.setSafetySourceData(
             Constants.UNUSED_APPS_SAFETY_CENTER_SOURCE_ID,
             /* safetySourceData= */ null,
-            safetyEvent
+            safetyEvent,
         )
     }
 }
@@ -291,21 +287,26 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                     /* notifyForDescendants= */ false,
                     object : ContentObserver(/* handler= */ null) {
                         override fun onChange(selfChange: Boolean, uri: Uri?) {
-                            if (uri == Settings.Secure.getUriFor(USER_SETUP_COMPLETE)
-                                && isUserSetupComplete(contentResolver)) {
+                            if (
+                                uri == Settings.Secure.getUriFor(USER_SETUP_COMPLETE) &&
+                                    isUserSetupComplete(contentResolver)
+                            ) {
                                 contentResolver.unregisterContentObserver(this)
                                 maybeInitStartTimeUnusedAppTracking(context.sharedPreferences)
 
                                 // Retail mode is set during set-up wizard so we need to check
                                 // after if the job should actually be scheduled
-                                if (Settings.Global.getInt(contentResolver, DEVICE_DEMO_MODE, 0)
-                                    != 0) {
-                                    context.getSystemService(JobScheduler::class.java)!!.cancel(
-                                        Constants.HIBERNATION_JOB_ID)
+                                if (
+                                    Settings.Global.getInt(contentResolver, DEVICE_DEMO_MODE, 0) !=
+                                        0
+                                ) {
+                                    context
+                                        .getSystemService(JobScheduler::class.java)!!
+                                        .cancel(Constants.HIBERNATION_JOB_ID)
                                 }
                             }
                         }
-                    }
+                    },
                 )
             }
             if (Log.isLoggable(LOG_TAG, Log.INFO)) {
@@ -313,7 +314,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                     LOG_TAG,
                     "scheduleHibernationJob " +
                         "with frequency ${getCheckFrequencyMs()}ms " +
-                        "and threshold ${getUnusedThresholdMs()}ms"
+                        "and threshold ${getUnusedThresholdMs()}ms",
                 )
             }
 
@@ -326,7 +327,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                     DumpableLog.i(
                         LOG_TAG,
                         "user ${Process.myUserHandle().identifier} is a profile." +
-                            " Not running hibernation job."
+                            " Not running hibernation job.",
                     )
                 }
                 return
@@ -334,7 +335,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                 DumpableLog.i(
                     LOG_TAG,
                     "user ${Process.myUserHandle().identifier} is a profile" +
-                        "owner. Running hibernation job."
+                        "owner. Running hibernation job.",
                 )
             }
 
@@ -345,7 +346,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                 val jobInfo =
                     JobInfo.Builder(
                             Constants.HIBERNATION_JOB_ID,
-                            ComponentName(context, HibernationJobService::class.java)
+                            ComponentName(context, HibernationJobService::class.java),
                         )
                         .setPeriodic(getCheckFrequencyMs())
                         // persist this job across boots
@@ -356,7 +357,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
                     DumpableLog.e(
                         LOG_TAG,
                         "Could not schedule " +
-                            "${HibernationJobService::class.java.simpleName}: $status"
+                            "${HibernationJobService::class.java.simpleName}: $status",
                     )
                 }
             }
@@ -410,9 +411,7 @@ class HibernationBroadcastReceiver : BroadcastReceiver() {
  */
 @MainThread
 @Suppress("MissingPermission")
-private suspend fun getAppsToHibernate(
-    context: Context,
-): Map<UserHandle, List<LightPackageInfo>> {
+private suspend fun getAppsToHibernate(context: Context): Map<UserHandle, List<LightPackageInfo>> {
     val now = System.currentTimeMillis()
     val startTimeOfUnusedAppTracking = getStartTimeOfUnusedAppTracking(context.sharedPreferences)
 
@@ -423,10 +422,7 @@ private suspend fun getAppsToHibernate(
     val unusedApps = allPackagesByUser.toMutableMap()
 
     val userStats =
-        UsageStatsLiveData[
-                getUnusedThresholdMs(),
-                INTERVAL_MONTHLY]
-            .getInitializedValue()
+        UsageStatsLiveData[getUnusedThresholdMs(), INTERVAL_MONTHLY].getInitializedValue()
             ?: emptyMap()
     if (Log.isLoggable(LOG_TAG, Log.INFO)) {
         for ((user, stats) in userStats) {
@@ -435,7 +431,7 @@ private suspend fun getAppsToHibernate(
                 "Usage stats for user ${user.identifier}: " +
                     stats
                         .map { stat -> stat.packageName to Date(stat.lastTimePackageUsed()) }
-                        .toMap()
+                        .toMap(),
             )
         }
     }
@@ -458,13 +454,12 @@ private suspend fun getAppsToHibernate(
                 val uidPackages =
                     allPackagesByUserByUid[user]!![packageInfo.uid]?.map { info ->
                         info.packageName
-                    }
-                        ?: emptyList()
+                    } ?: emptyList()
                 if (pkgName !in uidPackages) {
                     Log.wtf(
                         LOG_TAG,
                         "Package $pkgName not among packages for " +
-                            "its uid ${packageInfo.uid}: $uidPackages"
+                            "its uid ${packageInfo.uid}: $uidPackages",
                     )
                 }
                 var lastTimePkgUsed: Long = stats.lastTimePackageUsed(uidPackages)
@@ -495,7 +490,7 @@ private suspend fun getAppsToHibernate(
             DumpableLog.i(
                 LOG_TAG,
                 "Unused apps for user ${user.identifier}: " +
-                    "${unusedUserApps.map { it.packageName }}"
+                    "${unusedUserApps.map { it.packageName }}",
             )
         }
     }
@@ -507,7 +502,7 @@ private suspend fun getAppsToHibernate(
             DumpableLog.w(LOG_TAG, "Skipping $user - locked direct boot state")
             continue
         }
-        var userAppsToHibernate = mutableListOf<LightPackageInfo>()
+        val userAppsToHibernate = mutableListOf<LightPackageInfo>()
         userApps.forEachInParallel(Main) { pkg: LightPackageInfo ->
             if (isPackageHibernationExemptBySystem(pkg, user)) {
                 return@forEachInParallel
@@ -527,7 +522,7 @@ private suspend fun getAppsToHibernate(
                 DumpableLog.i(
                     LOG_TAG,
                     "Skipping hibernation - $packageName running with importance " +
-                        "$packageImportance"
+                        "$packageImportance",
                 )
                 return@forEachInParallel
             }
@@ -536,7 +531,7 @@ private suspend fun getAppsToHibernate(
                 DumpableLog.i(
                     LOG_TAG,
                     "unused app $packageName - last used on " +
-                        userStats[user]?.lastTimePackageUsed(packageName)?.let(::Date)
+                        userStats[user]?.lastTimePackageUsed(packageName)?.let(::Date),
                 )
             }
 
@@ -576,10 +571,7 @@ private fun List<UsageStats>.lastTimePackageUsed(pkgName: String): Long {
 
 /** Checks if the given package is exempt from hibernation in a way that's not user-overridable */
 @Suppress("MissingPermission")
-suspend fun isPackageHibernationExemptBySystem(
-    pkg: LightPackageInfo,
-    user: UserHandle,
-): Boolean {
+suspend fun isPackageHibernationExemptBySystem(pkg: LightPackageInfo, user: UserHandle): Boolean {
     val launcherPkgs = LauncherPackagesLiveData.getInitializedValue() ?: emptyList()
     if (!launcherPkgs.contains(pkg.packageName)) {
         if (Log.isLoggable(LOG_TAG, Log.INFO)) {
@@ -593,7 +585,7 @@ suspend fun isPackageHibernationExemptBySystem(
             DumpableLog.i(
                 LOG_TAG,
                 "Exempted ${pkg.packageName} - Has exempt components:" +
-                        "${exemptServicePkgs[pkg.packageName]?.joinToString()}",
+                    "${exemptServicePkgs[pkg.packageName]?.joinToString()}",
             )
         }
         return true
@@ -602,7 +594,7 @@ suspend fun isPackageHibernationExemptBySystem(
         if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
-                "Exempted ${pkg.packageName} - $user is disabled or a work profile"
+                "Exempted ${pkg.packageName} - $user is disabled or a work profile",
             )
         }
         return true
@@ -636,7 +628,7 @@ suspend fun isPackageHibernationExemptBySystem(
     ) {
         DumpableLog.w(
             LOG_TAG,
-            "Error carrier privileged status for ${pkg.packageName}: " + carrierPrivilegedStatus
+            "Error carrier privileged status for ${pkg.packageName}: " + carrierPrivilegedStatus,
         )
     }
     if (carrierPrivilegedStatus == CARRIER_PRIVILEGE_STATUS_HAS_ACCESS) {
@@ -655,7 +647,7 @@ suspend fun isPackageHibernationExemptBySystem(
         if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
-                "Exempted ${pkg.packageName} " + "- holder of READ_PRIVILEGED_PHONE_STATE"
+                "Exempted ${pkg.packageName} " + "- holder of READ_PRIVILEGED_PHONE_STATE",
             )
         }
         return true
@@ -676,14 +668,14 @@ suspend fun isPackageHibernationExemptBySystem(
     // introduced before auto-revoke / hibernation in R.
     val hasCallRelatedPermissions =
         context.checkPermission(Manifest.permission.MANAGE_OWN_CALLS, -1 /* pid */, pkg.uid) ==
-            PERMISSION_GRANTED
-        && context.checkPermission(Manifest.permission.RECORD_AUDIO, -1 /* pid */, pkg.uid) ==
-            PERMISSION_GRANTED
-        && context.checkPermission(Manifest.permission.WRITE_CALL_LOG, -1 /* pid */, pkg.uid) ==
-            PERMISSION_GRANTED
+            PERMISSION_GRANTED &&
+            context.checkPermission(Manifest.permission.RECORD_AUDIO, -1 /* pid */, pkg.uid) ==
+                PERMISSION_GRANTED &&
+            context.checkPermission(Manifest.permission.WRITE_CALL_LOG, -1 /* pid */, pkg.uid) ==
+                PERMISSION_GRANTED
     if (hasCallRelatedPermissions) {
-        val phoneAccounts = context.getSystemService(TelecomManager::class.java)!!
-                .selfManagedPhoneAccounts
+        val phoneAccounts =
+            context.getSystemService(TelecomManager::class.java)!!.selfManagedPhoneAccounts
         var hasRegisteredPhoneAccount = false
         for (phoneAccount in phoneAccounts) {
             if (pkg.packageName == phoneAccount.componentName.packageName) {
@@ -693,10 +685,7 @@ suspend fun isPackageHibernationExemptBySystem(
         }
         if (hasRegisteredPhoneAccount) {
             if (Log.isLoggable(LOG_TAG, Log.INFO)) {
-                DumpableLog.i(
-                        LOG_TAG,
-                        "Exempted ${pkg.packageName} - caller app"
-                )
+                DumpableLog.i(LOG_TAG, "Exempted ${pkg.packageName} - caller app")
             }
             return true
         }
@@ -709,7 +698,7 @@ suspend fun isPackageHibernationExemptBySystem(
                 context.checkPermission(
                     Manifest.permission.INSTALL_PACKAGE_UPDATES,
                     -1 /* pid */,
-                    pkg.uid
+                    pkg.uid,
                 ) == PERMISSION_GRANTED
         val hasUpdatePackagesWithoutUserActionPermission =
             context.checkPermission(UPDATE_PACKAGES_WITHOUT_USER_ACTION, -1 /* pid */, pkg.uid) ==
@@ -761,7 +750,7 @@ suspend fun isPackageHibernationExemptBySystem(
         if (Log.isLoggable(LOG_TAG, Log.INFO)) {
             DumpableLog.i(
                 LOG_TAG,
-                "Exempted ${pkg.packageName} - has OP_SYSTEM_EXEMPT_FROM_HIBERNATION"
+                "Exempted ${pkg.packageName} - has OP_SYSTEM_EXEMPT_FROM_HIBERNATION",
             )
         }
         return true
@@ -774,10 +763,7 @@ suspend fun isPackageHibernationExemptBySystem(
  * Checks if the given package is exempt from hibernation/auto revoke in a way that's
  * user-overridable
  */
-suspend fun isPackageHibernationExemptByUser(
-    context: Context,
-    pkg: LightPackageInfo,
-): Boolean {
+suspend fun isPackageHibernationExemptByUser(context: Context, pkg: LightPackageInfo): Boolean {
     val packageName = pkg.packageName
     val packageUid = pkg.uid
 
@@ -853,7 +839,7 @@ fun getStartTimeOfUnusedAppTracking(sharedPreferences: SharedPreferences): Long 
     val startTimeOfUnusedAppTracking =
         sharedPreferences.getLong(
             PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-            SNAPSHOT_UNINITIALIZED
+            SNAPSHOT_UNINITIALIZED,
         )
 
     // If the preference is not initialized then use the current system time.
@@ -873,19 +859,17 @@ fun getStartTimeOfUnusedAppTracking(sharedPreferences: SharedPreferences): Long 
     }
     return sharedPreferences.getLong(
         PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-        SNAPSHOT_UNINITIALIZED
+        SNAPSHOT_UNINITIALIZED,
     )
 }
 
-/**
- * Init the start time of unused apps tracking if it has not been initialized before
- */
+/** Init the start time of unused apps tracking if it has not been initialized before */
 private fun maybeInitStartTimeUnusedAppTracking(sharedPreferences: SharedPreferences) {
     val systemTimeSnapshot = System.currentTimeMillis()
     if (
         sharedPreferences.getLong(
             PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-            SNAPSHOT_UNINITIALIZED
+            SNAPSHOT_UNINITIALIZED,
         ) == SNAPSHOT_UNINITIALIZED
     ) {
         sharedPreferences
@@ -907,23 +891,26 @@ private fun setSystemTimeSnapshots(sharedPreferences: SharedPreferences) {
 
 private fun adjustSnapshotTimes(sharedPreferences: SharedPreferences) {
     val systemTime = getSystemTime(sharedPreferences)
-    val editor = sharedPreferences
-        .edit()
-        .putLong(PREF_KEY_SYSTEM_TIME_SNAPSHOT, systemTime.actualSystemTime)
-        .putLong(PREF_KEY_ELAPSED_REALTIME_SNAPSHOT, systemTime.actualRealtime)
+    val editor =
+        sharedPreferences
+            .edit()
+            .putLong(PREF_KEY_SYSTEM_TIME_SNAPSHOT, systemTime.actualSystemTime)
+            .putLong(PREF_KEY_ELAPSED_REALTIME_SNAPSHOT, systemTime.actualRealtime)
 
     val startTimeOfUnusedAppTracking =
         sharedPreferences.getLong(
             PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-            SNAPSHOT_UNINITIALIZED
+            SNAPSHOT_UNINITIALIZED,
         )
     if (startTimeOfUnusedAppTracking == SNAPSHOT_UNINITIALIZED) {
         DumpableLog.w(LOG_TAG, "PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING is not initialized")
     } else {
         val adjustedStartTimeOfUnusedAppTracking =
-                startTimeOfUnusedAppTracking + systemTime.diffSystemTime
-        editor.putLong(PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
-                adjustedStartTimeOfUnusedAppTracking)
+            startTimeOfUnusedAppTracking + systemTime.diffSystemTime
+        editor.putLong(
+            PREF_KEY_START_TIME_OF_UNUSED_APP_TRACKING,
+            adjustedStartTimeOfUnusedAppTracking,
+        )
     }
     editor.apply()
 }
@@ -955,7 +942,7 @@ private fun makeDismissIntent(context: Context, sessionId: Long): PendingIntent 
         context,
         /* requestCode= */ 0,
         dismissIntent,
-        FLAG_ONE_SHOT or FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+        FLAG_ONE_SHOT or FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE,
     )
 }
 
@@ -1015,7 +1002,7 @@ class HibernationJobService : JobService() {
                             HibernationController(
                                 this@HibernationJobService,
                                 getUnusedThresholdMs(),
-                                hibernationTargetsPreSApps()
+                                hibernationTargetsPreSApps(),
                             )
                         hibernatedApps = hibernationController.hibernateApps(appsToHibernate)
                     }
@@ -1026,7 +1013,7 @@ class HibernationJobService : JobService() {
                         showUnusedAppsNotification(
                             unusedApps.size,
                             sessionId,
-                            Process.myUserHandle()
+                            Process.myUserHandle(),
                         )
                         if (
                             SdkLevel.isAtLeastT() &&
@@ -1041,7 +1028,7 @@ class HibernationJobService : JobService() {
                                 SafetyEvent.Builder(
                                         SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED
                                     )
-                                    .build()
+                                    .build(),
                             )
                         }
                     }
@@ -1060,7 +1047,7 @@ class HibernationJobService : JobService() {
             NotificationChannel(
                 Constants.PERMISSION_REMINDER_CHANNEL_ID,
                 getString(R.string.permission_reminders),
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_LOW,
             )
         notificationManager.createNotificationChannel(permissionReminderChannel)
 
@@ -1071,7 +1058,7 @@ class HibernationJobService : JobService() {
                 StringUtils.getIcuPluralsString(
                     this,
                     R.string.unused_apps_notification_title,
-                    numUnused
+                    numUnused,
                 )
             notifContent = getString(R.string.unused_apps_notification_content)
         } else {
@@ -1117,7 +1104,7 @@ class HibernationJobService : JobService() {
         notificationManager.notify(
             HibernationJobService::class.java.simpleName,
             Constants.UNUSED_APPS_NOTIFICATION_ID,
-            b.build()
+            b.build(),
         )
         GlobalScope.launch(IPC) {
             // Preload the unused packages
@@ -1169,7 +1156,7 @@ class ExemptServicesLiveData(private val user: UserHandle) :
             BroadcastReceiverLiveData[
                 DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED,
                 Manifest.permission.BIND_DEVICE_ADMIN,
-                user]
+                user],
         )
 
     init {
@@ -1212,7 +1199,7 @@ object HibernationEnabledLiveData : MutableLiveData<Boolean>() {
                 DeviceConfig.getBoolean(
                     NAMESPACE_APP_HIBERNATION,
                     Utils.PROPERTY_APP_HIBERNATION_ENABLED,
-                    true /* defaultValue */
+                    true, /* defaultValue */
                 )
         )
         DeviceConfig.addOnPropertiesChangedListener(
@@ -1227,7 +1214,7 @@ object HibernationEnabledLiveData : MutableLiveData<Boolean>() {
                         break
                     }
                 }
-            }
+            },
         )
     }
 }

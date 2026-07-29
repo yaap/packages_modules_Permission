@@ -40,7 +40,7 @@ internal class CollapsableGroupCardHelper {
     fun saveState(outState: Bundle) {
         outState.putCharSequenceArray(
             EXPANDED_ENTRY_GROUPS_SAVED_INSTANCE_STATE_KEY,
-            expandedGroups.toTypedArray()
+            expandedGroups.toTypedArray(),
         )
     }
 

@@ -20,12 +20,19 @@ import android.Manifest.permission.SEND_SAFETY_CENTER_UPDATE
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent.ACTION_SAFETY_CENTER
+import android.os.Build.VERSION_CODES.CINNAMON_BUN
+import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterManager
 import android.safetycenter.SafetyCenterStatus
 import android.safetycenter.SafetyEvent
+import android.safetycenter.SafetySourceData
 import android.safetycenter.SafetySourceErrorDetails
 import android.safetycenter.SafetySourceIssue
 import android.service.notification.StatusBarNotification
@@ -34,11 +41,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import com.android.compatibility.common.util.DisableAnimationRule
 import com.android.compatibility.common.util.FreezeRotationRule
+import com.android.modules.utils.build.SdkLevel
+import com.android.permission.flags.Flags
 import com.android.safetycenter.pendingintents.PendingIntentSender
 import com.android.safetycenter.testing.Coroutines
 import com.android.safetycenter.testing.Coroutines.TIMEOUT_SHORT
 import com.android.safetycenter.testing.NotificationCharacteristics
 import com.android.safetycenter.testing.SafetyCenterActivityLauncher.executeBlockAndExit
+import com.android.safetycenter.testing.SafetyCenterActivityLauncher.handledByPermissionControllerSafetyCenter
 import com.android.safetycenter.testing.SafetyCenterApisWithShellPermissions.clearAllSafetySourceDataForTestsWithPermission
 import com.android.safetycenter.testing.SafetyCenterApisWithShellPermissions.dismissSafetyCenterIssueWithPermission
 import com.android.safetycenter.testing.SafetyCenterApisWithShellPermissions.reportSafetySourceErrorWithPermission
@@ -46,6 +56,7 @@ import com.android.safetycenter.testing.SafetyCenterFlags
 import com.android.safetycenter.testing.SafetyCenterTestConfigs
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SOURCE_ID_1
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SOURCE_ID_2
+import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SOURCE_ID_3
 import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.SOURCE_ID_5
 import com.android.safetycenter.testing.SafetyCenterTestData
 import com.android.safetycenter.testing.SafetyCenterTestHelper
@@ -64,6 +75,7 @@ import com.google.common.truth.Truth.assertThat
 import java.time.Duration
 import kotlin.test.assertFailsWith
 import kotlinx.coroutines.TimeoutCancellationException
+import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -83,6 +95,7 @@ class SafetyCenterNotificationTest {
         }
     private var uniqueSafetySourceId: String = ""
 
+    @get:Rule(order = 0) val flagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
     @get:Rule(order = 1) val supportsSafetyCenterRule = SupportsSafetyCenterRule(context)
     @get:Rule(order = 2)
     val safetyCenterTestRule =
@@ -98,7 +111,14 @@ class SafetyCenterNotificationTest {
         setFlagsForImmediateNotifications(uniqueSafetySourceId)
         safetyCenterTestHelper.setConfig(
             safetyCenterTestConfigs.singleSourceConfig(
-                safetyCenterTestConfigs.dynamicSafetySourceBuilder(uniqueSafetySourceId).build()
+                safetyCenterTestConfigs
+                    .dynamicSafetySourceBuilder(uniqueSafetySourceId)
+                    .apply {
+                        if (SdkLevel.isAtLeastU()) {
+                            setNotificationsAllowed(true)
+                        }
+                    }
+                    .build()
             )
         )
     }
@@ -123,8 +143,33 @@ class SafetyCenterNotificationTest {
     }
 
     @Test
+    @SdkSuppress(maxSdkVersion = TIRAMISU)
     fun setSafetySourceData_withoutNotificationsAllowedSource_noNotification() {
         SafetyCenterFlags.notificationsAllowedSources = emptySet()
+
+        safetyCenterTestHelper.setData(
+            uniqueSafetySourceId,
+            safetySourceTestData.recommendationWithAccountIssue,
+        )
+
+        TestNotificationListener.waitForZeroNotifications()
+    }
+
+    @Test
+    fun setSafetySourceData_withoutNotificationsAllowed_noNotification() {
+        SafetyCenterFlags.notificationsAllowedSources = emptySet()
+        safetyCenterTestHelper.setConfig(
+            safetyCenterTestConfigs.singleSourceConfig(
+                safetyCenterTestConfigs
+                    .dynamicSafetySourceBuilder(uniqueSafetySourceId)
+                    .apply {
+                        if (SdkLevel.isAtLeastU()) {
+                            setNotificationsAllowed(false)
+                        }
+                    }
+                    .build()
+            )
+        )
 
         safetyCenterTestHelper.setData(
             uniqueSafetySourceId,
@@ -289,6 +334,7 @@ class SafetyCenterNotificationTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_MIGRATE_TO_NEW_SAFETY_CENTER_UI_FEATURES)
     fun setSafetySourceData_withNotificationsAllowedForSourceByFlag_sendsNotification() {
         SafetyCenterFlags.notificationsAllowedSources = setOf(uniqueSafetySourceId)
         val data = safetySourceTestData.recommendationWithAccountIssue
@@ -373,6 +419,38 @@ class SafetyCenterNotificationTest {
                 safetySourceId = "MyNotifiableSource",
             )
         )
+    }
+
+    @SdkSuppress(minSdkVersion = CINNAMON_BUN)
+    @RequiresFlagsEnabled(Flags.FLAG_MIGRATE_TO_NEW_SAFETY_CENTER_UI_FEATURES)
+    @Test
+    fun setSafetySourceData_withNotificationsNotAllowedInConfig_doesntSendNotification() {
+        SafetyCenterFlags.notificationsAllowedSources = setOf("MyTestSource")
+        SafetyCenterFlags.immediateNotificationBehaviorIssues = setOf("MyTestSource")
+        safetyCenterTestHelper.setConfig(
+            safetyCenterTestConfigs.singleSourceConfig(
+                safetyCenterTestConfigs
+                    .dynamicSafetySourceBuilder("MyTestSource")
+                    .setNotificationsAllowed(false)
+                    .build()
+            )
+        )
+        val data =
+            safetySourceTestData
+                .defaultRecommendationDataBuilder()
+                .addIssue(
+                    safetySourceTestData
+                        .defaultRecommendationIssueBuilder("Notify immediately", "This is urgent!")
+                        .setNotificationBehavior(
+                            SafetySourceIssue.NOTIFICATION_BEHAVIOR_IMMEDIATELY
+                        )
+                        .build()
+                )
+                .build()
+
+        safetyCenterTestHelper.setData("MyTestSource", data)
+
+        TestNotificationListener.waitForZeroNotificationEvents()
     }
 
     @Test
@@ -1222,6 +1300,7 @@ class SafetyCenterNotificationTest {
 
     @Test
     fun sendContentPendingIntent_singleIssue_opensSafetyCenterWithIssueVisible() {
+        assumeTrue(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
         safetyCenterTestHelper.setData(
             uniqueSafetySourceId,
             safetySourceTestData.recommendationWithDeviceIssue,
@@ -1240,7 +1319,9 @@ class SafetyCenterNotificationTest {
     }
 
     @Test
-    fun sendContentPendingIntent_anotherHigherSeverityIssue_opensSafetyCenterWithIssueVisible() {
+    @SdkSuppress(maxSdkVersion = TIRAMISU)
+    fun sendContentPendingIntent_anotherHigherSeverityIssue_opensSafetyCenterAndIssueVisible() {
+        assumeTrue(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
         safetyCenterTestHelper.setConfig(safetyCenterTestConfigs.multipleSourcesConfig)
         setFlagsForImmediateNotifications(SOURCE_ID_1)
         safetyCenterTestHelper.setData(
@@ -1250,6 +1331,43 @@ class SafetyCenterNotificationTest {
         safetyCenterTestHelper.setData(
             SOURCE_ID_2,
             safetySourceTestData.criticalWithResolvingGeneralIssue(sourceId = SOURCE_ID_2),
+        )
+        val notificationWithChannel =
+            TestNotificationListener.waitForSingleNotificationMatching(
+                NotificationCharacteristics(
+                    actions = listOf("See issue"),
+                    safetySourceId = SOURCE_ID_1,
+                )
+            )
+
+        sendContentPendingIntent(notificationWithChannel) {
+            waitSourceIssueDisplayed(safetySourceTestData.criticalResolvingGeneralIssue)
+            waitSourceIssueDisplayed(safetySourceTestData.recommendationDeviceIssue)
+        }
+    }
+
+    @Test
+    @SdkSuppress(minSdkVersion = UPSIDE_DOWN_CAKE)
+    fun sendContentPendingIntent_onU_anotherHigherSeverityIssue_opensSafetyCenterAndIssueVisible() {
+        assumeTrue(handledByPermissionControllerSafetyCenter(context, ACTION_SAFETY_CENTER))
+        safetyCenterTestHelper.setConfig(
+            safetyCenterTestConfigs.multipleSourcesWithDeduplicationInfoConfig
+        )
+
+        setFlagsForImmediateNotifications(SOURCE_ID_1)
+        safetyCenterTestHelper.setData(
+            SOURCE_ID_1,
+            SafetySourceData.Builder()
+                .addIssue(safetySourceTestData.recommendationDeviceIssue)
+                .build(),
+        )
+        safetyCenterTestHelper.setData(
+            SOURCE_ID_3,
+            SafetySourceData.Builder()
+                .addIssue(
+                    safetySourceTestData.criticalResolvingGeneralIssue(sourceId = SOURCE_ID_3)
+                )
+                .build(),
         )
         val notificationWithChannel =
             TestNotificationListener.waitForSingleNotificationMatching(
@@ -1316,7 +1434,9 @@ class SafetyCenterNotificationTest {
         }
 
         fun setFlagsForImmediateNotifications(vararg sourceIds: String) {
-            SafetyCenterFlags.notificationsAllowedSources = sourceIds.toSet()
+            if (!SdkLevel.isAtLeastU()) {
+                SafetyCenterFlags.notificationsAllowedSources = sourceIds.toSet()
+            }
             SafetyCenterFlags.immediateNotificationBehaviorIssues =
                 sourceIds.map { "$it/$ISSUE_TYPE_ID" }.toSet()
         }

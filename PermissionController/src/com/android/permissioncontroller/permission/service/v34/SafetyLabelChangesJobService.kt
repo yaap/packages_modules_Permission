@@ -115,7 +115,7 @@ class SafetyLabelChangesJobService : JobService() {
                 Log.i(
                     LOG_TAG,
                     "onReceive: Received broadcast in profile, not scheduling safety label" +
-                        " change job"
+                        " change job",
                 )
                 return
             }
@@ -143,7 +143,7 @@ class SafetyLabelChangesJobService : JobService() {
                 Log.i(
                     LOG_TAG,
                     "NotificationDeleteHandler: " +
-                        "safety label change notifications are not enabled."
+                        "safety label change notifications are not enabled.",
                 )
                 return
             }
@@ -152,7 +152,7 @@ class SafetyLabelChangesJobService : JobService() {
             logAppDataSharingUpdatesNotificationInteraction(
                 sessionId,
                 APP_DATA_SHARING_UPDATES_NOTIFICATION_INTERACTION__ACTION__DISMISSED,
-                numberOfAppUpdates
+                numberOfAppUpdates,
             )
         }
     }
@@ -265,7 +265,7 @@ class SafetyLabelChangesJobService : JobService() {
                 "recording safety labels if missing:" +
                     " packagesRequestingLocation:" +
                     " $packagesRequestingLocation, packageNamesWithPersistedSafetyLabels:" +
-                    " $packageNamesWithPersistedSafetyLabels"
+                    " $packageNamesWithPersistedSafetyLabels",
             )
         }
         safetyLabelsToRecord.addAll(getSafetyLabels(packagesToInitialize))
@@ -293,7 +293,7 @@ class SafetyLabelChangesJobService : JobService() {
 
     private suspend fun getSafetyLabelsIfUpdatesMissed(
         packages: List<Pair<String, UserHandle>>,
-        safetyLabelsLastUpdatedTimes: Map<AppInfo, Instant>
+        safetyLabelsLastUpdatedTimes: Map<AppInfo, Instant>,
     ): List<SafetyLabelForPersistence> {
         val safetyLabelsToPersist = mutableListOf<SafetyLabelForPersistence>()
         for ((packageName, user) in packages) {
@@ -320,7 +320,7 @@ class SafetyLabelChangesJobService : JobService() {
      */
     private suspend fun areSafetyLabelsUpToDate(
         packageKey: Pair<String, UserHandle>,
-        safetyLabelsLastUpdatedTimes: Map<AppInfo, Instant>
+        safetyLabelsLastUpdatedTimes: Map<AppInfo, Instant>,
     ): Boolean {
         val lightPackageInfo = LightPackageInfoLiveData[packageKey].getInitializedValue()
         val lastAppUpdateTime: Instant = Instant.ofEpochMilli(lightPackageInfo?.lastUpdateTime ?: 0)
@@ -367,7 +367,7 @@ class SafetyLabelChangesJobService : JobService() {
             AppsSafetyLabelHistory.SafetyLabel.extractLocationSharingSafetyLabel(
                 packageName,
                 lastUpdateTime,
-                appMetadataSafetyLabel
+                appMetadataSafetyLabel,
             )
 
         return safetyLabelForPersistence
@@ -409,11 +409,11 @@ class SafetyLabelChangesJobService : JobService() {
             DeviceConfig.getLong(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 DATA_SHARING_UPDATE_PERIOD_PROPERTY,
-                Duration.ofDays(DEFAULT_DATA_SHARING_UPDATE_PERIOD_DAYS).toMillis()
+                Duration.ofDays(DEFAULT_DATA_SHARING_UPDATE_PERIOD_DAYS).toMillis(),
             )
         AppsSafetyLabelHistoryPersistence.deleteSafetyLabelsOlderThan(
             Instant.now().atZone(ZoneId.systemDefault()).toInstant().minusMillis(updatePeriod),
-            historyFile
+            historyFile,
         )
     }
 
@@ -550,7 +550,7 @@ class SafetyLabelChangesJobService : JobService() {
                     createIntentToLogDismissNotificationEvent(
                         context,
                         sessionId,
-                        numberOfAppUpdates
+                        numberOfAppUpdates,
                     )
                 )
         notificationBuilder.addExtras(
@@ -559,13 +559,13 @@ class SafetyLabelChangesJobService : JobService() {
 
         notificationManager.notify(
             SAFETY_LABEL_CHANGES_NOTIFICATION_ID,
-            notificationBuilder.build()
+            notificationBuilder.build(),
         )
 
         logAppDataSharingUpdatesNotificationInteraction(
             sessionId,
             APP_DATA_SHARING_UPDATES_NOTIFICATION_INTERACTION__ACTION__NOTIFICATION_SHOWN,
-            numberOfAppUpdates
+            numberOfAppUpdates,
         )
         Log.v(LOG_TAG, "Safety label change notification sent.")
     }
@@ -578,7 +578,7 @@ class SafetyLabelChangesJobService : JobService() {
 
     private fun createIntentToOpenAppDataSharingUpdates(
         context: Context,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         return PendingIntent.getActivity(
             context,
@@ -586,14 +586,14 @@ class SafetyLabelChangesJobService : JobService() {
             Intent(Intent.ACTION_REVIEW_APP_DATA_SHARING_UPDATES).apply {
                 putExtra(EXTRA_SESSION_ID, sessionId)
             },
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
     }
 
     private fun createIntentToLogDismissNotificationEvent(
         context: Context,
         sessionId: Long,
-        numberOfAppUpdates: Int
+        numberOfAppUpdates: Int,
     ): PendingIntent {
         return PendingIntent.getBroadcast(
             context,
@@ -604,19 +604,19 @@ class SafetyLabelChangesJobService : JobService() {
             },
             PendingIntent.FLAG_ONE_SHOT or
                 PendingIntent.FLAG_UPDATE_CURRENT or
-                PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_IMMUTABLE,
         )
     }
 
     private fun createNotificationChannel(
         context: Context,
-        notificationManager: NotificationManager
+        notificationManager: NotificationManager,
     ) {
         val notificationChannel =
             NotificationChannel(
                 PERMISSION_REMINDER_CHANNEL_ID,
                 context.getString(R.string.permission_reminders),
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_LOW,
             )
 
         notificationManager.createNotificationChannel(notificationChannel)
@@ -648,7 +648,7 @@ class SafetyLabelChangesJobService : JobService() {
                 val job =
                     JobInfo.Builder(
                             SAFETY_LABEL_CHANGES_DETECT_UPDATES_JOB_ID,
-                            ComponentName(context, SafetyLabelChangesJobService::class.java)
+                            ComponentName(context, SafetyLabelChangesJobService::class.java),
                         )
                         .setRequiresDeviceIdle(true)
                         .build()
@@ -679,7 +679,7 @@ class SafetyLabelChangesJobService : JobService() {
                     @Suppress("MissingPermission")
                     JobInfo.Builder(
                             SAFETY_LABEL_CHANGES_PERIODIC_NOTIFICATION_JOB_ID,
-                            ComponentName(context, SafetyLabelChangesJobService::class.java)
+                            ComponentName(context, SafetyLabelChangesJobService::class.java),
                         )
                         .setRequiresDeviceIdle(true)
                         .setPeriodic(KotlinUtils.getSafetyLabelChangesJobIntervalMillis())
@@ -700,20 +700,20 @@ class SafetyLabelChangesJobService : JobService() {
         private fun logAppDataSharingUpdatesNotificationInteraction(
             sessionId: Long,
             interactionType: Int,
-            numberOfAppUpdates: Int
+            numberOfAppUpdates: Int,
         ) {
             PermissionControllerStatsLog.write(
                 APP_DATA_SHARING_UPDATES_NOTIFICATION_INTERACTION,
                 sessionId,
                 interactionType,
-                numberOfAppUpdates
+                numberOfAppUpdates,
             )
             Log.v(
                 LOG_TAG,
                 "Notification interaction occurred with" +
                     " sessionId=$sessionId" +
                     " action=$interactionType" +
-                    " numberOfAppUpdates=$numberOfAppUpdates"
+                    " numberOfAppUpdates=$numberOfAppUpdates",
             )
         }
     }

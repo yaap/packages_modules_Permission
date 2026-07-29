@@ -208,7 +208,10 @@ internal object WearComposeMaterial3ColorScheme {
                     R.color.wear_compose_material3_on_background_dark,
                 ),
             error =
-                defaultColorScheme.error.updatedColor(context, R.color.wear_compose_material3_error_dark),
+                defaultColorScheme.error.updatedColor(
+                    context,
+                    R.color.wear_compose_material3_error_dark,
+                ),
             onError =
                 defaultColorScheme.onError.updatedColor(
                     context,

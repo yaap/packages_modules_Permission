@@ -155,8 +155,8 @@ fun rememberDrawablePainter(drawable: Drawable?): Painter =
 private val Drawable.intrinsicSize: Size
     get() =
         when {
-            // Only return a finite size if the drawable has an intrinsic size
-            intrinsicWidth >= 0 && intrinsicHeight >= 0 -> {
+            // Only return a finite size if the drawable has a non-zero intrinsic size
+            intrinsicWidth > 0 && intrinsicHeight > 0 -> {
                 Size(width = intrinsicWidth.toFloat(), height = intrinsicHeight.toFloat())
             }
             else -> Size.Unspecified

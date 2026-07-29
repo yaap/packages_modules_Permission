@@ -17,10 +17,13 @@
 package com.android.permissioncontroller.tests.mocking.appops.data.repository
 
 import android.app.AppOpsManager
+import android.app.AppOpsManager.OnOpChangedListener
 import android.app.AppOpsManager.PackageOps
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SdkSuppress
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.PermissionControllerApplication
@@ -41,6 +44,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.any
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as whenever
 import org.mockito.MockitoAnnotations
 import org.mockito.MockitoSession
@@ -97,6 +102,75 @@ class AppOpRepositoryTest {
         assertThat(packageOps.size).isEqualTo(1)
         assertThat(packageOps[0].packageName).isEqualTo(testPackageName)
         assertThat(packageOps[0].usages).isEqualTo(expectedAppOpUsages)
+    }
+
+    @SdkSuppress(maxSdkVersion = Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    @Test
+    fun verifyCheckOp_belowSdk36() = runTest {
+        whenever(
+                appOpsManager.unsafeCheckOpNoThrow(
+                    AppOpsManager.OPSTR_ASSIST_STRUCTURE,
+                    testAppId,
+                    testPackageName,
+                )
+            )
+            .thenReturn(AppOpsManager.MODE_DEFAULT)
+        assertThat(
+                underTest.checkOpNoThrow(
+                    AppOpsManager.OPSTR_ASSIST_STRUCTURE,
+                    testAppId,
+                    testPackageName,
+                )
+            )
+            .isEqualTo(AppOpsManager.MODE_DEFAULT)
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA)
+    @Test
+    fun verifyCheckOp() = runTest {
+        whenever(
+                appOpsManager.checkOpNoThrow(
+                    AppOpsManager.OPSTR_ASSIST_STRUCTURE,
+                    testAppId,
+                    testPackageName,
+                    null,
+                )
+            )
+            .thenReturn(AppOpsManager.MODE_DEFAULT)
+        assertThat(
+                underTest.checkOpNoThrow(
+                    AppOpsManager.OPSTR_ASSIST_STRUCTURE,
+                    testAppId,
+                    testPackageName,
+                )
+            )
+            .isEqualTo(AppOpsManager.MODE_DEFAULT)
+    }
+
+    @Test
+    fun verifySetUidMode() = runTest {
+        underTest.setUidMode(
+            AppOpsManager.OPSTR_ASSIST_STRUCTURE,
+            testAppId,
+            AppOpsManager.MODE_ALLOWED,
+        )
+        verify(appOpsManager)
+            .setUidMode(AppOpsManager.OPSTR_ASSIST_STRUCTURE, testAppId, AppOpsManager.MODE_ALLOWED)
+    }
+
+    @Test
+    fun verifyStartWatchingMode() = runTest {
+        val callback: OnOpChangedListener = mock(OnOpChangedListener::class.java)
+        underTest.startWatchingMode(AppOpsManager.OPSTR_ASSIST_STRUCTURE, testPackageName, callback)
+        verify(appOpsManager)
+            .startWatchingMode(AppOpsManager.OPSTR_ASSIST_STRUCTURE, testPackageName, callback)
+    }
+
+    @Test
+    fun verifyStopWatchingMode() = runTest {
+        val callback: OnOpChangedListener = mock(OnOpChangedListener::class.java)
+        underTest.stopWatchingMode(callback)
+        verify(appOpsManager).stopWatchingMode(callback)
     }
 
     private fun createPackageOpsMockData(): PackageOps {

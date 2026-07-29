@@ -88,6 +88,7 @@ import com.android.safetycenter.testing.SafetyCenterTestConfigs.Companion.STATIC
 import com.android.safetycenter.testing.SafetyCenterTestData
 import com.android.safetycenter.testing.SafetyCenterTestData.Companion.withoutExtras
 import com.android.safetycenter.testing.SafetyCenterTestHelper
+import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterStaticEntryBuilder
 import com.android.safetycenter.testing.SafetyCenterTestRule
 import com.android.safetycenter.testing.SafetySourceTestData
 import com.android.safetycenter.testing.SafetySourceTestData.Companion.EVENT_SOURCE_STATE_CHANGED
@@ -299,23 +300,34 @@ class SafetyCenterMultiUsersTest {
     private val staticAllOptionalForPrivate
         get() = staticAllOptionalForPrivateBuilder.build()
 
-    private fun createStaticEntry(explicit: Boolean = true): SafetyCenterStaticEntry =
-        SafetyCenterStaticEntry.Builder("OK")
+    private fun createStaticEntry(
+        explicit: Boolean = true,
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        createSafetyCenterStaticEntryBuilder("OK", sourceId, user)
             .setSummary("OK")
             .setPendingIntent(
                 safetySourceTestData.createTestActivityRedirectPendingIntent(explicit)
             )
             .build()
 
-    private val staticEntryUpdated: SafetyCenterStaticEntry
-        get() =
-            SafetyCenterStaticEntry.Builder("Unspecified title")
-                .setSummary("Unspecified summary")
-                .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
-                .build()
+    private fun staticEntryUpdated(
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        createSafetyCenterStaticEntryBuilder("Unspecified title", sourceId, user)
+            .setSummary("Unspecified summary")
+            .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
+            .build()
 
-    private fun staticEntryForWorkBuilder(title: CharSequence = "Paste", explicit: Boolean = true) =
-        SafetyCenterStaticEntry.Builder(title)
+    private fun staticEntryForWorkBuilder(
+        title: CharSequence = "Paste",
+        explicit: Boolean = true,
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ) =
+        createSafetyCenterStaticEntryBuilder(title, sourceId, user)
             .setSummary("OK")
             .setPendingIntent(
                 createTestActivityRedirectPendingIntentForUser(
@@ -327,8 +339,10 @@ class SafetyCenterMultiUsersTest {
     private fun staticEntryForPrivateBuilder(
         title: CharSequence = "Unknown",
         explicit: Boolean = true,
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
     ) =
-        SafetyCenterStaticEntry.Builder(title)
+        createSafetyCenterStaticEntryBuilder(title, sourceId, user)
             .setSummary("OK")
             .setPendingIntent(
                 createTestActivityRedirectPendingIntentForUser(
@@ -337,36 +351,57 @@ class SafetyCenterMultiUsersTest {
                 )
             )
 
-    private fun createStaticEntryForWork(explicit: Boolean = true): SafetyCenterStaticEntry =
-        staticEntryForWorkBuilder(explicit = explicit).build()
+    private fun createStaticEntryForWork(
+        explicit: Boolean = true,
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        staticEntryForWorkBuilder(explicit = explicit, sourceId = sourceId, user = user).build()
 
-    private fun createStaticEntryForPrivate(explicit: Boolean = true): SafetyCenterStaticEntry =
-        staticEntryForPrivateBuilder(explicit = explicit).build()
+    private fun createStaticEntryForPrivate(
+        explicit: Boolean = true,
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        staticEntryForPrivateBuilder(explicit = explicit, sourceId = sourceId, user = user).build()
 
-    private fun createStaticEntryForWorkPaused(): SafetyCenterStaticEntry =
-        staticEntryForWorkBuilder(explicit = false)
+    private fun createStaticEntryForWorkPaused(
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        staticEntryForWorkBuilder(explicit = false, sourceId = sourceId, user = user)
             .setSummary(safetyCenterResourcesApk.getStringByName("work_profile_paused"))
             .build()
 
-    private val staticEntryForWorkPausedUpdated: SafetyCenterStaticEntry
-        get() =
-            staticEntryForWorkBuilder(title = "Unspecified title for Work")
-                .setSummary(safetyCenterResourcesApk.getStringByName("work_profile_paused"))
-                .build()
+    private fun staticEntryForWorkPausedUpdated(
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        staticEntryForWorkBuilder(
+                title = "Unspecified title for Work",
+                sourceId = sourceId,
+                user = user,
+            )
+            .setSummary(safetyCenterResourcesApk.getStringByName("work_profile_paused"))
+            .build()
 
-    private val staticEntryForWorkUpdated: SafetyCenterStaticEntry
-        get() =
-            SafetyCenterStaticEntry.Builder("Unspecified title for Work")
-                .setSummary("Unspecified summary")
-                .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
-                .build()
+    private fun staticEntryForWorkUpdated(
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        createSafetyCenterStaticEntryBuilder("Unspecified title for Work", sourceId, user)
+            .setSummary("Unspecified summary")
+            .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
+            .build()
 
-    private val staticEntryForPrivateUpdated: SafetyCenterStaticEntry
-        get() =
-            SafetyCenterStaticEntry.Builder("Unspecified title for Private")
-                .setSummary("Unspecified summary")
-                .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
-                .build()
+    private fun staticEntryForPrivateUpdated(
+        sourceId: String = "sourceId",
+        user: UserHandle = UserHandle.of(0),
+    ): SafetyCenterStaticEntry =
+        createSafetyCenterStaticEntryBuilder("Unspecified title for Private", sourceId, user)
+            .setSummary("Unspecified summary")
+            .setPendingIntent(safetySourceTestData.createTestActivityRedirectPendingIntent())
+            .build()
 
     private val safetyCenterDataForAdditionalUser
         get() =
@@ -600,7 +635,10 @@ class SafetyCenterMultiUsersTest {
                 listOf(
                     SafetyCenterStaticEntryGroup(
                         "OK",
-                        listOf(createStaticEntry(), createStaticEntry(explicit = false)),
+                        listOf(
+                            createStaticEntry(sourceId = "dynamic_in_stateless"),
+                            createStaticEntry(explicit = false, sourceId = "static_in_stateless"),
+                        ),
                     )
                 ),
             )
@@ -650,10 +688,17 @@ class SafetyCenterMultiUsersTest {
                     SafetyCenterStaticEntryGroup(
                         "OK",
                         listOf(
-                            createStaticEntry(),
-                            createStaticEntryForWork(),
-                            createStaticEntry(explicit = false),
-                            createStaticEntryForWork(explicit = false),
+                            createStaticEntry(sourceId = "dynamic_in_stateless"),
+                            createStaticEntryForWork(
+                                sourceId = "dynamic_in_stateless",
+                                user = deviceState.workProfile().userHandle(),
+                            ),
+                            createStaticEntry(explicit = false, sourceId = "static_in_stateless"),
+                            createStaticEntryForWork(
+                                explicit = false,
+                                sourceId = "static_in_stateless",
+                                user = deviceState.workProfile().userHandle(),
+                            ),
                         ),
                     )
                 ),
@@ -704,10 +749,17 @@ class SafetyCenterMultiUsersTest {
                     SafetyCenterStaticEntryGroup(
                         "OK",
                         listOf(
-                            staticEntryUpdated,
-                            createStaticEntryForWork(),
-                            createStaticEntry(explicit = false),
-                            createStaticEntryForWork(explicit = false),
+                            staticEntryUpdated(sourceId = "dynamic_in_stateless"),
+                            createStaticEntryForWork(
+                                sourceId = "dynamic_in_stateless",
+                                user = deviceState.workProfile().userHandle(),
+                            ),
+                            createStaticEntry(explicit = false, sourceId = "static_in_stateless"),
+                            createStaticEntryForWork(
+                                explicit = false,
+                                sourceId = "static_in_stateless",
+                                user = deviceState.workProfile().userHandle(),
+                            ),
                         ),
                     )
                 ),
@@ -814,10 +866,17 @@ class SafetyCenterMultiUsersTest {
                     SafetyCenterStaticEntryGroup(
                         "OK",
                         listOf(
-                            staticEntryUpdated,
-                            staticEntryForWorkUpdated,
-                            createStaticEntry(explicit = false),
-                            createStaticEntryForWork(explicit = false),
+                            staticEntryUpdated(sourceId = "dynamic_in_stateless"),
+                            staticEntryForWorkUpdated(
+                                sourceId = "dynamic_in_stateless",
+                                user = UserHandle.of(managedUserId),
+                            ),
+                            createStaticEntry(explicit = false, sourceId = "static_in_stateless"),
+                            createStaticEntryForWork(
+                                explicit = false,
+                                sourceId = "static_in_stateless",
+                                user = UserHandle.of(managedUserId),
+                            ),
                         ),
                     )
                 ),
@@ -926,8 +985,8 @@ class SafetyCenterMultiUsersTest {
                     SafetyCenterStaticEntryGroup(
                         "OK",
                         listOf(
-                            staticEntryUpdated,
-                            staticEntryForWorkUpdated,
+                            staticEntryUpdated(),
+                            staticEntryForWorkUpdated(),
                             createStaticEntry(explicit = false),
                             createStaticEntryForWork(explicit = false),
                         ),
@@ -1073,12 +1132,26 @@ class SafetyCenterMultiUsersTest {
                     SafetyCenterStaticEntryGroup(
                         "OK",
                         listOf(
-                            staticEntryUpdated,
-                            staticEntryForWorkUpdated,
-                            staticEntryForPrivateUpdated,
-                            createStaticEntry(explicit = false),
-                            createStaticEntryForWork(explicit = false),
-                            createStaticEntryForPrivate(explicit = false),
+                            staticEntryUpdated(sourceId = "dynamic_in_stateless"),
+                            staticEntryForWorkUpdated(
+                                sourceId = "dynamic_in_stateless",
+                                user = UserHandle.of(managedUserId),
+                            ),
+                            staticEntryForPrivateUpdated(
+                                sourceId = "dynamic_in_stateless",
+                                user = UserHandle.of(privateProfileId),
+                            ),
+                            createStaticEntry(explicit = false, sourceId = "static_in_stateless"),
+                            createStaticEntryForWork(
+                                explicit = false,
+                                sourceId = "static_in_stateless",
+                                user = UserHandle.of(managedUserId),
+                            ),
+                            createStaticEntryForPrivate(
+                                explicit = false,
+                                sourceId = "static_in_stateless",
+                                user = UserHandle.of(privateProfileId),
+                            ),
                         ),
                     )
                 ),
@@ -1136,10 +1209,16 @@ class SafetyCenterMultiUsersTest {
                     SafetyCenterStaticEntryGroup(
                         "OK",
                         listOf(
-                            staticEntryUpdated,
-                            staticEntryForWorkPausedUpdated,
-                            createStaticEntry(explicit = false),
-                            createStaticEntryForWorkPaused(),
+                            staticEntryUpdated(sourceId = "dynamic_in_stateless"),
+                            staticEntryForWorkPausedUpdated(
+                                sourceId = "dynamic_in_stateless",
+                                user = deviceState.workProfile().userHandle(),
+                            ),
+                            createStaticEntry(explicit = false, sourceId = "static_in_stateless"),
+                            createStaticEntryForWorkPaused(
+                                sourceId = "static_in_stateless",
+                                user = deviceState.workProfile().userHandle(),
+                            ),
                         ),
                     )
                 ),

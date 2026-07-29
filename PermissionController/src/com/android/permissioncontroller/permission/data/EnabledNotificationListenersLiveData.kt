@@ -32,7 +32,7 @@ import kotlinx.coroutines.Job
  */
 class EnabledNotificationListenersLiveData(
     private val app: Application,
-    private val user: UserHandle
+    private val user: UserHandle,
 ) : SmartAsyncMediatorLiveData<List<String>>() {
 
     override suspend fun loadDataAndPostValue(job: Job) {
@@ -44,7 +44,7 @@ class EnabledNotificationListenersLiveData(
             Settings.Secure.getString(
                     Utils.getUserContext(app, user).contentResolver,
                     /* Settings.Secure.ENABLED_NOTIFICATION_LISTENERS */
-                    "enabled_notification_listeners"
+                    "enabled_notification_listeners",
                 )
                 ?.split(":")
                 ?.map { pkgOrComponent ->
@@ -54,8 +54,7 @@ class EnabledNotificationListenersLiveData(
                     } else {
                         pkgOrComponent
                     }
-                }
-                ?: emptyList()
+                } ?: emptyList()
 
         postValue(packageNames)
     }

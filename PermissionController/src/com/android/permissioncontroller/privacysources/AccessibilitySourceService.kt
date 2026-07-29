@@ -90,7 +90,7 @@ fun isAccessibilityListenerEnabled(): Boolean {
     return DeviceConfig.getBoolean(
         DeviceConfig.NAMESPACE_PRIVACY,
         PROPERTY_SC_ACCESSIBILITY_LISTENER_ENABLED,
-        true
+        true,
     )
 }
 
@@ -116,7 +116,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
     suspend fun processAccessibilityJob(
         params: JobParameters?,
         jobService: AccessibilityJobService,
-        cancel: BooleanSupplier?
+        cancel: BooleanSupplier?,
     ) {
         lock.withLock {
             try {
@@ -178,7 +178,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
     /** sends a notification for a given accessibility package */
     private suspend fun sendNotification(
         serviceToBeNotified: AccessibilityServiceInfo,
-        sessionId: Long
+        sessionId: Long,
     ) {
         val pkgLabel = serviceToBeNotified.resolveInfo.loadLabel(packageManager)
         val componentName = ComponentName.unflattenFromString(serviceToBeNotified.id)!!
@@ -198,7 +198,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
         val summary =
             parentUserContext.getString(
                 R.string.accessibility_access_reminder_notification_content,
-                pkgLabel
+                pkgLabel,
             )
 
         val (appLabel, smallIcon, color) =
@@ -220,7 +220,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
                         notificationDeleteIntent,
                         PendingIntent.FLAG_ONE_SHOT or
                             PendingIntent.FLAG_UPDATE_CURRENT or
-                            PendingIntent.FLAG_IMMUTABLE
+                            PendingIntent.FLAG_IMMUTABLE,
                     )
                 )
                 .setContentIntent(
@@ -234,7 +234,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
         notificationsManager.notify(
             componentName.flattenToShortString(),
             Constants.ACCESSIBILITY_CHECK_NOTIFICATION_ID,
-            b.build()
+            b.build(),
         )
 
         sharedPrefsLock.withLock {
@@ -253,7 +253,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
             PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__PRIVACY_SOURCE__A11Y_SERVICE,
             uid,
             PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__ACTION__NOTIFICATION_SHOWN,
-            sessionId
+            sessionId,
         )
     }
 
@@ -263,7 +263,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
             NotificationChannel(
                 Constants.PERMISSION_REMINDER_CHANNEL_ID,
                 context.getString(R.string.permission_reminders),
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_LOW,
             )
         notificationsManager.createNotificationChannel(permissionReminderChannel)
     }
@@ -274,7 +274,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
      */
     private fun createSafetySourceIssue(
         a11yService: AccessibilityServiceInfo,
-        sessionId: Long
+        sessionId: Long,
     ): SafetySourceIssue {
         val componentName = ComponentName.unflattenFromString(a11yService.id)!!
         val safetySourceIssueId = getSafetySourceIssueId(componentName)
@@ -287,14 +287,14 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
                 componentName,
                 safetySourceIssueId,
                 uid,
-                sessionId
+                sessionId,
             )
 
         val removeAccessAction =
             SafetySourceIssue.Action.Builder(
                     SC_ACCESSIBILITY_REMOVE_ACCESS_ACTION_ID,
                     parentUserContext.getString(R.string.accessibility_remove_access_button_label),
-                    removeAccessPendingIntent
+                    removeAccessPendingIntent,
                 )
                 .setWillResolve(true)
                 .setSuccessMessage(
@@ -309,7 +309,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
             SafetySourceIssue.Action.Builder(
                     SC_ACCESSIBILITY_SHOW_ACCESSIBILITY_ACTIVITY_ACTION_ID,
                     parentUserContext.getString(R.string.accessibility_show_all_apps_button_label),
-                    accessibilityActivityPendingIntent
+                    accessibilityActivityPendingIntent,
                 )
                 .build()
 
@@ -329,7 +329,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
                 warningCardDismissIntent,
                 PendingIntent.FLAG_ONE_SHOT or
                     PendingIntent.FLAG_UPDATE_CURRENT or
-                    PendingIntent.FLAG_IMMUTABLE
+                    PendingIntent.FLAG_IMMUTABLE,
             )
         val title =
             parentUserContext.getString(R.string.accessibility_access_reminder_notification_title)
@@ -341,7 +341,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
                 title,
                 summary,
                 SafetySourceData.SEVERITY_LEVEL_INFORMATION,
-                SC_ACCESSIBILITY_ISSUE_TYPE_ID
+                SC_ACCESSIBILITY_ISSUE_TYPE_ID,
             )
             .addAction(removeAccessAction)
             .addAction(accessibilityActivityAction)
@@ -357,7 +357,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
         serviceComponentName: ComponentName,
         safetySourceIssueId: String,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent =
             Intent(parentUserContext, AccessibilityRemoveAccessHandler::class.java).apply {
@@ -373,7 +373,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
             context,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
     }
 
@@ -381,7 +381,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
     private fun getAccessibilityActivityPendingIntent(
         context: Context,
         uid: Int,
-        sessionId: Long
+        sessionId: Long,
     ): PendingIntent {
         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -396,7 +396,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
             context,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
     }
 
@@ -405,7 +405,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
         context: Context,
         uid: Int,
         sessionId: Long,
-        componentName: ComponentName
+        componentName: ComponentName,
     ): PendingIntent {
         val intent = Intent(Intent.ACTION_SAFETY_CENTER)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -415,13 +415,13 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
         intent.putExtra(EXTRA_SAFETY_SOURCE_ISSUE_ID, getSafetySourceIssueId(componentName))
         intent.putExtra(
             Constants.EXTRA_PRIVACY_SOURCE,
-            PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__PRIVACY_SOURCE__A11Y_SERVICE
+            PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__PRIVACY_SOURCE__A11Y_SERVICE,
         )
         return PendingIntent.getActivity(
             context,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
     }
 
@@ -432,7 +432,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
     private fun sendIssuesToSafetyCenter(
         a11yServiceList: List<AccessibilityServiceInfo>,
         sessionId: Long,
-        safetyEvent: SafetyEvent = sourceStateChanged
+        safetyEvent: SafetyEvent = sourceStateChanged,
     ) {
         val pendingIssues = a11yServiceList.map { createSafetySourceIssue(it, sessionId) }
         val dataBuilder = SafetySourceData.Builder()
@@ -442,13 +442,13 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
         safetyCenterManager.setSafetySourceData(
             SC_ACCESSIBILITY_SOURCE_ID,
             safetySourceData,
-            safetyEvent
+            safetyEvent,
         )
     }
 
     fun sendIssuesToSafetyCenter(
         a11yServiceList: List<AccessibilityServiceInfo>,
-        safetyEvent: SafetyEvent = sourceStateChanged
+        safetyEvent: SafetyEvent = sourceStateChanged,
     ) {
         var sessionId = Constants.INVALID_SESSION_ID
         while (sessionId == Constants.INVALID_SESSION_ID) {
@@ -485,7 +485,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
                     Log.e(
                         LOG_TAG,
                         "enabled accessibility service ($it) not found in installed" +
-                            "services: ${installedServices.keys}"
+                            "services: ${installedServices.keys}",
                     )
                 }
                 installedServices[it]
@@ -646,7 +646,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
             return DeviceConfig.getLong(
                 DeviceConfig.NAMESPACE_PRIVACY,
                 PROPERTY_SC_ACCESSIBILITY_JOB_INTERVAL_MILLIS,
-                DEFAULT_SC_ACCESSIBILITY_JOB_INTERVAL_MILLIS
+                DEFAULT_SC_ACCESSIBILITY_JOB_INTERVAL_MILLIS,
             )
         }
 
@@ -684,7 +684,7 @@ class AccessibilitySourceService(val context: Context, val random: Random = Rand
     override fun rescanAndPushSafetyCenterData(
         context: Context,
         intent: Intent,
-        refreshEvent: RefreshEvent
+        refreshEvent: RefreshEvent,
     ) {
         if (DEBUG) {
             Log.d(LOG_TAG, "rescan and push event from safety center $refreshEvent")
@@ -725,6 +725,7 @@ class AccessibilityPackageResetHandler : BroadcastReceiver() {
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 class AccessibilityNotificationDeleteHandler : BroadcastReceiver() {
     private val LOG_TAG = AccessibilityNotificationDeleteHandler::class.java.simpleName
+
     override fun onReceive(context: Context, intent: Intent) {
         val sessionId =
             intent.getLongExtra(Constants.EXTRA_SESSION_ID, Constants.INVALID_SESSION_ID)
@@ -739,7 +740,7 @@ class AccessibilityNotificationDeleteHandler : BroadcastReceiver() {
                 PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__PRIVACY_SOURCE__A11Y_SERVICE,
                 uid,
                 PRIVACY_SIGNAL_NOTIFICATION_INTERACTION__ACTION__DISMISSED,
-                sessionId
+                sessionId,
             )
         }
     }
@@ -795,7 +796,7 @@ class AccessibilityRemoveAccessHandler : BroadcastReceiver() {
                 PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__PRIVACY_SOURCE__A11Y_SERVICE,
                 uid,
                 PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__ACTION__CLICKED_CTA1,
-                sessionId
+                sessionId,
             )
         }
     }
@@ -830,7 +831,7 @@ class AccessibilityWarningCardDismissalReceiver : BroadcastReceiver() {
             PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__PRIVACY_SOURCE__A11Y_SERVICE,
             uid,
             PRIVACY_SIGNAL_ISSUE_CARD_INTERACTION__ACTION__CARD_DISMISSED,
-            sessionId
+            sessionId,
         )
     }
 }
@@ -858,11 +859,11 @@ class AccessibilityOnBootReceiver : BroadcastReceiver() {
             val jobInfo =
                 JobInfo.Builder(
                         Constants.PERIODIC_ACCESSIBILITY_CHECK_JOB_ID,
-                        ComponentName(context, AccessibilityJobService::class.java)
+                        ComponentName(context, AccessibilityJobService::class.java),
                     )
                     .setPeriodic(
                         AccessibilitySourceService.getJobsIntervalMillis(),
-                        AccessibilitySourceService.getFlexJobsIntervalMillis()
+                        AccessibilitySourceService.getFlexJobsIntervalMillis(),
                     )
                     .build()
 
@@ -911,9 +912,8 @@ class AccessibilityJobService : JobService() {
                         BooleanSupplier {
                             val job = mCurrentJob
                             return@BooleanSupplier job?.isCancelled ?: false
-                        }
-                    )
-                        ?: jobFinished(params, false)
+                        },
+                    ) ?: jobFinished(params, false)
                 }
         }
         return true

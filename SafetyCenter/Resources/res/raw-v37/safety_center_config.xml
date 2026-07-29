@@ -29,6 +29,7 @@
                 searchTerms="@com.android.safetycenter.resources:string/lock_screen_search_terms"
                 initialDisplayState="disabled"
                 notificationsAllowed="true"/>
+            <!-- Optional -->
             <dynamic-safety-source
                 id="AndroidFingerprintUnlock"
                 packageName="com.android.settings"
@@ -39,6 +40,7 @@
                 searchTerms="@com.android.safetycenter.resources:string/fingerprint_unlock_search_terms"
                 refreshOnPageOpenAllowed="true"
                 initialDisplayState="hidden"/>
+            <!-- Optional -->
             <dynamic-safety-source
                 id="AndroidFaceUnlock"
                 packageName="com.android.settings"
@@ -49,6 +51,7 @@
                 searchTerms="@com.android.safetycenter.resources:string/face_unlock_search_terms"
                 refreshOnPageOpenAllowed="true"
                 initialDisplayState="hidden"/>
+            <!-- Optional -->
             <dynamic-safety-source
                 id="AndroidWearUnlock"
                 packageName="com.android.settings"
@@ -59,6 +62,7 @@
                 searchTerms="@com.android.safetycenter.resources:string/wear_unlock_search_terms"
                 refreshOnPageOpenAllowed="true"
                 initialDisplayState="hidden"/>
+            <!-- Optional -->
             <dynamic-safety-source
                 id="AndroidBiometrics"
                 packageName="com.android.settings"
@@ -69,6 +73,7 @@
                 searchTerms="@com.android.safetycenter.resources:string/biometrics_search_terms"
                 refreshOnPageOpenAllowed="true"
                 initialDisplayState="hidden"/>
+            <!-- Optional -->
             <issue-only-safety-source
                 id="AndroidIdentityCheck"
                 packageName="com.android.settings"
@@ -77,10 +82,12 @@
                 maxSeverityLevel="200"
                 notificationsAllowed="true"/>
         </safety-sources-group>
+        <!-- Optional -->
         <safety-sources-group
             id="AndroidCellularNetworkSecuritySources"
             title="@com.android.safetycenter.resources:string/cellular_network_security_title"
             summary="@com.android.safetycenter.resources:string/cellular_network_security_summary">
+            <!-- Optional -->
             <dynamic-safety-source
                 id="AndroidCellularNetworkSecurity"
                 packageName="com.android.phone"
@@ -108,6 +115,7 @@
                 refreshOnPageOpenAllowed="false"
                 title="@com.android.safetycenter.resources:string/health_connect_title"
                 searchTerms="@com.android.safetycenter.resources:string/health_connect_search_terms"/>
+            <!-- Optional -->
             <dynamic-safety-source
                 id="AndroidAppFunctionAccess"
                 packageName="com.android.permissioncontroller"
@@ -155,6 +163,7 @@
                 profile="all_profiles"
                 notificationsAllowed="true"
                 refreshOnPageOpenAllowed="true"/>
+            <!-- Optional -->
             <issue-only-safety-source
                 id="AndroidCertificateTransparency"
                 packageName="android"

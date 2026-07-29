@@ -19,6 +19,7 @@ package com.android.permissioncontroller.permission.ui.model.grantPermissions
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.os.Build
+import android.util.Log
 import com.android.permissioncontroller.permission.model.livedatatypes.LightAppPermGroup
 import com.android.permissioncontroller.permission.ui.model.DenyButton
 import com.android.permissioncontroller.permission.ui.model.Prompt
@@ -33,7 +34,7 @@ object LocationGrantBehavior : GrantBehavior() {
     override fun getPrompt(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        isSystemTriggeredPrompt: Boolean
+        isSystemTriggeredPrompt: Boolean,
     ): Prompt {
         val backgroundPrompt = BackgroundGrantBehavior.getPrompt(group, requestedPerms)
         val requestsBackground = requestedPerms.any { it in group.backgroundPermNames }
@@ -41,7 +42,14 @@ object LocationGrantBehavior : GrantBehavior() {
         return if (!supportsLocationAccuracy(group) || requestsBackground) {
             backgroundPrompt
         } else if (requestedPerms.contains(ACCESS_FINE_LOCATION)) {
-            if (coarseGranted) {
+            if (group.isOnlyForLocationButton) {
+                Log.w(LOG_TAG, "Precise permission can only be granted by location button.")
+                if (requestedPerms.contains(ACCESS_COARSE_LOCATION) && !coarseGranted) {
+                    Prompt.LOCATION_COARSE_ONLY
+                } else {
+                    Prompt.NO_UI_REJECT_THIS_GROUP
+                }
+            } else if (coarseGranted) {
                 Prompt.LOCATION_FINE_UPGRADE
             } else if (isFineLocationHighlighted(group)) {
                 Prompt.LOCATION_TWO_BUTTON_FINE_HIGHLIGHT
@@ -58,14 +66,14 @@ object LocationGrantBehavior : GrantBehavior() {
     override fun getDenyButton(
         group: LightAppPermGroup,
         requestedPerms: Set<String>,
-        prompt: Prompt
+        prompt: Prompt,
     ): DenyButton {
         return BackgroundGrantBehavior.getDenyButton(group, requestedPerms, prompt)
     }
 
     override fun isGroupFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         val requestsBackground = requestedPerms.any { it in group.backgroundPermNames }
         if (!supportsLocationAccuracy(group) || requestsBackground) {
@@ -76,7 +84,7 @@ object LocationGrantBehavior : GrantBehavior() {
 
     override fun isForegroundFullyGranted(
         group: LightAppPermGroup,
-        requestedPerms: Set<String>
+        requestedPerms: Set<String>,
     ): Boolean {
         if (!supportsLocationAccuracy(group)) {
             return BackgroundGrantBehavior.isForegroundFullyGranted(group, requestedPerms)

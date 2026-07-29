@@ -137,17 +137,18 @@ public interface RoleUiBehavior {
     }
 
     /**
-     * Get the confirmation message for adding an application as a holder of this role.
+     * Get the confirmation dialog info for adding an application as a holder of this role.
      *
-     * @param role the role to get confirmation message for
-     * @param packageName the package name of the application to get confirmation message for
+     * @param role the role to get confirmation dialog info for
+     * @param packageName the package name of the application to get confirmation dialog info for
+     * @param user the user of the application to get confirmation dialog info for
      * @param context the {@code Context} to retrieve system services
      *
-     * @return the confirmation message, or {@code null} if no confirmation is needed
+     * @return the confirmation dialog info, or {@code null} if no confirmation is needed
      */
     @Nullable
-    default CharSequence getConfirmationMessage(@NonNull Role role, @NonNull String packageName,
-            @NonNull Context context) {
+    default ConfirmationDialogInfo getConfirmationDialogInfo(@NonNull Role role,
+            @NonNull String packageName, @NonNull UserHandle user, @NonNull Context context) {
         return null;
     }
 }

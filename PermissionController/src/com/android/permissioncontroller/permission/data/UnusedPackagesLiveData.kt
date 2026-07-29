@@ -61,7 +61,7 @@ class UnusedPackagesLiveData(
                         addSource(usageStatsLiveData) { update() }
                     }
                 }
-            }
+            },
         )
     }
 

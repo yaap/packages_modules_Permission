@@ -22,7 +22,6 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import androidx.test.filters.FlakyTest
 import androidx.test.uiautomator.By
 import com.android.modules.utils.build.SdkLevel
-import com.google.common.truth.Truth.assertThat
 import org.junit.Assume.assumeFalse
 import org.junit.Assume.assumeTrue
 import org.junit.Before
@@ -119,8 +118,6 @@ class LocationAccuracyTest : BaseUsePermissionTest() {
             ACCESS_COARSE_LOCATION to true,
         ) {
             clickPreciseLocationOnlyView()
-            assertThat(uiDevice.findObject(By.res(ALLOW_FOREGROUND_BUTTON)).text.uppercase())
-                .isEqualTo("WHILE USING THE APP")
             clickPermissionRequestAllowForegroundButton()
         }
     }

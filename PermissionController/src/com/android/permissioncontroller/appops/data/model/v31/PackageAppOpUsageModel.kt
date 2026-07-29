@@ -23,7 +23,7 @@ package com.android.permissioncontroller.appops.data.model.v31
 data class PackageAppOpUsageModel(
     val packageName: String,
     val usages: List<AppOpUsageModel>,
-    val userId: Int
+    val userId: Int,
 ) {
     /** Data class representing an app op and the recent access time by an app. */
     data class AppOpUsageModel(

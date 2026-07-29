@@ -36,7 +36,6 @@ import org.junit.After
 import org.junit.Assume.assumeFalse
 import org.junit.Assume.assumeTrue
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -152,7 +151,6 @@ class HealthConnectAppPermissionFragmentTest : BasePermissionUiTest() {
 
         eventually { waitFindObject(By.text(HEALTH_FITNESS_LABEL)) }
     }
-
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.BAKLAVA, codeName = "Baklava")
     @RequiresFlagsEnabled(FLAG_REPLACE_BODY_SENSOR_PERMISSION_ENABLED)

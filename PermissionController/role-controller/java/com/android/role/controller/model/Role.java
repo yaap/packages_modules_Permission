@@ -24,6 +24,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.SharedLibraryInfo;
 import android.content.res.Resources;
@@ -240,10 +241,10 @@ public class Role {
     private final boolean mVisible;
 
     /**
-     * The required components for an application to qualify for this role.
+     * The requirements for an application to qualify for this role.
      */
     @NonNull
-    private final List<RequiredComponent> mRequiredComponents;
+    private final List<Requirement> mRequirements;
 
     /**
      * The permissions to be granted by this role.
@@ -281,7 +282,7 @@ public class Role {
             @StringRes int requestDescriptionResource, @StringRes int requestTitleResource,
             boolean requestable, @StringRes int searchKeywordsResource,
             @StringRes int shortLabelResource, boolean showNone, boolean statik, boolean systemOnly,
-            boolean visible, @NonNull List<RequiredComponent> requiredComponents,
+            boolean visible, @NonNull List<Requirement> requirements,
             @NonNull List<Permission> permissions, @NonNull List<Permission> appOpPermissions,
             @NonNull List<AppOp> appOps, @NonNull List<PreferredActivity> preferredActivities,
             @Nullable String uiBehaviorName) {
@@ -307,7 +308,7 @@ public class Role {
         mStatic = statik;
         mSystemOnly = systemOnly;
         mVisible = visible;
-        mRequiredComponents = requiredComponents;
+        mRequirements = requirements;
         mPermissions = permissions;
         mAppOpPermissions = appOpPermissions;
         mAppOps = appOps;
@@ -420,8 +421,8 @@ public class Role {
     }
 
     @NonNull
-    public List<RequiredComponent> getRequiredComponents() {
-        return mRequiredComponents;
+    public List<Requirement> getRequirements() {
+        return mRequirements;
     }
 
     @NonNull
@@ -649,15 +650,22 @@ public class Role {
     public boolean isPackageQualifiedAsUser(@NonNull String packageName, @NonNull UserHandle user,
             @NonNull Context context) {
         if (isBypassingQualification(context)) {
+            if (mBehavior != null) {
+                boolean isPackageAllowedToBypassQualification =
+                        mBehavior.isPackageAllowedToBypassQualificationAsUser(packageName, user,
+                                context);
+                return isPackageAllowedToBypassQualification;
+            }
             return true;
         }
 
-        ApplicationInfo applicationInfo = PackageUtils.getApplicationInfoAsUser(packageName, user,
-                context);
-        if (applicationInfo == null) {
-            Log.w(LOG_TAG, "Cannot get ApplicationInfo for package: " + packageName);
+        PackageInfo packageInfo = getPackageInfoAsUser(packageName, hasRequiredUsesPermission(),
+                null, user, context);
+        if (packageInfo == null) {
             return false;
         }
+        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+
         if (!isPackageMinimallyQualifiedAsUser(applicationInfo, user, context)) {
             return false;
         }
@@ -670,18 +678,17 @@ public class Role {
             }
         }
 
-        int requiredComponentsSize = mRequiredComponents.size();
-        for (int i = 0; i < requiredComponentsSize; i++) {
-            RequiredComponent requiredComponent = mRequiredComponents.get(i);
+        int requirementsSize = mRequirements.size();
+        for (int i = 0; i < requirementsSize; i++) {
+            Requirement requirement = mRequirements.get(i);
 
-            if (!requiredComponent.isRequired(applicationInfo)) {
+            if (!requirement.isRequired(applicationInfo)) {
                 continue;
             }
 
-            if (requiredComponent.getQualifyingComponentForPackageAsUser(packageName, user, context)
-                    == null) {
-                Log.i(LOG_TAG, packageName + " not qualified for " + mName
-                        + " due to missing " + requiredComponent);
+            if (!requirement.isQualifiedAsUser(packageInfo, user, context)) {
+                Log.i(LOG_TAG, packageName + " not qualified for " + mName + " due to missing "
+                        + requirement);
                 return false;
             }
         }
@@ -691,6 +698,19 @@ public class Role {
         }
 
         return true;
+    }
+
+    private boolean hasRequiredUsesPermission() {
+        for (int i = 0; i < mRequirements.size(); i++) {
+            Requirement requirement = mRequirements.get(i);
+
+            if (requirement instanceof RequiredUsesPermission requiredUsesPermission) {
+                if (requiredUsesPermission.isAvailable()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -711,38 +731,79 @@ public class Role {
             qualifyingPackages = mBehavior.getQualifyingPackagesAsUser(this, user, context);
         }
 
-        ArrayMap<String, ApplicationInfo> packageApplicationInfoMap = new ArrayMap<>();
+        ArrayMap<String, PackageInfo> packageInfoCache = new ArrayMap<>();
         if (qualifyingPackages == null) {
+            // Gather all the packages with all the required components they have by querying each
+            // of the required components, instead of spending one binder call to check for each
+            // pair of package and required component later, so that we have predictable/better
+            // performance.
+            // As a special case, if we don't have any required components, but we do have at least
+            // one required uses-permission, this will be populated with all installed package names
+            // and a {@code null} for set of required components, so that we can reuse the same
+            // logic later on.
             ArrayMap<String, ArraySet<RequiredComponent>> packageRequiredComponentsMap =
                     new ArrayMap<>();
-            int requiredComponentsSize = mRequiredComponents.size();
-            for (int requiredComponentsIndex = 0; requiredComponentsIndex < requiredComponentsSize;
-                    requiredComponentsIndex++) {
-                RequiredComponent requiredComponent = mRequiredComponents.get(
-                        requiredComponentsIndex);
+            boolean hasRequiredUsesPermission = false;
+            boolean hasRequiredComponent = false;
+            int requirementsSize = mRequirements.size();
+            for (int requirementIndex = 0; requirementIndex < requirementsSize;
+                    requirementIndex++) {
+                Requirement requirement = mRequirements.get(requirementIndex);
 
-                if (!requiredComponent.isAvailable()) {
+                if (!requirement.isAvailable()) {
                     continue;
                 }
 
-                // This returns at most one component per package.
-                List<ComponentName> qualifyingComponents =
-                        requiredComponent.getQualifyingComponentsAsUser(user, context);
-                int qualifyingComponentsSize = qualifyingComponents.size();
-                for (int qualifyingComponentsIndex = 0;
-                        qualifyingComponentsIndex < qualifyingComponentsSize;
-                        ++qualifyingComponentsIndex) {
-                    ComponentName componentName = qualifyingComponents.get(
-                            qualifyingComponentsIndex);
+                switch (requirement) {
+                    case RequiredUsesPermission requiredUsesPermission:
+                        hasRequiredUsesPermission = true;
+                        break;
+                    case RequiredComponent requiredComponent: {
+                        hasRequiredComponent = true;
+                        // This returns at most one component per package.
+                        List<ComponentName> qualifyingComponents =
+                                requiredComponent.getQualifyingComponentsAsUser(user, context);
+                        int qualifyingComponentsSize = qualifyingComponents.size();
+                        for (int qualifyingComponentsIndex = 0;
+                                qualifyingComponentsIndex < qualifyingComponentsSize;
+                                ++qualifyingComponentsIndex) {
+                            ComponentName componentName = qualifyingComponents.get(
+                                    qualifyingComponentsIndex);
 
-                    String packageName = componentName.getPackageName();
-                    ArraySet<RequiredComponent> packageRequiredComponents =
-                            packageRequiredComponentsMap.get(packageName);
-                    if (packageRequiredComponents == null) {
-                        packageRequiredComponents = new ArraySet<>();
-                        packageRequiredComponentsMap.put(packageName, packageRequiredComponents);
+                            String packageName = componentName.getPackageName();
+                            ArraySet<RequiredComponent> packageRequiredComponents =
+                                    packageRequiredComponentsMap.get(packageName);
+                            if (packageRequiredComponents == null) {
+                                packageRequiredComponents = new ArraySet<>();
+                                packageRequiredComponentsMap.put(packageName,
+                                        packageRequiredComponents);
+                            }
+                            packageRequiredComponents.add(requiredComponent);
+                        }
+                        break;
                     }
-                    packageRequiredComponents.add(requiredComponent);
+                    default:
+                        throw new IllegalStateException("Unknown requirement: " + requirement);
+                }
+            }
+
+            if (!hasRequiredComponent && hasRequiredUsesPermission) {
+                // If we don't have any required components, but we do have at least one required
+                // uses-permission, we'll have to check against all installed packages despite being
+                // much slower.
+                List<PackageInfo> packageInfos = PackageUtils.getInstalledPackagesAsUser(
+                        PackageManager.GET_PERMISSIONS, user, context);
+                int packageInfosSize = packageInfos.size();
+                for (int packageInfosIndex = 0; packageInfosIndex < packageInfosSize;
+                        packageInfosIndex++) {
+                    PackageInfo packageInfo = packageInfos.get(packageInfosIndex);
+
+                    if (packageInfo.applicationInfo == null) {
+                        continue;
+                    }
+
+                    packageInfoCache.put(packageInfo.packageName, packageInfo);
+                    packageRequiredComponentsMap.put(packageInfo.packageName, null);
                 }
             }
 
@@ -756,66 +817,85 @@ public class Role {
                 ArraySet<RequiredComponent> packageRequiredComponents =
                         packageRequiredComponentsMap.valueAt(packageRequiredComponentsMapIndex);
 
-                ApplicationInfo applicationInfo = packageApplicationInfoMap.get(packageName);
-                if (applicationInfo == null) {
-                    applicationInfo = PackageUtils.getApplicationInfoAsUser(packageName, user,
-                            context);
-                    if (applicationInfo == null) {
-                        Log.w(LOG_TAG, "Cannot get ApplicationInfo for package: " + packageName
-                                + ", user: " + user.getIdentifier());
-                        continue;
-                    }
-                    packageApplicationInfoMap.put(packageName, applicationInfo);
+                PackageInfo packageInfo = getPackageInfoAsUser(packageName,
+                        hasRequiredUsesPermission, packageInfoCache, user, context);
+                if (packageInfo == null) {
+                    continue;
                 }
+                ApplicationInfo applicationInfo = packageInfo.applicationInfo;
 
-                boolean hasAllRequiredComponents = true;
-                for (int requiredComponentsIndex = 0;
-                        requiredComponentsIndex < requiredComponentsSize;
-                        requiredComponentsIndex++) {
-                    RequiredComponent requiredComponent = mRequiredComponents.get(
-                            requiredComponentsIndex);
+                boolean isPackageQualified = true;
+                for (int requirementIndex = 0; requirementIndex < requirementsSize;
+                        requirementIndex++) {
+                    Requirement requirement = mRequirements.get(requirementIndex);
 
-                    if (!requiredComponent.isRequired(applicationInfo)) {
+                    if (!requirement.isRequired(applicationInfo)) {
                         continue;
                     }
 
-                    if (!packageRequiredComponents.contains(requiredComponent)) {
-                        hasAllRequiredComponents = false;
-                        break;
+                    if (requirement instanceof RequiredComponent requiredComponent) {
+                        if (!CollectionUtils.contains(packageRequiredComponents,
+                                requiredComponent)) {
+                            isPackageQualified = false;
+                            break;
+                        }
+                    } else {
+                        if (!requirement.isQualifiedAsUser(packageInfo, user, context)) {
+                            isPackageQualified = false;
+                            break;
+                        }
                     }
                 }
 
-                if (hasAllRequiredComponents) {
+                if (isPackageQualified) {
                     qualifyingPackages.add(packageName);
                 }
             }
         }
 
-        int qualifyingPackagesSize = qualifyingPackages.size();
-        for (int i = 0; i < qualifyingPackagesSize; ) {
+        for (int i = qualifyingPackages.size() - 1; i >= 0; i--) {
             String packageName = qualifyingPackages.get(i);
 
-            ApplicationInfo applicationInfo = packageApplicationInfoMap.get(packageName);
-            if (applicationInfo == null) {
-                applicationInfo = PackageUtils.getApplicationInfoAsUser(packageName, user,
-                        context);
-                if (applicationInfo == null) {
-                    Log.w(LOG_TAG, "Cannot get ApplicationInfo for package: " + packageName
-                            + ", user: " + user.getIdentifier());
-                    continue;
-                }
-                packageApplicationInfoMap.put(packageName, applicationInfo);
+            PackageInfo packageInfo = getPackageInfoAsUser(packageName, false, packageInfoCache,
+                    user, context);
+            if (packageInfo == null) {
+                qualifyingPackages.remove(i);
+                continue;
             }
+            ApplicationInfo applicationInfo = packageInfo.applicationInfo;
 
             if (!isPackageMinimallyQualifiedAsUser(applicationInfo, user, context)) {
                 qualifyingPackages.remove(i);
-                qualifyingPackagesSize--;
-            } else {
-                i++;
             }
         }
 
         return qualifyingPackages;
+    }
+
+    @NonNull
+    private PackageInfo getPackageInfoAsUser(@NonNull String packageName,
+            boolean getPermissions, @Nullable ArrayMap<String, PackageInfo> packageInfoCache,
+            @NonNull UserHandle user, @NonNull Context context) {
+        PackageInfo packageInfo = packageInfoCache != null ? packageInfoCache.get(packageName)
+                : null;
+        if (packageInfo == null) {
+            packageInfo = PackageUtils.getPackageInfoAsUser(packageName,
+                    getPermissions ? PackageManager.GET_PERMISSIONS : 0, user, context);
+            if (packageInfo == null) {
+                Log.w(LOG_TAG, "Cannot get PackageInfo for package: " + packageName + ", user: "
+                        + user.getIdentifier());
+                return null;
+            }
+            if (packageInfo.applicationInfo == null) {
+                Log.w(LOG_TAG, "Cannot get ApplicationInfo for package: " + packageName + ", user: "
+                        + user.getIdentifier());
+                return null;
+            }
+            if (packageInfoCache != null) {
+                packageInfoCache.put(packageName, packageInfo);
+            }
+        }
+        return packageInfo;
     }
 
     private boolean isPackageMinimallyQualifiedAsUser(@NonNull ApplicationInfo applicationInfo,
@@ -840,11 +920,11 @@ public class Role {
 
         PackageManager userPackageManager = UserUtils.getUserContext(context, user)
                 .getPackageManager();
-        List<SharedLibraryInfo> declaredLibraries = userPackageManager.getDeclaredSharedLibraries(
+        List<SharedLibraryInfo> sharedLibraries = userPackageManager.getDeclaredSharedLibraries(
                 packageName, 0);
-        final int libCount = declaredLibraries.size();
-        for (int i = 0; i < libCount; i++) {
-            SharedLibraryInfo sharedLibrary = declaredLibraries.get(i);
+        final int sharedLibrariesSize = sharedLibraries.size();
+        for (int i = 0; i < sharedLibrariesSize; i++) {
+            SharedLibraryInfo sharedLibrary = sharedLibraries.get(i);
             if (sharedLibrary.getType() != SharedLibraryInfo.TYPE_DYNAMIC) {
                 return false;
             }
@@ -890,7 +970,7 @@ public class Role {
         }
 
         if (mBehavior != null) {
-            mBehavior.grantAsUser(this, packageName, user, context);
+            mBehavior.grantAsUser(this, packageName, overrideUser, user, context);
         }
 
         if (!dontKillApp && permissionOrAppOpChanged
@@ -1215,7 +1295,7 @@ public class Role {
                 + ", mStatic=" + mStatic
                 + ", mSystemOnly=" + mSystemOnly
                 + ", mVisible=" + mVisible
-                + ", mRequiredComponents=" + mRequiredComponents
+                + ", mRequirements=" + mRequirements
                 + ", mPermissions=" + mPermissions
                 + ", mAppOpPermissions=" + mAppOpPermissions
                 + ", mAppOps=" + mAppOps

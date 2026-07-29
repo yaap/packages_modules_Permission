@@ -41,5 +41,5 @@ data class PermGroupPackagesUiInfo(
     val nonSystemUserSetOrPreGranted: Int,
     val systemGranted: Int,
     val systemUserSetOrPreGranted: Int,
-    val onlyShellPackageGranted: Boolean
+    val onlyShellPackageGranted: Boolean,
 )

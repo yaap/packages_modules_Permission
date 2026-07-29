@@ -42,7 +42,7 @@ open class SmartIconLoadPackagePermissionPreference(
     private val app: Application,
     private val packageName: String,
     private val user: UserHandle,
-    context: Context
+    context: Context,
 ) : PermissionPreference(context) {
 
     private var titleContentDescription: CharSequence? = null

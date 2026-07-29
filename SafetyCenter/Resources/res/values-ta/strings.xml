@@ -31,7 +31,7 @@
     <string name="permission_usage_summary" msgid="5323079206029964468">"சமீபத்தில் எந்தெந்த ஆப்ஸ் அனுமதிகளைப் பயன்படுத்தியுள்ளன என்பதைக் காட்டும்"</string>
     <string name="permission_usage_search_terms" msgid="3852343592870257104">"தனியுரிமை, தனியுரிமை டாஷ்போர்டு"</string>
     <string name="permission_manager_title" msgid="5277347862821255015">"அனுமதி நிர்வாகம்"</string>
-    <string name="permission_manager_summary" msgid="8099852107340970790">"உங்கள் தரவுக்கான ஆப்ஸ் அணுகலைக் கட்டுப்படுத்தும்"</string>
+    <string name="permission_manager_summary" msgid="8099852107340970790">"உங்கள் தரவுக்கான ஆப்ஸ் அணுகலைக் கட்டுப்படுத்தலாம்"</string>
     <string name="permission_manager_search_terms" msgid="2895147613099694722">"அனுமதிகள், அனுமதிகள் தொடர்பான நிர்வாகி"</string>
     <string name="privacy_controls_title" msgid="5322875777945432395">"தனியுரிமைக் கட்டுப்பாடுகள்"</string>
     <string name="privacy_controls_summary" msgid="2402066941190435424">"மைக்ரோஃபோன், கேமரா மற்றும் பலவற்றுக்கான சாதன அணுகலைக் கட்டுப்படுத்தலாம்"</string>

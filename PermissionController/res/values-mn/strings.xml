@@ -126,6 +126,22 @@
     <string name="message_staging" msgid="9110563899955511866">"Аппыг байршуулж байна…"</string>
     <string name="app_name_unknown" msgid="1319665005754048952">"Тодорхойгүй"</string>
     <string name="permission_usage_title" msgid="1568233336351734538">"Нууцлалын хяналтын самбар"</string>
+    <string name="permission_usage_app_permissions_title" msgid="7238764049615371525">"Аппын зөвшөөрөл"</string>
+    <string name="permission_usage_agent_activity_title" msgid="1638779122738460526">"ХОУ-ы туслахын үйл ажиллагаа"</string>
+    <string name="empty_agent_activity_preference_title" msgid="8561407829155181686">"Ямар ч ХОУ-ы туслах суулгаагүй"</string>
+    <string name="agent_activity_preference_summary_no_accesses_24h" msgid="7194072619746100487">"Сүүлийн 24 цагт хандаагүй"</string>
+    <string name="agent_activity_preference_summary_no_accesses_7d" msgid="8023811607582607766">"Сүүлийн 7 хоногт хандаагүй"</string>
+    <string name="agent_activity_timeline_title" msgid="5946267721775302726">"<xliff:g id="APP_NAME">%1$s</xliff:g>-н үйл ажиллагаа"</string>
+    <string name="agent_activity_timeline_category_title_24h" msgid="6534067957142090358">"Сүүлийн 24 цагийн дотор"</string>
+    <string name="agent_activity_timeline_category_title_7d" msgid="6957587886375942104">"Сүүлийн 7 хоног"</string>
+    <string name="agent_activity_timeline_category_title_today" msgid="557030782460256459">"Өнөөдөр"</string>
+    <string name="agent_activity_timeline_category_title_yesterday" msgid="8330670564653939302">"Өчигдөр"</string>
+    <string name="agent_activity_timeline_activity_summary" msgid="8865161887228114724">"Хамгийн сүүлд <xliff:g id="TIME_DATE">%1$s</xliff:g>-нд хандсан"</string>
+    <string name="agent_activity_timeline_preference_widget" msgid="8771365108648764365">"Харах"</string>
+    <string name="empty_agent_activity_timeline_preference_title" msgid="7099292969424621771">"Хандаагүй"</string>
+    <string name="agent_activity_timeline_top_intro_title" msgid="7546537264364923134">"Энэ ХОУ-ы туслах таны өмнөөс мэдээлэл авах эсвэл үйлдэл хийхийн тулд эдгээр аппад хандсан. Та үүнийг <xliff:g id="APP_NAME">%1$s</xliff:g>-н тохиргооноос хүссэн үедээ өөрчлөх боломжтой."</string>
+    <string name="agent_activity_timeline_footer_title" msgid="3409102224958679323">"Нууцлалын хяналтын самбарыг ХОУ-ы туслахад зориулсан Android-н онцлогуудыг ашиглан аппад хандахад л харуулдаг."</string>
+    <string name="device_assistance_title" msgid="1445976710214822208">"Төхөөрөмжийн тусламж"</string>
     <string name="auto_permission_usage_summary" msgid="7335667266743337075">"Зөвшөөрлийг саяхан аль аппууд ашигласан болохыг харна уу"</string>
     <string name="permission_group_usage_title" msgid="2595013198075285173">"<xliff:g id="PERMGROUP">%1$s</xliff:g>-н ашиглалт"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Бусад зөвшөөрлийг харах"</string>
@@ -165,6 +181,7 @@
     <string name="permission_usage_preference_summary_not_used_in_past_n_days" msgid="4771868094611359651">"{count,plural, =1{Сүүлийн # хоногт ашиглаагүй}other{Сүүлийн # хоногт ашиглаагүй}}"</string>
     <string name="permission_usage_preference_summary_not_used_in_past_n_hours" msgid="3828973177433435742">"{count,plural, =1{Сүүлийн # цагт ашиглаагүй}other{Сүүлийн # цагт ашиглаагүй}}"</string>
     <string name="permission_usage_preference_label" msgid="8343167938128676378">"{count,plural, =1{1 апп ашигласан}other{# апп ашигласан}}"</string>
+    <string name="agent_usage_preference_label" msgid="3123976176446237103">"{count,plural, =1{1 аппад хандсан}other{# аппад хандсан}}"</string>
     <string name="permission_usage_view_details" msgid="6675335735468752787">"Хяналтын самбараас бүгдийг нь харах"</string>
     <string name="app_permission_usage_filter_label" msgid="7182861154638631550">"Шүүсэн: <xliff:g id="PERM">%1$s</xliff:g>"</string>
     <string name="app_permission_usage_remove_filter" msgid="2926157607436428207">"Шүүлтийг устгах"</string>
@@ -189,8 +206,10 @@
     <string name="app_permission_button_allow_media_only" msgid="2834282724426046154">"Зөвхөн медиад хандахыг зөвшөөрөх"</string>
     <string name="app_permission_button_allow_always" msgid="4573292371734011171">"Ямар ч үед зөвшөөрөх"</string>
     <string name="app_permission_button_allow_foreground" msgid="1991570451498943207">"Зөвхөн аппыг ашиглаж байх үед зөвшөөрөх"</string>
+    <string name="app_permission_button_allow_for_compatibility" msgid="3337157819467626432">"Аппыг ажиллуулсан хэвээр байхыг зөвшөөрөх"</string>
     <string name="app_permission_button_always_allow_all" msgid="4905699259378428855">"Бүгдийг үргэлж зөвшөөрөх"</string>
     <string name="app_permission_button_ask" msgid="3342950658789427">"Тухай бүрд асуух"</string>
+    <string name="app_permission_button_ask_or_when_you_share" msgid="5609521340593096465">"Таныг хуваалцах бүрд асуух эсвэл зөвшөөрөх"</string>
     <string name="app_permission_button_deny" msgid="6016454069832050300">"Бүү зөвшөөр"</string>
     <string name="app_permission_button_allow_limited_access" msgid="8824410215149764113">"Хязгаарлагдмал хандалтыг зөвшөөрөх"</string>
     <string name="precise_image_description" msgid="6349638632303619872">"Нарийвчилсан байршил"</string>
@@ -255,12 +274,15 @@
     <string name="allowed_header" msgid="7769277978004790414">"Зөвшөөрсөн"</string>
     <string name="allowed_always_header" msgid="6455903312589013545">"Үргэлж зөвшөөрсөн"</string>
     <string name="allowed_foreground_header" msgid="6845655788447833353">"Зөвхөн ашиглаж байх үед зөвшөөрөгдсөн"</string>
+    <string name="allowed_for_compatibility_header" msgid="9184156612214246427">"Аппыг ажиллуулсаар байхыг зөвшөөрсөн"</string>
     <string name="allowed_storage_scoped" msgid="5383645873719086975">"Зөвхөн медиад хандахыг зөвшөөрсөн"</string>
     <string name="allowed_storage_full" msgid="5356699280625693530">"Бүх файлыг удирдахыг зөвшөөрсөн"</string>
     <string name="ask_header" msgid="2633816846459944376">"Тухай бүрд асуух"</string>
     <string name="denied_header" msgid="903209608358177654">"Зөвшөөрөөгүй"</string>
     <string name="permission_group_name_with_device_name" msgid="8798741850536024820">"<xliff:g id="DEVICE_NAME">%2$s</xliff:g> дээрх <xliff:g id="PERM_GROUP_NAME">%1$s</xliff:g>"</string>
     <string name="storage_footer_hyperlink_text" msgid="8873343987957834810">"Бүх файлд хандах боломжтой бусад аппыг харах"</string>
+    <string name="allow_for_compatibility_nearby_devices_footer" msgid="4788336711372843546">"&lt;b&gt;Аппыг ажиллуулсан хэвээр байхыг зөвшөөрөх&lt;/b&gt;&lt;br&gt;&lt;br&gt;Аппыг ажиллуулсан хэвээр байлгахын тулд тухайн аппад таны дотоод сүлжээнд хандаж, зөвхөн энэ сүлжээн дээрх төхөөрөмжүүдтэй холбогдохыг зөвшөөрсөн байж магадгүй.&lt;br&gt;&lt;br&gt;Таныг ойролцоох бүх төхөөрөмжийг олж, холбогдохыг зөвшөөрөөгүй тохиолдолд тухайн апп Bluetooth болон бусад технологийг ашиглан төхөөрөмжүүдтэй холбогдох боломжгүй."</string>
+    <string name="allowed_for_compatibility_nearby_devices_footer" msgid="75018894064754943">"&lt;b&gt;Аппыг ажиллуулсан хэвээр байхыг зөвшөөрсөн&lt;/b&gt;&lt;br&gt;&lt;br&gt;Аппыг ажиллуулсан хэвээр байлгахын тулд тухайн аппад таны дотоод сүлжээнд хандаж, зөвхөн энэ сүлжээн дээрх төхөөрөмжүүдтэй холбогдохыг зөвшөөрсөн байж магадгүй.&lt;br&gt;&lt;br&gt;Таныг ойролцоох бүх төхөөрөмжийг олж, холбогдохыг зөвшөөрөөгүй тохиолдолд тухайн апп Bluetooth болон бусад технологийг ашиглан төхөөрөмжүүдтэй холбогдох боломжгүй."</string>
     <string name="days" msgid="609563020985571393">"{count,plural, =1{1 өдөр}other{# өдөр}}"</string>
     <string name="hours" msgid="7302866489666950038">"{count,plural, =1{# цаг}other{# цаг}}"</string>
     <string name="minutes" msgid="4868414855445375753">"{count,plural, =1{# минут}other{# минут}}"</string>
@@ -297,8 +319,8 @@
     <string name="notification_listener_review_app_button_label" msgid="3433073281029143924">"Дэлгэрэнгүй харах сонголт"</string>
     <string name="notification_listener_remove_access_success_label" msgid="2477611529875633107">"Хандалтыг хассан"</string>
     <string name="accessibility_access_reminder_notification_title" msgid="2971317234668807566">"Төхөөрөмжийн бүрэн хандалттай аппыг шалгана уу"</string>
-    <string name="accessibility_access_reminder_notification_content" msgid="7389454158175306720">"<xliff:g id="APP_NAME">%s</xliff:g> таны дэлгэцийг харах болон төхөөрөмж дээр тань үйлдэл гүйцэтгэх боломжтой. Хандалтын аппууд зориулалтын дагуу ажиллахын тулд тэдгээрт энэ төрлийн хандалт шаардлагатай."</string>
-    <string name="accessibility_access_warning_card_content" msgid="4370327190293217358">"Энэ апп таны дэлгэцийг харах болон төхөөрөмж дээр тань үйлдэл гүйцэтгэх боломжтой. Хандалтын аппууд зориулалтын дагуу ажиллахын тулд тэдгээрт энэ төрлийн хандалт шаардлагатай ч аппыг шалгаад, та үүнд итгэдэг эсэхээ баталгаажуулна уу."</string>
+    <string name="accessibility_access_reminder_notification_content" msgid="7389454158175306720">"<xliff:g id="APP_NAME">%s</xliff:g> таны дэлгэцийг харах болон төхөөрөмж дээр тань үйлдэл гүйцэтгэх боломжтой. Хүртээмжтэй аппууд зориулалтын дагуу ажиллахын тулд тэдгээрт энэ төрлийн хандалт шаардлагатай."</string>
+    <string name="accessibility_access_warning_card_content" msgid="4370327190293217358">"Энэ апп таны дэлгэцийг харах болон төхөөрөмж дээр тань үйлдэл гүйцэтгэх боломжтой. Хүртээмжтэй аппууд зориулалтын дагуу ажиллахын тулд тэдгээрт энэ төрлийн хандалт шаардлагатай ч аппыг шалгаад, та үүнд итгэдэг эсэхээ баталгаажуулна уу."</string>
     <string name="accessibility_remove_access_button_label" msgid="44145801526711640">"Хандалтын эрхийг хасах"</string>
     <string name="accessibility_show_all_apps_button_label" msgid="960067249326392280">"Бүрэн хандалттай аппуудыг харах"</string>
     <string name="accessibility_remove_access_success_label" msgid="4380995302917014670">"Хандалтын эрхийг хассан"</string>
@@ -352,7 +374,7 @@
     <string name="car_permission_selected" msgid="180837028920791596">"Сонгосон"</string>
     <string name="settings" msgid="5409109923158713323">"Тохиргоо"</string>
     <string name="accessibility_service_dialog_title_single" msgid="7956432823014102366">"<xliff:g id="SERVICE_NAME">%s</xliff:g> таны төхөөрөмжид хандах бүрэн эрхтэй байна"</string>
-    <string name="accessibility_service_dialog_title_multiple" msgid="5527879210683548175">"Таны төхөөрөмжид хүртээмжийн <xliff:g id="NUM_SERVICES">%s</xliff:g> апп хандах бүрэн эрхтэй байна"</string>
+    <string name="accessibility_service_dialog_title_multiple" msgid="5527879210683548175">"Таны төхөөрөмжид хүртээмжтэй <xliff:g id="NUM_SERVICES">%s</xliff:g> апп хандах бүрэн эрхтэй байна"</string>
     <string name="accessibility_service_dialog_bottom_text_single" msgid="1128666197822205958">"<xliff:g id="SERVICE_NAME">%s</xliff:g> таны дэлгэц, үйлдэл, оролтыг харах, үйлдэл гүйцэтгэх болон дэлгэцийг хянах боломжтой."</string>
     <string name="accessibility_service_dialog_bottom_text_multiple" msgid="7009848932395519852">"Эдгээр апп таны дэлгэц, үйлдэл, оролтыг харах, үйлдэл хийх болон дэлгэцийг хянах боломжтой."</string>
     <string name="role_assistant_label" msgid="4727586018198208128">"Өгөгдмөл дижитал туслах апп"</string>
@@ -443,6 +465,8 @@
     <string name="default_app_none" msgid="9084592086808194457">"Тохируулсан апп алга"</string>
     <string name="default_app_system_default" msgid="6218386768175513760">"(Системийн өгөгдмөл)"</string>
     <string name="default_app_no_apps" msgid="115720991680586885">"Апп алга"</string>
+    <string name="default_app_confirmation_positive_button" msgid="7870227561758833590">"Өөрчлөх"</string>
+    <string name="default_app_confirmation_negative_button" msgid="2564849389728106051">"Одоогийнхыг хадгалах"</string>
     <string name="default_payment_app_other_nfc_services" msgid="5957633798695758917">"Бусад NFC үйлчилгээ"</string>
     <string name="car_default_app_selected" msgid="5416420830430644174">"Сонгосон"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Сонгосон - <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
@@ -451,8 +475,13 @@
     <string name="no_special_app_access" msgid="6950277571805106247">"Аппын тусгай хандалт алга"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"Апп алга"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"Ажлын профайлыг дэмждэггүй"</string>
+    <string name="home_confirmation_title" msgid="8070603501839126093">"Нүүр хуудасны өгөгдмөл аппаа &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; болгож өөрчлөх үү?"</string>
+    <string name="home_confirmation_message" msgid="248811491851505593">"Энэ нь таны үндсэн нүүрийг орлох бөгөөд таны төхөөрөмж дээрх онцлогуудын хандалтад нөлөөлж магадгүй.&lt;br&gt;&lt;br&gt;Та энэ сонголтыг &lt;b&gt;Нүүр хуудасны өгөгдмөл аппын&lt;/b&gt; тохиргооноос хүссэн үедээ өөрчлөх боломжтой."</string>
     <string name="encryption_unaware_confirmation_message" msgid="8274491794636402484">"Санамж: Хэрвээ та төхөөрөмжөө дахин эхлүүлж, дэлгэцийн түгжээ тохируулбал энэ апп таныг төхөөрөмжийнхөө түгжээг тайлах хүртэл эхлэх боломжгүй."</string>
     <string name="assistant_confirmation_message" msgid="7476540402884416212">"Туслах таны дэлгэцэд харагддаг эсвэл аппуудаас хандах боломжтой мэдээлэл зэрэг таны системд ашигладаг аппуудын талаарх мэдээллийг унших боломжтой болно."</string>
+    <string name="assistant_confirmation_title_v37" msgid="4998437583005547092">"Дижитал туслахын аппаа &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt; болгож өөрчлөх үү?"</string>
+    <string name="assistant_confirmation_message_v37" msgid="4763150587952308197">"Энэ туслах таны мессеж зэрэг мэдээлэл, аппын таны туслахтай хуваалцахаар сонгосон өгөгдөлд хандах боломжтой болно."</string>
+    <string name="assistant_confirmation_message_access_restored_v37" msgid="2731391781319881100">"Энэ туслах таны мессеж зэрэг мэдээлэл, аппын таны туслахтай хуваалцахаар сонгосон өгөгдөлд хандах боломжтой байх болно.&lt;br&gt;&lt;br&gt;Та өмнө нь <xliff:g id="APP_NAME">%1$s</xliff:g>-н хувьд дэлгэц, аппын өгөгдлийг асаасан тул тухайн апп таны дэлгэц дээр нээлттэй аппын контентод хандах боломжтой болно."</string>
     <string name="incident_report_channel_name" msgid="3144954065936288440">"Алдаа засах өгөгдлийг хуваалцах"</string>
     <string name="incident_report_notification_title" msgid="4635984625656519773">"Алдаа засах дэлгэрэнгүй өгөгдлийг хуваалцах уу?"</string>
     <string name="incident_report_notification_text" msgid="3376480583513587923">"<xliff:g id="APP_NAME">%1$s</xliff:g> алдаа засах мэдээллийг байршуулах хүсэлтэй байна."</string>
@@ -631,7 +660,7 @@
     <string name="mic_toggle_title" msgid="2649991093496110162">"Микрофоны хандалт"</string>
     <string name="perm_toggle_description" msgid="7801326363741451379">"Апп болон үйлчилгээнд"</string>
     <string name="mic_toggle_description" msgid="9163104307990677157">"Апп болон үйлчилгээнд. Энэ тохиргоо унтраалттай тохиолдолд таныг яаралтай тусламжийн утасны дугаар луу залгах үед микрофоны өгөгдлийг хуваалцсан хэвээр байж магадгүй."</string>
-    <string name="location_settings_subtitle" msgid="2328360561197430695">"Байршилд хандах эрхтэй апп, үйлчилгээнүүдийг хараарай"</string>
+    <string name="location_settings_subtitle" msgid="2328360561197430695">"Байршилд хандах эрхтэй апп, үйлчилгээг харах"</string>
     <string name="show_clip_access_notification_title" msgid="5168467637351109096">"Түр санах ойн хандалтыг харуулах"</string>
     <string name="show_clip_access_notification_summary" msgid="3532020182782112687">"Аппууд таны хуулсан текст, зураг эсвэл бусад контентод хандах үед мессеж харуулах"</string>
     <string name="show_password_title" msgid="2877269286984684659">"Нууц үгнүүдийг харуулах"</string>
@@ -683,12 +712,12 @@
 </xliff:g>Залилагч танаас шинэ эх сурвалжаас тодорхойгүй апп суулгахыг хүсэж хор хөнөөлтэй апп суулгахаар оролдож магадгүй."</string>
     <string name="enhanced_confirmation_phone_state_dialog_a11y_desc" msgid="6567523001053288057">"<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Залилагч танаас аппын хандалтын эрхийг зөвшөөрөхийг хүсэж таны төхөөрөмжийн хяналтыг гартаа авахаар оролдож магадгүй."</string>
+</xliff:g>Залилагч танаас аппын хүртээмжийн эрхийг зөвшөөрөхийг хүсэж таны төхөөрөмжийн хяналтыг гартаа авахаар оролдож магадгүй."</string>
     <string name="enhanced_confirmation_phone_state_dialog_generic_desc" msgid="158278816955957088"></string>
     <string name="enhanced_confirmation_dialog_title_permission" msgid="2149144789394238266">"Аппад <xliff:g id="PERMISSION_NAME">%1$s</xliff:g>-д хандах эрх олгохоос татгалзсан"</string>
     <string name="enhanced_confirmation_dialog_desc_permission" msgid="3150778951946468945">"Апп нь таны хувийн болон санхүүгийн мэдээллийг эрсдэлд оруулж болох эмзэг зөвшөөрөлд хандах эрх хүссэн.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Энэ хязгаарлагдмал зөвшөөрөлгүйгээр уг апп зохих ёсоор ажиллахгүй байх боломжтой. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Хандах эрхийг хэрхэн зөвшөөрөх талаар мэдэж авах&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_role" msgid="1737023798483772780">"Аппад өгөгдмөл <xliff:g id="ROLE_NAME">%1$s</xliff:g> болох эрх олгохоос татгалзсан"</string>
-    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"Апп нь таны хувийн болон санхүүгийн мэдээллийг эрсдэлд оруулж болох эмзэг зөвшөөрлүүдэд хандах эрх хүссэн.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Эдгээр хязгаарлагдмал зөвшөөрөлгүйгээр уг апп зохих ёсоор ажиллахгүй байх боломжтой. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Хандах эрхийг хэрхэн зөвшөөрөх талаар мэдэж авах&lt;/a&gt;"</string>
+    <string name="enhanced_confirmation_dialog_desc_role" msgid="6369601947905234551">"Апп нь таны хувийн болон санхүүгийн мэдээллийг эрсдэлд оруулж болох эмзэг зөвшөөрлүүдэд хандах эрх хүссэн.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Эдгээр хязгаарлагдмал зөвшөөрөлгүйгээр уг апп зохих ёсоор ажиллахгүй байж магадгүй. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Хандах эрхийг хэрхэн зөвшөөрөх талаар мэдэж авах&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_title_settings_default" msgid="1858092969721041576">"Аппад хандах эрх олгохоос татгалзсан"</string>
     <string name="enhanced_confirmation_dialog_desc_settings_default" msgid="6911632348359332981">"Энэ зөвшөөрөлд хандах эрх нь таны хувийн болон санхүүгийн мэдээллийг эрсдэлд оруулж болно.<xliff:g id="ID_1">&lt;br&gt;&lt;br&gt;</xliff:g>Энэ хязгаарлагдмал зөвшөөрөлгүйгээр уг апп зохих ёсоор ажиллахгүй байх боломжтой. &lt;a href=<xliff:g id="LEARN_MORE_LINK">%1$s</xliff:g>&gt;Хандах эрхийг хэрхэн зөвшөөрөх талаар мэдэж авах&lt;/a&gt;"</string>
     <string name="enhanced_confirmation_dialog_learn_more" msgid="5226619861379095709">"Нэмэлт мэдээлэл авах"</string>
@@ -714,9 +743,31 @@
     <string name="app_function_agent_access_app_targets_category_title" msgid="620431387701237004">"Апп"</string>
     <string name="app_function_target_access_title" msgid="7415628605578155761">"Агентын хандах эрх"</string>
     <string name="app_function_target_access_summary" msgid="6099120829640806490">"Энэ аппад мэдээлэлд хандаж, танд зориулж үйлдэл хийх боломжтой агентууд"</string>
+    <string name="app_function_access_allowed_header" msgid="139473645426829908">"Зөвшөөрсөн"</string>
+    <string name="app_function_access_denied_header" msgid="6934818996725728911">"Зөвшөөрөөгүй"</string>
+    <string name="app_function_agent_access_none_allowed_title" msgid="4922794509336759858">"Ямар ч агентын хандалтыг зөвшөөрөөгүй"</string>
+    <string name="app_function_agent_access_none_denied_title" msgid="5745249773152088458">"Ямар ч агентын хандалтаас татгалзаагүй"</string>
+    <string name="app_function_target_access_none_allowed_title" msgid="5994321178244800275">"Ямар ч аппын хандалтыг зөвшөөрөөгүй"</string>
+    <string name="app_function_target_access_none_denied_title" msgid="3717686680310691344">"Ямар ч аппын хандалтаас татгалзаагүй"</string>
+    <string name="app_function_manage_access_default_title" msgid="2992299728169265212">"Аппад хандах"</string>
+    <string name="app_function_manage_access_title" msgid="5805361194157907463">"<xliff:g id="TARGET_APP_NAME">%1$s</xliff:g>-д хандах"</string>
+    <string name="app_function_manage_access_radiobutton_group_title" msgid="995463553024931659">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g> <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>-д хандах"</string>
+    <string name="manage_app_function_access_allow" msgid="957884395966109578">"Зөвшөөрөх"</string>
+    <string name="manage_app_function_access_dont_allow" msgid="4282220224010484177">"Бүү зөвшөөр"</string>
     <string name="app_function_device_settings_target_title" msgid="7310525289514611525">"Төхөөрөмжийн тохиргоо"</string>
     <string name="request_app_function_access_dialog_title" msgid="877934835928912474">"<xliff:g id="AGENT_APP_NAME">%1$s</xliff:g>-г <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>-н агент байхыг зөвшөөрөх үү?"</string>
     <string name="request_app_function_access_dialog_description" msgid="155777384496379754">"Энэ агент таны өмнөөс мэдээлэл авч, үйлдэл хийхийн тулд <xliff:g id="TARGET_APP_NAME">%2$s</xliff:g>-д хандах боломжтой болно"</string>
     <string name="request_app_function_dialog_button_allow" msgid="7758794243635329183">"Зөвшөөрөх"</string>
     <string name="request_app_function_dialog_button_dont_allow" msgid="7657036841986717007">"Бүү зөвшөөр"</string>
+    <string name="request_read_screen_context_dialog_title" msgid="9048738661085777679">"&lt;b&gt;<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>&lt;/b&gt;-д дэлгэц, аппын өгөгдлийг ашиглахыг зөвшөөрөх үү?"</string>
+    <string name="request_read_screen_context_dialog_description" msgid="627006720540705018">"Энэ туслах таны дэлгэц дээрх нээлттэй аппын мэдээлэл, контентод хандах боломжтой болно"</string>
+    <string name="request_read_screen_context_dialog_button_allow" msgid="5664102873265905702">"Зөвшөөрөх"</string>
+    <string name="request_read_screen_context_dialog_button_dont_allow" msgid="582852715625937711">"Бүү зөвшөөр"</string>
+    <string name="read_screen_context_setting_title" msgid="5557279099665174872">"Дэлгэц, аппын өгөгдлийг ашиглах"</string>
+    <string name="read_screen_context_setting_default_description" msgid="4349794650902006368">"Туслахад таны дэлгэц дээрх нээлттэй аппын мэдээлэл, контентод хандахыг зөвшөөрөх"</string>
+    <string name="read_screen_context_setting_description" msgid="3610476260828196298">"<xliff:g id="ASSISTANT_APP_NAME">%1$s</xliff:g>-д таны дэлгэц дээрх нээлттэй аппын мэдээлэл, контентод хандахыг зөвшөөрөх"</string>
+    <string name="request_location_button_permissions_dialog_button_allow" msgid="3422800468376317863">"Зөвшөөрөх"</string>
+    <string name="request_location_button_permissions_dialog_button_dont_allow" msgid="3273946372861701473">"Зөвшөөрөхгүй"</string>
+    <string name="request_location_button_permissions_dialog_title" msgid="1305012762950180684">"Та нарийвчилсан байршлаа хуваалцахаар сонгоход &lt;b&gt;<xliff:g id="APP_NAME">%1$s</xliff:g>&lt;/b&gt;-д нарийвчилсан байршилд хандахыг зөвшөөрөх үү?"</string>
+    <string name="request_location_button_permissions_dialog_subtitle" msgid="4401187641885414225">"Та нарийвчилсан байршлаа хуваалцах тохиолдолд аппыг хаах хүртэл энэ апп нарийвчилсан байршилд хандах эрхтэй байна"</string>
 </resources>

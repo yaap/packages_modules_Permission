@@ -40,8 +40,10 @@ import android.util.Log;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.filters.MediumTest;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Tests Permissions related to reading from and writing to providers
@@ -187,8 +189,9 @@ public class ProviderPermissionTest extends AndroidTestCase {
 
     /**
      * Verify that the {@link android.Manifest.permission#MANAGE_DOCUMENTS}
-     * permission is only held by up to one package: whoever handles the
-     * {@link android.content.Intent#ACTION_OPEN_DOCUMENT} intent, if any.
+     * permission is only held by up to two packages: whoever handles the
+     * {@link android.content.Intent#ACTION_OPEN_DOCUMENT} intent, if any,
+     * and the shell.
      * <p>
      * No other apps should <em>ever</em> attempt to acquire this permission,
      * since it would give those apps extremely broad access to all storage
@@ -200,25 +203,31 @@ public class ProviderPermissionTest extends AndroidTestCase {
      */
     public void testManageDocuments() {
         final PackageManager pm = getContext().getPackageManager();
+        final HashSet<String> validPackages = new HashSet<>();
+        validPackages.add("com.android.shell");
 
+        // Find ACTION_OPEN_DOCUMENT handler.
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
         final ResolveInfo ri = pm.resolveActivity(intent, 0);
-
         if (ri != null) {
-            final String validPkg = ri.activityInfo.packageName;
+            validPackages.add(ri.activityInfo.packageName);
+        }
 
-            final List<PackageInfo> holding = pm.getPackagesHoldingPermissions(new String[] {
-                    android.Manifest.permission.MANAGE_DOCUMENTS
-                    }, PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            for (PackageInfo pi : holding) {
-                if (!Objects.equals(pi.packageName, validPkg)) {
-                    fail("Exactly one package (must be " + validPkg
-                            + ") can request the MANAGE_DOCUMENTS permission; found package "
-                            + pi.packageName + " which must be revoked for security reasons");
-                }
-            }
+        final List<PackageInfo> holding = pm.getPackagesHoldingPermissions(new String[] {
+                android.Manifest.permission.MANAGE_DOCUMENTS
+                }, PackageManager.MATCH_UNINSTALLED_PACKAGES);
+        HashSet<String> holdingPackages = holding
+                .stream()
+                .map(pi -> pi.packageName)
+                .collect(Collectors.toCollection(HashSet::new));
+        holdingPackages.removeAll(validPackages);
+        if (!holdingPackages.isEmpty()) {
+            fail("Only packages " + String.join(" or ", validPackages)
+                    + " can request the MANAGE_DOCUMENTS permission; "
+                    + "found packages: " + String.join(", ", holdingPackages)
+                    + " which must be revoked for security reasons");
         }
     }
 

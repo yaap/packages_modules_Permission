@@ -64,7 +64,7 @@ open class PermissionHub2Test {
                                 context.packageManager.getPackageUid(APP, 0),
                                 APP,
                                 null,
-                                null
+                                null,
                             )
                     )
                     .isEqualTo(MODE_ALLOWED)

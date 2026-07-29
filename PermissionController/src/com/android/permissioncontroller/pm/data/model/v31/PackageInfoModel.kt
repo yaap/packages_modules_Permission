@@ -31,7 +31,7 @@ data class PackageInfoModel(
         packageInfo.packageName,
         packageInfo.requestedPermissions?.toList() ?: emptyList(),
         packageInfo.requestedPermissionsFlags?.toList() ?: emptyList(),
-        requireNotNull(packageInfo.applicationInfo).flags
+        requireNotNull(packageInfo.applicationInfo).flags,
     )
 }
 

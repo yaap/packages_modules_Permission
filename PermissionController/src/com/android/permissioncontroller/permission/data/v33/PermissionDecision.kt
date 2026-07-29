@@ -31,5 +31,5 @@ data class PermissionDecision(
     override val packageName: String,
     override val eventTime: Long,
     val permissionGroupName: String,
-    val isGranted: Boolean
+    val isGranted: Boolean,
 ) : PermissionEvent(packageName, eventTime)

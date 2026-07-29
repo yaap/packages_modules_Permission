@@ -19,9 +19,7 @@ package com.android.permissioncontroller.tests.mocking.safetycenter.ui.model
 import android.content.Context
 import android.os.Build
 import android.os.UserHandle
-import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
-import android.safetycenter.SafetyCenterIssue
 import android.safetycenter.SafetyCenterStatus
 import android.safetycenter.SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING
 import android.safetycenter.SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK
@@ -31,10 +29,9 @@ import android.safetycenter.SafetyCenterStatus.REFRESH_STATUS_DATA_FETCH_IN_PROG
 import android.safetycenter.SafetyCenterStatus.REFRESH_STATUS_FULL_RESCAN_IN_PROGRESS
 import android.safetycenter.SafetyCenterStatus.REFRESH_STATUS_NONE
 import androidx.test.filters.SdkSuppress
-import com.android.modules.utils.build.SdkLevel
 import com.android.permissioncontroller.R
 import com.android.permissioncontroller.safetycenter.ui.model.StatusUiData
-import com.android.safetycenter.testing.SafetyCenterTestHelper.Companion.createSafetyCenterIssueBuilder
+import com.android.permissioncontroller.tests.mocking.safetycenter.SafetyCenterTestUtil.createSafetyCenterIssueBuilder
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -119,7 +116,7 @@ class StatusUiDataTest {
                 mockContext.getString(
                     R.string.safety_status_preference_title_and_summary_content_description,
                     STATUS.title,
-                    STATUS.summary
+                    STATUS.summary,
                 )
             )
             .thenReturn(expectedContentDescription)
@@ -156,11 +153,13 @@ class StatusUiDataTest {
         assertThat(uiDataForSeverity(OVERALL_SEVERITY_LEVEL_UNKNOWN).statusImageResId)
             .isEqualTo(R.drawable.safety_status_info)
     }
+
     @Test
     fun getStatusImageResId_severityRecommendation() {
         assertThat(uiDataForSeverity(OVERALL_SEVERITY_LEVEL_RECOMMENDATION).statusImageResId)
             .isEqualTo(R.drawable.safety_status_recommendation)
     }
+
     @Test
     fun getStatusImageResId_severityWarning() {
         assertThat(uiDataForSeverity(OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING).statusImageResId)
@@ -194,7 +193,7 @@ class StatusUiDataTest {
                 StatusUiData(
                         statusForSeverity(OVERALL_SEVERITY_LEVEL_OK),
                         hasIssues = false,
-                        hasPendingActions = false
+                        hasPendingActions = false,
                     )
                     .shouldShowRescanButton()
             )
@@ -207,7 +206,7 @@ class StatusUiDataTest {
                 StatusUiData(
                         statusForSeverity(OVERALL_SEVERITY_LEVEL_UNKNOWN),
                         hasIssues = false,
-                        hasPendingActions = false
+                        hasPendingActions = false,
                     )
                     .shouldShowRescanButton()
             )
@@ -220,7 +219,7 @@ class StatusUiDataTest {
                 StatusUiData(
                         statusForSeverity(OVERALL_SEVERITY_LEVEL_OK),
                         hasIssues = true,
-                        hasPendingActions = false
+                        hasPendingActions = false,
                     )
                     .shouldShowRescanButton()
             )
@@ -233,7 +232,7 @@ class StatusUiDataTest {
                 StatusUiData(
                         statusForSeverity(OVERALL_SEVERITY_LEVEL_OK),
                         hasIssues = false,
-                        hasPendingActions = true
+                        hasPendingActions = true,
                     )
                     .shouldShowRescanButton()
             )
@@ -245,13 +244,13 @@ class StatusUiDataTest {
         for (severity in
             listOf(
                 OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING,
-                OVERALL_SEVERITY_LEVEL_RECOMMENDATION
+                OVERALL_SEVERITY_LEVEL_RECOMMENDATION,
             )) {
             assertThat(
                     StatusUiData(
                             statusForSeverity(severity),
                             hasIssues = false,
-                            hasPendingActions = false
+                            hasPendingActions = false,
                         )
                         .shouldShowRescanButton()
                 )
@@ -272,14 +271,17 @@ class StatusUiDataTest {
                 .setRefreshStatus(REFRESH_STATUS_DATA_FETCH_IN_PROGRESS)
                 .build()
 
-        val ISSUE = createSafetyCenterIssueBuilder(
-                "iSsUe_Id",
-                "issue title",
-                "issue summary",
-                UserHandle.of(UserHandle.myUserId()),
-                setOf("safety_source_id"),
-                "default_issue_type_id")
-            .build()
+        val ISSUE =
+            createSafetyCenterIssueBuilder(
+                    "iSsUe_Id",
+                    "issue title",
+                    "issue summary",
+                    UserHandle.of(UserHandle.myUserId()),
+                    setOf("safety_source_id"),
+                    "default_issue_type_id",
+                    "default_safety_source_issue_id",
+                )
+                .build()
 
         val DATA_WITH_ISSUES = SafetyCenterData(STATUS, listOf(ISSUE), listOf(), listOf())
         val DATA_WITHOUT_ISSUES = SafetyCenterData(STATUS, listOf(), listOf(), listOf())

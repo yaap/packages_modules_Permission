@@ -22,7 +22,7 @@
     <string name="privacy_sources_summary" msgid="4083646673569677049">"Permisos, panel de control y controles"</string>
     <string name="health_connect_title" msgid="8318152190040327804">"Salud conectada"</string>
     <string name="health_connect_search_terms" msgid="4998970586245680829">"Salud, Salud conectada"</string>
-    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Cambios en los datos compartidos de ubicación"</string>
+    <string name="app_data_sharing_updates_title" msgid="7428862330643262588">"Cambios en la compartición de datos de ubicación"</string>
     <string name="app_data_sharing_updates_search_terms" msgid="8414777373734245398">"datos, compartir datos, cambios en los datos que se comparten, cambios en los datos compartidos de ubicación, compartir"</string>
     <string name="advanced_title" msgid="6259362998269627310">"Otros ajustes"</string>
     <string name="more_settings_title" msgid="9033454654010697185">"Más seguridad y privacidad"</string>

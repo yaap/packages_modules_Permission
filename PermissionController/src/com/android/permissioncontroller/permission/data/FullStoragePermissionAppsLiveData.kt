@@ -139,7 +139,6 @@ object FullStoragePermissionAppsLiveData :
         return null
     }
 
-    /** Recalculate the LiveData TODO ntmyren: Make livedata properly observe app ops */
     fun recalculate() {
         updateAsync()
     }

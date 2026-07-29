@@ -37,7 +37,7 @@ class UnusedAppPreference(
     app: Application,
     packageName: String,
     user: UserHandle,
-    context: Context
+    context: Context,
 ) : SmartIconLoadPackagePermissionPreference(app, packageName, user, context), RemovablePref {
     private var removeRunnable: Runnable? = null
     private var removeButtonEnabled: Boolean = false
